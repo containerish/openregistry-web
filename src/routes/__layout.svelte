@@ -1,11 +1,37 @@
 <script lang="ts">
 	import Footer from '$lib/footer.svelte';
-  import Navbar from '$lib/navbar.svelte';
+	import Navbar from '$lib/navbar.svelte';
+	import { onMount, setContext } from 'svelte';
 	import '../app.css';
+
+	const isAuth = async (cookie: string): Promise<boolean> => {
+		if (cookie) {
+			return new Promise<boolean>((resolve) => {
+				resolve(true);
+			});
+		}
+
+		return new Promise<boolean>((_, reject) => {
+			reject(false);
+		});
+	};
+
+	setContext('isAuth', isAuth);
+	onMount(() => {
+		isAuth(document.cookie)
+			.then((auth) => {
+				console.log('auth: ', auth);
+			})
+			.catch((err) => {
+				console.log('error: ', err);
+			});
+	});
 </script>
 
-<main class="dark:bg-gradient-to-tl dark:from-brown-900 dark:to-brown-800 bg-gradient-to-tl from-brown-100 to-brown-300  w-full flex justify-center flex-col">
-  <Navbar />
+<main
+	class="dark:bg-brown-900 bg-brown-900 lg:w-screen uw:min-w-[55vw] uw:max-w-[55vw] flex justify-center flex-col"
+>
+	<Navbar />
 	<slot />
-  <Footer />
+	<Footer />
 </main>

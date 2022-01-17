@@ -5,6 +5,8 @@
 @tailwind utilities;
 
 html, body {
+	scroll-behavior: smooth;
+	scroll-snap-type: block;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -73,3 +75,10 @@ button:focus {
 	border-color: #666;
 }
 
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
