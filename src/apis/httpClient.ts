@@ -4,14 +4,6 @@ declare module 'axios' {
 	interface AxiosResponse<T = any> extends Promise<T> {}
 }
 
-enum StatusCode {
-	Ok = 200,
-	Unauthorized = 401,
-	Forbidden = 403,
-	TooManyRequests = 429,
-	InternalServerError = 500,
-}
-
 abstract class HttpClient {
 	protected readonly http: AxiosInstance;
 

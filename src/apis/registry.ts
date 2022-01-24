@@ -7,18 +7,31 @@ export interface Repository {
   schemaVersion: number
 }
 
+export interface TagList {
+	name: string
+	tags: string[]
+}
 
 export class RegistryBackend extends HttpClient {
 	public constructor() {
-		super('http://0.0.0.0:5000')
+		super('http://localhost:5000')
 	}
 
-	public ListRepositories = (namespace?: string) => {
+	public ListRepositories = async (namespace?: string) => {
 		let url = '/internal/metadata'
 		if (namespace && namespace != '') {
 			url = url + '?namespace=' + namespace
 		}
 
-		return this.instance.get<Repository[]>(url)
+		return await this.http.get<Repository[]>(url)
+	}
+
+	public ListTags = (namespace: string) => {
+		if (!namespace) {
+			return Promise.reject("empty namespace, invalid")
+		}
+		const url = `/v2/${namespace}/tags/list`
+
+		return this.http.get<TagList>(url)
 	}
 }

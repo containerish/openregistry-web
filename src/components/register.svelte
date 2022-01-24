@@ -7,11 +7,11 @@
 
 <form class="my-8 w-full">
 	<div class="flex items-center">
-		<div class="flex-3 float-left">
-			<input placeholder="Email" id="registger-for-beta-email" type="email" class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+		<div class="flex-4 float-left w-80">
+			<input placeholder="Email" id="register-for-beta-email" type="email" class="block w-full px-5 py-3.5 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-300 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
 		</div>
 		<div class="flex flex-3">
-			<button on:click={onClick} class="inline-flex tracking-wider ml-4 items-center px-8 py-2 font-normal leading-6 text-md shadow rounded-md text-gray-50 btn transition ease-in-out duration-150">
+			<button on:click={onClick} class="inline-flex tracking-wider ml-4 items-center px-8 py-3.5 font-normal leading-6 text-md shadow rounded-md text-gray-50 btn transition ease-in-out duration-150">
 				{#if isLoading}
 				<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -32,7 +32,7 @@
 	}
 
 	.btn{
-		background-color: #55443a;
+		background-color: #14110d;
 		border: none;
 	}
 </style>

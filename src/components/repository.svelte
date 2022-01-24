@@ -1,23 +1,28 @@
-<script>
+<script lang="ts">
 	import Copy from '$lib/icons/copy.svelte';
 	import Download from '$lib/icons/download.svelte';
 	import LockClosed from '$lib/icons/lock-closed.svelte';
 	import Star from '$lib/icons/star.svelte';
+	import { Repository as Repo } from '../apis/registry'
+
+	export let data: Repo;
 </script>
 
 <div
-	class="hover:shadow-brown-100 shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-auto bg-gray-100 rounded-lg dark:bg-brown-800"
+		id={data.uuid}
+		on:click={() => alert('clicked')}
+	class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-auto bg-gray-100 rounded-lg dark:bg-brown-800"
 >
 	<div class="pt-2">
-		<span class="dark:text-gray-50">
-			janedoe /
-			<span class="font-lato font-semibold">alpine</span>
+		<span class="dark:text-gray-50 text-lg">
+			{data.namespace.split('/')[0]} /
+			<span class="font-lato font-semibold">{data.namespace.split('/')[1]}</span>
 		</span>
 	</div>
 
 	<div class="flex items-center justify-between">
 		<span class="text-xs font-light text-gray-500 dark:text-gray-50">
-			Last Updated: Mar 10, 2019
+			{new Date().toDateString()}
 		</span>
 
 		<div class="flex gap-4">

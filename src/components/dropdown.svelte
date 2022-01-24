@@ -3,6 +3,7 @@
 	import Invite from './invite.svelte';
 
 	export let show = false;
+	import {onMount} from "svelte";
 
 	const signOut = () => {
 		document.cookie = 'github-jwt' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -11,8 +12,20 @@
 
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
-</script>
 
+	$: 	document.onkeydown = function(evt) {
+		evt = evt || window.event
+		var isEscape = false
+		if ("key" in evt) {
+			isEscape = (evt.key === "Escape" || evt.key === "Esc")
+		} else {
+			isEscape = (evt.keyCode === 27)
+		}
+		if (isEscape && document.body.classList.contains('modal-active')) {
+			toggleModal()
+		}
+	};
+</script>
 <div class="relative inline-block ">
 	<slot />
 
@@ -38,7 +51,7 @@
 			<hr class="border-gray-200 dark:border-brown-50 " />
 
 			<a
-				href="#"
+				href="/u"
 				class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-white dark:hover:bg-brown-100 dark:hover:text-white hover:no-underline"
 			>
 				<svg
@@ -61,7 +74,7 @@
 			</a>
 
 			<a
-				href="#"
+				href="/settings"
 				class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-white dark:hover:bg-brown-100 dark:hover:text-white hover:no-underline"
 			>
 				<svg

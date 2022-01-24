@@ -9,7 +9,7 @@
 </script>
 
 <div class="items-center md:flex">
-	<div class="flex flex-col justify-center items-center md:flex-row md:mt-0 md:mx-1">
+	<div class="flex flex-col justify-center items-center md:flex-row md:mt-0 md:ml-10 pl-10">
 		<button
 			class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit border-none transform dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-4 md:my-0"
 		>
@@ -21,6 +21,7 @@
 			Repositories
 		</button>
 		<button
+				on:click={()=> window.location.href="/faq"}
 			class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-4 md:my-0"
 		>
 			FAQ

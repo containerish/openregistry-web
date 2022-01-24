@@ -1,12 +1,27 @@
-<script>
+<script lang="ts">
 	import Advert from '$lib/advert.svelte';
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import { setContext } from 'svelte';
+	import {onMount, setContext} from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
+	import {RegistryBackend} from "../../apis/registry.ts";
+	import { Repository as Repo } from '../../apis/registry'
+	import type {AxiosResponse} from "axios";
+
+	const backend = new RegistryBackend();
+
+	let repositoryList: Repo[] = [];
+
+	onMount(()=>{
+		backend.ListRepositories().then((repoList: Repo[]) => {
+			console.log('loiiiiii: ', repoList)
+			repositoryList = repoList
+		})
+		backend.ListTags("johndoe/openregistry")
+	})
 
 	let showModal = false;
 	const toggleModal = () => {
@@ -14,12 +29,15 @@
 	};
 
 	setContext('toggleModal', toggleModal);
+	console.log(
+			'repo list', repositoryList
+	)
 </script>
 
 <Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-[#e5e2e0] dark:bg-brown-900">
 	<div class="flex w-full h-full max-w-[3000px]">
 		<div class="w-3/4 my-8">
-			<div class="flex px-10 justify-between uw:px-20 lg:px-14 apple:px-24">
+			<div class="flex px-10 pb-2 justify-between uw:px-20 lg:px-14 apple:px-24">
 				<div class="w-2/5">
 					<Textfield placeholder="Search Repositories" />
 				</div>
@@ -37,8 +55,8 @@
 			</div>
 
 			<div class="w-full px-4">
-				{#each [11, 2, 2, 2, 3, 4, 5, 6, 7, 3] as item}
-					<Repository />
+				{#each repositoryList as repo}
+					<Repository data={repo} />
 				{/each}
 			</div>
 

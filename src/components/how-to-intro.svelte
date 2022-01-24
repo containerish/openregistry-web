@@ -4,7 +4,7 @@
 </script>
 
 <Card
-	styles="bg-brown-400 desktop:flex-col desktop:items-center py-12 min-h-[70vh] dark:bg-brown-900"
+	styles="bg-brown-400 apple:flex-col desktop:flex-col desktop:items-center py-12 min-h-[70vh] dark:bg-brown-900"
 >
 	<div class="flex w-1/2 flex-col items-center px-6 pb-10">
 		<span
@@ -27,7 +27,7 @@
 		</ul>
 	</div>
 
-	<div class="w-3/4 h-[60vh] max-h-fit apple:w-3/5 uw:w-3/6 uw:px-32">
+	<div class="w-3/4 h-[30vh] max-h-fit apple:w-3/5 uw:w-3/6 uw:px-32">
 		<Xterm />
 	</div>
 </Card>

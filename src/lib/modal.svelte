@@ -1,5 +1,6 @@
 <script>
 	import Button from './button.svelte';
+
 </script>
 
 <div
@@ -19,9 +20,13 @@
 			>&#8203;</span
 		>
 		<div
-			class="inline-block align-bottom bg-cream-50 dark:bg-brown-900 duration-500 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+			class="modal-close modal inline-block align-bottom bg-cream-50 dark:bg-brown-900 duration-500 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
 		>
 			<slot />
 		</div>
 	</div>
 </div>
+
+<style>
+
+</style>

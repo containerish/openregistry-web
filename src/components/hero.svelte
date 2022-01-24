@@ -29,21 +29,21 @@
 <Card
 	styles="min-h-[93vh] dark:bg-gradient-to-tl dark:from-brown-800 dark:to-brown-800 bg-gradient-to-br w-full from-grad-100 via-grad-400 to-grad-900 apple:gap-56 uw:gap-56 lg:gap-20 desktop:gap-40"
 >
-	<div class="left flex flex-col w-full desktop:w-full lg:w-3/4 apple:w-full px-10 z-30">
+	<div class="left flex flex-col w-full desktop:w-full lg:w-3/4 apple:w-full z-30">
 		<div class="w-3/4">
 			<h1
-				class="dark:text-gray-50 text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins break-words whitespace-nowrap apple:text-7xl uw:text-6xl"
+				class="dark:text-gray-50 text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins break-words whitespace-nowrap apple:text-7xl uw:text-8xl"
 			>
 				A Decentralised
 			</h1>
 			<h2
-				class="dark:text-gray-50 text-6xl font-semibold font-poppins break-words whitespace-nowrap apple:text-7xl uw:text-6xl"
+				class="dark:text-gray-50 text-6xl font-semibold font-poppins break-words whitespace-nowrap apple:text-7xl uw:text-8xl"
 			>
 				Container Registry
 			</h2>
-			<div class="w-3/4">
+			<div class="w-full">
 				<p
-					class="font-poppins text-left text-gray-700 break-words dark:text-gray-200 text-xl mt-4 mb-20 apple:text-2xl"
+					class="font-poppins text-left text-gray-700 break-words dark:text-gray-200 text-xl mt-4 mb-20 apple:text-2xl uw:text-3xl"
 				>
 					Store, Download, and Share your container images with decentralized Container Registry
 				</p>
@@ -59,7 +59,7 @@
 		{#if !showRegisterForm}
 			<Button
 				onClick={toggleRegisterForm}
-				styles="px-8 opacity-75 float-left py-5 text-lg font-medium leading-5 text-center text-gray-50 transition-colors duration-200 transform bg-black rounded-md md:w-auto no-underline"
+				styles="px-8 opacity-75 float-left py-6 text-lg font-medium leading-5 text-center text-gray-50 transition-colors duration-200 transform bg-black rounded-md md:w-auto no-underline"
 				label="Register for Beta"
 			/>
 		{/if}
@@ -86,7 +86,7 @@
 		width: 33.3%;
 		min-height: 600px;
 		display: flex;
-		align-items: center;
+		align-items: start;
 		justify-content: center;
 	}
 </style>

@@ -29,7 +29,7 @@
 </script>
 
 <main
-	class="dark:bg-brown-900 bg-brown-900 lg:w-screen uw:min-w-[55vw] uw:max-w-[55vw] flex justify-center flex-col"
+	class="dark:bg-brown-900 bg-brown-900 lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col"
 >
 	<Navbar />
 	<slot />
