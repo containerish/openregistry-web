@@ -32,7 +32,7 @@
 
 <header
 	class="bg-gradient-to-r from-brown-50 to-brown-500 dark:bg-brown-900 {isAuth
-		? 'pt-2 dark:mt-4 dark:pt-0'
+		? 'py-4 dark:mt-4 dark:py-0'
 		: 'pt-8'}"
 >
 	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] dark:bg-brown-900 px-16 mx-auto">
@@ -53,9 +53,9 @@
 								<div class="relative">
 									<span class="absolute inset-y-0 left-0 flex items-center pl-3">
 										<svg
-											class="w-6 pt-0 pb-1 mt-0 h-6 text-gray-400"
+											class="w-7 pt-0 pb-1 mt-0 h-6 text-gray-500"
 											viewBox="0 0 24 24"
-											fill="none"
+											fill=""
 										>
 											<path
 												d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
@@ -69,7 +69,7 @@
 
 									<input
 										type="text"
-										class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md dark:bg-cream-50 dark:text-gray-100 dark:border-gray-600 focus:border-blue-400 dark:focus:border-brown-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-brown-300"
+										class="w-80 py-2 pl-10 pr-4 text-gray-700 dark:bg-brown-800 border rounded-md dark:bg-cream-50 dark:text-gray-100 dark:border-gray-600 focus:border-brown-800 dark:focus:border-brown-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-brown-300"
 										placeholder="Search"
 									/>
 								</div>

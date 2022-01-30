@@ -1,22 +1,36 @@
-<script>
+<script lang="ts">
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext } from 'svelte';
+	import {Auth, LoginResponse} from "../apis/auth";
 
 	const toggleSignupForm = getContext('toggleSignUpForm');
 	const toggleSignInForm = getContext('toggleSignInForm');
 	let isLoading = false;
 	let isSignUpForm = false;
 
+	const auth = new Auth()
+
 	const renderSignUpForm = () => {
 		isSignUpForm = !isSignUpForm;
 		toggleSignupForm();
 	};
 
-	const onClickSignIn = () => {
+	const handleGithubSignin = () => {
 		isLoading = true;
 		let client_id = 'ef57d82fbc5d0eede417';
 		window.location.href = `https://github.com/login/oauth/authorize/?client_id=${client_id}&redirect_uri=http://localhost:5000/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
+	}
+
+	const onClickSignIn = (e) => {
+		isLoading = true;
+		auth.Login(e.target.email.value, e.target.password.value).then((response: LoginResponse)  => {
+			console.log('token ', response.token)
+			window.location.href="/repositories"
+		}).catch(error => {
+			console.log("error happened",error)
+		})
+		console.log(e.target.email.value, e.target.password.value)
 	};
 </script>
 
@@ -30,7 +44,7 @@
 		</div>
 
 		<button
-			on:click={onClickSignIn}
+			on:click={handleGithubSignin}
 			class="w-full h-12 flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black transition-colors duration-200 transform rounded-md dark:border-brown-900 dark:bg-brown-800 dark:text-gray-200 hover:bg-gray-200 hover:no-underline dark:hover:bg-brown-600"
 		>
 			<span class="w-5/6 pr-7 font-semibold text-center">Sign in with GitHub</span>
@@ -48,27 +62,28 @@
 
 			<span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4" />
 		</div>
-		<form>
+		<form on:submit|preventDefault={e => onClickSignIn(e) }>
 			<div class="mt-4">
-				<Textfield label="Email Address" type="email" />
+				<Textfield name="email" label="Email Address" type="email" />
 			</div>
 			<div class="mt-4">
-				<Textfield label="Password" type="password" />
+				<Textfield name="password" label="Password" type="password" />
+			</div>
+
+			<div class="flex mt-8 w-full">
+				<Button
+						{isLoading}
+						styles="text-gray-50 w-full mr-2"
+						label="Sign In"
+				/>
+				<Button
+						onClick={toggleSignInForm}
+						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
+						label="Close"
+				/>
 			</div>
 		</form>
-		<div class="flex mt-8 w-full">
-			<Button
-				{isLoading}
-				onClick={onClickSignIn}
-				styles="text-gray-50 w-full mr-2"
-				label="Sign In"
-			/>
-			<Button
-				onClick={toggleSignInForm}
-				styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-				label="Close"
-			/>
-		</div>
+
 
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-1/5 border-b dark:border-gray-700 md:w-1/4" />

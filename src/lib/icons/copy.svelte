@@ -1,6 +1,6 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="dark:bg-brown-800 h-6 w-6"
+	class="dark:bg-brown-800 bg-brown-400 h-6 w-6"
 	viewBox="0 0 20 20"
 	fill="currentColor"
 >

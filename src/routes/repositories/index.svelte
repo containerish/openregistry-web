@@ -17,6 +17,9 @@
 
 	onMount(()=>{
 		backend.ListRepositories().then((repoList: Repo[]) => {
+			if (!repoList) {
+				return
+			}
 			console.log('loiiiiii: ', repoList)
 			repositoryList = repoList
 		})
@@ -37,7 +40,7 @@
 <Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-[#e5e2e0] dark:bg-brown-900">
 	<div class="flex w-full h-full max-w-[3000px]">
 		<div class="w-3/4 my-8">
-			<div class="flex px-10 pb-2 justify-between uw:px-20 lg:px-14 apple:px-24">
+			<div class="flex px-10 pb-2 justify-between uw:px-36 lg:px-14 apple:px-24">
 				<div class="w-2/5">
 					<Textfield placeholder="Search Repositories" />
 				</div>
@@ -54,15 +57,22 @@
 				{/if}
 			</div>
 
-			<div class="w-full px-4">
-				{#each repositoryList as repo}
-					<Repository data={repo} />
-				{/each}
-			</div>
+			{#if repositoryList && repositoryList.length > 0}
+				<div class="w-full px-4">
+					{#each repositoryList as repo}
+						<Repository data={repo} />
+					{/each}
+				</div>
 
-			<div class="flex justify-center py-4 bg-cream-50 dark:bg-brown-900">
-				<Pagination />
-			</div>
+				<div class="flex justify-center py-4 bg-cream-50 dark:bg-brown-900">
+					<Pagination />
+				</div>
+				{:else}
+				<div class="w-full px-20 py-20 flex justify-center items-center">
+					<span class="text-white text-5xl">No Repositories</span>
+				</div>
+			{/if}
+
 		</div>
 		<div class="my-20 flex justify-start flex-col items-center w-1/4">
 			<Advert />

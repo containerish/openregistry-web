@@ -3,6 +3,7 @@
 	export let type = 'text';
 	export let placeholder = '';
 	export let subHeading = '';
+	export let name = '';
 </script>
 
 <div>
@@ -13,8 +14,9 @@
 		{/if}
 	</div>
 	<input
+		{name}
 		{type}
 		{placeholder}
-		class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-cream-50 dark:text-gray-300 dark:border-gray-600 focus:border-brown-600 dark:focus:border-brown-700 focus:outline-brown-100 focus:ring-brown-700"
+		class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-cream-50 dark:text-brown-900 dark:border-gray-600 focus:border-brown-600 dark:focus:border-brown-700 focus:outline-brown-100 focus:ring-brown-700"
 	/>
 </div>

@@ -30,7 +30,7 @@
 		<Dropdown show={showMenu}>
 			<button
 				on:click={toggleMenu}
-				class="flex items-center dark:text-gray-200 px-4 ml-10 font-lato font-semibold border-brown-800 hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200 transform bg-inherit rounded-md hover:bg-brown-50 dark:hover:bg-brown-800 focus:outline-none focus:ring focus:ring-brown-300 focus:ring-opacity-80"
+				class="flex items-center dark:text-gray-200 px-4 ml-10 mt-1.5 font-lato font-semibold border-brown-800 hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200 transform bg-inherit rounded-md hover:bg-brown-50 dark:hover:bg-brown-800 focus:outline-none focus:ring focus:ring-brown-300 focus:ring-opacity-80"
 			>
 				<User />
 				<span>Jane Doe</span>

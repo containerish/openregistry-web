@@ -3,15 +3,32 @@
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext } from 'svelte';
 	import Github from '$lib/github.svelte';
+	import {SignupResponse,Auth} from "../apis/auth";
 
 	const toggleSignUpForm: Function = getContext('toggleSignUpForm');
 	const toggleSignInForm: Function = getContext('toggleSignInForm');
 	let isLoading = false;
 
+	const auth = new Auth()
+
 	const toggleModals = () => {
 		toggleSignInForm();
 		toggleSignUpForm();
 	};
+
+
+
+
+	const handleSignup = (e) => {
+		isLoading = true;
+			auth.Signup(e.target.username.value, e.target.email.value, e.target.password.value).then((response: SignupResponse)  => {
+				console.log('msg ', response.msg)
+			}).catch(error => {
+				console.log("error happened",error)
+			})
+			console.log(e.target.username.value, e.target.email.value, e.target.password.value)
+
+	}
 
 	const onClickSignUp = () => {
 		isLoading = true;
@@ -49,32 +66,33 @@
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-full border-b dark:border-gray-400" />
 		</div>
-
+		<form on:submit|preventDefault={e => handleSignup(e)}>
 		<div class="mt-4">
-			<Textfield label="Username" type="email" />
+			<Textfield label="Username" type="text" name="username"/>
 		</div>
 
 		<div class="mt-4">
-			<Textfield label="Email Address" type="email" />
+			<Textfield label="Email Address" type="email" name="email"/>
 		</div>
 
 		<div class="mt-4">
-			<Textfield label="Password" type="password" />
+			<Textfield label="Password" type="password" name="password"/>
 		</div>
 
 		<div class="mt-4">
-			<Textfield label="Confirm Password" type="password" />
+			<Textfield label="Confirm Password" type="password" name="confirmPassword"/>
 		</div>
 
 		<div class="flex mt-8 w-full">
 			<Button
 				{isLoading}
-				onClick={() => onClickSignUp()}
+				type="submit"
 				styles="text-gray-50 w-full mr-2"
 				label="Sign Up"
 			/>
 			<Button onClick={toggleModals} styles="bg-gray-50 text-gray-800 w-2/3 ml-2" label="Close" />
 		</div>
+		</form>
 	</div>
 </div>
 
