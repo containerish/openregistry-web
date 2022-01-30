@@ -3,32 +3,43 @@
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext } from 'svelte';
 	import Github from '$lib/github.svelte';
-	import {SignupResponse,Auth} from "../apis/auth";
+	import { SignupResponse, SignupRequest, Auth } from '../apis/auth';
+	import type { AxiosError } from 'axios';
 
 	const toggleSignUpForm: Function = getContext('toggleSignUpForm');
 	const toggleSignInForm: Function = getContext('toggleSignInForm');
 	let isLoading = false;
 
-	const auth = new Auth()
+	const auth = new Auth();
 
 	const toggleModals = () => {
 		toggleSignInForm();
 		toggleSignUpForm();
 	};
 
+	let usernameErr = '';
+	let emailErr = '';
+	let passwordErr = '';
+	let confirmPasswordErr = '';
+	let password = '';
+	let formErr = '';
 
+	const handleSignup = (e: any) => {
+		usernameErr = '';
 
-
-	const handleSignup = (e) => {
 		isLoading = true;
-			auth.Signup(e.target.username.value, e.target.email.value, e.target.password.value).then((response: SignupResponse)  => {
-				console.log('msg ', response.msg)
-			}).catch(error => {
-				console.log("error happened",error)
+		auth
+			.Signup(e.target.username.value, e.target.email.value, e.target.password.value)
+			.then((response: SignupResponse) => {
+				console.log('msg ', response.msg);
+				formErr = '';
+				window.location.reload();
 			})
-			console.log(e.target.username.value, e.target.email.value, e.target.password.value)
-
-	}
+			.catch((error: AxiosError) => {
+				console.log('error happened', error.response.data.error);
+				formErr = error.response.data.error;
+			});
+	};
 
 	const onClickSignUp = () => {
 		isLoading = true;
@@ -41,6 +52,57 @@
 			.catch((err) => {
 				console.log('error: ', err.string());
 			});
+	};
+
+	const validateUsername = (e: any) => {
+		const username: string = e.target.value;
+
+		if (!username || username.length < 3) {
+			usernameErr = 'invalid username';
+			return;
+		}
+
+		usernameErr = '';
+	};
+
+	const validatePassword = (e: any) => {
+		const pwd: string = e.target.value;
+
+		if (!pwd || pwd.length < 8) {
+			passwordErr = 'invalid password';
+			return;
+		}
+
+		password = pwd;
+		passwordErr = '';
+	};
+
+	const validateConfirmPassword = (e: any) => {
+		const confirmPassword: string = e.target.value;
+
+		if (confirmPassword !== password) {
+			confirmPasswordErr = 'password and confirm password mismatch';
+			return;
+		}
+
+		confirmPasswordErr = '';
+	};
+
+	const validateEmail = (e: any) => {
+		const email: string = e.target.value;
+		const regexp = new RegExp(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		);
+
+		const regexFailed = regexp.test(email);
+		console.log('isemail: ', regexFailed);
+		// minimum length for email is 3 chars
+		if (!email || email.length < 3 || !regexFailed) {
+			emailErr = 'invalid email';
+			return;
+		}
+
+		emailErr = '';
 	};
 </script>
 
@@ -66,32 +128,60 @@
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-full border-b dark:border-gray-400" />
 		</div>
-		<form on:submit|preventDefault={e => handleSignup(e)}>
-		<div class="mt-4">
-			<Textfield label="Username" type="text" name="username"/>
-		</div>
+		<form on:submit|preventDefault={(e) => handleSignup(e)}>
+			<div class="mt-4">
+				<Textfield
+					onInput={validateUsername}
+					error={usernameErr}
+					label="Username"
+					type="text"
+					name="username"
+				/>
+			</div>
 
-		<div class="mt-4">
-			<Textfield label="Email Address" type="email" name="email"/>
-		</div>
+			<div class="mt-4">
+				<Textfield
+					onInput={validateEmail}
+					error={emailErr}
+					label="Email Address"
+					type="email"
+					name="email"
+				/>
+			</div>
 
-		<div class="mt-4">
-			<Textfield label="Password" type="password" name="password"/>
-		</div>
+			<div class="mt-4">
+				<Textfield
+					error={passwordErr}
+					onInput={validatePassword}
+					subHeading="alphanumeric and min 8 chars"
+					label="Password"
+					type="password"
+					name="password"
+				/>
+			</div>
 
-		<div class="mt-4">
-			<Textfield label="Confirm Password" type="password" name="confirmPassword"/>
-		</div>
+			<div class="mt-4">
+				<Textfield
+					error={confirmPasswordErr}
+					onInput={validateConfirmPassword}
+					label="Confirm Password"
+					type="password"
+					name="confirmPassword"
+				/>
+			</div>
 
-		<div class="flex mt-8 w-full">
-			<Button
-				{isLoading}
-				type="submit"
-				styles="text-gray-50 w-full mr-2"
-				label="Sign Up"
-			/>
-			<Button onClick={toggleModals} styles="bg-gray-50 text-gray-800 w-2/3 ml-2" label="Close" />
-		</div>
+			{#if formErr.length > 0}
+				<div class="mt-4 p-2 rounded-md bg-red-50">
+					<span class="text-red-500">
+						{formErr}
+					</span>
+				</div>
+			{/if}
+
+			<div class="flex mt-8 w-full">
+				<Button {isLoading} type="submit" styles="text-gray-50 w-full mr-2" label="Sign Up" />
+				<Button onClick={toggleModals} styles="bg-gray-50 text-gray-800 w-2/3 ml-2" label="Close" />
+			</div>
 		</form>
 	</div>
 </div>
