@@ -2,14 +2,14 @@
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext } from 'svelte';
-	import {Auth, LoginResponse} from "../apis/auth";
+	import { Auth, LoginResponse } from '../apis/auth';
 
-	const toggleSignupForm = getContext('toggleSignUpForm');
-	const toggleSignInForm = getContext('toggleSignInForm');
+	const toggleSignupForm: Function = getContext('toggleSignUpForm');
+	const toggleSignInForm: Function = getContext('toggleSignInForm');
 	let isLoading = false;
 	let isSignUpForm = false;
 
-	const auth = new Auth()
+	const auth = new Auth();
 
 	const renderSignUpForm = () => {
 		isSignUpForm = !isSignUpForm;
@@ -20,17 +20,19 @@
 		isLoading = true;
 		let client_id = 'ef57d82fbc5d0eede417';
 		window.location.href = `https://github.com/login/oauth/authorize/?client_id=${client_id}&redirect_uri=http://localhost:5000/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
-	}
+	};
 
 	const onClickSignIn = (e) => {
 		isLoading = true;
-		auth.Login(e.target.email.value, e.target.password.value).then((response: LoginResponse)  => {
-			console.log('token ', response.token)
-			window.location.href="/repositories"
-		}).catch(error => {
-			console.log("error happened",error)
-		})
-		console.log(e.target.email.value, e.target.password.value)
+		auth
+			.Login(e.target.email.value, e.target.password.value)
+			.then((response: LoginResponse) => {
+				window.location.reload();
+			})
+			.catch((error) => {
+				console.log('error happened', error);
+			});
+		console.log(e.target.email.value, e.target.password.value);
 	};
 </script>
 
@@ -62,7 +64,7 @@
 
 			<span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4" />
 		</div>
-		<form on:submit|preventDefault={e => onClickSignIn(e) }>
+		<form on:submit|preventDefault={(e) => onClickSignIn(e)}>
 			<div class="mt-4">
 				<Textfield name="email" label="Email Address" type="email" />
 			</div>
@@ -71,19 +73,14 @@
 			</div>
 
 			<div class="flex mt-8 w-full">
+				<Button {isLoading} styles="text-gray-50 w-full mr-2" label="Sign In" />
 				<Button
-						{isLoading}
-						styles="text-gray-50 w-full mr-2"
-						label="Sign In"
-				/>
-				<Button
-						onClick={toggleSignInForm}
-						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-						label="Close"
+					onClick={toggleSignInForm}
+					styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
+					label="Close"
 				/>
 			</div>
 		</form>
-
 
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-1/5 border-b dark:border-gray-700 md:w-1/4" />
