@@ -44,6 +44,10 @@ const config = {
 				"cream-50": "#e5e2e0",
 			},
 			screens: {
+				// 'mimi':{'min': '320px', 'max': '499px'},
+				'half':{'min': '320px', 'max': '719px'},
+				'laptop':{'min': '720px', 'max': '1023px'},
+				'ipad':{'min': '1024px', 'max': '1279px'},
 				'desktop': {'min': '1280px', 'max': '1600px'},
 				'apple': {'min': '1601px', 'max': '2560px'},
 				'uw': {'min': '2561px'},

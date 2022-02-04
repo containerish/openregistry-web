@@ -36,7 +36,7 @@
 </script>
 
 <div class="items-center sm:flex">
-	<div class="flex flex-col mt-2 sm:flex-row md:mt-0 md:mx-1">
+	<div class="flex flex-row half:flex-col half:mr-5 mt-2 md:mt-0 md:mx-1">
 		<a
 			class="my-1 border-b-2 border-black no-underline hover:no-underline font-poppins text-md leading-5 text-brown-900 duration-500 transform dark:text-gray-100 dark:border-b-brown-100 dark:decoration-gray-100 md:mx-4 md:my-0 uw:text-xl uw:leading-10"
 			href="https://blog.openregistry.dev"
@@ -53,7 +53,7 @@
 		>
 	</div>
 
-	<div class="flex items-center py-2 -mx-1 sm:mx-0 uw:py-4">
+	<div class="flex items-center py-2 -mx-1 sm:mx-0 uw:py-4 half:hidden">
 		<Button onClick={() => toggleSignInForm()} styles="text-gray-50" label="Sign In" />
 	</div>
 

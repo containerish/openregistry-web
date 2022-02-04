@@ -36,19 +36,19 @@
 		: 'pt-8'}"
 >
 	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] dark:bg-brown-900 px-16 mx-auto">
-		<div class="container px-6 mx-auto uw:px-12">
-			<div class="flex flex-col sm:flex-row md:justify-between md:items-center">
+		<div class="container px-6 mx-auto half:px-1 uw:px-12">
+			<div class="flex flex-col md:justify-between md:items-center">
 				<div
 					class="flex {loggedIn ? 'apple:justify-start' : ''} items-center justify-between w-full"
 				>
-					<div class="cursor-pointer flex items-center">
-						<picture on:click={() => (window.location.href = '/')}>
+					<div class="cursor-pointer flex items-center half:ml-5">
+						<picture class="md:w-44" on:click={() => (window.location.href = '/')}>
 							<source srcset="/logo-light.svg" media="(prefers-color-scheme: dark)" />
 							<img class="h-full w-full" src="/logo.svg" alt="opener" />
 						</picture>
 
 						<!-- Search input on desktop screen -->
-						<div class="hidden mx-10 pt-2 md:block">
+						<div class="hidden mx-10 pt-2 md:block half:hidden">
 							{#if loggedIn}
 								<div class="relative">
 									<span class="absolute inset-y-0 left-0 flex items-center pl-3">

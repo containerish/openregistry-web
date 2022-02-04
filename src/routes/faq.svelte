@@ -1,5 +1,7 @@
 <script>
     import Card from '$lib/card.svelte';
+
+
 </script>
 
 <Card styles="bg-cream-50 dark:bg-brown-900">
@@ -37,11 +39,19 @@
 
         <Card>
             <div class="w-full -ml-10">
-                <h3 class="mt-1 ml-2 text-2xl font-normal text-left text-brown-900 dark:text-gray-300">Need More Help?</h3>
-                <textarea class="block w-1/2 px-5 py-5 mt-2 text-gray-700 text-lg placeholder-gray-500 bg-white border rounded-md dark:bg-brown-400 dark:border-gray-600 dark:placeholder-gray-400 focus:border-brown-100 dark:focus:border-brown-600 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800" type="text" placeholder="Write to us" aria-label="write to us"></textarea>
-                <button class="w-32 px-6 py-3.5 mt-5 text-lg font-medium tracking-wide text-gray-100 capitalize transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-900 border-none">
-                    Save
-                </button>
+                <form method="post" action="mail:team@openregistry.dev?subject=subject&message=message">
+                    <h3 class="mt-1 ml-2 text-2xl font-normal text-left text-brown-900 dark:text-gray-300">Need More Help?</h3>
+                    <textarea class="block w-1/2 px-5 py-5 mt-2 text-gray-700 text-lg placeholder-gray-500 bg-white border
+                    rounded-md dark:bg-brown-400 dark:border-gray-600 dark:placeholder-gray-400 focus:border-brown-100
+                    dark:focus:border-brown-600 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+                    type="text" placeholder="Write to us" aria-label="write to us"></textarea>
+
+                    <button class="w-32 px-6 py-3 mt-5 text-lg font-medium tracking-wide text-gray-100
+                    transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2
+                    hover:bg-brown-700 focus:outline-none focus:bg-brown-900 border-none">
+                        Save
+                    </button>
+                </form>
             </div>
 
         </Card>

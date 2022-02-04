@@ -26,12 +26,14 @@ export class RegistryBackend extends HttpClient {
 		return await this.http.get<Repository[]>(url)
 	}
 
-	public ListTags = (namespace: string) => {
+	public ListTags = async (namespace: string) => {
 		if (!namespace) {
 			return Promise.reject("empty namespace, invalid")
 		}
 		const url = `/v2/${namespace}/tags/list`
 
-		return this.http.get<TagList>(url)
+		return await this.http.get<TagList>(url)
 	}
+
+
 }

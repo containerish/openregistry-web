@@ -5,7 +5,7 @@
 </script>
 
 <footer class="bg-gray-50 dark:bg-brown-800 dark:opacity-70">
-	<div class="container px-10 pb-8 pt-12 mx-auto">
+	<div class="container px-10 pb-8 pt-12 mx-auto half:px-0">
 		<div class="flex justify-center">
 			<div class="w-full -mx-6">
 				<div class="px-6 flex justify-between pb-8">

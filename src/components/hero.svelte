@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import {onMount, setContext} from 'svelte';
 
 	import Register from '../components/register.svelte';
 	import Card from '$lib/card.svelte';
@@ -7,7 +7,6 @@
 
 	let showRegisterForm = false;
 	let isLoading = false;
-
 	function toggleRegisterForm() {
 		showRegisterForm = !showRegisterForm;
 	}
@@ -23,29 +22,45 @@
 
 	// 1280px * 1394px
 	// 3840 px *  1394 px
+	let resolution;
+	const getResolution = () => {
+		const isIphone = navigator.userAgent.includes("iPhone")
+		return isIphone ? "iPhone": "noit"
+	}
+
+	onMount(() => {
+		resolution = getResolution();
+	})
+
 	setContext('onClickRegister', onClickRegister);
 </script>
 
 <Card
-	styles="min-h-[93vh] dark:bg-gradient-to-tl dark:from-brown-800 dark:to-brown-800 bg-gradient-to-br w-full from-grad-100 via-grad-400 to-grad-900 apple:gap-56 uw:gap-56 lg:gap-20 desktop:gap-40"
+	styles="min-h-[93vh] dark:bg-gradient-to-tl dark:from-brown-800 dark:to-brown-800 bg-gradient-to-br
+	w-full from-grad-100 half:flex-col-reverse half:gap-2 via-grad-400 to-grad-900 apple:gap-56 uw:gap-56 lg:gap-20 desktop:gap-40
+	laptop:flex-col-reverse ipad:flex-col-reverse laptop:gap-0"
 >
-	<div class="left flex flex-col w-full desktop:w-full lg:w-3/4 apple:w-full z-30">
-		<div class="w-3/4">
+	<div class="left flex flex-col w-full half:items-start half:justify-start desktop:w-full lg:w-3/4
+	apple:w-full half:w-full half:z-0 z-30 laptop:-mt-36 laptop:-ml-20 ipad:-ml-56 ipad:-mt-48 ipad:w-full">
+		<div class="w-3/4 desktop:ml-28 z-35">
 			<h1
-				class="dark:text-gray-50 text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins break-words whitespace-nowrap apple:text-7xl uw:text-8xl"
+				class="dark:text-gray-50 text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins
+				break-words whitespace-nowrap half:self-end half:text-4xl half:font-bold apple:text-7xl uw:text-8xl"
 			>
 				A Decentralised
 			</h1>
 			<h2
-				class="dark:text-gray-50 text-6xl font-semibold font-poppins break-words whitespace-nowrap apple:text-7xl uw:text-8xl"
+				class="dark:text-gray-50 text-6xl font-semibold font-poppins break-words whitespace-nowrap
+				half:text-4xl half:font-bold apple:text-7xl uw:text-8xl"
 			>
 				Container Registry
 			</h2>
 			<div class="w-full">
 				<p
-					class="font-poppins text-left text-gray-700 break-words dark:text-gray-200 text-xl mt-4 mb-20 apple:text-2xl uw:text-3xl"
+					class="font-poppins text-left text-brown-900 break-words dark:text-gray-200
+					half:text-[19px] half:font-normal half:pr-16 text-xl mt-4 mb-20 apple:text-2xl uw:text-3xl"
 				>
-					Store, Download, and Share your container images with decentralized Container Registry
+					Store, Download, and Share your container images with decentralized OpenRegistry
 				</p>
 			</div>
 		</div>
@@ -59,15 +74,19 @@
 		{#if !showRegisterForm}
 			<Button
 				onClick={toggleRegisterForm}
-				styles="px-8 opacity-75 float-left py-6 text-lg font-medium leading-5 text-center text-gray-50 transition-colors duration-200 transform bg-black rounded-md md:w-auto no-underline"
+				styles="px-8 opacity-75 float-left py-6 text-lg font-medium leading-5 text-center text-gray-50
+				transition-colors duration-200 transform bg-black rounded-md md:w-auto no-underline
+				desktop:ml-28 half:text-md half:font-normal half:px-4 half:py-4 half:-my-5"
 				label="Register for Beta"
 			/>
 		{/if}
 	</div>
-	<div class="right z-0 w-full desktop:w-3/5 apple:w-4/5 uw:w-3/4 min-w-max">
+	<div class="right z-0 w-full relative desktop:w-3/5 apple:w-4/5 uw:w-3/4 min-w-max half:mt-56">
 		<picture>
 			<source srcset="/hero-dark.svg" media="(prefers-color-scheme: dark)" />
-			<img class="h-full apple:w-3/4 uw:w-3/4 w-full" src="/hero.svg" alt="OpenRegistry-Hero" />
+			<img class="h-full half:w-96 half:ml-32 half:-mt-56 half:mb-4 apple:w-3/4
+			laptop:w-3/4 laptop:ml-10 laptop:pl-24 uw:w-3/4 w-full"
+			src="/hero.svg" alt="OpenRegistry-Hero" />
 		</picture>
 	</div>
 </Card>

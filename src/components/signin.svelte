@@ -18,7 +18,7 @@
 
 	const handleGithubSignin = () => {
 		isLoading = true;
-		let client_id = 'ef57d82fbc5d0eede417';
+		let client_id = 'fb9cee19e87356765f5a';
 		window.location.href = `https://github.com/login/oauth/authorize/?client_id=${client_id}&redirect_uri=http://localhost:5000/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
 	};
 

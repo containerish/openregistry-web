@@ -127,7 +127,7 @@
 				<hr class="border-gray-200 dark:border-brown-50 " />
 
 				<a
-					href="#"
+					href="/faq"
 					class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-white dark:hover:bg-brown-100 dark:hover:text-white hover:no-underline"
 				>
 					<svg

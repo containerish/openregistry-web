@@ -17,21 +17,22 @@
 	});
 </script>
 
-<div class="items-center md:flex">
-	<div class="flex flex-col justify-center items-center md:flex-row md:mt-0 md:ml-10 pl-10">
+<div class="items-center md:flex sm:flex half:flex">
+	<div class="flex flex-col justify-center items-center md:flex-row half:mt-0 pl-10">
 		<button
-			class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit border-none transform dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-4 md:my-0"
+			class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit border-none transform dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			Explore
 		</button>
 		<button
-			class="my-1 mx-0 px-0 text-lg font-semibold font-lato leading-5 text-brown-800 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-4 md:my-0"
+			on:click={() => (window.location.href = '/repositories')}
+			class="my-1 mx-0 px-0 text-lg font-semibold font-lato leading-5 text-brown-800 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			Repositories
 		</button>
 		<button
 			on:click={() => (window.location.href = '/faq')}
-			class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-4 md:my-0"
+			class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			FAQ
 		</button>
@@ -40,12 +41,12 @@
 			<Dropdown {userInfo} show={showMenu}>
 				<button
 					on:click={toggleMenu}
-					class="flex items-center dark:text-gray-200 px-4 ml-10 mt-1.5 font-lato font-semibold border-brown-800 hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200 transform bg-inherit rounded-md hover:bg-brown-50 dark:hover:bg-brown-800 focus:outline-none focus:ring focus:ring-brown-300 focus:ring-opacity-80"
+					class="flex items-center dark:text-gray-200 px-4 half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800 hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200 transform bg-inherit rounded-md hover:bg-brown-50 dark:hover:bg-brown-800 focus:outline-none focus:bg-cream-50"
 				>
 					<User />
 					<span>{userInfo.UserPayload.username}</span>
 					<svg
-						class="w-5 h-5 mx-1"
+						class="w-5 h-5 mx-1 half:w-4 half:h-4 half:mx-0"
 						viewBox="0 0 24 24"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"

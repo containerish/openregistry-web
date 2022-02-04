@@ -1,6 +1,10 @@
+<script>
+	export let styles = ""
+</script>
+
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="dark:text-gray-200 h-6 w-6"
+	class="{styles} h-6 w-6"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

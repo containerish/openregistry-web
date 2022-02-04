@@ -35,7 +35,7 @@
 	console.log('repo list', repositoryList);
 </script>
 
-<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-[#e5e2e0] dark:bg-brown-900">
+<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50 dark:bg-brown-900">
 	<div class="flex w-full h-full max-w-[3000px]">
 		<div class="w-3/4 mx-8 my-8">
 			<div class="flex px-10 pb-2 justify-between uw:px-36 lg:px-14 apple:px-24">
@@ -66,9 +66,12 @@
 					<Pagination />
 				</div>
 			{:else}
-				<div class="bg-gray-50 w-full rounded-md px-20 py-20 flex justify-center items-center">
-					<span class="text-brown-800 text-5xl">No Repositories</span>
+				<div class="flex justify-center items-center">
+					<div class="bg-gray-50 w-10/12 rounded-md px-20 py-20 my-5 flex justify-center items-center">
+						<span class="text-brown-800 text-4xl">No Repositories</span>
+					</div>
 				</div>
+
 			{/if}
 		</div>
 

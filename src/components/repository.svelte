@@ -3,14 +3,19 @@
 	import Download from '$lib/icons/download.svelte';
 	import LockClosed from '$lib/icons/lock-closed.svelte';
 	import Star from '$lib/icons/star.svelte';
-	import { Repository as Repo } from '../apis/registry'
+	import {RegistryBackend} from '../apis/registry'
+	import type { Repository as Repo, TagList } from '../apis/registry';
 
 	export let data: Repo;
+
+	const handleRepoDetail = () => {
+		location.href = `u/${data.namespace}`
+	}
 </script>
 
 <div
-		id={data.uuid}
-		on:click={() => alert('clicked')}
+	id={data.uuid}
+	on:click={handleRepoDetail}
 	class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-auto bg-brown-400 rounded-lg dark:bg-brown-800"
 >
 	<div class="pt-2">
