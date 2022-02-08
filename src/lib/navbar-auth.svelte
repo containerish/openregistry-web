@@ -20,6 +20,7 @@
 <div class="items-center md:flex sm:flex half:flex">
 	<div class="flex flex-col justify-center items-center md:flex-row half:mt-0 pl-10">
 		<button
+				on:click={() => location.href="/search"}
 			class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit border-none transform dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			Explore
