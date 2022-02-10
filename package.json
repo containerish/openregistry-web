@@ -16,9 +16,9 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-cloudflare": "^1.0.0-next.9",
 		"@sveltejs/kit": "next",
-		"@types/axios": "^0.14.0",
 		"@types/cookie": "^0.4.1",
 		"@types/cssnano": "^5.0.0",
+		"@types/js-cookie": "^3.0.1",
 		"@types/tailwindcss": "^3.0.2",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
 		"@typescript-eslint/parser": "^4.31.1",
@@ -45,6 +45,7 @@
 		"@lukeed/uuid": "^2.0.0",
 		"axios": "^0.24.0",
 		"cookie": "^0.4.1",
+		"js-cookie": "^3.0.1",
 		"jwt-decode": "^3.1.2",
 		"shell.js": "^3.3.1"
 	}

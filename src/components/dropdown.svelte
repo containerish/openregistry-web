@@ -2,15 +2,14 @@
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import type { JWT } from '../apis/auth';
+	import Cookies from 'js-cookie';
 
 	export let userInfo: JWT;
 	export let show = false;
-	import { onMount } from 'svelte';
 
 	const signOut = () => {
-		document.cookie = 'github-jwt' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-		document.cookie = 'access' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-		document.cookie = 'refresh' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		Cookies.remove('access');
+		Cookies.remove('refresh');
 		window.location.href = '/';
 	};
 

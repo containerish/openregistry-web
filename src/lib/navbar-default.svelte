@@ -5,6 +5,7 @@
 	import Signup from '../components/signup.svelte';
 
 	import { onMount, setContext } from 'svelte';
+	import Cookies from 'js-cookie';
 
 	let isLoading = false;
 	let showSignInForm = false;
@@ -23,7 +24,7 @@
 	};
 
 	onMount(async () => {
-		const cookie = document.cookie;
+		const cookie = Cookies.get('access');
 		if (cookie) {
 			isAuth = true;
 		}
