@@ -17,6 +17,7 @@
 		"@types/cookie": "^0.4.1",
 		"@types/cssnano": "^5.0.0",
 		"@types/tailwindcss": "^3.0.2",
+		"@types/axios": "^0.14.0",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
 		"@typescript-eslint/parser": "^4.31.1",
 		"autoprefixer": "^10.4.2",
@@ -40,10 +41,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@floating-ui/dom": "^0.1.10",
-		"@fontsource/fira-mono": "^4.5.0",
 		"@lukeed/uuid": "^2.0.0",
-		"@types/axios": "^0.14.0",
 		"axios": "^0.24.0",
 		"cookie": "^0.4.1",
 		"jwt-decode": "^3.1.2",
