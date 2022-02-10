@@ -16,12 +16,6 @@
 		toggleSignupForm();
 	};
 
-	const handleGithubSignin = () => {
-		isLoading = true;
-		let client_id = 'fb9cee19e87356765f5a';
-		window.location.href = `https://github.com/login/oauth/authorize/?client_id=${client_id}&redirect_uri=http://localhost:5000/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
-	};
-
 	const onClickSignIn = (e) => {
 		isLoading = true;
 		auth
@@ -46,7 +40,7 @@
 		</div>
 
 		<button
-			on:click={handleGithubSignin}
+			on:click={auth.LoginWithGithub}
 			class="w-full h-12 flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black transition-colors duration-200 transform rounded-md dark:border-brown-900 dark:bg-brown-800 dark:text-gray-200 hover:bg-gray-200 hover:no-underline dark:hover:bg-brown-600"
 		>
 			<span class="w-5/6 pr-7 font-semibold text-center">Sign in with GitHub</span>
