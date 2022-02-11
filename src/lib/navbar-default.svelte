@@ -44,7 +44,7 @@
 		>
 		<a
 			class="my-1 border-b-2 border-black no-underline hover:no-underline text-md leading-5 font-poppins text-[#241d19] duration-500 transform dark:text-gray-100 dark:border-b-brown-100 md:mx-4 md:my-0 uw:text-xl uw:leading-10"
-			href="#">About</a
+			href="/about">About</a
 		>
 		<a
 			class="my-1 text-md border-b-2 border-black no-underline hover:no-underline font-poppins leading-5 text-[#241d19] duration-500 transform dark:text-gray-100 dark:border-b-brown-100 md:mx-4 md:my-0 uw:text-xl uw:leading-10"

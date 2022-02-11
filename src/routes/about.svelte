@@ -1,5 +1,7 @@
 <script context="module">
 	import { browser, dev } from '$app/env';
+	import Card from '$lib/card.svelte';
+	import Circle from '$lib/icons/circle.svelte';
 
 	// we don't need any JS on this page, though we'll load
 	// it in dev so that we get hot module replacement...
@@ -15,36 +17,30 @@
 </script>
 
 <svelte:head>
-	<title>About</title>
+	<title>About|Open Registry</title>
 </svelte:head>
 
-<div class="content">
-	<h1>About this app</h1>
 
-	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
+<Card styles="bg-cream-50">
+	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 my-20">
+		<div class="bg-brown-400 justify-start items-center px-10 py-20 mx-5 my-0 rounded-xl ">
+			<h1 class="text-4xl font-semibold text-brown-900 mb-5"> Decentralisation is the Future! and we want to play a role in making it better </h1>
+			<span class="text-lg text-black">
+                With growing
+            </span>
+			<div class=" mt-32">
+				<h1 class="text-4xl font-semibold text-brown-900 my-5"> Help build an Open Source World with us </h1>
+				<span class="text-lg text-black">
+                Currently, you cannot rename an OpenRegistry repository once it's been created. You will need to create a new repository with the name of your choice,
+                move all relevant tags to the new repository created, and delete the existing repository you wish to rename.
+            </span>
+			</div>
 
-	<!-- TODO lose the @next! -->
-	<pre>npm init svelte@next</pre>
+		</div>
+	</div>
 
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
+</Card>
 
-	<p>
-		The <a href="/todos">TODOs</a> page illustrates SvelteKit's data loading and form handling. Try using
-		it with JavaScript disabled!
-	</p>
-</div>
 
-<style>
-	.content {
-		width: 100%;
-		max-width: var(--column-width);
-		margin: var(--column-margin-top) auto 0 auto;
-	}
-</style>
+
+

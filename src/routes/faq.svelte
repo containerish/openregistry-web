@@ -1,8 +1,10 @@
 <script>
     import Card from '$lib/card.svelte';
-
-
 </script>
+
+<svelte:head>
+    <title>FAQ|Open Registry</title>
+</svelte:head>
 
 <Card styles="bg-cream-50 dark:bg-brown-900">
     <div class="w-full min-h-[90vh] m-w-[70vw] mx-10 my-20">
