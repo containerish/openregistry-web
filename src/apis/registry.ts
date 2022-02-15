@@ -52,15 +52,19 @@ export class RegistryBackend extends HttpClient {
 		return await this.http.get<TagList>(url)
 	}
 
-	public ListCatalog = async (pageSize?: number, offset?: number) => {
+	public ListCatalog = async (namespace?: string, pageSize?: number, offset?: number) => {
 		let url = '/v2/_catalog'
 		if (pageSize){
 			if (!offset) offset = 0;
 			url = url + `?n=${pageSize}&last=${offset}`
 		}
+		if (namespace) {
+			if (!offset) offset = 0;
+			url = url + `?n=${pageSize}&last=${offset}&ns=${namespace}`
+		}
 		return await this.http.get<Catalog>(url)
 	}
 
-	public DefaultPageSize: number = 5;
+	public DefaultPageSize: number = 10;
 
 }

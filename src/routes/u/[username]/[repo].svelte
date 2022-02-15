@@ -49,7 +49,7 @@
             <div class="w-full">
                 <div class="flex gap-4">
                     <h1 class="text-4xl font-medium dark:text-gray-200">{username}/{repo}</h1>
-                    <Star/>
+                    <Star styles="w-8 h-8 mt-1.5"/>
                 </div>
                 <span class="text-md dark:text-gray-200">by {username}</span>
             </div>

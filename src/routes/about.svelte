@@ -2,17 +2,8 @@
 	import { browser, dev } from '$app/env';
 	import Card from '$lib/card.svelte';
 	import Circle from '$lib/icons/circle.svelte';
-
-	// we don't need any JS on this page, though we'll load
-	// it in dev so that we get hot module replacement...
 	export const hydrate = dev;
-
-	// ...but if the client-side router is already loaded
-	// (i.e. we came here from elsewhere in the app), use it
 	export const router = browser;
-
-	// since there's no dynamic data here, we can prerender
-	// it so that it gets served as a static asset in prod
 	export const prerender = true;
 </script>
 
@@ -23,17 +14,52 @@
 
 <Card styles="bg-cream-50">
 	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 my-20">
-		<div class="bg-brown-400 justify-start items-center px-10 py-20 mx-5 my-0 rounded-xl ">
-			<h1 class="text-4xl font-semibold text-brown-900 mb-5"> Decentralisation is the Future! and we want to play a role in making it better </h1>
+		<div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-0 rounded-xl ">
+			<h1 class="text-5xl font-semibold text-brown-900 mb-8"> Decentralisation is the Future! and we want to play a role in making it better </h1>
 			<span class="text-lg text-black">
-                With growing
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+				ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+				reprehenderit
             </span>
-			<div class=" mt-32">
-				<h1 class="text-4xl font-semibold text-brown-900 my-5"> Help build an Open Source World with us </h1>
+			<div class=" mt-28">
+				<h1 class="text-5xl font-semibold text-brown-900 mt-5 mb-8"> Help build an Open Source World with us </h1>
 				<span class="text-lg text-black">
-                Currently, you cannot rename an OpenRegistry repository once it's been created. You will need to create a new repository with the name of your choice,
-                move all relevant tags to the new repository created, and delete the existing repository you wish to rename.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+				ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+				reprehenderit
             </span>
+			</div>
+			<div class=" mt-28">
+				<h1 class="text-5xl font-semibold text-brown-900 mt-5 mb-8"> Get to know our Team </h1>
+				<span class="text-lg text-black">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+				ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+				reprehenderit
+            </span>
+			</div>
+		</div>
+		<div class="flex flex-row my-8 items-center">
+			<div class="flex flex-col bg-brown-400 w-1/2 rounded-xl mx-8 py-4 px-4">
+					<img
+					on:click={()=> window.open("https://github.com/guacamole", "_blank")}
+					src="https://avatars.githubusercontent.com/u/68041753?v=4&s=400" alt="guacamole"
+					class="my-4 cursor-pointer self-center rounded-full border-2 border-black w-52"/>
+
+				<h2 class="text-3xl font-semibold text-brown-900 self-center my-2">Guacamole</h2>
+				<span class="text-lg text-black px-3.5 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</span>
+			</div>
+			<div class="flex flex-col bg-brown-400 w-1/2 rounded-xl mx-8 py-4 px-4">
+				<img
+					on:click={()=> window.open("https://github.com/jay-dee7", "_blank")}
+					class="my-2.5 cursor-pointer self-center rounded-full w-56"
+					src="https://avatars.githubusercontent.com/u/10788442?v=4&s=300" alt="jasdeep"/>
+				<h2 class="text-3xl font-semibold text-brown-900 self-center my-2">Jasdeep</h2>
+				<span class="text-lg text-black px-3.5 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</span>
 			</div>
 
 		</div>

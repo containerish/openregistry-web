@@ -49,6 +49,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>User|Open Registry</title>
+</svelte:head>
+
 {#if user && user.UserPayload}
 
 	<div class="min-h-[93vh] dark:bg-brown-900 bg-cream-50">

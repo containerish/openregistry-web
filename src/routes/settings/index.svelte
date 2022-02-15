@@ -12,6 +12,10 @@
     })
 </script>
 
+<svelte:head>
+    <title>User|Open Registry</title>
+</svelte:head>
+
 {#if user && user.UserPayload}
     <div class="min-h-[93vh] dark:bg-brown-900 bg-cream-50">
         <div class="flex gap-5 space-x-10 min-w-full justify-start items-center py-28 dark:bg-brown-600 my-20 px-20 bg-brown-500">

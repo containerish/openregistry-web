@@ -7,23 +7,26 @@
 	import { onMount, setContext } from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
-	import { RegistryBackend } from '../../apis/registry.ts';
-	import { Repository as Repo } from '../../apis/registry';
+	import {Catalog, RegistryBackend} from '../../apis/registry.ts';
 	import type { AxiosResponse } from 'axios';
 
 	const backend = new RegistryBackend();
+	const pageSize = 5
+	const fetchPageData = (offset: number) => {
+		backend.ListCatalog("",pageSize, pageSize*offset).then((data: Catalog) => {
+			catalog = data
+		})
+	}
 
-	let repositoryList: Repo[] = [];
+	setContext("getPageData", fetchPageData)
+	let catalog: Catalog = {};
 
 	onMount(() => {
-		backend.ListRepositories().then((repoList: Repo[]) => {
-			if (!repoList) {
-				return;
-			}
-			console.log('loiiiiii: ', repoList);
-			repositoryList = repoList;
-		});
 		backend.ListTags('johndoe/openregistry');
+		backend.ListCatalog("",pageSize).then((data: Catalog) => {
+			console.log("data:",data)
+			catalog = data
+		})
 	});
 
 	let showModal = false;
@@ -32,7 +35,7 @@
 	};
 
 	setContext('toggleModal', toggleModal);
-	console.log('repo list', repositoryList);
+	console.log('repo list', catalog);
 </script>
 
 <Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50 dark:bg-brown-900">
@@ -55,15 +58,15 @@
 				{/if}
 			</div>
 
-			{#if repositoryList && repositoryList.length > 0}
+			{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 				<div class="w-full px-4">
-					{#each repositoryList as repo}
-						<Repository data={repo} />
+					{#each catalog.repositories as repo}
+						<Repository data={repo} compact={false}/>
 					{/each}
 				</div>
 
 				<div class="flex justify-center py-4 bg-cream-50 dark:bg-brown-900">
-					<Pagination />
+					<Pagination pages={Math.ceil(catalog.total/pageSize)}/>
 				</div>
 			{:else}
 				<div class="flex justify-center items-center">

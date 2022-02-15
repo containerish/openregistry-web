@@ -13,7 +13,7 @@
     const backend = new RegistryBackend();
 
     const fetchPageData = (offset: number) => {
-        backend.ListCatalog(backend.DefaultPageSize, backend.DefaultPageSize*offset).then((data: Catalog) => {
+        backend.ListCatalog("",backend.DefaultPageSize, backend.DefaultPageSize*offset).then((data: Catalog) => {
             catalog = data
         })
     }
@@ -23,7 +23,7 @@
 
     onMount(() => {
         backend.ListTags('johndoe/openregistry');
-        backend.ListCatalog(backend.DefaultPageSize).then((data: Catalog) => {
+        backend.ListCatalog("",backend.DefaultPageSize).then((data: Catalog) => {
             console.log("data:",data)
             catalog = data
         })
@@ -81,8 +81,9 @@
         <div class="w-3/4 my-8">
             <div class="flex px-4 pb-2 justify-between uw:px-36 apple:px-24">
                 <button
-                        on:click={toggleModal}
-                        class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 dark:border-brown-800 bg-white rounded-md sm:inline dark:bg-brown-900 dark:text-gray-100 hover:bg-brown-50 dark:hover:bg-brown-800 hover:text-gray-700 dark:hover:text-gray-100"
+                        class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 dark:border-brown-800 bg-white
+                        rounded-md sm:inline dark:bg-brown-900 dark:text-gray-100 hover:bg-brown-50 dark:hover:bg-brown-800
+                        hover:text-gray-700 dark:hover:text-gray-100"
                 >
                     Sort
                 </button>
