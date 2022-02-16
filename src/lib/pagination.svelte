@@ -16,7 +16,7 @@
 	}
 </script>
 
-<div class="flex dark:bg-brown-900">
+<div class="flex">
 	<button
 			on:click={() => setActivePage(activePage-1)}
 			class="{activePage === 0 ? 'disabled cursor-not-allowed bg-cream-50' : 'bg-cream-50 hover:bg-gray-200 hover:text-gray-700'}

@@ -11,13 +11,11 @@
 
 	const toggleSignInForm = () => {
 		showSignInForm = !showSignInForm;
-		console.log(showSignInForm);
 	};
 
 	const toggleSignUpForm = () => {
 		showSignInForm = !showSignInForm;
 		showSignUpForm = !showSignUpForm;
-		console.log(showSignInForm, showSignUpForm);
 	};
 
 	let isAuth = getContext<Function>('isAuth');
@@ -31,11 +29,11 @@
 </script>
 
 <header
-	class="bg-gradient-to-r from-brown-50 to-brown-500 dark:bg-brown-900 {isAuth
-		? 'py-4 dark:mt-4 dark:py-0'
+	class="bg-gradient-to-r from-brown-50 to-brown-500 {isAuth
+		? 'py-4'
 		: 'pt-8'}"
 >
-	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] dark:bg-brown-900 px-16 mx-auto">
+	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
 		<div class="container px-6 mx-auto half:px-1 uw:px-12">
 			<div class="flex flex-col md:justify-between md:items-center">
 				<div
@@ -43,7 +41,6 @@
 				>
 					<div class="cursor-pointer flex items-center half:ml-5">
 						<picture class="md:w-44" on:click={() => (window.location.href = '/')}>
-							<source srcset="/logo-light.svg" media="(prefers-color-scheme: dark)" />
 							<img class="h-full w-full" src="/logo.svg" alt="opener" />
 						</picture>
 
@@ -69,7 +66,8 @@
 
 									<input
 										type="text"
-										class="w-80 py-2 pl-10 pr-4 text-gray-700 dark:bg-brown-800 border rounded-md dark:bg-cream-50 dark:text-gray-100 dark:border-gray-600 focus:border-brown-800 dark:focus:border-brown-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-brown-300"
+										class="w-80 py-2 pl-10 pr-4 text-gray-700 border rounded-md focus:border-brown-800
+										focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-brown-300"
 										placeholder="Search"
 									/>
 								</div>

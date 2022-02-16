@@ -13,7 +13,6 @@
 
 	onMount(() => {
 		userInfo = UserInfo();
-		console.log('user: ', userInfo);
 	});
 </script>
 
@@ -21,19 +20,22 @@
 	<div class="flex flex-col justify-center items-center md:flex-row half:mt-0 pl-10">
 		<button
 				on:click={() => location.href="/search"}
-			class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit border-none transform dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
+			class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit
+			border-none transform hover:text-brown-800 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			Explore
 		</button>
 		<button
 			on:click={() => (window.location.href = '/repositories')}
-			class="my-1 mx-0 px-0 text-lg font-semibold font-lato leading-5 text-brown-800 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
+			class="my-1 mx-0 px-0 text-lg font-semibold font-lato leading-5 text-brown-800 transition-colors duration-200
+			transform bg-inherit border-none hover:text-brown-800 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			Repositories
 		</button>
 		<button
 			on:click={() => (window.location.href = '/faq')}
-			class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 transition-colors duration-200 transform bg-inherit border-none dark:text-gray-200 hover:text-brown-800 dark:hover:text-brown-400 hover:no-underline md:mx-6 md:my-0 half:mx-2"
+			class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 transition-colors duration-200
+			transform bg-inherit border-none hover:text-brown-800 hover:no-underline md:mx-6 md:my-0 half:mx-2"
 		>
 			FAQ
 		</button>
@@ -42,7 +44,9 @@
 			<Dropdown {userInfo} show={showMenu}>
 				<button
 					on:click={toggleMenu}
-					class="flex items-center dark:text-gray-200 px-4 half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800 hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200 transform bg-inherit rounded-md hover:bg-brown-50 dark:hover:bg-brown-800 focus:outline-none focus:bg-cream-50"
+					class="flex items-center px-4 half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800
+					hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200
+					transform bg-inherit rounded-md hover:bg-brown-50 focus:outline-none focus:bg-cream-50"
 				>
 					<User />
 					<span>{userInfo.UserPayload.username}</span>

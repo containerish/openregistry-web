@@ -18,7 +18,6 @@
 	let loggedIn = false;
 	onMount(async () => {
 		loggedIn = await isAuth(document.cookie);
-		console.log('loggedin? ', loggedIn);
 	});
 </script>
 

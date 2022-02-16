@@ -4,25 +4,25 @@
 </script>
 
 <Card
-	styles="bg-brown-400 half:flex-col laptop:flex-col apple:flex-col desktop:flex-col desktop:items-center half:pt-0 py-12 min-h-[70vh] dark:bg-brown-900"
+	styles="bg-brown-400 half:flex-col laptop:flex-col apple:flex-col desktop:flex-col desktop:items-center half:pt-0 py-12 min-h-[70vh]"
 >
 	<div class="flex w-1/2 flex-col items-center px-6 pb-10 half:pt-24">
 		<span
-			class="font-poppins text-center dark:text-gray-300 whitespace-nowrap font-normal pb-4 text-5xl
+			class="font-poppins text-center whitespace-nowrap font-normal pb-4 text-5xl
 			half:text-4xl half:font-semibold"
 		>
 			How does it work?
 		</span>
 		<ul class="font-lato text-center font-normal list-disc">
-			<li class="text-left font-lato text-gray-800 text-xl dark:text-gray-300 half:text-[19px]">
-				Create an account on <a href="#" class="dark:text-brown-50 underline text-brown-800"
+			<li class="text-left font-lato text-gray-800 text-xl half:text-[19px]">
+				Create an account on <a href="#" class="underline text-brown-800"
 					>OpenRegistry.dev</a
 				>
 			</li>
-			<li class="dark:text-gray-300 text-left font-lato text-gray-800 text-xl half:text-[19px]">
+			<li class="text-left font-lato text-gray-800 text-xl half:text-[19px]">
 				Install Docker/Nerdctl/Podman
 			</li>
-			<li class="dark:text-gray-300 text-left font-lato text-gray-800 text-xl half:text-[19px]">
+			<li class="text-left font-lato text-gray-800 text-xl half:text-[19px]">
 				Login into OpenRegistry using Docker CLI
 			</li>
 		</ul>

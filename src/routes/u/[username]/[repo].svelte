@@ -33,14 +33,13 @@
     }
 
     export async function load({ params, fetch, session, stuff }) {
-        console.log('pkjsdkf: ', params.repo, params.username)
         repo = params.repo
         username = params.username
         return true
     }
 </script>
 
-<div class="min-h-[93vh] dark:bg-brown-900 bg-cream-50">
+<div class="min-h-[93vh] bg-cream-50">
     <div class="flex flex-col w-full h-full mt-20">
         <div class="flex py-24 px-20 space-x-10 w-full bg-brown-400">
             <div>
@@ -48,21 +47,21 @@
             </div>
             <div class="w-full">
                 <div class="flex gap-4">
-                    <h1 class="text-4xl font-medium dark:text-gray-200">{username}/{repo}</h1>
+                    <h1 class="text-4xl font-medium">{username}/{repo}</h1>
                     <Star styles="w-8 h-8 mt-1.5"/>
                 </div>
-                <span class="text-md dark:text-gray-200">by {username}</span>
+                <span class="text-md">by {username}</span>
             </div>
         </div>
 
         <div
-        class="flex gap-5 items-start justify-items-center dark:bg-brown-800 bg-brown-400 space-x-10 px-16 mb-10"
+        class="flex gap-5 items-start justify-items-center bg-brown-400 space-x-10 px-16 mb-10"
         >
             <button
                     on:click={toggleOverview}
                     class="ease-in duration-300 h-10 pb-9 py-2 text-center text-brown-900 bg-transparent border-b-2
-					border-transparent apple:text-xl uw:text-2xl dark:text-gray-200 whitespace-nowrap cursor-base
-					focus:outline-none dark:hover:border-b-gray-50 hover:border-b-black"
+					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
+					focus:outline-none hover:border-b-black"
             >
                 Overview
             </button>
@@ -70,8 +69,8 @@
             <button
                     on:click={toggleTags}
                     class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
-					border-transparent apple:text-xl uw:text-2xl dark:text-gray-200 whitespace-nowrap cursor-base
-					focus:outline-none dark:hover:border-b-gray-50 hover:border-b-black"
+					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
+					focus:outline-none hover:border-b-black"
             >
                 Tags
             </button>
@@ -89,7 +88,7 @@
                 </div>
             {/if}
             <div class="flex flex-col rounded-md mx-4 my-4 bg-gray-50 px-4 py-4">
-                <h1 class="text-xl font-medium dark:text-gray-200 mb-4">Docker Push Command</h1>
+                <h1 class="text-xl font-medium mb-4">Docker Push Command</h1>
                 <span class="rounded-md bg-gray-400 text-sm text-gray-900 px-4 py-2"> docker push cntr.sh/janedoe/openregistry:tagname</span>
             </div>
         </div>

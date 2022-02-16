@@ -9,8 +9,7 @@
 	<div class="flex items-center">
 		<div class="flex-4 float-left w-80 half:w-full">
 			<input placeholder="Email" id="register-for-beta-email" type="email" class="block w-full px-5 py-3.5
-			text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-300 dark:text-gray-300
-			dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring
+			text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring
 			desktop:ml-28 half:px-3 half:py-2.5 half:text-sm">
 		</div>
 		<div class="flex flex-3">

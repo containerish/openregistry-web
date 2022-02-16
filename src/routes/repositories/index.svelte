@@ -11,7 +11,7 @@
 	import type { AxiosResponse } from 'axios';
 
 	const backend = new RegistryBackend();
-	const pageSize = 5
+	const pageSize = 10
 	const fetchPageData = (offset: number) => {
 		backend.ListCatalog("",pageSize, pageSize*offset).then((data: Catalog) => {
 			catalog = data
@@ -24,7 +24,6 @@
 	onMount(() => {
 		backend.ListTags('johndoe/openregistry');
 		backend.ListCatalog("",pageSize).then((data: Catalog) => {
-			console.log("data:",data)
 			catalog = data
 		})
 	});
@@ -35,10 +34,9 @@
 	};
 
 	setContext('toggleModal', toggleModal);
-	console.log('repo list', catalog);
 </script>
 
-<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50 dark:bg-brown-900">
+<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
 	<div class="flex w-full h-full max-w-[3000px]">
 		<div class="w-3/4 mx-8 my-8">
 			<div class="flex px-10 pb-2 justify-between uw:px-36 lg:px-14 apple:px-24">
@@ -47,7 +45,8 @@
 				</div>
 				<button
 					on:click={toggleModal}
-					class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 dark:border-brown-800 bg-white rounded-md sm:inline dark:bg-brown-900 dark:text-gray-100 hover:bg-brown-50 dark:hover:bg-brown-800 hover:text-gray-700 dark:hover:text-gray-100"
+					class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
+					hover:bg-brown-50 hover:text-gray-700"
 				>
 					Create Repository
 				</button>
@@ -65,7 +64,7 @@
 					{/each}
 				</div>
 
-				<div class="flex justify-center py-4 bg-cream-50 dark:bg-brown-900">
+				<div class="flex justify-center py-4 bg-cream-50">
 					<Pagination pages={Math.ceil(catalog.total/pageSize)}/>
 				</div>
 			{:else}

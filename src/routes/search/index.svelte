@@ -24,7 +24,6 @@
     onMount(() => {
         backend.ListTags('johndoe/openregistry');
         backend.ListCatalog("",backend.DefaultPageSize).then((data: Catalog) => {
-            console.log("data:",data)
             catalog = data
         })
     });
@@ -35,10 +34,9 @@
     };
 
     setContext('toggleModal', toggleModal);
-    console.log('repo list', catalog);
 </script>
 
-<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50 dark:bg-brown-900">
+<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
     <div class="flex w-full h-full max-w-[3000px]">
         <div class="h-full w-1/3 px-4 py-4 my-4">
             <h3 class="font-semibold font-lato text-xl mb-4 text-brown-900">Filters</h3>
@@ -81,9 +79,8 @@
         <div class="w-3/4 my-8">
             <div class="flex px-4 pb-2 justify-between uw:px-36 apple:px-24">
                 <button
-                        class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 dark:border-brown-800 bg-white
-                        rounded-md sm:inline dark:bg-brown-900 dark:text-gray-100 hover:bg-brown-50 dark:hover:bg-brown-800
-                        hover:text-gray-700 dark:hover:text-gray-100"
+                        class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white
+                        rounded-md sm:inline hover:bg-brown-50 hover:text-gray-700"
                 >
                     Sort
                 </button>
@@ -101,7 +98,7 @@
                     {/each}
                 </div>
 
-                <div class="flex justify-center py-4 bg-cream-50 dark:bg-brown-900">
+                <div class="flex justify-center py-4 bg-cream-50">
                     <Pagination pages={Math.ceil(catalog.total/backend.DefaultPageSize)}/>
                 </div>
             {:else}

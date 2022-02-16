@@ -12,7 +12,7 @@
 		{value}
 	/>
 	<label
-		class="dark:text-gray-200 text-lg form-check-label flex gap-1 text-gray-800"
+		class="text-lg form-check-label flex gap-1 text-gray-800"
 		for="inlineRadio10"
 	>
 		{label}
