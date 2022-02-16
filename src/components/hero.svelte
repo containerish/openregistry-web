@@ -12,7 +12,6 @@
 	}
 
 	const onClickRegister = () => {
-		console.log('clicked register');
 		isLoading = true;
 		setTimeout(() => {
 			toggleRegisterForm();
@@ -36,29 +35,29 @@
 </script>
 
 <Card
-	styles="min-h-[93vh] dark:bg-gradient-to-tl dark:from-brown-800 dark:to-brown-800 bg-gradient-to-br
-	w-full from-grad-100 half:flex-col-reverse half:gap-2 via-grad-400 to-grad-900 apple:gap-56 uw:gap-56 lg:gap-20 desktop:gap-40
-	laptop:flex-col-reverse ipad:flex-col-reverse laptop:gap-0"
+	styles="min-h-[93vh] w-full
+	half:flex-col-reverse half:gap-2 apple:gap-56 uw:gap-56 lg:gap-20 desktop:gap-40 laptop:flex-col-reverse
+	ipad:flex-col-reverse laptop:gap-0 from-grad-100 bg-gradient-to-br via-grad-400 to-grad-900"
 >
 	<div class="left flex flex-col w-full half:items-start half:justify-start desktop:w-full lg:w-3/4
 	apple:w-full half:w-full half:z-0 z-30 laptop:-mt-36 laptop:-ml-20 ipad:-ml-56 ipad:-mt-48 ipad:w-full">
 		<div class="w-3/4 desktop:ml-28 z-35">
 			<h1
-				class="dark:text-gray-50 text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins
+				class="text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins
 				break-words whitespace-nowrap half:self-end half:text-4xl half:font-bold apple:text-7xl uw:text-8xl"
 			>
 				A Decentralised
 			</h1>
 			<h2
-				class="dark:text-gray-50 text-6xl font-semibold font-poppins break-words whitespace-nowrap
+				class="text-6xl font-semibold font-poppins break-words whitespace-nowrap
 				half:text-4xl half:font-bold apple:text-7xl uw:text-8xl"
 			>
 				Container Registry
 			</h2>
 			<div class="w-full">
 				<p
-					class="font-poppins text-left text-brown-900 break-words dark:text-gray-200
-					half:text-[19px] half:font-normal half:pr-16 text-xl mt-4 mb-20 apple:text-2xl uw:text-3xl"
+					class="font-poppins text-left text-brown-900 break-words half:text-[19px] half:font-normal
+					half:pr-16 text-xl mt-4 mb-20 apple:text-2xl uw:text-3xl"
 				>
 					Store, Download, and Share your container images with decentralized OpenRegistry
 				</p>
@@ -83,7 +82,6 @@
 	</div>
 	<div class="right z-0 w-full relative desktop:w-3/5 apple:w-4/5 uw:w-3/4 min-w-max half:mt-56">
 		<picture>
-			<source srcset="/hero-dark.svg" media="(prefers-color-scheme: dark)" />
 			<img class="h-full half:w-96 half:ml-32 half:-mt-56 half:mb-4 apple:w-3/4
 			laptop:w-3/4 laptop:ml-10 laptop:pl-24 uw:w-3/4 w-full"
 			src="/hero.svg" alt="OpenRegistry-Hero" />
