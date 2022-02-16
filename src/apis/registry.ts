@@ -52,7 +52,7 @@ export class RegistryBackend extends HttpClient {
 		return await this.http.get<TagList>(url)
 	}
 
-	public ListCatalog = async (namespace?: string, pageSize?: number, offset?: number) => {
+	public ListCatalog = async (pageSize?: number, offset?: number, namespace?: string) => {
 		let url = '/v2/_catalog'
 		if (pageSize){
 			if (!offset) offset = 0;

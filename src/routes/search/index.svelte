@@ -13,7 +13,7 @@
     const backend = new RegistryBackend();
 
     const fetchPageData = (offset: number) => {
-        backend.ListCatalog("",backend.DefaultPageSize, backend.DefaultPageSize*offset).then((data: Catalog) => {
+        backend.ListCatalog(backend.DefaultPageSize, backend.DefaultPageSize*offset).then((data: Catalog) => {
             catalog = data
         })
     }
@@ -23,7 +23,7 @@
 
     onMount(() => {
         backend.ListTags('johndoe/openregistry');
-        backend.ListCatalog("",backend.DefaultPageSize).then((data: Catalog) => {
+        backend.ListCatalog(backend.DefaultPageSize).then((data: Catalog) => {
             catalog = data
         })
     });
