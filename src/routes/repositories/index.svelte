@@ -7,23 +7,25 @@
 	import { onMount, setContext } from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
-	import { RegistryBackend } from '../../apis/registry.ts';
-	import { Repository as Repo } from '../../apis/registry';
+	import {Catalog, RegistryBackend} from '../../apis/registry.ts';
 	import type { AxiosResponse } from 'axios';
 
 	const backend = new RegistryBackend();
+	const pageSize = 10
+	const fetchPageData = (offset: number) => {
+		backend.ListCatalog(pageSize, pageSize*offset).then((data: Catalog) => {
+			catalog = data
+		})
+	}
 
-	let repositoryList: Repo[] = [];
+	setContext("getPageData", fetchPageData)
+	let catalog: Catalog = {};
 
 	onMount(() => {
-		backend.ListRepositories().then((repoList: Repo[]) => {
-			if (!repoList) {
-				return;
-			}
-			console.log('loiiiiii: ', repoList);
-			repositoryList = repoList;
-		});
 		backend.ListTags('johndoe/openregistry');
+		backend.ListCatalog(pageSize).then((data: Catalog) => {
+			catalog = data
+		})
 	});
 
 	let showModal = false;
@@ -32,10 +34,9 @@
 	};
 
 	setContext('toggleModal', toggleModal);
-	console.log('repo list', repositoryList);
 </script>
 
-<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50 dark:bg-brown-900">
+<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
 	<div class="flex w-full h-full max-w-[3000px]">
 		<div class="w-3/4 mx-8 my-8">
 			<div class="flex px-10 pb-2 justify-between uw:px-36 lg:px-14 apple:px-24">
@@ -44,7 +45,8 @@
 				</div>
 				<button
 					on:click={toggleModal}
-					class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 dark:border-brown-800 bg-white rounded-md sm:inline dark:bg-brown-900 dark:text-gray-100 hover:bg-brown-50 dark:hover:bg-brown-800 hover:text-gray-700 dark:hover:text-gray-100"
+					class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
+					hover:bg-brown-50 hover:text-gray-700"
 				>
 					Create Repository
 				</button>
@@ -55,15 +57,15 @@
 				{/if}
 			</div>
 
-			{#if repositoryList && repositoryList.length > 0}
+			{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 				<div class="w-full px-4">
-					{#each repositoryList as repo}
-						<Repository data={repo} />
+					{#each catalog.repositories as repo}
+						<Repository data={repo} compact={false}/>
 					{/each}
 				</div>
 
-				<div class="flex justify-center py-4 bg-cream-50 dark:bg-brown-900">
-					<Pagination />
+				<div class="flex justify-center py-4 bg-cream-50">
+					<Pagination pages={Math.ceil(catalog.total/pageSize)}/>
 				</div>
 			{:else}
 				<div class="flex justify-center items-center">

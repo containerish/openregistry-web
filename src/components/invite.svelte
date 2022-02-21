@@ -7,7 +7,7 @@
 
 <div class="px-10 py-10">
 	<form class="flex justify-around items-center gap-8 flex-col h-full w-full">
-		<span class="text-2xl capitalize font-semibold font-lato dark:text-gray-200">
+		<span class="text-2xl capitalize font-semibold font-lato">
 			Invite Your Colleauges
 		</span>
 		<div class="w-full">

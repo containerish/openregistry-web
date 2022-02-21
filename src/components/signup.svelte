@@ -31,7 +31,6 @@
 		auth
 			.Signup(e.target.username.value, e.target.email.value, e.target.password.value)
 			.then((response: SignupResponse) => {
-				console.log('msg ', response.msg);
 				formErr = '';
 				window.location.reload();
 			})
@@ -46,7 +45,6 @@
 		fetch('http://localhost:5000/auth/github/login', { redirect: 'follow' })
 			.then((res) => res.json())
 			.then((res) => {
-				console.log('response from server: ', res);
 				isLoading = false;
 			})
 			.catch((err) => {
@@ -95,7 +93,6 @@
 		);
 
 		const regexFailed = regexp.test(email);
-		console.log('isemail: ', regexFailed);
 		// minimum length for email is 3 chars
 		if (!email || email.length < 3 || !regexFailed) {
 			emailErr = 'invalid email';
@@ -106,27 +103,27 @@
 	};
 </script>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg dark:bg-brown-900 lg:max-w-4xl">
+<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
 	<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
 		<div class="flex justify-center py-4 mb-8">
 			<picture>
-				<source srcset="/logo-light.svg" media="(prefers-color-scheme: dark)" />
 				<img class="" src="/logo-dark.svg" alt="openregistry-logo.svg" />
 			</picture>
 		</div>
 		<a
 			href="#"
 			on:click={onClickSignUp}
-			class="flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black transition-colors duration-200 transform rounded-lg dark:border-brown-800 dark:text-gray-100 dark:bg-brown-800 hover:bg-gray-200 hover:no-underline dark:hover:bg-brown-800"
+			class="flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black transition-colors
+			duration-200 transform rounded-lg hover:bg-gray-200 hover:no-underline"
 		>
-			<div class="py-2 dark:bg-brown-800">
+			<div class="py-2">
 				<Github />
 			</div>
 			<span class="w-5/6 pr-7 font-bold text-center">Sign in with GitHub</span>
 		</a>
 
 		<div class="flex items-center justify-between mt-4">
-			<span class="w-full border-b dark:border-gray-400" />
+			<span class="w-full border-b" />
 		</div>
 		<form on:submit|preventDefault={(e) => handleSignup(e)}>
 			<div class="mt-4">

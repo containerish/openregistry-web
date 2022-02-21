@@ -4,12 +4,13 @@
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="{styles} h-6 w-6"
+	class="{styles}"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"
 >
 	<path
+		class="fill-brown-900"
 		stroke-linecap="round"
 		stroke-linejoin="round"
 		stroke-width="2"

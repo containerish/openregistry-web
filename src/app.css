@@ -14,9 +14,7 @@ html, body {
 }
 
 body {
-	/* background-image: linear-gradient(300deg, #8c6f5f, #ddd3cd); */
-	/* background: linear-gradient(150deg, rgba(240, 190, 163, 0.01) 1.35%, rgba(146, 116, 99, 0) 13.3%, #8C6F5F 99.29%); */
-	color: #333;
+	color: #241D19;
 	margin: 0;
 	padding: 0px;
 	box-sizing: border-box;
@@ -58,7 +56,7 @@ input:disabled {
 }
 
 button {
-	color: #333;
+	color: #241D19;
 	background-color: #f4f4f4;
 	outline: none;
 }

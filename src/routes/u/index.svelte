@@ -42,46 +42,49 @@
 			if (!repoList) {
 				return;
 			}
-			console.log('loiiiiii: ', repoList);
 			repositoryList = repoList;
 		});
 		backend.ListTags('johndoe/openregistry');
 	});
 </script>
 
+<svelte:head>
+	<title>User|Open Registry</title>
+</svelte:head>
+
 {#if user && user.UserPayload}
 
-	<div class="min-h-[93vh] dark:bg-brown-900 bg-cream-50">
+	<div class="min-h-[93vh] bg-cream-50">
 		<div
-				class="flex gap-5 space-x-10 min-w-full justify-start items-center py-24 dark:bg-brown-800 mt-20 px-20 bg-brown-500"
+				class="flex gap-5 space-x-10 min-w-full justify-start items-center py-24 mt-20 px-20 bg-brown-500"
 		>
 			<div class="px-4" />
 			<div>
-				<User styles="h-24 w-24 text-black color-black" />
+				<User styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial w-64">
-				<h1 class="text-4xl font-medium dark:text-gray-200">{user.UserPayload.name}</h1>
+				<h1 class="text-4xl font-medium">{user.UserPayload.name}</h1>
 				<div class="flex mt-3">
-					<User />
-					<span class="text-lg dark:text-gray-200">Community User</span>
+					<User styles="h-6 w-6" />
+					<span class="text-lg">Community User</span>
 				</div>
 			</div>
 			<div class="flex flex-col flex-initial w-32">
-				<a class="dark:text-gray-100 text-gray-700 text-xl underline-offset-4" href="/settings"
+				<a class="text-gray-700 text-xl underline-offset-4" href="/settings"
 				><u>Edit Profile</u></a
 				>
-				<span class="mt-3 text-lg dark:text-gray-200"> Joined Today</span>
+				<span class="mt-3 text-lg"> Joined Today</span>
 			</div>
 		</div>
 
 		<div
-				class="flex gap-5 items-start justify-items-center dark:bg-brown-800 bg-brown-500 space-x-10 pb-2 px-40 mb-10"
+				class="flex gap-5 items-start justify-items-center bg-brown-500 space-x-10 pb-2 px-40 mb-10"
 		>
 			<button
 					on:click={toggleRepo}
 					class="ease-in duration-300 h-10 pb-9 py-2 text-center text-brown-900 bg-transparent border-b-2
-					border-transparent apple:text-xl uw:text-2xl dark:text-gray-200 whitespace-nowrap cursor-base
-					focus:outline-none dark:hover:border-b-gray-50 hover:border-b-black"
+					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base focus:outline-none
+					hover:border-b-black"
 			>
 				Repositories
 			</button>
@@ -89,8 +92,8 @@
 			<button
 					on:click={toggleStarred}
 					class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
-					border-transparent apple:text-xl uw:text-2xl dark:text-gray-200 whitespace-nowrap cursor-base
-					focus:outline-none dark:hover:border-b-gray-50 hover:border-b-black"
+					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
+					focus:outline-none hover:border-b-black"
 			>
 				Starred
 			</button>
@@ -98,8 +101,8 @@
 			<button
 					on:click={toggleisContrib}
 					class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
-					border-transparent apple:text-xl uw:text-2xl dark:text-gray-200 whitespace-nowrap cursor-base
-					focus:outline-none dark:hover:border-b-gray-50 hover:border-b-black"
+					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
+					focus:outline-none hover:border-b-black"
 			>
 				Contributed
 			</button>
