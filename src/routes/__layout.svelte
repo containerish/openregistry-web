@@ -3,6 +3,7 @@
 	import Navbar from '$lib/navbar.svelte';
 	import { onMount, setContext } from 'svelte';
 	import '../app.css';
+	import Cookies from 'js-cookie';
 
 	const isAuth = async (cookie: string): Promise<boolean> => {
 		if (cookie) {
@@ -18,7 +19,7 @@
 
 	setContext('isAuth', isAuth);
 	onMount(() => {
-		isAuth(document.cookie)
+		isAuth(Cookies.get('access'))
 			.then((auth) => {
 				console.log('auth: ', auth);
 			})

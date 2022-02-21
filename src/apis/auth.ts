@@ -1,5 +1,6 @@
 import HttpClient from './httpClient';
 import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 export interface LoginResponse {
     access: string
@@ -112,12 +113,16 @@ export class Auth extends HttpClient {
 }
 
 export const UserInfo = () => {
-    const value = "; " + document.cookie;
-    const parts = value.split("; " + "access" + "=");
+    // const value = "; " + Cookies.get;
+    // const parts = value.split("; " + "access" + "=");
     
-    if (parts.length == 2) {
-        const cookie = parts.pop().split(";").shift();
+    // if (parts.length == 2) {
+        const cookie = Cookies.get('access')
+		if (!cookie) {
+			return Promise.reject("user info no found")
+		}
+
 		const userinfo = jwtDecode<JWT>(cookie)
-		return userinfo
-    }
+		return Promise.resolve(userinfo)
+    // }
 }

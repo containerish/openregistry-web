@@ -1,4 +1,6 @@
 <script context="module" lang="ts">
+	import Cookies from 'js-cookie';
+
 	export const prerender = true;
 </script>
 
@@ -17,7 +19,7 @@
 
 	let loggedIn = false;
 	onMount(async () => {
-		loggedIn = await isAuth(document.cookie);
+		loggedIn = await isAuth(Cookies.get('access'));
 	});
 </script>
 

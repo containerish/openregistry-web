@@ -1,10 +1,16 @@
 import {writable} from "svelte/store";
 import { UserInfo } from '../apis/auth';
+import type { JWT } from '../apis/auth';
 
-// let userInfo: JWT;
+const data = () => {
+    UserInfo().then((data: JWT) => {
+		return data
+	}).catch(err => {
+		return err.toString()
+	})
+}
+//
+//
 
-// const data = () => {
-//     userInfo = UserInfo();
-// }
-const UserStore = writable(UserInfo())
+const UserStore = writable(data())
 export default UserStore
