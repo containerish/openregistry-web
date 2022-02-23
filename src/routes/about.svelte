@@ -15,20 +15,16 @@
 <Card styles="bg-cream-50">
 	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 my-20">
 		<div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-0 rounded-xl ">
-			<h1 class="text-5xl font-semibold text-brown-900 mb-8"> Decentralisation is the Future! and we want to play a role in making it better </h1>
+			<h1 class="text-4xl font-semibold text-brown-900 mb-8 "> Decentralisation is the Future! and we want to play a role in making it better </h1>
 			<span class="text-lg text-black">
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-				ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit
+               Our Vision is derived and powered by the principals of Web 3.0 and Dworld of Dapps.
+
             </span>
 			<div class=" mt-28">
 				<h1 class="text-5xl font-semibold text-brown-900 mt-5 mb-8"> Help build an Open Source World with us </h1>
 				<span class="text-lg text-black">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-				ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit
+                We started off as a fun project which eventually opened many doors for us
+
             </span>
 			</div>
 			<div class=" mt-28">
