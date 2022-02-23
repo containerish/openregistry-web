@@ -1,5 +1,6 @@
 <script>
 	import Card from '$lib/card.svelte';
+	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
 <Card styles="bg-brown-400 block py-12 uw:py-20 laptop:pt-20">
@@ -26,12 +27,22 @@
 						Architecture
 					</h4>
 				</div>
-				<p class="font-lato text-center font-normal">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit
+				<p class="font-lato text-[17.5px] text-center font-normal leading-6">
+					The following diagram tries to depict the high level architecture of OpenRegistry.
+					We are hosted on Akash dCloud and the container images are stored on decentralised storage systems
+					like skynet. OpenRegistry is designed as a pluggable platform to adapt to any modern infrastructure
+					or frameworks. We are exploring ways of collaborating with IPFS, Arweave and Storj
 				</p>
+				<div class="flex justify-center pt-2 cursor-pointer">
+					<a class="text-brown-900 text-xl mt-1" href="">More</a>
+					<button
+							class="transition duration-500 ease-in-out
+                       bg-transparent hover: transform
+                       hover:translate-x-2 hover:scale-110
+                      	 pb-3 border border-none">
+						<Arrow/>
+					</button>
+				</div>
 			</div>
 			<div class="half:w-96 laptop:w-3/4 laptop:mr-14 ipad:w-3/4 ipad:mr-14">
 				<picture>
