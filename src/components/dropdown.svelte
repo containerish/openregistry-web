@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
-	import type { JWT } from '../apis/auth';
+	import type { User } from '../apis/auth';
 	import Cookies from 'js-cookie';
 
-	export let userInfo: JWT;
+	export let userInfo: User;
 	export let show = false;
 
 	const signOut = () => {
@@ -18,7 +18,7 @@
 
 	$: document.onkeydown = function (evt: any) {
 		evt = evt || window.event;
-		var isEscape = false;
+		let isEscape = false;
 		if ('key' in evt) {
 			isEscape = evt.key === 'Escape' || evt.key === 'Esc';
 		} else {
@@ -30,7 +30,7 @@
 	};
 </script>
 
-{#if userInfo && userInfo.UserPayload}
+{#if userInfo}
 	<div class="relative inline-block ">
 		<slot />
 
@@ -45,10 +45,10 @@
 				>
 					<div class="mx-1">
 						<h1 class="text-lg font-normal text-brown-900">
-							{userInfo.UserPayload.username}
+							{userInfo.username}
 						</h1>
 						<p class="text-sm text-gray-500 truncate">
-							{userInfo.UserPayload.email}
+							{userInfo.email}
 						</p>
 					</div>
 				</a>

@@ -19,7 +19,7 @@
 
 	let loggedIn = false;
 	onMount(async () => {
-		loggedIn = await isAuth(Cookies.get('access'));
+		loggedIn = await isAuth(Cookies.get('session_id'));
 	});
 </script>
 

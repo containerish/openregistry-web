@@ -5,28 +5,12 @@
 	import '../app.css';
 	import Cookies from 'js-cookie';
 
-	const isAuth = async (cookie: string): Promise<boolean> => {
-		if (cookie) {
-			return new Promise<boolean>((resolve) => {
-				resolve(true);
-			});
-		}
-
-		return new Promise<boolean>((_, reject) => {
-			reject(false);
-		});
+	const isAuth = () => {
+		const sessionCookie = Cookies.get('session_id')
+		return !!sessionCookie;
 	};
 
 	setContext('isAuth', isAuth);
-	onMount(() => {
-		isAuth(Cookies.get('access'))
-			.then((auth) => {
-				console.log('auth: ', auth);
-			})
-			.catch((err) => {
-				console.log('error: ', err);
-			});
-	});
 </script>
 
 <main

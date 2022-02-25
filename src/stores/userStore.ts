@@ -1,12 +1,13 @@
 import {writable} from "svelte/store";
-import { UserInfo } from '../apis/auth';
+import {Auth} from '../apis/auth';
 import type { JWT } from '../apis/auth';
 
-const data = () => {
-    UserInfo().then((data: JWT) => {
+const auth = new Auth();
+const data = async () => {
+    return await auth.GetUserWithSession().then(data => {
 		return data
 	}).catch(err => {
-		return err.toString()
+		throw err
 	})
 }
 //

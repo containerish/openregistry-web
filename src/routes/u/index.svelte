@@ -5,12 +5,14 @@
 	import { RegistryBackend, Repository as Repo } from '../../apis/registry';
 
 	import UserStore from "../../stores/userStore";
-	import type {JWT} from "../../apis/auth";
-	let user: JWT;
-	onMount(() => {
-		UserStore.subscribe(data => {
-			user = data
+	import type {User as UserInfo} from "../../apis/auth";
+	let user: UserInfo|void;
+
+	onMount(async () => {
+		const unsubscribe = await UserStore.subscribe(async data => {
+			user = await data
 		})
+
 	})
 
 	let isRepo = true;
@@ -52,7 +54,7 @@
 	<title>User|Open Registry</title>
 </svelte:head>
 
-{#if user && user.UserPayload}
+{#if user && user}
 
 	<div class="min-h-[93vh] bg-cream-50">
 		<div
@@ -63,7 +65,7 @@
 				<User styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial w-64">
-				<h1 class="text-4xl font-medium">{user.UserPayload.name}</h1>
+				<h1 class="text-4xl font-medium">{user.username}</h1>
 				<div class="flex mt-3">
 					<User styles="h-6 w-6" />
 					<span class="text-lg">Community User</span>

@@ -19,18 +19,13 @@
 		showSignUpForm = !showSignUpForm;
 	};
 
-	let isAuth = getContext<Function>('isAuth');
-	let loggedIn = false;
-	onMount(async () => {
-		loggedIn = await isAuth(Cookies.get('access'));
-	});
-
+	let isAuth = getContext('isAuth');
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
 <header
-	class="bg-gradient-to-r from-brown-50 to-brown-500 {isAuth
+	class="bg-gradient-to-r from-brown-50 to-brown-500 {isAuth()
 		? 'py-4'
 		: 'pt-8'}"
 >
@@ -38,16 +33,16 @@
 		<div class="container px-6 mx-auto half:px-1 uw:px-12">
 			<div class="flex flex-col md:justify-between md:items-center">
 				<div
-					class="flex {loggedIn ? 'apple:justify-start' : ''} items-center justify-between w-full"
+					class="flex {isAuth() ? 'apple:justify-start' : ''} items-center justify-between w-full"
 				>
 					<div class="cursor-pointer flex items-center half:ml-5">
-						<picture class="md:w-44" on:click={() => (window.location.href = '/')}>
+						<picture class="md:w-44" on:click={() => (location.href = '/')}>
 							<img class="h-full w-full" src="/logo.svg" alt="opener" />
 						</picture>
 
 						<!-- Search input on desktop screen -->
 						<div class="hidden mx-10 pt-2 md:block half:hidden">
-							{#if loggedIn}
+							{#if isAuth()}
 								<div class="relative">
 									<span class="absolute inset-y-0 left-0 flex items-center pl-3">
 										<svg class="w-7 pt-0 pb-1 mt-0 h-6 text-gray-500" viewBox="0 0 24 24" fill="">
@@ -72,7 +67,7 @@
 						</div>
 					</div>
 
-					{#if loggedIn}
+					{#if isAuth()}
 						<NavbarAuth />
 					{:else}
 						<NavbarDefault />

@@ -49,6 +49,16 @@ export interface UserPayload {
   id: number
 }
 
+export interface User {
+    created_at: Date;
+    updated_at: Date;
+    uuid:       string;
+    name:       string;
+    username:   string;
+    email:      string;
+    is_active:  boolean;
+}
+
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 export const ValidateSignupRequest = (input: SignupRequest) => {
@@ -110,12 +120,24 @@ export class Auth extends HttpClient {
 	private getGithubOAuthUrl = () => {
 		return `https://github.com/login/oauth/authorize/?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
 	}
+
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public GetUserWithSession = (): Promise<User> => {
+        const sessionId = Cookies.get("session_id")
+        const path = `/sessions/me?session_id=3c7b11a7-1a59-455f-b390-62d34737ddf3`
+
+        return this.http.get<User>(path).then(data => {
+            return Promise.resolve(data)
+        }).catch(err => {
+            return Promise.reject(err)
+        })
+    }
 }
 
 export const UserInfo = () => {
     // const value = "; " + Cookies.get;
     // const parts = value.split("; " + "access" + "=");
-    
+
     // if (parts.length == 2) {
         const cookie = Cookies.get('access')
 		if (!cookie) {
