@@ -6,20 +6,14 @@
 
 <script lang="ts">
 	import Landing from './landing.svelte';
-	import { RegistryBackend } from '../apis/registry';
 	import { getContext, onMount } from 'svelte';
-	import Repository from '../routes/repositories/index.svelte';
-
-	const getCookie = async () => {
-		let rb = new RegistryBackend();
-		rb.ListRepositories();
-	};
 
 	const isAuth = getContext<Function>('isAuth');
 
 	let loggedIn = false;
 	onMount(async () => {
 		loggedIn = await isAuth(Cookies.get('session_id'));
+		console.log("logged in:",loggedIn)
 	});
 </script>
 
@@ -27,9 +21,9 @@
 	<title>Home</title>
 </svelte:head>
 
-<div on:load={getCookie}>
+<div>
 	{#if loggedIn}
-		<Repository />
+		{location.href="/repositories"}
 	{:else}
 		<Landing />
 	{/if}

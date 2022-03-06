@@ -18,6 +18,7 @@
 	onMount(async () => {
 		const unsubscribe = await UserStore.subscribe(async data => {
 			userInfo = await data
+			console.log("come here user info:",userInfo,data)
 		})
 
 	})

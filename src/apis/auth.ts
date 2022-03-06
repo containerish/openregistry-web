@@ -124,7 +124,7 @@ export class Auth extends HttpClient {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public GetUserWithSession = (): Promise<User> => {
         const sessionId = Cookies.get("session_id")
-        const path = `/sessions/me?session_id=3c7b11a7-1a59-455f-b390-62d34737ddf3`
+        const path = `/sessions/me`
 
         return this.http.get<User>(path).then(data => {
             return Promise.resolve(data)
