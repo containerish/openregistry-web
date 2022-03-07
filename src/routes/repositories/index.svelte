@@ -1,4 +1,22 @@
+<script context="module" lang="ts">
+	export async function load({ session }) {
+		if (!session.authenticated) {
+			return {
+				status: 302,
+				redirect: '/auth/unauthorized'
+			};
+		}
+
+		return {
+			props: {
+				user: session.userInfo
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
+	export let user;
 	import Advert from '$lib/advert.svelte';
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
@@ -7,25 +25,26 @@
 	import { onMount, setContext } from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
-	import {Catalog, RegistryBackend} from '../../apis/registry.ts';
+	import { RegistryBackend } from '../../apis/registry';
+	import type { Catalog } from '../../apis/registry';
 	import type { AxiosResponse } from 'axios';
 
 	const backend = new RegistryBackend();
-	const pageSize = 10
+	const pageSize = 10;
 	const fetchPageData = (offset: number) => {
-		backend.ListCatalog(pageSize, pageSize*offset).then((data: Catalog) => {
-			catalog = data
-		})
-	}
+		backend.ListCatalog(pageSize, pageSize * offset).then((data: Catalog) => {
+			catalog = data;
+		});
+	};
 
-	setContext("getPageData", fetchPageData)
-	let catalog: Catalog = {};
+	setContext('getPageData', fetchPageData);
+	let catalog: Catalog;
 
 	onMount(() => {
 		backend.ListTags('johndoe/openregistry');
 		backend.ListCatalog(pageSize).then((data: Catalog) => {
-			catalog = data
-		})
+			catalog = data;
+		});
 	});
 
 	let showModal = false;
@@ -60,20 +79,21 @@
 			{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 				<div class="w-full px-4">
 					{#each catalog.repositories as repo}
-						<Repository data={repo} compact={false}/>
+						<Repository data={repo} compact={false} />
 					{/each}
 				</div>
 
 				<div class="flex justify-center py-4 bg-cream-50">
-					<Pagination pages={Math.ceil(catalog.total/pageSize)}/>
+					<Pagination pages={Math.ceil(catalog.total / pageSize)} />
 				</div>
 			{:else}
 				<div class="flex justify-center items-center">
-					<div class="bg-gray-50 w-10/12 rounded-md px-20 py-20 my-5 flex justify-center items-center">
+					<div
+						class="bg-gray-50 w-10/12 rounded-md px-20 py-20 my-5 flex justify-center items-center"
+					>
 						<span class="text-brown-800 text-4xl">No Repositories</span>
 					</div>
 				</div>
-
 			{/if}
 		</div>
 

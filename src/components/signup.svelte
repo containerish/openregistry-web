@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
-	import { getContext } from 'svelte';
+	import { getContext, createEventDispatcher } from 'svelte';
+	import { goto } from '$app/navigation';
 	import Github from '$lib/github.svelte';
-	import { SignupResponse, SignupRequest, Auth } from '../apis/auth';
+	import type { SignupResponse } from '../apis/auth';
+	import { Auth } from '../apis/auth';
 	import type { AxiosError } from 'axios';
 
 	const toggleSignUpForm: Function = getContext('toggleSignUpForm');
@@ -11,6 +13,7 @@
 	let isLoading = false;
 
 	const auth = new Auth();
+	const dispatch = createEventDispatcher();
 
 	const toggleModals = () => {
 		toggleSignInForm();
@@ -24,32 +27,20 @@
 	let password = '';
 	let formErr = '';
 
-	const handleSignup = (e: any) => {
-		usernameErr = '';
-
-		isLoading = true;
+	const onClickSignUpUser = (e: any) => {
 		auth
 			.Signup(e.target.username.value, e.target.email.value, e.target.password.value)
-			.then((response: SignupResponse) => {
+			.then((_) => {
 				formErr = '';
-				window.location.reload();
+				dispatch('success');
 			})
-			.catch((error: AxiosError) => {
-				console.log('error happened', error.response.data.error);
-				formErr = error.response.data.error;
+			.catch((err: AxiosError) => {
+				formErr = err.message;
 			});
 	};
 
-	const onClickSignUp = () => {
-		isLoading = true;
-		fetch('http://localhost:5000/auth/github/login', { redirect: 'follow' })
-			.then((res) => res.json())
-			.then((res) => {
-				isLoading = false;
-			})
-			.catch((err) => {
-				console.log('error: ', err.string());
-			});
+	const loginWithGithub = () => {
+		auth.LoginWithGithub();
 	};
 
 	const validateUsername = (e: any) => {
@@ -112,7 +103,7 @@
 		</div>
 		<a
 			href="#"
-			on:click={onClickSignUp}
+			on:click={loginWithGithub}
 			class="flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black transition-colors
 			duration-200 transform rounded-lg hover:bg-gray-200 hover:no-underline"
 		>
@@ -125,7 +116,7 @@
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-full border-b" />
 		</div>
-		<form on:submit|preventDefault={(e) => handleSignup(e)}>
+		<form on:submit|preventDefault={(e) => onClickSignUpUser(e)}>
 			<div class="mt-4">
 				<Textfield
 					onInput={validateUsername}

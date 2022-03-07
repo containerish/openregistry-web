@@ -4,7 +4,7 @@
 	import type { User } from '../apis/auth';
 	import Cookies from 'js-cookie';
 
-	export let userInfo: User;
+	export let user: User;
 	export let show = false;
 
 	const signOut = () => {
@@ -30,7 +30,7 @@
 	};
 </script>
 
-{#if userInfo}
+{#if user}
 	<div class="relative inline-block ">
 		<slot />
 
@@ -45,10 +45,10 @@
 				>
 					<div class="mx-1">
 						<h1 class="text-lg font-normal text-brown-900">
-							{userInfo.username}
+							{user.username}
 						</h1>
 						<p class="text-sm text-gray-500 truncate">
-							{userInfo.email}
+							{user.email}
 						</p>
 					</div>
 				</a>

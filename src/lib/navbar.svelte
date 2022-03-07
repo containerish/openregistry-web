@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { getContext, onMount, setContext } from 'svelte';
-	import Cookies from 'js-cookie';
-	import Search from '$lib/icons/search.svelte';
+	import { getContext, setContext } from 'svelte';
 	import NavbarAuth from './navbar-auth.svelte';
 	import NavbarDefault from './navbar-default.svelte';
-	import Logo from './icons/logo.svelte';
 
-	let isLoading = false;
 	let showSignInForm = false;
 	let showSignUpForm = false;
 
@@ -19,16 +15,12 @@
 		showSignUpForm = !showSignUpForm;
 	};
 
-	let isAuth = getContext('isAuth');
+	let isAuth = getContext<Function>('isAuth');
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-<header
-	class="bg-gradient-to-r from-brown-50 to-brown-500 {isAuth()
-		? 'py-4'
-		: 'pt-8'}"
->
+<header class="bg-gradient-to-r from-brown-50 to-brown-500 {isAuth() ? 'py-4' : 'pt-8'}">
 	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
 		<div class="container px-6 mx-auto half:px-1 uw:px-12">
 			<div class="flex flex-col md:justify-between md:items-center">

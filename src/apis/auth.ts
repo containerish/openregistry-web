@@ -1,6 +1,8 @@
 import HttpClient from './httpClient';
 import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
+import { goto } from '$app/navigation';
+import type { AxiosError } from 'axios';
 
 export interface LoginResponse {
     access: string
@@ -96,7 +98,22 @@ export class Auth extends HttpClient {
             email:email,
             password:password,
         }
-        return await this.http.post<LoginResponse>(path, body)
+
+        const resp = await this.http.post<LoginResponse>(path, body).then(data => {
+			return {
+				status: data.status,
+				headers: data.headers,
+				body: data.data,
+			}
+		}).catch((err: AxiosError) => {
+			return {
+				status: err.response.status,
+				body: err.response.data,
+				headers: err.response.headers,
+			}
+		})
+
+		return resp
     }
 
     public Signup = async (username: string, email: string, password: string) => {
@@ -110,11 +127,25 @@ export class Auth extends HttpClient {
             email:email,
             password:password,
         }
-        return await this.http.post<SignupResponse>(path, body)
+        const resp = this.http.post<SignupResponse>(path, body).then(data => {
+			return {
+				status: data.status,
+				headers: data.headers,
+				body: data.data,
+			}
+		}).catch((err: AxiosError) => {
+			return {
+				status: err.response.status,
+				body: err.response.data,
+				headers: err.response.headers,
+			}
+		})
+
+		return resp;
     }
 
 	public LoginWithGithub = () => {
-		location.href = this.getGithubOAuthUrl()
+		goto(this.getGithubOAuthUrl())
 	}
 
 	private getGithubOAuthUrl = () => {
@@ -122,15 +153,24 @@ export class Auth extends HttpClient {
 	}
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    public GetUserWithSession = (): Promise<User> => {
-        const sessionId = Cookies.get("session_id")
-        const path = `/sessions/me`
+    public GetUserWithSession = async (sessionId: string) => {
+        const path = `/sessions/me?session_id=${sessionId}`
 
-        return this.http.get<User>(path).then(data => {
-            return Promise.resolve(data)
-        }).catch(err => {
-            return Promise.reject(err)
+        const resp = this.http.get<User>(path).then(data => {
+			return {
+				status: data.status,
+				headers: data.headers,
+				body: data.data,
+			}
+        }).catch((err: AxiosError) => {
+			return {
+				status: 401,
+				body: err.response.data,
+				headers: err.response.headers,
+			}
         })
+
+		return resp;
     }
 }
 

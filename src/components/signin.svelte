@@ -2,7 +2,8 @@
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext } from 'svelte';
-	import { Auth, LoginResponse } from '../apis/auth';
+	import { Auth } from '../apis/auth';
+	import type { LoginResponse } from '../apis/auth';
 
 	const toggleSignupForm: Function = getContext('toggleSignUpForm');
 	const toggleSignInForm: Function = getContext('toggleSignInForm');
@@ -48,10 +49,7 @@
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-1/5 border-b lg:w-1/4" />
 
-			<span
-				href="#"
-				class="text-xs text-center text-gray-600 uppercase hover:no-underline"
-			>
+			<span href="#" class="text-xs text-center text-gray-600 uppercase hover:no-underline">
 				or login with email
 			</span>
 

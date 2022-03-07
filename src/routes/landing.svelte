@@ -13,7 +13,6 @@
 	}
 
 	const onClickRegister = () => {
-		console.log('clicked register');
 		isLoading = true;
 		setTimeout(() => {
 			toggleRegisterForm();

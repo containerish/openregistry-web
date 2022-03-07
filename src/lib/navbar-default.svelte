@@ -4,13 +4,13 @@
 	import Modal from './modal.svelte';
 	import Signup from '../components/signup.svelte';
 
-	import { onMount, setContext } from 'svelte';
+	import { onMount, setContext, createEventDispatcher } from 'svelte';
 	import Cookies from 'js-cookie';
 
-	let isLoading = false;
+	const dispatch = createEventDispatcher();
+
 	let showSignInForm = false;
 	let showSignUpForm = false;
-	let isAuth = false;
 
 	const toggleSignInForm = () => {
 		showSignInForm = !showSignInForm;
@@ -24,10 +24,10 @@
 	onMount(async () => {
 		const cookie = Cookies.get('access');
 		if (cookie) {
-			isAuth = true;
 		}
 	});
 
+	const redirectToRepositories = () => {};
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
@@ -59,13 +59,13 @@
 
 	{#if showSignInForm}
 		<Modal>
-			<Signin />
+			<Signin on:success={redirectToRepositories} />
 		</Modal>
 	{/if}
 
 	{#if showSignUpForm}
 		<Modal>
-			<Signup />
+			<Signup on:success={redirectToRepositories} />
 		</Modal>
 	{/if}
 </div>
