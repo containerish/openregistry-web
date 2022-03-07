@@ -1,33 +1,25 @@
 <script lang="ts">
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
-	import type { User } from '../apis/auth';
-	import Cookies from 'js-cookie';
-
+	import { Auth, type User } from '../apis/auth';
 	export let user: User;
 	export let show = false;
 
+	const auth = new Auth();
+
 	const signOut = () => {
-		Cookies.remove('access');
-		Cookies.remove('refresh');
-		window.location.href = '/';
+		auth
+			.Signout(user.sessionId)
+			.then((_) => {
+				location.reload();
+			})
+			.catch((err) => {
+				console.log('error logging out: ', err);
+			});
 	};
 
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
-
-	$: document.onkeydown = function (evt: any) {
-		evt = evt || window.event;
-		let isEscape = false;
-		if ('key' in evt) {
-			isEscape = evt.key === 'Escape' || evt.key === 'Esc';
-		} else {
-			isEscape = evt.keyCode === 27;
-		}
-		if (isEscape && document.body.classList.contains('modal-active')) {
-			toggleModal();
-		}
-	};
 </script>
 
 {#if user}
@@ -76,7 +68,7 @@
 						/>
 					</svg>
 
-					<span class="mx-1"> view profile </span>
+					<span class="mx-1">View Profile</span>
 				</a>
 
 				<a

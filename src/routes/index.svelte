@@ -1,19 +1,20 @@
 <script context="module" lang="ts">
-	import Cookies from 'js-cookie';
 	export const prerender = true;
+
+	export async function load({ session }) {
+		return {
+			props: {
+				session: session
+			}
+		};
+	}
 </script>
 
 <script lang="ts">
 	import Landing from './landing.svelte';
-	import { getContext, onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import Repository from './repositories/index.svelte';
 
-	const isAuth = getContext<Function>('isAuth');
-
-	let loggedIn = false;
-	onMount(async () => {
-		loggedIn = await isAuth(Cookies.get('session_id'));
-	});
+	export let session: any;
 </script>
 
 <svelte:head>
@@ -21,5 +22,9 @@
 </svelte:head>
 
 <div>
-	<Landing />
+	{#if session?.authenticated}
+		<Repository />
+	{:else}
+		<Landing />
+	{/if}
 </div>

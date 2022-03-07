@@ -6,11 +6,13 @@ const auth = new Auth()
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({event, resolve}) {
 	const cookies = cookie.parse(event.request.headers.get('cookie')|| '')
-	if (cookies.session_id) {
-		const userInfo = await auth.GetUserWithSession(cookies.session_id)
+	const sessionId = cookies.session_id;
+	if (sessionId) {
+		const userInfo = await auth.GetUserWithSession(sessionId)
 		if (userInfo && userInfo.status === 200) {
 			event.locals.authenticated = true
 			event.locals.user = userInfo.body;
+			event.locals.user.sessionId = sessionId
 			const resp = await resolve(event)
 			return resp
 		}

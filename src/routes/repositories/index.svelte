@@ -9,14 +9,13 @@
 
 		return {
 			props: {
-				user: session.userInfo
+				user: session.user
 			}
 		};
 	}
 </script>
 
 <script lang="ts">
-	export let user;
 	import Advert from '$lib/advert.svelte';
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';

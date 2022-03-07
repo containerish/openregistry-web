@@ -1,7 +1,20 @@
+<script lang="ts" context="module">
+	export function load(event) {
+		console.log('src/lib/nav', event);
+		return {
+			props: event
+		};
+	}
+</script>
+
 <script lang="ts">
+	import type { User } from 'src/apis/auth';
+
 	import { getContext, setContext } from 'svelte';
 	import NavbarAuth from './navbar-auth.svelte';
 	import NavbarDefault from './navbar-default.svelte';
+
+	export let session: any;
 
 	let showSignInForm = false;
 	let showSignUpForm = false;
@@ -15,17 +28,20 @@
 		showSignUpForm = !showSignUpForm;
 	};
 
-	let isAuth = getContext<Function>('isAuth');
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-<header class="bg-gradient-to-r from-brown-50 to-brown-500 {isAuth() ? 'py-4' : 'pt-8'}">
+<header
+	class="bg-gradient-to-r from-brown-50 to-brown-500 {session?.authenticated ? 'py-4' : 'pt-8'}"
+>
 	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
 		<div class="container px-6 mx-auto half:px-1 uw:px-12">
 			<div class="flex flex-col md:justify-between md:items-center">
 				<div
-					class="flex {isAuth() ? 'apple:justify-start' : ''} items-center justify-between w-full"
+					class="flex {session?.authenticated
+						? 'apple:justify-start'
+						: ''} items-center justify-between w-full"
 				>
 					<div class="cursor-pointer flex items-center half:ml-5">
 						<picture class="md:w-44" on:click={() => (location.href = '/')}>
@@ -34,7 +50,7 @@
 
 						<!-- Search input on desktop screen -->
 						<div class="hidden mx-10 pt-2 md:block half:hidden">
-							{#if isAuth()}
+							{#if session?.authenticated}
 								<div class="relative">
 									<span class="absolute inset-y-0 left-0 flex items-center pl-3">
 										<svg class="w-7 pt-0 pb-1 mt-0 h-6 text-gray-500" viewBox="0 0 24 24" fill="">
@@ -59,8 +75,8 @@
 						</div>
 					</div>
 
-					{#if isAuth()}
-						<NavbarAuth />
+					{#if session?.authenticated}
+						<NavbarAuth user={session?.user} />
 					{:else}
 						<NavbarDefault />
 					{/if}

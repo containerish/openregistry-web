@@ -59,6 +59,7 @@ export interface User {
     username:   string;
     email:      string;
     is_active:  boolean;
+	sessionId: string;
 }
 
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -138,6 +139,26 @@ export class Auth extends HttpClient {
 				status: err.response.status,
 				body: err.response.data,
 				headers: err.response.headers,
+			}
+		})
+
+		return resp;
+    }
+
+    public Signout = async (sessionId: string) => {
+		const path = `/signout?session_id=${sessionId}`
+
+        const resp = this.http.delete(path).then(data => {
+			return {
+				status: data.status,
+				headers: data.headers,
+				body: data.data,
+			}
+		}).catch((err: AxiosError) => {
+			return {
+				status: err.response.status,
+				headers: err.response.headers,
+				body: err.response.data,
 			}
 		})
 

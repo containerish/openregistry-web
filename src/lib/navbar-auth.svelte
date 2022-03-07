@@ -1,5 +1,8 @@
 <script context="module">
-	export async function load({ error, status, session }) {
+	export async function load(event) {
+		console.log('src/nav-auth', event);
+
+		const { error, status, session } = event;
 		if (!session.authenticated) {
 			return {
 				status: 302,
@@ -16,14 +19,18 @@
 </script>
 
 <script lang="ts">
+	import UserIcon from './icons/user.svelte';
+
+	import type { User } from '../apis/auth';
 	import Dropdown from '../components/dropdown.svelte';
-	import User from './icons/user.svelte';
-	export let user;
+	export let user: User;
 
 	let showMenu = false;
 	const toggleMenu = () => {
 		showMenu = !showMenu;
 	};
+
+	console.log('src/lib/nac-auth', user);
 </script>
 
 <div class="items-center md:flex sm:flex half:flex">
@@ -56,7 +63,7 @@
 					hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200
 					transform bg-inherit rounded-md hover:bg-brown-50 focus:outline-none focus:bg-cream-50"
 			>
-				<User styles="h-6 w-6" />
+				<UserIcon styles="h-6 w-6" />
 				<span>{user.username}</span>
 				<svg
 					class="w-5 h-5 mx-1 half:w-4 half:h-4 half:mx-0"

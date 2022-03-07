@@ -1,22 +1,25 @@
+<script context="module" lang="ts">
+	export const prerender = true;
+
+	export async function load({ session }) {
+		return {
+			props: {
+				session: session
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
 	import Footer from '$lib/footer.svelte';
 	import Navbar from '$lib/navbar.svelte';
-	import { onMount, setContext } from 'svelte';
 	import '../app.css';
-	import Cookies from 'js-cookie';
 
-	const isAuth = () => {
-		const sessionCookie = Cookies.get('session_id')
-		return !!sessionCookie;
-	};
-
-	setContext('isAuth', isAuth);
+	export let session: any;
 </script>
 
-<main
-	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col"
->
-	<Navbar />
+<main class="lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col">
+	<Navbar {session} />
 	<slot />
 	<Footer />
 </main>
