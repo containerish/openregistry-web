@@ -29,8 +29,6 @@
 	const toggleMenu = () => {
 		showMenu = !showMenu;
 	};
-
-	console.log('src/lib/nac-auth', user);
 </script>
 
 <div class="items-center md:flex sm:flex half:flex">

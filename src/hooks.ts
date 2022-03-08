@@ -8,14 +8,17 @@ export async function handle({event, resolve}) {
 	const cookies = cookie.parse(event.request.headers.get('cookie')|| '')
 	const sessionId = cookies.session_id;
 	if (sessionId) {
-		const userInfo = await auth.GetUserWithSession(sessionId)
-		if (userInfo && userInfo.status === 200) {
+		const {data, error, status} = await auth.GetUserWithSession(sessionId)
+		// status: 226 is the max good status
+		if (data && status <= 226) {
 			event.locals.authenticated = true
-			event.locals.user = userInfo.body;
+			event.locals.user = data;
 			event.locals.user.sessionId = sessionId
 			const resp = await resolve(event)
 			return resp
 		}
+
+		event.locals.error = error;
 	}
 
 	event.locals.authenticated = false;

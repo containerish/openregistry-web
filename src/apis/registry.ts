@@ -40,7 +40,7 @@ export class RegistryBackend extends HttpClient {
 			url = url + '?namespace=' + namespace
 		}
 
-		return await this.http.get<Repository[]>(url)
+		return await this.http.get(url)
 	}
 
 	public ListTags = async (namespace: string) => {
@@ -49,7 +49,7 @@ export class RegistryBackend extends HttpClient {
 		}
 		const url = `/v2/${namespace}/tags/list`
 
-		return await this.http.get<TagList>(url)
+		return await this.http.get(url)
 	}
 
 	public ListCatalog = async (pageSize?: number, offset?: number, namespace?: string) => {
@@ -62,9 +62,8 @@ export class RegistryBackend extends HttpClient {
 			if (!offset) offset = 0;
 			url = url + `?n=${pageSize}&last=${offset}&ns=${namespace}`
 		}
-		return await this.http.get<Catalog>(url)
+		return await this.http.get(url)
 	}
 
 	public DefaultPageSize: number = 10;
-
 }

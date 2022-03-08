@@ -33,14 +33,16 @@ abstract class HttpClient {
 	}
 
 	private _handleResponse = ({ data, status, headers }: AxiosResponse) => ({
-		data, 
-		status, 
-		headers
+		data: data, 
+		status: status, 
+		headers: headers
 	});
 
-	protected _handleError = (error: any) => {
-		Promise.reject(error);
-	}
+	protected _handleError = (err: AxiosError) => ({
+		error: err.toJSON(),
+		status: err.response.status,
+		Headers: err.response.headers,
+	})
 }
 
 export default HttpClient;

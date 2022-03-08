@@ -100,20 +100,7 @@ export class Auth extends HttpClient {
             password:password,
         }
 
-        const resp = await this.http.post<LoginResponse>(path, body).then(data => {
-			return {
-				status: data.status,
-				headers: data.headers,
-				body: data.data,
-			}
-		}).catch((err: AxiosError) => {
-			return {
-				status: err.response.status,
-				body: err.response.data,
-				headers: err.response.headers,
-			}
-		})
-
+        const resp = await this.http.post<LoginResponse>(path, body);
 		return resp
     }
 
@@ -128,40 +115,22 @@ export class Auth extends HttpClient {
             email:email,
             password:password,
         }
-        const resp = this.http.post<SignupResponse>(path, body).then(data => {
-			return {
-				status: data.status,
-				headers: data.headers,
-				body: data.data,
-			}
-		}).catch((err: AxiosError) => {
-			return {
-				status: err.response.status,
-				body: err.response.data,
-				headers: err.response.headers,
-			}
-		})
-
+        const resp = await this.http.post<SignupResponse>(path, body);
 		return resp;
     }
 
     public Signout = async (sessionId: string) => {
 		const path = `/signout?session_id=${sessionId}`
 
-        const resp = this.http.delete(path).then(data => {
-			return {
-				status: data.status,
-				headers: data.headers,
-				body: data.data,
-			}
-		}).catch((err: AxiosError) => {
-			return {
-				status: err.response.status,
-				headers: err.response.headers,
-				body: err.response.data,
-			}
-		})
+        const resp = await this.http.delete(path);
+		return resp;
+    }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public GetUserWithSession = async (sessionId: string) => {
+        const path = `/sessions/me?session_id=${sessionId}`
+
+        const resp = await this.http.get(path);
 		return resp;
     }
 
@@ -172,40 +141,4 @@ export class Auth extends HttpClient {
 	private getGithubOAuthUrl = () => {
 		return `https://github.com/login/oauth/authorize/?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
 	}
-
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    public GetUserWithSession = async (sessionId: string) => {
-        const path = `/sessions/me?session_id=${sessionId}`
-
-        const resp = this.http.get<User>(path).then(data => {
-			return {
-				status: data.status,
-				headers: data.headers,
-				body: data.data,
-			}
-        }).catch((err: AxiosError) => {
-			return {
-				status: 401,
-				body: err.response.data,
-				headers: err.response.headers,
-			}
-        })
-
-		return resp;
-    }
-}
-
-export const UserInfo = () => {
-    // const value = "; " + Cookies.get;
-    // const parts = value.split("; " + "access" + "=");
-
-    // if (parts.length == 2) {
-        const cookie = Cookies.get('access')
-		if (!cookie) {
-			return Promise.reject("user info no found")
-		}
-
-		const userinfo = jwtDecode<JWT>(cookie)
-		return Promise.resolve(userinfo)
-    // }
 }

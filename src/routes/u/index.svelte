@@ -1,19 +1,20 @@
+<script context="module" lang="ts">
+	export function load({ session }) {
+		return {
+			props: {
+				user: session.user
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
-	import User from '$lib/icons/user.svelte';
+	import { onMount } from 'svelte';
+	import UserIcon from '$lib/icons/user.svelte';
 	import Repository from '../../components/repository.svelte';
-	import { RegistryBackend, Repository as Repo } from '../../apis/registry';
-
-	import UserStore from "../../stores/userStore";
-	import type {User as UserInfo} from "../../apis/auth";
-	let user: UserInfo|void;
-
-	onMount(async () => {
-		const unsubscribe = await UserStore.subscribe(async data => {
-			user = await data
-		})
-
-	})
+	import { RegistryBackend, type DetailedRepository } from '../../apis/registry';
+	import type { User } from 'src/apis/auth';
+	export let user: User;
 
 	let isRepo = true;
 	let isStarred = false;
@@ -24,11 +25,13 @@
 		isStarred = false;
 		isRepo = true;
 	};
+
 	const toggleStarred = () => {
 		isRepo = false;
 		isContrib = false;
 		isStarred = true;
 	};
+
 	const toggleisContrib = () => {
 		isRepo = false;
 		isStarred = false;
@@ -37,16 +40,16 @@
 
 	const backend = new RegistryBackend();
 
-	let repositoryList: Repo[] = [];
+	let repositoryList: DetailedRepository[] = [];
 
-	onMount(() => {
-		backend.ListRepositories().then((repoList: Repo[]) => {
-			if (!repoList) {
-				return;
-			}
-			repositoryList = repoList;
-		});
-		backend.ListTags('johndoe/openregistry');
+	onMount(async () => {
+		const { error, data } = await backend.ListRepositories();
+		if (error) {
+			console.error('error in u/ListRepositories: ', error);
+			return;
+		}
+
+		repositoryList = data;
 	});
 </script>
 
@@ -55,36 +58,33 @@
 </svelte:head>
 
 {#if user && user}
-
 	<div class="min-h-[93vh] bg-cream-50">
 		<div
-				class="flex gap-5 space-x-10 min-w-full justify-start items-center py-24 mt-20 px-20 bg-brown-500"
+			class="flex gap-5 space-x-10 min-w-full justify-start items-center py-24 mt-20 px-20 bg-brown-500"
 		>
 			<div class="px-4" />
 			<div>
-				<User styles="h-24 w-24" />
+				<UserIcon styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial w-64">
 				<h1 class="text-4xl font-medium">{user.username}</h1>
 				<div class="flex mt-3">
-					<User styles="h-6 w-6" />
+					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg">Community User</span>
 				</div>
 			</div>
 			<div class="flex flex-col flex-initial w-32">
-				<a class="text-gray-700 text-xl underline-offset-4" href="/settings"
-				><u>Edit Profile</u></a
-				>
+				<a class="text-gray-700 text-xl underline-offset-4" href="/settings"><u>Edit Profile</u></a>
 				<span class="mt-3 text-lg"> Joined Today</span>
 			</div>
 		</div>
 
 		<div
-				class="flex gap-5 items-start justify-items-center bg-brown-500 space-x-10 pb-2 px-40 mb-10"
+			class="flex gap-5 items-start justify-items-center bg-brown-500 space-x-10 pb-2 px-40 mb-10"
 		>
 			<button
-					on:click={toggleRepo}
-					class="ease-in duration-300 h-10 pb-9 py-2 text-center text-brown-900 bg-transparent border-b-2
+				on:click={toggleRepo}
+				class="ease-in duration-300 h-10 pb-9 py-2 text-center text-brown-900 bg-transparent border-b-2
 					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base focus:outline-none
 					hover:border-b-black"
 			>
@@ -92,8 +92,8 @@
 			</button>
 
 			<button
-					on:click={toggleStarred}
-					class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
+				on:click={toggleStarred}
+				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
 					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
 					focus:outline-none hover:border-b-black"
 			>
@@ -101,8 +101,8 @@
 			</button>
 
 			<button
-					on:click={toggleisContrib}
-					class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
+				on:click={toggleisContrib}
+				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
 					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
 					focus:outline-none hover:border-b-black"
 			>
@@ -114,8 +114,8 @@
 			<div>
 				<div class="w-full px-8">
 					{#if repositoryList && repositoryList.length > 0}
-						{#each repositoryList as item}
-							<Repository data={item} />
+						{#each repositoryList as repo}
+							<Repository data={repo} />
 						{/each}
 					{:else}
 						<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
@@ -128,17 +128,17 @@
 
 		{#if isStarred}
 			<div class="w-full px-8">
-			<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
-				<span class="text-brown-700 text-3xl">Your starred repositories will show here</span>
-			</div>
+				<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
+					<span class="text-brown-700 text-3xl">Your starred repositories will show here</span>
+				</div>
 			</div>
 		{/if}
 
 		{#if isContrib}
 			<div class="w-full px-8">
-			<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
-				<span class="text-brown-700 text-3xl">Your Contributions will be placed here</span>
-			</div>
+				<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
+					<span class="text-brown-700 text-3xl">Your Contributions will be placed here</span>
+				</div>
 			</div>
 		{/if}
 	</div>

@@ -26,7 +26,7 @@
 	import Repository from '../../components/repository.svelte';
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
-	import type { AxiosResponse } from 'axios';
+	import type { User } from 'src/apis/auth';
 
 	const backend = new RegistryBackend();
 	const pageSize = 10;
@@ -39,11 +39,15 @@
 	setContext('getPageData', fetchPageData);
 	let catalog: Catalog;
 
-	onMount(() => {
-		backend.ListTags('johndoe/openregistry');
-		backend.ListCatalog(pageSize).then((data: Catalog) => {
-			catalog = data;
-		});
+	onMount(async () => {
+		await backend.ListTags('johndoe/openregistry');
+		const { error, data } = await backend.ListCatalog(pageSize);
+		if (error) {
+			console.error('error in ListCatalog: ', error);
+			return;
+		}
+
+		catalog = data;
 	});
 
 	let showModal = false;
