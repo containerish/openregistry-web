@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	import Copy from '$lib/icons/copy.svelte';
 	import Download from '$lib/icons/download.svelte';
 	import LockClosed from '$lib/icons/lock-closed.svelte';
@@ -9,7 +11,7 @@
 	export let compact = true;
 
 	const handleRepoDetail = () => {
-		location.href = `u/${data.namespace}`;
+		goto(`u/${data.namespace}`);
 	};
 </script>
 

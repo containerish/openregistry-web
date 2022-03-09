@@ -27,27 +27,29 @@
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
 	import type { User } from 'src/apis/auth';
-
+	export let user: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
-	const fetchPageData = (offset: number) => {
-		backend.ListCatalog(pageSize, pageSize * offset).then((data: Catalog) => {
-			catalog = data;
-		});
-	};
-
-	setContext('getPageData', fetchPageData);
 	let catalog: Catalog;
 
-	onMount(async () => {
-		await backend.ListTags('johndoe/openregistry');
-		const { error, data } = await backend.ListCatalog(pageSize);
+	const fetchPageData = async (offset?: number) => {
+		const { error, data } = await backend.ListCatalog(
+			backend.DefaultPageSize,
+			backend.DefaultPageSize * offset,
+			user.username
+		);
+
 		if (error) {
-			console.error('error in ListCatalog: ', error);
+			console.error('error in repo/index: fetchPageData: ', error);
 			return;
 		}
 
 		catalog = data;
+	};
+
+	setContext('getPageData', fetchPageData);
+	onMount(async () => {
+		fetchPageData();
 	});
 
 	let showModal = false;

@@ -100,7 +100,7 @@ export class Auth extends HttpClient {
             password:password,
         }
 
-        const resp = await this.http.post<LoginResponse>(path, body);
+        const resp = await this.http.post(path, body);
 		return resp
     }
 
@@ -115,7 +115,7 @@ export class Auth extends HttpClient {
             email:email,
             password:password,
         }
-        const resp = await this.http.post<SignupResponse>(path, body);
+        const resp = await this.http.post(path, body);
 		return resp;
     }
 

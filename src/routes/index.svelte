@@ -12,9 +12,6 @@
 
 <script lang="ts">
 	import Landing from './landing.svelte';
-	import Repository from './repositories/index.svelte';
-
-	export let session: any;
 </script>
 
 <svelte:head>
@@ -22,9 +19,5 @@
 </svelte:head>
 
 <div>
-	{#if session?.authenticated}
-		<Repository />
-	{:else}
-		<Landing />
-	{/if}
+	<Landing />
 </div>

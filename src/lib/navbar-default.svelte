@@ -4,10 +4,9 @@
 	import Modal from './modal.svelte';
 	import Signup from '../components/signup.svelte';
 
-	import { onMount, setContext, createEventDispatcher } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import Cookies from 'js-cookie';
-
-	const dispatch = createEventDispatcher();
+	import { goto } from '$app/navigation';
 
 	let showSignInForm = false;
 	let showSignUpForm = false;
@@ -27,7 +26,9 @@
 		}
 	});
 
-	const redirectToRepositories = () => {};
+	const redirectToRepositories = () => {
+		goto('/repositories');
+	};
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>

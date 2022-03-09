@@ -1,32 +1,29 @@
 <script lang="ts">
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
-	import { getContext } from 'svelte';
+	import { createEventDispatcher, getContext } from 'svelte';
 	import { Auth } from '../apis/auth';
-	import type { LoginResponse } from '../apis/auth';
+	import { goto } from '$app/navigation';
 
-	const toggleSignupForm: Function = getContext('toggleSignUpForm');
-	const toggleSignInForm: Function = getContext('toggleSignInForm');
+	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
+	const toggleSignInForm = getContext<VoidFunction>('toggleSignInForm');
 	let isLoading = false;
-	let isSignUpForm = false;
 
 	const auth = new Auth();
+	const dispatch = createEventDispatcher();
 
-	const renderSignUpForm = () => {
-		isSignUpForm = !isSignUpForm;
-		toggleSignupForm();
-	};
-
-	const onClickSignIn = (e) => {
+	const onClickSignIn = async (e) => {
 		isLoading = true;
-		auth
-			.Login(e.target.email.value, e.target.password.value)
-			.then((response: LoginResponse) => {
-				window.location.reload();
-			})
-			.catch((error) => {
-				console.log('error happened', error);
-			});
+		/* const { error, status } = await auth.Login(e.target.email.value, e.target.password.value); */
+		const { error, status } = await auth.Login('johndoe@example.com', 'Qwerty@123');
+		if (error) {
+			console.error('erro singin: ', error);
+			return;
+		}
+
+		if (status === 200) {
+			dispatch('success');
+		}
 	};
 </script>
 

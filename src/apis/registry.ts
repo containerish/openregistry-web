@@ -54,15 +54,18 @@ export class RegistryBackend extends HttpClient {
 
 	public ListCatalog = async (pageSize?: number, offset?: number, namespace?: string) => {
 		let url = '/v2/_catalog'
+
 		if (pageSize){
 			if (!offset) offset = 0;
 			url = url + `?n=${pageSize}&last=${offset}`
 		}
 		if (namespace) {
 			if (!offset) offset = 0;
-			url = url + `?n=${pageSize}&last=${offset}&ns=${namespace}`
+			url = url + `&ns=${namespace}`
 		}
-		return await this.http.get(url)
+
+		const resp = await this.http.get(url);
+		return resp;
 	}
 
 	public DefaultPageSize: number = 10;

@@ -2,6 +2,7 @@
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import { Auth, type User } from '../apis/auth';
+	import { goto } from '$app/navigation';
 	export let user: User;
 	export let show = false;
 
@@ -11,7 +12,7 @@
 		auth
 			.Signout(user.sessionId)
 			.then((_) => {
-				location.reload();
+				location.href = '/';
 			})
 			.catch((err) => {
 				console.log('error logging out: ', err);

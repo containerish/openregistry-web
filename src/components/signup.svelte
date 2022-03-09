@@ -2,9 +2,7 @@
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext, createEventDispatcher } from 'svelte';
-	import { goto } from '$app/navigation';
 	import Github from '$lib/github.svelte';
-	import type { SignupResponse } from '../apis/auth';
 	import { Auth } from '../apis/auth';
 	import type { AxiosError } from 'axios';
 

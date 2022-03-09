@@ -1,18 +1,8 @@
-<script lang="ts" context="module">
-	export function load(event) {
-		console.log('src/lib/nav', event);
-		return {
-			props: event
-		};
-	}
-</script>
-
 <script lang="ts">
-	import type { User } from 'src/apis/auth';
-
-	import { getContext, setContext } from 'svelte';
-	import NavbarAuth from './navbar-auth.svelte';
+	import { goto } from '$app/navigation';
+	import { setContext } from 'svelte';
 	import NavbarDefault from './navbar-default.svelte';
+	import Textfield from './textfield.svelte';
 
 	export let session: any;
 
@@ -44,42 +34,18 @@
 						: ''} items-center justify-between w-full"
 				>
 					<div class="cursor-pointer flex items-center half:ml-5">
-						<picture class="md:w-44" on:click={() => (location.href = '/')}>
+						<picture class="md:w-44" on:click={() => goto('/')}>
 							<img class="h-full w-full" src="/logo.svg" alt="opener" />
 						</picture>
 
 						<!-- Search input on desktop screen -->
 						<div class="hidden mx-10 pt-2 md:block half:hidden">
 							{#if session?.authenticated}
-								<div class="relative">
-									<span class="absolute inset-y-0 left-0 flex items-center pl-3">
-										<svg class="w-7 pt-0 pb-1 mt-0 h-6 text-gray-500" viewBox="0 0 24 24" fill="">
-											<path
-												d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											/>
-										</svg>
-									</span>
-
-									<input
-										type="text"
-										class="w-80 py-2 pl-10 pr-4 text-gray-700 border rounded-md focus:border-brown-800
-										focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-brown-300"
-										placeholder="Search"
-									/>
-								</div>
+								<Textfield name="auto-complete" label="" placeholder="Seach..." type="" />
 							{/if}
 						</div>
 					</div>
-
-					{#if session?.authenticated}
-						<NavbarAuth user={session?.user} />
-					{:else}
-						<NavbarDefault />
-					{/if}
+					<NavbarDefault />
 				</div>
 			</div>
 		</div>
