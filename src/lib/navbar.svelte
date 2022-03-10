@@ -22,9 +22,7 @@
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-<header
-	class="bg-gradient-to-r from-brown-50 to-brown-500 {session?.authenticated ? 'py-4' : 'pt-8'}"
->
+<header class="bg-gradient-to-r from-brown-50 to-brown-500 pt-4">
 	<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
 		<div class="container px-6 mx-auto half:px-1 uw:px-12">
 			<div class="flex flex-col md:justify-between md:items-center">

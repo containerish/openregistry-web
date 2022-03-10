@@ -28,6 +28,6 @@
 	<input
 		type="text"
 		placeholder="Search..."
-		class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-md text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pl-10"
+		class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-md text-sm border-0 shadow outline-none focus:outline-none focus:border-brown-600 focus:ring-brown-700 w-full pl-10"
 	/>
 </div>

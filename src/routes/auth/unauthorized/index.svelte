@@ -1,5 +1,3 @@
-<div>
-	<picture>
-		<img src="assets/unauthorized.png" alt="" />
-	</picture>
+<div class="bg-brown-200 flex-col w-full h-full flex justify-center items-center">
+	<img class="w-4/6" src="/unauthorised.svg" alt="" />
 </div>

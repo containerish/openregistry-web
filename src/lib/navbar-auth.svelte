@@ -40,11 +40,11 @@
 			<div class="flex justify-between w-full md:justify-between md:items-center">
 				<div class="cursor-pointer flex-1 flex items-center half:ml-5">
 					<picture class="md:w-44" on:click={() => goto('/')}>
-						<img class="h-full w-full" src="/logo.svg" alt="opener" />
+						<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
 					</picture>
 				</div>
 
-				<div class="flex-[2] mx-10 justify-center items-center flex md:block half:hidden">
+				<div class="flex-[2] pt-2 mx-10 justify-center items-center flex md:block half:hidden">
 					<Autocomplete />
 				</div>
 

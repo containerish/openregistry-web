@@ -1,10 +1,15 @@
 <script context="module" lang="ts">
-	export const prerender = true;
-
 	export async function load({ session }) {
+		if (session.authenticated) {
+			return {
+				status: 302,
+				redirect: '/repositories'
+			};
+		}
+
 		return {
 			props: {
-				session: session
+				session
 			}
 		};
 	}
