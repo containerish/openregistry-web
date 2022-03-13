@@ -92,14 +92,11 @@ export class Auth extends HttpClient {
 
     public Login = async (email: string, password: string) => {
         const path = '/signin'
+
         if (!email || !password) {
             return Promise.reject("email/password cannot be empty")
         }
-        const body = {
-            email:email,
-            password:password,
-        }
-
+        const body = { email, password };
         const resp = await this.http.post(path, body);
 		return resp
     }
@@ -119,16 +116,17 @@ export class Auth extends HttpClient {
 		return resp;
     }
 
-    public Signout = async (sessionId: string) => {
-		const path = `/signout?session_id=${sessionId}`
+    public Signout = async () => {
+		const path = `/signout`
 
         const resp = await this.http.delete(path);
 		return resp;
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    public GetUserWithSession = async (sessionId: string) => {
-        const path = `/sessions/me?session_id=${sessionId}`
+    public GetUserWithSession = async () => {
+        const path = `/sessions/me`
+
 
         const resp = await this.http.get(path);
 		return resp;

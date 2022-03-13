@@ -1,20 +1,3 @@
-<script context="module" lang="ts">
-	export async function load({ session }) {
-		if (!session.authenticated) {
-			return {
-				status: 302,
-				redirect: '/auth/unauthorized'
-			};
-		}
-
-		return {
-			props: {
-				user: session.user
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	import Advert from '$lib/advert.svelte';
 	import Card from '$lib/card.svelte';
@@ -27,16 +10,28 @@
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
 	import type { User } from 'src/apis/auth';
-	export let user: User;
+	export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
 	let catalog: Catalog;
+
+	import { session } from '$app/stores';
+	import { goto } from '$app/navigation';
+	// @ts-ignore
+	session.subscribe(async ({ authenticated, user }) => {
+		if (authenticated) {
+			u = user;
+			return;
+		}
+
+		goto('/auth/unauthorized');
+	});
 
 	const fetchPageData = async (offset?: number) => {
 		const { error, data } = await backend.ListCatalog(
 			backend.DefaultPageSize,
 			backend.DefaultPageSize * offset,
-			user.username
+			u.username
 		);
 
 		if (error) {

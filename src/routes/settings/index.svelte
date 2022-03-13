@@ -20,7 +20,6 @@
 	import UserIcon from '$lib/icons/user.svelte';
 	import type { User } from '../../apis/auth';
 	export let user: User;
-	console.log('session  in settttings: ', user);
 </script>
 
 <svelte:head>

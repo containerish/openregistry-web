@@ -13,6 +13,7 @@ abstract class HttpClient {
 			baseURL,
 			headers,
 			withCredentials: true,
+			httpAgent: this.getUserAgent(),
 		});
 		this._responseInterceptor();
 		this._requestInterceptor();
@@ -20,7 +21,7 @@ abstract class HttpClient {
 
 	private _requestInterceptor = () => {
 		this.http.interceptors.request.use(req => {
-			req.withCredentials = true
+			req.withCredentials = true;
 			return req;
 		})
 	}
@@ -35,14 +36,18 @@ abstract class HttpClient {
 	private _handleResponse = ({ data, status, headers }: AxiosResponse) => ({
 		data: data, 
 		status: status, 
-		headers: headers
+		headers: headers,
 	});
 
 	protected _handleError = (err: AxiosError) => ({
-		error: err.toJSON(),
-		status: err.response.status,
-		Headers: err.response.headers,
+		error: err?.response,
+		status: err?.response.status,
+		Headers: err?.response.headers,
 	})
+
+	private getUserAgent = () => {
+		return import.meta.env.VITE_OPEN_REGISTRY_APP_NAME + "-" + import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT
+	}
 }
 
 export default HttpClient;

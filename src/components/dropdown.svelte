@@ -8,15 +8,13 @@
 
 	const auth = new Auth();
 
-	const signOut = () => {
-		auth
-			.Signout(user.sessionId)
-			.then((_) => {
-				location.href = '/';
-			})
-			.catch((err) => {
-				console.log('error logging out: ', err);
-			});
+	const signOut = async () => {
+		const { error } = await auth.Signout();
+		if (error) {
+			console.error('error signnout user: ', error);
+			return;
+		}
+		location.href = '/';
 	};
 
 	let showModal = false;

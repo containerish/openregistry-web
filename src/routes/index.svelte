@@ -1,22 +1,11 @@
-<script context="module" lang="ts">
-	export async function load({ session }) {
-		if (session.authenticated) {
-			return {
-				status: 302,
-				redirect: '/repositories'
-			};
-		}
-
-		return {
-			props: {
-				session
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	import Landing from './landing.svelte';
+	import { session } from '$app/stores';
+	import { goto } from '$app/navigation';
+	// @ts-ignore
+	session.subscribe(async ({ authenticated }) => {
+		if (authenticated) goto('/repositories');
+	});
 </script>
 
 <svelte:head>
