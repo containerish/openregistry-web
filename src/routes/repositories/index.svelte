@@ -17,15 +17,20 @@
 
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/env';
 	// @ts-ignore
-	session.subscribe(async ({ authenticated, user }) => {
-		if (authenticated) {
-			u = user;
-			return;
-		}
+	if (browser) {
+		// @ts-ignore
+		session.subscribe(async ({ authenticated, user }) => {
+			console.log('running this one');
+			if (authenticated) {
+				u = user;
+				return;
+			}
 
-		goto('/auth/unauthorized');
-	});
+			goto('/auth/unauthorized');
+		});
+	}
 
 	const fetchPageData = async (offset?: number) => {
 		const { error, data } = await backend.ListCatalog(

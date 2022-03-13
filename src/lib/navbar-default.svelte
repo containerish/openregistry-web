@@ -42,6 +42,7 @@
 		$session.user = data;
 		// @ts-ignore
 		$session.authenticated = true;
+		goto('/repositories');
 		return;
 	};
 
