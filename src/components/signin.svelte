@@ -3,7 +3,6 @@
 	import Textfield from '../lib/textfield.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { Auth } from '../apis/auth';
-	import { session } from '$app/stores';
 
 	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
 	const toggleSignInForm = getContext<VoidFunction>('toggleSignInForm');
@@ -12,13 +11,9 @@
 	const auth = new Auth();
 	const dispatch = createEventDispatcher();
 
-	const onClickSignIn = async (e) => {
+	const onClickSignIn = async (e: any) => {
 		isLoading = true;
-		/* const { error, status, headers } = await auth.Login( */
-		/* 	e.target.email.value, */
-		/* 	e.target.password.value */
-		/* ); */
-		const { error, status, headers } = await auth.Login('johndoe@example.com', 'Qwerty@123');
+		const { error, status } = await auth.Login(e.target.email.value, e.target.password.value);
 		if (error) {
 			console.error('erro singin: ', error);
 			return;

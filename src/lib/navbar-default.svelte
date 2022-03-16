@@ -5,8 +5,7 @@
 	import Signup from '../components/signup.svelte';
 
 	import { Auth } from '../apis/auth';
-	import { onMount, setContext } from 'svelte';
-	import Cookies from 'js-cookie';
+	import { setContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { session } from '$app/stores';
 
@@ -24,16 +23,9 @@
 		showSignUpForm = !showSignUpForm;
 	};
 
-	onMount(async () => {
-		const cookie = Cookies.get('access');
-		if (cookie) {
-		}
-	});
-
 	const redirectToRepositories = async () => {
 		const { error, data } = await auth.GetUserWithSession();
 		if (error) {
-			alert(error);
 			console.error('error signin: ', error);
 			return;
 		}
