@@ -43,6 +43,15 @@ export class RegistryBackend extends HttpClient {
 		return await this.http.get(url)
 	}
 
+	public SearchRepositories = async (query: string) => {
+		if (!query) {
+			return Promise.reject('Query cannot be empty');
+		}
+
+		let url = `/v2/catalog/search?search_query=${query}`
+		return await this.http.get(url)
+	}
+
 	public ListTags = async (namespace: string) => {
 		if (!namespace) {
 			return Promise.reject("empty namespace, invalid")

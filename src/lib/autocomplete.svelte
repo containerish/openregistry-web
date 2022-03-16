@@ -1,11 +1,50 @@
 <script lang="ts">
-	export let label = '';
-	export let type = 'text';
-	export let placeholder = '';
-	export let subHeading = '';
-	export let name = '';
-	export let error = '';
-	export let onInput = (e: any) => {};
+	import Cube from './icons/cube.svelte';
+	import { debounce, throttle } from 'throttle-debounce';
+	import { goto } from '$app/navigation';
+	export let onAutoComplete: Function;
+	let showItems = false;
+	let searchQuery = '';
+	let items = [];
+
+	const handleOnChange = async (e: any) => {
+		if (e.target.value === '') {
+			showItems = false;
+			return;
+		}
+
+		if (e.target.value.length < 5) {
+			autoCompleteThrottled(e.target.value);
+		} else {
+			autoCompleteDebounced(e.target.value);
+		}
+	};
+
+	const getList = async (q: string) => {
+		const { data, error } = await onAutoComplete(q);
+		if (error || !data) {
+			showItems = false;
+			return;
+		}
+
+		showItems = true;
+		items = data;
+	};
+
+	const autoComplete = (q: string) => {
+		getList(q);
+	};
+
+	const autoCompleteDebounced = debounce(500, autoComplete);
+	const autoCompleteThrottled = throttle(500, autoComplete);
+
+	const getHref = async (item: string) => {
+		showItems = false;
+		searchQuery = '';
+		await goto(`/u/${item}`, {
+			replaceState: true
+		});
+	};
 </script>
 
 <div class="relative flex w-full flex-wrap items-stretch">
@@ -26,8 +65,30 @@
 		</svg>
 	</span>
 	<input
+		on:input={handleOnChange}
+		bind:value={searchQuery}
 		type="text"
 		placeholder="Search..."
 		class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-md text-sm border-0 shadow outline-none focus:outline-none focus:border-brown-600 focus:ring-brown-700 w-full pl-10"
 	/>
+	{#if showItems}
+		<div class="pt-6 z-50">
+			<div
+				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md max-h-96"
+			>
+				{#each items as item}
+					<a href="#" on:click={() => getHref(item)} class="py-1 block no-underline ">
+						<div
+							class="2xl:px-4 2xl:py-5 px-4 hover:bg-brown-50 gap-1 py-3 flex flex-row items-center justify-start"
+						>
+							<Cube />
+							<h3 class=" font-lg text-gray-700 ">
+								{item}
+							</h3>
+						</div>
+					</a>
+				{/each}
+			</div>
+		</div>
+	{/if}
 </div>

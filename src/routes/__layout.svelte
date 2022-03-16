@@ -43,8 +43,6 @@
 			$session.authenticated = true;
 			return;
 		}
-
-		console.log('error in GetUserWithSession: ', error);
 	});
 </script>
 

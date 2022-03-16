@@ -1,13 +1,19 @@
 <script lang="ts" context="module">
-	import Copy from '$lib/icons/copy.svelte';
-	import Download from '$lib/icons/download.svelte';
-	import LockClosed from '$lib/icons/lock-closed.svelte';
+	export async function load({ params }) {
+		return {
+			props: {
+				repo: params.repo,
+				username: params.username
+			}
+		};
+	}
+</script>
+
+<script lang="ts">
 	import Star from '$lib/icons/star.svelte';
-	import Card from '$lib/card.svelte';
 	import Globe from '$lib/icons/globe.svelte';
 	import { RegistryBackend } from '../../../apis/registry';
 	import type { Repository as Repo, TagList } from '../../../apis/registry';
-	import { onMount } from 'svelte';
 
 	let isOverview = true;
 	let isTags = false;
@@ -22,8 +28,8 @@
 		isOverview = false;
 	};
 
-	let repo;
-	let username;
+	export let repo;
+	export let username;
 	const registryBackend = new RegistryBackend();
 
 	const repoDetail = (namespace: string) => {
@@ -31,12 +37,6 @@
 			console.log('repoinfo: ', tagList);
 		});
 	};
-
-	export async function load({ params, fetch, session, stuff }) {
-		repo = params.repo;
-		username = params.username;
-		return true;
-	}
 </script>
 
 <div class="min-h-[93vh] bg-cream-50">

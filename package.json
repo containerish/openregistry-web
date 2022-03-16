@@ -47,6 +47,8 @@
 		"cookie": "^0.4.2",
 		"js-cookie": "^3.0.1",
 		"jwt-decode": "^3.1.2",
-		"shell.js": "^3.3.1"
+		"shell.js": "^3.3.1",
+		"throttle-debounce": "^3.0.1",
+		"typewriter-effect": "^2.18.2"
 	}
 }

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Autocomplete from './autocomplete.svelte';
 	import UserIcon from './icons/user.svelte';
 	import type { User } from '../apis/auth';
 	import Dropdown from '../components/dropdown.svelte';
+	import { RegistryBackend } from '../apis/registry';
 
 	let u: User;
 	let sessionOk: boolean = false;
@@ -18,6 +18,12 @@
 	let showMenu = false;
 	const toggleMenu = () => {
 		showMenu = !showMenu;
+	};
+
+	const registry = new RegistryBackend();
+
+	const handleAutoComplete = async (query: string) => {
+		return await registry.SearchRepositories(query);
 	};
 </script>
 
@@ -33,7 +39,7 @@
 					</div>
 
 					<div class="flex-[2] pt-2 mx-10 justify-center items-center flex md:block half:hidden">
-						<Autocomplete />
+						<Autocomplete onAutoComplete={handleAutoComplete} />
 					</div>
 
 					<div class="items-center md:flex flex-[3] justify-end sm:flex half:flex">

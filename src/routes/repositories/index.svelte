@@ -22,7 +22,6 @@
 	if (browser) {
 		// @ts-ignore
 		session.subscribe(async ({ authenticated, user }) => {
-			console.log('running this one');
 			if (authenticated) {
 				u = user;
 				return;
