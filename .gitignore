@@ -5,6 +5,7 @@ node_modules
 /package
 .env
 .env.development
+.env.*
 !.env.example
 .vercel
 .output
