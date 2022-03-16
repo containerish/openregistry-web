@@ -15,9 +15,7 @@
 		</span>
 		<ul class="font-lato text-center font-normal list-disc">
 			<li class="text-left font-lato text-gray-800 text-xl half:text-[19px]">
-				Create an account on <a href="#" class="underline text-brown-800"
-					>OpenRegistry.dev</a
-				>
+				Create an account on <a href="#" class="underline text-brown-800">OpenRegistry.dev</a>
 			</li>
 			<li class="text-left font-lato text-gray-800 text-xl half:text-[19px]">
 				Install Docker/Nerdctl/Podman
@@ -28,7 +26,7 @@
 		</ul>
 	</div>
 
-	<div class="w-3/4 h-[30vh] max-h-fit half:px-10 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32">
-		<Xterm />
-	</div>
+	<div
+		class="w-3/4 h-[30vh] max-h-fit half:px-10 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32"
+	/>
 </Card>

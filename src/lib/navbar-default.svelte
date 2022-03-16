@@ -4,13 +4,15 @@
 	import Modal from './modal.svelte';
 	import Signup from '../components/signup.svelte';
 
-	import { onMount, setContext } from 'svelte';
-	import Cookies from 'js-cookie';
+	import { Auth } from '../apis/auth';
+	import { setContext } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { session } from '$app/stores';
 
-	let isLoading = false;
+	const auth = new Auth();
+
 	let showSignInForm = false;
 	let showSignUpForm = false;
-	let isAuth = false;
 
 	const toggleSignInForm = () => {
 		showSignInForm = !showSignInForm;
@@ -21,12 +23,20 @@
 		showSignUpForm = !showSignUpForm;
 	};
 
-	onMount(async () => {
-		const cookie = Cookies.get('access');
-		if (cookie) {
-			isAuth = true;
+	const redirectToRepositories = async () => {
+		const { error, data } = await auth.GetUserWithSession();
+		if (error) {
+			console.error('error signin: ', error);
+			return;
 		}
-	});
+
+		// @ts-ignore
+		$session.user = data;
+		// @ts-ignore
+		$session.authenticated = true;
+		goto('/repositories');
+		return;
+	};
 
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
@@ -59,13 +69,13 @@
 
 	{#if showSignInForm}
 		<Modal>
-			<Signin />
+			<Signin on:success={redirectToRepositories} />
 		</Modal>
 	{/if}
 
 	{#if showSignUpForm}
 		<Modal>
-			<Signup />
+			<Signup on:success={redirectToRepositories} />
 		</Modal>
 	{/if}
 </div>

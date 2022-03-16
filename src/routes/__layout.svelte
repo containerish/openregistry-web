@@ -1,37 +1,28 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Footer from '$lib/footer.svelte';
 	import Navbar from '$lib/navbar.svelte';
-	import { onMount, setContext } from 'svelte';
+	import NavbarAuth from '$lib/navbar-auth.svelte';
+	import { Auth } from '../apis/auth';
 	import '../app.css';
-	import Cookies from 'js-cookie';
+	import { session } from '$app/stores';
 
-	const isAuth = async (cookie: string): Promise<boolean> => {
-		if (cookie) {
-			return new Promise<boolean>((resolve) => {
-				resolve(true);
-			});
+	const auth = new Auth();
+
+	onMount(async () => {
+		const { data, status } = await auth.GetUserWithSession();
+		if (status === 200) {
+			// @ts-ignore
+			$session.user = data;
+			// @ts-ignore
+			$session.authenticated = true;
+			return;
 		}
-
-		return new Promise<boolean>((_, reject) => {
-			reject(false);
-		});
-	};
-
-	setContext('isAuth', isAuth);
-	onMount(() => {
-		isAuth(Cookies.get('access'))
-			.then((auth) => {
-				console.log('auth: ', auth);
-			})
-			.catch((err) => {
-				console.log('error: ', err);
-			});
 	});
 </script>
 
-<main
-	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col"
->
+<main class="lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col">
+	<NavbarAuth />
 	<Navbar />
 	<slot />
 	<Footer />

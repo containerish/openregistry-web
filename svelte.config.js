@@ -1,14 +1,22 @@
 import preprocess from 'svelte-preprocess';
-import cloudflare from '@sveltejs/adapter-cloudflare';
+import cfAdapter from '@sveltejs/adapter-cloudflare';
+import autoAdapter from '@sveltejs/adapter-auto';
+
+const getAdapter = () => {
+	const env = process.env.VITE_OPEN_REGISTRY_ENVIRONMENT;
+
+	if (env && env.toLowerCase() == "cloudflare") {
+		return cfAdapter;
+	}
+
+	return autoAdapter;
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
 	preprocess: [preprocess({})],
-
 	kit: {
-		adapter: cloudflare(),
+		adapter: getAdapter()(),
 	}
 };
 

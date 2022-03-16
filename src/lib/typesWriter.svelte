@@ -1,5 +1,14 @@
 <script lang="ts">
-	import TW from 'svelte-typewriter';
+	import Typewriter from 'typewriter-effect/dist/core';
+
+	Typewriter.typeString('hellop workd')
+		.pauseFor(2500)
+		.deleteAll()
+		.pauseFor(500)
+		.changeCursor('$')
+		.typeString('This is a new cursor')
+		.pauseFor(2500)
+		.start();
 
 	const renderCommand = (cmd: string, output?: string) => {
 		if (!output) {
@@ -16,17 +25,11 @@
 		Static?: boolean;
 	};
 
-	export let CommandList: Command[] = [
+	// @ts-ignore
+	export const CommandList: Command[] = [
 		{ Name: 'ls', Output: 'main.go' },
 		{ Name: 'pwd', Output: '/home/jane' }
 	];
 </script>
 
-<p class="flex-1 typing items-center pl-2">
-	{#each CommandList as command}
-		<TW scrambleSlowdown={true} cursor="#fff" cascade={true} interval={[80, 50, 20]}>
-			{@html renderCommand(command.Name, `<div>${command.Output}</div>`)}
-			<span class="text-green-400">jane@openregistry:~$ </span>
-		</TW>
-	{/each}
-</p>
+<div id="typewriter" />

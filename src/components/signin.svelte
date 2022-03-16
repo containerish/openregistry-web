@@ -1,31 +1,27 @@
 <script lang="ts">
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
-	import { getContext } from 'svelte';
-	import { Auth, LoginResponse } from '../apis/auth';
+	import { createEventDispatcher, getContext } from 'svelte';
+	import { Auth } from '../apis/auth';
 
-	const toggleSignupForm: Function = getContext('toggleSignUpForm');
-	const toggleSignInForm: Function = getContext('toggleSignInForm');
+	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
+	const toggleSignInForm = getContext<VoidFunction>('toggleSignInForm');
 	let isLoading = false;
-	let isSignUpForm = false;
 
 	const auth = new Auth();
+	const dispatch = createEventDispatcher();
 
-	const renderSignUpForm = () => {
-		isSignUpForm = !isSignUpForm;
-		toggleSignupForm();
-	};
-
-	const onClickSignIn = (e) => {
+	const onClickSignIn = async (e: any) => {
 		isLoading = true;
-		auth
-			.Login(e.target.email.value, e.target.password.value)
-			.then((response: LoginResponse) => {
-				window.location.reload();
-			})
-			.catch((error) => {
-				console.log('error happened', error);
-			});
+		const { error, status } = await auth.Login(e.target.email.value, e.target.password.value);
+		if (error) {
+			console.error('erro singin: ', error);
+			return;
+		}
+
+		if (status === 200) {
+			dispatch('success');
+		}
 	};
 </script>
 
@@ -48,10 +44,7 @@
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-1/5 border-b lg:w-1/4" />
 
-			<span
-				href="#"
-				class="text-xs text-center text-gray-600 uppercase hover:no-underline"
-			>
+			<span href="#" class="text-xs text-center text-gray-600 uppercase hover:no-underline">
 				or login with email
 			</span>
 

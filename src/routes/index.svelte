@@ -1,25 +1,10 @@
-<script context="module" lang="ts">
-	import Cookies from 'js-cookie';
-
-	export const prerender = true;
-</script>
-
 <script lang="ts">
 	import Landing from './landing.svelte';
-	import { RegistryBackend } from '../apis/registry';
-	import { getContext, onMount } from 'svelte';
-	import Repository from '../routes/repositories/index.svelte';
-
-	const getCookie = async () => {
-		let rb = new RegistryBackend();
-		rb.ListRepositories();
-	};
-
-	const isAuth = getContext<Function>('isAuth');
-
-	let loggedIn = false;
-	onMount(async () => {
-		loggedIn = await isAuth(Cookies.get('access'));
+	import { session } from '$app/stores';
+	import { goto } from '$app/navigation';
+	// @ts-ignore
+	session.subscribe(async ({ authenticated }) => {
+		if (authenticated) goto('/repositories');
 	});
 </script>
 
@@ -27,10 +12,6 @@
 	<title>Home</title>
 </svelte:head>
 
-<div on:load={getCookie}>
-	{#if loggedIn}
-		<Repository />
-	{:else}
-		<Landing />
-	{/if}
+<div>
+	<Landing />
 </div>

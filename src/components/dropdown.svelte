@@ -1,36 +1,26 @@
 <script lang="ts">
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
-	import type { JWT } from '../apis/auth';
-	import Cookies from 'js-cookie';
-
-	export let userInfo: JWT;
+	import { Auth, type User } from '../apis/auth';
+	export let user: User;
 	export let show = false;
 
-	const signOut = () => {
-		Cookies.remove('access');
-		Cookies.remove('refresh');
-		window.location.href = '/';
+	const auth = new Auth();
+
+	const signOut = async () => {
+		const { error } = await auth.Signout();
+		if (error) {
+			console.error('error signnout user: ', error);
+			return;
+		}
+		location.href = '/';
 	};
 
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
-
-	$: document.onkeydown = function (evt: any) {
-		evt = evt || window.event;
-		var isEscape = false;
-		if ('key' in evt) {
-			isEscape = evt.key === 'Escape' || evt.key === 'Esc';
-		} else {
-			isEscape = evt.keyCode === 27;
-		}
-		if (isEscape && document.body.classList.contains('modal-active')) {
-			toggleModal();
-		}
-	};
 </script>
 
-{#if userInfo && userInfo.UserPayload}
+{#if user}
 	<div class="relative inline-block ">
 		<slot />
 
@@ -45,10 +35,10 @@
 				>
 					<div class="mx-1">
 						<h1 class="text-lg font-normal text-brown-900">
-							{userInfo.UserPayload.username}
+							{user.username}
 						</h1>
 						<p class="text-sm text-gray-500 truncate">
-							{userInfo.UserPayload.email}
+							{user.email}
 						</p>
 					</div>
 				</a>
@@ -76,7 +66,7 @@
 						/>
 					</svg>
 
-					<span class="mx-1"> view profile </span>
+					<span class="mx-1">View Profile</span>
 				</a>
 
 				<a

@@ -1,6 +1,8 @@
 import HttpClient from './httpClient';
 import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
+import { goto } from '$app/navigation';
+import type { AxiosError } from 'axios';
 
 export interface LoginResponse {
     access: string
@@ -49,6 +51,17 @@ export interface UserPayload {
   id: number
 }
 
+export interface User {
+    created_at: Date;
+    updated_at: Date;
+    uuid:       string;
+    name:       string;
+    username:   string;
+    email:      string;
+    is_active:  boolean;
+	sessionId: string;
+}
+
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 export const ValidateSignupRequest = (input: SignupRequest) => {
@@ -79,14 +92,13 @@ export class Auth extends HttpClient {
 
     public Login = async (email: string, password: string) => {
         const path = '/signin'
+
         if (!email || !password) {
             return Promise.reject("email/password cannot be empty")
         }
-        const body = {
-            email:email,
-            password:password,
-        }
-        return await this.http.post<LoginResponse>(path, body)
+        const body = { email, password };
+        const resp = await this.http.post(path, body);
+		return resp
     }
 
     public Signup = async (username: string, email: string, password: string) => {
@@ -100,29 +112,31 @@ export class Auth extends HttpClient {
             email:email,
             password:password,
         }
-        return await this.http.post<SignupResponse>(path, body)
+        const resp = await this.http.post(path, body);
+		return resp;
+    }
+
+    public Signout = async () => {
+		const path = `/signout`
+
+        const resp = await this.http.delete(path);
+		return resp;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public GetUserWithSession = async () => {
+        const path = `/sessions/me`
+
+
+        const resp = await this.http.get(path);
+		return resp;
     }
 
 	public LoginWithGithub = () => {
-		location.href = this.getGithubOAuthUrl()
+		goto(this.getGithubOAuthUrl())
 	}
 
 	private getGithubOAuthUrl = () => {
 		return `https://github.com/login/oauth/authorize/?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
 	}
-}
-
-export const UserInfo = () => {
-    // const value = "; " + Cookies.get;
-    // const parts = value.split("; " + "access" + "=");
-    
-    // if (parts.length == 2) {
-        const cookie = Cookies.get('access')
-		if (!cookie) {
-			return Promise.reject("user info no found")
-		}
-
-		const userinfo = jwtDecode<JWT>(cookie)
-		return Promise.resolve(userinfo)
-    // }
 }

@@ -40,7 +40,16 @@ export class RegistryBackend extends HttpClient {
 			url = url + '?namespace=' + namespace
 		}
 
-		return await this.http.get<Repository[]>(url)
+		return await this.http.get(url)
+	}
+
+	public SearchRepositories = async (query: string) => {
+		if (!query) {
+			return Promise.reject('Query cannot be empty');
+		}
+
+		let url = `/v2/catalog/search?search_query=${query}`
+		return await this.http.get(url)
 	}
 
 	public ListTags = async (namespace: string) => {
@@ -49,22 +58,24 @@ export class RegistryBackend extends HttpClient {
 		}
 		const url = `/v2/${namespace}/tags/list`
 
-		return await this.http.get<TagList>(url)
+		return await this.http.get(url)
 	}
 
 	public ListCatalog = async (pageSize?: number, offset?: number, namespace?: string) => {
 		let url = '/v2/_catalog'
+
 		if (pageSize){
 			if (!offset) offset = 0;
 			url = url + `?n=${pageSize}&last=${offset}`
 		}
 		if (namespace) {
 			if (!offset) offset = 0;
-			url = url + `?n=${pageSize}&last=${offset}&ns=${namespace}`
+			url = url + `&ns=${namespace}`
 		}
-		return await this.http.get<Catalog>(url)
+
+		const resp = await this.http.get(url);
+		return resp;
 	}
 
 	public DefaultPageSize: number = 10;
-
 }
