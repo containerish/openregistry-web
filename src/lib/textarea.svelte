@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	export let placeholder = '';
 	export let name = '';
+	export let onInput = (e: any, key: string) => {};
 </script>
 
 <div class="my-2 xl:w-full">
@@ -9,6 +10,7 @@
 		id="FormControlTextarea"
 		rows="3"
 		maxlength="300"
+		on:input={(e) => onInput(e, name)}
 		{name}
 		{placeholder}
 	/>

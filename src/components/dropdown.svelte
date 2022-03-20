@@ -13,6 +13,8 @@
 			console.error('error signnout user: ', error);
 			return;
 		}
+
+		// tried using await goto('/') but it keeps failing
 		location.href = '/';
 	};
 

@@ -12,7 +12,10 @@
 	let email = '';
 	let isLoading = false;
 	let ticketResponse = '';
-	let disableSendButton = true;
+	let formValidation = {
+		isSubjectValid: false,
+		isBodyValid: false
+	};
 
 	if (browser) {
 		// @ts-ignore
@@ -25,12 +28,24 @@
 		});
 	}
 
+	const validateBody = (e: any) => {
+		if (e.target.value.length >= 10) {
+			formValidation.isBodyValid = true;
+		}
+	};
+
+	const validateSubject = (e: any) => {
+		if (e.target.value.length >= 20) {
+			formValidation.isSubjectValid = true;
+		}
+	};
+
 	const handleFormSubmit = async (e: any) => {
 		isLoading = true;
 		const subject = e.target.subject.value;
 		const body = e.target.body.value;
 
-		const { error, data } = await support.CreateNewTicket(body, subject, email);
+		const { error } = await support.CreateNewTicket(body, subject, email);
 		isLoading = false;
 		if (error) {
 			ticketResponse = `<span class="text-red-700 font-semibold">${error}</span>`;
@@ -39,7 +54,6 @@
 		}
 
 		ticketResponse = `<span class="text-green-700 font-semibold">Ticket Created Successfully</span>`;
-		console.log('ticket: ', data);
 	};
 </script>
 
@@ -73,18 +87,18 @@
 
 		<div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-6 rounded-xl">
 			<h1 class="text-3xl font-semibold text-brown-900 mb-5">
-				I Signed in with Github, how can i docker login to pull/push images ?
+				I Signed in with GitHub, how can I docker login to pull/push images ?
 			</h1>
 			<span class="text-lg text-black">
-				You can use a PAT(Personal Access Token) from Github for Docker CLI login. To create a PAT
-				follow the github guide:
+				You can use a PAT (Personal Access Token) from GitHub for Docker CLI login. To create a PAT,
+				follow the official GitHub guide here:
 				<a
 					href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
 				>
-					Github Doc for PAT
+					GitHub Doc for PAT
 				</a>
 				and use the generated Personal Access Token as your password for docker login. <br /> The username
-				will same as your github username
+				will same as your GitHub username
 			</span>
 			<div class="bg-black w-96 p-4 mt-4">
 				<span class="text-gray-400 ">
@@ -107,10 +121,11 @@
 				How can I change my OpenRegistry Password
 			</h1>
 			<span class="text-lg text-black">
-				To change your OpenRegistry Password, go to Your Profile -> Settings -> enter the current
-				password, new password and confirm the new password and there you have it! In case you
-				forgot your OpenRegistry Password, please click on forgot password and you'll receive an
-				email to reset the password
+				To change your OpenRegistry Password, go to your
+				<span class="font-semibold">Profile -> Settings -> Change Password.</span><br />
+				Enter the current password, new password and finally confirm the new password and there you have
+				it! In case you forgot your OpenRegistry Password, please click on forgot password and you'll
+				receive an email to reset the password
 			</span>
 		</div>
 
@@ -118,8 +133,8 @@
 			<h1 class="text-3xl font-semibold text-brown-900 mb-5">A Humble Note</h1>
 			<span class="text-lg text-black">
 				OpenRegistry is a small team of 2 developers, as we work towards making it the best
-				Container Registry please make sure to drop any bug reports or improvement advice in the
-				section below as we'd love to hear from you!
+				Container Registry, please make sure to drop any bug reports or improvement advice in the
+				section below. We'd love to hear from you!
 			</span>
 		</div>
 
@@ -127,13 +142,13 @@
 			<div class="w-full -ml-10">
 				<h3 class="mt-1 ml-2 text-2xl font-normal text-left text-brown-900 ">Need More Help?</h3>
 				<form on:submit|preventDefault={(e) => handleFormSubmit(e)} class="w-full lg:w-2/5 py-2">
-					<Textfield name="subject" type="text" placeholder="Subject" />
-					<Textarea name="body" placeholder="Write to us" />
+					<Textfield name="subject" type="text" onInput={validateSubject} placeholder="Subject" />
+					<Textarea name="body" onInput={validateBody} placeholder="Write to us" />
 					<div>
 						{@html ticketResponse}
 					</div>
 					<button
-						disabled={disableSendButton}
+						disabled={!formValidation.isBodyValid || !formValidation.isSubjectValid}
 						on:click={handleFormSubmit}
 						class="disabled:cursor-not-allowed disabled:hover:bg-brown-800 inline-flex items-center gap-2 ml-1 px-6 py-2 mt-2 text-lg font-medium tracking-wide text-gray-100
        transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700

@@ -68,7 +68,7 @@
 							<Dropdown user={u} show={showMenu}>
 								<button
 									on:click={toggleMenu}
-									class="flex items-center px-4 w-56 lg:w-full half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800
+									class="flex items-center px-4 w-full half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800
 					hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200
 					transform bg-inherit rounded-md hover:bg-brown-50 focus:outline-none focus:bg-cream-50"
 								>

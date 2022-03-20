@@ -1,32 +1,30 @@
-<script context="module" lang="ts">
-	export async function load({ session }) {
-		if (!session.authenticated) {
-			return {
-				status: 302,
-				redirect: '/auth/unauthorized'
-			};
-		}
-
-		return {
-			props: {
-				user: session.user
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
 	import type { User } from '../../apis/auth';
-	export let user: User;
+	import { session } from '$app/stores';
+	export let u: User;
+
+	if (browser) {
+		// @ts-ignore
+		session.subscribe(async ({ authenticated, user }) => {
+			if (authenticated) {
+				u = user;
+				return;
+			}
+
+			goto('/auth/unauthorized');
+		});
+	}
 </script>
 
 <svelte:head>
 	<title>User|Open Registry</title>
 </svelte:head>
 
-{#if user}
+{#if u}
 	<div class="min-h-[93vh] bg-cream-50">
 		<div
 			class="flex gap-5 space-x-10 min-w-full justify-start items-center py-28 my-20 px-20 bg-brown-500"
@@ -36,7 +34,7 @@
 				<UserIcon styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial">
-				<h1 class="text-4xl font-medium">{user.name}</h1>
+				<h1 class="text-4xl font-medium">{u.name}</h1>
 				<div class="flex mt-3">
 					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg mr-5">Community User</span>
@@ -45,7 +43,7 @@
 			</div>
 		</div>
 		<Card>
-			<div class="rounded-xl flex flex-col w-3/4 flex bg-brown-400 px-20 py-8">
+			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8">
 				<h1 class="text-2xl font-medium">Email Address</h1>
 				<div>
 					<input
@@ -55,7 +53,7 @@
                     text-gray-700 bg-white border rounded-md sm:mr-5 focus:border-brown-800
                     focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
 						disabled
-						placeholder={user.email}
+						placeholder={u.email}
 					/>
 
 					<button
@@ -69,7 +67,7 @@
 		</Card>
 
 		<Card>
-			<div class="rounded-xl flex flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5">
+			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5">
 				<h1 class="text-2xl font-medium">Change Password</h1>
 				<div class="flex flex-col">
 					<input
@@ -106,11 +104,11 @@
 		</Card>
 
 		<Card>
-			<div class="rounded-xl flex flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5 mb-20">
+			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5 mb-20">
 				<h1 class="text-2xl font-medium">Account Information</h1>
 				<div class="flex flex-col">
 					<span class="mt-2 text-brown-800 text-md"
-						>This information will be public and visible to all users of OpenRegistry</span
+						>This information will be public and visible to all us of OpenRegistry</span
 					>
 					<input
 						type="text"

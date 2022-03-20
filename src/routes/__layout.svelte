@@ -8,7 +8,6 @@
 	import { session } from '$app/stores';
 
 	const auth = new Auth();
-
 	onMount(async () => {
 		const { data, status } = await auth.GetUserWithSession();
 		if (status === 200) {
@@ -21,8 +20,10 @@
 	});
 </script>
 
-<main class="lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col
-			selection:bg-brown-800 selection:text-cream-50">
+<main
+	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[65vw] flex justify-center flex-col
+			selection:bg-brown-800 selection:text-cream-50"
+>
 	<NavbarAuth />
 	<Navbar />
 	<slot />
