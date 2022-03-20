@@ -26,16 +26,45 @@
         </div>
 
         <div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-6 rounded-xl">
-            <h1 class="text-3xl font-semibold text-brown-900 mb-5"> How can I reset my OpenRegistry password? </h1>
+            <h1 class="text-3xl font-semibold text-brown-900 mb-5"> I Signed in with Github, how can i docker login to pull/push images ? </h1>
             <span class="text-lg text-black">
-              You can reset your OpenRegistry password at .................
+              You can use a PAT(Personal Access Token) from Github for Docker CLI login. To create a PAT follow the github guide:
+                <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">
+                    Github Doc for PAT
+                </a>
+                and use the generated Personal Access Token as your password for docker login. <br/> The username will same as your github username
             </span>
+            <div class="bg-black w-96 p-4 mt-4">
+                <span class="text-gray-400 ">
+                    johnedoe#linux: docker login openregistry.dev
+                    username: johndoe <br/>
+                    password: **PAT**
+                </span>
+            </div>
         </div>
 
         <div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-6 rounded-xl">
             <h1 class="text-3xl font-semibold text-brown-900 mb-5"> How can I change my email address? </h1>
             <span class="text-lg text-black">
-              You can reset your OpenRegistry password at .................
+              Currently, this functionality is unavailable. However, we're working on integrating it into OpenRegistry with coming releases
+            </span>
+        </div>
+
+        <div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-6 rounded-xl">
+            <h1 class="text-3xl font-semibold text-brown-900 mb-5"> How can I change my OpenRegistry Password </h1>
+            <span class="text-lg text-black">
+              To change your OpenRegistry Password, go to Your Profile -> Settings -> enter the current password,
+                new password and confirm the new password and there you have it!
+                In case you forgot your OpenRegistry Password, please click on forgot password and you'll receive
+                an email to reset the password
+            </span>
+        </div>
+
+        <div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-6 rounded-xl">
+            <h1 class="text-3xl font-semibold text-brown-900 mb-5"> A Humble Note </h1>
+            <span class="text-lg text-black">
+              OpenRegistry is a small team of 2 developers, as we work towards making it the best Container Registry
+                please make sure to drop any bug reports or improvement advice in the section below as we'd love to hear from you!
             </span>
         </div>
 
