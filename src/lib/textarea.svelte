@@ -1,21 +1,15 @@
 <script>
-	export let label = '';
 	export let placeholder = '';
+	export let name = '';
 </script>
 
-<div>
-	<div class="flex justify-center">
-		<div class="mb-3 xl:w-96">
-			<label for="FormControlTextarea" class="form-label inline-block mb-2 text-gray-700">
-				{label}
-			</label>
-			<textarea
-				class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-				id="FormControlTextarea"
-				rows="3"
-				maxlength="2"
-				{placeholder}
-			/>
-		</div>
-	</div>
+<div class="my-2 xl:w-full">
+	<textarea
+		class="placeholder-gray-500 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+		id="FormControlTextarea"
+		rows="3"
+		maxlength="300"
+		{name}
+		{placeholder}
+	/>
 </div>

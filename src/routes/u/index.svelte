@@ -67,15 +67,21 @@
 				<UserIcon styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial w-64">
-				<h1 class="text-4xl font-medium">{user.username}</h1>
+				<h1 class="text-4xl font-medium">{user.name ? user.name : user.username}</h1>
 				<div class="flex mt-3">
 					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg">Community User</span>
 				</div>
 			</div>
-			<div class="flex flex-col flex-initial w-32">
-				<a class="text-gray-700 text-xl underline-offset-4" href="/settings"><u>Edit Profile</u></a>
-				<span class="mt-3 text-lg"> Joined Today</span>
+			<div class="flex flex-col flex-initial w-32 lg:w-72">
+				<a class="text-brown-900 text-xl underline-offset-4" href="/settings"><u>Edit Profile</u></a
+				>
+				<span class="mt-3 text-sm "
+					>Joined on
+					<span class="font-semibold">
+						{new Date(user.created_at).toDateString()}
+					</span>
+				</span>
 			</div>
 		</div>
 

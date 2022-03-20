@@ -21,12 +21,12 @@
 </script>
 
 {#if user}
-	<div class="relative inline-block ">
+	<div class="relative inline-block w-full">
 		<slot />
 
 		{#if show}
 			<div
-				class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-gray-100 rounded-md shadow-xl"
+				class="absolute right-0 z-20 w-56 lg:w-64 py-2 mt-2 overflow-hidden bg-gray-100 rounded-md shadow-xl"
 			>
 				<a
 					href="#"

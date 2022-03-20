@@ -1,10 +1,10 @@
 <script>
-	export let styles = ""
+	export let styles = '';
 </script>
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="{styles}h-6 w-6"
+	class="{styles} bg-brown-400 h-6 w-6"
 	viewBox="0 0 20 20"
 	fill="none"
 >
@@ -15,4 +15,3 @@
 		clip-rule="evenodd"
 	/>
 </svg>
-

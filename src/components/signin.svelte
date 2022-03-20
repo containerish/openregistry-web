@@ -44,8 +44,11 @@
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-1/5 border-b lg:w-1/4" />
 
-			<span href="#" class="text-xs text-center text-gray-600 uppercase hover:no-underline">
-				or login with email
+			<span
+				href="#"
+				class="text-xs font-semibold text-center text-gray-600 uppercase hover:no-underline"
+			>
+				or sign in with email
 			</span>
 
 			<span class="w-1/5 border-b lg:w-1/4" />
@@ -73,7 +76,7 @@
 			<a
 				on:click={() => toggleSignupForm()}
 				href="#"
-				class="text-xs text-gray-700 uppercase hover:underline">or sign up</a
+				class="text-xs font-semibold text-gray-700 uppercase hover:underline">or sign up</a
 			>
 			<span class="w-1/5 border-b md:w-1/4" />
 		</div>

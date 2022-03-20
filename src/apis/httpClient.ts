@@ -21,29 +21,35 @@ abstract class HttpClient {
 
 	private _requestInterceptor = () => {
 		this.http.interceptors.request.use(req => {
-			req.withCredentials = true;
+			const supportBaseUrl = import.meta.env.VITE_OPEN_REGISTRY_SUPPORT_ENDPOINT;
+			if (req.baseURL === supportBaseUrl) {
+				req.withCredentials = false;
+			} else {
+				req.withCredentials = true;
+			}
+
 			return req;
 		})
 	}
 
 	private _responseInterceptor = () => {
-		this.http.interceptors.response.use(
-			this._handleResponse,
-			this._handleError,
-		);
+		this.http.interceptors.response.use(this._handleResponse, this._handleError);
 	}
 
-	private _handleResponse = ({ data, status, headers }: AxiosResponse) => ({
-		data: data, 
-		status: status, 
-		headers: headers,
-	});
+	private _handleResponse = ({ data, status, headers }: AxiosResponse) => {
+		return {
+			data: data, 
+			status: status, 
+			headers: headers,
+		}
+	};
 
-	protected _handleError = (err: AxiosError) => ({
-		error: err?.response,
-		status: err?.response.status,
-		Headers: err?.response.headers,
-	})
+	protected _handleError = (err: AxiosError) => {
+		return {
+			error: err.message,
+			status: err.code,
+		}
+	}
 
 	private getUserAgent = () => {
 		return import.meta.env.VITE_OPEN_REGISTRY_APP_NAME + "-" + import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT

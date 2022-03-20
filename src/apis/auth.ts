@@ -1,8 +1,5 @@
 import HttpClient from './httpClient';
-import jwtDecode from 'jwt-decode';
-import Cookies from 'js-cookie';
 import { goto } from '$app/navigation';
-import type { AxiosError } from 'axios';
 
 export interface LoginResponse {
     access: string

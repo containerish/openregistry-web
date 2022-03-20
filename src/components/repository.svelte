@@ -3,7 +3,7 @@
 
 	import Copy from '$lib/icons/copy.svelte';
 	import Download from '$lib/icons/download.svelte';
-	import LockClosed from '$lib/icons/lock-closed.svelte';
+	import LockOpen from '$lib/icons/lock-open.svelte';
 	import Star from '$lib/icons/star.svelte';
 	import type { DetailedRepository } from '../apis/registry';
 
@@ -38,7 +38,7 @@
 				<button class="border-none p-0"><Copy /></button>
 				<button class="border-none p-0"><Download /></button>
 				<button class="border-none p-0"><Star /></button>
-				<button class="border-none p-0"><LockClosed /></button>
+				<button class="border-none p-0"><LockOpen /></button>
 			</div>
 		</div>
 
@@ -63,10 +63,9 @@
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><Copy /></button>
 				<button class="border-none p-0"><Download /></button>
 				<button class="border-none p-0"><Star /></button>
-				<button class="border-none p-0"><LockClosed styles="bg-brown-400 h-6 w-6" /></button>
+				<button class="border-none p-0"><LockOpen /></button>
 			</div>
 		</div>
 
