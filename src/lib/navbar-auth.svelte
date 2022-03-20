@@ -68,14 +68,14 @@
 							<Dropdown user={u} show={showMenu}>
 								<button
 									on:click={toggleMenu}
-									class="flex items-center px-4 half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800
+									class="flex items-center px-4 w-56 lg:w-full half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800
 					hover:border-brown-100 border-2 tracking-wide text-brown-800 capitalize transition-colors duration-200
 					transform bg-inherit rounded-md hover:bg-brown-50 focus:outline-none focus:bg-cream-50"
 								>
-									<UserIcon styles="h-6 w-6" />
-									<span>{u.username}</span>
+									<UserIcon styles="h-4 w-4 lg:h-4 lg:w-6 " />
+									<span class="font-semibold text-sm">{u.username}</span>
 									<svg
-										class="w-5 h-5 mx-1 half:w-4 half:h-4 half:mx-0"
+										class="w-4 h-4 lg:h-6 lg:w-6 mx-1 half:w-4 half:h-4 half:mx-0"
 										viewBox="0 0 24 24"
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg"
