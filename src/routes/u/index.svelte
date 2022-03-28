@@ -12,7 +12,7 @@
 	import { onMount } from 'svelte';
 	import UserIcon from '$lib/icons/user.svelte';
 	import Repository from '../../components/repository.svelte';
-	import { RegistryBackend, type DetailedRepository } from '../../apis/registry';
+	import { RegistryBackend, type Catalog, type DetailedRepository } from '../../apis/registry';
 	import type { User } from 'src/apis/auth';
 	export let user: User;
 
@@ -40,16 +40,17 @@
 
 	const backend = new RegistryBackend();
 
-	let repositoryList: DetailedRepository[] = [];
+	let catalog: Catalog;
 
 	onMount(async () => {
-		const { error, data } = await backend.ListRepositories();
+		const { error, data } = await backend.ListCatalog();
 		if (error) {
 			console.error('error in u/ListRepositories: ', error);
 			return;
 		}
 
-		repositoryList = data;
+		catalog = data;
+		console.log('data: ', catalog);
 	});
 </script>
 
@@ -76,8 +77,8 @@
 			<div class="flex flex-col flex-initial w-32 lg:w-72">
 				<a class="text-brown-900 text-xl underline-offset-4" href="/settings"><u>Edit Profile</u></a
 				>
-				<span class="mt-3 text-sm "
-					>Joined on
+				<span class="mt-3 text-sm">
+					Joined
 					<span class="font-semibold">
 						{new Date(user.created_at).toDateString()}
 					</span>
@@ -91,8 +92,10 @@
 			<button
 				on:click={toggleRepo}
 				class="ease-in duration-300 h-10 pb-9 py-2 text-center text-brown-900 bg-transparent border-b-2
-					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base focus:outline-none
-					hover:border-b-black"
+					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base 
+          hover:border-b-black
+          {isRepo ? 'border-b-brown-900' : 'border-b-transparent'}
+          "
 			>
 				Repositories
 			</button>
@@ -101,7 +104,9 @@
 				on:click={toggleStarred}
 				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
 					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
-					focus:outline-none hover:border-b-black"
+          hover:border-b-black
+          {isStarred ? 'border-b-brown-900' : 'border-b-transparent'}
+          "
 			>
 				Starred
 			</button>
@@ -110,7 +115,9 @@
 				on:click={toggleisContrib}
 				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-brown-900 bg-transparent border-b-2
 					border-transparent apple:text-xl uw:text-2xl whitespace-nowrap cursor-base
-					focus:outline-none hover:border-b-black"
+          hover:border-b-black
+          {isContrib ? 'border-b-brown-900' : 'border-b-transparent'}
+          "
 			>
 				Contributed
 			</button>
@@ -119,9 +126,9 @@
 		{#if isRepo}
 			<div>
 				<div class="w-full px-8">
-					{#if repositoryList && repositoryList.length > 0}
-						{#each repositoryList as repo}
-							<Repository data={repo} />
+					{#if catalog?.repositories}
+						{#each catalog.repositories as repo}
+							<Repository compact={false} data={repo} />
 						{/each}
 					{:else}
 						<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">

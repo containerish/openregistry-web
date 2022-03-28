@@ -1,10 +1,13 @@
 import HttpClient from './httpClient';
+import { debounce, throttle } from 'throttle-debounce';
 
-export interface Repository {
+export type Repository = {
   uuid: string
   namespace: string
   mediaType: string
   schemaVersion: number
+  created_at: Date
+  updated_at: Date
 }
 
 export interface TagList {
@@ -13,7 +16,7 @@ export interface TagList {
 }
 
 export interface Catalog {
-	repositories: DetailedRepository[];
+	repositories: Repository[];
 	total: number;
 }
 
@@ -26,8 +29,24 @@ export interface DetailedRepository {
 	media_type: string;
 	layers:     null;
 	size:       number;
+	created_at: Date;
+	updated_at: Date;
 }
 
+export type Repo = {
+  namespace: string
+  tags: Tag[]
+}
+
+export type Tag = {
+  size: number
+  created_at: string
+  updated_at: string
+  namespace: string
+  sky_link: string
+  reference: string
+  digest: string
+}
 
 export class RegistryBackend extends HttpClient {
 	public constructor() {
@@ -48,7 +67,7 @@ export class RegistryBackend extends HttpClient {
 			return Promise.reject('Query cannot be empty');
 		}
 
-		let url = `/v2/catalog/search?search_query=${query}`
+		let url = `/v2/ext/catalog/search?search_query=${query}`
 		return await this.http.get(url)
 	}
 
@@ -62,7 +81,7 @@ export class RegistryBackend extends HttpClient {
 	}
 
 	public ListCatalog = async (pageSize?: number, offset?: number, namespace?: string) => {
-		let url = '/v2/_catalog'
+		let url = '/v2/ext/catalog/detail'
 
 		if (pageSize){
 			if (!offset) offset = 0;
@@ -74,6 +93,17 @@ export class RegistryBackend extends HttpClient {
 		}
 
 		const resp = await this.http.get(url);
+		return resp;
+	}
+
+	public GetRepositoryDetails = async (namespace: string, pageSize?: number, offset?: number) => {
+		if (!pageSize) {
+			pageSize = this.DefaultPageSize;
+			offset = 0;
+		}
+
+		const url = `/v2/ext/repository?ns=${namespace}&n=${pageSize}&offset=${offset}`
+		const resp = await this.http.get(url)
 		return resp;
 	}
 

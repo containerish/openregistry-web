@@ -2,14 +2,20 @@
 	import Cube from './icons/cube.svelte';
 	import { debounce, throttle } from 'throttle-debounce';
 	import { goto } from '$app/navigation';
+	import type { Catalog } from 'src/apis/registry';
 	export let onAutoComplete: Function;
 	let showItems = false;
 	let searchQuery = '';
-	let items = [];
+	let catalog: Catalog = {
+		repositories: [],
+		total: 0
+	};
 
 	const handleOnChange = async (e: any) => {
-		if (e.target.value === '') {
+		console.log('event: ', e.target.value);
+		if (e.target.value === '' || e.target.value.length < 2) {
 			showItems = false;
+			catalog.repositories = [];
 			return;
 		}
 
@@ -20,19 +26,23 @@
 		}
 	};
 
-	const getList = async (q: string) => {
-		const { data, error } = await onAutoComplete(q);
-		if (error || !data) {
+	const autoComplete = async (q: string) => {
+		if (q === '') {
+			catalog.repositories = [];
 			showItems = false;
 			return;
 		}
 
-		showItems = true;
-		items = data;
-	};
+		const { data, error } = await onAutoComplete(q);
+		if (error || !data.repositories) {
+			catalog.repositories = [];
+			showItems = false;
+			return;
+		}
 
-	const autoComplete = (q: string) => {
-		getList(q);
+		console.log('coming here', data, q);
+		showItems = true;
+		catalog = data;
 	};
 
 	const autoCompleteDebounced = debounce(500, autoComplete);
@@ -76,14 +86,14 @@
 			<div
 				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md max-h-96"
 			>
-				{#each items as item}
-					<a href="#" on:click={() => getHref(item)} class="py-1 block no-underline ">
+				{#each catalog.repositories as item}
+					<a href="#" on:click={() => getHref(item.namespace)} class="py-1 block no-underline ">
 						<div
 							class="2xl:px-4 2xl:py-5 px-4 hover:bg-brown-50 gap-1 py-3 flex flex-row items-center justify-start"
 						>
 							<Cube />
 							<h3 class=" font-lg text-gray-700 ">
-								{item}
+								{item.namespace}
 							</h3>
 						</div>
 					</a>

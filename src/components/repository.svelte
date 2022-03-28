@@ -5,9 +5,9 @@
 	import Download from '$lib/icons/download.svelte';
 	import LockOpen from '$lib/icons/lock-open.svelte';
 	import Star from '$lib/icons/star.svelte';
-	import type { DetailedRepository } from '../apis/registry';
+	import type { Repository } from '../apis/registry';
 
-	export let data: DetailedRepository;
+	export let data: Repository;
 	export let compact = true;
 
 	const handleRepoDetail = () => {
@@ -31,11 +31,10 @@
 
 		<div class="flex items-center justify-between">
 			<span class="text-xs font-light text-gray-500">
-				{new Date().toDateString()}
+				{new Date(data.created_at).toDateString()}
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><Copy /></button>
 				<button class="border-none p-0"><Download /></button>
 				<button class="border-none p-0"><Star /></button>
 				<button class="border-none p-0"><LockOpen /></button>
@@ -59,7 +58,7 @@
 
 		<div class="flex items-center justify-between">
 			<span class="text-xs font-light text-gray-500">
-				{new Date().toDateString()}
+				{new Date(data.created_at).toDateString()}
 			</span>
 
 			<div class="flex gap-4">

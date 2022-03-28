@@ -4,6 +4,7 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
+	import { debounce, throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
@@ -14,6 +15,14 @@
 	const backend = new RegistryBackend();
 	const pageSize = 10;
 	let catalog: Catalog;
+	import { createPopperActions } from 'svelte-popperjs';
+	const [popperRef, popperContent] = createPopperActions({
+		placement: 'top-start',
+		strategy: 'fixed'
+	});
+	const extraOpts = {
+		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
+	};
 
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -45,6 +54,7 @@
 
 		catalog = data;
 	};
+	let showTooltip = false;
 
 	setContext('getPageData', fetchPageData);
 	onMount(async () => {
@@ -57,6 +67,38 @@
 	};
 
 	setContext('toggleModal', toggleModal);
+
+	const handleOnChange = async (e: any) => {
+		autoCompleteThrottled(e.target.value);
+	};
+
+	const getList = async (q: string) => {
+		let query = u.username;
+
+		if (q !== '') {
+			query += '/' + q;
+		}
+
+		const { error, data } = await backend.SearchRepositories(query);
+		if (error || !data) {
+			catalog.repositories = [];
+			return;
+		}
+
+		catalog = data;
+	};
+
+	const autoComplete = (q: string) => {
+		getList(q);
+	};
+
+	const autoCompleteThrottled = throttle(1000, autoComplete);
+
+	const getHref = async (item: string) => {
+		await goto(`/u/${item}`, {
+			replaceState: true
+		});
+	};
 </script>
 
 <Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
@@ -64,12 +106,34 @@
 		<div class="w-3/4 mx-8 my-8">
 			<div class="flex px-10 pb-2 justify-between uw:px-36 lg:px-14 apple:px-24">
 				<div class="w-2/5">
-					<Textfield placeholder="Search Repositories" />
+					<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 				</div>
+				{#if showTooltip}
+					<div
+						id="tooltip"
+						class="z-50 bg-white rounded-lg py-3 px-4"
+						use:popperContent={extraOpts}
+					>
+						<span class=" text-gray-800">
+							Coming soon
+							<svg
+								class="absolute text-white h-6 left-0 ml-3 top-full"
+								x="0px"
+								y="0px"
+								viewBox="0 0 255 255"
+								xml:space="preserve"
+								><polygon class="fill-current" points="0,0 127.5,127.5 255,0" /></svg
+							>
+						</span>
+						<div id="arrow" data-popper-arrow />
+					</div>
+				{/if}
 				<button
-					on:click={toggleModal}
-					class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
-					hover:bg-brown-50 hover:text-gray-700"
+					use:popperRef
+					on:mouseenter={() => (showTooltip = true)}
+					on:mouseleave={() => (showTooltip = false)}
+					class="cursor-not-allowed px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
+					"
 				>
 					Create Repository
 				</button>
@@ -101,9 +165,23 @@
 			{/if}
 		</div>
 
-		<div class="my-20 flex justify-start flex-col items-center w-1/4">
-			<Advert />
-			<Advert />
+		<div
+			class="border py-2 rounded-lg px-4 border-brown-500 my-20 flex justify-start flex-col items-center w-1/4"
+		>
+			<Advert
+				link="https://akash.network"
+				styles="hover:bg-red-600"
+				logo="akash-logo.svg"
+				body="Infrastructure that powers web3 for cloud compute akash network is a distributed
+					peer-to-peer marketplace for cloud compute"
+			/>
+			<Advert
+				link="https://siasky.net"
+				styles="hover:bg-[#00C65E]"
+				logo="skynet-logo.png"
+				body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
+          and applications."
+			/>
 		</div>
 	</div>
 </Card>

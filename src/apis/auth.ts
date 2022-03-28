@@ -130,7 +130,7 @@ export class Auth extends HttpClient {
     }
 
 	public LoginWithGithub = () => {
-		goto(this.getGithubOAuthUrl())
+		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + "/auth/github/login")
 	}
 
 	private getGithubOAuthUrl = () => {

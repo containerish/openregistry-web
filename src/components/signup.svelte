@@ -4,7 +4,6 @@
 	import { getContext, createEventDispatcher } from 'svelte';
 	import Github from '$lib/github.svelte';
 	import { Auth } from '../apis/auth';
-	import type { AxiosError } from 'axios';
 
 	const toggleSignUpForm: Function = getContext('toggleSignUpForm');
 	const toggleSignInForm: Function = getContext('toggleSignInForm');
@@ -25,16 +24,18 @@
 	let password = '';
 	let formErr = '';
 
-	const onClickSignUpUser = (e: any) => {
-		auth
-			.Signup(e.target.username.value, e.target.email.value, e.target.password.value)
-			.then((_) => {
-				formErr = '';
-				dispatch('success');
-			})
-			.catch((err: AxiosError) => {
-				formErr = err.message;
-			});
+	const onClickSignUpUser = async (e: any) => {
+		const { error, status } = await auth.Signup(
+			e.target.username.value,
+			e.target.email.value,
+			e.target.password.value
+		);
+		if (error || status !== 201) {
+			console.error('error signup: ', status, error);
+			return;
+		}
+
+		dispatch('success');
 	};
 
 	const loginWithGithub = () => {
