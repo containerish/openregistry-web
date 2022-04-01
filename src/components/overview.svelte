@@ -3,7 +3,7 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card styles=" bg-brown-200 block m-h-screen py-12">
+<Card styles=" bg-brown-200 block py-12">
 	<div class="w-full h-full">
 		<div
 			class="px-6 my-6 w-full flex justify-center items-center half:flex-col laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10"
@@ -36,7 +36,9 @@
 					> for storage
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
-					<a class="text-brown-900 text-xl mt-1" href="https://conformance.opencontainers.org/"
+					<a
+						class="text-brown-900 text-xl mt-1"
+						href="https://conformance.opencontainers.org/"
 						target="_blank">More</a
 					>
 					<button
@@ -78,7 +80,11 @@
 					>
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
-					<a class="text-brown-900 text-xl mt-1" href="https://blog.openregistry.dev/collaborations" target="_blank">More</a>
+					<a
+						class="text-brown-900 text-xl mt-1"
+						href="https://blog.openregistry.dev/collaborations"
+						target="_blank">More</a
+					>
 					<button
 						class="transition duration-500 ease-in-out
                        bg-transparent hover: transform
@@ -117,7 +123,11 @@
 					OpenRegistry free for everyone
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
-					<a class="text-brown-900 text-xl mt-1" href="https://blog.openregistry.dev/web3-infrastructure" target="_blank">More</a>
+					<a
+						class="text-brown-900 text-xl mt-1"
+						href="https://blog.openregistry.dev/web3-infrastructure"
+						target="_blank">More</a
+					>
 					<button
 						class="transition duration-500 ease-in-out
                        bg-transparent hover: transform

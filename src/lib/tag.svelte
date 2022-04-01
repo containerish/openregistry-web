@@ -52,7 +52,7 @@
 				<div class="table-row">
 					<div class="table-cell text-ellipsis max-w-xs">{tag.digest.slice(7, 28)}</div>
 					<div class="table-cell">{new Date(tag.updated_at).toDateString()}</div>
-					<div class="table-cell">{tag.sky_link}</div>
+					<div class="table-cell overflow-hidden text-ellipsis">{tag.sky_link}</div>
 					<div class="table-cell">{(tag.size / 1000000).toFixed(2)} MB</div>
 				</div>
 			</div>

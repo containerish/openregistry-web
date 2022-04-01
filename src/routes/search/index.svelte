@@ -1,3 +1,15 @@
+<script lang="ts" context="module">
+	/** @type import('@sveltejs/kit').Load} */
+	export async function load({ url }) {
+		const u = new URLSearchParams(url.search);
+		return {
+			props: {
+				query: u.get('query')
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
@@ -9,6 +21,8 @@
 	import Checkbox from '$lib/checkbox.svelte';
 	import type { Catalog } from '../../apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
+	export let query: string = '';
+
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -31,7 +45,19 @@
 	let catalog: Catalog;
 
 	onMount(async () => {
-		const { data, error } = await backend.ListCatalog(backend.DefaultPageSize);
+		console.log('query from url: ', query);
+		if (query && query !== '') {
+			const { error, data } = await backend.SearchRepositories(query);
+			if (error) {
+				console.error('error in search/ListCatalog: ', error);
+				return;
+			}
+
+			catalog = data;
+			return;
+		}
+
+		let { data, error } = await backend.ListCatalog(backend.DefaultPageSize);
 		if (error) {
 			console.error('error in search/ListCatalog: ', error);
 			return;
@@ -46,8 +72,6 @@
 	};
 
 	let showTooltip = false;
-
-	const searchRepositories = () => {};
 
 	setContext('toggleModal', toggleModal);
 </script>

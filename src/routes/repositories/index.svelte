@@ -166,7 +166,7 @@
 		</div>
 
 		<div
-			class="border py-2 rounded-lg px-4 border-brown-500 my-20 flex justify-start flex-col items-center w-1/4"
+			class="invisible lg:visible border py-2 rounded-lg px-4 border-brown-500 my-20 flex justify-start flex-col items-center w-1/4"
 		>
 			<Advert
 				link="https://akash.network"

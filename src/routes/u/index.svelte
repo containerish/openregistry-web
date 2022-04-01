@@ -14,6 +14,8 @@
 	import Repository from '../../components/repository.svelte';
 	import { RegistryBackend, type Catalog, type DetailedRepository } from '../../apis/registry';
 	import type { User } from 'src/apis/auth';
+	import StarIcon from '$lib/icons/star.svelte';
+	import UserGroupIcon from '$lib/icons/userGroup.svelte';
 	export let user: User;
 
 	let isRepo = true;
@@ -42,15 +44,23 @@
 
 	let catalog: Catalog;
 
-	onMount(async () => {
-		const { error, data } = await backend.ListCatalog();
+	const fetchPageData = async (offset?: number) => {
+		const { error, data } = await backend.ListCatalog(
+			backend.DefaultPageSize,
+			backend.DefaultPageSize * offset,
+			user.username
+		);
+
 		if (error) {
-			console.error('error in u/ListRepositories: ', error);
+			console.error('error in repo/index: fetchPageData: ', error);
 			return;
 		}
 
 		catalog = data;
-		console.log('data: ', catalog);
+	};
+	let showTooltip = false;
+	onMount(async () => {
+		fetchPageData();
 	});
 </script>
 
@@ -141,16 +151,28 @@
 
 		{#if isStarred}
 			<div class="w-full px-8">
-				<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
+				<div
+					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center"
+				>
+					<StarIcon styles="h-10 w-10" />
 					<span class="text-brown-700 text-3xl">Your starred repositories will show here</span>
+					<span class="text-brown-800 font-light text-lg xl:text-xl">
+						We're working on bringing this feature as we build more analytics
+					</span>
 				</div>
 			</div>
 		{/if}
 
 		{#if isContrib}
 			<div class="w-full px-8">
-				<div class="bg-gray-50 w-full rounded-md px-28 py-20 flex justify-center items-center">
+				<div
+					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center"
+				>
+					<UserGroupIcon styles="h-10 w-10" />
 					<span class="text-brown-700 text-3xl">Your Contributions will be placed here</span>
+					<span class="text-brown-800 font-light text-lg xl:text-xl">
+						We're working on bringing this feature as we build more analytics
+					</span>
 				</div>
 			</div>
 		{/if}

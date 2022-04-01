@@ -57,6 +57,8 @@ export interface User {
     email:      string;
     is_active:  boolean;
 	sessionId: string;
+	hireable: boolean;
+	html_url: string;
 }
 
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -86,6 +88,55 @@ export class Auth extends HttpClient {
     public constructor() {
         super('http://localhost:5000/auth')
     }
+
+	public VerifyEmail = async (token:string) => {
+		const path= `/signup/verify?token=${token}`
+
+		const resp = this.http.get(path)
+		return resp;
+	}
+
+	public ResetPassword = async (oldPassword: string, newPassword: string) => {
+		const path= `/reset-password`
+
+		const body = {
+			"old_password": oldPassword,
+			"new_password": newPassword,
+		}
+
+		const resp = this.http.post(path, body)
+		return resp;
+	}
+
+	public ForgotPassword = async () => {
+		const path= `/reset-password?kind=forgot`
+
+		const resp = this.http.post(path)
+		return resp;
+	}
+
+	public ForgotPasswordCallback = async (newPassword: string, token: string) => {
+		const path= `/reset-password?kind=forgot_password_callback`
+
+		const body = {
+			"new_password": newPassword,
+		}
+
+		const resp = this.http.post(path, body, {headers: {
+			'Authorization': 'Bearer ' + token,
+		}})
+		return resp;
+	}
+
+	public SendInvites = async (emails: string)=> {
+		const path = "send-email/welcome"
+		const body = {
+			emails: emails,
+		}
+		const resp = await this.http.post(path, body)
+		return resp;
+	}
+
 
     public Login = async (email: string, password: string) => {
         const path = '/signin'
@@ -123,7 +174,6 @@ export class Auth extends HttpClient {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public GetUserWithSession = async () => {
         const path = `/sessions/me`
-
 
         const resp = await this.http.get(path);
 		return resp;

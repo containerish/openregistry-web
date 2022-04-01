@@ -75,7 +75,7 @@
 
 	{#if showSignUpForm}
 		<Modal>
-			<Signup on:success={redirectToRepositories} />
+			<Signup />
 		</Modal>
 	{/if}
 </div>

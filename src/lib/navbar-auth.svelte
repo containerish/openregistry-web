@@ -6,6 +6,7 @@
 	import type { User } from '../apis/auth';
 	import Dropdown from '../components/dropdown.svelte';
 	import { RegistryBackend } from '../apis/registry';
+	import Menu from './menu.svelte';
 
 	let u: User;
 	let sessionOk: boolean = false;
@@ -24,6 +25,14 @@
 
 	const handleAutoComplete = async (query: string) => {
 		return await registry.SearchRepositories(query);
+	};
+
+	const closeMenu = () => {
+		showMenu = false;
+	};
+
+	const handleShowMenu = () => {
+		showMenu = !showMenu;
 	};
 </script>
 
@@ -65,7 +74,7 @@
 							>
 								FAQ
 							</button>
-							<Dropdown user={u} show={showMenu}>
+							<Dropdown user={u} show={showMenu} {closeMenu} {handleShowMenu}>
 								<button
 									on:click={toggleMenu}
 									class="flex items-center px-4 w-full half:px-2 ml-8 half:ml-4 mt-1.5 font-lato font-semibold border-brown-800

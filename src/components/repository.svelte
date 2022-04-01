@@ -62,9 +62,9 @@
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><Download /></button>
-				<button class="border-none p-0"><Star /></button>
-				<button class="border-none p-0"><LockOpen /></button>
+				<Download styles="bg-brown-400 h-6 w-6" />
+				<Star styles="bg-brown-400 h-6 w-6" />
+				<LockOpen styles="bg-brown-400 h-6 w-6" />
 			</div>
 		</div>
 

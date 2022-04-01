@@ -47,7 +47,6 @@
 		}
 
 		repository = data;
-
 		console.log('tags: ', repository.tags);
 	});
 </script>

@@ -8,6 +8,7 @@
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
 	import SpinnerCircle from '$lib/icons/spinner-circle.svelte';
+	import FaqTerminal from '$lib/faqTerminal.svelte';
 	const support = new Support();
 	let email = '';
 	let isLoading = false;
@@ -100,11 +101,10 @@
 				and use the generated Personal Access Token as your password for docker login. <br /> The username
 				will same as your GitHub username
 			</span>
-			<div class="bg-black w-96 p-4 mt-4">
-				<span class="text-gray-400 ">
-					johnedoe#linux: docker login openregistry.dev username: johndoe <br />
-					password: **PAT**
-				</span>
+			<div
+				class="w-full p-8 max-h-fit half:px-10 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32"
+			>
+				<FaqTerminal />
 			</div>
 		</div>
 
