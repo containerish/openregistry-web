@@ -13,15 +13,19 @@
 
 	const onClickSignIn = async (e: any) => {
 		isLoading = true;
-		const { error, status } = await auth.Login(e.target.email.value, e.target.password.value);
-		if (error) {
-			console.error('erro singin: ', error);
-			return;
-		}
+		setTimeout(async () => {
+			const { error, status } = await auth.Login(e.target.email.value, e.target.password.value);
+			if (error) {
+				isLoading = false;
+				console.error('erro singin: ', error);
+				return;
+			}
 
-		if (status === 200) {
-			dispatch('success');
-		}
+			isLoading = false;
+			if (status === 200) {
+				dispatch('success');
+			}
+		}, 1000);
 	};
 </script>
 
@@ -62,7 +66,12 @@
 			</div>
 
 			<div class="flex mt-8 w-full">
-				<Button {isLoading} styles="text-gray-50 w-full mr-2" label="Sign In" />
+				<Button
+					onClick={onClickSignIn}
+					{isLoading}
+					styles="text-gray-50 w-full mr-2"
+					label="Sign In"
+				/>
 				<Button
 					onClick={toggleSignInForm}
 					styles="bg-gray-50 text-gray-800 w-2/3 ml-2"

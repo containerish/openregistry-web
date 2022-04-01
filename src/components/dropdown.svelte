@@ -3,6 +3,7 @@
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import { Auth, type User } from '../apis/auth';
+	import { goto } from '$app/navigation';
 	export let user: User;
 	export let show = false;
 	export let handleShowMenu: VoidFunction;
@@ -31,6 +32,10 @@
 
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
+	const navigateAround = async (path: string) => {
+		closeMenu();
+		await goto(path);
+	};
 </script>
 
 <ClickOutside on:clickoutside={onClickOutside}>
@@ -57,11 +62,11 @@
 						</div>
 					</a>
 
-					<hr class="border-gray-200" />
+					<hr class="border-gray-400" />
 
-					<a
-						href="/u"
-						class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200
+					<button
+						on:click={() => navigateAround('/u')}
+						class="flex items-center w-full border-0 m-0 p-3 text-sm text-gray-600 capitalize transition-colors duration-200
 					transform hover:bg-white hover:no-underline"
 					>
 						<svg
@@ -81,11 +86,12 @@
 						</svg>
 
 						<span class="mx-1">View Profile</span>
-					</a>
+					</button>
+					<hr class="border-gray-200" />
 
-					<a
-						href="/settings"
-						class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform
+					<button
+						on:click={() => navigateAround('/settings')}
+						class="flex w-full items-center border-0 m-0 p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform
 					 hover:bg-white hover:no-underline"
 					>
 						<svg
@@ -101,14 +107,14 @@
 						</svg>
 
 						<span class="mx-1"> Settings </span>
-					</a>
+					</button>
 
 					<hr class="border-gray-200" />
 
-					<a
+					<button
 						on:click={toggleModal}
 						href="#"
-						class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200
+						class="flex w-full items-center border-0 m-0 p-3 text-sm text-gray-600 capitalize transition-colors duration-200
 					transform hover:bg-white hover:no-underline"
 					>
 						<svg
@@ -124,13 +130,13 @@
 						</svg>
 
 						<span class="mx-1"> Invite colleagues </span>
-					</a>
+					</button>
 
 					<hr class="border-gray-200" />
 
-					<a
-						href="/faq"
-						class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform
+					<button
+						on:click={() => navigateAround('/faq')}
+						class="flex items-center w-full p-3 text-sm border-0 m-0 text-gray-600 capitalize transition-colors duration-200 transform
 					 hover:bg-white hover:no-underline"
 					>
 						<svg
@@ -146,11 +152,12 @@
 						</svg>
 
 						<span class="mx-1"> Help </span>
-					</a>
-					<a
+					</button>
+					<hr class="border-gray-200" />
+					<button
 						on:click={signOut}
 						href="#"
-						class="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform
+						class="flex w-full items-center p-3 text-sm border-0 m-0 text-gray-600 capitalize transition-colors duration-200 transform
 					  hover:bg-white hover:no-underline"
 					>
 						<svg
@@ -166,7 +173,7 @@
 						</svg>
 
 						<span class="mx-1"> Sign Out </span>
-					</a>
+					</button>
 					{#if showModal}
 						<Modal closeFunc={() => (showModal = false)}>
 							<Invite handleModal={toggleModal} />

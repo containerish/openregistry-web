@@ -56,21 +56,26 @@
 	let successMessage = '';
 
 	const onClickSignUpUser = async (e: any) => {
-		const { error, status, data } = await auth.Signup(
-			e.target.username.value,
-			e.target.email.value,
-			e.target.password.value
-		);
-		if (error || status !== 201 || !data) {
-			console.error('error signup: ', status, error);
-			return;
-		}
+		isLoading = true;
+		setTimeout(async () => {
+			const { error, status, data } = await auth.Signup(
+				e.target.username.value,
+				e.target.email.value,
+				e.target.password.value
+			);
+			if (error || status !== 201 || !data) {
+				console.error('error signup: ', status, error);
+				isLoading = false;
+				return;
+			}
 
-		console.log('resp for signup: ', data);
-		showSuccessMsg = true;
-		successMessage = data.message;
-		throwSomeConfetti();
-		throwSomeConfetti();
+			isLoading = false;
+			console.log('resp for signup: ', data);
+			showSuccessMsg = true;
+			successMessage = data.message;
+			throwSomeConfetti();
+			throwSomeConfetti();
+		}, 1000);
 	};
 
 	const loginWithGithub = () => {
