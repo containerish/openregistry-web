@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount, setContext } from 'svelte';
-
-	import Register from '../components/register.svelte';
 	import Card from '$lib/card.svelte';
 	import Button from '$lib/button.svelte';
 	import { goto } from '$app/navigation';
@@ -69,10 +67,10 @@
 			</div>
 		</div>
 
-		<div class="h-full p-8 w-full ml-20">
+		<div class="h-full p-8 w-full desktop:ml-20 half:-ml-6 half:-mt-12">
 			<form
 				on:submit|preventDefault={() => goto(`/search?query=${query}`)}
-				class="flex justify-end gap-5 items-center"
+				class="flex half:flex-col half:items-start justify-end gap-5 items-center"
 				action=""
 			>
 				<div>
@@ -81,15 +79,18 @@
 						name="search"
 						type="text"
 						placeholder="Search container images"
-						class="placeholder-gray-500 form-control block w-96 px-3 py-3.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+						class="placeholder-gray-500 form-control block w-96 half:w-80 px-3 py-3.5 half:py-3 text-base font-normal
+						text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0
+						focus:text-gray-700 border rounded-md focus:border-brown-100 focus:ring-opacity-40
+						focus:outline-none focus:ring focus:ring-brown-800"
 					/>
 				</div>
 				<div class="flex w-full">
 					<button
 						on:click={() => goto(`/search?query=${query}`)}
-						class="inline-flex justify-center bg-brown-900 tracking-wider items-center w-32 max-w-[48rem] py-3.5
-			        font-normal leading-6 border-none text-md shadow rounded-md text-gray-50 half:px-4 half:py-2 half:mt-1 lg:mt-2"
-					>
+						class="inline-flex justify-center bg-brown-900 tracking-wider items-center w-32 max-w-[48rem]
+						py-3.5 font-normal leading-6 border-none text-md shadow rounded-md text-gray-50 half:px-4
+						half:py-3 half:mt-1 mt-2">
 						Search
 					</button>
 				</div>

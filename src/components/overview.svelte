@@ -6,7 +6,8 @@
 <Card styles=" bg-brown-200 block py-12">
 	<div class="w-full h-full">
 		<div
-			class="px-6 my-6 w-full flex justify-center items-center half:flex-col laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10"
+			class="px-6 my-6 w-full flex justify-center items-center half:flex-col
+			laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10 my-28"
 		>
 			<div class="half:w-96">
 				<picture>
@@ -15,12 +16,12 @@
 			</div>
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<h3
-					class="font-poppins text-center whitespace-nowrap font-normal pb-4 text-5xl
-					half:text-3xl half:font-semibold"
+					class=" text-brown-800 font-poppins text-center whitespace-nowrap font-semibold pb-4 text-5xl
+					half:text-3xl"
 				>
 					Overview
 				</h3>
-				<p class="font-lato text-[17.5px] text-center font-normal leading-6">
+				<p class="font-lato text-[17.5px] text-center font-normal leading-6 tracking-wide">
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
 					difference in operations of OpenRegistry than any other popular container registries like
@@ -53,16 +54,17 @@
 			</div>
 		</div>
 		<div
-			class="px-6 my-6 w-full flex justify-center items-center half:flex-col-reverse laptop:flex-col-reverse laptop:py-10 ipad:flex-col-reverse ipad:py-10"
+			class="px-6 w-full flex justify-center items-center half:flex-col-reverse laptop:flex-col-reverse
+			laptop:py-10 ipad:flex-col-reverse ipad:py-10 my-28"
 		>
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<h3
-					class="font-poppins text-center whitespace-nowrap font-normal pb-4 text-5xl
-					half:text-3xl half:font-semibold"
+					class="text-brown-800 font-poppins text-center whitespace-nowrap font-semibold pb-4 text-5xl
+					half:text-3xl"
 				>
 					Collaborations
 				</h3>
-				<p class="font-lato text-[17.5px] text-center font-normal leading-6">
+				<p class="font-lato text-[17.5px] text-center font-normal leading-6 tracking-wide">
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
 					integrated together to serve larger audience. You can also, simply contribute to
@@ -102,7 +104,8 @@
 			</div>
 		</div>
 		<div
-			class="px-6 my-6 w-full flex justify-center items-center half:flex-col laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10"
+			class="px-6 w-full flex justify-center items-center half:flex-col laptop:flex-col
+			laptop:py-10 ipad:flex-col ipad:py-10 my-28"
 		>
 			<div class="half:w-96 ipad:pb-4 half:pb-4">
 				<picture>
@@ -111,12 +114,12 @@
 			</div>
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<h3
-					class="font-poppins text-center whitespace-nowrap font-normal pb-4 text-5xl
-					half:text-3xl half:font-semibold half:-ml-4 ipad:self-center"
+					class="text-brown-800 font-poppins text-center whitespace-nowrap font-semibold pb-4 text-5xl
+					half:text-3xl ipad:self-center"
 				>
 					Web 3.0 Infrastructure
 				</h3>
-				<p class="font-lato text-[17.5px] text-center font-normal leading-6">
+				<p class="font-lato text-[17.5px] text-center font-normal leading-6 tracking-wide">
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
 					at OpenRegistry believe in dWorld full of dApps. With our initiative, we want to make

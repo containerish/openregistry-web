@@ -15,7 +15,7 @@
 </svelte:head>
 
 <Card styles="bg-brown-400">
-	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 my-20">
+	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 half:mx-4 my-20">
 		<div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-0 rounded-xl">
 			<h1 class="text-5xl font-semibold text-brown-900 mb-8 ">
 				Decentralisation is the Future! and we want to play a role in making it better
@@ -42,10 +42,10 @@
 		</div>
 		<div class="flex flex-row items-center">
 			<section class="bg-brown-400 rounded-xl mx-4">
-				<div class="container px-6 py-89 mx-auto">
+				<div class="container px-6 half:px-0 py-89 mx-auto">
 					<div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2">
 						<div
-							class="px-12 py-8 transition-colors duration-200 transform border-none bg-brown-500 rounded-xl
+							class="px-12 py-8 half:px-5 transition-colors duration-200 transform border-none bg-brown-500 rounded-xl
 						hover:border-transparent group hover:bg-brown-700"
 						>
 							<div class="flex flex-col sm:-mx-4 sm:flex-row">
@@ -93,7 +93,7 @@
 						</div>
 
 						<div
-							class="px-12 py-8 transition-colors duration-200 transform border-none bg-brown-500 rounded-xl
+							class="px-12 py-8 half:px-5 transition-colors duration-200 transform border-none bg-brown-500 rounded-xl
 						hover:border-transparent group hover:bg-brown-700"
 						>
 							<div class="flex flex-col sm:-mx-4 sm:flex-row">
