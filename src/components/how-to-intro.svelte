@@ -6,7 +6,7 @@
 <Card styles="bg-brown-400 min-h-[1000px] block flex-col desktop:items-center half:pt-0 pb-12">
 	<div class="flex w-1/2 flex-col items-center px-6 pb-10 half:pt-24">
 		<span
-			class="font-lato text-center whitespace-nowrap lg:font-semibold pb-4 lg:text-5xl xl:text-6xl text-4xl font-semibold"
+			class="text-brown-800 font-poppins text-center whitespace-nowrap pb-4 text-4xl md:text-6xl font-semibold"
 		>
 			How does it work?
 		</span>
@@ -26,7 +26,7 @@
 		</ul>
 	</div>
 
-	<div class="w-3/4 max-h-fit half:px-10 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32">
+	<div class="w-3/4 apple:w-3/5 max-h-fit half:px-10 half:mb-10 laptop:px-10 uw:px-32">
 		<Xterm />
 	</div>
 </Card>

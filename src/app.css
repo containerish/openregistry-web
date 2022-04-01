@@ -15,6 +15,7 @@ html, body {
 
 body {
 	color: #241D19;
+	background-color: #E8E3E0;
 	margin: 0;
 	padding: 0px;
 	box-sizing: border-box;
@@ -24,7 +25,7 @@ body {
 }
 
 a {
-	color: rgb(0,100,200);
+	color: rgb(131, 78, 53);
 	text-decoration: none;
 }
 
@@ -33,7 +34,7 @@ a:hover {
 }
 
 a:visited {
-	color: rgb(0,80,160);
+	color: rgb(131, 78, 53);
 }
 
 label {
