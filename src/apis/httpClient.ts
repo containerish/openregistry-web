@@ -46,8 +46,8 @@ abstract class HttpClient {
 
 	protected _handleError = (err: AxiosError) => {
 		return {
-			error: err.message,
-			status: err.code,
+			error: err?.response?.data ? err.response.data : err.message,
+			status: err?.response?.status,
 		}
 	}
 

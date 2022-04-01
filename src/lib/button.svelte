@@ -1,14 +1,16 @@
-<script>
+<script lang="ts">
 	export let label = '';
-	export let onClick = () => {};
+	export let onClick: Function;
 	export let styles = '';
 	export let isLoading = false;
 	export let type = '';
+	export let disabled = false;
 </script>
 
 <button
 	{type}
-	on:click={onClick}
+	{disabled}
+	on:click={() => onClick()}
 	class="{styles} border-none inline-flex justify-center tracking-wider btn items-center py-2 font-normal leading-6 text-md shadow rounded-md transition ease-in-out duration-150
   {isLoading ? 'px-0' : 'px-4'}"
 >

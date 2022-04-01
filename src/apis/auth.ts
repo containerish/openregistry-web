@@ -108,10 +108,10 @@ export class Auth extends HttpClient {
 		return resp;
 	}
 
-	public ForgotPassword = async () => {
-		const path= `/reset-password?kind=forgot`
+	public ForgotPassword = async (email: string) => {
+		const path= `/forgot-password?email=${email}`
 
-		const resp = this.http.post(path)
+		const resp = this.http.get(path)
 		return resp;
 	}
 

@@ -31,19 +31,8 @@
 
 	const passwordForm = form(currentPassword, newPassword, confirmPassword);
 
-	const forgotPassword = async () => {
-		const { error, data } = await auth.ForgotPassword();
-		console.log('errror: ', error);
-		console.log('data: ', data);
-	};
-
 	const resetPassword = async () => {
-		console.log($passwordForm.summary);
-
 		const { error, data } = await auth.ResetPassword($currentPassword.value, $newPassword.value);
-		console.log('error: ', error);
-		console.log('data: ', data);
-
 		passwordForm.reset();
 	};
 </script>
@@ -137,9 +126,6 @@ focus:outline-none focus:ring focus:ring-opacity-40
 				{#if $passwordForm.hasError('confirm_password.match_field')}
 					<span class="text-red-700">Error - passwords don't match</span>
 				{/if}
-				<a on:click={forgotPassword} class="text-brown-900 mt-2 text-lg underline" href="#">
-					I forgot my password
-				</a>
 				<button
 					on:click={resetPassword}
 					class="w-32 px-6 py-2 mt-5 -ml-1.5 text-lg font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"

@@ -19,7 +19,7 @@
 	<div
 		id={data.uuid}
 		on:click={handleRepoDetail}
-		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-auto
+		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-full px-8 py-2 my-2 mx-auto
 			bg-brown-400 rounded-lg"
 	>
 		<div class="pt-2">
@@ -47,7 +47,7 @@
 	<div
 		id={data.uuid + data.namespace}
 		on:click={handleRepoDetail}
-		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-2 bg-brown-400 rounded-lg"
+		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-full px-8 py-2 my-2 mx-2 bg-brown-400 rounded-lg"
 	>
 		<div class="pt-2">
 			<span class="text-lg">

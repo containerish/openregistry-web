@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '../lib/button.svelte';
 	import Textfield from '../lib/textfield.svelte';
-	import { getContext, createEventDispatcher, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import Github from '$lib/github.svelte';
 	import { Auth } from '../apis/auth';
 	import confetti from 'canvas-confetti';
@@ -37,10 +37,7 @@
 	const toggleSignInForm: Function = getContext('toggleSignInForm');
 	let isLoading = false;
 	let showSuccessMsg = false;
-	let showAnimation = false;
-
 	const auth = new Auth();
-	const dispatch = createEventDispatcher();
 
 	const toggleModals = () => {
 		toggleSignInForm();
@@ -52,7 +49,7 @@
 	let passwordErr = '';
 	let confirmPasswordErr = '';
 	let password = '';
-	let formErr = '';
+	let formErr: string;
 	let successMessage = '';
 
 	const onClickSignUpUser = async (e: any) => {
@@ -63,14 +60,14 @@
 				e.target.email.value,
 				e.target.password.value
 			);
-			if (error || status !== 201 || !data) {
+			if (error || status !== 201) {
 				console.error('error signup: ', status, error);
+				formErr = error.message;
 				isLoading = false;
 				return;
 			}
 
 			isLoading = false;
-			console.log('resp for signup: ', data);
 			showSuccessMsg = true;
 			successMessage = data.message;
 			throwSomeConfetti();
@@ -85,8 +82,13 @@
 	const validateUsername = (e: any) => {
 		const username: string = e.target.value;
 
-		if (!username || username.length < 3) {
-			usernameErr = 'invalid username';
+		if (!username) {
+			usernameErr = 'username is invalid';
+			return;
+		}
+
+		if (username.length < 3) {
+			usernameErr = 'username must be atleast 3 characters';
 			return;
 		}
 
@@ -96,8 +98,13 @@
 	const validatePassword = (e: any) => {
 		const pwd: string = e.target.value;
 
-		if (!pwd || pwd.length < 8) {
-			passwordErr = 'invalid password';
+		if (!pwd) {
+			passwordErr = 'password is invalid';
+			return;
+		}
+
+		if (pwd.length < 8) {
+			passwordErr = 'password must be alphanumeric and atleast 8 characters long';
 			return;
 		}
 
@@ -109,7 +116,7 @@
 		const confirmPassword: string = e.target.value;
 
 		if (confirmPassword !== password) {
-			confirmPasswordErr = 'password and confirm password mismatch';
+			confirmPasswordErr = 'password and confirm password do not match';
 			return;
 		}
 
@@ -125,7 +132,7 @@
 		const regexFailed = regexp.test(email);
 		// minimum length for email is 3 chars
 		if (!email || email.length < 3 || !regexFailed) {
-			emailErr = 'invalid email';
+			emailErr = 'email is invalid';
 			return;
 		}
 
@@ -198,7 +205,7 @@
 					/>
 				</div>
 
-				{#if formErr.length > 0}
+				{#if formErr}
 					<div class="mt-4 p-2 rounded-md bg-red-50">
 						<span class="text-red-500">
 							{formErr}
@@ -207,7 +214,13 @@
 				{/if}
 
 				<div class="flex mt-8 w-full">
-					<Button {isLoading} type="submit" styles="text-gray-50 w-full mr-2" label="Sign Up" />
+					<Button
+						{isLoading}
+						onClick={() => {}}
+						type="submit"
+						styles="text-gray-50 w-full mr-2"
+						label="Sign Up"
+					/>
 					<Button
 						onClick={toggleModals}
 						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"

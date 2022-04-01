@@ -8,19 +8,30 @@
 	import { setContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { session } from '$app/stores';
+	import Autocomplete from './autocomplete.svelte';
+	import { RegistryBackend } from '../apis/registry';
 
+	export let pathname: string;
+	export let openSignInModal: boolean;
 	const auth = new Auth();
+	const registry = new RegistryBackend();
 
 	let showSignInForm = false;
 	let showSignUpForm = false;
 
 	const toggleSignInForm = () => {
+		openSignInModal = undefined;
 		showSignInForm = !showSignInForm;
 	};
 
 	const toggleSignUpForm = () => {
 		showSignInForm = !showSignInForm;
 		showSignUpForm = !showSignUpForm;
+		openSignInModal = false;
+	};
+
+	const handleAutoComplete = async (query: string) => {
+		return await registry.SearchRepositories(query);
 	};
 
 	const redirectToRepositories = async () => {
@@ -42,6 +53,11 @@
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
+{#if pathname}
+	<div class="w-1/3 pt-2 mx-10 justify-center items-center flex md:block half:hidden">
+		<Autocomplete onAutoComplete={handleAutoComplete} />
+	</div>
+{/if}
 <div class="items-center sm:flex">
 	<div class="flex flex-row half:flex-col half:mr-5 mt-2 md:mt-0 md:mx-1">
 		<a
@@ -67,7 +83,7 @@
 		<Button onClick={() => toggleSignInForm()} styles="text-gray-50" label="Sign In" />
 	</div>
 
-	{#if showSignInForm}
+	{#if showSignInForm || openSignInModal}
 		<Modal>
 			<Signin on:success={redirectToRepositories} />
 		</Modal>
