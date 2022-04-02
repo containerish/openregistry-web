@@ -4,30 +4,16 @@
 	import Textfield from '$lib/textfield.svelte';
 	import { Support } from '../apis/support';
 	import SupportIcon from '$lib/icons/support.svelte';
-	import { session } from '$app/stores';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/env';
 	import SpinnerCircle from '$lib/icons/spinner-circle.svelte';
 	import FaqTerminal from '$lib/faqTerminal.svelte';
 	const support = new Support();
-	let email = '';
 	let isLoading = false;
 	let ticketResponse = '';
 	let formValidation = {
 		isSubjectValid: false,
-		isBodyValid: false
+		isBodyValid: false,
+		isEmailValid: false
 	};
-
-	if (browser) {
-		// @ts-ignore
-		session.subscribe(async ({ authenticated, user }) => {
-			if (authenticated) {
-				email = user.email;
-				return;
-			}
-			goto('/auth/unauthorized');
-		});
-	}
 
 	const validateBody = (e: any) => {
 		if (e.target.value.length >= 10) {
@@ -41,10 +27,28 @@
 		}
 	};
 
+	const validateEmail = (e: any) => {
+		const email: string = e.target.value;
+		const regexp = new RegExp(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		);
+
+		const regexFailed = regexp.test(email);
+		// minimum length for email is 3 chars
+		if (!email || email.length < 3 || !regexFailed) {
+			formValidation.isEmailValid = false;
+			/* = 'email is invalid'; */
+			return;
+		}
+
+		formValidation.isEmailValid = true;
+	};
+
 	const handleFormSubmit = async (e: any) => {
 		isLoading = true;
 		const subject = e.target.subject.value;
 		const body = e.target.body.value;
+		const email = e.target.email.value;
 
 		const { error } = await support.CreateNewTicket(body, subject, email);
 		isLoading = false;
@@ -142,17 +146,20 @@
 			<div class="w-full -ml-10">
 				<h3 class="mt-1 ml-2 text-2xl font-normal text-left text-brown-900 ">Need More Help?</h3>
 				<form on:submit|preventDefault={(e) => handleFormSubmit(e)} class="w-full lg:w-2/5 py-2">
+					<Textfield name="email" type="email" onInput={validateEmail} placeholder="Email" />
 					<Textfield name="subject" type="text" onInput={validateSubject} placeholder="Subject" />
 					<Textarea name="body" onInput={validateBody} placeholder="Write to us" />
 					<div>
 						{@html ticketResponse}
 					</div>
 					<button
-						disabled={!formValidation.isBodyValid || !formValidation.isSubjectValid}
+						disabled={!formValidation.isBodyValid ||
+							!formValidation.isSubjectValid ||
+							!formValidation.isEmailValid}
 						on:click={handleFormSubmit}
-						class="disabled:cursor-not-allowed disabled:hover:bg-brown-800 inline-flex items-center gap-2 ml-1 px-6 py-2 mt-2 text-lg font-medium tracking-wide text-gray-100
-       transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700
-       focus:outline-none focus:bg-brown-900 border-none"
+						class="disabled:cursor-not-allowed disabled:hover:bg-brown-800 inline-flex items-center gap-2 ml-1 px-6
+            py-2 mt-2 text-lg font-medium tracking-wide text-gray-100 transition-colors duration-200 transform
+            bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-900 border-none"
 					>
 						{#if isLoading}
 							<SpinnerCircle />

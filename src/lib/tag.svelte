@@ -1,23 +1,22 @@
 <script lang="ts">
 	import CopyIcon from './icons/copy.svelte';
-	import { createPopperActions } from 'svelte-popperjs';
-	const [popperRef, popperContent] = createPopperActions({
-		placement: 'top-start',
-		strategy: 'fixed'
-	});
-	const extraOpts = {
-		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
-	};
-
 	import type { Tag } from '../apis/registry';
+	import { onDestroy } from 'svelte';
 	// @ts-ignore
 	export let tag: Tag;
 	export let namespace: string;
 
-	let showTooltip = false;
+	let selected = '';
+	let timeout: any;
 	const copyCommandToClipboard = () => {
+		selected = tag.reference;
 		navigator.clipboard.writeText(`docker pull openregistry.dev/${namespace}:${tag.reference}`);
+		setTimeout(() => {
+			selected = '';
+		}, 2000);
 	};
+
+	onDestroy(() => clearTimeout(timeout));
 </script>
 
 {#if tag}
@@ -29,13 +28,14 @@
 				</span>
 			</div>
 			<div
-				use:popperRef
-				on:mouseenter={() => (showTooltip = true)}
-				on:mouseleave={() => (showTooltip = false)}
 				on:click={copyCommandToClipboard}
 				class="flex justify-center items-center px-2 py-1 rounded-sm cursor-pointer"
 			>
-				<CopyIcon />
+				{#if selected === tag.reference}
+					Command copied!!
+				{:else}
+					<CopyIcon />
+				{/if}
 			</div>
 		</div>
 

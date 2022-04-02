@@ -23,7 +23,6 @@
 		const { error } = await auth.Signout();
 		if (error) {
 			console.error('error signnout user: ', error);
-			return;
 		}
 
 		// tried using await goto('/') but it keeps failing
@@ -175,7 +174,7 @@
 						<span class="mx-1"> Sign Out </span>
 					</button>
 					{#if showModal}
-						<Modal closeFunc={() => (showModal = false)}>
+						<Modal>
 							<Invite handleModal={toggleModal} />
 						</Modal>
 					{/if}

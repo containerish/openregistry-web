@@ -80,7 +80,7 @@ export class RegistryBackend extends HttpClient {
 		return await this.http.get(url)
 	}
 
-	public ListCatalog = async (pageSize?: number, offset?: number, namespace?: string) => {
+	public ListCatalog = async (pageSize: number = 10, offset: number = 0, namespace?: string, sortBy?: string) => {
 		let url = '/v2/ext/catalog/detail'
 
 		if (pageSize){
@@ -90,6 +90,10 @@ export class RegistryBackend extends HttpClient {
 		if (namespace) {
 			if (!offset) offset = 0;
 			url = url + `&ns=${namespace}`
+		}
+
+		if (sortBy) {
+			url = url + `&sort_by=${sortBy}`
 		}
 
 		const resp = await this.http.get(url);
@@ -102,7 +106,7 @@ export class RegistryBackend extends HttpClient {
 			offset = 0;
 		}
 
-		const url = `/v2/ext/repository?ns=${namespace}&n=${pageSize}&offset=${offset}`
+		const url = `/v2/ext/catalog/repository?ns=${namespace}&n=${pageSize}&offset=${offset}`
 		const resp = await this.http.get(url)
 		return resp;
 	}

@@ -4,15 +4,15 @@
 	import { getContext } from 'svelte';
 
 	let activePage = 0;
-	const getPageData = getContext<Function>('getPageData');
+	const fetchPageData = getContext<Function>('fetchPageData');
 	export let pages: number = 0;
 
-	const setActivePage = (offset: number) => {
+	const setActivePage = async (offset: number) => {
 		if (offset > pages - 1 || offset < 0) {
 			return;
 		}
-		activePage = offset;
-		getPageData(offset);
+
+		await fetchPageData(offset);
 	};
 </script>
 

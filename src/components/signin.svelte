@@ -50,6 +50,8 @@
 	let showForgotPasswordForm = false;
 	let formMsg: string;
 	const handleForgotPassword = async (e: any) => {
+		// dont know why, but this is the way
+		e.preventDefault();
 		if (!email || email === '') {
 			emailErr = 'email is a required field';
 			return;
@@ -228,17 +230,17 @@
 
 		<div class="flex items-center w-full justify-center gap-4 mt-4">
 			<span
+				on:click={() => toggleSignupForm()}
+				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
+			>
+				sign up
+			</span>
+			<span class="border-2">|</span>
+			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
 			>
 				Forgot password?
-			</span>
-			<span class="border-2">|</span>
-			<span
-				on:click={() => toggleSignupForm()}
-				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
-			>
-				or sign up
 			</span>
 		</div>
 	</div>

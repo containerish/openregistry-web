@@ -14,7 +14,9 @@ abstract class HttpClient {
 			headers,
 			withCredentials: true,
 			httpAgent: this.getUserAgent(),
+			httpsAgent: this.getUserAgent(),
 		});
+
 		this._responseInterceptor();
 		this._requestInterceptor();
 	}
@@ -46,13 +48,13 @@ abstract class HttpClient {
 
 	protected _handleError = (err: AxiosError) => {
 		return {
-			error: err?.response?.data ? err.response.data : err.message,
+			error: err?.response?.data ? err.response.data : err,
 			status: err?.response?.status,
 		}
 	}
 
 	private getUserAgent = () => {
-		return import.meta.env.VITE_OPEN_REGISTRY_APP_NAME + "-" + import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT
+		return import.meta.env.VITE_OPEN_REGISTRY_APP_NAME + "/" + import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT
 	}
 }
 

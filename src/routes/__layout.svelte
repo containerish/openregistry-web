@@ -26,9 +26,10 @@
 
 	const auth = new Auth();
 	onMount(async () => {
-		if (pathname === '/' || pathname === '/about') {
+		if (pathname === '/' || pathname === '/about' || pathname === '/faq') {
 			return;
 		}
+
 		const { data, status } = await auth.GetUserWithSession();
 		if (status === 200) {
 			// @ts-ignore

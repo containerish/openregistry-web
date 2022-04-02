@@ -13,9 +13,8 @@
 	import Star from '$lib/icons/star.svelte';
 	import Globe from '$lib/icons/globe.svelte';
 	import { RegistryBackend, type Repo } from '../../../apis/registry';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import Tag from '$lib/tag.svelte';
-
 	let isOverview = true;
 	let isTags = false;
 
@@ -48,6 +47,31 @@
 
 		repository = data;
 	});
+
+	let isCopied = '';
+	let timeout: any;
+
+	const handleCopy = (cmd: string) => {
+		switch (cmd) {
+			case 'push':
+				isCopied = 'push';
+				window.navigator.clipboard.writeText(
+					`docker push ${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/${ns}`
+				);
+				break;
+			case 'pull':
+				isCopied = 'pull';
+				window.navigator.clipboard.writeText(
+					`docker pull ${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/${ns}`
+				);
+		}
+
+		timeout = setTimeout(() => {
+			isCopied = '';
+		}, 2000);
+	};
+
+	onDestroy(() => clearTimeout(timeout));
 </script>
 
 <div class="min-h-[93vh] bg-cream-50">
@@ -93,7 +117,7 @@
 
 		<div class="w-full flex px-5">
 			{#if isTags}
-				<div class="w-full flex-col gap-4 rounded-md px-8 py-4 flex justify-center items-center">
+				<div class="w-full flex-col gap-4 rounded-md px-8 py-8 flex justify-center items-center">
 					{#each repository.tags as tag}
 						<Tag {tag} namespace={repository.namespace} />
 					{/each}
@@ -105,12 +129,26 @@
 				</div>
 				<div class="flex flex-col rounded-md mx-4 my-4 bg-gray-50 px-4 py-4">
 					<h1 class="text-xl font-medium mb-4">Quick Docker Commands</h1>
-					<span class="rounded-md bg-brown-400 text-sm text-gray-900 my-2 px-4 py-2">
-						docker push cntr.sh/{ns}
-					</span>
-					<span class="rounded-md bg-brown-400 text-sm text-gray-900 my-2 px-4 py-2">
-						docker pull cntr.sh/{ns}
-					</span>
+
+					<div class="my-2 px-4 py-2 text-center bg-brown-400 rounded-md">
+						<span
+							on:click={() => handleCopy('push')}
+							class="{isCopied === 'push'
+								? 'font-semibold'
+								: ''} select-all rounded-md text-sm text-gray-900"
+						>
+							{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}
+						</span>
+					</div>
+
+					<div class="my-2 text-center px-4 py-2 bg-brown-400 rounded-md">
+						<span
+							on:click={() => handleCopy('pull')}
+							class="{isCopied === 'pull' ? 'font-semibold' : ''} select-all text-sm text-gray-900 "
+						>
+							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
+						</span>
+					</div>
 				</div>
 			{/if}
 		</div>

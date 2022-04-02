@@ -64,19 +64,32 @@
 			class="my-1 border-b-2 border-black no-underline hover:no-underline font-poppins text-md leading-5 text-brown-900
 			duration-500 transform md:mx-4 md:my-0 uw:text-xl uw:leading-10"
 			href="https://blog.openregistry.dev"
-			target="_blank">Blog</a
+			target="_blank"
 		>
+			Blog
+		</a>
 		<a
 			class="my-1 border-b-2 border-black no-underline hover:no-underline text-md leading-5 font-poppins text-[#241d19]
 			duration-500 transform md:mx-4 md:my-0 uw:text-xl uw:leading-10"
-			href="/about">About</a
+			href="/about"
 		>
+			About
+		</a>
 		<a
 			class="my-1 text-md border-b-2 border-black no-underline hover:no-underline font-poppins leading-5 text-[#241d19]
 			duration-500 transform md:mx-4 md:my-0 uw:text-xl uw:leading-10"
 			href="https://github.com/containerish/OpenRegistry.git"
-			target="_blank">Github</a
+			target="_blank"
 		>
+			Github
+		</a>
+		<a
+			class="my-1 text-md border-b-2 border-black no-underline hover:no-underline font-poppins leading-5 text-[#241d19]
+			duration-500 transform md:mx-4 md:my-0 uw:text-xl uw:leading-10"
+			href="/faq"
+		>
+			FAQ
+		</a>
 	</div>
 
 	<div class="flex items-center py-2 -mx-1 sm:mx-0 uw:py-4 half:hidden">

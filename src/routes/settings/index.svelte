@@ -31,8 +31,21 @@
 
 	const passwordForm = form(currentPassword, newPassword, confirmPassword);
 
+	let formResp = {
+		message: undefined,
+		type: undefined
+	};
+
 	const resetPassword = async () => {
 		const { error, data } = await auth.ResetPassword($currentPassword.value, $newPassword.value);
+		if (error) {
+			formResp.message = error.message;
+			formResp.type = 'error';
+			return;
+		}
+
+		formResp.type = undefined;
+		formResp.message = data.message;
 		passwordForm.reset();
 	};
 </script>
@@ -125,6 +138,11 @@ focus:outline-none focus:ring focus:ring-opacity-40
 				{/if}
 				{#if $passwordForm.hasError('confirm_password.match_field')}
 					<span class="text-red-700">Error - passwords don't match</span>
+				{/if}
+				{#if formResp.message}
+					<span class={!formResp.type ? 'text-green-600' : 'text-red-600'}>
+						{formResp.message}
+					</span>
 				{/if}
 				<button
 					on:click={resetPassword}

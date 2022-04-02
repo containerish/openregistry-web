@@ -22,27 +22,40 @@
 	import type { Catalog } from '../../apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
 	import Pulse from '../../components/pulse.svelte';
+	import Menu from '$lib/headless/menu.svelte';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import ClockIcon from '$lib/icons/clock.svelte';
 	export let query: string = '';
+	let sortBy = 'namespace';
 
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
 	});
+
 	const extraOpts = {
 		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
 	};
 
 	const backend = new RegistryBackend();
 
-	const fetchPageData = (offset: number) => {
-		backend
-			.ListCatalog(backend.DefaultPageSize, backend.DefaultPageSize * offset)
-			.then((data: Catalog) => {
-				catalog = data;
-			});
+	const fetchPageData = async (offset: number) => {
+		const { error, data } = await backend.ListCatalog(
+			backend.DefaultPageSize,
+			backend.DefaultPageSize * offset,
+			undefined,
+			sortBy
+		);
+		if (error) {
+			console.error('eroror in fetchPageData: ', error);
+			return;
+		}
+
+		catalog = data;
+		return offset;
 	};
 
-	setContext('getPageData', fetchPageData);
+	setContext('fetchPageData', fetchPageData);
 	let catalog: Catalog;
 	let contentReady = false;
 
@@ -110,9 +123,7 @@
 					<span class="text-lg font-lato text-brown-800">Operating System</span>
 					<ul>
 						<li><Checkbox label="Linux" /></li>
-						<li>
-							<Checkbox label="Windows" />
-						</li>
+						<li><Checkbox label="Windows" /></li>
 					</ul>
 				</div>
 				<div class="my-5">
@@ -143,12 +154,38 @@
 			</div>
 			<div class="w-3/4 my-8">
 				<div class="flex px-4 pb-2 justify-between uw:px-36 apple:px-24">
-					<button
-						class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
-              hover:bg-brown-50 hover:text-gray-700"
-					>
-						Sort
-					</button>
+					<Menu title="Sort">
+						<MenuItem class="bg-gray-100">
+							<button
+								on:click={() => {
+									sortBy = 'last_updated';
+									fetchPageData(0);
+								}}
+								class="{sortBy === 'last_updated' ? 'font-semibold bg-white' : ''} 
+                w-full py-3 border-none inline-flex items-center justify-center bg-cream-50 rounded-b-none rounded-md gap-2 m-0 hover:bg-brown-50 text-sm"
+							>
+								<ClockIcon styles="h-5 w-5" />
+								Last Updated
+							</button>
+						</MenuItem>
+						<MenuItem class="bg-gray-100">
+							<button
+								on:click={() => {
+									sortBy = 'namespace';
+									fetchPageData(0);
+								}}
+								class="{sortBy === 'namespace' ? 'font-semibold bg-white' : ''} 
+         inline-flex py-3 justify-center gap-2 items-center w-full bg-cream-50 m-0 border-none rounded-t-none rounded-md hover:bg-brown-50 text-sm"
+							>
+								<div
+									class="rounded-full border-2 border-black text-sm h-4 inline-flex justify-center items-center w-4"
+								>
+									A
+								</div>
+								Image Name
+							</button>
+						</MenuItem>
+					</Menu>
 					{#if showModal}
 						<Modal>
 							<NewRepository />

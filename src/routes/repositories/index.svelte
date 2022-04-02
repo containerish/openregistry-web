@@ -4,16 +4,15 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import { debounce, throttle } from 'throttle-debounce';
+	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
-	import { Auth, type User } from '../../apis/auth';
+	import type { User } from '../../apis/auth';
 	export let u: User;
 	const backend = new RegistryBackend();
-	const auth = new Auth();
 	const pageSize = 10;
 	let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
@@ -27,7 +26,6 @@
 
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/env';
 	import Pulse from '../../components/pulse.svelte';
 	// @ts-ignore
 
@@ -47,7 +45,7 @@
 	};
 	let showTooltip = false;
 
-	setContext('getPageData', fetchPageData);
+	setContext('fetchPageData', fetchPageData);
 	let contentReady = false;
 
 	onMount(async () => {
@@ -151,7 +149,9 @@
 					</div>
 
 					<div class="flex justify-center py-4 bg-cream-50">
-						<Pagination pages={Math.ceil(catalog.total / pageSize)} />
+						{#if catalog.total > backend.DefaultPageSize}
+							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
+						{/if}
 					</div>
 				{:else}
 					<div class="flex justify-center items-center">
@@ -165,22 +165,31 @@
 			</div>
 
 			<div
-				class="invisible lg:visible border py-2 rounded-lg px-4 border-brown-500 my-20 flex justify-start flex-col items-center w-1/4"
+				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
 			>
-				<Advert
-					link="https://akash.network"
-					styles="hover:bg-red-600"
-					logo="akash-logo.svg"
-					body="Infrastructure that powers web3 for cloud compute akash network is a distributed
+				<div class="border rounded-lg px-4 py-2 border-brown-500">
+					<Advert
+						link="https://akash.network"
+						styles="hover:bg-red-600"
+						logo="akash-logo.svg"
+						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
 					peer-to-peer marketplace for cloud compute"
-				/>
-				<Advert
-					link="https://siasky.net"
-					styles="hover:bg-[#00C65E]"
-					logo="skynet-logo.png"
-					body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
+					/>
+					<Advert
+						link="https://ipfs.io"
+						styles="hover:bg-[#65c3ca]"
+						logo="ipfs-logo.png"
+						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
+            upgradeable, resilient, and more open."
+					/>
+					<Advert
+						link="https://siasky.net"
+						styles="hover:bg-[#00C65E]"
+						logo="skynet-logo.png"
+						body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
           and applications."
-				/>
+					/>
+				</div>
 			</div>
 		</div>
 	</Card>

@@ -6,7 +6,7 @@
 <Card styles=" bg-brown-200 block py-12">
 	<div class="w-full h-full">
 		<div
-			class="px-6 my-6 w-full flex justify-center items-center half:flex-col
+			class="px-6 w-full flex justify-center items-center half:flex-col
 			laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10 my-28"
 		>
 			<div class="half:w-96">
@@ -29,12 +29,18 @@
 					<a
 						class="text-red-700 text-lg font-semibold"
 						href="https://akash.network/"
-						target="_blank">Akash</a
+						target="_blank"
 					>
+						Akash Network
+					</a>
 					as it's compute layer and
-					<a class="text-green-600 text-lg font-semibold" href="https://siasky.net/" target="_blank"
-						>Skynet</a
-					> for storage
+					<a
+						class="text-green-600 text-lg font-semibold"
+						href="https://siasky.net/"
+						target="_blank"
+					>
+						Skynet
+					</a> for storage
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
@@ -43,10 +49,8 @@
 						target="_blank">More</a
 					>
 					<button
-						class="transition duration-500 ease-in-out
-                       bg-transparent hover: transform
-                       hover:translate-x-2 hover:scale-110
-                      	 pb-3 border border-none"
+						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2 
+            hover:scale-110 pb-3 border border-none"
 					>
 						<Arrow />
 					</button>
@@ -70,13 +74,13 @@
 					integrated together to serve larger audience. You can also, simply contribute to
 					OpenRegistry by helping with on of the
 					<a
-						class="font-semibold text-lg"
+						class="font-semibold text-lg capitalize"
 						href="https://github.com/containerish/OpenRegistry/issues"
 						target="_blank">github issues</a
 					>
 					or start a discussion at
 					<a
-						class="font-semibold text-lg"
+						class="font-semibold capitalize text-lg"
 						href="https://github.com/containerish/OpenRegistry/discussions/47"
 						target="_blank">github discussions</a
 					>
@@ -84,14 +88,12 @@
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
 						class="text-brown-900 text-xl mt-1"
-						href="https://blog.openregistry.dev/collaborations"
+						href="https://blog.openregistry.dev/posts/collaborations"
 						target="_blank">More</a
 					>
 					<button
-						class="transition duration-500 ease-in-out
-                       bg-transparent hover: transform
-                       hover:translate-x-2 hover:scale-110
-                      	 pb-3 border border-none"
+						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
+       hover:scale-110 pb-3 border border-none"
 					>
 						<Arrow />
 					</button>
@@ -128,14 +130,12 @@
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
 						class="text-brown-900 text-xl mt-1"
-						href="https://blog.openregistry.dev/web3-infrastructure"
+						href="https://blog.openregistry.dev/posts/web3-infrastructure"
 						target="_blank">More</a
 					>
 					<button
-						class="transition duration-500 ease-in-out
-                       bg-transparent hover: transform
-                       hover:translate-x-2 hover:scale-110
-                      	 pb-3 border border-none"
+						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
+          hover:scale-110 pb-3 border border-none"
 					>
 						<Arrow />
 					</button>

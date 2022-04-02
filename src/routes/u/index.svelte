@@ -135,7 +135,7 @@
 
 		{#if isRepo}
 			<div>
-				<div class="w-full px-8">
+				<div class="w-full px-16 p-8">
 					{#if catalog?.repositories}
 						{#each catalog.repositories as repo}
 							<Repository compact={false} data={repo} />

@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export async function load({ params, url, stuff }) {
+	export async function load({ params, url }) {
 		const slug = params.slug;
 		const u = new URLSearchParams(url.search);
 
@@ -18,6 +18,8 @@
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/modal.svelte';
 	import Button from '$lib/button.svelte';
+	import Pulse from '../../components/pulse.svelte';
+	import CrossIcon from '$lib/icons/crossIcon.svelte';
 	let showModal = false;
 	let password = '';
 	let confirmPassword = '';
@@ -31,14 +33,24 @@
 
 	const auth = new Auth();
 
-	const toggleModal = () => {
+	const toggleModal = async () => {
 		showModal = !showModal;
+		await goto('/');
 	};
 
 	let timer: any;
 	const setNewPassword = async () => {
-		const { error, data } = await auth.ForgotPasswordCallback(password, token);
+		if (!password || !confirmPassword) {
+			formErr = 'password and confirm passsword are required fields';
+			return;
+		}
+
+		const { error, data, status } = await auth.ForgotPasswordCallback(password, token);
 		if (error) {
+			if (status === 401) {
+				formErr = 'your link has expired, please try again';
+				return;
+			}
 			formErr = error.message;
 			return;
 		}
@@ -55,12 +67,15 @@
 	const verifyEmail = 'verify';
 	const forgotPassword = 'forgot-password';
 
+	let showErrorModal = false;
 	const handleCallback = async () => {
 		switch (slug) {
 			case verifyEmail:
 				const { error } = await auth.VerifyEmail(token);
 				if (error) {
 					console.error('error in verifyEmail: ', error);
+					showErrorModal = true;
+					formErr = error.message;
 					return;
 				}
 
@@ -101,6 +116,11 @@
 		}
 
 		confirmPasswordErr = '';
+	};
+
+	const handleErrorModal = async () => {
+		showErrorModal = false;
+		await goto('/');
 	};
 </script>
 
@@ -192,8 +212,9 @@
 
 						<div class="flex mt-8 w-full">
 							<Button
+								disabled={!!passwordErr || !!confirmPasswordErr}
 								onClick={setNewPassword}
-								styles="text-gray-50 w-full mr-2"
+								styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
 								label="Update Password"
 							/>
 							<Button
@@ -207,4 +228,39 @@
 			</div>
 		</Modal>
 	{/if}
+
+	{#if showErrorModal}
+		<Modal>
+			<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+				<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
+					<div class="flex justify-center py4 mb-8">
+						<picture>
+							<img class="" src="/logo-dark.svg" alt="openregistry-logo.svg" />
+						</picture>
+					</div>
+
+					<div class="flex items-center justify-between mt-4">
+						<span class="w-1/5 border-b lg:w-1/4" />
+
+						<span class="w-1/5 border-b lg:w-1/4" />
+					</div>
+					<div class="w-full flex justify-center gap-2 items-center flex-col text-center">
+						<CrossIcon styles="h-16 w-16 text-red-600" />
+						<span class="font-semibold text-red-600 capitalize tracking-wider">
+							{formErr}
+						</span>
+					</div>
+
+					<div class="flex mt-8 justify-center w-full">
+						<Button
+							onClick={handleErrorModal}
+							styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
+							label="Close"
+						/>
+					</div>
+				</div>
+			</div>
+		</Modal>
+	{/if}
+	<Pulse />
 </div>

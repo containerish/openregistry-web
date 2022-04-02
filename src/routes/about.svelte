@@ -1,10 +1,8 @@
 <script context="module">
 	import { browser, dev } from '$app/env';
 	import Card from '$lib/card.svelte';
-	import Circle from '$lib/icons/circle.svelte';
 	import Twitter from '$lib/icons/twitter.svelte';
 	import Github from '$lib/icons/github.svelte';
-	import Reddit from '$lib/icons/reddit.svelte';
 	export const hydrate = dev;
 	export const router = browser;
 	export const prerender = true;
@@ -17,8 +15,9 @@
 <Card styles="bg-brown-400">
 	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 half:mx-4 my-20">
 		<div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-0 rounded-xl">
+			<h1 class="text-5xl font-semibold text-brown-900">Decentralisation is the Future!</h1>
 			<h1 class="text-5xl font-semibold text-brown-900 mb-8 ">
-				Decentralisation is the Future! and we want to play a role in making it better
+				and we want to play a role in making it better
 			</h1>
 			<span class="text-lg text-black">
 				Our Vision is derived and powered by the principals of Web 3.0 and Dworld of Dapps. With
@@ -72,7 +71,6 @@
 							</p>
 
 							<div class="flex mt-4">
-
 								<a
 									href="https://twitter.com/_jsdp"
 									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
@@ -122,7 +120,6 @@
 							</p>
 
 							<div class="flex mt-4 -mx-2">
-
 								<a
 									href="https://twitter.com/guacaemole"
 									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
