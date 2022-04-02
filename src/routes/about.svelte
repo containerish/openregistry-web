@@ -1,11 +1,7 @@
-<script context="module">
-	import { browser, dev } from '$app/env';
+<script>
 	import Card from '$lib/card.svelte';
 	import Twitter from '$lib/icons/twitter.svelte';
 	import Github from '$lib/icons/github.svelte';
-	export const hydrate = dev;
-	export const router = browser;
-	export const prerender = true;
 </script>
 
 <svelte:head>

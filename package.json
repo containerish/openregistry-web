@@ -16,7 +16,7 @@
 		"@popperjs/core": "^2.11.4",
 		"@rgossiaux/svelte-headlessui": "^1.0.0-beta.12",
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-cloudflare": "^1.0.0-next.9",
+		"@sveltejs/adapter-cloudflare": "^1.0.0-next.17",
 		"@sveltejs/kit": "next",
 		"@tailwindcss/typography": "^0.5.2",
 		"@types/cookie": "^0.4.1",
@@ -43,8 +43,7 @@
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.3",
 		"svelte-click-outside": "^1.0.0",
-		"svelte-forms": "^2.3.0",
-		"typeit": "^8.4.0"
+		"svelte-forms": "^2.3.0"
 	},
 	"dependencies": {
 		"@lukeed/uuid": "^2.0.0",
@@ -52,6 +51,7 @@
 		"cookie": "^0.4.2",
 		"js-cookie": "^3.0.1",
 		"jwt-decode": "^3.1.2",
-		"throttle-debounce": "^3.0.1"
+		"throttle-debounce": "^3.0.1",
+		"typeit": "^8.4.0"
 	}
 }

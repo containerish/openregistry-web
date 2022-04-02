@@ -1,7 +1,3 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
 	import Landing from './landing.svelte';
 	import { RegistryBackend } from '../apis/registry';
