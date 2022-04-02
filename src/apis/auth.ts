@@ -1,8 +1,5 @@
 import HttpClient from './httpClient';
-import jwtDecode from 'jwt-decode';
-import Cookies from 'js-cookie';
 import { goto } from '$app/navigation';
-import type { AxiosError } from 'axios';
 
 export interface LoginResponse {
     access: string
@@ -60,6 +57,8 @@ export interface User {
     email:      string;
     is_active:  boolean;
 	sessionId: string;
+	hireable: boolean;
+	html_url: string;
 }
 
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -89,6 +88,55 @@ export class Auth extends HttpClient {
     public constructor() {
         super('http://localhost:5000/auth')
     }
+
+	public VerifyEmail = async (token:string) => {
+		const path= `/signup/verify?token=${token}`
+
+		const resp = this.http.get(path)
+		return resp;
+	}
+
+	public ResetPassword = async (oldPassword: string, newPassword: string) => {
+		const path= `/reset-password`
+
+		const body = {
+			"old_password": oldPassword,
+			"new_password": newPassword,
+		}
+
+		const resp = this.http.post(path, body)
+		return resp;
+	}
+
+	public ForgotPassword = async (email: string) => {
+		const path= `/forgot-password?email=${email}`
+
+		const resp = this.http.get(path)
+		return resp;
+	}
+
+	public ForgotPasswordCallback = async (newPassword: string, token: string) => {
+		const path= `/reset-password?kind=forgot_password_callback`
+
+		const body = {
+			"new_password": newPassword,
+		}
+
+		const resp = this.http.post(path, body, {headers: {
+			'Authorization': 'Bearer ' + token,
+		}})
+		return resp;
+	}
+
+	public SendInvites = async (emails: string)=> {
+		const path = "send-email/welcome"
+		const body = {
+			emails: emails,
+		}
+		const resp = await this.http.post(path, body)
+		return resp;
+	}
+
 
     public Login = async (email: string, password: string) => {
         const path = '/signin'
@@ -127,13 +175,12 @@ export class Auth extends HttpClient {
     public GetUserWithSession = async () => {
         const path = `/sessions/me`
 
-
         const resp = await this.http.get(path);
 		return resp;
     }
 
 	public LoginWithGithub = () => {
-		goto(this.getGithubOAuthUrl())
+		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + "/auth/github/login")
 	}
 
 	private getGithubOAuthUrl = () => {

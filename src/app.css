@@ -14,6 +14,7 @@ html, body {
 }
 
 body {
+	@apply bg-gray-100;
 	color: #241D19;
 	margin: 0;
 	padding: 0px;
@@ -24,7 +25,7 @@ body {
 }
 
 a {
-	color: rgb(0,100,200);
+	color: rgb(131, 78, 53);
 	text-decoration: none;
 }
 
@@ -33,7 +34,7 @@ a:hover {
 }
 
 a:visited {
-	color: rgb(0,80,160);
+	color: rgb(131, 78, 53);
 }
 
 label {

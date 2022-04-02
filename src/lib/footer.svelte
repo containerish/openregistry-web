@@ -27,15 +27,14 @@
 							<a
 								href="https://blog.openregistry.dev"
 								target="_blank"
-								class="block mt-2 text-sm text-gray-600 hover:underline">Blog</a>
+								class="block mt-2 text-sm text-gray-600 hover:underline">Blog</a
+							>
 							<a
 								href="https://github.com/containerish"
 								target="_blank"
 								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer"
-								>Containerish</a>
-							<a
-								href="#"
-								class="block mt-2 text-sm text-gray-600 hover:underline">Brand Assets</a>
+								>Containerish</a
+							>
 						</div>
 
 						<div>
@@ -48,8 +47,7 @@
 							<a
 								href="https://github.com/containerish/OpenRegistry/discussions"
 								target="_blank"
-								class="block mt-2 text-sm text-gray-600 hover:underline"
-								>Github Discussions</a
+								class="block mt-2 text-sm text-gray-600 hover:underline">Github Discussions</a
 							>
 						</div>
 
@@ -57,8 +55,7 @@
 							<h3 class="text-gray-700 pb-2 uppercase font-semibold">Community</h3>
 							<span
 								on:click={() => window.open('https://siasky.net/developers', '_blank')}
-								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer"
-								>Skynet</span
+								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer">Skynet</span
 							>
 							<span
 								on:click={() => window.open('https://akash.network', '_blank')}
@@ -108,7 +105,7 @@
 
 		<div>
 			<p class="text-center text-gray-800">
-				© Containerish 2022 - All rights reserved
+				© Containerish {new Date().getFullYear()} - All rights reserved
 			</p>
 		</div>
 	</div>

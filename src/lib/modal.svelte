@@ -1,6 +1,5 @@
-<script>
-	import Button from './button.svelte';
-
+<script lang="ts">
+	import ClickOutside from 'svelte-click-outside';
 </script>
 
 <div
@@ -27,7 +26,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-
-</style>

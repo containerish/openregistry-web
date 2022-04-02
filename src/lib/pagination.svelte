@@ -4,15 +4,15 @@
 	import { getContext } from 'svelte';
 
 	let activePage = 0;
-	const getPageData = getContext<Function>('getPageData');
+	const fetchPageData = getContext<Function>('fetchPageData');
 	export let pages: number = 0;
 
-	const setActivePage = (offset: number) => {
+	const setActivePage = async (offset: number) => {
 		if (offset > pages - 1 || offset < 0) {
 			return;
 		}
-		activePage = offset;
-		getPageData(offset);
+
+		await fetchPageData(offset);
 	};
 </script>
 
@@ -28,6 +28,7 @@
 	</button>
 	{#each new Array(pages).fill(0) as i, page}
 		<button
+			id={i}
 			on:click={() => setActivePage(page)}
 			class=" {activePage === page ? 'bg-brown-400' : 'bg-cream-50'} px-4 py-2 mx-1 text-gray-700
 				transition-colors duration-200 transform rounded-md sm:inline hover:bg-gray-200 hover:text-gray-700 border-brown-100"

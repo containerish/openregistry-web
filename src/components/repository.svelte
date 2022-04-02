@@ -3,11 +3,11 @@
 
 	import Copy from '$lib/icons/copy.svelte';
 	import Download from '$lib/icons/download.svelte';
-	import LockClosed from '$lib/icons/lock-closed.svelte';
+	import LockOpen from '$lib/icons/lock-open.svelte';
 	import Star from '$lib/icons/star.svelte';
-	import type { DetailedRepository } from '../apis/registry';
+	import type { Repository } from '../apis/registry';
 
-	export let data: DetailedRepository;
+	export let data: Repository;
 	export let compact = true;
 
 	const handleRepoDetail = () => {
@@ -19,7 +19,7 @@
 	<div
 		id={data.uuid}
 		on:click={handleRepoDetail}
-		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-auto
+		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-full px-8 py-2 my-2 mx-auto
 			bg-brown-400 rounded-lg"
 	>
 		<div class="pt-2">
@@ -31,14 +31,13 @@
 
 		<div class="flex items-center justify-between">
 			<span class="text-xs font-light text-gray-500">
-				{new Date().toDateString()}
+				{new Date(data.created_at).toDateString()}
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><Copy /></button>
 				<button class="border-none p-0"><Download /></button>
 				<button class="border-none p-0"><Star /></button>
-				<button class="border-none p-0"><LockClosed /></button>
+				<button class="border-none p-0"><LockOpen /></button>
 			</div>
 		</div>
 
@@ -48,7 +47,7 @@
 	<div
 		id={data.uuid + data.namespace}
 		on:click={handleRepoDetail}
-		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-11/12 px-8 py-2 my-2 mx-2 bg-brown-400 rounded-lg"
+		class="hover:shadow-brown-100 cursor-pointer shadow-sm drop-shadow-sm w-full px-8 py-2 my-2 mx-2 bg-brown-400 rounded-lg"
 	>
 		<div class="pt-2">
 			<span class="text-lg">
@@ -59,14 +58,13 @@
 
 		<div class="flex items-center justify-between">
 			<span class="text-xs font-light text-gray-500">
-				{new Date().toDateString()}
+				{new Date(data.created_at).toDateString()}
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><Copy /></button>
-				<button class="border-none p-0"><Download /></button>
-				<button class="border-none p-0"><Star /></button>
-				<button class="border-none p-0"><LockClosed styles="bg-brown-400 h-6 w-6" /></button>
+				<Download styles="bg-brown-400 h-6 w-6" />
+				<Star styles="bg-brown-400 h-6 w-6" />
+				<LockOpen styles="bg-brown-400 h-6 w-6" />
 			</div>
 		</div>
 

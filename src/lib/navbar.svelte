@@ -3,6 +3,9 @@
 	import { setContext } from 'svelte';
 	import NavbarDefault from './navbar-default.svelte';
 	import { session } from '$app/stores';
+	import NavbarAuth from './navbar-auth.svelte';
+	export let pathname: string;
+	export let openSignInModal: boolean;
 
 	let showSignInForm = false;
 	let showSignUpForm = false;
@@ -16,17 +19,13 @@
 		showSignUpForm = !showSignUpForm;
 	};
 
-	let sessionOk: boolean = true;
 	// @ts-ignore
-	session.subscribe(async ({ authenticated }) => {
-		if (authenticated) sessionOk = false;
-	});
 
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-{#if sessionOk}
+{#if !$session.authenticated}
 	<header class="bg-gradient-to-r from-brown-50 to-brown-500 pt-4">
 		<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
 			<div class="container px-6 mx-auto half:px-1 uw:px-12">
@@ -37,10 +36,12 @@
 								<img class="h-full w-full" src="/logo.svg" alt="opener" />
 							</picture>
 						</div>
-						<NavbarDefault />
+						<NavbarDefault {pathname} {openSignInModal} />
 					</div>
 				</div>
 			</div>
 		</nav>
 	</header>
+{:else}
+	<NavbarAuth />
 {/if}

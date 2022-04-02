@@ -1,6 +1,5 @@
 import cookie from 'cookie';
 import { Auth } from './apis/auth';
-import sessionStore from './stores/session';
 
 const auth = new Auth()
 
@@ -15,10 +14,6 @@ export async function handle({event, resolve}) {
 			event.locals.authenticated = true
 			event.locals.user = data;
 			event.locals.user.sessionId = sessionId
-			sessionStore.set({
-				isAuthenticated: true,
-				user: data,
-			});
 			const resp = await resolve(event)
 			return resp
 		}

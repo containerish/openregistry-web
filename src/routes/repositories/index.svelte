@@ -4,32 +4,30 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
+	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
 	import NewRepository from '../../components/newRepository.svelte';
 	import Repository from '../../components/repository.svelte';
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
-	import type { User } from 'src/apis/auth';
+	import type { User } from '../../apis/auth';
 	export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
 	let catalog: Catalog;
+	import { createPopperActions } from 'svelte-popperjs';
+	const [popperRef, popperContent] = createPopperActions({
+		placement: 'top-start',
+		strategy: 'fixed'
+	});
+	const extraOpts = {
+		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
+	};
 
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/env';
+	import Pulse from '../../components/pulse.svelte';
 	// @ts-ignore
-	if (browser) {
-		// @ts-ignore
-		session.subscribe(async ({ authenticated, user }) => {
-			if (authenticated) {
-				u = user;
-				return;
-			}
-
-			goto('/auth/unauthorized');
-		});
-	}
 
 	const fetchPageData = async (offset?: number) => {
 		const { error, data } = await backend.ListCatalog(
@@ -45,10 +43,28 @@
 
 		catalog = data;
 	};
+	let showTooltip = false;
 
-	setContext('getPageData', fetchPageData);
+	setContext('fetchPageData', fetchPageData);
+	let contentReady = false;
+
 	onMount(async () => {
-		fetchPageData();
+		// @ts-ignore
+		if (!$session.authenticated) {
+			await goto('/auth/unauthorized');
+		}
+
+		// @ts-ignore
+		u = $session.user;
+		const { error, data } = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
+
+		if (error) {
+			contentReady = true;
+			return;
+		}
+
+		catalog = data;
+		contentReady = true;
 	});
 
 	let showModal = false;
@@ -57,53 +73,126 @@
 	};
 
 	setContext('toggleModal', toggleModal);
+
+	const handleOnChange = async (e: any) => {
+		autoCompleteThrottled(e.target.value);
+	};
+
+	const autoComplete = async (q: string) => {
+		let query = u.username;
+
+		if (q !== '') {
+			query += '/' + q;
+		}
+
+		const { error, data } = await backend.SearchRepositories(query);
+		if (error || !data) {
+			catalog.repositories = [];
+			return;
+		}
+
+		catalog = data;
+	};
+
+	const autoCompleteThrottled = throttle(1000, autoComplete);
 </script>
 
-<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
-	<div class="flex w-full h-full max-w-[3000px]">
-		<div class="w-3/4 mx-8 my-8">
-			<div class="flex px-10 pb-2 justify-between uw:px-36 lg:px-14 apple:px-24">
-				<div class="w-2/5">
-					<Textfield placeholder="Search Repositories" />
+{#if contentReady}
+	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
+		<div class="flex w-full h-full max-w-[3000px]">
+			<div class="w-3/4 px-8 my-8">
+				<div class="flex px-4 justify-between lg:px-8">
+					<div class="w-2/5">
+						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
+					</div>
+					{#if showTooltip}
+						<div
+							id="tooltip"
+							class="z-50 bg-white rounded-lg py-3 px-4"
+							use:popperContent={extraOpts}
+						>
+							<span class=" text-gray-800">
+								Coming soon
+								<svg
+									class="absolute text-white h-6 left-0 ml-3 top-full"
+									x="0px"
+									y="0px"
+									viewBox="0 0 255 255"
+									xml:space="preserve"
+									><polygon class="fill-current" points="0,0 127.5,127.5 255,0" /></svg
+								>
+							</span>
+							<div id="arrow" data-popper-arrow />
+						</div>
+					{/if}
+					<button
+						use:popperRef
+						on:mouseenter={() => (showTooltip = true)}
+						on:mouseleave={() => (showTooltip = false)}
+						class="cursor-not-allowed px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
+					"
+					>
+						Create Repository
+					</button>
+					{#if showModal}
+						<Modal>
+							<NewRepository />
+						</Modal>
+					{/if}
 				</div>
-				<button
-					on:click={toggleModal}
-					class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
-					hover:bg-brown-50 hover:text-gray-700"
-				>
-					Create Repository
-				</button>
-				{#if showModal}
-					<Modal>
-						<NewRepository />
-					</Modal>
+
+				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
+					<div class="w-full px-4">
+						{#each catalog.repositories as repo}
+							<Repository data={repo} compact={false} />
+						{/each}
+					</div>
+
+					<div class="flex justify-center py-4 bg-cream-50">
+						{#if catalog.total > backend.DefaultPageSize}
+							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
+						{/if}
+					</div>
+				{:else}
+					<div class="flex justify-center items-center">
+						<div
+							class="bg-gray-50 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
+						>
+							<span class="text-brown-800 text-4xl">No Repositories</span>
+						</div>
+					</div>
 				{/if}
 			</div>
 
-			{#if catalog && catalog.repositories && catalog.repositories.length > 0}
-				<div class="w-full px-4">
-					{#each catalog.repositories as repo}
-						<Repository data={repo} compact={false} />
-					{/each}
+			<div
+				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
+			>
+				<div class="border rounded-lg px-4 py-2 border-brown-500">
+					<Advert
+						link="https://akash.network"
+						styles="hover:bg-red-600"
+						logo="akash-logo.svg"
+						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
+					peer-to-peer marketplace for cloud compute"
+					/>
+					<Advert
+						link="https://ipfs.io"
+						styles="hover:bg-[#65c3ca]"
+						logo="ipfs-logo.png"
+						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
+            upgradeable, resilient, and more open."
+					/>
+					<Advert
+						link="https://siasky.net"
+						styles="hover:bg-[#00C65E]"
+						logo="skynet-logo.png"
+						body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
+          and applications."
+					/>
 				</div>
-
-				<div class="flex justify-center py-4 bg-cream-50">
-					<Pagination pages={Math.ceil(catalog.total / pageSize)} />
-				</div>
-			{:else}
-				<div class="flex justify-center items-center">
-					<div
-						class="bg-gray-50 w-10/12 rounded-md px-20 py-20 my-5 flex justify-center items-center"
-					>
-						<span class="text-brown-800 text-4xl">No Repositories</span>
-					</div>
-				</div>
-			{/if}
+			</div>
 		</div>
-
-		<div class="my-20 flex justify-start flex-col items-center w-1/4">
-			<Advert />
-			<Advert />
-		</div>
-	</div>
-</Card>
+	</Card>
+{:else}
+	<Pulse />
+{/if}
