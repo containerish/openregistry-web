@@ -86,7 +86,7 @@ export const ValidateSignupRequest = (input: SignupRequest) => {
 
 export class Auth extends HttpClient {
     public constructor() {
-        super('http://localhost:5000/auth')
+        super(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth')
     }
 
 	public VerifyEmail = async (token:string) => {
