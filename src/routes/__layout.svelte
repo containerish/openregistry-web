@@ -1,13 +1,13 @@
 <script context="module" lang="ts">
 	export const load = async ({ url }) => {
-		const pathname = url.pathname === '/search' ? url.pathname : undefined;
-
+		const signinPath = url.pathname === '/search' ? url.pathname : undefined;
 		const u = new URLSearchParams(url.search);
 		const signin = u.get('signin');
 
 		return {
 			props: {
-				pathname: pathname,
+				signinPath: signinPath,
+				pathname: url.pathname,
 				openSignInModal: signin
 			}
 		};
@@ -22,11 +22,12 @@
 	import Navbar from '$lib/navbar.svelte';
 	import { Auth } from '../apis/auth';
 	export let pathname: string;
+	export let signinPath: string;
 	export let openSignInModal: boolean;
 
 	const auth = new Auth();
 	onMount(async () => {
-		if (pathname === '/' || pathname === '/about' || pathname === '/faq') {
+		if (!pathname || pathname === '/' || pathname === '/about' || pathname === '/faq') {
 			return;
 		}
 
@@ -45,7 +46,7 @@
 	class="prose lg:w-screen uw:min-w-[55vw] uw:max-w-[50vw] flex justify-center flex-col selection:bg-brown-800
       selection:text-cream-50"
 >
-	<Navbar {pathname} {openSignInModal} />
+	<Navbar pathname={signinPath} {openSignInModal} />
 	<slot />
 	<Footer />
 </main>

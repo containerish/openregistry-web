@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let label = '';
-	export let onClick: Function;
+	export let onClick: Function = () => {};
 	export let styles = '';
 	export let isLoading = false;
 	export let type = '';

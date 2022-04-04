@@ -69,6 +69,7 @@
 	};
 
 	const onClickSignIn = async (e: any) => {
+		e.preventDefault();
 		isLoading = true;
 		const email = e.target.email.value;
 		const password = e.target.password.value;
@@ -124,7 +125,7 @@
 			<span class="w-1/5 border-b lg:w-1/4" />
 		</div>
 		{#if !showForgotPasswordForm}
-			<form on:submit|preventDefault={(e) => onClickSignIn(e)}>
+			<form on:submit={(e) => onClickSignIn(e)}>
 				<div class="mt-4">
 					<Textfield
 						error={emailErr}
@@ -155,7 +156,6 @@
 				<div class="flex mt-4 w-full">
 					<Button
 						disabled={!!emailErr || !!passwordErr}
-						onClick={onClickSignIn}
 						{isLoading}
 						styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed disabled:bg-opacity-20"
 						label="Sign In"
