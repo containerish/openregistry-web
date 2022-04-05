@@ -11,6 +11,7 @@
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
 	import type { User } from '../../apis/auth';
+	import { session } from '$app/stores';
 	export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
@@ -24,7 +25,6 @@
 		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
 	};
 
-	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Pulse from '../../components/pulse.svelte';
 	// @ts-ignore

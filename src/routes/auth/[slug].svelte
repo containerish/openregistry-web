@@ -6,7 +6,8 @@
 		return {
 			props: {
 				slug: slug,
-				token: u.get('token')
+				token: u.get('token'),
+				unhandledErr: u.get('error')
 			}
 		};
 	}
@@ -20,6 +21,7 @@
 	import Button from '$lib/button.svelte';
 	import Pulse from '../../components/pulse.svelte';
 	import CrossIcon from '$lib/icons/crossIcon.svelte';
+	export let unhandledErr: string;
 	let showModal = false;
 	let password = '';
 	let confirmPassword = '';
@@ -66,6 +68,7 @@
 
 	const verifyEmail = 'verify';
 	const forgotPassword = 'forgot-password';
+	const unhandled = 'unhandled';
 
 	let showErrorModal = false;
 	const handleCallback = async () => {
@@ -86,6 +89,9 @@
 			case forgotPassword:
 				showModal = true;
 				break;
+			case unhandled:
+				showErrorModal = true;
+				formErr = unhandledErr;
 		}
 	};
 
