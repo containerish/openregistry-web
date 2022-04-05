@@ -35,7 +35,7 @@
 					Arweave and Storj
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
-					<a class="text-brown-900 text-xl mt-1" href="https://blog.openregistry.dev/overview" target="_blank">More</a>
+					<a class="text-brown-900 text-xl mt-1" href="https://blog.openregistry.dev/posts/overview" target="_blank">More</a>
 					<button
 						class="transition duration-500 ease-in-out
                        bg-transparent hover: transform

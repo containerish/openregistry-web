@@ -49,7 +49,7 @@
 						target="_blank">More</a
 					>
 					<button
-						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2 
+						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
             hover:scale-110 pb-3 border border-none"
 					>
 						<Arrow />
@@ -71,8 +71,8 @@
 				<p class="font-lato text-[17.5px] text-center font-normal leading-6 tracking-wide">
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
-					integrated together to serve larger audience. You can also, simply contribute to
-					OpenRegistry by helping with on of the
+					integrated together to serve larger audience. Simply contribute to
+					OpenRegistry by helping with one of the
 					<a
 						class="font-semibold text-lg capitalize"
 						href="https://github.com/containerish/OpenRegistry/issues"
@@ -83,7 +83,7 @@
 						class="font-semibold capitalize text-lg"
 						href="https://github.com/containerish/OpenRegistry/discussions/47"
 						target="_blank">github discussions</a
-					>
+					>. We would love to hear from you.
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
