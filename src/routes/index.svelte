@@ -2,9 +2,12 @@
 	import Landing from './landing.svelte';
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
-	// @ts-ignore
-	session.subscribe(async ({ authenticated }) => {
-		if (authenticated) goto('/repositories');
+	import { onMount } from 'svelte';
+	onMount(async () => {
+		// @ts-ignore
+		if ($session.authenticated) {
+			goto('/repositories');
+		}
 	});
 </script>
 

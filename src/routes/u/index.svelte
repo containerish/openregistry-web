@@ -1,26 +1,29 @@
-<script context="module" lang="ts">
-	export function load({ session }) {
-		return {
-			props: {
-				user: session.user
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import UserIcon from '$lib/icons/user.svelte';
 	import Repository from '../../components/repository.svelte';
-	import { RegistryBackend, type Catalog, type DetailedRepository } from '../../apis/registry';
+	import { RegistryBackend, type Catalog } from '../../apis/registry';
 	import type { User } from 'src/apis/auth';
 	import StarIcon from '$lib/icons/star.svelte';
 	import UserGroupIcon from '$lib/icons/userGroup.svelte';
+	import { goto } from '$app/navigation';
+	import { session } from '$app/stores';
 	export let user: User;
 
 	let isRepo = true;
 	let isStarred = false;
 	let isContrib = false;
+
+	onMount(async () => {
+		// @ts-ignore
+		if (!$session.authenticated) {
+			await goto('/auth/unauthorized');
+		}
+
+		// @ts-ignore
+		user = $session.user;
+		await fetchPageData();
+	});
 
 	const toggleRepo = () => {
 		isContrib = false;
@@ -58,10 +61,6 @@
 
 		catalog = data;
 	};
-	let showTooltip = false;
-	onMount(async () => {
-		fetchPageData();
-	});
 </script>
 
 <svelte:head>
@@ -135,7 +134,7 @@
 
 		{#if isRepo}
 			<div>
-				<div class="w-full px-16 p-8">
+				<div class="w-full px-16 py-8">
 					{#if catalog?.repositories}
 						{#each catalog.repositories as repo}
 							<Repository compact={false} data={repo} />
@@ -150,7 +149,7 @@
 		{/if}
 
 		{#if isStarred}
-			<div class="w-full px-8">
+			<div class="w-full px-16 py-8">
 				<div
 					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center"
 				>
@@ -164,7 +163,7 @@
 		{/if}
 
 		{#if isContrib}
-			<div class="w-full px-8">
+			<div class="w-full px-16 py-8">
 				<div
 					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center"
 				>

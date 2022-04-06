@@ -6,18 +6,13 @@
 	import { goto } from '$app/navigation';
 	export let user: User;
 	export let show = false;
-	export let handleShowMenu: VoidFunction;
 	export let closeMenu: VoidFunction;
+
+	const auth = new Auth();
 
 	function onClickOutside() {
 		closeMenu();
 	}
-
-	const modalCloseFunc = () => {
-		showModal = false;
-	};
-
-	const auth = new Auth();
 
 	const signOut = async () => {
 		const { error } = await auth.Signout();
@@ -48,8 +43,8 @@
 				>
 					<a
 						href="#"
-						class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform
-					 hover:bg-white hover:no-underline"
+						class="flex cursor-default items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform
+					hover:no-underline"
 					>
 						<div class="mx-1">
 							<h1 class="text-lg font-normal text-brown-900">
@@ -63,8 +58,9 @@
 
 					<hr class="border-gray-400" />
 
-					<button
-						on:click={() => navigateAround('/u')}
+					<a
+						href="/u"
+						sveltekit:prefetch
 						class="flex items-center w-full border-0 m-0 p-3 text-sm text-gray-600 capitalize transition-colors duration-200
 					transform hover:bg-white hover:no-underline"
 					>
@@ -85,7 +81,7 @@
 						</svg>
 
 						<span class="mx-1">View Profile</span>
-					</button>
+					</a>
 					<hr class="border-gray-200" />
 
 					<button
