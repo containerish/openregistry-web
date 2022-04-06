@@ -31,9 +31,9 @@
 			<div class="container px-6 mx-auto half:px-1 uw:px-12">
 				<div class="flex flex-col md:justify-between md:items-center">
 					<div class="flex items-center justify-between w-full">
-						<div class="cursor-pointer flex items-center half:ml-5">
-							<picture class="md:w-44" on:click={() => goto('/')}>
-								<img class="h-full w-full" src="/logo.svg" alt="opener" />
+						<div on:click={() => goto('/')} class="cursor-pointer flex items-center half:ml-5">
+							<picture class="md:w-44">
+								<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
 							</picture>
 						</div>
 						<NavbarDefault {pathname} {openSignInModal} />

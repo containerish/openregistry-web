@@ -1,44 +1,75 @@
 <script context="module" lang="ts">
+	import { Auth, type User } from '../apis/auth';
+	const auth = new Auth();
+
 	export const load = async ({ url }) => {
 		const signinPath = url.pathname === '/search' ? url.pathname : undefined;
 		const u = new URLSearchParams(url.search);
-		const signin = u.get('signin');
+		const openSignInModal = u.get('signin');
+		const pathname = url.pathname;
 
-		return {
-			props: {
-				signinPath: signinPath,
-				pathname: url.pathname,
-				openSignInModal: signin
+		if (auth.publicPaths.has(pathname)) {
+			return {
+				props: {
+					signinPath: signinPath,
+					pathname: url.pathname,
+					openSignInModal: openSignInModal,
+					authenticated: false
+				}
+			};
+		}
+
+		let s: number;
+		try {
+			const { data, status } = await auth.GetUserWithSession();
+			s = status;
+			return {
+				props: {
+					signinPath: signinPath,
+					pathname: url.pathname,
+					openSignInModal: openSignInModal,
+					user: data,
+					authenticated: true
+				}
+			};
+		} catch (err) {
+			if (err) {
+				return {
+					status: s,
+					error: err,
+					props: {
+						signinPath: signinPath,
+						pathname: url.pathname,
+						openSignInModal: openSignInModal,
+						authenticated: false
+					}
+				};
 			}
-		};
+		}
 	};
 </script>
 
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { session } from '$app/stores';
 	import Footer from '$lib/footer.svelte';
 	import Navbar from '$lib/navbar.svelte';
-	import { Auth } from '../apis/auth';
-	export let pathname: string;
+	import { session } from '$app/stores';
 	export let signinPath: string;
 	export let openSignInModal: boolean;
+	export let user: User;
 
-	const auth = new Auth();
 	onMount(async () => {
-		if (!pathname || pathname === '/' || pathname === '/about' || pathname === '/faq') {
-			return;
-		}
-
-		const { data, status } = await auth.GetUserWithSession();
-		if (status === 200) {
+		if (user) {
 			// @ts-ignore
-			$session.user = data;
+			$session.user = user;
 			// @ts-ignore
 			$session.authenticated = true;
 			return;
 		}
+
+		// @ts-ignore
+		$session.authenticated = false;
 	});
 </script>
 

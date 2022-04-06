@@ -82,9 +82,7 @@
 					return;
 				}
 
-				timer = setTimeout(async () => {
-					await goto('/repositories');
-				}, 1000);
+				goto('/repositories');
 				break;
 			case forgotPassword:
 				showModal = true;

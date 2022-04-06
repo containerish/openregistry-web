@@ -116,7 +116,7 @@ export class Auth extends HttpClient {
 	}
 
 	public ForgotPasswordCallback = async (newPassword: string, token: string) => {
-		const path= `/reset-password?kind=forgot_password_callback`
+		const path= `/reset-forgotten-password`
 
 		const body = {
 			"new_password": newPassword,
@@ -125,6 +125,7 @@ export class Auth extends HttpClient {
 		const resp = this.http.post(path, body, {headers: {
 			'Authorization': 'Bearer ' + token,
 		}})
+
 		return resp;
 	}
 
@@ -182,6 +183,17 @@ export class Auth extends HttpClient {
 	public LoginWithGithub = () => {
 		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + "/auth/github/login")
 	}
+
+	public publicPaths = new Map([
+		['/', 'root'],
+		['/about', 'about'],
+		['/faq', 'faq'],
+		['/search', 'search'],
+		['/auth/verify', 'authVerify'],
+		['/auth/unhandled', 'unhandled'],
+		['/auth/forgot-password', 'forgot-password']
+	]);
+
 
 	private getGithubOAuthUrl = () => {
 		return `https://github.com/login/oauth/authorize/?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
