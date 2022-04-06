@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
@@ -7,23 +6,22 @@
 	import { session } from '$app/stores';
 	export let u: User;
 
+	let nameOrUsername: string;
 	const auth = new Auth();
-	if (browser) {
+	onMount(async () => {
 		// @ts-ignore
-		session.subscribe(async ({ authenticated, user }) => {
-			if (authenticated) {
-				u = user;
-				return;
-			}
+		if (!$session.authenticated) {
+			await goto('/auth/unauthorized');
+		}
 
-			goto('/auth/unauthorized');
-		});
-	}
-
-	let nameOrUsername = u.name ? u.name : u.username;
+		// @ts-ignore
+		u = $session.user;
+		nameOrUsername = u.name ? u.name : u.username;
+	});
 
 	import { form, field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
+	import { onMount } from 'svelte';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);

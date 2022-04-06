@@ -82,7 +82,6 @@
 		}
 
 		const { error, status } = await auth.Login(email, password);
-		/* const { error, status } = await auth.Login('buggu@jsdp.dev', 'Qwerty@123'); */
 		if (error) {
 			isLoading = false;
 			formErr = error.message;

@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
-	import Copy from '$lib/icons/copy.svelte';
 	import Download from '$lib/icons/download.svelte';
 	import LockOpen from '$lib/icons/lock-open.svelte';
 	import Star from '$lib/icons/star.svelte';

@@ -1,3 +1,15 @@
+<script lang="ts" context="module">
+	export const prerender: boolean = true;
+	export async function load({ params }) {
+		return {
+			props: {
+				repo: params.repo,
+				username: params.username
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
 	import Star from '$lib/icons/star.svelte';
 	import Globe from '$lib/icons/globe.svelte';
