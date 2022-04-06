@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	export const prerender: boolean = true;
 	export async function load({ params }) {
 		return {
 			props: {
