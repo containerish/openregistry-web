@@ -52,6 +52,7 @@
 		// @ts-ignore
 		if (!$session.authenticated) {
 			await goto('/auth/unauthorized');
+			return;
 		}
 
 		// @ts-ignore
@@ -119,8 +120,9 @@
 									y="0px"
 									viewBox="0 0 255 255"
 									xml:space="preserve"
-									><polygon class="fill-current" points="0,0 127.5,127.5 255,0" /></svg
 								>
+									<polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+								</svg>
 							</span>
 							<div id="arrow" data-popper-arrow />
 						</div>

@@ -13,8 +13,6 @@ abstract class HttpClient {
 			baseURL,
 			headers,
 			withCredentials: true,
-			httpAgent: this.getUserAgent(),
-			httpsAgent: this.getUserAgent(),
 		});
 
 		this._responseInterceptor();
@@ -28,6 +26,8 @@ abstract class HttpClient {
 				req.withCredentials = false;
 			} else {
 				req.withCredentials = true;
+				// @TODO (jay-dee7) we need to set this header
+				// req.headers['User-Agent'] = this.getUserAgent();
 			}
 
 			return req;
@@ -54,7 +54,8 @@ abstract class HttpClient {
 	}
 
 	private getUserAgent = () => {
-		return import.meta.env.VITE_OPEN_REGISTRY_APP_NAME + "/" + import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT
+	const agentName = `${import.meta.env.VITE_OPEN_REGISTRY_APP_NAME}/${import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT} ${import.meta.env.VITE_OPEN_REGISTRY_APP_VERSION}`
+		return agentName;
 	}
 }
 
