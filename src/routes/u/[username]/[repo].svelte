@@ -116,7 +116,7 @@
 			</button>
 		</div>
 
-		<div class="w-full flex px-5">
+		<div class="w-full h-full py-4 flex px-4">
 			{#if isTags}
 				<div class="w-full flex-col gap-4 rounded-md px-8 py-8 flex justify-center items-center">
 					{#each repository.tags as tag}
@@ -124,13 +124,13 @@
 					{/each}
 				</div>
 			{/if}
+
 			{#if isOverview}
-				<div class="bg-gray-50 w-2/3 rounded-md px-28 py-20 flex justify-center items-center">
+				<div class="bg-gray-50 w-2/3 h-full rounded-md px-8 py-8 flex justify-center items-center">
 					<span class="text-brown-700 text-2xl">No Overview Available</span>
 				</div>
-				<div class="flex flex-col rounded-md mx-4 my-4 bg-gray-50 px-4 py-4">
+				<div class="flex flex-col w-4/12 rounded-md mx-4 bg-gray-50 px-4 py-8">
 					<h1 class="text-xl font-medium mb-4">Quick Docker Commands</h1>
-
 					<div class="my-2 px-4 py-2 text-center bg-brown-400 rounded-md">
 						<span
 							on:click={() => handleCopy('push')}

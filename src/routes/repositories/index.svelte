@@ -15,7 +15,7 @@
 	export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
-	let catalog: Catalog;
+	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
@@ -46,26 +46,16 @@
 	let showTooltip = false;
 
 	setContext('fetchPageData', fetchPageData);
-	let contentReady = false;
 
 	onMount(async () => {
 		// @ts-ignore
 		if (!$session.authenticated) {
-			await goto('/auth/unauthorized');
+			goto('/auth/unauthorized');
 			return;
 		}
 
 		// @ts-ignore
 		u = $session.user;
-		const { error, data } = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
-
-		if (error) {
-			contentReady = true;
-			return;
-		}
-
-		catalog = data;
-		contentReady = true;
 	});
 
 	let showModal = false;
@@ -98,7 +88,7 @@
 	const autoCompleteThrottled = throttle(1000, autoComplete);
 </script>
 
-{#if contentReady}
+{#if catalog}
 	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
 		<div class="flex w-full h-full max-w-[3000px]">
 			<div class="w-3/4 px-8 my-8">
