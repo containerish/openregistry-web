@@ -17,7 +17,6 @@
 <div
 	class="bg-brown-200 text-center min-h-[70vh] py-8 2xl:py-16 flex-col w-full h-full flex justify-center items-center"
 >
-	{status}
 	{#if status === 400 || status === 401}
 		<img class="w-4/6" src="/unauthorised.svg" alt="" />
 	{:else}
