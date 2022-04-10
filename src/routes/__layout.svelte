@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import cookie from 'js-cookie';
 	import { Auth, type User } from '../apis/auth';
 	const auth = new Auth();
 
@@ -8,7 +9,8 @@
 		const openSignInModal = u.get('signin');
 		const pathname = url.pathname;
 
-		if (auth.publicPaths.has(pathname)) {
+		const sessionCookiePresent = cookie.get('session_id');
+		if (auth.publicPaths.has(pathname) && !sessionCookiePresent) {
 			return {
 				props: {
 					signinPath: signinPath,
@@ -19,58 +21,45 @@
 			};
 		}
 
-		let s: number;
-		try {
-			const { data, status } = await auth.GetUserWithSession();
-			s = status;
+		const { data, error, status } = await auth.GetUserWithSession();
+		if (error) {
 			return {
+				status: status,
+				error: error.message,
 				props: {
 					signinPath: signinPath,
 					pathname: url.pathname,
 					openSignInModal: openSignInModal,
-					user: data,
-					authenticated: true
+					authenticated: false
 				}
 			};
-		} catch (err) {
-			if (err) {
-				return {
-					status: s,
-					error: err,
-					props: {
-						signinPath: signinPath,
-						pathname: url.pathname,
-						openSignInModal: openSignInModal,
-						authenticated: false
-					}
-				};
-			}
 		}
+
+		return {
+			props: {
+				signinPath: signinPath,
+				pathname: url.pathname,
+				openSignInModal: openSignInModal,
+				user: data,
+				authenticated: true
+			}
+		};
 	};
 </script>
 
 <script lang="ts">
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import Footer from '$lib/footer.svelte';
 	import Navbar from '$lib/navbar.svelte';
-	import { session } from '$app/stores';
+	import { userStore } from '$lib/userStore';
 	export let signinPath: string;
 	export let openSignInModal: boolean;
 	export let user: User;
+	export let authenticated: boolean = true;
 
-	onMount(async () => {
-		if (user) {
-			// @ts-ignore
-			$session.user = user;
-			// @ts-ignore
-			$session.authenticated = true;
-			return;
-		}
-
-		// @ts-ignore
-		$session.authenticated = false;
-	});
+	$: {
+		userStore.setUser(user, authenticated);
+	}
 </script>
 
 <main

@@ -11,7 +11,8 @@
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
 	import type { User } from '../../apis/auth';
-	import { session } from '$app/stores';
+	import { navigating } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
@@ -27,6 +28,8 @@
 
 	import { goto } from '$app/navigation';
 	import Pulse from '../../components/pulse.svelte';
+	import { pulseStore } from '../../components/pulse';
+	import ErrorModal from '$lib/errorModal.svelte';
 	// @ts-ignore
 
 	const fetchPageData = async (offset?: number) => {
@@ -56,6 +59,14 @@
 
 		// @ts-ignore
 		u = $session.user;
+		const { data, error } = await backend.ListCatalog();
+		if (error) {
+			openErrorModal = true;
+			httpError = error.message;
+			return;
+		}
+
+		catalog = data;
 	});
 
 	let showModal = false;
@@ -86,9 +97,15 @@
 	};
 
 	const autoCompleteThrottled = throttle(1000, autoComplete);
+
+	$: {
+		pulseStore.setPulseState(!$navigating && !!catalog);
+	}
+	let openErrorModal: boolean = false;
+	let httpError: string;
 </script>
 
-{#if catalog}
+<Pulse>
 	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
 		<div class="flex w-full h-full max-w-[3000px]">
 			<div class="w-3/4 px-8 my-8">
@@ -185,6 +202,5 @@
 			</div>
 		</div>
 	</Card>
-{:else}
-	<Pulse />
-{/if}
+</Pulse>
+<ErrorModal open={openErrorModal} error={httpError} />

@@ -7,7 +7,7 @@
 	import StarIcon from '$lib/icons/star.svelte';
 	import UserGroupIcon from '$lib/icons/userGroup.svelte';
 	import { goto } from '$app/navigation';
-	import { session } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	export let user: User;
 
 	let isRepo = true;

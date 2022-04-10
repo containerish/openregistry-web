@@ -21,6 +21,8 @@
 	import Button from '$lib/button.svelte';
 	import Pulse from '../../components/pulse.svelte';
 	import CrossIcon from '$lib/icons/crossIcon.svelte';
+	import ErrorModal from '$lib/errorModal.svelte';
+	import ButtonWithConfetti from '$lib/buttonWithConfetti.svelte';
 	export let unhandledErr: string;
 	let showModal = false;
 	let password = '';
@@ -128,143 +130,111 @@
 	};
 </script>
 
-<div>
-	{#if showModal}
-		<Modal>
-			<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-				<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
-					<div class="flex justify-center py4 mb-8">
-						<picture>
-							<img class="" src="/logo-dark.svg" alt="openregistry-logo.svg" />
-						</picture>
-					</div>
+<Pulse>
+	<div>
+		{#if showModal}
+			<Modal>
+				<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+					<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
+						<div class="flex justify-center py4 mb-8">
+							<picture>
+								<img class="" src="/logo-dark.svg" alt="openregistry-logo.svg" />
+							</picture>
+						</div>
 
-					<div class="flex items-center justify-between mt-4">
-						<span class="w-1/5 border-b lg:w-1/4" />
+						<div class="flex items-center justify-between mt-4">
+							<span class="w-1/5 border-b lg:w-1/4" />
 
-						<span class="w-1/5 border-b lg:w-1/4" />
-					</div>
-					<form on:submit|preventDefault={setNewPassword}>
-						<div class="mt-4">
-							<div class="flex items-center px-2">
-								<label for="password" class="block font-semibold text-sm text-gray-800">
-									Password
-								</label>
-								<span class="px-2 text-xs text-brown-800">
-									(min. 8 alphanumeric special characters)
-								</span>
+							<span class="w-1/5 border-b lg:w-1/4" />
+						</div>
+						<form on:submit|preventDefault={setNewPassword}>
+							<div class="mt-4">
+								<div class="flex items-center px-2">
+									<label for="password" class="block font-semibold text-sm text-gray-800">
+										Password
+									</label>
+									<span class="px-2 text-xs text-brown-800">
+										(min. 8 alphanumeric special characters)
+									</span>
+								</div>
+								<input
+									on:input={(e) => validatePassword(e)}
+									name="password"
+									bind:value={password}
+									type="password"
+									class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+								/>
+								{#if passwordErr}
+									<div class="w-full pt-1 capitalize text-center">
+										<span class="text-xs font-semibold text-center text-red-600 uppercase">
+											{passwordErr}
+										</span>
+									</div>
+								{/if}
 							</div>
-							<input
-								on:input={(e) => validatePassword(e)}
-								name="password"
-								bind:value={password}
-								type="password"
-								class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
-							/>
-							{#if passwordErr}
+							<div class="mt-4">
+								<div class="flex items-center px-2">
+									<label for="password" class="block font-semibold text-sm text-gray-800">
+										Confirm Password
+									</label>
+								</div>
+								<input
+									on:input={(e) => validateConfirmPassword(e)}
+									bind:value={confirmPassword}
+									name="confirm_password"
+									type="password"
+									class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+								/>
+								{#if confirmPasswordErr}
+									<div class="w-full pt-1 capitalize text-center">
+										<span class="text-xs font-semibold text-center text-red-600 uppercase">
+											{confirmPasswordErr}
+										</span>
+									</div>
+								{/if}
+							</div>
+
+							{#if formErr}
 								<div class="w-full pt-1 capitalize text-center">
 									<span class="text-xs font-semibold text-center text-red-600 uppercase">
-										{passwordErr}
+										{formErr}
 									</span>
 								</div>
 							{/if}
-						</div>
-						<div class="mt-4">
-							<div class="flex items-center px-2">
-								<label for="password" class="block font-semibold text-sm text-gray-800">
-									Confirm Password
-								</label>
-							</div>
-							<input
-								on:input={(e) => validateConfirmPassword(e)}
-								bind:value={confirmPassword}
-								name="confirm_password"
-								type="password"
-								class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
-							/>
-							{#if confirmPasswordErr}
+
+							{#if formMsg}
 								<div class="w-full pt-1 capitalize text-center">
-									<span class="text-xs font-semibold text-center text-red-600 uppercase">
-										{confirmPasswordErr}
+									<span class="text-xs font-semibold text-center text-green-600 uppercase">
+										{formMsg}
+									</span>
+								</div>
+								<div class="w-full pt-1 capitalize text-center">
+									<span
+										class="text-xs font-semibold animate-pulse text-center text-green-600 uppercase"
+									>
+										Redirecting you back to Sign In Page
 									</span>
 								</div>
 							{/if}
-						</div>
 
-						{#if formErr}
-							<div class="w-full pt-1 capitalize text-center">
-								<span class="text-xs font-semibold text-center text-red-600 uppercase">
-									{formErr}
-								</span>
+							<div class="flex mt-8 w-full">
+								<Button
+									disabled={!!passwordErr || !!confirmPasswordErr}
+									onClick={setNewPassword}
+									styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
+									label="Update Password"
+								/>
+								<Button
+									onClick={toggleModal}
+									styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
+									label="Close"
+								/>
 							</div>
-						{/if}
-
-						{#if formMsg}
-							<div class="w-full pt-1 capitalize text-center">
-								<span class="text-xs font-semibold text-center text-green-600 uppercase">
-									{formMsg}
-								</span>
-							</div>
-							<div class="w-full pt-1 capitalize text-center">
-								<span
-									class="text-xs font-semibold animate-pulse text-center text-green-600 uppercase"
-								>
-									Redirecting you back to Sign In Page
-								</span>
-							</div>
-						{/if}
-
-						<div class="flex mt-8 w-full">
-							<Button
-								disabled={!!passwordErr || !!confirmPasswordErr}
-								onClick={setNewPassword}
-								styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
-								label="Update Password"
-							/>
-							<Button
-								onClick={toggleModal}
-								styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-								label="Close"
-							/>
-						</div>
-					</form>
-				</div>
-			</div>
-		</Modal>
-	{/if}
-
-	{#if showErrorModal}
-		<Modal>
-			<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-				<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
-					<div class="flex justify-center py4 mb-8">
-						<picture>
-							<img class="" src="/logo-dark.svg" alt="openregistry-logo.svg" />
-						</picture>
-					</div>
-
-					<div class="flex items-center justify-between mt-4">
-						<span class="w-1/5 border-b lg:w-1/4" />
-
-						<span class="w-1/5 border-b lg:w-1/4" />
-					</div>
-					<div class="w-full flex justify-center gap-2 items-center flex-col text-center">
-						<CrossIcon styles="h-16 w-16 text-red-600" />
-						<span class="font-semibold text-red-600 capitalize tracking-wider">
-							{formErr}
-						</span>
-					</div>
-
-					<div class="flex mt-8 justify-center w-full">
-						<Button
-							onClick={handleErrorModal}
-							styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-							label="Close"
-						/>
+						</form>
 					</div>
 				</div>
-			</div>
-		</Modal>
-	{/if}
-	<Pulse />
-</div>
+			</Modal>
+		{/if}
+	</div>
+</Pulse>
+<ErrorModal open={showErrorModal} error={formErr} />
