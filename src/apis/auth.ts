@@ -191,6 +191,7 @@ export class Auth extends HttpClient {
 		['/search', 'search'],
 		['/auth/verify', 'authVerify'],
 		['/auth/unhandled', 'unhandled'],
-		['/auth/forgot-password', 'forgot-password']
+		['/auth/forgot-password', 'forgot-password'],
+		['/auth/github-login-callback', 'github-callback']
 	]);
 }

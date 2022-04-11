@@ -1,7 +1,5 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import { browser } from '$app/env';
-import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 
 declare module 'axios' {
 	interface AxiosResponse<T = any> extends Promise<T> {}
@@ -38,9 +36,6 @@ abstract class HttpClient {
 			}
 
 
-			if (browser) {
-				req.adapter = fetchAdapter
-			}
 
 			return req;
 		})

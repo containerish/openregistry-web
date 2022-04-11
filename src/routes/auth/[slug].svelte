@@ -96,9 +96,7 @@
 					return;
 				}
 
-				console.log('error in slug: ', resp.error);
-				console.log('data in slug: ', resp.data);
-				/* goto('/repositories'); */
+				goto('/repositories');
 				break;
 			case unhandled:
 				showErrorModal = true;
