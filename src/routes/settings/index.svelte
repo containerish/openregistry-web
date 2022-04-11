@@ -66,7 +66,11 @@
 				<div class="flex mt-3">
 					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg mr-5">Community User</span>
-					<span class="text-lg"> Joined Today</span>
+					<span class="text-lg"> Joined 
+						<span class="font-semibold">
+						{new Date(u.created_at).toDateString()}
+					</span>
+					</span>
 				</div>
 			</div>
 		</div>
