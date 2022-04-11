@@ -31,7 +31,7 @@
 	export let query: string = '';
 	let sortBy = 'namespace';
 	let httpError: string;
-	let openErrorModal: boolean = true;
+	let openErrorModal: boolean = false;
 
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
