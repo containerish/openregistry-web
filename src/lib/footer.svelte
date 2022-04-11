@@ -104,7 +104,7 @@
 		<hr class="h-px my-6 bg-gray-300 border-none" />
 
 		<div>
-			<p class="text-center text-gray-800">
+			<p class="text-center text-red-800">
 				© Containerish {new Date().getFullYear()} - All rights reserved
 			</p>
 		</div>
