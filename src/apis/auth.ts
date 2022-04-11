@@ -193,9 +193,4 @@ export class Auth extends HttpClient {
 		['/auth/unhandled', 'unhandled'],
 		['/auth/forgot-password', 'forgot-password']
 	]);
-
-
-	private getGithubOAuthUrl = () => {
-		return `https://github.com/login/oauth/authorize/?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/auth/github/callback&scope=user:email&state=skljdfkljsdjfklj`;
-	}
 }
