@@ -1,5 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import { browser } from '$app/env';
+import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 
 declare module 'axios' {
 	interface AxiosResponse<T = any> extends Promise<T> {}
@@ -33,6 +35,11 @@ abstract class HttpClient {
 				req.withCredentials = true;
 				// @TODO (jay-dee7) we need to set this header
 				// req.headers['User-Agent'] = this.getUserAgent();
+			}
+
+
+			if (browser) {
+				req.adapter = fetchAdapter
 			}
 
 			return req;
