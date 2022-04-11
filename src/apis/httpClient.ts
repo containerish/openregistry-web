@@ -11,7 +11,12 @@ abstract class HttpClient {
 	 protected constructor(baseURL: string, headers?: any) {
 		this.http = axios.create({
 			baseURL,
-			headers,
+			headers: {
+				'Cache-Control': 'no-cache',
+				'Pragma': 'no-cache',
+				'Expires': '0',
+				...headers
+			},
 			withCredentials: true,
 		});
 

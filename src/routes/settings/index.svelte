@@ -3,7 +3,7 @@
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
 	import { Auth, type User } from '../../apis/auth';
-	import { session } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	export let u: User;
 
 	let nameOrUsername: string;

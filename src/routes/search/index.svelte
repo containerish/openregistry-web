@@ -21,12 +21,17 @@
 	import Checkbox from '$lib/checkbox.svelte';
 	import type { Catalog } from '../../apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
+	import { navigating } from '$app/stores';
 	import Pulse from '../../components/pulse.svelte';
 	import Menu from '$lib/headless/menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import ClockIcon from '$lib/icons/clock.svelte';
+	import { pulseStore } from '../../components/pulse';
+	import ErrorModal from '$lib/errorModal.svelte';
 	export let query: string = '';
 	let sortBy = 'namespace';
+	let httpError: string;
+	let openErrorModal: boolean = true;
 
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
@@ -57,30 +62,29 @@
 
 	setContext('fetchPageData', fetchPageData);
 	let catalog: Catalog;
-	let contentReady = false;
 
 	onMount(async () => {
 		if (query && query !== '') {
 			const { error, data } = await backend.SearchRepositories(query);
 			if (error) {
 				console.error('error in search/ListCatalog: ', error);
-				contentReady = true;
+				httpError = error.message;
+				openErrorModal = true;
 				return;
 			}
 
 			catalog = data;
-			contentReady = true;
 			return;
 		}
 
 		let { data, error } = await backend.ListCatalog(backend.DefaultPageSize);
 		if (error) {
-			contentReady = true;
 			console.error('error in search/ListCatalog: ', error);
+			httpError = error.message;
+			openErrorModal = true;
 			return;
 		}
 		catalog = data;
-		contentReady = true;
 	});
 
 	let showModal = false;
@@ -91,9 +95,12 @@
 	let showTooltip = false;
 
 	setContext('toggleModal', toggleModal);
+	$: {
+		pulseStore.setPulseState(!$navigating && !!catalog);
+	}
 </script>
 
-{#if contentReady}
+<Pulse>
 	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
 		<div class="flex w-full h-full max-w-[3000px]">
 			{#if showTooltip}
@@ -215,6 +222,5 @@
 			</div>
 		</div>
 	</Card>
-{:else}
-	<Pulse />
-{/if}
+</Pulse>
+<ErrorModal open={openErrorModal} error={httpError} />

@@ -99,7 +99,7 @@
 	<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
 		<div class="flex justify-center py4 mb-8">
 			<picture>
-				<img class="" src="/logo-dark.svg" alt="openregistry-logo.svg" />
+				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
 			</picture>
 		</div>
 

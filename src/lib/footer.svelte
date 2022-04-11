@@ -104,8 +104,11 @@
 		<hr class="h-px my-6 bg-gray-300 border-none" />
 
 		<div>
-			<p class="text-center text-gray-800">
-				© Containerish {new Date().getFullYear()} - All rights reserved
+			<p class="text-center text-brown-800">
+				<a class="text-brown-900" href="https://github.com/containerish" target="_blank">
+					© Containerish {new Date().getFullYear()}
+				</a>
+				- All rights reserved
 			</p>
 		</div>
 	</div>

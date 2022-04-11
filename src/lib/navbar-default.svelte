@@ -7,7 +7,7 @@
 	import { Auth } from '../apis/auth';
 	import { setContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { session } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	import Autocomplete from './autocomplete.svelte';
 	import { RegistryBackend } from '../apis/registry';
 

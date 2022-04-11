@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	import { goto } from '$app/navigation';
 	import Autocomplete from './autocomplete.svelte';
 	import UserIcon from './icons/user.svelte';
@@ -7,13 +7,8 @@
 	import Dropdown from '../components/dropdown.svelte';
 	import { RegistryBackend } from '../apis/registry';
 
-	let u: User;
-	let sessionOk: boolean = false;
 	// @ts-ignore
-	session.subscribe(async ({ authenticated, user }) => {
-		u = user;
-		sessionOk = authenticated;
-	});
+	let u: User = $session.user;
 
 	let showMenu = false;
 	const toggleMenu = () => {
@@ -31,7 +26,7 @@
 	};
 </script>
 
-{#if sessionOk}
+{#if $session.authenticated && $session.user}
 	<header class="bg-gradient-to-r from-brown-50 to-brown-500 py-4}">
 		<nav class="uw:max-w-[70vw] max-w-[100vw] py-2 px-16 mx-auto">
 			<div class="container w-full px-6 mx-auto half:px-1 uw:px-12">

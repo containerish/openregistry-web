@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Landing from './landing.svelte';
-	import { session } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	onMount(async () => {

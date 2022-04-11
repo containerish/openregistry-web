@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { setContext } from 'svelte';
 	import NavbarDefault from './navbar-default.svelte';
-	import { session } from '$app/stores';
+	import { userStore as session } from '$lib/userStore';
 	import NavbarAuth from './navbar-auth.svelte';
 	export let pathname: string;
 	export let openSignInModal: boolean;
