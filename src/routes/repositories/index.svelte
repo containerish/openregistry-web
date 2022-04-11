@@ -59,7 +59,7 @@
 
 		// @ts-ignore
 		u = $session.user;
-		const { data, error } = await backend.ListCatalog();
+		const { data, error } = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
 		if (error) {
 			openErrorModal = true;
 			httpError = error.message;
