@@ -20,9 +20,7 @@
 	import Modal from '$lib/modal.svelte';
 	import Button from '$lib/button.svelte';
 	import Pulse from '../../components/pulse.svelte';
-	import CrossIcon from '$lib/icons/crossIcon.svelte';
 	import ErrorModal from '$lib/errorModal.svelte';
-	import ButtonWithConfetti from '$lib/buttonWithConfetti.svelte';
 	export let unhandledErr: string;
 	let showModal = false;
 	let password = '';
@@ -71,6 +69,7 @@
 	const verifyEmail = 'verify';
 	const forgotPassword = 'forgot-password';
 	const unhandled = 'unhandled';
+	const githubCallback = 'github-login-callback';
 
 	let showErrorModal = false;
 	const handleCallback = async () => {
@@ -88,6 +87,18 @@
 				break;
 			case forgotPassword:
 				showModal = true;
+				break;
+			case githubCallback:
+				const resp = await auth.GetUserWithSession();
+				if (resp.error) {
+					formErr = resp.error.message;
+					showErrorModal = true;
+					return;
+				}
+
+				console.log('error in slug: ', resp.error);
+				console.log('data in slug: ', resp.data);
+				/* goto('/repositories'); */
 				break;
 			case unhandled:
 				showErrorModal = true;
