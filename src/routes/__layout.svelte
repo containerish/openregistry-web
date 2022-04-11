@@ -25,7 +25,7 @@
 		if (error) {
 			return {
 				status: status,
-				error: error.message,
+				error: JSON.stringify(error.message),
 				props: {
 					signinPath: signinPath,
 					pathname: url.pathname,

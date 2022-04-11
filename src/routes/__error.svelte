@@ -2,7 +2,7 @@
 	export function load({ error, status }) {
 		return {
 			props: {
-				error: error,
+				error: JSON.stringify(error),
 				status: status
 			}
 		};
