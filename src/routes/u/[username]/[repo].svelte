@@ -52,18 +52,15 @@
 	let timeout: any;
 
 	const handleCopy = (cmd: string) => {
+		const u = new URL(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL);
 		switch (cmd) {
 			case 'push':
 				isCopied = 'push';
-				window.navigator.clipboard.writeText(
-					`docker push ${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/${ns}`
-				);
+				window.navigator.clipboard.writeText(`docker push ${u.hostname}/${ns}`);
 				break;
 			case 'pull':
 				isCopied = 'pull';
-				window.navigator.clipboard.writeText(
-					`docker pull ${import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL}/${ns}`
-				);
+				window.navigator.clipboard.writeText(`docker pull ${u.hostname}/${ns}`);
 		}
 
 		timeout = setTimeout(() => {
@@ -130,6 +127,16 @@
 				</div>
 				<div class="flex flex-col w-4/12 rounded-md mx-4 bg-gray-50 px-4 py-8">
 					<h1 class="text-xl font-medium mb-4">Quick Docker Commands</h1>
+
+					<div class="my-2 text-center px-4 py-2 bg-brown-400 rounded-md">
+						<span
+							on:click={() => handleCopy('pull')}
+							class="{isCopied === 'pull' ? 'font-semibold' : ''} select-all text-sm text-gray-900 "
+						>
+							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
+						</span>
+					</div>
+
 					<div class="my-2 px-4 py-2 text-center bg-brown-400 rounded-md">
 						<span
 							on:click={() => handleCopy('push')}
@@ -138,15 +145,6 @@
 								: ''} select-all rounded-md text-sm text-gray-900"
 						>
 							{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}
-						</span>
-					</div>
-
-					<div class="my-2 text-center px-4 py-2 bg-brown-400 rounded-md">
-						<span
-							on:click={() => handleCopy('pull')}
-							class="{isCopied === 'pull' ? 'font-semibold' : ''} select-all text-sm text-gray-900 "
-						>
-							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
 						</span>
 					</div>
 				</div>
