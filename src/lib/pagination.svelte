@@ -11,8 +11,8 @@
 		if (offset > pages - 1 || offset < 0) {
 			return;
 		}
-
 		await fetchPageData(offset);
+		activePage = offset;
 	};
 </script>
 
