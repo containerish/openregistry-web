@@ -55,12 +55,12 @@
 	const onClickSignUpUser = async (e: any) => {
 		isLoading = true;
 		setTimeout(async () => {
-			const { error, status, data } = await auth.Signup(
+			const { error, status, data } = await auth.WebAuthNBeginRegister(
 				e.target.username.value,
-				e.target.email.value,
-				e.target.password.value
+				e.target.email.value
+				/* e.target.password.value, */
 			);
-			if (error || status !== 201) {
+			if (error || status !== 200) {
 				console.error('error signup: ', status, error);
 				formErr = error.message;
 				isLoading = false;
@@ -181,27 +181,6 @@
 						label="Email Address"
 						type="email"
 						name="email"
-					/>
-				</div>
-
-				<div class="mt-4">
-					<Textfield
-						error={passwordErr}
-						onInput={validatePassword}
-						subHeading="alphanumeric and min 8 chars"
-						label="Password"
-						type="password"
-						name="password"
-					/>
-				</div>
-
-				<div class="mt-4">
-					<Textfield
-						error={confirmPasswordErr}
-						onInput={validateConfirmPassword}
-						label="Confirm Password"
-						type="password"
-						name="confirmPassword"
 					/>
 				</div>
 

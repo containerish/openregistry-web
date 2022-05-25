@@ -72,16 +72,16 @@
 		e.preventDefault();
 		isLoading = true;
 		const email = e.target.email.value;
-		const password = e.target.password.value;
+		/* const password = e.target.password.value; */
 
-		if (email === '' || password === '') {
-			isLoading = false;
-			emailErr = 'email is a required field';
-			passwordErr = 'password is a required field';
-			return;
-		}
+		/* if (email === '' || password === '') { */
+		/* 	isLoading = false; */
+		/* 	emailErr = 'email is a required field'; */
+		/* 	passwordErr = 'password is a required field'; */
+		/* 	return; */
+		/* } */
 
-		const { error, status } = await auth.Login(email, password);
+		const { error, status } = await auth.WebAuthNBeginLogin(email);
 		if (error) {
 			isLoading = false;
 			formErr = error.message;
@@ -126,13 +126,7 @@
 		{#if !showForgotPasswordForm}
 			<form on:submit={(e) => onClickSignIn(e)}>
 				<div class="mt-4">
-					<Textfield
-						error={emailErr}
-						onInput={(e) => validateEmail(e)}
-						name="email"
-						label="Email Address"
-						type="email"
-					/>
+					<Textfield name="email" label="Email Address" />
 				</div>
 				<div class="mt-4">
 					<Textfield
@@ -154,7 +148,6 @@
 
 				<div class="flex mt-4 w-full">
 					<Button
-						disabled={!!emailErr || !!passwordErr}
 						{isLoading}
 						styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed disabled:bg-opacity-20"
 						label="Sign In"

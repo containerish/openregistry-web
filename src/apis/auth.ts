@@ -89,6 +89,120 @@ export class Auth extends HttpClient {
         super(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth')
     }
 
+	public BrowserSupportsWebAuthN = (): boolean => {
+		if (window.PublicKeyCredential) {
+			return true
+		}
+
+		return false;
+	}
+
+	public WebAuthNBeginRegister = async (username: string, email: string) => {
+		if (!this.BrowserSupportsWebAuthN()) {
+			return {
+				error: "Browser does not support WebAuthN",
+			}
+		}
+
+		const body = { username, email };
+
+		const path = '/webauthn/begin-registration';
+		const resp = await this.http.post(path, body);
+		console.log('credentailOptions: ', resp.data);
+
+		const finishResponse = await this.WebAuthNFinishRegister(username, resp.data.options);
+		return finishResponse;
+	}
+
+	private bufferDecode = (value) => {
+		return Uint8Array.from(atob(value), c => c.charCodeAt(0));
+	}
+
+	private bufferEncode = (value: any) => {
+		return btoa(String.fromCharCode.apply(null, new Uint8Array(value)))
+		.replace(/\+/g, "-")
+		.replace(/\//g, "_")
+		.replace(/=/g, "");;
+	}
+
+	public WebAuthNFinishRegister = async (username: string, credentialCreationOptions: any) => {
+		credentialCreationOptions.publicKey.challenge = this.bufferDecode(credentialCreationOptions.publicKey.challenge);
+		credentialCreationOptions.publicKey.user.id = this.bufferDecode(credentialCreationOptions.publicKey.user.id);
+
+		const credential = await navigator.credentials.create({
+			publicKey: credentialCreationOptions.publicKey,
+		})
+
+		// @ts-ignore
+		let attestationObject = credential.response.attestationObject;
+		// @ts-ignore
+		let clientDataJSON = credential.response.clientDataJSON;
+		// @ts-ignore
+		let rawId = credential.rawId;
+
+		const body = {
+			id: credential.id,
+			rawId: this.bufferEncode(rawId),
+			type: credential.type,
+			response: {
+				attestationObject: this.bufferEncode(attestationObject),
+				clientDataJSON: this.bufferEncode(clientDataJSON),
+			}
+		};
+
+		const path = `/webauthn/finish-registration?username=${username}`;
+		const resp = await this.http.post(path, body);
+		return resp;
+	}
+
+	public WebAuthNBeginLogin = async (username: string) => {
+		const path = `/webauthn/begin-login?username=${username}`
+		const resp = await this.http.get(path)
+		const credentialRequestOptions = resp.data.options;
+
+		const bufDecode = this.bufferDecode;
+		credentialRequestOptions.publicKey.challenge = bufDecode(
+			credentialRequestOptions.publicKey.challenge
+		);
+		credentialRequestOptions.publicKey.allowCredentials.forEach((listItem) => {
+			listItem.id = bufDecode(listItem.id)
+		});
+		console.log('credentialRequestOptions: ', credentialRequestOptions)
+
+		const navigatorResp = await navigator.credentials.get({
+			publicKey: credentialRequestOptions.publicKey,
+		})
+		console.log('navigatorResp: ', navigatorResp)
+
+		// @ts-ignore
+		let authData = navigatorResp.response.authenticatorData;
+		// @ts-ignore
+		let clientDataJSON = navigatorResp.response.clientDataJSON;
+		// @ts-ignore
+		let rawId = navigatorResp.rawId;
+		// @ts-ignore
+		let sig = navigatorResp.response.signature;
+		// @ts-ignore
+		let userHandle = navigatorResp.response.userHandle;
+
+		const finishLoginPath = `/webauthn/finish-login?username=${username}`
+		const body = {
+			id: navigatorResp.id,
+			rawId: this.bufferEncode(rawId),
+			type: navigatorResp.type,
+			response: {
+				authenticatorData: this.bufferEncode(authData),
+				clientDataJSON: this.bufferEncode(clientDataJSON),
+				signature: this.bufferEncode(sig),
+				userHandle: this.bufferEncode(userHandle),
+			}
+		}
+
+		const finishLoginResp = await this.http.post(finishLoginPath, body)
+		return finishLoginResp;
+	}
+
+
 	public VerifyEmail = async (token:string) => {
 		const path= `/signup/verify?token=${token}`
 
