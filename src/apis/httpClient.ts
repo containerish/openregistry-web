@@ -2,13 +2,13 @@ import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 declare module 'axios' {
-	interface AxiosResponse<T = any> extends Promise<T> {}
+	interface AxiosResponse<T = any> extends Promise<T> { }
 }
 
 abstract class HttpClient {
 	protected readonly http: AxiosInstance;
 
-	 protected constructor(baseURL: string, headers?: any) {
+	protected constructor(baseURL: string, headers?: any) {
 		this.http = axios.create({
 			baseURL,
 			headers: {
@@ -35,8 +35,6 @@ abstract class HttpClient {
 				// req.headers['User-Agent'] = this.getUserAgent();
 			}
 
-
-
 			return req;
 		})
 	}
@@ -47,8 +45,8 @@ abstract class HttpClient {
 
 	private _handleResponse = ({ data, status, headers }: AxiosResponse) => {
 		return {
-			data: data, 
-			status: status, 
+			data: data,
+			status: status,
 			headers: headers,
 		}
 	};
@@ -61,7 +59,7 @@ abstract class HttpClient {
 	}
 
 	private getUserAgent = () => {
-	const agentName = `${import.meta.env.VITE_OPEN_REGISTRY_APP_NAME}/${import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT} ${import.meta.env.VITE_OPEN_REGISTRY_APP_VERSION}`
+		const agentName = `${import.meta.env.VITE_OPEN_REGISTRY_APP_NAME}/${import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT} ${import.meta.env.VITE_OPEN_REGISTRY_APP_VERSION}`
 		return agentName;
 	}
 }
