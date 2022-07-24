@@ -36,7 +36,7 @@
 					as it's compute layer and
 					<a
 						class="text-green-600 text-lg font-semibold"
-						href="https://siasky.net/"
+						href="https://skynetlabs.com/developers"
 						target="_blank"
 					>
 						Skynet

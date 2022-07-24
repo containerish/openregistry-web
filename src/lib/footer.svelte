@@ -54,7 +54,7 @@
 						<div>
 							<h3 class="text-gray-700 pb-2 uppercase font-semibold">Community</h3>
 							<span
-								on:click={() => window.open('https://siasky.net/developers', '_blank')}
+								on:click={() => window.open('https://skynetlabs.com/developers', '_blank')}
 								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer">Skynet</span
 							>
 							<span
