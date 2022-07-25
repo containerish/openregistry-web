@@ -192,7 +192,7 @@
             upgradeable, resilient, and more open."
 					/>
 					<Advert
-						link="https://siasky.net"
+						link="https://skynetlabs.com/developers"
 						styles="hover:bg-[#00C65E]"
 						logo="skynet-logo.png"
 						body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
