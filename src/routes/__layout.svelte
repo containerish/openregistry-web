@@ -10,6 +10,7 @@
 		const pathname: string = url.pathname;
 
 		const sessionCookiePresent = cookie.get('session_id');
+		console.log("session cookie present")
 		const pubPath = pathname.startsWith('/u/') && pathname.split('/').length >= 3;
 		if (pubPath && !sessionCookiePresent) {
 			return {
