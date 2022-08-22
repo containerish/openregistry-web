@@ -13,7 +13,6 @@ const installGithubApp = () => {
     window.open(uri)
 }
 
-
 </script>
 
 
