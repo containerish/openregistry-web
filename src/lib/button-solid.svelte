@@ -7,10 +7,10 @@
 <button
 	{disabled}
 	on:click={() => onClick()}
-	class="{isLoading ? 'px-0' : 'px-4'} 
-	transition ease-in-out duration-300
-	max-w-[48rem] w-36 rounded-md bg-brown-800 text-white text-lg font-medium border-2 border-brown-800
-	hover:bg-brown-700 hover:text-white">
+	class="{isLoading ? 'px-2' : 'px-4'} 
+	transition ease-in-out duration-200
+	flex justify-center items-center max-w-[48rem] min-w-[144px] rounded-md bg-brown-800 text-white text-lg capitalize font-medium border-2 border-brown-800
+	hover:bg-brown-700 hover:text-white hover:ease-in">
 	{#if isLoading}
 		<svg
 			class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50"

@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Button from '../lib/button.svelte';
+	import ButtonSolid from '../lib/button-solid.svelte';
+	import ButtonOutlined from '../lib/button-outlined.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { getContext } from 'svelte';
-	import Github from '$lib/github.svelte';
+	import GithubIcon from '$lib/github.svelte';
 	import { Auth } from '../apis/auth';
 	import confetti from 'canvas-confetti';
 	var canvas = document.getElementById('confetti');
@@ -141,28 +143,23 @@
 </script>
 
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
-		<div class="flex justify-center py-4 mb-8">
+	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
+
+		<div class="flex justify-center py4 mb-8">
 			<picture>
 				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
 			</picture>
 		</div>
-		{#if !showSuccessMsg}
-			<a
-				href="#"
-				on:click={loginWithGithub}
-				class="flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black transition-colors
-			duration-200 transform rounded-lg hover:bg-gray-200 hover:no-underline"
-			>
-				<div class="py-2">
-					<Github />
-				</div>
-				<span class="w-5/6 pr-7 font-bold text-center">Sign in with GitHub</span>
-			</a>
 
-			<div class="flex items-center justify-between mt-4">
-				<span class="w-full border-b" />
-			</div>
+		
+		{#if !showSuccessMsg}
+			
+			<ButtonOutlined
+			onClick={auth.LoginWithGithub}>
+			<GithubIcon styles="text-brown-800 mr-2"/>
+			 Sign in with Github
+			</ButtonOutlined>
+
 			<form on:submit|preventDefault={(e) => onClickSignUpUser(e)}>
 				<div class="mt-4">
 					<Textfield
@@ -213,19 +210,16 @@
 					</div>
 				{/if}
 
-				<div class="flex mt-8 w-full">
-					<Button
-						{isLoading}
-						onClick={() => {}}
-						type="submit"
-						styles="text-gray-50 w-full mr-2"
-						label="Sign Up"
-					/>
-					<Button
-						onClick={toggleModals}
-						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-						label="Close"
-					/>
+				<div class="flex mt-8 w-full space-x-8">
+					<ButtonSolid
+					{isLoading}
+					disabled= {!!emailErr || !!passwordErr}
+					onClick={() => {}}
+					> Sign Up</ButtonSolid>
+
+					<ButtonOutlined
+					onClick={toggleModals}
+					> Close</ButtonOutlined>
 				</div>
 			</form>
 		{:else}
@@ -233,13 +227,11 @@
 				<div id="confetti">
 					<CheckIcon styles="fill-current stroke-1 h-32 w-32 text-brown-800" />
 				</div>
-				<div class="w-full text-center flex flex-col gap-2 px-4 items-center">
+				<div class="w-full text-center flex flex-col space-y-4 gap-2 px-4 items-center">
 					<span class="text-lg capitalize text-brown-900">{successMessage}</span>
-					<Button
-						onClick={toggleModals}
-						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-						label="Close"
-					/>
+					<ButtonOutlined
+					onClick={toggleModals}
+					>Close</ButtonOutlined>
 				</div>
 			</div>
 		{/if}

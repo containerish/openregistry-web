@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, setContext } from 'svelte';
 	import Card from '$lib/card.svelte';
-	import Button from '$lib/button.svelte';
+	import ButtonSolid from '$lib/button-solid.svelte';
 	import { goto } from '$app/navigation';
 
 	let showRegisterForm = false;
@@ -85,14 +85,10 @@
 						focus:outline-none focus:ring focus:ring-brown-800"
 					/>
 				</div>
-				<div class="flex w-full">
-					<button
-						on:click={() => goto(`/search?query=${query}`)}
-						class="inline-flex justify-center bg-brown-900 tracking-wider items-center w-32 max-w-[48rem]
-						py-3.5 font-normal leading-6 border-none text-md shadow rounded-md text-gray-50 half:px-4
-						half:py-3 half:mt-1 mt-2">
-						Search
-					</button>
+				<div class="flex w-full justify-start mt-2.5">
+					<ButtonSolid
+					on:click={() => goto(`/search?query=${query}`)}
+					>Search</ButtonSolid>
 				</div>
 			</form>
 		</div>

@@ -6,6 +6,7 @@
 	import SupportIcon from '$lib/icons/support.svelte';
 	import SpinnerCircle from '$lib/icons/spinner-circle.svelte';
 	import FaqTerminal from '$lib/faqTerminal.svelte';
+	import ButtonSolid from '$lib/button-solid.svelte';
 	const support = new Support();
 	let isLoading = false;
 	let ticketResponse = '';
@@ -152,14 +153,12 @@
 					<div>
 						{@html ticketResponse}
 					</div>
-					<button
+				
+					<ButtonSolid
 						disabled={!formValidation.isBodyValid ||
 							!formValidation.isSubjectValid ||
 							!formValidation.isEmailValid}
 						on:click={handleFormSubmit}
-						class="disabled:cursor-not-allowed disabled:hover:bg-brown-800 inline-flex items-center gap-2 ml-1 px-6
-            py-2 mt-2 text-lg font-medium tracking-wide text-gray-100 transition-colors duration-200 transform
-            bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-900 border-none"
 					>
 						{#if isLoading}
 							<SpinnerCircle />
@@ -167,7 +166,7 @@
 							<SupportIcon />
 						{/if}
 						Send
-					</button>
+					</ButtonSolid>
 				</form>
 			</div>
 		</Card>

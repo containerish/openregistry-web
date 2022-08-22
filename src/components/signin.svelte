@@ -1,5 +1,7 @@
 <script lang="ts">
-	import Button from '../lib/button.svelte';
+	import ButtonOutlined from '../lib/button-outlined.svelte';
+	import ButtonSolid from '../lib/button-solid.svelte';
+	import GithubIcon from '../lib/github.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { Auth } from '../apis/auth';
@@ -96,20 +98,18 @@
 </script>
 
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
+	<div class=" flex  flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
 		<div class="flex justify-center py4 mb-8">
 			<picture>
 				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
 			</picture>
 		</div>
 
-		<button
-			on:click={auth.LoginWithGithub}
-			class="w-full h-12 flex bg-gray-100 items-center justify-center mt-4 text-gray-800 border-2 border-black
-			transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:no-underline"
-		>
-			<span class="w-5/6 pr-7 font-semibold text-center">Sign in with GitHub</span>
-		</button>
+		<ButtonOutlined
+		onClick={auth.LoginWithGithub}>
+		<GithubIcon styles="text-brown-800 mr-2"/>
+		 Sign in with Github
+		</ButtonOutlined>
 
 		<div class="flex items-center justify-between mt-4">
 			<span class="w-1/5 border-b lg:w-1/4" />
@@ -152,18 +152,15 @@
 					</div>
 				{/if}
 
-				<div class="flex mt-4 w-full">
-					<Button
-						disabled={!!emailErr || !!passwordErr}
-						{isLoading}
-						styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed disabled:bg-opacity-20"
-						label="Sign In"
-					/>
-					<Button
-						onClick={toggleModal}
-						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-						label="Close"
-					/>
+				<div class="flex mt-4 w-full justify-center space-x-5">
+					<ButtonSolid
+					disabled={!!emailErr || !!passwordErr}
+					{isLoading}
+					> Sign In</ButtonSolid>
+
+					<ButtonOutlined
+					onClick={toggleModal}
+					>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -210,19 +207,16 @@
 					</div>
 				{/if}
 
-				<div class="flex mt-4 w-full">
-					<Button
-						disabled={!!emailErr}
-						onClick={handleForgotPassword}
-						{isLoading}
-						styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed disabled:bg-opacity-20"
-						label="Submit"
-					/>
-					<Button
-						onClick={toggleModal}
-						styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-						label="Close"
-					/>
+				<div class="flex justify-center mt-4 w-full space-x-5">
+					<ButtonSolid
+					disabled={!!emailErr}
+					onClick={handleForgotPassword}
+					{isLoading}
+					>Submit</ButtonSolid>
+						
+					<ButtonOutlined
+					onClick={toggleModal}
+					> Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
