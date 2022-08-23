@@ -1,18 +1,9 @@
-<script lang="ts" context="module">
-	export async function load({ params }) {
-		return {
-			props: {
-				repo: params.repo,
-				username: params.username
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import Star from '$lib/icons/star.svelte';
 	import Globe from '$lib/icons/globe.svelte';
-	import { RegistryBackend, type Repo } from '../../../apis/registry';
+	import { RegistryBackend, type Repo } from '../../../../apis/registry';
 	import { onDestroy, onMount } from 'svelte';
 	import Tag from '$lib/tag.svelte';
 	let isOverview = true;

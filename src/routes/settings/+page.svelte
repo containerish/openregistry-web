@@ -1,4 +1,6 @@
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';

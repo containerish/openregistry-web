@@ -184,7 +184,7 @@ export class Auth extends HttpClient {
 		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + "/auth/github/login")
 	}
 
-	public publicPaths = new Map([
+	public static publicPaths = new Map([
 		['/', 'root'],
 		['/about', 'about'],
 		['/faq', 'faq'],

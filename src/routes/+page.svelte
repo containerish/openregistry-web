@@ -1,5 +1,5 @@
-<script lang="ts">
-	import Landing from './landing.svelte';
+<!-- <script lang="ts">
+	import Landing from './landing/+page.svelte';
 	import { userStore as session } from '$lib/userStore';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
@@ -17,4 +17,5 @@
 
 <div>
 	<Landing />
-</div>
+</div> -->
+<div>Hello!</div>

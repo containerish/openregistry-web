@@ -1,17 +1,6 @@
-<script context="module" lang="ts">
-	export function load({ error, status }) {
-		return {
-			props: {
-				error: JSON.stringify(error),
-				status: status
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
-	export let error: string;
-	export let status: number;
+	import {page} from '$app/stores';
+	const { status, error } = $page;
 </script>
 
 <div

@@ -1,4 +1,6 @@
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import Advert from '$lib/advert.svelte';
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';

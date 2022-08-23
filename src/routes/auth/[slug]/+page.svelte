@@ -1,25 +1,12 @@
-<script lang="ts" context="module">
-	export async function load({ params, url }) {
-		const slug = params.slug;
-		const u = new URLSearchParams(url.search);
-
-		return {
-			props: {
-				slug: slug,
-				token: u.get('token'),
-				unhandledErr: u.get('error')
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
-	import { Auth } from '../../apis/auth';
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
+	import { Auth } from '../../../apis/auth';
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/modal.svelte';
 	import Button from '$lib/button.svelte';
-	import Pulse from '../../components/pulse.svelte';
+	import Pulse from '../../../components/pulse.svelte';
 	import ErrorModal from '$lib/errorModal.svelte';
 	export let unhandledErr: string;
 	let showModal = false;

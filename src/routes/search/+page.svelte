@@ -1,16 +1,6 @@
-<script lang="ts" context="module">
-	/** @type import('@sveltejs/kit').Load} */
-	export async function load({ url }) {
-		const u = new URLSearchParams(url.search);
-		return {
-			props: {
-				query: u.get('query')
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
