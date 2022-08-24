@@ -7,12 +7,9 @@ const config = {
 		removeDeprecatedGapUtilities: true,
 	},
 	mode: "jit",
-	purge: {
-		content: [
-			"./src/**/*.{html,js,svelte,ts}",
-		],
-		enabled: true // disable purge in dev
-	},
+	content: [
+		"./src/**/*.{html,svelte,ts}",
+	],
 	theme: {
 		fontFamily: {
 			'sans': ['ui-sans-serif', 'system-ui'],

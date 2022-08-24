@@ -3,5 +3,9 @@ import { sveltekit } from '@sveltejs/kit/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [sveltekit()]
+    plugins: [sveltekit()],
+    server: {
+        host: "0.0.0.0",
+        port: 3000,
+    }
 })
