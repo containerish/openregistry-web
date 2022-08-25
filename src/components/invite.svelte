@@ -1,5 +1,7 @@
 <script type="module" lang="ts">
-	import Button from '$lib/button.svelte';
+	import ButtonOutlined from '$lib/button-outlined.svelte';
+	import ButtonSolid from '$lib/button-solid.svelte';
+
 	import { Auth } from '../apis/auth';
 
 	export let handleModal = () => {};
@@ -59,14 +61,15 @@
 					<span class={statusCode > 299 ? 'text-red-600' : 'text-brown-800'}>{respMsg}</span>
 				</div>
 			{/if}
-			<div class="flex px-16 pt-4 w-full">
-				<Button
-					{isLoading}
-					onClick={sendInvites}
-					styles="text-gray-50 w-full mr-2"
-					label="Send Invites"
-				/>
-				<Button onClick={handleModal} styles="bg-gray-50 text-gray-800 w-2/3 ml-2" label="Cancel" />
+			<div class="flex px-16 pt-4 w-full space-x-5 justify-center">
+				<ButtonSolid
+				{isLoading}
+				onClick={sendInvites}
+				>Send Invites</ButtonSolid>
+
+				<ButtonOutlined
+				onClick={handleModal}
+				>Cancel</ButtonOutlined>
 			</div>
 		</div>
 	</form>

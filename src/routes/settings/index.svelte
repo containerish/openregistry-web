@@ -22,6 +22,7 @@
 	import { form, field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
 	import { onMount } from 'svelte';
+	import ButtonSolid from '$lib/button-solid.svelte';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
@@ -66,10 +67,11 @@
 				<div class="flex mt-3">
 					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg mr-5">Community User</span>
-					<span class="text-lg"> Joined 
+					<span class="text-lg">
+						Joined
 						<span class="font-semibold">
-						{new Date(u.created_at).toDateString()}
-					</span>
+							{new Date(u.created_at).toDateString()}
+						</span>
 					</span>
 				</div>
 			</div>
@@ -77,35 +79,31 @@
 		<Card>
 			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8">
 				<h1 class="text-2xl font-medium">Email Address</h1>
-				<div>
+				<div class="flex items-center justify-start mt-5">
 					<input
 						id="email"
 						type="text"
-						class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md disabled:text-gray-400
+						class="w-1/2 px-4 py-3 -ml-1.5 text-md disabled:text-gray-400
                     text-gray-700 bg-white border rounded-md sm:mr-5 focus:border-brown-800
                     focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
 						disabled
 						bind:value={u.email}
 						placeholder="email"
 					/>
-
-					<button
-						class="px-6 py-2 text-lg font-medium tracking-wide text-gray-200 capitalize transition-colors
-                     duration-200 transform bg-brown-800 rounded-md sm:mx-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"
-					>
-						Edit
-					</button>
+					<ButtonSolid>Edit</ButtonSolid>
 				</div>
 			</div>
 		</Card>
 
 		<Card>
-			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5">
+			<div
+				class="rounded-xl flex-col w-3/4 flex space-y-6 justify-start items-start bg-brown-400 px-20 py-8 mt-5"
+			>
 				<h1 class="text-2xl font-medium">Change Password</h1>
 				<input
 					type="password"
 					bind:value={$currentPassword.value}
-					class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md
+					class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md
                      sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700
                      focus:ring-opacity-40"
 					placeholder="current password"
@@ -114,7 +112,7 @@
 				<input
 					type="password"
 					bind:value={$newPassword.value}
-					class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md
+					class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md
                      sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
 					placeholder="new password"
 				/>
@@ -122,7 +120,7 @@
 				<input
 					type="password"
 					bind:value={$confirmPassword.value}
-					class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5
+					class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5
 focus:outline-none focus:ring focus:ring-opacity-40
           {!$passwordForm.hasError('confirm_password.match_field')
 						? 'focus:border-brown-800 focus:ring-brown-700 '
@@ -146,25 +144,20 @@ focus:outline-none focus:ring focus:ring-opacity-40
 						{formResp.message}
 					</span>
 				{/if}
-				<button
-					on:click={resetPassword}
-					class="w-32 px-6 py-2 mt-5 -ml-1.5 text-lg font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"
-				>
-					Save
-				</button>
+				<ButtonSolid onClick={resetPassword}>Save</ButtonSolid>
 			</div>
 		</Card>
 
 		<Card>
 			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5 mb-20">
 				<h1 class="text-2xl font-medium">Account Information</h1>
-				<div class="flex flex-col">
+				<div class="flex flex-col space-y-6 justify-start items-start">
 					<span class="mt-2 text-brown-800 text-md">
 						This information will be public and visible to all us of OpenRegistry
 					</span>
 					<input
 						type="text"
-						class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5 disabled:text-gray-400
+						class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5 disabled:text-gray-400
               focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
 						bind:value={u.username}
 						disabled
@@ -173,20 +166,14 @@ focus:outline-none focus:ring focus:ring-opacity-40
 
 					<input
 						type="text"
-						class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md disabled:text-gray-400
+						class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md disabled:text-gray-400
                     sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700
                     focus:ring-opacity-40"
 						disabled
 						bind:value={u.html_url}
 						placeholder="Github"
 					/>
-
-					<button
-						class="w-32 px-6 py-2 mt-5 -ml-1.5 text-lg font-medium tracking-wide text-white capitalize
-                    transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"
-					>
-						Save
-					</button>
+					<ButtonSolid>Save</ButtonSolid>
 				</div>
 			</div>
 		</Card>

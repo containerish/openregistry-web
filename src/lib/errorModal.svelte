@@ -1,9 +1,8 @@
 <script lang="ts">
-	import Button from './button.svelte';
 	import ClickOutside from 'svelte-click-outside';
-
 	import CrossIcon from './icons/crossIcon.svelte';
 	import Modal from './modal.svelte';
+	import ButtonOutlined from './button-outlined.svelte';
 
 	export let error: string;
 	export let open: boolean = false;
@@ -44,12 +43,8 @@
 						</span>
 					</div>
 
-					<div class="flex mt-8 justify-center w-full">
-						<Button
-							onClick={closeModal}
-							styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-							label="Close"
-						/>
+					<div class="flex mt-8 justify-center items-center w-full">
+						<ButtonOutlined onClick={closeModal}>Close</ButtonOutlined>
 					</div>
 				</div>
 			</div>

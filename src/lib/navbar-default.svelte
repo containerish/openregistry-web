@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Signin from '../components/signin.svelte';
-	import Button from './button.svelte';
+	import ButtonSolid from './button-solid.svelte';
 	import Modal from './modal.svelte';
 	import Signup from '../components/signup.svelte';
 
@@ -93,7 +93,9 @@
 	</div>
 
 	<div class="flex items-center py-2 -mx-1 sm:mx-0 uw:py-4 half:hidden">
-		<Button onClick={() => toggleSignInForm()} styles="text-gray-50" label="Sign In" />
+		<ButtonSolid
+		onClick={() => toggleSignInForm()}> Sign In </ButtonSolid>
+		
 	</div>
 
 	{#if showSignInForm || openSignInModal}

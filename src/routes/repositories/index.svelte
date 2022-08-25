@@ -30,6 +30,7 @@
 	import Pulse from '../../components/pulse.svelte';
 	import { pulseStore } from '../../components/pulse';
 	import ErrorModal from '$lib/errorModal.svelte';
+	import ButtonOutlined from '$lib/button-outlined.svelte';
 	// @ts-ignore
 
 	const fetchPageData = async (offset?: number) => {
@@ -138,7 +139,7 @@
 						use:popperRef
 						on:mouseenter={() => (showTooltip = true)}
 						on:mouseleave={() => (showTooltip = false)}
-						class="cursor-not-allowed px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-white rounded-md sm:inline
+						class="cursor-not-allowed px-4 mx-1 lg:mr-0 text-brown-800 border-2 border-brown-100 bg-transparent rounded-md sm:inline
 					"
 					>
 						Create Repository
