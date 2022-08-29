@@ -11,6 +11,9 @@
 	import Autocomplete from './autocomplete.svelte';
 	import { RegistryBackend } from '../apis/registry';
 
+	/** @type {import('./$types').PageData} */
+	export let data;
+
 	export let pathname: string;
 	export let openSignInModal: boolean;
 	const auth = new Auth();
@@ -35,18 +38,7 @@
 	};
 
 	const redirectToRepositories = async () => {
-		const { error, data } = await auth.GetUserWithSession();
-		if (error) {
-			console.error('error signin: ', error);
-			return;
-		}
-
-		// @ts-ignore
-		$session.user = data;
-		// @ts-ignore
-		$session.authenticated = true;
 		goto('/repositories');
-		return;
 	};
 
 	setContext('toggleSignInForm', toggleSignInForm);

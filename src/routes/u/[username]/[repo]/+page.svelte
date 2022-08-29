@@ -1,13 +1,13 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import Star from '$lib/icons/star.svelte';
 	import Globe from '$lib/icons/globe.svelte';
 	import { RegistryBackend, type Repo } from '../../../../apis/registry';
 	import { onDestroy, onMount } from 'svelte';
 	import Tag from '$lib/tag.svelte';
+	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+
 	let isOverview = true;
-	let isTags = false;
+	let isTags = false; 
 
 	let repository: Repo = {
 		namespace: '',
@@ -24,19 +24,19 @@
 		isOverview = false;
 	};
 
-	export let repo: string;
-	export let username: string;
-	const ns = username + '/' + repo;
+	export let data: PageData;
+	console.log("data from repo details page:", data)
+	const ns = data.username + '/' + data.repo;
 	const registryBackend = new RegistryBackend();
 
 	onMount(async () => {
-		const { error, data } = await registryBackend.GetRepositoryDetails(ns);
-		if (error) {
-			console.error('error taglist: ', error);
+		const resp= await registryBackend.GetRepositoryDetails(ns);
+		if (resp.error) {
+			console.error('error taglist: ', resp.error);
 			return;
 		}
 
-		repository = data;
+		repository = resp.data;
 	});
 
 	let isCopied = '';
@@ -70,14 +70,14 @@
 			</div>
 			<div class="w-full">
 				<div class="flex gap-4">
-					<h1 class="text-4xl font-medium">{username}/{repo}</h1>
+					<h1 class="text-4xl font-medium">{data.username}/{data.repo}</h1>
 					<button
 						class="bg-inherit p-0 inline-flex justify-center items-center m-0 focus:border-none focus:p-0 focus:m-0"
 					>
 						<Star styles="w-8 h-8 mt-1.5" />
 					</button>
 				</div>
-				<span class="text-md">by {username}</span>
+				<span class="text-md">by {data.username}</span>
 			</div>
 		</div>
 

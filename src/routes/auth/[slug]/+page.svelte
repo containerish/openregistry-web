@@ -1,5 +1,5 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+	// throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
 
 	import { Auth } from '../../../apis/auth';
 	import { onDestroy, onMount } from 'svelte';
@@ -17,7 +17,7 @@
 	let formErr: string;
 	let formMsg: string;
 
-	export let slug = '';
+	export let data;
 	export let token = '';
 
 	const auth = new Auth();
@@ -60,7 +60,7 @@
 
 	let showErrorModal = false;
 	const handleCallback = async () => {
-		switch (slug) {
+		switch (data.slug) {
 			case verifyEmail:
 				const { error } = await auth.VerifyEmail(token);
 				if (error) {
@@ -76,9 +76,8 @@
 				showModal = true;
 				break;
 			case githubCallback:
-				const resp = await auth.GetUserWithSession();
-				if (resp.error) {
-					formErr = resp.error.message;
+				if (data.error) {
+					formErr = data.error.message;
 					showErrorModal = true;
 					return;
 				}

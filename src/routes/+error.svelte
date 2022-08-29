@@ -12,6 +12,6 @@
 		<img class="w-4/6" src="/404-not-found.svg" alt="" />
 	{/if}
 	<div class="w-full h-full">
-		<span class="text-brown-900 text-xl">Status Code: {status} {error}</span>
+		<span class="text-brown-900 text-xl">Status Code: {status} {JSON.stringify(error)}</span>
 	</div>
 </div>

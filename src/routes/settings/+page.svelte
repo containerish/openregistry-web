@@ -1,29 +1,16 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+	// throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
 
 	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
-	import { Auth, type User } from '../../apis/auth';
-	import { userStore as session } from '$lib/userStore';
-	export let u: User;
-
-	let nameOrUsername: string;
+	import { Auth } from '../../apis/auth';
+	export let data: PageData;
 	const auth = new Auth();
-	onMount(async () => {
-		// @ts-ignore
-		if (!$session.authenticated) {
-			await goto('/auth/unauthorized');
-		}
-
-		// @ts-ignore
-		u = $session.user;
-		nameOrUsername = u.name ? u.name : u.username;
-	});
 
 	import { form, field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
-	import { onMount } from 'svelte';
+	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
@@ -54,7 +41,7 @@
 	<title>User|Open Registry</title>
 </svelte:head>
 
-{#if u}
+{#if data.user}
 	<div class="min-h-[93vh] bg-cream-50">
 		<div
 			class="flex gap-5 space-x-10 min-w-full justify-start items-center py-28 my-20 px-20 bg-brown-500"
@@ -64,13 +51,13 @@
 				<UserIcon styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial">
-				<h1 class="text-4xl font-medium capitalize">{nameOrUsername}</h1>
+				<h1 class="text-4xl font-medium capitalize">{data.user.name? data.user.name : data.user.username}</h1>
 				<div class="flex mt-3">
 					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg mr-5">Community User</span>
 					<span class="text-lg"> Joined 
 						<span class="font-semibold">
-						{new Date(u.created_at).toDateString()}
+						{new Date(data.user.created_at).toDateString()}
 					</span>
 					</span>
 				</div>
@@ -87,7 +74,7 @@
                     text-gray-700 bg-white border rounded-md sm:mr-5 focus:border-brown-800
                     focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
 						disabled
-						bind:value={u.email}
+						bind:value={data.user.email}
 						placeholder="email"
 					/>
 
@@ -168,7 +155,7 @@ focus:outline-none focus:ring focus:ring-opacity-40
 						type="text"
 						class="w-1/2 mt-5 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5 disabled:text-gray-400
               focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
-						bind:value={u.username}
+						bind:value={data.user.username}
 						disabled
 						placeholder="Username"
 					/>
@@ -179,7 +166,7 @@ focus:outline-none focus:ring focus:ring-opacity-40
                     sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700
                     focus:ring-opacity-40"
 						disabled
-						bind:value={u.html_url}
+						bind:value={data.user.html_url}
 						placeholder="Github"
 					/>
 

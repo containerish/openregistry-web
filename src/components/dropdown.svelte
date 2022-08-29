@@ -4,6 +4,7 @@
 	import Invite from './invite.svelte';
 	import { Auth, type User } from '../apis/auth';
 	import { goto } from '$app/navigation';
+	
 	export let user: User;
 	export let show = false;
 	export let closeMenu: VoidFunction;

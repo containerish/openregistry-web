@@ -1,5 +1,6 @@
 import HttpClient from './httpClient';
 import { goto } from '$app/navigation';
+import type {AxiosResponse} from 'axios';
 
 export interface LoginResponse {
     access: string
@@ -63,9 +64,9 @@ export interface User {
 
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-export const ValidateSignupRequest = (input: SignupRequest) => {
+export const ValidateSignupRequest = (input: SignupRequest): boolean => {
 	if (input.password !== input.confirmPassword) {
-		return Promise.reject("confirm password does not match")
+		return false;
 	}
 
 	// minimum length for email is 3 chars
@@ -85,104 +86,116 @@ export const ValidateSignupRequest = (input: SignupRequest) => {
 }
 
 export class Auth extends HttpClient {
-    public constructor() {
-        super(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth')
-    }
-
-	public VerifyEmail = async (token:string) => {
-		const path= `/signup/verify?token=${token}`
-
-		const resp = this.http.get(path)
-		return resp;
+	public constructor() {
+		super(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth');
 	}
 
-	public ResetPassword = async (oldPassword: string, newPassword: string) => {
-		const path= `/reset-password`
+	public VerifyEmail = async (token: string): Promise<AxiosResponse> => {
+		const path = `/signup/verify?token=${token}`;
+
+		const resp = this.http.get(path);
+		return resp;
+	};
+
+	public ResetPassword = async (oldPassword: string, newPassword: string): Promise<AxiosResponse> => {
+		const path = `/reset-password`;
 
 		const body = {
-			"old_password": oldPassword,
-			"new_password": newPassword,
-		}
+			old_password: oldPassword,
+			new_password: newPassword
+		};
 
-		const resp = this.http.post(path, body)
+		const resp = this.http.post(path, body);
 		return resp;
-	}
+	};
 
-	public ForgotPassword = async (email: string) => {
-		const path= `/forgot-password?email=${email}`
+	public ForgotPassword = async (email: string): Promise<AxiosResponse> => {
+		const path = `/forgot-password?email=${email}`;
 
-		const resp = this.http.get(path)
+		const resp = this.http.get(path);
 		return resp;
-	}
+	};
 
-	public ForgotPasswordCallback = async (newPassword: string, token: string) => {
-		const path= `/reset-forgotten-password`
+	public ForgotPasswordCallback = async (newPassword: string, token: string): Promise<AxiosResponse> => {
+		const path = `/reset-forgotten-password`;
 
 		const body = {
-			"new_password": newPassword,
-		}
+			new_password: newPassword
+		};
 
-		const resp = this.http.post(path, body, {headers: {
-			'Authorization': 'Bearer ' + token,
-		}})
+		const resp = this.http.post(path, body, {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		});
 
 		return resp;
-	}
+	};
 
-	public SendInvites = async (emails: string)=> {
-		const path = "send-email/welcome"
+	public SendInvites = async (emails: string): Promise<AxiosResponse> => {
+		const path = 'send-email/welcome';
 		const body = {
-			emails: emails,
+			emails: emails
+		};
+		const resp = await this.http.post(path, body);
+		return resp;
+	};
+
+	public Login = async (email: string, password: string): Promise<AxiosResponse> => {
+		const path = '/signin';
+
+		if (!email || !password) {
+			return Promise.reject('email/password cannot be empty');
 		}
-		const resp = await this.http.post(path, body)
+		const body = { email, password };
+		const resp = await this.http.post(path, body);
 		return resp;
-	}
+	};
 
-
-    public Login = async (email: string, password: string) => {
-        const path = '/signin'
-
-        if (!email || !password) {
-            return Promise.reject("email/password cannot be empty")
-        }
-        const body = { email, password };
-        const resp = await this.http.post(path, body);
-		return resp
-    }
-
-    public Signup = async (username: string, email: string, password: string) => {
-
-        const path = '/signup'
-        if (!email || !password) {
-            return Promise.reject("email/password cannot be empty")
-        }
-        const body = {
-            username: username,
-            email:email,
-            password:password,
-        }
-        const resp = await this.http.post(path, body);
+	public Signup = async (username: string, email: string, password: string): Promise<AxiosResponse> => {
+		const path = '/signup';
+		if (!email || !password) {
+			return Promise.reject('email/password cannot be empty');
+		}
+		const body = {
+			username: username,
+			email: email,
+			password: password
+		};
+		const resp = await this.http.post(path, body);
 		return resp;
-    }
+	};
 
-    public Signout = async () => {
-		const path = `/signout`
+	public Signout = async (): Promise<AxiosResponse> => {
+		const path = `/signout`;
 
-        const resp = await this.http.delete(path);
+		const resp = await this.http.delete(path);
 		return resp;
-    }
+	};
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    public GetUserWithSession = async () => {
-        const path = `/sessions/me`
-
-        const resp = await this.http.get(path);
-		return resp;
-    }
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	public GetUserWithSession = async (sessionId: string) => {
+		if (!sessionId) throw new Error('session is empty');
+		try {
+			const path = `/sessions/me`;
+			const resp = await this.http.get(path, {
+				headers: {
+					cookie: `session_id=${sessionId}`
+				},
+			})
+			return resp
+		} catch (err) {
+			return {
+				error: err,
+				status: 400,
+				data: undefined,
+			};
+		}
+	};
 
 	public LoginWithGithub = () => {
-		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + "/auth/github/login")
-	}
+		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login');
+	};
 
 	public static publicPaths = new Map([
 		['/', 'root'],

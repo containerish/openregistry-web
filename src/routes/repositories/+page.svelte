@@ -1,6 +1,4 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import Advert from '$lib/advert.svelte';
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
@@ -15,7 +13,11 @@
 	import type { User } from '../../apis/auth';
 	import { navigating } from '$app/stores';
 	import { userStore as session } from '$lib/userStore';
-	export let u: User;
+
+	/** @type {import('./$types').PageData} */
+	export let data: PageData;
+	
+	// export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
 	export let catalog: Catalog;
@@ -32,21 +34,22 @@
 	import Pulse from '../../components/pulse.svelte';
 	import { pulseStore } from '../../components/pulse';
 	import ErrorModal from '$lib/errorModal.svelte';
+	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	// @ts-ignore
 
 	const fetchPageData = async (offset?: number) => {
-		const { error, data } = await backend.ListCatalog(
+		const resp = await backend.ListCatalog(
 			backend.DefaultPageSize,
 			backend.DefaultPageSize * offset,
-			u.username
+			data.user.username
 		);
 
-		if (error) {
+		if (resp.error) {
 			console.error('error in repo/index: fetchPageData: ', error);
 			return;
 		}
 
-		catalog = data;
+		catalog = resp.data;
 	};
 	let showTooltip = false;
 
@@ -54,21 +57,21 @@
 
 	onMount(async () => {
 		// @ts-ignore
-		if (!$session.authenticated) {
+		if (!data.authenticated) {
 			goto('/auth/unauthorized');
 			return;
 		}
 
 		// @ts-ignore
-		u = $session.user;
-		const { data, error } = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
-		if (error) {
+		const u: User = data.user;
+		const resp = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
+		if (resp.error) {
 			openErrorModal = true;
-			httpError = error.message;
+			httpError = resp.error.message;
 			return;
 		}
 
-		catalog = data;
+		catalog = resp.data;
 	});
 
 	let showModal = false;
