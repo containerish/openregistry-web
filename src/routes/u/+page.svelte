@@ -1,6 +1,4 @@
 <script lang="ts">
-	// throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import { onMount } from 'svelte';
 	import UserIcon from '$lib/icons/user.svelte';
 	import Repository from '../../components/repository.svelte';
@@ -16,17 +14,6 @@
 	let isRepo = true;
 	let isStarred = false;
 	let isContrib = false;
-
-	// onMount(async () => {
-	// 	// @ts-ignore
-	// 	if (!$session.authenticated) {
-	// 		await goto('/auth/unauthorized');
-	// 	}
-
-	// 	// @ts-ignore
-	// 	user = $session.user;
-	// 	await fetchPageData();
-	// });
 
 	const toggleRepo = () => {
 		isContrib = false;

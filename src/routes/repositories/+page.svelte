@@ -12,12 +12,10 @@
 	import type { Catalog } from '../../apis/registry';
 	import type { User } from '../../apis/auth';
 	import { navigating } from '$app/stores';
-	import { userStore as session } from '$lib/userStore';
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
 	
-	// export let u: User;
 	const backend = new RegistryBackend();
 	const pageSize = 10;
 	export let catalog: Catalog;

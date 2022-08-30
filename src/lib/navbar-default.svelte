@@ -14,7 +14,6 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-	export let pathname: string;
 	export let openSignInModal: boolean;
 	const auth = new Auth();
 	const registry = new RegistryBackend();
@@ -45,11 +44,6 @@
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-{#if pathname}
-	<div class="w-1/3 pt-2 mx-10 justify-center items-center flex md:block half:hidden">
-		<Autocomplete onAutoComplete={handleAutoComplete} />
-	</div>
-{/if}
 <div class="items-center sm:flex">
 	<div class="flex flex-row half:flex-col half:mr-5 mt-2 md:mt-0 md:mx-1">
 		<a

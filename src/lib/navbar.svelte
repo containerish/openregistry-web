@@ -5,7 +5,6 @@
 	import { userStore as session } from '$lib/userStore';
 	import NavbarAuth from './navbar-auth.svelte';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
-	export let pathname: string;
 	export let openSignInModal: boolean;
 	export let data: PageData;
 
@@ -37,7 +36,7 @@
 								<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
 							</picture>
 						</div>
-						<NavbarDefault {pathname} {openSignInModal} {data}/>
+						<NavbarDefault {openSignInModal} {data}/>
 					</div>
 				</div>
 			</div>

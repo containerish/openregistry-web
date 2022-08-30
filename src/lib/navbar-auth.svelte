@@ -29,7 +29,7 @@
 			goto('/repositories')
 			return
 		}
-		goto('/')
+		 goto('/')
 	}
 </script>
 

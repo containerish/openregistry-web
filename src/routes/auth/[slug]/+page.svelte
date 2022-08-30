@@ -1,6 +1,4 @@
 <script lang="ts">
-	// throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import { Auth } from '../../../apis/auth';
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';

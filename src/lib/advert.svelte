@@ -34,23 +34,3 @@
 		</div>
 	</div>
 {/if}
-
-<style>
-	/* .content-div { */
-	/* 	background-repeat: no-repeat; */
-	/* 	background-size: cover; */
-	/* 	background-position: center; */
-	/* } */
-
-	/* .content-div:hover { */
-	/* 	background-image: linear-gradient(to right, rgba(227, 6, 19, 0.801), rgba(175, 25, 23, 0.8)); */
-	/* } */
-
-	/* .content-div:hover .fd-cl { */
-	/* 	opacity: 0.2; */
-	/* } */
-
-	/* .content-div:hover .fd-sh { */
-	/* 	opacity: 1; */
-	/* } */
-</style>
