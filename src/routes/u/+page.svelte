@@ -8,22 +8,12 @@
 	import UserGroupIcon from '$lib/icons/userGroup.svelte';
 	import { goto } from '$app/navigation';
 	import { userStore as session } from '$lib/userStore';
-	export let user: User;
+	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+	export let data: PageData;
 
 	let isRepo = true;
 	let isStarred = false;
 	let isContrib = false;
-
-	onMount(async () => {
-		// @ts-ignore
-		if (!$session.authenticated) {
-			await goto('/auth/unauthorized');
-		}
-
-		// @ts-ignore
-		user = $session.user;
-		await fetchPageData();
-	});
 
 	const toggleRepo = () => {
 		isContrib = false;
@@ -48,18 +38,18 @@
 	let catalog: Catalog;
 
 	const fetchPageData = async (offset?: number) => {
-		const { error, data } = await backend.ListCatalog(
+		const resp = await backend.ListCatalog(
 			backend.DefaultPageSize,
 			backend.DefaultPageSize * offset,
-			user.username
+			data.user.username
 		);
 
-		if (error) {
-			console.error('error in repo/index: fetchPageData: ', error);
+		if (resp.error) {
+			console.error('error in repo/index: fetchPageData: ', resp.error);
 			return;
 		}
 
-		catalog = data;
+		catalog = resp.data;
 	};
 </script>
 
@@ -67,7 +57,7 @@
 	<title>User|Open Registry</title>
 </svelte:head>
 
-{#if user && user}
+{#if data.user}
 	<div class="min-h-[93vh] bg-cream-50">
 		<div
 			class="flex gap-5 space-x-10 min-w-full justify-start items-center py-24 mt-20 px-20 bg-brown-500"
@@ -77,7 +67,7 @@
 				<UserIcon styles="h-24 w-24" />
 			</div>
 			<div class="flex-initial w-64">
-				<h1 class="text-4xl font-medium">{user.name ? user.name : user.username}</h1>
+				<h1 class="text-4xl font-medium">{data.user.name ? data.user.name : data.user.username}</h1>
 				<div class="flex mt-3">
 					<UserIcon styles="h-6 w-6" />
 					<span class="text-lg">Community User</span>
@@ -89,7 +79,7 @@
 				<span class="mt-3 text-sm">
 					Joined
 					<span class="font-semibold">
-						{new Date(user.created_at).toDateString()}
+						{new Date(data.user.created_at).toDateString()}
 					</span>
 				</span>
 			</div>

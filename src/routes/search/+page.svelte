@@ -1,15 +1,3 @@
-<script lang="ts" context="module">
-	/** @type import('@sveltejs/kit').Load} */
-	export async function load({ url }) {
-		const u = new URLSearchParams(url.search);
-		return {
-			props: {
-				query: u.get('query')
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
