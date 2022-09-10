@@ -10,6 +10,7 @@
 	onMount( () => {
 		if (data.user) {
 			goto('/repositories')
+			return
 		}
 	})
 </script>

@@ -2,9 +2,10 @@
     import { goto } from "$app/navigation";
     import {fade, draw, scale } from "svelte/transition";
     import { flip } from "svelte/animate";
-    import RightArrow from "../../../../../lib/icons/arrow-right.svelte"
-    import ArrowLeft from "../../../../../lib/icons/arrow-l.svelte";
+    import RightArrow from "$lib/icons/arrow-right.svelte"
+    import ArrowLeft from "$lib/icons/arrow-l.svelte";
     import ArrowDown from "$lib/icons/arrow-down.svelte";
+    import Input from "$lib/textfield.svelte";
     import Info from "$lib/icons/info.svelte";
     import Book from "$lib/icons/book.svelte";
     </script>
@@ -34,13 +35,17 @@
             </div>
             <div class="flex flex-col my-10 space-y-1">
                 <span class="font-semibold text-brown-900 text-lg"> Project name</span>
-                <input type="text" placeholder="" class="rounded-md w-2/5"/>
+                <div class="w-2/5">
+                    <Input/>
+                </div>
                 <span class="text-md"> Your project will be deployed to akash network</span>
             </div>
             <div class="flex flex-col my-10 space-y-2">
                 <span class="font-semibold text-brown-900"> Production branch</span>
                 <div class="flex relative w-1/4">
-                    <input type="text" placeholder="main" class="rounded-md w-full"/>
+                    <div class="w-full">
+                        <Input placeholder="main"/>
+                    </div>
                     <div class="absolute right-1 top-2">
                         <ArrowDown/>
                     </div>
@@ -52,9 +57,9 @@
             <div class="flex flex-col space-y-1">
                 <div class="flex space-x-2">
                     <span class="text-lg font-semibold text-brown-900"> Build Settings</span>
-                    <div class="flex space-x-2 justify-center items-center rounded-full bg-purple-200 max-w-fit px-2 py-0.5 text-sm text-purple-900"> 
+                    <div class="flex space-x-2 justify-center items-center rounded-full bg-purple-200 max-w-fit px-2 pr-3 py-0.5 text-sm text-purple-900"> 
                         <Book/>
-                        <span class=" text-xs">Configuring build</span>
+                        <span class="text-xs">Configuring build</span>
                     </div>
                 </div>
                 <span class="text-md">
@@ -64,7 +69,9 @@
                     <div class="flex flex-col my-10 space-y-1">
                         <span class=" text-brown-900 font-semibold"> Framework preset</span>
                         <div class="flex relative w-1/4">
-                            <input type="text" placeholder="main" class="rounded-md w-full"/>
+                            <div class="w-full">
+                                <Input placeholder="main"/>
+                            </div>
                             <div class="absolute right-1 top-2">
                                 <ArrowDown/>
                             </div>
@@ -77,7 +84,9 @@
                             <span class="font-semibold text-brown-900"> Build command</span>
                             <Info/>
                         </div>
-                        <input type="text" placeholder="" class="rounded-md w-2/5"/>
+                        <div class="w-2/5">
+                            <Input/>
+                        </div>
                         <span class="text-md"> e.g. npm run build </span>
                     </div>
     
@@ -88,7 +97,9 @@
                         </div>
                         <div class="flex space-x-1">
                             <span class="text-2xl text-brown-900 font-semibold">/</span>
-                            <input type="text" placeholder="" class="rounded-md w-2/5"/>
+                            <div class="w-2/5">
+                                <Input/>
+                            </div>
                         </div>
                         <span class="text-md"> e.g. dist </span>
                     </div>

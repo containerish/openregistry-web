@@ -1,6 +1,8 @@
 <script>
     import AddAccount from "$lib/icons/add-account.svelte";
     import { goto } from "$app/navigation";
+    import Input from "$lib/textfield.svelte";
+    import ArrowDown from "$lib/icons/arrow-down.svelte";
     import {fade, slide, scale} from "svelte/transition";
 </script>
 
@@ -41,19 +43,11 @@
                 <span class="text-md font-semibold text-brown-900"> Github account</span>
             </div>
             <div class="flex relative w-2/5">
-                <input type="text" placeholder="guacamole" class="rounded-md w-full"/>
+                <div class="w-full">
+                    <Input placeholder="blog"/>
+                </div>
                 <div class="absolute right-1 top-2">
-                    <svg
-                    class="w-4 h-4 lg:h-6 lg:w-6 mx-1 half:w-4 half:h-4 half:mx-0"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    >
-                    <path
-                        d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                        fill="currentColor"
-                    />
-                     </svg>
+                    <ArrowDown/>
                 </div>
             </div>
             <div class="flex space-x-1">
@@ -65,7 +59,9 @@
             <span class="ml-2 text-md font-semibold">
                 Select a repository
             </span>
-            <input class="rounded-md w-1/2 h-11" placeholder="blog"/>
+            <div class="w-1/2">
+                <Input placeholder="blog"/>
+            </div>
             <span class="text-md text-gray-700"> If your repository is not shown, configure repository access for OpenRegistry app on Github.</span>
         </div>
         <hr class="mt-20 border-1 border-gray-300"/>

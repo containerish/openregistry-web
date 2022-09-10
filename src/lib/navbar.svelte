@@ -36,7 +36,7 @@
 								<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
 							</picture>
 						</div>
-						<NavbarDefault {openSignInModal} {data}/>
+						<NavbarDefault {openSignInModal} />
 					</div>
 				</div>
 			</div>

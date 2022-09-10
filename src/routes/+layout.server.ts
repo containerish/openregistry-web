@@ -29,6 +29,8 @@ export async function load(loadEvent: LayoutServerLoadEvent): Promise<LayoutResp
 				pathname: url.pathname
 			} as LayoutResponse;
 		}
+
+		throw Error(`status: ${status} - error: ${error} `);
 	} catch (error) {
 		return {
 			error: JSON.stringify(error.message),

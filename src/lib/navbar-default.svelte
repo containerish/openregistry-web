@@ -7,15 +7,9 @@
 	import { Auth } from '../apis/auth';
 	import { setContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { userStore as session } from '$lib/userStore';
-	import Autocomplete from './autocomplete.svelte';
 	import { RegistryBackend } from '../apis/registry';
 
-	/** @type {import('./$types').PageData} */
-	export let data;
-
 	export let openSignInModal: boolean;
-	const auth = new Auth();
 	const registry = new RegistryBackend();
 
 	let showSignInForm = false;

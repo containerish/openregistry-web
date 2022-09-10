@@ -15,6 +15,7 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
+	const u: User = data.user;
 
 	const backend = new RegistryBackend();
 	const pageSize = 10;
@@ -43,7 +44,7 @@
 		);
 
 		if (resp.error) {
-			console.error('error in repo/index: fetchPageData: ', error);
+			console.error('error in repo/index: fetchPageData: ', data.error);
 			return;
 		}
 
@@ -207,4 +208,3 @@
 	</Card>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />
-
