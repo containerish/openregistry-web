@@ -1,5 +1,7 @@
+import { ghStore } from "$lib/stores";
 import type { PageServerLoadEvent } from ".svelte-kit/types/src/routes/auth/[slug]/$types";
 import * as cookie from 'cookie';
+import type { AuthorisedRepository, } from "src/routes/+layout.server";
 
 export async function load(loadEvent: PageServerLoadEvent) {
 	const cookies = cookie.parse(loadEvent.request.headers.get('cookie') || '');
@@ -21,8 +23,10 @@ export async function load(loadEvent: PageServerLoadEvent) {
 			'cookie': `session_id=${sessionId}`
 		}
 	})
-	const jsonResp = await resp.json()
 
+	const jsonResp = await resp.json() as AuthorisedRepository[]
+
+	ghStore.setGithubUsername(jsonResp[0].repository.owner.login)
 	return {
 		repoList: jsonResp,
 		githubUsername: jsonResp[0].repository.owner.login,

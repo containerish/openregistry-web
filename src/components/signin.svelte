@@ -76,7 +76,7 @@
 		const email = e.target.email.value;
 		const password = e.target.password.value;
 
-		if (email === '' || password === '') {
+		if (!email || !password) {
 			isLoading = false;
 			emailErr = 'email is a required field';
 			passwordErr = 'password is a required field';

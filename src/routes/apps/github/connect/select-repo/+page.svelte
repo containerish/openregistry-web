@@ -2,26 +2,30 @@
 	import AddAccountIcon from '$lib/icons/add-account.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Input from '$lib/textfield.svelte';
-	import ArrowDown from '$lib/icons/arrow-down.svelte';
-	import { fade, slide, scale } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
+	import { ghStore } from '$lib/stores';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	import CheckIcon from '$lib/icons/checkIcon.svelte';
-	import Button from '$lib/button.svelte';
+	import type { AuthorisedRepository } from 'src/routes/+layout.server';
 
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
 
 	let selectedRepo: string;
 
-	function handleRepoSelect(repo: string) {
-		selectedRepo = repo;
+	async function handleRepoSelect(repo: AuthorisedRepository) {
+		selectedRepo = repo.repository.name;
+		await ghStore.setSelectedRepository(repo);
+		await ghStore.setAllAuthorisedRepositories(data.repoList);
+		await ghStore.setGithubUsername(repo.repository.owner.login);
 	}
 
 	console.log('data: ', data);
 
 	$: {
 		console.log('selectedRepo: ', selectedRepo);
+		console.log('set branches in selectedRepo: ', $ghStore.selectedRepository);
+		console.log('githu username in store', $ghStore.githubUsername);
 	}
 </script>
 
@@ -121,7 +125,7 @@
 				<div class="grid-flow-row grid grid-cols-2 gap-4">
 					{#each data.repoList as repo}
 						<button
-							on:click={() => handleRepoSelect(repo.repository.name)}
+							on:click={() => handleRepoSelect(repo)}
 							class="bg-white rounded-md border-2 gap-2 border-brown-300 flex justify-center items-center py-1 {repo
 								.repository.name === selectedRepo
 								? 'bg-cream-50'
@@ -146,10 +150,7 @@
 				class="text-brown-800 underline underline-offset-4 text-lg cursor-pointer">Cancel</span
 			>
 			<button
-				on:click={() =>
-					goto(
-						`/apps/github/connect/setup?selected_repo=${selectedRepo}&github_username=${data.githubUsername}`
-					)}
+				on:click={() => goto(`/apps/github/connect/setup`)}
 				class="rounded-md text-white bg-brown-700 px-6 py-3 mt-2 tracking-wide text-lg"
 			>
 				Begin setup

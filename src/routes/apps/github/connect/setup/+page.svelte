@@ -1,17 +1,20 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { fade, draw, scale } from 'svelte/transition';
-	import { flip } from 'svelte/animate';
-	import RightArrow from '$lib/icons/arrow-right.svelte';
+	import { fade } from 'svelte/transition';
 	import ArrowLeft from '$lib/icons/arrow-l.svelte';
-	import ArrowDown from '$lib/icons/arrow-down.svelte';
-	import Input from '$lib/textfield.svelte';
 	import Info from '$lib/icons/info.svelte';
 	import Book from '$lib/icons/book.svelte';
-	import { page } from '$app/stores';
+	import { ghStore } from '$lib/stores';
+	import ListBox from '$lib/listBox.svelte';
+	import Disclosure from '$lib/disclosure.svelte';
+	import Textfield from '$lib/textfield.svelte';
+	import Input from '$lib/input.svelte';
+	import Button from '$lib/button.svelte';
+	import AddAccount from '$lib/icons/add-account.svelte';
 
-	const selectedRepo = $page.url.searchParams.get('selected_repo');
-	const githubUsername = $page.url.searchParams.get('github_username');
+	$: {
+		console.log('branches in setup: ', $ghStore.selectedRepository);
+	}
 </script>
 
 <div class="flex flex-col min-h-[75vh] bg-cream-50 items-center space-y-6 px-10 pb-52 pt-20">
@@ -39,9 +42,13 @@
 				<span class="text-lg"> Configure automatic builds and deployments for</span>
 				<img class="mt-0.5" src="/github.svg" alt="github-logo" width="24" />
 				<!-- must replace this with a variable -->
-				<a target="_blank" href="https://github.com/{githubUsername}/{selectedRepo}">
+				<a
+					target="_blank"
+					href="https://github.com/{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository
+						.name}"
+				>
 					<u>
-						{githubUsername}/{selectedRepo}
+						{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository.name}
 					</u>
 				</a>
 				<!-- must replace this with a variable -->
@@ -50,20 +57,19 @@
 		<div class="flex flex-col my-10 space-y-1">
 			<span class="font-semibold text-brown-900 text-lg">Project name</span>
 			<div class="w-2/5">
-				<Input />
+				<Textfield />
 			</div>
 			<span class="text-md"> Your project will be deployed to akash network</span>
 		</div>
 		<div class="flex flex-col my-10 space-y-2">
-			<span class="font-semibold text-brown-900"> Production branch</span>
-			<div class="flex relative w-1/4">
-				<div class="w-full">
-					<Input placeholder="main" />
-				</div>
-				<div class="absolute right-1 top-2">
-					<ArrowDown />
-				</div>
-			</div>
+			<ListBox
+				items={$ghStore.selectedRepository.branches.map((b, i) => ({
+					name: b.name,
+					id: i,
+					handler: () => {},
+					disabled: false
+				}))}
+			/>
 			<span class="text-md">
 				Pushes to this branch automatically trigger deployments to the Production environment.
 				Pushes to all other
@@ -82,20 +88,17 @@
 				</div>
 			</div>
 			<span class="text-md">
-				If your project uses a static site generator or build tool, set the build instructions for
-				Cloudflare.
+				If your project uses a different tool than Docker (like nerdctl), then please set the build
+				instructions for OpenRegistry
 			</span>
 			<div>
 				<div class="flex flex-col my-10 space-y-1">
-					<span class=" text-brown-900 font-semibold"> Framework preset</span>
-					<div class="flex relative w-1/4">
-						<div class="w-full">
-							<Input placeholder="main" />
-						</div>
-						<div class="absolute right-1 top-2">
-							<ArrowDown />
-						</div>
-					</div>
+					<ListBox
+						items={[
+							{ name: 'Docker', id: 0, disabled: false },
+							{ name: 'NerdCtl', disabled: false, id: 1 }
+						]}
+					/>
 					<span class="text-md"> select a framework to prefill recommended settings </span>
 				</div>
 
@@ -105,32 +108,35 @@
 						<Info />
 					</div>
 					<div class="w-2/5">
-						<Input />
+						<Textfield />
 					</div>
-					<span class="text-md"> e.g. npm run build </span>
+					<span class="text-md">
+						e.g. <code>docker build -f Dockerfile -t openregistry.dev/test-user/myapp:latest .</code
+						>
+					</span>
 				</div>
 
-				<div class="flex flex-col my-10 space-y-1">
-					<div class="flex items-center space-x-1 w-2/5">
-						<span class="font-semibold text-brown-900"> Build output directory</span>
-						<Info />
-					</div>
-					<div class="flex space-x-1">
-						<span class="text-2xl text-brown-900 font-semibold">/</span>
-						<div class="w-2/5">
-							<Input />
-						</div>
-					</div>
-					<span class="text-md"> e.g. dist </span>
-				</div>
 				<div class="flex flex-col space-y-8">
 					<div class="flex items-center space-x-1">
-						<RightArrow styles="text-blue-600" />
-						<span class="text-blue-600 font-normal"> Root directory (advanced)</span>
+						<Disclosure title="Dockerfile directory (advanced)">
+							<Textfield />
+						</Disclosure>
 					</div>
-					<div class="flex items-center space-x-1">
-						<RightArrow styles="text-blue-600" />
-						<span class="text-blue-600 font-normal"> Environment variables (advanced)</span>
+					<div class="flex items-center justify-center w-full space-x-1">
+						<Disclosure title="Environment variables (advanced)">
+							<div class="grid grid-flow-col gap-4 place-items-center grid-cols-2 w-full">
+								<div class="w-3/4">
+									<Input placeholder="Key" value="" />
+								</div>
+								<div class="w-3/4">
+									<Input placeholder="Value" value="" />
+								</div>
+							</div>
+							<button class="flex gap-2 border-none p-2 place-items-center rounded-md bg-cream-50">
+								<AddAccount styles="text-brown-900" />
+								Add More
+							</button>
+						</Disclosure>
 					</div>
 				</div>
 
@@ -142,15 +148,15 @@
 						class="flex space-x-1 cursor-pointer"
 					>
 						<ArrowLeft />
-						<span class="text-brown-800 text-lg"> Change repository</span>
+						<span class="text-brown-800 text-lg">Change repository</span>
 					</div>
 
 					<button
 						on:click={() => goto('/apps/github/connect/deploy')}
 						class="rounded-md text-white bg-brown-700 px-6 py-3 mt-2 tracking-wide text-lg"
 					>
-						Save and Deploy</button
-					>
+						Save and Deploy
+					</button>
 				</div>
 			</div>
 		</div>
