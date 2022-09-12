@@ -26,7 +26,7 @@
 
 	const installGithubApp = () => {
 		const uri = 'https://github.com/apps/test-app-or/installations/new';
-		window.open(uri);
+		goto(uri);
 	};
 
 	$: {
