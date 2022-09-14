@@ -25,7 +25,7 @@
 	};
 
 	const installGithubApp = () => {
-		const uri = 'https://github.com/apps/test-app-or/installations/new';
+		const uri = 'https://github.com/apps/demo-github-app-guacamole/installations/new';
 		goto(uri);
 	};
 

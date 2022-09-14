@@ -73,8 +73,11 @@
 	const onClickSignIn = async (e: any) => {
 		e.preventDefault();
 		isLoading = true;
-		const email = e.target.email.value;
-		const password = e.target.password.value;
+		// const email = e.target.email.value;
+		// const password = e.target.password.value;
+
+		const email = 'johndoe@guacamole.sh'
+		const password = 'Qwerty@123'
 
 		if (!email || !password) {
 			isLoading = false;

@@ -3,12 +3,13 @@ import type { PageServerLoadEvent } from './$types';
 import * as cookie from 'cookie';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load(loadEvent: PageServerLoadEvent){
+export async function load(loadEvent: PageServerLoadEvent) {
+	console.log('cookies: ');
 	const auth = new Auth();
-	const {request, params} = loadEvent
+	const { request, params } = loadEvent;
 
 	const cookies = cookie.parse(request.headers.get('cookie') || '');
-	const { data, error, status } = await auth.GetUserWithSession(cookies["session_id"]);
+	const { data, error, status } = await auth.GetUserWithSession(cookies['session_id']);
 
 	if (error) {
 		return {

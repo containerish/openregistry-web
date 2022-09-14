@@ -13,6 +13,9 @@
 			return;
 		}
 	});
+	$: {
+		console.log('data in layout: ', data)
+	}
 </script>
 
 <main

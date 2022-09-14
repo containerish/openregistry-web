@@ -6,7 +6,7 @@ import * as cookie from 'cookie';
 export type AuthorisedRepository = {
 	branches: Branch[];
 	repository: Repository;
-}
+};
 
 export type Organization = {
 	login?: string;
@@ -52,20 +52,20 @@ export type Organization = {
 	members_url?: string;
 	public_members_url?: string;
 	repos_url?: string;
-}
+};
 
 export type SecurityAndAnalysis = {
 	advanced_security?: AdvancedSecurity;
 	secret_scanning?: SecretScanning;
-}
+};
 
 export type AdvancedSecurity = {
 	status?: string;
-}
+};
 
 export type SecretScanning = {
 	status?: string;
-}
+};
 
 export type GithubUser = {
 	login?: string;
@@ -110,7 +110,7 @@ export type GithubUser = {
 	subscriptions_url?: string;
 	permissions?: { [key: string]: boolean };
 	role_name?: string;
-}
+};
 
 export type Repository = {
 	id?: number;
@@ -209,13 +209,13 @@ export type Repository = {
 	teams_url?: string;
 	visibility?: string;
 	role_name?: string;
-}
+};
 
 export type Branch = {
 	name: string;
-	commit: { sha: string, url: string }
+	commit: { sha: string; url: string };
 	protected: string;
-}
+};
 
 export type LayoutResponse = {
 	user?: User;
@@ -235,7 +235,7 @@ export async function load(loadEvent: LayoutServerLoadEvent): Promise<LayoutResp
 
 	try {
 		const cookies = cookie.parse(request.headers.get('cookie') || '');
-
+		
 		const { data, error, status } = await auth.GetUserWithSession(cookies['session_id']);
 		if (data) {
 			return {
