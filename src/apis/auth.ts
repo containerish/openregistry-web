@@ -158,7 +158,7 @@ export class Auth extends HttpClient {
 		const body = { email, password };
 		const resp = await this.http.post(path, body);
 
-		console.log('response: ', resp);
+		console.log('response from auth.ts: ', resp);
 		return resp;
 	};
 

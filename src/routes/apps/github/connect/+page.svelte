@@ -1,17 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { fade, slide, scale } from 'svelte/transition';
-	import Button from '$lib/button.svelte';
-	import ArrowR from '$lib/icons/arrow-right.svelte';
-	import { navigating } from '$app/stores';
-	import { pulseStore } from '../../../../components/pulse';
 	import { onMount } from 'svelte';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
-	import Pulse from '../../../../components/pulse.svelte';
-	import { error, redirect } from '@sveltejs/kit';
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
+	console.log('data in connect page: ', data);
 
 	onMount(() => {
 		if (!data.authenticated) {
@@ -28,10 +22,6 @@
 		const uri = 'https://github.com/apps/demo-github-app-guacamole/installations/new';
 		goto(uri);
 	};
-
-	$: {
-		pulseStore.setPulseState(!$navigating && !!data);
-	}
 </script>
 
 <div class="flex flex-col min-h-[75vh] bg-cream-50 items-center space-y-6 p-10 pb-52 pt-32">

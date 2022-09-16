@@ -12,7 +12,7 @@
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import { goto } from '$app/navigation';
-	
+
 	export let user: User;
 
 	const auth = new Auth();
@@ -65,7 +65,7 @@
 							<div class="hover:bg-brown-50 border-b-[1px] px-3 py-1 m-2 rounded-md">
 								<MenuItem let:active class="">
 									<button
-										class="text-gray-600 bg-transparent group border-0 flex-col items-start
+										class="text-gray-600 bg-transparent group border-0 flex flex-col items-start
 								 w-full px-2 text-sm text-start"
 									>
 										<span class="text-lg text-brown-900">{user.username}</span>
@@ -113,7 +113,7 @@
 										on:click={toggleModal}
 										class="text-gray-600 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
 									>
-										<UserPlusIcon/>
+										<UserPlusIcon />
 										<span>Invite Colleagues</span>
 									</button>
 								</MenuItem>

@@ -31,9 +31,6 @@
 	};
 
 	const redirectToRepositories = async () => {
-		alert(
-			'doing a redirect'
-		)
 		goto('/repositories');
 	};
 

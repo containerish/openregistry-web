@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
 	import { Steps } from 'svelte-steps';
 	let steps = [{ text: 'Select repository' }, { text: 'Set up build' }, { text: 'Build project' }];
 	let clickable: boolean = false;
@@ -12,6 +11,9 @@
 	import BuildProject from './build-project.svelte';
 
 	export let data: PageData;
+
+	console.log('data in main page:', data);
+
 	const installationId = $page.url.searchParams.get('installation_id');
 
 	let selectedRepo: string;
