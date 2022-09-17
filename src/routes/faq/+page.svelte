@@ -153,7 +153,6 @@
 					<div>
 						{@html ticketResponse}
 					</div>
-				
 					<ButtonSolid
 						disabled={!formValidation.isBodyValid ||
 							!formValidation.isSubjectValid ||

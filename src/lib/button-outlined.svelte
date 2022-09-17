@@ -9,7 +9,7 @@
 	on:click={() => onClick()}
 	class="{isLoading ? 'px-2' : 'px-4'} 
 	transition ease-in-out duration-200
-	flex justify-center items-center max-w-[48rem] min-w-[144px] border-2 border-brown-800 rounded-md bg-transparent capitalize text-lg font-medium 
+	flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] border-2 border-brown-800 rounded-md bg-transparent capitalize text-lg font-medium 
 	hover:bg-brown-700 hover:text-white hover:ease-in"
 >
 	{#if isLoading}

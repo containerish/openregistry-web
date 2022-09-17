@@ -3,6 +3,7 @@
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
 	import { Auth } from '../../apis/auth';
+	import ButtonSolid from '$lib/button-solid.svelte';
 	export let data: PageData;
 	const auth = new Auth();
 
@@ -65,7 +66,7 @@
 			</div>
 		</div>
 		<Card>
-			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8">
+			<div class="rounded-xl flex flex-col w-3/4 bg-brown-400 px-20 py-8">
 				<h1 class="text-2xl font-medium">Email Address</h1>
 				<div class="flex items-center justify-start mt-5">
 					<input
@@ -79,12 +80,7 @@
 						placeholder="email"
 					/>
 
-					<button
-						class="px-6 py-2 text-lg font-medium tracking-wide text-gray-200 capitalize transition-colors
-                     duration-200 transform bg-brown-800 rounded-md sm:mx-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"
-					>
-						Edit
-					</button>
+					<ButtonSolid>Edit</ButtonSolid>
 				</div>
 			</div>
 		</Card>
@@ -138,12 +134,7 @@ focus:outline-none focus:ring focus:ring-opacity-40
 						{formResp.message}
 					</span>
 				{/if}
-				<button
-					on:click={resetPassword}
-					class="w-32 px-6 py-2 mt-5 -ml-1.5 text-lg font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"
-				>
-					Save
-				</button>
+				<ButtonSolid onClick={resetPassword}>Save</ButtonSolid>
 			</div>
 		</Card>
 
@@ -173,15 +164,9 @@ focus:outline-none focus:ring focus:ring-opacity-40
 						placeholder="Github"
 					/>
 
-					<button
-						class="w-32 px-6 py-2 mt-5 -ml-1.5 text-lg font-medium tracking-wide text-white capitalize
-                    transition-colors duration-200 transform bg-brown-800 rounded-md sm:mr-2 hover:bg-brown-700 focus:outline-none focus:bg-brown-700"
-					>
-						Save
-					</button>
+					<ButtonSolid>Save</ButtonSolid>
 				</div>
 			</div>
 		</Card>
 	</div>
 {/if}
-

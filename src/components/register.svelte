@@ -1,5 +1,5 @@
 <script>
-	import Button from '$lib/button.svelte';
+	import Button from '$lib/button-solid.svelte';
 	import Textfield from '$lib/textfield.svelte';
 	import { getContext } from 'svelte';
 

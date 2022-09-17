@@ -1,7 +1,6 @@
 <script type="module" lang="ts">
-	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
-
+	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import { Auth } from '../apis/auth';
 
 	export let handleModal = () => {};
@@ -62,14 +61,8 @@
 				</div>
 			{/if}
 			<div class="flex px-16 pt-4 w-full space-x-5 justify-center">
-				<ButtonSolid
-				{isLoading}
-				onClick={sendInvites}
-				>Send Invites</ButtonSolid>
-
-				<ButtonOutlined
-				onClick={handleModal}
-				>Cancel</ButtonOutlined>
+				<ButtonSolid {isLoading} onClick={sendInvites}>Send Invites</ButtonSolid>
+				<ButtonOutlined onClick={handleModal}>Cancel</ButtonOutlined>
 			</div>
 		</div>
 	</form>

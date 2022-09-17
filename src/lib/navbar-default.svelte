@@ -73,9 +73,7 @@
 	</div>
 
 	<div class="flex items-center py-2 -mx-1 sm:mx-0 uw:py-4 half:hidden">
-		<ButtonSolid
-		onClick={() => toggleSignInForm()}> Sign In </ButtonSolid>
-		
+		<ButtonSolid onClick={() => toggleSignInForm()}>Sign In</ButtonSolid>
 	</div>
 
 	{#if showSignInForm || openSignInModal}

@@ -43,8 +43,8 @@
 			<div>
 				<Menu>
 					<MenuButton
-						class="mt-1.5 inline-flex justify-center items-center w-full px-6 py-2 text-md font-medium text-brown-900 capitalize
-					 border-brown-900 bg-transparent rounded-lg hover:bg-brown-700 hover:text-white space-x-2 tracking-wide"
+						class="mt-1.5 inline-flex justify-center items-center w-full px-6 py-2 text-md font-medium text-brown-900 capitalize border-2
+					 border-brown-800 bg-transparent rounded-md hover:bg-brown-700 hover:text-white space-x-2 tracking-wide"
 					>
 						<ProfileIcon styles="h-5 w-5" />
 						{user.username}
@@ -65,7 +65,7 @@
 							<div class="hover:bg-brown-50 border-b-[1px] px-3 py-1 m-2 rounded-md">
 								<MenuItem let:active class="">
 									<button
-										class="text-gray-600 bg-transparent group border-0 flex flex-col items-start
+										class="text-gray-600 bg-transparent group border-0  flex flex-col items-start
 								 w-full px-2 text-sm text-start"
 									>
 										<span class="text-lg text-brown-900">{user.username}</span>

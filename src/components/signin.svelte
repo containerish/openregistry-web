@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ButtonOutlined from '../lib/button-outlined.svelte';
-	import ButtonSolid from '../lib/button-solid.svelte';
-	import GithubIcon from '../lib/github.svelte';
+	import ButtonSolid from '$lib/button-solid.svelte';
+	import GithubIcon from '$lib/github.svelte';
 	import Textfield from '../lib/textfield.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { Auth } from '../apis/auth';
@@ -76,8 +76,8 @@
 		// const email = e.target.email.value;
 		// const password = e.target.password.value;
 
-		const email = 'johndoe@guacamole.sh'
-		const password = 'Qwerty@123'
+		const email = 'johndoe@guacamole.sh';
+		const password = 'Qwerty@123';
 
 		if (!email || !password) {
 			isLoading = false;
@@ -101,17 +101,16 @@
 </script>
 
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class=" flex  flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
-		<div class="flex justify-center py4 mb-8">
+	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
+		<div class="flex justify-center py-4 mb-8">
 			<picture>
 				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
 			</picture>
 		</div>
 
-		<ButtonOutlined
-		onClick={auth.LoginWithGithub}>
-		<GithubIcon styles="text-brown-800 mr-2"/>
-		 Sign in with Github
+		<ButtonOutlined onClick={auth.LoginWithGithub}>
+			<GithubIcon styles="text-brown-800 mr-2" />
+			Sign in with Github
 		</ButtonOutlined>
 
 		<div class="flex items-center justify-between mt-4">
@@ -156,14 +155,9 @@
 				{/if}
 
 				<div class="flex mt-4 w-full justify-center space-x-5">
-					<ButtonSolid
-					disabled={!!emailErr || !!passwordErr}
-					{isLoading}
-					> Sign In</ButtonSolid>
+					<ButtonSolid disabled={!!emailErr || !!passwordErr} {isLoading}>Sign In</ButtonSolid>
 
-					<ButtonOutlined
-					onClick={toggleModal}
-					>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -211,15 +205,11 @@
 				{/if}
 
 				<div class="flex justify-center mt-4 w-full space-x-5">
-					<ButtonSolid
-					disabled={!!emailErr}
-					onClick={handleForgotPassword}
-					{isLoading}
-					>Submit</ButtonSolid>
-						
-					<ButtonOutlined
-					onClick={toggleModal}
-					> Close</ButtonOutlined>
+					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}
+						>Submit</ButtonSolid
+					>
+
+					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
