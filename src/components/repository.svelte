@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Download from '$lib/icons/download.svelte';
-	import LockOpen from '$lib/icons/lock-open.svelte';
-	import Star from '$lib/icons/star.svelte';
+	import { DownloadIcon, LockOpenIcon, StarIcon } from '$lib/icons';
 	import type { Repository } from '../apis/registry';
 
 	export let data: Repository;
@@ -60,9 +58,9 @@
 			</span>
 
 			<div class="flex gap-4">
-				<Download styles="bg-brown-400 h-6 w-6" />
-				<Star styles="bg-brown-400 h-6 w-6" />
-				<LockOpen styles="bg-brown-400 h-6 w-6" />
+				<DownloadIcon styles="bg-brown-400 h-6 w-6" />
+				<StarIcon styles="bg-brown-400 h-6 w-6" />
+				<LockOpenIcon styles="bg-brown-400 h-6 w-6" />
 			</div>
 		</div>
 

@@ -1,8 +1,7 @@
 <script>
 	import Textfield from '$lib/textfield.svelte';
 	import RadioButton from '$lib/radioButton.svelte';
-	import Globe from '$lib/icons/globe.svelte';
-	import LockClosed from '$lib/icons/lock-closed.svelte';
+	import { GlobeIcon, LockClosedIcon } from '$lib/icons';
 	import { getContext } from 'svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
@@ -16,10 +15,10 @@
 		<div class="w-full">
 			<div class="bg-cream-50 flex gap-4">
 				<RadioButton label="Public">
-					<Globe styles="h-6 w-6" />
+					<GlobeIcon styles="h-6 w-6" />
 				</RadioButton>
 				<RadioButton label="Private">
-					<LockClosed styles="bg-cream-50 h-6 w-6" />
+					<LockClosedIcon styles="bg-cream-50 h-6 w-6" />
 				</RadioButton>
 			</div>
 			<div class="mt-2 w-full">

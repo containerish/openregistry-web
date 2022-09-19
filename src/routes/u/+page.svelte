@@ -1,13 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import UserIcon from '$lib/icons/user.svelte';
 	import Repository from '../../components/repository.svelte';
 	import { RegistryBackend, type Catalog } from '../../apis/registry';
-	import type { User } from 'src/apis/auth';
-	import StarIcon from '$lib/icons/star.svelte';
-	import UserGroupIcon from '$lib/icons/userGroup.svelte';
-	import { goto } from '$app/navigation';
-	import { userStore as session } from '$lib/userStore';
+	import { UserIcon, StarIcon, UserGroupIcon } from '$lib/icons';
+
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	export let data: PageData;
 
@@ -141,9 +136,9 @@
 		{#if isStarred}
 			<div class="w-full px-16 py-8">
 				<div
-					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center"
+					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
-					<StarIcon styles="h-10 w-10" />
+					<StarIcon styles="h-10 w-10 text-brown-800" />
 					<span class="text-brown-700 text-3xl">Your starred repositories will show here</span>
 					<span class="text-brown-800 font-light text-lg xl:text-xl">
 						We're working on bringing this feature as we build more analytics
@@ -155,9 +150,9 @@
 		{#if isContrib}
 			<div class="w-full px-16 py-8">
 				<div
-					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center"
+					class="bg-gray-50 w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
-					<UserGroupIcon styles="h-10 w-10" />
+					<UserGroupIcon styles="h-10 w-10 text-brown-800" />
 					<span class="text-brown-700 text-3xl">Your Contributions will be placed here</span>
 					<span class="text-brown-800 font-light text-lg xl:text-xl">
 						We're working on bringing this feature as we build more analytics

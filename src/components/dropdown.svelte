@@ -3,12 +3,14 @@
 	import { Menu, MenuButton, MenuItems, MenuItem, Transition } from '@rgossiaux/svelte-headlessui';
 	import type { User } from '../apis/auth';
 	import { Auth } from '../apis/auth';
-	import ProfileIcon from '$lib/icons/profile.svelte';
-	import GithubIcon from '$lib/github.svelte';
-	import UserPlusIcon from '$lib/icons/user-plus.svelte';
-	import SettingsIcon from '$lib/icons/settings.svelte';
-	import SignOutIcon from '$lib/icons/sign-out.svelte';
-	import QuestionMarkIcon from '$lib/icons/question-mark.svelte';
+	import {
+		ProfileIcon,
+		QuestionMarkIcon,
+		GithubIcon,
+		UserPlusIcon,
+		SettingsIcon,
+		SignOutIcon
+	} from '$lib/icons';
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import { goto } from '$app/navigation';

@@ -6,8 +6,8 @@
 		ListboxOption,
 		Transition
 	} from '@rgossiaux/svelte-headlessui';
-	import CheckIcon from './icons/checkIcon.svelte';
-	import Chevron from './icons/chevron.svelte';
+	import { CheckIcon, ChevronIcon } from './icons/';
+	import { ghStore } from './stores';
 
 	type ListItem = {
 		name: string;
@@ -21,6 +21,7 @@
 	let selectedItem: ListItem = items[0];
 	function setSelectItem(item: ListItem) {
 		selectedItem = item;
+		item?.handler();
 	}
 </script>
 
@@ -33,7 +34,7 @@
 						class="flex w-full px-4 justify-between border-2 border-brown-400 rounded-md"
 					>
 						{selectedItem.name}
-						<Chevron />
+						<ChevronIcon />
 					</ListboxButton>
 					<Transition
 						enter="transition duration-100 ease-out"

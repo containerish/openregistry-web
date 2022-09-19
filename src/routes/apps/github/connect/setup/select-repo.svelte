@@ -1,12 +1,12 @@
 <script lang="ts">
-	import AddAccountIcon from '$lib/icons/add-account.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { ghStore } from '$lib/stores';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
-	import CheckIcon from '$lib/icons/checkIcon.svelte';
+	import { CheckIcon, AddAccountIcon } from '$lib/icons';
 	import type { AuthorisedRepository } from 'src/routes/+layout.server';
 	import Dialog from '$lib/dialog.svelte';
+	import ButtonSolid from '$lib/button-solid.svelte';
 
 	let openDialog = false;
 	let disabled = false;
@@ -135,23 +135,15 @@ border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-non
 			class="text-brown-800 underline underline-offset-4 text-lg cursor-pointer">Cancel</span
 		>
 		{#if !selectedRepo}
-			<button
+			<ButtonSolid
 				{disabled}
-				on:click={() => {
+				onClick={() => {
 					openDialog = true;
 					disabled = true;
-				}}
-				class="rounded-md text-white bg-brown-700 px-6 py-3 mt-2 tracking-wide text-lg disabled:bg-opacity-40"
+				}}>Begin setup</ButtonSolid
 			>
-				Begin setup
-			</button>
 		{:else}
-			<button
-				on:click={() => handleNext(1)}
-				class="rounded-md text-white bg-brown-700 px-6 py-3 mt-2 tracking-wide text-lg"
-			>
-				Begin setup
-			</button>
+			<ButtonSolid onClick={() => handleNext(1)}>Begin setup</ButtonSolid>
 		{/if}
 	</div>
 

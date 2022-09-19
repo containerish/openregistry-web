@@ -12,6 +12,7 @@ const github = () => {
 		githubUsername: string;
 		selectedRepository?: AuthorisedRepository;
 		tabIndex?: number;
+		activeBranch?: string;
 	}>({
 		repositories: [],
 		githubUsername: ''
@@ -33,6 +34,10 @@ const github = () => {
 		await update((state) => ({ ...state, tabIndex: index }));
 	}
 
+	async function setActiveBranch(branch: string) {
+		await update((state) => ({ ...state, activeBranch: branch }));
+	}
+
 	return {
 		subscribe,
 		set,
@@ -40,7 +45,8 @@ const github = () => {
 		setSelectedRepository,
 		setGithubUsername,
 		setAllAuthorisedRepositories,
-		setTabIndex
+		setTabIndex,
+		setActiveBranch
 	};
 };
 

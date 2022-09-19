@@ -1,7 +1,6 @@
 <script>
 	import Card from '$lib/card.svelte';
-	import Twitter from '$lib/icons/twitter.svelte';
-	import Github from '$lib/icons/github.svelte';
+	import { TwitterIcon, GithubIcon } from '$lib/icons';
 </script>
 
 <svelte:head>
@@ -72,7 +71,7 @@
 									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
 									target="_blank"
 								>
-									<Twitter styles="h-6 w-6" />
+									<TwitterIcon styles="h-10 w-10 mt-0.5" />
 								</a>
 
 								<a
@@ -81,7 +80,7 @@
 									aria-label="Github"
 									target="_blank"
 								>
-									<Github styles="h-6 w-6" />
+									<GithubIcon styles="h-11 w-11 text-brown-900" />
 								</a>
 							</div>
 						</div>
@@ -121,7 +120,7 @@
 									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
 									target="_blank"
 								>
-									<Twitter styles="h-6 w-6" />
+								<TwitterIcon styles="h-10 w-10 mt-0.5" />
 								</a>
 
 								<a
@@ -130,7 +129,7 @@
 									aria-label="Github"
 									target="_blank"
 								>
-									<Github styles="h-6 w-6" />
+								<GithubIcon styles="h-11 w-11 text-brown-900" />
 								</a>
 							</div>
 						</div>

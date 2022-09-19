@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+	import ButtonSolid from '$lib/button-solid.svelte';
+	import GihubIcon from '$lib/github.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
@@ -39,13 +41,12 @@
 				<span class="text-lg"
 					>To deploy a site, first select it from your personal or team <br />GitHub account.</span
 				>
-				<button
-					on:click={installGithubApp}
-					class="bg-brown-500 rounded-md w-3/6 h-12 flex space-x-2 justify-center items-center border-none"
-				>
-					<img class="" src="/github.svg" alt="github-logo" width="24" />
-					<span class="text-lg font-semibold">Connect Github</span>
-				</button>
+				<div class="w-full">
+					<ButtonSolid onClick={installGithubApp}>
+						<GihubIcon />
+						Connect Github
+					</ButtonSolid>
+				</div>
 			</div>
 		</div>
 		<hr class="m-10" />

@@ -1,6 +1,5 @@
 <script lang="ts">
-	import ArrowLeft from '$lib/icons/arrow-left.svelte';
-	import ArrowRight from '$lib/icons/arrow-right.svelte';
+	import { ArrowRightIcon, ArrowLeftIcon } from '$lib/icons';
 	import { getContext } from 'svelte';
 
 	let activePage = 0;
@@ -24,7 +23,7 @@
 			: 'bg-cream-50 hover:bg-gray-200 hover:text-gray-700'}
 			flex items-center justify-center px-4 mx-1 text-gray-500 capitalize rounded-md border-brown-100"
 	>
-		<ArrowLeft />
+		<ArrowLeftIcon />
 	</button>
 	{#each new Array(pages).fill(0) as i, page}
 		<button
@@ -43,6 +42,6 @@
 			: 'bg-cream-50 hover:bg-gray-200 hover:text-gray-700'}
 		px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform rounded-md sm:inline border-brown-100"
 	>
-		<ArrowRight />
+		<ArrowRightIcon />
 	</button>
 </div>

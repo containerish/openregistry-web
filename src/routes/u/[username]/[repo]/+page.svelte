@@ -7,8 +7,7 @@
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 
 	let isOverview = true;
-	let isTags = false; 
-
+	let isTags = false;
 	let repository: Repo = {
 		namespace: '',
 		tags: []
@@ -25,12 +24,12 @@
 	};
 
 	export let data: PageData;
-	console.log("data from repo details page:", data)
+	console.log('data from repo details page:', data);
 	const ns = data.username + '/' + data.repo;
 	const registryBackend = new RegistryBackend();
 
 	onMount(async () => {
-		const resp= await registryBackend.GetRepositoryDetails(ns);
+		const resp = await registryBackend.GetRepositoryDetails(ns);
 		if (resp.error) {
 			console.error('error taglist: ', resp.error);
 			return;

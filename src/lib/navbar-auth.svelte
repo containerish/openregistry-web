@@ -2,9 +2,8 @@
 	import { userStore as session } from '$lib/userStore';
 	import { goto } from '$app/navigation';
 	import ButtonOutlined from './button-outlined.svelte';
-	import ArrowDown from './icons/arrow-down.svelte';
 	import Autocomplete from './autocomplete.svelte';
-	import UserIcon from './icons/user.svelte';
+	import { UserIcon, ArrowDownIcon } from './icons/';
 	import type { User } from '../apis/auth';
 	import Dropdown from '../components/dropdown.svelte';
 	import { RegistryBackend } from '../apis/registry';
@@ -81,7 +80,7 @@
 									<ButtonOutlined onClick={toggleMenu}>
 										<UserIcon styles="h-4 w-4 lg:h-4 lg:w-6 " />
 										<span class="font-semibold text-sm">{user.username}</span>
-										<ArrowDown />
+										<ArrowDownIcon />
 									</ButtonOutlined>
 								</div>
 							</Dropdown>

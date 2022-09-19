@@ -1,13 +1,11 @@
 <script>
-	import ArrowLeft from '$lib/icons/arrow-l.svelte';
-	import Info from '$lib/icons/info.svelte';
-	import Book from '$lib/icons/book.svelte';
 	import { ghStore } from '$lib/stores';
 	import ListBox from '$lib/listBox.svelte';
 	import Disclosure from '$lib/disclosure.svelte';
 	import Textfield from '$lib/textfield.svelte';
 	import Input from '$lib/input.svelte';
-	import AddAccount from '$lib/icons/add-account.svelte';
+	import { ArrowLeftIcon, InfoIcon, BookIcon, AddAccountIcon } from '$lib/icons';
+	import ButtonSolid from '$lib/button-solid.svelte';
 
 	export let handleNext;
 
@@ -46,7 +44,9 @@
 			items={$ghStore.selectedRepository.branches.map((b, i) => ({
 				name: b.name,
 				id: i,
-				handler: () => {},
+				handler: () => {
+					ghStore.setActiveBranch(b.name);
+				},
 				disabled: false
 			}))}
 		/>
@@ -63,7 +63,7 @@
 			<div
 				class="flex space-x-2 justify-center items-center rounded-full bg-purple-200 max-w-fit px-2 pr-3 py-0.5 text-sm text-purple-900"
 			>
-				<Book />
+				<BookIcon />
 				<span class="text-xs">Configuring build</span>
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 			<div class="flex flex-col my-10 space-y-1">
 				<div class="flex items-center space-x-1 w-2/5">
 					<span class="font-semibold text-brown-900"> Build command</span>
-					<Info />
+					<InfoIcon />
 				</div>
 				<div class="w-2/5">
 					<Textfield />
@@ -111,8 +111,10 @@
 								<Input placeholder="Value" value="" />
 							</div>
 						</div>
-						<button class="flex gap-2 border-none p-2 place-items-center rounded-md bg-cream-50">
-							<AddAccount styles="text-brown-900" />
+						<button
+							class="flex gap-2 border-none py-2 px-3 place-items-center rounded-md bg-cream-50 mt-20"
+						>
+							<AddAccountIcon styles="text-brown-800" />
 							Add More
 						</button>
 					</Disclosure>
@@ -123,16 +125,11 @@
 
 			<div class="flex justify-between items-center mt-10">
 				<div on:click={() => handleNext(0)} class="flex space-x-1 cursor-pointer">
-					<ArrowLeft />
+					<ArrowLeftIcon />
 					<span class="text-brown-800 text-lg">Change repository</span>
 				</div>
 
-				<button
-					on:click={() => handleNext(2)}
-					class="rounded-md text-white bg-brown-700 px-6 py-3 mt-2 tracking-wide text-lg"
-				>
-					Save and Deploy
-				</button>
+				<ButtonSolid onClick={() => handleNext(2)}>Save and Deploy</ButtonSolid>
 			</div>
 		</div>
 	</div>
