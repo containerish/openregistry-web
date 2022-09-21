@@ -24,20 +24,24 @@
 
 <div>
 	<div class="justify-center flex items-center">
-		<span class="text-2xl font-bold text-brown-900"> Building and deploying</span>
+		<span class="text-2xl font-bold text-brown-800"> Building and deploying</span>
 	</div>
-	<div class="min-w-[70vw]" />
+	<div class="min-w-[70vw] desktop:min-w-[62vw] uw:min-w-[40vw]" />
 	<div class="flex flex-col space-y-5 mt-24">
 		<div class="flex">
 			<SpinnerCircle styles="invisible" />
-			<span class="text-lg font-semibold ml-6"> Initializing build environment </span>
+			<span class="text-base desktop:text-base apple:text-lg uw:text-lg font-semibold ml-6">
+				Initializing build environment
+			</span>
 		</div>
 
 		<hr class=" border-t-gray-400" />
 
 		<div class="flex">
 			<SpinnerCircle styles="invisible" />
-			<span class="text-lg font-normal ml-6 text-gray-600">
+			<span
+				class="text-base desktop:text-base apple:text-lg uw:text-lg font-normal ml-6 text-gray-600"
+			>
 				<i>Cloning git repository</i>
 			</span>
 		</div>
@@ -46,7 +50,9 @@
 
 		<div class="flex">
 			<SpinnerCircle styles="invisible" />
-			<span class="text-lg font-normal ml-6 text-gray-600">
+			<span
+				class="text-base desktop:text-base apple:text-lg uw:text-lg font-normal ml-6 text-gray-600"
+			>
 				<i>Building application</i>
 			</span>
 		</div>
@@ -55,7 +61,9 @@
 
 		<div class="flex">
 			<SpinnerCircle styles="invisible" />
-			<span class="text-lg font-normal ml-6 text-gray-600">
+			<span
+				class="text-base desktop:text-base apple:text-lg uw:text-lg font-normal ml-6 text-gray-600"
+			>
 				<i>Deploying to Akash network</i>
 			</span>
 		</div>
@@ -64,11 +72,15 @@
 		<div class="flex space-x-4 justify-end items-end">
 			<div class="flex space-x-2">
 				<DownloadIcon styles="h-6 w-6" />
-				<span class="text-lg text-brown-900"> Download log </span>
+				<span class="text-base desktop:text-base apple:text-lg uw:text-lg text-brown-900">
+					Download log
+				</span>
 			</div>
 			<div class="flex space-x-2">
 				<CopyIcon />
-				<span class="text-lg text-brown-900"> Copy log </span>
+				<span class="text-base desktop:text-base apple:text-lg uw:text-lg text-brown-900">
+					Copy log
+				</span>
 			</div>
 		</div>
 		<hr class="border-t-2 border-brown-400 -mx-5 mt-4" />
@@ -207,7 +219,9 @@
 
 		<div class=" flex pt-10">
 			<ArrowRightIcon styles="text-brown-900" />
-			<span class="text-lg font-light"> Build Settings</span>
+			<span class="text-base desktop:text-base apple:text-lg uw:text-lg font-light">
+				Build Settings</span
+			>
 		</div>
 	</div>
 
@@ -218,7 +232,9 @@
 			class="flex border-none bg-transparent text-lg space-x-2 tracking-wide text-brown-900 mt-3"
 		>
 			<ArrowLeftIcon />
-			<span class="text-lg text-brown-800">Change settings</span>
+			<span class="text-base desktop:text-base apple:text-lg uw:text-lg text-brown-800"
+				>Change settings</span
+			>
 		</button>
 
 		<ButtonSolid onClick={() => goto('/apps/github/connect/all-deployments')}>

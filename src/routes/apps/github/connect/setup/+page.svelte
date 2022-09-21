@@ -39,8 +39,10 @@
 	}
 </script>
 
-<div class="bg-cream-50 flex flex-col justify-start items-center min-h-[77vh] py-10">
-	<div class="w-3/4 px-2 py-16">
+<div class="bg-cream-50 flex flex-col justify-start items-center min-h-[77vh] py-10 desktop:py-8">
+	<div
+		class="w-3/4 text-xs desktop:w-1/2 px-2 py-16 desktop:py-2 desktop:text-xs apple:text-sm uw:text-lg"
+	>
 		<Steps
 			{steps}
 			size="2rem"

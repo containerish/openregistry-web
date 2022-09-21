@@ -9,7 +9,7 @@
 	{name}
 	{placeholder}
 	bind:value
-	class="placeholder-gray-500 w-full form-control block px-3 py-2 text-base font-normal text-gray-700 bg-white
+	class="placeholder-gray-500 w-full form-control block px-3 py-2 text-sm apple:text-base uw:text-base font-normal text-gray-700 bg-white
 	 bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
 	 border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-500"
 />

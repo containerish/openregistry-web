@@ -28,11 +28,9 @@ const config = {
 				"brown-300": "#ddd3cd",
 				"brown-400": "#dbd1ca",
 				"brown-500": "#baa89d",
-				//"brown-600": "#927463",
 				"brown-600": "#59483e",
 				"brown-700": "#8d7060",
 				"brown-800": "#55443A",
-				//"brown-800": "#4F3A2F",
 				"brown-900": "#241D19",
 				"grad-100": "#DDD3CD",
 				"grad-400": "#BAA89D",
@@ -68,7 +66,7 @@ const config = {
 			},
 		},
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/typography')],
 };
 
 module.exports = config;

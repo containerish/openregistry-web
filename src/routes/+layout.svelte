@@ -14,15 +14,15 @@
 		}
 	});
 	$: {
-		console.log('data in layout: ', data)
+		console.log('data in layout: ', data);
 	}
 </script>
 
 <main
-	class="prose lg:w-screen uw:min-w-[55vw] uw:max-w-[50vw] flex justify-center flex-col selection:bg-brown-800
+	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[50vw] flex justify-center flex-col selection:bg-brown-800
       selection:text-cream-50"
 >
 	<Navbar openSignInModal={false} {data} />
-	<slot />
+	<slot/>
 	<Footer />
 </main>

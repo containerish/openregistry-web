@@ -36,7 +36,7 @@
 </script>
 
 <Card
-	styles="min-h-[93vh] w-full
+	styles="min-h-[70vh] w-full
 	half:flex-col-reverse half:gap-2 apple:gap-56 uw:gap-56 lg:gap-20 desktop:gap-40 laptop:flex-col-reverse
 	ipad:flex-col-reverse laptop:gap-0 from-grad-100 bg-gradient-to-br via-grad-400 to-grad-900"
 >
@@ -44,23 +44,23 @@
 		class="left flex flex-col w-full half:items-start half:justify-start desktop:w-full lg:w-3/4
 	apple:w-full half:w-full half:z-0 z-30 laptop:-mt-36 laptop:-ml-20 ipad:-ml-56 ipad:-mt-48 ipad:w-full"
 	>
-		<div class="w-3/4 desktop:ml-28 z-35">
-			<h1
+		<div class="w-3/4 desktop:ml-28 z-35 text-brown-900">
+			<span
 				class="text-left text-6xl apple:font-bold uw:font-bold font-semibold font-poppins
 				break-words whitespace-nowrap half:self-end half:text-4xl half:font-bold apple:text-7xl uw:text-8xl"
 			>
 				A Decentralised
-			</h1>
-			<h2
+			</span>
+			<span
 				class="text-6xl font-semibold font-poppins break-words whitespace-nowrap
 				half:text-4xl half:font-bold apple:text-7xl uw:text-8xl"
 			>
 				Container Registry
-			</h2>
+			</span>
 			<div class="w-full">
 				<p
 					class="font-poppins text-left text-brown-900 break-words half:text-[19px] half:font-normal
-					half:pr-16 text-xl mt-4 mb-20 apple:text-2xl uw:text-3xl"
+					half:pr-16 text-xl mt-4 mb-20 uw:text-3xl apple:text-2xl"
 				>
 					Store, Download, and Share your container images with decentralized OpenRegistry
 				</p>
@@ -86,17 +86,17 @@
 					/>
 				</div>
 				<div class="flex w-full justify-start mt-2.5">
-					<ButtonSolid
-					on:click={() => goto(`/search?query=${query}`)}
-					>Search</ButtonSolid>
+					<ButtonSolid on:click={() => goto(`/search?query=${query}`)}>Search</ButtonSolid>
 				</div>
 			</form>
 		</div>
 	</div>
-	<div class="right z-0 w-full relative desktop:w-3/5 apple:w-4/5 uw:w-3/4 min-w-max half:mt-56">
+	<div
+		class="right z-0 w-full relative desktop:w-3/5 apple:w-full apple:max-w-[50vw] uw:w-3/4 min-w-max half:mt-56"
+	>
 		<picture>
 			<img
-				class="h-full half:w-96 half:ml-32 half:-mt-56 half:mb-4 apple:w-3/4
+				class="h-full half:w-96 half:ml-32 half:-mt-56 half:mb-4 desktop:w-full
 			laptop:w-3/4 laptop:ml-10 laptop:pl-24 uw:w-3/4 w-full"
 				src="/hero.svg"
 				alt="OpenRegistry-Hero"

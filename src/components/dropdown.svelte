@@ -45,7 +45,7 @@
 			<div>
 				<Menu>
 					<MenuButton
-						class="mt-1.5 inline-flex justify-center items-center w-full px-6 py-2 text-md font-medium text-brown-900 capitalize border-2
+						class="mt-1.5 inline-flex justify-center items-center w-full px-6 py-2 desktop:px-4 desktop:py-1.5 font-medium desktop:font-normal text-brown-900 capitalize border-2
 					 border-brown-800 bg-transparent rounded-md hover:bg-brown-700 hover:text-white space-x-2 tracking-wide"
 					>
 						<ProfileIcon styles="h-5 w-5" />
@@ -61,26 +61,25 @@
 						leaveTo="transform scale-95 opacity-0"
 					>
 						<MenuItems
-							class="absolute right-0 origin-top-right w-72 bg-white shadow-lg ring-1 ring-black 
-						ring-opacity-5 focus:outline-none rounded-md"
+							class="absolute right-0 origin-top-right w-72 desktop:w-64 bg-white shadow-lg ring-1 ring-brown-900 
+						ring-opacity-10 focus:outline-none rounded-md"
 						>
 							<div class="hover:bg-brown-50 border-b-[1px] px-3 py-1 m-2 rounded-md">
-								<MenuItem let:active class="">
+								<MenuItem let:active class="no-underline">
 									<button
-										class="text-gray-600 bg-transparent group border-0  flex flex-col items-start
-								 w-full px-2 text-sm text-start"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group border-0 flex flex-col items-start
+								 		w-full px-2 text-sm text-start"
 									>
 										<span class="text-lg text-brown-900">{user.username}</span>
 										{user.email}
 									</button>
-									<!-- <a href="/account-settings" class:active>{user.username}</a> -->
-									<!-- <span>{user.email}</span> -->
 								</MenuItem>
 							</div>
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem let:active href="/apps/github/connect" sveltekit:prefetch>
+								<MenuItem href="/apps/github/connect" sveltekit:prefetch class="no-underline">
 									<button
-										class="text-gray-600 bg-transparent group flex justify-start space-x-2 items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex justify-start space-x-2 items-center
+										 border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
 									>
 										<GithubIcon />
 										<span>Connect Github</span>
@@ -88,9 +87,10 @@
 								</MenuItem>
 							</div>
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem let:active href="/u" sveltekit:prefetch>
+								<MenuItem href="/u" sveltekit:prefetch class="no-underline">
 									<button
-										class="text-gray-600 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center
+										 border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
 									>
 										<ProfileIcon />
 										<span>View Profile</span>
@@ -99,10 +99,10 @@
 							</div>
 
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem href="/settings" sveltekit:prefetch>
+								<MenuItem href="/settings" sveltekit:prefetch class="no-underline">
 									<button
 										on:click={() => navigateAround('/settings')}
-										class="text-gray-600 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
 									>
 										<SettingsIcon />
 										<span>Settings</span>
@@ -110,10 +110,10 @@
 								</MenuItem>
 							</div>
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem href="">
+								<MenuItem href="" class="no-underline">
 									<button
 										on:click={toggleModal}
-										class="text-gray-600 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
 									>
 										<UserPlusIcon />
 										<span>Invite Colleagues</span>
@@ -121,10 +121,10 @@
 								</MenuItem>
 							</div>
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem>
+								<MenuItem class="no-underline">
 									<button
 										on:click={() => navigateAround('/faq')}
-										class="text-gray-600 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
 									>
 										<QuestionMarkIcon />
 										<span>Help</span>
@@ -133,10 +133,10 @@
 							</div>
 
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem>
+								<MenuItem class="no-underline">
 									<button
 										on:click={signOut}
-										class="text-gray-600 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center"
+										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center"
 									>
 										<SignOutIcon />
 										<span>Sign Out</span>

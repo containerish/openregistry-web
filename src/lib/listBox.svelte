@@ -31,7 +31,7 @@
 			<div class="relative mt-1">
 				<Listbox value={selectedItem} on:change={(e) => setSelectItem(e.detail)}>
 					<ListboxButton
-						class="flex w-full px-4 justify-between border-2 border-brown-400 rounded-md"
+						class="flex w-full px-4 justify-between items-center border-2 border-brown-400 rounded-md"
 					>
 						{selectedItem.name}
 						<ChevronIcon />

@@ -3,10 +3,12 @@
 	import Xterm from '$lib/xterm.svelte';
 </script>
 
-<Card styles="bg-brown-400 min-h-[1000px] block flex-col desktop:items-center half:pt-0 pb-12">
+<Card
+	styles="bg-brown-400 min-h-[1000px] desktop:min-h-[800px] block flex-col desktop:items-center half:pt-0 desktop:py-20 space-y-8"
+>
 	<div class="flex w-1/2 flex-col items-center px-6 pb-10 half:pt-24">
 		<span
-			class="text-brown-800 font-poppins text-center whitespace-nowrap pb-4 text-4xl md:text-6xl font-semibold"
+			class="text-brown-800 font-poppins text-center whitespace-nowrap pb-4 text-4xl md:text-6xl desktop:text-5xl font-semibold"
 		>
 			How does it work?
 		</span>

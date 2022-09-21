@@ -36,23 +36,26 @@
 <div class="relative">
 	<div class="flex flex-col justify-center items-center space-x-5 space-y-5">
 		<span class="text-2xl font-bold text-brown-800">Deploy a site from your account</span>
-		<span class="text-center text-lg"
-			>Select a repository to connect as your project’s source code. New commits will trigger
-			Cloudflare to automatically build and deploy your changes.
-		</span>
+		<div class="text-center desktop:flex desktop:flex-col">
+			<span class="text-center text-lg desktop:text-base"
+				>Select a repository to connect as your project’s source code. New commits will trigger
+				Cloudflare to automatically build
+			</span>
+			<span>and deploy your changes.</span>
+		</div>
 	</div>
-	<div class="min-w-[70%]" />
+	<div class="min-w-[60%]" />
 	<div class="flex space-x-2 items-center mt-10">
 		<img src="/github.svg" alt="github-logo" width="24" />
-		<span class="text-lg font-semibold">Github | </span>
-		<span class="text-md font-light"> more coming soon</span>
+		<span class="text-base desktop:text-base apple:text-lg font-semibold">Github | </span>
+		<span class="font-light"> more coming soon</span>
 	</div>
-	<div class="flex flex-col relative my-4">
+	<div class="flex flex-col relative my-3">
 		<div class="w-24 bg-brown-700 h-[4px] rounded-md absolute" />
 		<div class="bg-gray-300 h-[1px] mt-0.5 ml-24" />
 	</div>
 
-	<div class=" space-y-1 mt-20">
+	<div class="space-y-1 mt-12 desktop:mt-12 apple:mt-20 uw:mt-20">
 		<div class="flex space-x-1 ml-2">
 			<img src="/github.svg" alt="github-logo" width="20" />
 			<span class="text-md font-semibold text-brown-900"> Github account</span>
@@ -68,14 +71,14 @@ bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:t
 border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-500"
 				/>
 			</div>
-			<!-- <div class="absolute right-1 top-2"> -->
-			<!-- 	<ArrowDown /> -->
-			<!-- </div> -->
 		</div>
 		<div class="flex space-x-1">
-			<button class="flex border-none bg-brown-300 opacity-50 rounded-md" disabled>
-				<AddAccountIcon />
-				<span class="text-brown-800 text-md">Add account</span>
+			<button
+				class="flex justify-center items-center border-none bg-brown-300 opacity-50 rounded-md mt-1"
+				disabled
+			>
+				<AddAccountIcon styles="desktop:h-4 desktop:w-4" />
+				<span class="text-brown-800 text-md desktop:text-xs">Add account</span>
 			</button>
 		</div>
 	</div>
@@ -104,7 +107,7 @@ border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-non
 			5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 					/>
 				</svg>
-				<span class="font-semibold text-brown-600">Loading...</span>
+				<span class="font-semibold text-brown-600">Loading...</span>``
 			</div>
 		{:else}
 			<div class="grid-flow-row grid grid-cols-2 gap-4">
@@ -113,7 +116,7 @@ border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-non
 						on:click={() => handleRepoSelect(repo)}
 						class="bg-white rounded-md border-2 gap-2 border-brown-300 flex justify-center items-center py-3 {repo
 							.repository.name === selectedRepo
-							? 'bg-[#e5e2e0]'
+							? 'bg-[#d6c8bf]'
 							: ''}"
 					>
 						{repo.repository.name}
@@ -128,11 +131,12 @@ border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-non
 			If your repository is not shown, configure repository access for OpenRegistry app on Github.
 		</span>
 	</div>
-	<hr class="mt-20 border-1 border-gray-300" />
+	<hr class="mt-10 desktop:mt-10 apple:mt-20 uw:mt-20 border-1 border-gray-300" />
 	<div class="flex justify-between items-center mt-10">
 		<span
 			on:click={() => goto('/apps/github/connect')}
-			class="text-brown-800 underline underline-offset-4 text-lg cursor-pointer">Cancel</span
+			class="text-brown-800 underline underline-offset-4 text-base desktop:text-base apple:text-lg uw:text-lg cursor-pointer"
+			>Cancel</span
 		>
 		{#if !selectedRepo}
 			<ButtonSolid

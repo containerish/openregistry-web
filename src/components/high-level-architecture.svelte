@@ -9,11 +9,11 @@
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<h4
 					class="font-poppins text-center whitespace-nowrap font-semibold
-				pb-4 text-5xl half:invisible ipad:self-center"
+				pb-4 text-5xl half:invisible ipad:self-center text-brown-800"
 				>
 					High Level Architecture
 				</h4>
-				<div class="flex -mt-10">
+				<div class="flex">
 					<h4
 						class="invisible font-poppins text-center whitespace-nowrap font-semibold
 					pb-4 text-3xl half:font-semibold half:visible half:pr-2 half:-ml-2"
@@ -35,7 +35,11 @@
 					Arweave and Storj
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
-					<a class="text-brown-900 text-xl mt-1" href="https://blog.openregistry.dev/posts/overview" target="_blank">More</a>
+					<a
+						class="text-brown-900 text-xl mt-1"
+						href="https://blog.openregistry.dev/posts/overview"
+						target="_blank">More</a
+					>
 					<button
 						class="transition duration-500 ease-in-out
                        bg-transparent hover: transform
