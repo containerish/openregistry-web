@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/modal.svelte';
 	import Button from '$lib/button-solid.svelte';
-	import Pulse from '../../../components/pulse.svelte';
+	import { Pulse } from '$lib/components';
 	import ErrorModal from '$lib/errorModal.svelte';
 	export let unhandledErr: string;
 	let showModal = false;

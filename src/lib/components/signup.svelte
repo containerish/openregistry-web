@@ -1,10 +1,10 @@
 <script lang="ts">
-	import ButtonSolid from '../lib/button-solid.svelte';
-	import ButtonOutlined from '../lib/button-outlined.svelte';
-	import Textfield from '../lib/textfield.svelte';
+	import ButtonSolid from '../button-solid.svelte';
+	import ButtonOutlined from '../button-outlined.svelte';
+	import Textfield from '../textfield.svelte';
 	import { getContext } from 'svelte';
 	import GithubIcon from '$lib/github.svelte';
-	import { Auth } from '../apis/auth';
+	import { Auth } from '../../apis/auth';
 	import confetti from 'canvas-confetti';
 	var canvas = document.getElementById('confetti');
 	let conf = confetti.create(canvas, { resize: true });

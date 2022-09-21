@@ -6,8 +6,8 @@
 	import Textfield from '$lib/textfield.svelte';
 	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
-	import NewRepository from '../../components/newRepository.svelte';
-	import Repository from '../../components/repository.svelte';
+	import { NewRepository, Repository, Pulse } from '$lib/components';
+
 	import { RegistryBackend } from '../../apis/registry';
 	import type { Catalog } from '../../apis/registry';
 	import type { User } from '../../apis/auth';
@@ -30,8 +30,7 @@
 	};
 
 	import { goto } from '$app/navigation';
-	import Pulse from '../../components/pulse.svelte';
-	import { pulseStore } from '../../components/pulse';
+	import { pulseStore } from '../../lib/components/pulse';
 	import ErrorModal from '$lib/errorModal.svelte';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	// @ts-ignore

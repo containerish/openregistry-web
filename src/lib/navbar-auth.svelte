@@ -5,7 +5,7 @@
 	import Autocomplete from './autocomplete.svelte';
 	import { UserIcon, ArrowDownIcon } from './icons/';
 	import type { User } from '../apis/auth';
-	import Dropdown from '../components/dropdown.svelte';
+	import { DropDown } from '$lib/components';
 	import { RegistryBackend } from '../apis/registry';
 
 	export let user: User;
@@ -75,7 +75,7 @@
 							>
 								FAQ
 							</a>
-							<Dropdown {user} {closeMenu} />
+							<DropDown {user} {closeMenu} />
 						</div>
 					</div>
 				</div>

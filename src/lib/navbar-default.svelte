@@ -1,9 +1,8 @@
 <script lang="ts">
-	import Signin from '../components/signin.svelte';
+	
 	import ButtonSolid from './button-solid.svelte';
 	import Modal from './modal.svelte';
-	import Signup from '../components/signup.svelte';
-
+	import { Signin, Signup } from '$lib/components';
 	import { Auth } from '../apis/auth';
 	import { setContext } from 'svelte';
 	import { goto } from '$app/navigation';

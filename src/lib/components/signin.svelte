@@ -1,10 +1,10 @@
 <script lang="ts">
-	import ButtonOutlined from '../lib/button-outlined.svelte';
+	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import GithubIcon from '$lib/github.svelte';
-	import Textfield from '../lib/textfield.svelte';
+	import Textfield from '../textfield.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
-	import { Auth } from '../apis/auth';
+	import { Auth } from '../../apis/auth';
 
 	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
 	const toggleModal = getContext<VoidFunction>('toggleSignInForm');

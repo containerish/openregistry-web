@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ChevronDown from '$lib/icons/chevron-down.svelte';
 	import { Menu, MenuButton, MenuItems, MenuItem, Transition } from '@rgossiaux/svelte-headlessui';
-	import type { User } from '../apis/auth';
-	import { Auth } from '../apis/auth';
+	import type { User } from '../../apis/auth';
+	import { Auth } from '../../apis/auth';
 	import {
 		ProfileIcon,
 		QuestionMarkIcon,

@@ -1,8 +1,5 @@
 <script lang="ts">
-	import Hero from '../../components/hero.svelte';
-	import Overview from '../../components/overview.svelte';
-	import HowToIntro from '../../components/how-to-intro.svelte';
-	import HighLevelArchitecture from '../../components/high-level-architecture.svelte';
+	import { Hero, Overview, HowToIntro, HighLevelArchitecture } from '$lib/components'
 </script>
 
 <Hero />

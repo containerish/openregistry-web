@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Repository from '../../components/repository.svelte';
+	import { Repository } from '$lib/components';
 	import { RegistryBackend, type Catalog } from '../../apis/registry';
 	import { UserIcon, StarIcon, UserGroupIcon } from '$lib/icons';
 

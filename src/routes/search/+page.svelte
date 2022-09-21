@@ -3,18 +3,17 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
-	import NewRepository from '../../components/newRepository.svelte';
-	import Repository from '../../components/repository.svelte';
 	import { RegistryBackend } from '../../apis/registry';
 	import Checkbox from '$lib/checkbox.svelte';
 	import type { Catalog } from '../../apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { navigating } from '$app/stores';
-	import Pulse from '../../components/pulse.svelte';
 	import Menu from '$lib/headless/menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import ClockIcon from '$lib/icons/clock.svelte';
-	import { pulseStore } from '../../components/pulse';
+	import { pulseStore } from '../../lib/components/pulse';
+	import { NewRepository, Repository, Pulse } from '$lib/components';
+
 	import ErrorModal from '$lib/errorModal.svelte';
 	export let query: string = '';
 	let sortBy = 'namespace';

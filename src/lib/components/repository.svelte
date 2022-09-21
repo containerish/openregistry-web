@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { DownloadIcon, LockOpenIcon, StarIcon } from '$lib/icons';
-	import type { Repository } from '../apis/registry';
+	import type { Repository } from '../../apis/registry';
 
 	export let data: Repository;
 	export let compact = true;
@@ -31,9 +31,9 @@
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><Download /></button>
-				<button class="border-none p-0"><Star /></button>
-				<button class="border-none p-0"><LockOpen /></button>
+				<button class="border-none p-0"><DownloadIcon /></button>
+				<button class="border-none p-0"><StarIcon /></button>
+				<button class="border-none p-0"><LockOpenIcon /></button>
 			</div>
 		</div>
 
