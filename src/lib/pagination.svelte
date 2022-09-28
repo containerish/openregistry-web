@@ -1,12 +1,19 @@
 <script lang="ts">
 	import { ArrowRightIcon, ArrowLeftIcon } from '$lib/icons';
 	import { getContext } from 'svelte';
+	import * as animateScroll from 'svelte-scrollto';
 
 	let activePage = 0;
 	const fetchPageData = getContext<Function>('fetchPageData');
 	export let pages: number = 0;
 
+	animateScroll.setGlobalOptions({
+		duration: 0,
+		easing: () => {}
+	});
+
 	const setActivePage = async (offset: number) => {
+		animateScroll.scrollToTop();
 		if (offset > pages - 1 || offset < 0) {
 			return;
 		}

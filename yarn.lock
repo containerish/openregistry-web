@@ -2746,12 +2746,19 @@ svelte-preprocess@^4.0.0, svelte-preprocess@^4.10.7:
     sorcery "^0.10.0"
     strip-indent "^3.0.0"
 
+svelte-scrollto@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/svelte-scrollto/-/svelte-scrollto-0.2.0.tgz#a1da47876466796bba4533a4346537f752f01680"
+  integrity sha512-l4K2E4jr6dXCODtZDCkpp/TzknVVoq8gecHM0UOOmihvLosczdyLuyDUhZ+U2HkhLWi7nnimuOstZSFKtXSpmA==
+  dependencies:
+    svelte "3.x"
+
 svelte-steps@^2.3.5:
   version "2.3.5"
   resolved "https://registry.yarnpkg.com/svelte-steps/-/svelte-steps-2.3.5.tgz#ef6b24eab6573e800d72f48c1ea3157a92d97305"
   integrity sha512-d490ClMkS/vOLUX56GjIR60rbRDjJ/eE4NGO31RIdkGruBm/wi9MWfxHG4xQmIM68hbAbV2lSOksoO+SVbtq/g==
 
-svelte@^3.49.0:
+svelte@3.x, svelte@^3.49.0:
   version "3.50.1"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.50.1.tgz#b35fbc5e79ddd71e8bb27c3149ee6ff903841239"
   integrity sha512-bS4odcsdj5D5jEg6riZuMg5NKelzPtmsCbD9RG+8umU03TeNkdWnP6pqbCm0s8UQNBkqk29w/Bdubn3C+HWSwA==

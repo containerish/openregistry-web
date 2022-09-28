@@ -40,6 +40,7 @@
 		"svelte-forms": "^2.3.0",
 		"svelte-popperjs": "^1.2.8",
 		"svelte-preprocess": "^4.10.7",
+		"svelte-scrollto": "^0.2.0",
 		"tailwindcss": "^3.1.8",
 		"tslib": "^2.4.0",
 		"typescript": "^4.7.4",
