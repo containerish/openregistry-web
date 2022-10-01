@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
-	import GithubIcon from '$lib/github.svelte';
+	import { GithubIcon, FingerprintIcon } from '$lib/icons';
 	import Textfield from '../textfield.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { Auth } from '../../apis/auth';
@@ -73,7 +73,7 @@
 	const onClickSignIn = async (e: any) => {
 		e.preventDefault();
 		isLoading = true;
-		// const email = e.target.email.value;
+		// const email = e.target.username.value;
 		// const password = e.target.password.value;
 
 		const email = 'johndoe@guacamole.sh';
@@ -87,6 +87,27 @@
 		}
 
 		const { error, status } = await auth.Login(email, password);
+		if (error) {
+			isLoading = false;
+			formErr = error.message;
+			return;
+		}
+
+		isLoading = false;
+		if (status === 200) {
+			dispatch('success');
+		}
+	};
+
+	let isWebAuthN: boolean = false;
+	const handleIsWebAuthn = () => {
+		isWebAuthN = !isWebAuthN;
+	};
+	const webAuthnSignIn = async (e: any) => {
+		e.preventDefault();
+		isLoading = true;
+		const email = e.target.username.value;
+		const { error, status } = await auth.WebAuthNBeginLogin(email);
 		if (error) {
 			isLoading = false;
 			formErr = error.message;
@@ -112,29 +133,29 @@
 			<GithubIcon styles="text-brown-800 mr-2" />
 			Sign in with Github
 		</ButtonOutlined>
+		<div class="mt-4" />
 
-		<div class="flex items-center justify-between mt-4">
-			<span class="w-1/5 border-b lg:w-1/4" />
+		{#if !showForgotPasswordForm && !isWebAuthN}
+			<ButtonOutlined onClick={handleIsWebAuthn}>
+				<FingerprintIcon styles="text-brown-800 mr-2" />
+				Sign in using Security key
+			</ButtonOutlined>
 
-			<span
-				href="#"
-				class="text-xs font-semibold text-center text-gray-600 uppercase hover:no-underline"
-			>
-				or sign in with email
-			</span>
+			<div class="flex items-center justify-between mt-4">
+				<span class="w-1/5 border-b lg:w-1/4" />
 
-			<span class="w-1/5 border-b lg:w-1/4" />
-		</div>
-		{#if !showForgotPasswordForm}
+				<span
+					href="#"
+					class="text-xs font-semibold text-center text-gray-600 capitalize hover:no-underline"
+				>
+					or sign in with email
+				</span>
+
+				<span class="w-1/5 border-b lg:w-1/4" />
+			</div>
 			<form on:submit={(e) => onClickSignIn(e)}>
 				<div class="mt-4">
-					<Textfield
-						error={emailErr}
-						onInput={(e) => validateEmail(e)}
-						name="email"
-						label="Email Address"
-						type="email"
-					/>
+					<Textfield name="username" label="Username" type="text" />
 				</div>
 				<div class="mt-4">
 					<Textfield
@@ -155,7 +176,34 @@
 				{/if}
 
 				<div class="flex mt-4 w-full justify-center space-x-5">
-					<ButtonSolid disabled={!!emailErr || !!passwordErr} {isLoading}>Sign In</ButtonSolid>
+					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
+
+					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+				</div>
+			</form>
+		{/if}
+
+		{#if isWebAuthN}
+			<ButtonOutlined onClick={handleIsWebAuthn}>
+				<FingerprintIcon styles="text-brown-800 mr-2" />
+				Sign in using Email Password
+			</ButtonOutlined>
+
+			<form on:submit={(e) => webAuthnSignIn(e)}>
+				<div class="mt-4">
+					<Textfield name="username" label="Username" type="text" />
+				</div>
+
+				{#if formErr}
+					<div class="w-full pt-1 capitalize text-center">
+						<span class="text-xs font-semibold text-center text-red-600 uppercase">
+							{formErr}
+						</span>
+					</div>
+				{/if}
+
+				<div class="flex mt-4 w-full justify-center space-x-5">
+					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 
 					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
 				</div>
@@ -176,7 +224,9 @@
 							name="reset_password"
 							bind:value={email}
 							placeholder="Email"
-							class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+							class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 
+							bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 
+							focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
 						/>
 						{#if emailErr}
 							<div class="w-full pt-1 capitalize text-center">
@@ -213,7 +263,6 @@
 				</div>
 			</form>
 		{/if}
-
 		<div class="flex items-center w-full justify-center gap-4 mt-4">
 			<span
 				on:click={() => toggleSignupForm()}

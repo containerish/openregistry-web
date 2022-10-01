@@ -43,6 +43,7 @@ export { TwitterIcon };
 export { UserPlusIcon };
 export { UserIcon };
 export { UserGroupIcon };
+export { FingerprintIcon };
 
 import ArrowDownIcon from './arrow-down.svelte';
 import ArrowLIcon from './arrow-l.svelte';
@@ -86,3 +87,4 @@ import TwitterIcon from './twitter.svelte';
 import UserPlusIcon from './user-plus.svelte';
 import UserIcon from './user.svelte';
 import UserGroupIcon from './userGroup.svelte';
+import FingerprintIcon from './fingerprint.svelte';

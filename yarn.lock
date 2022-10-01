@@ -289,6 +289,11 @@
   dependencies:
     tailwindcss "*"
 
+"@types/webappsec-credential-management@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@types/webappsec-credential-management/-/webappsec-credential-management-0.6.3.tgz#82fdfa092a2a7f08c23201b78fb2557f4a4bd079"
+  integrity sha512-r5r3DmO0xYJA2T6fMKpSc+EjRs7GxNndhh7qW+oR/nihxhbYF++zINj1OslZBkK17l9DHtpZneSIdVuN0F7gXQ==
+
 "@typescript-eslint/eslint-plugin@^4.31.1":
   version "4.33.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.33.0.tgz#c24dc7c8069c7706bc40d99f6fa87edcb2005276"
