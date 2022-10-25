@@ -109,7 +109,7 @@ export class Auth extends HttpClient {
 
 		const body = { username, email };
 
-		const path = '/webauthn/begin-registration';
+		const path = 'webauthn/registration/begin';
 		const resp = await this.http.post(path, body);
 		console.log('credentailOptions: ', resp.data);
 
@@ -155,13 +155,13 @@ export class Auth extends HttpClient {
 			}
 		};
 
-		const path = `/webauthn/finish-registration?username=${username}`;
+		const path = `/webauthn/registration/finish?username=${username}`;
 		const resp = await this.http.post(path, body);
 		return resp;
 	};
 
 	public WebAuthNBeginLogin = async (username: string) => {
-		const path = `/webauthn/begin-login?username=${username}`;
+		const path = `/webauthn/login/begin?username=${username}`;
 		const resp = await this.http.get(path);
 		const credentialRequestOptions = resp.data.options;
 
@@ -185,7 +185,7 @@ export class Auth extends HttpClient {
 		const sig = response.signature;
 		const userHandle = response.userHandle;
 
-		const finishLoginPath = `/webauthn/finish-login?username=${username}`;
+		const finishLoginPath = `/webauthn/login/finish?username=${username}`;
 		const body = {
 			id: credential.id,
 			rawId: this.bufferEncode(rawId),

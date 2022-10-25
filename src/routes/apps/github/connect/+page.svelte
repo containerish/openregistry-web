@@ -21,8 +21,8 @@
 	};
 
 	const installGithubApp = () => {
-		const uri = 'https://github.com/apps/demo-github-app-guacamole/installations/new';
-		goto(uri);
+		const installationUrl = import.meta.env.VITE_GITHUB_APP_PUBLIC_LINK + '/installations/new';
+		goto(installationUrl);
 	};
 </script>
 
