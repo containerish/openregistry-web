@@ -4,7 +4,6 @@ import * as cookie from 'cookie';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load(loadEvent: PageServerLoadEvent) {
-	console.log('cookies: ');
 	const auth = new Auth();
 	const { request, params } = loadEvent;
 

@@ -13,9 +13,6 @@
 			return;
 		}
 	});
-	$: {
-		console.log('data in layout: ', data);
-	}
 </script>
 
 <main
@@ -23,6 +20,6 @@
       selection:text-cream-50"
 >
 	<Navbar openSignInModal={false} {data} />
-	<slot/>
+	<slot />
 	<Footer />
 </main>

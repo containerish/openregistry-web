@@ -235,7 +235,7 @@ export async function load(loadEvent: LayoutServerLoadEvent): Promise<LayoutResp
 
 	try {
 		const cookies = cookie.parse(request.headers.get('cookie') || '');
-		
+
 		const { data, error, status } = await auth.GetUserWithSession(cookies['session_id']);
 		if (data) {
 			return {

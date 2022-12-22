@@ -8,10 +8,6 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 
 	export let handleNext;
-
-	$: {
-		console.log('branches in setup: ', $ghStore.selectedRepository);
-	}
 </script>
 
 <div>

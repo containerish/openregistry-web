@@ -24,7 +24,6 @@
 	};
 
 	export let data: PageData;
-	console.log('data from repo details page:', data);
 	const ns = data.username + '/' + data.repo;
 	const registryBackend = new RegistryBackend();
 

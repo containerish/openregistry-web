@@ -111,7 +111,6 @@ export class Auth extends HttpClient {
 
 		const path = 'webauthn/registration/begin';
 		const resp = await this.http.post(path, body);
-		console.log('credentailOptions: ', resp.data);
 
 		const finishResponse = await this.WebAuthNFinishRegister(username, resp.data.options);
 		return finishResponse;
@@ -172,7 +171,6 @@ export class Auth extends HttpClient {
 		credentialRequestOptions.publicKey.allowCredentials.forEach((listItem) => {
 			listItem.id = bufDecode(listItem.id);
 		});
-		console.log('credentialRequestOptions: ', credentialRequestOptions);
 
 		const credential = (await window.navigator.credentials.get({
 			publicKey: credentialRequestOptions.publicKey
@@ -268,7 +266,6 @@ export class Auth extends HttpClient {
 		const body = { email, password };
 		const resp = await this.http.post(path, body);
 
-		console.log('response from auth.ts: ', resp);
 		return resp;
 	};
 

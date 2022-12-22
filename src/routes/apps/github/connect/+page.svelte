@@ -7,7 +7,6 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
-	console.log('data in connect page: ', data);
 
 	onMount(() => {
 		if (!data.authenticated) {

@@ -4,7 +4,6 @@
 	import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
 
 	const handleTabSelect = (opts: any) => {
-		console.log('is selected: ', opts);
 		return opts.selected
 			? `font-semibold  border-0 border-b-4 border-brown-700 text-lg tracking-wide`
 			: `border-none selection:bg-brown-500 text-lg tracking-wide`;

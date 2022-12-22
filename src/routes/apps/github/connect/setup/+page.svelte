@@ -11,13 +11,8 @@
 	import BuildProject from './build-project.svelte';
 
 	export let data: PageData;
-
-	console.log('data in main page:', data);
-
 	const installationId = $page.url.searchParams.get('installation_id');
-
 	let selectedRepo: string;
-
 	async function handleSelectedRepo(repo: AuthorisedRepository) {
 		selectedRepo = repo.repository.name;
 		await ghStore.setSelectedRepository(repo);
@@ -30,12 +25,6 @@
 		await ghStore.setTabIndex(index);
 		selectedTab = index;
 		console.log('selected tab: ', selectedTab);
-	}
-
-	$: {
-		console.log('selectedRepo: ', selectedRepo);
-		console.log('set branches in selectedRepo: ', $ghStore.selectedRepository);
-		console.log('github username in store', $ghStore.githubUsername);
 	}
 </script>
 

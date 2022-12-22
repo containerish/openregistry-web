@@ -9,7 +9,6 @@ export async function load(loadEvent: PageServerLoadEvent) {
 	const sessionId = cookies['session_id'];
 	const installationId = loadEvent.url.searchParams.get('installation_id');
 	const action = loadEvent.url.searchParams.get('setup_action');
-	console.log('action: ', action);
 
 	if (action && action === 'install') {
 		try {
@@ -23,7 +22,6 @@ export async function load(loadEvent: PageServerLoadEvent) {
 				}
 			);
 
-			console.log('resp from setup github app: ', setupResp.status);
 		} catch (err) {
 			throw error(500, err);
 		}
@@ -35,10 +33,8 @@ export async function load(loadEvent: PageServerLoadEvent) {
 		}
 	});
 
-	console.log('just response: ', resp);
 
 	const jsonResp = (await resp.json()) as AuthorisedRepository[];
-	console.log('json response: ', jsonResp);
 
 	ghStore.setGithubUsername(jsonResp[0].repository.owner.login);
 	return {

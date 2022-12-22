@@ -23,14 +23,6 @@
 		await ghStore.setAllAuthorisedRepositories(data.repoList);
 		await ghStore.setGithubUsername(repo.repository.owner.login);
 	}
-
-	console.log('data: ', data);
-
-	$: {
-		console.log('selectedRepo: ', selectedRepo);
-		console.log('set branches in selectedRepo: ', $ghStore.selectedRepository);
-		console.log('githu username in store', $ghStore.githubUsername);
-	}
 </script>
 
 <div class="relative">
