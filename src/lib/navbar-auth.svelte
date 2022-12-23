@@ -1,16 +1,14 @@
 <script lang="ts">
 	import { userStore as session } from '$lib/userStore';
 	import { goto } from '$app/navigation';
-	import Autocomplete from './autocomplete.svelte';
-	import UserIcon from './icons/user.svelte';
-	import type { User } from '../apis/auth';
-	import Dropdown from '../components/dropdown.svelte';
-	import { RegistryBackend } from '../apis/registry';
 	import ButtonOutlined from './button-outlined.svelte';
-	import ArrowDown from './icons/arrow-down.svelte';
+	import Autocomplete from './autocomplete.svelte';
+	import { UserIcon, ArrowDownIcon } from './icons/';
+	import type { User } from '../apis/auth';
+	import { DropDown } from '$lib/components';
+	import { RegistryBackend } from '../apis/registry';
 
-	// @ts-ignore
-	let u: User = $session.user;
+	export let user: User;
 
 	let showMenu = false;
 	const toggleMenu = () => {
@@ -26,15 +24,23 @@
 	const closeMenu = () => {
 		showMenu = false;
 	};
+
+	const checkUserAuth = () => {
+		if (user) {
+			goto('/repositories');
+			return;
+		}
+		goto('/');
+	};
 </script>
 
-{#if $session.authenticated && $session.user}
+{#if user}
 	<header class="bg-gradient-to-r from-brown-50 to-brown-500 py-4}">
 		<nav class="uw:max-w-[70vw] max-w-[100vw] py-2 px-16 mx-auto">
 			<div class="container w-full px-6 mx-auto half:px-1 uw:px-12">
 				<div class="flex justify-between w-full md:justify-between md:items-center">
-					<div class="cursor-pointer flex-1 flex items-center half:ml-5">
-						<picture class="md:w-44" on:click={() => goto('/')}>
+					<div on:click={checkUserAuth} class="cursor-pointer flex-1 flex items-center half:ml-5">
+						<picture class="md:w-44">
 							<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
 						</picture>
 					</div>
@@ -49,7 +55,7 @@
 								sveltekit:prefetch
 								href="/search"
 								class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit
-			border-none transform hover:text-brown-800 hover:no-underline md:mx-6 md:my-0 half:mx-2"
+			border-none transform hover:text-brown-900 hover:no-underline md:mx-6 md:my-0 half:mx-2 desktop:text-base"
 							>
 								Explore
 							</a>
@@ -57,27 +63,19 @@
 								href="/repositories"
 								sveltekit:prefetch
 								class="my-1 mx-0 px-0 text-lg font-semibold font-lato leading-5 text-brown-800 transition-colors duration-200
-			transform bg-inherit border-none hover:text-brown-800 hover:no-underline md:mx-6 md:my-0 half:mx-2"
+			transform bg-inherit border-none hover:text-brown-900 hover:no-underline md:mx-6 md:my-0 half:mx-2 desktop:text-base"
 							>
 								Repositories
 							</a>
 							<a
 								sveltekit:prefetch
 								href="/faq"
-								class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 transition-colors duration-200
-			transform bg-inherit border-none hover:text-brown-800 hover:no-underline md:mx-6 md:my-0 half:mx-2"
+								class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 duration-200
+			transform bg-inherit border-none hover:text-brown-900 hover:no-underline md:mx-6 md:my-0 half:mx-2 desktop:text-base pr-4"
 							>
 								FAQ
 							</a>
-							<Dropdown user={u} show={showMenu} {closeMenu}>
-								<div class="mt-2">
-									<ButtonOutlined onClick={toggleMenu}>
-										<UserIcon styles="h-4 w-4 lg:h-4 lg:w-6 " />
-										<span class="font-semibold text-sm">{u.username}</span>
-										<ArrowDown />
-									</ButtonOutlined>
-								</div>
-							</Dropdown>
+							<DropDown {user} {closeMenu} />
 						</div>
 					</div>
 				</div>

@@ -4,8 +4,9 @@
 	import NavbarDefault from './navbar-default.svelte';
 	import { userStore as session } from '$lib/userStore';
 	import NavbarAuth from './navbar-auth.svelte';
-	export let pathname: string;
+	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	export let openSignInModal: boolean;
+	export let data: PageData;
 
 	let showSignInForm = false;
 	let showSignUpForm = false;
@@ -20,12 +21,11 @@
 	};
 
 	// @ts-ignore
-
 	setContext('toggleSignInForm', toggleSignInForm);
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-{#if !$session.authenticated}
+{#if !data.authenticated}
 	<header class="bg-gradient-to-r from-brown-50 to-brown-500 pt-4">
 		<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
 			<div class="container px-6 mx-auto half:px-1 uw:px-12">
@@ -36,12 +36,12 @@
 								<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
 							</picture>
 						</div>
-						<NavbarDefault {pathname} {openSignInModal} />
+						<NavbarDefault {openSignInModal} />
 					</div>
 				</div>
 			</div>
 		</nav>
 	</header>
 {:else}
-	<NavbarAuth />
+	<NavbarAuth user={data.user}/>
 {/if}

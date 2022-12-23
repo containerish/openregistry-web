@@ -1,7 +1,10 @@
-<svg width="150" height="150" viewBox="0 0 500 531" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="250" cy="250" r="250" fill="#241D19"/>
-    <ellipse cx="250.5" cy="191" rx="89.5" ry="90" fill="#fff"/>
-    <path
-        class="fill-brown-900"
-        d="M358 400.5C358 365.889 346.621 332.696 326.368 308.223C306.114 283.749 278.643 270 250 270C221.357 270 193.886 283.749 173.632 308.223C153.379 332.696 142 365.889 142 400.5L250 400.5H358Z"/>
-</svg>
+<script>
+    export let styles="";
+</script>
+<svg fill="none"
+ viewBox="0 0 24 24" 
+ stroke-width="2"
+  stroke="currentColor"
+   class="{styles} w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+  </svg>

@@ -1,7 +1,5 @@
 <script>
-	import Discord from '$lib/icons/discord.svelte';
-	import Github from '$lib/icons/github.svelte';
-	import Twitter from '$lib/icons/twitter.svelte';
+	import { GithubIcon, DiscordIcon, TwitterIcon } from './icons';
 </script>
 
 <footer class="bg-gray-50">
@@ -76,7 +74,7 @@
 									class="mx-2 text-gray-900 hover:text-gray-500"
 									aria-label="Twitter"
 								>
-									<Twitter />
+									<TwitterIcon />
 								</a>
 								<a
 									href="https://github.com/containerish/OpenRegistry.git"
@@ -84,7 +82,7 @@
 									class="mx-2 text-gray-900 hover:text-gray-500"
 									aria-label="Github"
 								>
-									<Github />
+									<GithubIcon styles="w-11 h-11" />
 								</a>
 								<a
 									href="https://discord.gg/Mx8HAazrHc"
@@ -92,7 +90,7 @@
 									class="mx-2 text-gray-900 hover:text-gray-500"
 									aria-label="Discord"
 								>
-									<Discord />
+									<DiscordIcon />
 								</a>
 							</div>
 						</div>
