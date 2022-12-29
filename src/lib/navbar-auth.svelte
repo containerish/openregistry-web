@@ -1,19 +1,13 @@
 <script lang="ts">
-	import { userStore as session } from '$lib/userStore';
 	import { goto } from '$app/navigation';
-	import ButtonOutlined from './button-outlined.svelte';
 	import Autocomplete from './autocomplete.svelte';
-	import { UserIcon, ArrowDownIcon } from './icons/';
-	import type { User } from '../apis/auth';
+	import type { User } from '$apis/auth';
 	import { DropDown } from '$lib/components';
-	import { RegistryBackend } from '../apis/registry';
+	import { RegistryBackend } from '$apis/registry';
 
 	export let user: User;
 
 	let showMenu = false;
-	const toggleMenu = () => {
-		showMenu = !showMenu;
-	};
 
 	const registry = new RegistryBackend();
 

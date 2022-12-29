@@ -1,5 +1,5 @@
 import {writable} from 'svelte/store';
-import {RegistryBackend} from '../apis/registry';
+import {RegistryBackend} from '$apis/registry';
 
 const registry = new RegistryBackend();
 export const RepoStore = writable([])

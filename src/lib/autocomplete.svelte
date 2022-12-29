@@ -2,7 +2,7 @@
 	import Cube from './icons/cube.svelte';
 	import { debounce, throttle } from 'throttle-debounce';
 	import { goto } from '$app/navigation';
-	import type { Catalog } from 'src/apis/registry';
+	import type { Catalog } from '$apis/registry';
 	export let onAutoComplete: Function;
 	let showItems = false;
 	let searchQuery = '';

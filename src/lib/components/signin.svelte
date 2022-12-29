@@ -2,9 +2,12 @@
 	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { GithubIcon, FingerprintIcon } from '$lib/icons';
-	import Textfield from '../textfield.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
-	import { Auth } from '../../apis/auth';
+	import { Auth } from '$apis/auth';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import Textfield from '$lib/textfield.svelte';
 
 	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
 	const toggleModal = getContext<VoidFunction>('toggleSignInForm');
@@ -14,41 +17,9 @@
 	const dispatch = createEventDispatcher();
 	let emailErr: string;
 	let passwordErr: string;
-	let formErr: string;
-	let email: string;
-
-	const validateEmail = (e: any) => {
-		formErr = undefined;
-		const email: string = e.target.value;
-		const regexp = new RegExp(
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		);
-
-		const regexFailed = regexp.test(email);
-		// minimum length for email is 3 chars
-		if (!email || email.length < 3 || !regexFailed) {
-			emailErr = 'email is invalid';
-			return false;
-		}
-
-		emailErr = '';
-		return true;
-	};
-
-	const validatePassword = (e: any) => {
-		const pwd: string = e.target.value;
-
-		formErr = undefined;
-
-		const regexp = new RegExp(/^[ A-Za-z0-9]*$/);
-		if (!pwd || pwd.length < 8 || regexp.test(pwd)) {
-			passwordErr = 'password must be alphanumeric and atleast 8 characters long';
-			return;
-		}
-
-		passwordErr = '';
-	};
-
+	let formErr: string | undefined;
+	let email = $page.form?.data?.email as string;
+	let password = $page.form?.data?.password as string;
 	let showForgotPasswordForm = false;
 	let formMsg: string;
 	const handleForgotPassword = async (e: any) => {
@@ -70,30 +41,29 @@
 		formErr = '';
 	};
 
-	const onClickSignIn = async (e: any) => {
-		e.preventDefault();
+	const handleSignInSubmit: SubmitFunction = () => {
 		isLoading = true;
-		const email = e.target.username.value;
-		const password = e.target.password.value;
 
-		if (!email || !password) {
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					// await update();
+					goto('/repositories');
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+				default:
+					await update();
+			}
 			isLoading = false;
-			emailErr = 'email is a required field';
-			passwordErr = 'password is a required field';
-			return;
-		}
-
-		const { error, status } = await auth.Login(email, password);
-		if (error) {
-			isLoading = false;
-			formErr = error.message;
-			return;
-		}
-
-		isLoading = false;
-		if (status === 200) {
-			dispatch('success');
-		}
+		};
 	};
 
 	let isWebAuthN: boolean = false;
@@ -147,34 +117,38 @@
 				>
 					or sign in with email
 				</span>
-
 				<span class="w-1/5 border-b lg:w-1/4" />
 			</div>
-			<form on:submit={(e) => onClickSignIn(e)}>
+			<form method="POST" action="?/signin" use:enhance={handleSignInSubmit}>
 				<div class="mt-4">
-					<Textfield name="username" label="Username" type="text" />
+					<Textfield
+						errors={$page.form?.errors?.email}
+						name="email"
+						label="Email"
+						type="text"
+						value={$page.form?.data?.email || ''}
+					/>
 				</div>
 				<div class="mt-4">
 					<Textfield
-						error={passwordErr}
-						onInput={(e) => validatePassword(e)}
+						errors={$page.form?.errors?.password}
 						name="password"
 						label="Password"
 						type="password"
+						value={password}
 					/>
 				</div>
 
-				{#if formErr}
+				{#if $page.form?.formErrors && $page.form?.formErrors.length}
 					<div class="w-full pt-1 capitalize text-center">
 						<span class="text-xs font-semibold text-center text-red-600 uppercase">
-							{formErr}
+							{$page.form?.formErrors[0]}
 						</span>
 					</div>
 				{/if}
 
 				<div class="flex mt-4 w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
-
 					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
 				</div>
 			</form>
@@ -208,7 +182,7 @@
 		{/if}
 
 		{#if showForgotPasswordForm}
-			<form on:submit|preventDefault={(e) => handleForgotPassword(e)}>
+			<form method="POST" id="reset_password">
 				<div class="mt-4">
 					{#if !formMsg}
 						<div class="flex items-center px-2">
@@ -252,10 +226,9 @@
 				{/if}
 
 				<div class="flex justify-center mt-4 w-full space-x-5">
-					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}
-						>Submit</ButtonSolid
-					>
-
+					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}>
+						Submit
+					</ButtonSolid>
 					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
 				</div>
 			</form>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CopyIcon from './icons/copy.svelte';
-	import type { Tag } from '../apis/registry';
+	import type { Tag } from '$apis/registry';
 	import { onDestroy } from 'svelte';
 	// @ts-ignore
 	export let tag: Tag;

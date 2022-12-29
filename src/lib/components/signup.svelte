@@ -4,10 +4,12 @@
 	import Textfield from '../textfield.svelte';
 	import { getContext } from 'svelte';
 	import { CheckIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
-	import { Auth } from '../../apis/auth';
+	import { Auth } from '$apis/auth';
 	import confetti from 'canvas-confetti';
 	var canvas = document.getElementById('confetti');
 	let conf = confetti.create(canvas, { resize: true });
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { page } from '$app/stores';
 
 	var count = 200;
 	var defaults = {
@@ -24,8 +26,11 @@
 
 	const throwSomeConfetti = () => {
 		fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+		fire(0.45, { spread: 100, decay: 0.91, scalar: 0.8 });
 		fire(0.25, { spread: 26, startVelocity: 55 });
+		fire(0.35, { spread: 36, startVelocity: 40 });
 		fire(0.2, { spread: 60 });
+		fire(0.4, { spread: 40 });
 		fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
 		fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
 		fire(0.2, { spread: 60 });
@@ -45,34 +50,39 @@
 
 	let usernameErr = '';
 	let emailErr = '';
-	let passwordErr = '';
-	let confirmPasswordErr = '';
-	let password = '';
 	let formErr: string;
 	let successMessage = '';
 
-	const onClickSignUpUser = async (e: any) => {
+	const handleSignUpSubmit: SubmitFunction = ({ form }) => {
 		isLoading = true;
-		setTimeout(async () => {
-			const { error, status, data } = await auth.Signup(
-				e.target.username.value,
-				e.target.email.value,
-				e.target.password.value
-			);
 
-			if (error || status !== 201) {
-				console.error('error signup: ', status, error);
-				formErr = error.message;
-				isLoading = false;
-				return;
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					// await update();
+					form.reset();
+					await update();
+					successMessage = result.data?.message;
+					showSuccessMsg = true;
+					throwSomeConfetti();
+					throwSomeConfetti();
+					throwSomeConfetti();
+					throwSomeConfetti();
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+				default:
+					await update();
 			}
-
 			isLoading = false;
-			showSuccessMsg = true;
-			successMessage = data.message;
-			throwSomeConfetti();
-			throwSomeConfetti();
-		}, 1000);
+		};
 	};
 
 	let isWebAuthn: boolean = false;
@@ -102,10 +112,6 @@
 		}, 1000);
 	};
 
-	const loginWithGithub = () => {
-		auth.LoginWithGithub();
-	};
-
 	const validateUsername = (e: any) => {
 		const username: string = e.target.value;
 
@@ -120,34 +126,6 @@
 		}
 
 		usernameErr = '';
-	};
-
-	const validatePassword = (e: any) => {
-		const pwd: string = e.target.value;
-
-		if (!pwd) {
-			passwordErr = 'password is invalid';
-			return;
-		}
-
-		if (pwd.length < 8) {
-			passwordErr = 'password must be alphanumeric and atleast 8 characters long';
-			return;
-		}
-
-		password = pwd;
-		passwordErr = '';
-	};
-
-	const validateConfirmPassword = (e: any) => {
-		const confirmPassword: string = e.target.value;
-
-		if (confirmPassword !== password) {
-			confirmPasswordErr = 'password and confirm password do not match';
-			return;
-		}
-
-		confirmPasswordErr = '';
 	};
 
 	const validateEmail = (e: any) => {
@@ -200,61 +178,60 @@
 					<span class="w-1/5 border-b lg:w-1/4" />
 				</div>
 
-				<form on:submit|preventDefault={(e) => onClickSignUpUser(e)}>
+				<form id="signup" method="POST" action="?/signup" use:enhance={handleSignUpSubmit}>
 					<div class="mt-4">
 						<Textfield
 							onInput={validateUsername}
-							error={usernameErr}
+							errors={$page.form?.fieldErrors?.username}
 							label="Username"
 							type="text"
 							name="username"
+							value={$page.form?.data?.username ?? ''}
 						/>
 					</div>
 
 					<div class="mt-4">
 						<Textfield
 							onInput={validateEmail}
-							error={emailErr}
+							errors={$page.form?.fieldErrors?.email}
 							label="Email Address"
 							type="email"
 							name="email"
+							value={$page.form?.data?.email}
 						/>
 					</div>
 
 					<div class="mt-4">
 						<Textfield
-							error={passwordErr}
-							onInput={validatePassword}
+							errors={$page.form?.fieldErrors?.password}
 							subHeading="alphanumeric and min 8 chars"
 							label="Password"
 							type="password"
 							name="password"
+							value={$page.form?.data?.password}
 						/>
 					</div>
 
 					<div class="mt-4">
 						<Textfield
-							error={confirmPasswordErr}
-							onInput={validateConfirmPassword}
+							errors={$page.form?.fieldErrors?.confirmPassword}
 							label="Confirm Password"
 							type="password"
 							name="confirmPassword"
+							value={$page.form?.data?.confirmPassword}
 						/>
 					</div>
 
-					{#if formErr}
-						<div class="mt-4 p-2 rounded-md bg-red-50">
-							<span class="text-red-500">
-								{formErr}
+					{#if $page.form?.formErrors && $page.form?.formErrors.length}
+						<div class="w-full pt-1 capitalize text-center">
+							<span class="text-xs font-semibold text-center text-red-600 uppercase">
+								{$page.form?.formErrors[0]}
 							</span>
 						</div>
 					{/if}
 
 					<div class="flex mt-8 w-full space-x-8">
-						<ButtonSolid {isLoading} disabled={!!emailErr || !!passwordErr} onClick={() => {}}>
-							Sign Up</ButtonSolid
-						>
-
+						<ButtonSolid type="submit" {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
 						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 					</div>
 				</form>
@@ -278,11 +255,11 @@
 					<span class="w-1/5 border-b lg:w-1/4" />
 				</div>
 
-				<form on:submit|preventDefault={(e) => webAuthNSignup(e)}>
+				<form id="webauthn" on:submit|preventDefault={(e) => webAuthNSignup(e)}>
 					<div class="mt-4">
 						<Textfield
 							onInput={validateUsername}
-							error={usernameErr}
+							errors={[usernameErr]}
 							label="Username"
 							type="text"
 							name="username"
@@ -292,24 +269,22 @@
 					<div class="mt-4">
 						<Textfield
 							onInput={validateEmail}
-							error={emailErr}
+							errors={[emailErr]}
 							label="Email Address"
 							type="email"
 							name="email"
 						/>
 					</div>
-					{#if formErr}
-						<div class="mt-4 p-2 rounded-md bg-red-50">
-							<span class="text-red-500">
-								{formErr}
+					{#if $page.form?.formErrors && $page.form?.formErrors.length}
+						<div class="w-full pt-1 capitalize text-center">
+							<span class="text-xs font-semibold text-center text-red-600 uppercase">
+								{$page.form?.formErrors[0]}
 							</span>
 						</div>
 					{/if}
 
 					<div class="flex mt-8 w-full space-x-8">
-						<ButtonSolid {isLoading} disabled={!!emailErr || !!passwordErr} onClick={() => {}}>
-							Sign Up</ButtonSolid
-						>
+						<ButtonSolid {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
 
 						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 					</div>
@@ -320,8 +295,9 @@
 				<div id="confetti">
 					<CheckIcon styles="h-24 w-24 text-brown-800" />
 				</div>
-				<div class="w-full text-center flex flex-col space-y-4 gap-2 px-4 items-center">
-					<span class="text-lg capitalize text-brown-900">{successMessage}</span>
+				<span class="text-lg capitalize text-brown-900">{successMessage}</span>
+				<div class="w-full text-center flex flex-row justify-center gap-2 px-4 items-center">
+					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 				</div>
 			</div>

@@ -1,23 +1,27 @@
 {
 	"compilerOptions": {
 		"moduleResolution": "node",
-		"module": "es2020",
-		"lib": ["es2020", "DOM"],
-		"target": "es2020",
+		// "module": "es2020",
+		// "lib": ["es2020", "DOM"],
+		// "target": "es2020",
 		"importsNotUsedAsValues": "error",
-		"isolatedModules": true,
+		// "isolatedModules": true,
 		"resolveJsonModule": true,
 		"sourceMap": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		// "strict": true,
+		"strict": true,
 		"baseUrl": ".",
 		"allowJs": true,
 		"checkJs": true,
 		"paths": {
 			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"]
+			"$lib/*": ["src/lib/*"],
+			"$apis": ["src/apis"],
+			"$apis/*": ["src/apis/*"],
+			"$stores": ["src/stores"],
+			"$stores/*": ["src/stores/*"]
 		},
 		"types": [
 			"@types/webappsec-credential-management"
