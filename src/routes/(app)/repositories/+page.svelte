@@ -54,13 +54,6 @@
 
 	onMount(async () => {
 		// @ts-ignore
-		// if (!data.authenticated) {
-		// goto('/auth/unauthorized');
-		// return;
-		// }
-
-		// @ts-ignore
-		const u: User = data.user;
 		const resp = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
 		if (resp.error) {
 			openErrorModal = true;

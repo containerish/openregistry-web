@@ -8,7 +8,7 @@
 	class="bg-brown-200 text-center min-h-[70vh] py-8 2xl:py-16 flex-col w-full h-full flex justify-center items-center"
 >
 	{#if $page.status === 400 || $page.status === 401}
-		<img class="w-ful" src="/unauthorised.svg" alt="" />
+		<img class="w-full" src="/unauthorised.svg" alt="" />
 	{:else}
 		<img class="w-full" src="/404-not-found.svg" alt="" />
 	{/if}

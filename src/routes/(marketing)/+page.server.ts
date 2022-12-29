@@ -6,6 +6,7 @@ import { Auth } from '$apis/auth';
 import type { RequestEvent } from './$types';
 import { ZodError } from 'zod';
 import { signInSchema, signUpSchema } from '$lib/formSchemas';
+import { VITE_OPEN_REGISTRY_BACKEND_URL } from '$env/static/private';
 
 const auth = new Auth()
 
@@ -13,8 +14,6 @@ export const actions: Actions = {
 	signin: async (event: RequestEvent) => {
 		const { request, cookies, setHeaders, fetch } = event;
 		const formData = Object.fromEntries(await request.formData())
-		// formData.set('email', 'johndoe@guacamole.sh')
-		// formData.set('password', 'Qwerty@123')
 
 		try {
 			const user = signInSchema.parse(formData)
@@ -60,7 +59,7 @@ export const actions: Actions = {
 		const { cookies, locals, fetch } = event;
 
 		try {
-			const resp = await fetch('http://localhost:5000/auth/signout', {
+			const resp = await fetch(`${VITE_OPEN_REGISTRY_BACKEND_URL}/auth/signout`, {
 				method: 'DELETE',
 				credentials: 'always',
 				headers: {

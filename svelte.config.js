@@ -10,7 +10,7 @@ const config = {
 		alias: {
 			'$apis': 'src/apis',
 			'$stores': 'src/stores',
-		}
+		},
 	}
 };
 

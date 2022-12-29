@@ -2,6 +2,7 @@ import { ghStore } from '$lib/stores';
 import { error, redirect } from '@sveltejs/kit';
 import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 import type { PageServerLoadEvent } from './$types';
+import { VITE_OPEN_REGISTRY_BACKEND_URL } from '$env/static/private';
 
 export const load = async (event: PageServerLoadEvent) => {
 	const { request, cookies, url, fetch } = event;
@@ -13,7 +14,7 @@ export const load = async (event: PageServerLoadEvent) => {
 	if (action && (action === 'install' || action === 'update')) {
 		try {
 			const setupResp = await fetch(
-				`http://localhost:5000/github/app/setup/finish?installation_id=${installationId}`,
+				`${VITE_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`,
 				{
 					method: 'POST',
 					headers: {
@@ -30,7 +31,7 @@ export const load = async (event: PageServerLoadEvent) => {
 		}
 	}
 
-	const resp = await fetch('http://localhost:5000/github/app/repo/list', {
+	const resp = await fetch(`${VITE_OPEN_REGISTRY_BACKEND_URL}/github/app/repo/list`, {
 		headers: {
 			cookie: `session_id=${sessionId}`
 		}
