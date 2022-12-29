@@ -10,8 +10,8 @@
 	on:click={() => onClick()}
 	class="{isLoading ? 'px-2' : 'px-4'} 
 	{styles}transition ease-in-out duration-200
-	flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] border-2 border-brown-800 rounded-md bg-transparent capitalize text-lg font-medium 
-	hover:bg-brown-700 hover:text-white hover:ease-in desktop:py-1.5 desktop:text-base desktop:border-[1.5px]"
+	flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] border-2 border-primary-200 text-primary-400 
+	rounded-md bg-transparent capitalize text-lg font-medium hover:rounded-full hover:ease-in py-3 laptop:py-1.5 desktop:text-base desktop:border-[1.5px]"
 >
 	{#if isLoading}
 		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50" fill="none" viewBox="0 0 24 24">

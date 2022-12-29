@@ -1,5 +1,3 @@
-import AddAccountIcon from './add-account.svelte';
-
 export { AddAccountIcon };
 export { ArrowLeftIcon };
 export { ArrowLIcon };
@@ -44,7 +42,17 @@ export { UserPlusIcon };
 export { UserIcon };
 export { UserGroupIcon };
 export { FingerprintIcon };
+export { MongoIcon };
+export { StorjIcon };
+export { IexecIcon };
+export { AkashIcon };
+export { LaboratoryIcon };
+export { LayersIcon };
+export { SettingsHowToIcon };
+export { CloudIcon };
+export { ConfirmIcon };
 
+import AddAccountIcon from './add-account.svelte';
 import ArrowDownIcon from './arrow-down.svelte';
 import ArrowLIcon from './arrow-l.svelte';
 import ArrowLeftIcon from './arrow-left.svelte';
@@ -88,3 +96,12 @@ import UserPlusIcon from './user-plus.svelte';
 import UserIcon from './user.svelte';
 import UserGroupIcon from './userGroup.svelte';
 import FingerprintIcon from './fingerprint.svelte';
+import MongoIcon from './mongo.svelte';
+import StorjIcon from './storj.svelte';
+import IexecIcon from './iexec.svelte';
+import AkashIcon from './akash.svelte';
+import LaboratoryIcon from './laboratory.svelte';
+import LayersIcon from './layers.svelte';
+import SettingsHowToIcon from './settings-how-to.svelte';
+import CloudIcon from './cloud.svelte';
+import ConfirmIcon from './confirm.svelte';

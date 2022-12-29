@@ -37,6 +37,26 @@ const config = {
 				"grad-900": "#8D7060",
 				"spec-100": "#E8E3E0",
 				"cream-50": "#e5e2e0",
+
+				"primary-800":"#030527",
+				"primary-700":"#19195C",
+				"primary-600":"#2F2F7D",
+				"primary-500":"#4848BC",
+				"primary-400":"#6363F1",
+				"primary-300":"#7373FF",
+				"primary-200":"#A3AEFD",
+				"primary-100":"#C2C9FD",
+				"primary-50":"#EEEDFF",
+
+				"gray-800":"#",
+				"gray-700":"#",
+				"gray-600":"#",
+				"gray-500":"#",
+				"gray-400":"#",
+				"gray-300":"#",
+				"gray-200":"#",
+				"gray-100":"#",
+
 			},
 			screens: {
 				'half':{'min': '320px', 'max': '719px'},
