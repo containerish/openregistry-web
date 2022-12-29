@@ -55,6 +55,7 @@
 		"js-cookie": "^3.0.1",
 		"svelte-steps": "^2.3.5",
 		"throttle-debounce": "^3.0.1",
-		"typeit": "^8.4.0"
+		"typeit": "^8.4.0",
+		"zod": "^3.20.2"
 	}
 }

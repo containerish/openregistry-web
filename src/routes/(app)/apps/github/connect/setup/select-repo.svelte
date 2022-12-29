@@ -2,11 +2,11 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { ghStore } from '$lib/stores';
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	import { CheckIcon, AddAccountIcon } from '$lib/icons';
-	import type { AuthorisedRepository } from 'src/routes/+layout.server';
+	import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 	import Dialog from '$lib/dialog.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
+	import type { PageData } from './$types';
 
 	let openDialog = false;
 	let disabled = false;

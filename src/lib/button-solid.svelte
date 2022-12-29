@@ -2,9 +2,11 @@
 	export let onClick: Function = () => {};
 	export let isLoading = false;
 	export let disabled = false;
+	export let type: string = '';
 </script>
 
 <button
+	{type}
 	{disabled}
 	on:click={() => onClick()}
 	class="{isLoading ? 'px-2' : 'px-4'} 

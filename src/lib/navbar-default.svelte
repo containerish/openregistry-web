@@ -2,19 +2,16 @@
 	import ButtonSolid from './button-solid.svelte';
 	import Modal from './modal.svelte';
 	import { Signin, Signup } from '$lib/components';
-	import { Auth } from '../apis/auth';
 	import { setContext } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { RegistryBackend } from '../apis/registry';
 
 	export let openSignInModal: boolean;
-	const registry = new RegistryBackend();
+	export let form: { data: any; errors: any };
 
 	let showSignInForm = false;
 	let showSignUpForm = false;
 
 	const toggleSignInForm = () => {
-		openSignInModal = undefined;
+		openSignInModal = false;
 		showSignInForm = !showSignInForm;
 	};
 
@@ -22,14 +19,6 @@
 		showSignInForm = !showSignInForm;
 		showSignUpForm = !showSignUpForm;
 		openSignInModal = false;
-	};
-
-	const handleAutoComplete = async (query: string) => {
-		return await registry.SearchRepositories(query);
-	};
-
-	const redirectToRepositories = async () => {
-		goto('/repositories');
 	};
 
 	setContext('toggleSignInForm', toggleSignInForm);
@@ -78,7 +67,7 @@
 
 	{#if showSignInForm || openSignInModal}
 		<Modal>
-			<Signin on:success={redirectToRepositories} />
+			<Signin {form} />
 		</Modal>
 	{/if}
 

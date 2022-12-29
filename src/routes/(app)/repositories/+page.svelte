@@ -7,11 +7,14 @@
 	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
 	import { NewRepository, Repository, Pulse } from '$lib/components';
+	import type { PageData } from './$types';
 
-	import { RegistryBackend } from '../../apis/registry';
-	import type { Catalog } from '../../apis/registry';
-	import type { User } from '../../apis/auth';
+	import { RegistryBackend } from '../../../apis/registry';
+	import type { Catalog } from '../../../apis/registry';
+	import type { User } from '../../../apis/auth';
 	import { navigating } from '$app/stores';
+	import { pulseStore } from '../../../lib/components/pulse';
+	import ErrorModal from '$lib/errorModal.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
@@ -29,10 +32,6 @@
 		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
 	};
 
-	import { goto } from '$app/navigation';
-	import { pulseStore } from '../../lib/components/pulse';
-	import ErrorModal from '$lib/errorModal.svelte';
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	// @ts-ignore
 
 	const fetchPageData = async (offset?: number) => {
@@ -55,10 +54,10 @@
 
 	onMount(async () => {
 		// @ts-ignore
-		if (!data.authenticated) {
-			goto('/auth/unauthorized');
-			return;
-		}
+		// if (!data.authenticated) {
+		// goto('/auth/unauthorized');
+		// return;
+		// }
 
 		// @ts-ignore
 		const u: User = data.user;

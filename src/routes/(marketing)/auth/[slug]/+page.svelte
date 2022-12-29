@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { Auth } from '../../../apis/auth';
+	import { Auth } from '../../../../apis/auth';
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/modal.svelte';
 	import Button from '$lib/button-solid.svelte';
 	import { Pulse } from '$lib/components';
 	import ErrorModal from '$lib/errorModal.svelte';
+	import type { PageData } from './$types';
 	export let unhandledErr: string;
 	let showModal = false;
 	let password = '';
@@ -15,7 +16,7 @@
 	let formErr: string;
 	let formMsg: string;
 
-	export let data;
+	export let data: PageData;
 	export let token = '';
 
 	const auth = new Auth();

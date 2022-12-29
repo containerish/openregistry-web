@@ -4,11 +4,11 @@
 	let clickable: boolean = false;
 	import { page } from '$app/stores';
 	import { ghStore } from '$lib/stores';
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
-	import type { AuthorisedRepository } from 'src/routes/+layout.server';
+	import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 	import SelectRepo from './select-repo.svelte';
 	import Setup from './setup.svelte';
 	import BuildProject from './build-project.svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
@@ -24,7 +24,6 @@
 	async function handleNext(index: number) {
 		await ghStore.setTabIndex(index);
 		selectedTab = index;
-		console.log('selected tab: ', selectedTab);
 	}
 </script>
 

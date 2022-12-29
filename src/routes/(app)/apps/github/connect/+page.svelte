@@ -1,18 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import GihubIcon from '$lib/github.svelte';
-
-	/** @type {import('./$types').PageData} */
-	export let data: PageData;
-
-	onMount(() => {
-		if (!data.authenticated) {
-			goto('/auth/unauthorised');
-		}
-	});
 
 	let toggleSteps = false;
 	const handleToggleSteps = () => {

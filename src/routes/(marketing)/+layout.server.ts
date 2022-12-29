@@ -1,7 +1,45 @@
-import { Auth } from '../apis/auth';
+import { Auth } from '../../apis/auth';
 import type { LayoutServerLoadEvent } from './$types';
-import type { User } from '../apis/auth';
+import type { User } from '../../apis/auth';
+import { session } from '../../stores/session';
 import * as cookie from 'cookie';
+import { redirect } from '@sveltejs/kit';
+
+export const load = async (loadEvent: LayoutServerLoadEvent) => {
+	const { cookies, locals } = loadEvent;
+	if (locals.authenticated && locals.user) {
+		// throw redirect(303, '/repositories')
+		return {
+			user: locals.user,
+			isAuthenticated: locals.authenticated,
+		}
+
+	}
+	// const auth = new Auth();
+	// const { request, url, cookies } = loadEvent;
+
+	// try {
+	// 	const sessionId = cookies.get('session_id')
+	// 	const { data, error, status } = await auth.GetUserWithSession(sessionId);
+	// 	if (data) {
+	// 		sessionStore.set({ user: data, isAuthenticated: true })
+	// 		loadEvent.locals.sessionId = sessionId
+	// 		return {
+	// 			user: data,
+	// 			authenticated: true,
+	// 			locals: { username: data.username },
+	// 			pathname: url.pathname
+	// 		} as LayoutResponse;
+	// 	}
+	//
+	// 	throw Error(`status: ${status} - error: ${error} `);
+	// } catch (error) {
+	// 	return {
+	// 		error: JSON.stringify(error.message),
+	// 		authenticated: false
+	// 	} as LayoutResponse;
+	// }
+}
 
 export type AuthorisedRepository = {
 	branches: Branch[];
@@ -228,29 +266,3 @@ export type LayoutResponse = {
 	githubUsername?: string;
 	repoList?: AuthorisedRepository[];
 };
-/** @type {import('./$types').LayoutServerLoad} */
-export async function load(loadEvent: LayoutServerLoadEvent): Promise<LayoutResponse> {
-	const auth = new Auth();
-	const { request, url } = loadEvent;
-
-	try {
-		const cookies = cookie.parse(request.headers.get('cookie') || '');
-
-		const { data, error, status } = await auth.GetUserWithSession(cookies['session_id']);
-		if (data) {
-			return {
-				user: data,
-				authenticated: true,
-				locals: { username: data.username },
-				pathname: url.pathname
-			} as LayoutResponse;
-		}
-
-		throw Error(`status: ${status} - error: ${error} `);
-	} catch (error) {
-		return {
-			error: JSON.stringify(error.message),
-			authenticated: false
-		} as LayoutResponse;
-	}
-}

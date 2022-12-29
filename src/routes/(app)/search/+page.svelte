@@ -3,15 +3,15 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
-	import { RegistryBackend } from '../../apis/registry';
+	import { RegistryBackend } from '../../../apis/registry';
 	import Checkbox from '$lib/checkbox.svelte';
-	import type { Catalog } from '../../apis/registry';
+	import type { Catalog } from '../../../apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { navigating } from '$app/stores';
 	import Menu from '$lib/headless/menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import ClockIcon from '$lib/icons/clock.svelte';
-	import { pulseStore } from '../../lib/components/pulse';
+	import { pulseStore } from '$lib/components/pulse';
 	import { NewRepository, Repository, Pulse } from '$lib/components';
 
 	import ErrorModal from '$lib/errorModal.svelte';
@@ -211,3 +211,4 @@
 	</Card>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />
+
