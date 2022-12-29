@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Star from '$lib/icons/star.svelte';
 	import Globe from '$lib/icons/globe.svelte';
-	import { RegistryBackend, type Repo } from '../../../../apis/registry';
+	import { RegistryBackend, type Repo } from '../../../../../apis/registry';
 	import { onDestroy, onMount } from 'svelte';
 	import Tag from '$lib/tag.svelte';
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+	import type { PageData } from './$types';
 
 	let isOverview = true;
 	let isTags = false;
