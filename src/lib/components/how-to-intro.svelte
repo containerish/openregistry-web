@@ -14,15 +14,16 @@
 
 <div class=" bg-slate-100 relative">
 	<Card
-		styles="min-h-[800px] desktop:min-h-[800px] block flex flex-col desktop:items-center desktop:py-2 space-y-8 gap-10 py-20"
+		styles="min-h-[800px] desktop:min-h-[800px] flex flex-col desktop:items-center desktop:py-2 space-y-8 gap-10 py-20"
 	>
-		<div class="w-full flex justify-between half:flex-col half:px-4 laptop:flex-col items-center">
+		<div class="w-full flex justify-between half:flex-col laptop:flex-col items-center">
 			<div class="flex flex-col gap-12 w-1/2">
-				<div class="flex flex-col gap-3">
+				<div class="flex flex-col justify-center gap-3 half:px-4">
 					<span
 						class="text-7xl laptop:text-4xl desktop:text-5xl half:text-3xl font-black text-primary-700"
-						>A truly decentralized container registry</span
 					>
+						A truly decentralized container registry
+					</span>
 					<span class="text-2xl half:text-xl text-primary-600"
 						>in just a few simple steps, you can get started with OpenRegsitry</span
 					>
@@ -43,7 +44,7 @@
 					</ul>
 				</div>
 
-				<div class="flex justify-start items-center gap-5">
+				<div class="flex half:justify-center items-center gap-5">
 					<ButtonSolid>Sign up for free</ButtonSolid>
 					<ButtonOutlined>Learn more</ButtonOutlined>
 				</div>

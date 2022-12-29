@@ -81,7 +81,7 @@
 			</div>
 		</div>
 
-		<div class="h-full pb-8 desktop:ml-20 half:-ml-6">
+		<div class="h-full pb-8 desktop:ml-20">
 			<form
 				on:submit|preventDefault={() => goto(`/search?query=${query}`)}
 				class="flex half:flex-col justify-center gap-5 items-center"
@@ -108,7 +108,7 @@
 
 	<div
 		class="grid grid-cols-5 laptop:grid-cols-3 half:grid-cols-2 gap-16 half:gap-2 laptop:gap-4
-		py-20 half:py-0 laptop:py-0 laptop:pb-4 half:pb-4 half:w-1/2 laptop:w-3/5 half:px-10"
+		py-20 half:py-0 laptop:py-0 laptop:pb-4 half:pb-4 half:w-1/2 laptop:w-3/5 half:place-items-center half:px-10"
 	>
 		<div class="col-span-5 laptop:col-span-3 half:col-span-2 pb-4">
 			<span

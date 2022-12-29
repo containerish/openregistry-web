@@ -4,12 +4,12 @@
 </script>
 
 <Card styles="bg-primary-50 block py-12">
-	<div class="w-full h-full">
+	<div class="w-full h-full half:w-4/5">
 		<div
 			class="px-6 w-full flex justify-center items-center half:flex-col
-			laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10 my-28"
+			laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10 my-28 half:my-5"
 		>
-			<div class="half:w-96">
+			<div class="half:w-80">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
 				</picture>
@@ -55,7 +55,7 @@
 						class="transition-all duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
             hover:scale-110 pb-3 border border-none"
 					>
-						<Arrow />
+						<Arrow styles="text-primary-400" />
 					</button>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-xl mt-1"
+						class="text-primary-400 text-xl mt-1 font-semibold"
 						href="https://blog.openregistry.dev/posts/collaborations"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -101,11 +101,11 @@
 						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
        hover:scale-110 pb-3 border border-none"
 					>
-						<Arrow />
+						<Arrow styles="text-primary-400" />
 					</button>
 				</div>
 			</div>
-			<div class="half:w-96">
+			<div class="half:w-80">
 				<picture>
 					<img src="/collaboration.svg" alt="Collaborations" width="600px" />
 				</picture>
@@ -115,7 +115,7 @@
 			class="px-6 w-full flex justify-center items-center half:flex-col laptop:flex-col
 			laptop:py-10 ipad:flex-col ipad:py-10 my-28"
 		>
-			<div class="half:w-96 ipad:pb-4 half:pb-4">
+			<div class="half:w-80 ipad:pb-4 half:pb-4">
 				<picture>
 					<img src="man-arrow-up.svg" alt="Storage" width="600px" />
 				</picture>
@@ -138,7 +138,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-xl mt-1"
+						class="text-primary-400 text-xl mt-1 font-semibold"
 						href="https://blog.openregistry.dev/posts/web3-infrastructure"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -147,7 +147,7 @@
 						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
           hover:scale-110 pb-3 border border-none"
 					>
-						<Arrow />
+						<Arrow styles="text-primary-400" />
 					</button>
 				</div>
 			</div>

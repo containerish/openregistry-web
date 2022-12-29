@@ -16,32 +16,35 @@
 					</span>
 				</div>
 
-				<div class="flex half:ml-16">
-					<h4
-						class="invisible text-center whitespace-nowrap font-semibold
-					pb-4 text-3xl half:font-semibold half:visible half:pr-2 half:-ml-2"
-					>
-						High Level
-					</h4>
-					<h4
+				<div class="flex text-center justify-center items-center">
+					<span
 						class="invisible text-center whitespace-nowrap font-semibold
 					pb-4 text-3xl half:font-semibold half:visible"
 					>
-						Architecture
-					</h4>
+						High Level
+					</span>
+					<span
+						class="invisible text-center whitespace-nowrap font-semibold
+					pb-4 text-3xl half:font-semibold half:visible"
+					>
+						&nbsp;Architecture
+					</span>
 				</div>
-				<p
-					class="text-lg half:text-sm text-center font-normal leading-6 tracking-wide text-primary-600"
-				>
-					The following diagram tries to depict the high level architecture of OpenRegistry. We are
-					hosted on Akash dCloud and the container images are stored on decentralised storage
-					systems like IPFS. OpenRegistry is designed as a pluggable platform to adapt to any modern
-					infrastructure or frameworks. We are exploring ways of collaborating with iExec, Arweave
-					and Storj
-				</p>
+				<div class="half:px-4">
+					<p
+						class="text-lg half:text-sm text-center font-normal leading-6 tracking-wide half:tracking-normal text-primary-600"
+					>
+						The following diagram tries to depict the high level architecture of OpenRegistry. We
+						are hosted on Akash dCloud and the container images are stored on decentralised storage
+						systems like IPFS. OpenRegistry is designed as a pluggable platform to adapt to any
+						modern infrastructure or frameworks. We are exploring ways of collaborating with iExec,
+						Arweave and Storj
+					</p>
+				</div>
+
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primaaary-400 text-xl mt-1"
+						class="text-primary-400 text-xl mt-1 font-semibold"
 						href="https://blog.openregistry.dev/posts/overview"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -52,11 +55,11 @@
                        hover:translate-x-2 hover:scale-110
                       	 pb-3 border border-none"
 					>
-						<Arrow />
+						<Arrow styles="text-primary-400" />
 					</button>
 				</div>
 			</div>
-			<div class="half:w-96 laptop:w-1/2 laptop:mr-14 ipad:w-3/4 mr-14">
+			<div class="half:w-[45%] laptop:w-1/2 laptop:mr-14 ipad:w-3/4 mr-14 half:mr-0">
 				<picture>
 					<img
 						class="w-full"
