@@ -3,7 +3,7 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { GithubIcon, FingerprintIcon } from '$lib/icons';
 	import { createEventDispatcher, getContext } from 'svelte';
-	import { Auth } from '../../apis/auth';
+	import { Auth } from '$apis/auth';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';

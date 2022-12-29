@@ -1,4 +1,4 @@
-import { Auth } from '../../../../apis/auth';
+import { Auth } from '$apis/auth';
 import type { PageServerLoadEvent } from './$types';
 import * as cookie from 'cookie';
 

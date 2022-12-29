@@ -1,4 +1,4 @@
-import type { User } from './apis/auth';
+import type { User } from '$apis/auth';
 
 declare global {
 	/// <refrence types="@sveltejs/kit">

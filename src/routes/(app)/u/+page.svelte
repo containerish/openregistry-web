@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Repository } from '$lib/components';
-	import { RegistryBackend, type Catalog } from '../../../apis/registry';
+	import { RegistryBackend, type Catalog } from '$apis/registry';
 	import { UserIcon, StarIcon, UserGroupIcon } from '$lib/icons';
 
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+	import type { PageData } from './$types';
 	export let data: PageData;
 
 	let isRepo = true;

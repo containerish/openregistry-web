@@ -1,7 +1,7 @@
-import { Auth } from '../../apis/auth';
+import { Auth } from '$apis/auth';
 import type { LayoutServerLoadEvent } from './$types';
-import type { User } from '../../apis/auth';
-import { session } from '../../stores/session';
+import type { User } from '$apis/auth';
+import { session } from '$stores/session';
 import * as cookie from 'cookie';
 import { redirect } from '@sveltejs/kit';
 

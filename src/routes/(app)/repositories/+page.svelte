@@ -9,11 +9,11 @@
 	import { NewRepository, Repository, Pulse } from '$lib/components';
 	import type { PageData } from './$types';
 
-	import { RegistryBackend } from '../../../apis/registry';
-	import type { Catalog } from '../../../apis/registry';
-	import type { User } from '../../../apis/auth';
+	import { RegistryBackend } from '$apis/registry';
+	import type { Catalog } from '$apis/registry';
+	import type { User } from '$apis/auth';
 	import { navigating } from '$app/stores';
-	import { pulseStore } from '../../../lib/components/pulse';
+	import { pulseStore } from '$lib/components/pulse';
 	import ErrorModal from '$lib/errorModal.svelte';
 
 	/** @type {import('./$types').PageData} */

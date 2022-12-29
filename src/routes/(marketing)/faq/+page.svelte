@@ -2,7 +2,7 @@
 	import Card from '$lib/card.svelte';
 	import Textarea from '$lib/textarea.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import { Support } from '../../../apis/support';
+	import { Support } from '$apis/support';
 	import { SpinnerCircle, SupportIcon } from '$lib/icons';
 	import FaqTerminal from '$lib/faqTerminal.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';

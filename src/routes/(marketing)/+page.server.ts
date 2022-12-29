@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { AxiosResponseHeaders } from "axios";
 import * as c from 'cookie';
 import type { Actions } from './$types';
-import { Auth } from '../../apis/auth';
+import { Auth } from '$apis/auth';
 import type { RequestEvent } from './$types';
 import { ZodError } from 'zod';
 import { signInSchema, signUpSchema } from '$lib/formSchemas';

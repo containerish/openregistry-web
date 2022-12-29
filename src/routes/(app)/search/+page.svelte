@@ -3,9 +3,9 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
-	import { RegistryBackend } from '../../../apis/registry';
+	import { RegistryBackend } from '$apis/registry';
 	import Checkbox from '$lib/checkbox.svelte';
-	import type { Catalog } from '../../../apis/registry';
+	import type { Catalog } from '$apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { navigating } from '$app/stores';
 	import Menu from '$lib/headless/menu.svelte';
@@ -211,4 +211,3 @@
 	</Card>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />
-

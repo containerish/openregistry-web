@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Auth } from '../../../../apis/auth';
+	import { Auth } from '$apis/auth';
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/modal.svelte';

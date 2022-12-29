@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Autocomplete from './autocomplete.svelte';
-	import type { User } from '../apis/auth';
+	import type { User } from '$apis/auth';
 	import { DropDown } from '$lib/components';
-	import { RegistryBackend } from '../apis/registry';
+	import { RegistryBackend } from '$apis/registry';
 
 	export let user: User;
 

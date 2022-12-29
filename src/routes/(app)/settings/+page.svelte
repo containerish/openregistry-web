@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
-	import { Auth } from '../../../apis/auth';
+	import { Auth } from '$apis/auth';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	export let data: PageData;
 	const auth = new Auth();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { DownloadIcon, LockOpenIcon, StarIcon } from '$lib/icons';
-	import type { Repository } from '../../apis/registry';
+	import type { Repository } from '$apis/registry';
 
 	export let data: Repository;
 	export let compact = true;

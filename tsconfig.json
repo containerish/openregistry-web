@@ -17,7 +17,11 @@
 		"checkJs": true,
 		"paths": {
 			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"]
+			"$lib/*": ["src/lib/*"],
+			"$apis": ["src/apis"],
+			"$apis/*": ["src/apis/*"],
+			"$stores": ["src/stores"],
+			"$stores/*": ["src/stores/*"]
 		},
 		"types": [
 			"@types/webappsec-credential-management"

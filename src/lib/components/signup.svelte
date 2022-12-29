@@ -4,7 +4,7 @@
 	import Textfield from '../textfield.svelte';
 	import { getContext } from 'svelte';
 	import { CheckIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
-	import { Auth } from '../../apis/auth';
+	import { Auth } from '$apis/auth';
 	import confetti from 'canvas-confetti';
 	var canvas = document.getElementById('confetti');
 	let conf = confetti.create(canvas, { resize: true });

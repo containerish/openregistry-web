@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { Tag } from 'src/apis/registry';
+	import type { Tag } from '$apis/registry';
 
 	export type TableData = {
 		headers: string[];

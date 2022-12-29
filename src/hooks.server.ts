@@ -1,5 +1,5 @@
 import { session } from './stores/session';
-import { Auth } from "./apis/auth";
+import { Auth } from "$apis/auth";
 import { redirect, type Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {

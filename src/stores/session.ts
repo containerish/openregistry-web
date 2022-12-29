@@ -1,4 +1,4 @@
-import type { User } from '../apis/auth';
+import type { User } from '$apis/auth';
 import { writable } from 'svelte/store';
 
 const sessionStore = () => {

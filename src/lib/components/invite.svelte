@@ -1,7 +1,7 @@
 <script type="module" lang="ts">
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
-	import { Auth } from '../../apis/auth';
+	import { Auth } from '$apis/auth';
 
 	export let handleModal = () => {};
 
