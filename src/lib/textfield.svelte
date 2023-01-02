@@ -12,7 +12,7 @@
 <div class="flex items-center px-2">
 	<label for={label} class="block font-semibold text-sm text-gray-800">{label}</label>
 	{#if subHeading !== ''}
-		<span class="px-2 text-xs text-brown-800">({subHeading})</span>
+		<span class="px-2 text-xs text-primary-700">({subHeading})</span>
 	{/if}
 </div>
 <input
@@ -21,9 +21,9 @@
 	{type}
 	value={value ?? ''}
 	{placeholder}
-	class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white
-	 bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
-     border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-500
+	class="placeholder-gray-500 form-control block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white
+	 bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
+     border rounded-md focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
      {errors && errors.length > 0 ? 'border-red-600' : ''}"
 />
 {#if errors && errors.length > 0}

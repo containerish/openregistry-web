@@ -15,7 +15,7 @@
 </script>
 
 <main
-	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[50vw] flex justify-center flex-col selection:bg-primary-500
+	class="lg:w-screen uw:min-w-[30vw] uw:max-w-[2000px] apple:max-w-[2000px] flex justify-center flex-col selection:bg-primary-500
       selection:text-white"
 >
 	<Navbar openSignInModal={false} />

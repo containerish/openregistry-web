@@ -88,33 +88,35 @@
 	};
 </script>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl bg-white">
 	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
 		<div class="flex justify-center py-4 mb-8">
-			<picture>
-				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
+			<picture class="flex items-center gap-2">
+				<img
+					class="w-[60px] half:w-[40px] lg:max-w-4xl"
+					src="/logo-new.png"
+					alt="OpenRegistry-Logo"
+				/>
+				<span class="text-3xl half:text-xl font-semibold text-primary-500"> OpenRegistry</span>
 			</picture>
 		</div>
 
 		<ButtonOutlined onClick={auth.LoginWithGithub}>
-			<GithubIcon styles="text-brown-800 mr-2" />
+			<GithubIcon styles="text-primary-600 mr-2" />
 			Sign in with Github
 		</ButtonOutlined>
 		<div class="mt-4" />
 
 		{#if !showForgotPasswordForm && !isWebAuthN}
 			<ButtonOutlined onClick={handleIsWebAuthn}>
-				<FingerprintIcon styles="text-brown-800 mr-2" />
+				<FingerprintIcon styles="text-primary-600 mr-2" />
 				Sign in using Security key
 			</ButtonOutlined>
 
 			<div class="flex items-center justify-between mt-4">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
-				<span
-					href="#"
-					class="text-xs font-semibold text-center text-gray-600 capitalize hover:no-underline"
-				>
+				<span class="text-sm text-center text-slate-600 capitalize hover:no-underline">
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />
@@ -236,14 +238,16 @@
 		<div class="flex items-center w-full justify-center gap-4 mt-4">
 			<span
 				on:click={() => toggleSignupForm()}
-				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
+				on:keypress={() => toggleSignupForm()}
+				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-slate-700 uppercase hover:underline"
 			>
 				sign up
 			</span>
 			<span class="border-2">|</span>
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
-				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
+				on:keypress={() => (showForgotPasswordForm = true)}
+				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-slate-700 uppercase hover:underline"
 			>
 				Forgot password?
 			</span>

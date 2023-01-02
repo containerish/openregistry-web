@@ -8,8 +8,13 @@
 			<div class="w-full -mx-6">
 				<div class="px-6 flex justify-between pb-8">
 					<div>
-						<picture>
-							<img class="lg:max-w-4xl" src="/logo.svg" alt="OpenRegistry-Logo" />
+						<picture class="flex items-center gap-2">
+							<img
+								class="w-[60px] half:w-[40px] lg:max-w-4xl"
+								src="/logo-new.png"
+								alt="OpenRegistry-Logo"
+							/>
+							<span class="text-3xl half:text-xl font-bold text-primary-500"> OpenRegistry</span>
 						</picture>
 						<p class="max-w-md mt-2 text-lg text-slate-600">
 							Join us and become a part of <br />the decentralised future of internet

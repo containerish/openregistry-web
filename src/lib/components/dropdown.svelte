@@ -14,6 +14,7 @@
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import { goto } from '$app/navigation';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 
 	export let user: User;
 
@@ -36,6 +37,28 @@
 	const navigateAround = async (path: string) => {
 		closeMenu();
 		await goto(path);
+	};
+
+	const handleSignOutSubmit: SubmitFunction = () => {
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					// await update();
+					goto('/repositories');
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+				default:
+					await update();
+			}
+		};
 	};
 </script>
 
@@ -133,15 +156,17 @@
 							</div>
 
 							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<MenuItem class="no-underline">
-									<button
-										on:click={signOut}
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center"
-									>
-										<SignOutIcon />
-										<span>Sign Out</span>
-									</button>
-								</MenuItem>
+								<form method="POST" action="?/signout" use:enhance={handleSignOutSubmit}>
+									<MenuItem class="no-underline">
+										<button
+											type="submit"
+											class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center"
+										>
+											<SignOutIcon />
+											<span>Sign Out</span>
+										</button>
+									</MenuItem>
+								</form>
 							</div>
 						</MenuItems>
 					</Transition>
