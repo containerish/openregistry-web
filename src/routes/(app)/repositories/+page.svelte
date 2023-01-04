@@ -24,6 +24,7 @@
 	const pageSize = 10;
 	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
+	import ButtonOutlined from '$lib/button-outlined.svelte';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -101,7 +102,7 @@
 </script>
 
 <Pulse>
-	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
+	<Card styles="w-full min-h-[1500px] m-w-[70vw] py-8 h-max bg-white">
 		<div class="flex w-full h-full max-w-[3000px]">
 			<div class="w-3/4 px-8 my-8">
 				<div class="flex px-4 justify-between lg:px-8">
@@ -111,13 +112,13 @@
 					{#if showTooltip}
 						<div
 							id="tooltip"
-							class="z-50 bg-white rounded-lg py-3 px-4"
+							class="z-50 bg-cyan-200 rounded py-3 px-4"
 							use:popperContent={extraOpts}
 						>
-							<span class=" text-gray-800">
+							<span class=" text-slate-800">
 								Coming soon
 								<svg
-									class="absolute text-white h-6 left-0 ml-3 top-full"
+									class="absolute text-cyan-100 h-5 w-5 left-0 pb-1 ml-3 top-full"
 									x="0px"
 									y="0px"
 									viewBox="0 0 255 255"
@@ -129,15 +130,14 @@
 							<div id="arrow" data-popper-arrow />
 						</div>
 					{/if}
-					<button
+					<div
 						use:popperRef
 						on:mouseenter={() => (showTooltip = true)}
 						on:mouseleave={() => (showTooltip = false)}
-						class="cursor-not-allowed px-4 mx-1 lg:mr-0 text-brown-800 border-2 border-brown-100 bg-transparent rounded-md sm:inline
-					"
 					>
-						Create Repository
-					</button>
+						<ButtonOutlined disabled>Create Respository</ButtonOutlined>
+					</div>
+
 					{#if showModal}
 						<Modal>
 							<NewRepository />
@@ -152,7 +152,7 @@
 						{/each}
 					</div>
 
-					<div class="flex justify-center py-4 bg-cream-50">
+					<div class="flex justify-center py-4 bg-white">
 						{#if catalog.total > backend.DefaultPageSize}
 							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
 						{/if}
@@ -160,9 +160,9 @@
 				{:else}
 					<div class="flex justify-center items-center">
 						<div
-							class="bg-gray-50 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
+							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 						>
-							<span class="text-brown-800 text-4xl">No Repositories</span>
+							<span class="text-primary-600 text-4xl">No Repositories</span>
 						</div>
 					</div>
 				{/if}
@@ -171,7 +171,7 @@
 			<div
 				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
 			>
-				<div class="border rounded-lg px-4 py-2 border-brown-500">
+				<div class="rounded-md px-4 py-2 bg-slate-100">
 					<Advert
 						link="https://akash.network"
 						styles="hover:bg-red-600"

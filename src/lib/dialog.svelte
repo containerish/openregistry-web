@@ -6,7 +6,7 @@
 		DialogDescription
 	} from '@rgossiaux/svelte-headlessui';
 	let isOpen = true;
-
+	export let styles = '';
 	// export let caption = '';
 	// export let text = '';
 	// export let buttonText = '';
@@ -24,7 +24,7 @@
 	<DialogTitle class="text-2xl font-semibold capitalize" />
 	<DialogDescription />
 	<div
-		class="min-w-max max-w-lg min-h-max bg-white shadow-lg py-4 z-50 
+		class="{styles} min-w-max max-w-lg min-h-max bg-white shadow-lg py-4 z-50 
 	inset-0 border-2 border-primary-400 fixed top-[30vh] left-[35vw] laptop:left-[40vw] uw:left-[45vw]"
 	>
 		<slot />

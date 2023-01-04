@@ -63,7 +63,7 @@
 				How does it work?
 			</span>
 			<div
-				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center drop-shadow-lg bg-slate-100 px-4 py-10"
+				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 px-4 py-10"
 			>
 				<LaboratoryIcon />
 				<span class="text-center text-primary-600 text-lg"
@@ -73,7 +73,7 @@
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 1</span>
 			</div>
 			<div
-				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center drop-shadow-lg bg-slate-100 p-4"
+				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<LayersIcon />
 				<span class="text-center text-primary-600 text-lg"
@@ -83,7 +83,7 @@
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 2</span>
 			</div>
 			<div
-				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center drop-shadow-lg bg-slate-100 p-4"
+				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<CloudIcon />
 				<span class="text-center text-primary-600 text-lg"
@@ -93,7 +93,7 @@
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 3</span>
 			</div>
 			<div
-				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center drop-shadow-lg bg-slate-100 p-4"
+				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<ConfirmIcon />
 				<span class="text-center text-primary-600 text-lg"

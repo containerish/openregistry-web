@@ -1,6 +1,8 @@
+<script>
+	export let styles= '';
+</script>
 <svg
-	class="text-gray-600 h-4 w-4 fill-current"
-	xmlns="http://www.w3.org/2000/svg"
+	class="{styles} h-4 w-4 fill-current"
 	x="0px"
 	y="0px"
 	viewBox="0 0 56.966 56.966"

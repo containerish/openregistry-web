@@ -20,35 +20,36 @@
 </script>
 
 {#if tag}
-	<div class="w-full p-4 bg-gray-50 rounded-md">
+	<div class="flex flex-col gap-5 w-full p-4 bg-slate-50">
 		<div class="flex py-2 items-center justify-between">
 			<div>
-				<span class="text-lg font-semibold text-brown-600">
-					Tag: <span class="font-normal">{tag.reference}</span>
+				<span class="text-[22px] font-semibold text-primary-600">
+					Tag: <span class="font-normal text-xl">{tag.reference}</span>
 				</span>
 			</div>
 			<div
 				on:click={copyCommandToClipboard}
-				class="flex justify-center items-center px-2 py-1 rounded-sm cursor-pointer"
+				on:keypress={copyCommandToClipboard}
+				class="flex justify-center items-center text-lg px-2 py-1 rounded-sm cursor-pointer"
 			>
 				{#if selected === tag.reference}
 					Command copied!!
 				{:else}
-					<CopyIcon />
+					<CopyIcon styles="w-8 h-8 text-primary-400" />
 				{/if}
 			</div>
 		</div>
 
 		<div class="table w-full">
 			<div class="table-header-group">
-				<div class="w-full table-row">
-					<div class="table-cell text-sm text-left">Digest (SHA256)</div>
-					<div class="table-cell text-sm text-left">Updated At</div>
-					<div class="table-cell text-sm text-left">Content Link</div>
-					<div class="table-cell text-sm text-left">Size (compressed)</div>
+				<div class="w-full table-row h-10 text-xl">
+					<div class="table-cell text-primary-600 font-medium text-left">Digest (SHA256)</div>
+					<div class="table-cell text-primary-600 font-medium text-left">Updated At</div>
+					<div class="table-cell text-primary-600 font-medium text-left">Content Link</div>
+					<div class="table-cell text-primary-600 font-medium text-left">Size (compressed)</div>
 				</div>
 			</div>
-			<div class="table-row-group">
+			<div class="table-row-group text-primary-500 text-lg">
 				<div class="table-row">
 					<div class="table-cell text-ellipsis max-w-xs">{tag.digest.slice(7, 28)}</div>
 					<div class="table-cell">{new Date(tag.updated_at).toDateString()}</div>

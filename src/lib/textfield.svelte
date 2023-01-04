@@ -1,4 +1,5 @@
 <script lang="ts">
+	export let styles = '';
 	export let label = '';
 	export let type = 'text';
 	export let placeholder = '';
@@ -21,7 +22,7 @@
 	{type}
 	value={value ?? ''}
 	{placeholder}
-	class="placeholder-gray-500 form-control block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white
+	class="{styles} placeholder-gray-500 form-control block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white
 	 bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
      border rounded-md focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
      {errors && errors.length > 0 ? 'border-red-600' : ''}"

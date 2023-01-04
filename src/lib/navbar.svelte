@@ -7,6 +7,7 @@
 	import Modal from './modal.svelte';
 	import { Signin, Signup } from '$lib/components';
 	import Dialog from '$lib/dialog.svelte';
+	import Logo from './components/logo.svelte';
 	let showSignInForm = false;
 	let showSignUpForm = false;
 
@@ -26,7 +27,7 @@
 	setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-<header class="pt-6 bg-primary-50">
+<header class="pt-6 bg-primary-50 sticky top-0 z-50">
 	<nav class="uw:max-w-[50vw] apple:max-w-[100vw] px-16 mx-auto">
 		<div class="container px-6 mx-auto half:px-1 uw:px-12">
 			<div class="flex flex-col md:justify-between md:items-center">
@@ -36,16 +37,7 @@
 						on:click={() => goto('/')}
 						class="cursor-pointer flex items-center half:ml-5"
 					>
-						<picture class="flex items-center gap-2">
-							<img
-								class="w-[60px] half:w-[40px] lg:max-w-4xl"
-								src="/logo-new.png"
-								alt="OpenRegistry-Logo"
-							/>
-							<span class="text-3xl half:text-xl font-semibold text-primary-500">
-								OpenRegistry</span
-							>
-						</picture>
+						<Logo />
 					</div>
 					<div class="items-center sm:flex">
 						<div class="flex flex-row half:flex-col mt-2 md:mt-0 md:mx-1 laptop:gap-3">

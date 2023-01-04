@@ -5,7 +5,7 @@
     </script>
     
     <div>
-        <Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
+        <Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-white">
             <div class="flex w-full h-full max-w-[3000px]">
                 <div class="flex space-x-10 w-full">
                     <div>

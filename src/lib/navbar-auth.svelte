@@ -4,6 +4,7 @@
 	import type { User } from '$apis/auth';
 	import { DropDown } from '$lib/components';
 	import { RegistryBackend } from '$apis/registry';
+	import Logo from './components/logo.svelte';
 
 	export let user: User;
 
@@ -29,14 +30,16 @@
 </script>
 
 {#if user}
-	<header class="bg-gradient-to-r from-brown-50 to-brown-500 py-4}">
+	<header class="py-3 border-b-2 border-slate-200 sticky top-0 bg-white">
 		<nav class="uw:max-w-[70vw] max-w-[100vw] py-2 px-16 mx-auto">
-			<div class="container w-full px-6 mx-auto half:px-1 uw:px-12">
+			<div class="w-full px-6 mx-auto half:px-1 uw:px-12">
 				<div class="flex justify-between w-full md:justify-between md:items-center">
-					<div on:click={checkUserAuth} class="cursor-pointer flex-1 flex items-center half:ml-5">
-						<picture class="md:w-44">
-							<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
-						</picture>
+					<div
+						on:click={checkUserAuth}
+						on:keypress={checkUserAuth}
+						class="cursor-pointer flex-1 flex items-center half:ml-5"
+					>
+						<Logo />
 					</div>
 
 					<div class="flex-[2] pt-2 mx-10 justify-center items-center flex md:block half:hidden">
@@ -44,28 +47,27 @@
 					</div>
 
 					<div class="items-center md:flex flex-[3] justify-end sm:flex half:flex">
-						<div class="flex flex-col justify-center items-center md:flex-row half:mt-0 pl-10">
+						<div
+							class="flex flex-col gap-8 text-lg font-semibold tracking-wide justify-center items-center md:flex-row half:mt-0 pl-10"
+						>
 							<a
 								sveltekit:prefetch
 								href="/search"
-								class="my-1 text-lg leading-5 font-lato font-semibold text-brown-800 transition-colors duration-200 bg-inherit
-			border-none transform hover:text-brown-900 hover:no-underline md:mx-6 md:my-0 half:mx-2 desktop:text-base"
+								class="text-primary-500 hover:scale-110 transform duration-500 text-[22px] font-normal"
 							>
 								Explore
 							</a>
 							<a
 								href="/repositories"
 								sveltekit:prefetch
-								class="my-1 mx-0 px-0 text-lg font-semibold font-lato leading-5 text-brown-800 transition-colors duration-200
-			transform bg-inherit border-none hover:text-brown-900 hover:no-underline md:mx-6 md:my-0 half:mx-2 desktop:text-base"
+								class="text-primary-500 hover:scale-110 transform duration-500 text-[22px] font-normal"
 							>
 								Repositories
 							</a>
 							<a
 								sveltekit:prefetch
 								href="/faq"
-								class="my-1 text-lg font-semibold px-0 leading-5 text-brown-800 border-2 duration-200
-			transform bg-inherit border-none hover:text-brown-900 hover:no-underline md:mx-6 md:my-0 half:mx-2 desktop:text-base pr-4"
+								class="text-primary-500 hover:scale-110 transform duration-500 text-[22px] font-normal"
 							>
 								FAQ
 							</a>

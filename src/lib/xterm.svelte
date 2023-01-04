@@ -78,9 +78,9 @@
 
 <div class="w-full h-full px-4">
 	<div
-		class="coding min-h-[700px] inverse-toggle px-5 shadow-lg text-gray-100 text-sm font-mono 
-		subpixel-antialiased border-2 border-primary-200 pb-6 pt-4 rounded-lg leading-normal overflow-hidden
-		bg-primary-700"
+		class="coding min-h-[700px] inverse-toggle px-5 text-gray-100 text-sm font-mono 
+		subpixel-antialiased pb-6 pt-4 rounded-sm leading-normal overflow-hidden
+		bg-primary-700 shadow-4xl shadow-blue-200"
 	>
 		<div class="top mb-2 flex">
 			<div class="h-3 w-3 bg-red-500 rounded-full" />

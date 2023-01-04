@@ -41,9 +41,10 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[93vh] bg-cream-50">
+	<div class="min-h-[1500px] bg-white">
 		<div
-			class="flex gap-5 space-x-10 min-w-full justify-start items-center py-28 my-20 px-20 bg-brown-500"
+			class="flex gap-5 space-x-10 min-w-max max-w-[] justify-start items-center py-24 mt-20 px-20 
+		bg-primary-50 text-slate-700 mx-5 border-2 border-primary-200"
 		>
 			<div class="px-4" />
 			<div>

@@ -15,6 +15,7 @@
 	import { NewRepository, Repository, Pulse } from '$lib/components';
 
 	import ErrorModal from '$lib/errorModal.svelte';
+	import Filter from '$lib/icons/filter.svelte';
 	export let query: string = '';
 	let sortBy = 'namespace';
 	let httpError: string;
@@ -88,20 +89,21 @@
 </script>
 
 <Pulse>
-	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
+	<Card styles="w-full h-full min-w-max min-h-[1500px] py-8 bg-white px-0">
 		<div class="flex w-full h-full max-w-[3000px]">
 			{#if showTooltip}
-				<div id="tooltip" class="z-50 bg-white rounded-lg py-4 px-4" use:popperContent={extraOpts}>
-					<span class=" text-gray-800">
+				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
+					<span class=" text-slate-800">
 						Coming soon
 						<svg
-							class="absolute text-white h-6 left-0 ml-3 top-full"
+							class="absolute text-cyan-100 h-5 w-5 left-0 pb-1 ml-3 top-full"
 							x="0px"
 							y="0px"
 							viewBox="0 0 255 255"
 							xml:space="preserve"
-							><polygon class="fill-current" points="0,0 127.5,127.5 255,0" /></svg
 						>
+							<polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+						</svg>
 					</span>
 					<div id="arrow" data-popper-arrow />
 				</div>
@@ -110,18 +112,27 @@
 				use:popperRef
 				on:mouseenter={() => (showTooltip = true)}
 				on:mouseleave={() => (showTooltip = false)}
-				class="hover:opacity-50 opacity-60 h-full w-1/3 px-4 py-4 my-4"
+				class="flex flex-col gap-20 hover:opacity-50 opacity-60 h-full w-1/5 mx-10 my-4 border-r-2 border-slate-200"
 			>
-				<h3 class="font-semibold font-lato text-xl mb-4 text-brown-900">Filters</h3>
-				<div class="my-5">
-					<span class="text-lg font-lato text-brown-800">Operating System</span>
+				<div class="flex flex-col gap-4">
+					<div class="flex gap-3 items-center text-primary-500">
+						<Filter />
+						<span class="text-[25px] font-medium">Filters</span>
+					</div>
+					<hr />
+				</div>
+
+				<div class="flex flex-col gap-4 text-lg text-slate-800">
+					<span class="text-xl">Operating System</span>
 					<ul>
 						<li><Checkbox label="Linux" /></li>
 						<li><Checkbox label="Windows" /></li>
 					</ul>
+					<hr />
 				</div>
-				<div class="my-5">
-					<span class="text-lg font-lato text-brown-800">Categories</span>
+
+				<div class="flex flex-col gap-4 text-lg text-slate-800">
+					<span class="text-xl">Categories</span>
 					<ul>
 						<li>
 							<Checkbox label="Analytics" />
@@ -135,28 +146,30 @@
 						<li><Checkbox label="Messaging Services" /></li>
 						<li><Checkbox label="Application Frameworks" /></li>
 					</ul>
+					<hr />
 				</div>
-				<div class="my-5">
-					<span class="text-lg font-lato text-brown-800">Architectures</span>
+				<div class="flex flex-col gap-4 text-lg text-slate-700">
+					<span class="text-xl text-slate-800">Architectures</span>
 					<ul>
 						<li><Checkbox label="ARM32" /></li>
 						<li><Checkbox label="ARM64" /></li>
 						<li><Checkbox label="X86" /></li>
 						<li><Checkbox label="X86-64" /></li>
 					</ul>
+					<hr />
 				</div>
 			</div>
 			<div class="w-3/4 my-8">
 				<div class="flex px-4 pb-2 justify-between uw:px-36 apple:px-24">
 					<Menu title="Sort">
-						<MenuItem class="bg-gray-100">
+						<MenuItem>
 							<button
 								on:click={() => {
 									sortBy = 'last_updated';
 									fetchPageData(0);
 								}}
-								class="{sortBy === 'last_updated' ? 'font-semibold bg-white' : ''} 
-                w-full py-3 border-none inline-flex items-center justify-center bg-cream-50 rounded-b-none rounded-md gap-2 m-0 hover:bg-brown-50 text-sm"
+								class="{sortBy === 'last_updated' ? 'font-normal bg-white' : ''} 
+                w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none rounded-md gap-2 m-0 hover:bg-slate-100 text-sm"
 							>
 								<ClockIcon styles="h-5 w-5" />
 								Last Updated
@@ -168,11 +181,11 @@
 									sortBy = 'namespace';
 									fetchPageData(0);
 								}}
-								class="{sortBy === 'namespace' ? 'font-semibold bg-white' : ''} 
-         inline-flex py-3 justify-center gap-2 items-center w-full bg-cream-50 m-0 border-none rounded-t-none rounded-md hover:bg-brown-50 text-sm"
+								class="{sortBy === 'namespace' ? 'font-normal bg-white' : ''} 
+         inline-flex py-3 justify-center gap-2 items-center w-full  m-0 border-none rounded-t-none rounded-md hover:bg-slate-100 text-sm"
 							>
 								<div
-									class="rounded-full border-2 border-black text-sm h-4 inline-flex justify-center items-center w-4"
+									class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4 inline-flex justify-center items-center w-4"
 								>
 									A
 								</div>
@@ -188,21 +201,21 @@
 				</div>
 
 				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
-					<div class="w-full">
+					<div class="w-11/12">
 						{#each catalog.repositories as repo}
 							<Repository data={repo} compact={false} />
 						{/each}
 					</div>
 
-					<div class="flex justify-center py-4 bg-cream-50">
+					<div class="flex justify-center py-4">
 						<Pagination pages={Math.ceil(catalog.total / backend.DefaultPageSize)} />
 					</div>
 				{:else}
 					<div class="flex justify-center items-center">
 						<div
-							class="bg-gray-50 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
+							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 						>
-							<span class="text-brown-800 text-4xl">No Repositories</span>
+							<span class="text-primary-600 text-4xl">No Repositories</span>
 						</div>
 					</div>
 				{/if}

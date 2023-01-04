@@ -10,6 +10,7 @@
 	let conf = confetti.create(canvas, { resize: true });
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
+	import Logo from './logo.svelte';
 
 	var count = 200;
 	var defaults = {
@@ -148,20 +149,18 @@
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
 	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
 		<div class="flex justify-center py-4 mb-8">
-			<picture>
-				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
-			</picture>
+			<Logo />
 		</div>
 		{#if !showSuccessMsg}
 			<ButtonOutlined onClick={auth.LoginWithGithub}>
-				<GithubIcon styles="text-brown-800 mr-2" />
+				<GithubIcon styles="text-black mr-2" />
 				Sign in with Github
 			</ButtonOutlined>
 			<div class="mt-4" />
 
 			{#if !isWebAuthn}
 				<ButtonOutlined onClick={handleIsWebAuthn}>
-					<FingerprintIcon styles="text-brown-800 mr-2" />
+					<FingerprintIcon styles="text-black mr-2" />
 					Sign up with Security key
 				</ButtonOutlined>
 

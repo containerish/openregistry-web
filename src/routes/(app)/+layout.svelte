@@ -6,7 +6,7 @@
 </script>
 
 <main
-	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[50vw] flex justify-center flex-col selection:bg-brown-800
+	class="lg:w-screen uw:min-w-[55vw] uw:max-w-[50vw] flex justify-center flex-col selection:bg-primary-500
       selection:text-cream-50"
 >
 	<NavbarAuth user={data.user} />

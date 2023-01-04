@@ -38,28 +38,6 @@
 		closeMenu();
 		await goto(path);
 	};
-
-	const handleSignOutSubmit: SubmitFunction = () => {
-		return async ({ result, update }) => {
-			switch (result.type) {
-				case 'success':
-					// await update();
-					goto('/repositories');
-					break;
-				case 'failure':
-					// handle error here
-					await applyAction(result);
-					await update();
-					break;
-				case 'error':
-					// handle server side error here
-					await update();
-					await applyAction(result);
-				default:
-					await update();
-			}
-		};
-	};
 </script>
 
 {#if user}
@@ -68,8 +46,9 @@
 			<div>
 				<Menu>
 					<MenuButton
-						class="mt-1.5 inline-flex justify-center items-center w-full px-6 py-2 desktop:px-4 desktop:py-1.5 font-medium desktop:font-normal text-brown-900 capitalize border-2
-					 border-brown-800 bg-transparent rounded-md hover:bg-brown-700 hover:text-white space-x-2 tracking-wide"
+						class="transition ease-in-out duration-200
+						flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] border-2 border-primary-500 text-primary-500 
+						rounded-md bg-transparent capitalize text-lg font-medium hover:rounded-full hover:ease-in py-3 px-4 laptop:py-1.5 desktop:text-base desktop:border-[1.5px]"
 					>
 						<ProfileIcon styles="h-5 w-5" />
 						{user.username}
@@ -84,89 +63,91 @@
 						leaveTo="transform scale-95 opacity-0"
 					>
 						<MenuItems
-							class="absolute right-0 origin-top-right w-72 desktop:w-64 bg-white shadow-lg ring-1 ring-brown-900 
-						ring-opacity-10 focus:outline-none rounded-md"
+							class="absolute right-0 origin-top-right w-80 desktop:w-64 bg-slate-50 shadow-lg ring-1 ring-primary-400
+						 focus:outline-none rounded"
 						>
-							<div class="hover:bg-brown-50 border-b-[1px] px-3 py-1 m-2 rounded-md">
+							<div class="hover:bg-slate-50 border-b-[1px] px-3 py-1 m-2 rounded-md">
 								<MenuItem let:active class="no-underline">
 									<button
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group border-0 flex flex-col items-start
-								 		w-full px-2 text-sm text-start"
+										class="my-1 desktop:my-0 bg-transparent group border-0 flex flex-col items-start
+								 		w-full px-2 text-lg text-start text-slate-600"
 									>
-										<span class="text-lg text-brown-900">{user.username}</span>
+										<span class="">{user.username}</span>
 										{user.email}
 									</button>
 								</MenuItem>
 							</div>
-							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
+							<div class="h-full hover:bg-primary-50 py-1 px-3 m-2 rounded-md">
 								<MenuItem href="/apps/github/connect" sveltekit:prefetch class="no-underline">
 									<button
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex justify-start space-x-2 items-center
-										 border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-primary-500 my-1 desktop:my-0 bg-transparent group flex justify-start space-x-2 items-center
+										 border-0 w-full px-2 text-lg text-center font-normal"
 									>
-										<GithubIcon />
+										<GithubIcon styles="text-slate-700" />
 										<span>Connect Github</span>
 									</button>
 								</MenuItem>
 							</div>
-							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
+							<div class="h-full hover:bg-primary-50 py-1 px-3 m-2 rounded-md">
 								<MenuItem href="/u" sveltekit:prefetch class="no-underline">
 									<button
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center
-										 border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-primary-500 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center
+										 border-0 w-full px-2 text-lg text-center font-normal "
 									>
-										<ProfileIcon />
+										<ProfileIcon styles="text-slate-700" />
 										<span>View Profile</span>
 									</button>
 								</MenuItem>
 							</div>
 
-							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
+							<div class="h-full hover:bg-primary-50 py-1 px-3 m-2 rounded-md">
 								<MenuItem href="/settings" sveltekit:prefetch class="no-underline">
 									<button
 										on:click={() => navigateAround('/settings')}
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-primary-500 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center 
+										border-0 w-full px-2 text-lg text-center font-normal "
 									>
-										<SettingsIcon />
+										<SettingsIcon styles="text-slate-700" />
 										<span>Settings</span>
 									</button>
 								</MenuItem>
 							</div>
-							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
+							<div class="h-full hover:bg-primary-50 py-1 px-3 m-2 rounded-md">
 								<MenuItem href="" class="no-underline">
 									<button
 										on:click={toggleModal}
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-primary-500 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center 
+										border-0 w-full px-2 text-lg text-center font-normal "
 									>
-										<UserPlusIcon />
+										<UserPlusIcon styles="text-slate-700" />
 										<span>Invite Colleagues</span>
 									</button>
 								</MenuItem>
 							</div>
-							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
+							<div class="h-full hover:bg-primary-50 py-1 px-3 m-2 rounded-md">
 								<MenuItem class="no-underline">
 									<button
 										on:click={() => navigateAround('/faq')}
-										class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center hover:bg-brown-50"
+										class="text-primary-500 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center 
+										border-0 w-full px-2 text-lg text-center font-normal "
 									>
-										<QuestionMarkIcon />
+										<QuestionMarkIcon styles="text-slate-700" />
 										<span>Help</span>
 									</button>
 								</MenuItem>
 							</div>
 
-							<div class="hover:bg-brown-50 h-full py-1 px-3 m-2 rounded-md">
-								<form method="POST" action="?/signout" use:enhance={handleSignOutSubmit}>
-									<MenuItem class="no-underline">
-										<button
-											type="submit"
-											class="text-brown-800 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center border-0 w-full px-2 text-sm text-center"
-										>
-											<SignOutIcon />
-											<span>Sign Out</span>
-										</button>
-									</MenuItem>
-								</form>
+							<div class="h-full hover:bg-primary-50 py-1 px-3 m-2 rounded-md">
+								<MenuItem class="no-underline">
+									<button
+										type="submit"
+										class="text-primary-500 my-1 desktop:my-0 bg-transparent group flex space-x-2 justify-start items-center 
+										border-0 w-full px-2 text-lg text-center font-normal"
+									>
+										<SignOutIcon styles="text-slate-700" />
+										<span>Sign Out</span>
+									</button>
+								</MenuItem>
 							</div>
 						</MenuItems>
 					</Transition>

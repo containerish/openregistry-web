@@ -84,6 +84,11 @@ const config = {
 					'95%, 100%': { transform: 'translateX(11ch)' },
 				},
 			},
+			boxShadow: {
+				'2xl': '4px 5px 1px rgba(194, 201, 253, 0.47)',
+				'3xl': '6px 7px 1px rgba(194, 201, 253, 0.47)',
+				'4xl': '15px 16px 1px rgba(194, 201, 253, 0.47)',
+			},
 		},
 	},
 	plugins: [require('@tailwindcss/typography')],
