@@ -3,7 +3,6 @@
 </script>
 
 <svg
-	xmlns="http://www.w3.org/2000/svg"
 	class="{styles} h-6 w-6 transition-transform"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

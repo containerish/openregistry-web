@@ -3,7 +3,7 @@
 </script>
 
 <svg
-	class={styles}
+	class="{styles} h-6 w-6 text-slate-600"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

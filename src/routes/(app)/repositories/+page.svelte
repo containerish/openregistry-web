@@ -25,6 +25,7 @@
 	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
+	import Sidebar from '$lib/components/sidebar.svelte';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -102,8 +103,9 @@
 </script>
 
 <Pulse>
-	<Card styles="w-full min-h-[1500px] m-w-[70vw] py-8 h-max bg-white">
+	<Card styles="w-full min-h-[1000px] m-w-[70vw] py-8 h-max bg-white">
 		<div class="flex w-full h-full max-w-[3000px]">
+			<Sidebar />
 			<div class="w-3/4 px-8 my-8">
 				<div class="flex px-4 justify-between lg:px-8">
 					<div class="w-2/5">
@@ -112,7 +114,7 @@
 					{#if showTooltip}
 						<div
 							id="tooltip"
-							class="z-50 bg-cyan-200 rounded py-3 px-4"
+							class=" bg-cyan-200 rounded py-3 px-4"
 							use:popperContent={extraOpts}
 						>
 							<span class=" text-slate-800">
@@ -168,7 +170,7 @@
 				{/if}
 			</div>
 
-			<div
+			<!-- <div
 				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
 			>
 				<div class="rounded-md px-4 py-2 bg-slate-100">
@@ -194,7 +196,7 @@
           and applications."
 					/>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</Card>
 </Pulse>

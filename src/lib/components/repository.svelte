@@ -45,7 +45,7 @@
 		id={data.uuid + data.namespace}
 		on:click={handleRepoDetail}
 		on:keypress={handleRepoDetail}
-		class="hover:shadow-primary-300 cursor-pointer shadow-sm drop-shadow-sm w-full 
+		class="hover:shadow-primary-300 z-0 cursor-pointer shadow-sm drop-shadow-sm w-full 
 		px-8 py-2 my-2 mx-2 bg-slate-50 border-2 border-primary-100 rounded-sm"
 	>
 		<div class="pt-2 text-[22px] text-slate-700">

@@ -3,13 +3,14 @@
 	export let isLoading = false;
 	export let disabled = false;
 	export let type: string = '';
+	export let styles = '';
 </script>
 
 <button
 	{type}
 	{disabled}
 	on:click={() => onClick()}
-	class="{isLoading ? 'px-2' : 'px-4'}
+	class="{isLoading ? 'px-2' : 'px-4'} {styles}
 	flex justify-center space-x-2 items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] rounded-md text-lg 
 	desktop:text-base capitalize font-medium border-2 bg-primary-300 border-primary-800 text-primary-800 
 	bg-opacity-80 hover:shadow-primary-600 hover:shadow-3xl disabled:hover:bg-slate-300 transition-all duration-200

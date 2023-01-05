@@ -41,8 +41,8 @@
 </script>
 
 {#if user}
-	<div class="min-w-max text-right z-50">
-		<div class="relative inline-block text-left">
+	<div class="min-w-max text-right">
+		<div class="relative inline-block text-left ">
 			<div>
 				<Menu>
 					<MenuButton
@@ -63,7 +63,7 @@
 						leaveTo="transform scale-95 opacity-0"
 					>
 						<MenuItems
-							class="absolute right-0 origin-top-right w-80 desktop:w-64 bg-slate-50 shadow-lg ring-1 ring-primary-400
+							class=" absolute right-0 origin-top-right w-80 desktop:w-64 bg-slate-50 shadow-lg ring-1 ring-primary-400
 						 focus:outline-none rounded"
 						>
 							<div class="hover:bg-slate-50 border-b-[1px] px-3 py-1 m-2 rounded-md">

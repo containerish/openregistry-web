@@ -13,7 +13,7 @@
 	<form class="flex justify-around items-center gap-8 flex-col h-full w-full">
 		<span class="text-2xl capitalize font-semibold font-lato"> Create A New Repository </span>
 		<div class="w-full">
-			<div class="bg-cream-50 flex gap-4">
+			<div class="bg-primary-50 flex gap-4">
 				<RadioButton label="Public">
 					<GlobeIcon styles="h-6 w-6" />
 				</RadioButton>
@@ -28,7 +28,7 @@
 				<label for="textarea" class="block text-md text-gray-800">Description</label>
 				<textarea
 					rows="3"
-					class="w-full resize-none rounded-md focus:border-brown-600 focus:outline-brown-100 focus:ring-brown-700"
+					class="w-full resize-none rounded-md focus:border-primary-600 focus:outline-primary-50 focus:ring-primary-700"
 				/>
 			</div>
 			<div class="flex px-16 pt-8 w-full justify-center items-center space-x-5">

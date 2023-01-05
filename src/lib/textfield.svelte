@@ -8,6 +8,7 @@
 	export let errors: string[] = [];
 	export let value: any = undefined;
 	export let onInput = (e: any) => {};
+	export let disabled: boolean = false;
 </script>
 
 <div class="flex items-center px-2">
@@ -22,9 +23,11 @@
 	{type}
 	value={value ?? ''}
 	{placeholder}
+	{disabled}
 	class="{styles} placeholder-gray-500 form-control block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white
 	 bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
      border rounded-md focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
+	disabled:text-slate-400
      {errors && errors.length > 0 ? 'border-red-600' : ''}"
 />
 {#if errors && errors.length > 0}

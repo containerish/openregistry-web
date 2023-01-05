@@ -1,4 +1,4 @@
-import type { AuthorisedRepository } from 'src/routes/+layout.server';
+import type { AuthorisedRepository } from 'src/routes/(app)/+layout.server';
 import { writable } from 'svelte/store';
 
 export type Branch = {

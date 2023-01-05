@@ -5,14 +5,14 @@
 </script>
 
 <div
-	class="bg-brown-200 text-center min-h-[70vh] py-8 2xl:py-16 flex-col w-full h-full flex justify-center items-center"
+	class="bg-white text-center min-h-max py-8 2xl:py-16 flex-col w-full h-full flex justify-center items-center"
 >
 	{#if $page.status === 400 || $page.status === 401}
-		<img class="w-full" src="/unauthorised.svg" alt="" />
+		<img class="w-full" src="/unauthorised.svg" alt="unauthorised" />
 	{:else}
-		<img class="w-full" src="/404-not-found.svg" alt="" />
+		<img class="w-1/2" src="/not-found.svg" alt="not found" width="50px" />
 	{/if}
-	<div class="w-full h-full flex flex-col justify-start gap-4 items-center">
+	<div class="w-full flex flex-col justify-start gap-4 items-center">
 		<span class="text-brown-900 text-xl">
 			Status Code: {$page.status}
 			{JSON.stringify($page.error)}

@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="{styles} fixed duration-500 z-50 inset-0 overflow-y-auto bg-primary-800 bg-opacity-60"
+	class="{styles} fixed duration-500 inset-0 overflow-y-auto bg-primary-800 bg-opacity-60"
 	aria-labelledby="modal-title"
 	role="dialog"
 	aria-modal="true"

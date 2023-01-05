@@ -72,7 +72,7 @@
 				<div class="flex gap-4">
 					<h1 class="text-[41px]">{data.username}/{data.repo}</h1>
 					<button
-						class="bg-inherit p-0 inline-flex justify-center items-center m-0 focus:border-none focus:p-0 focus:m-0"
+						class="bg-inherit p-0 inline-flex justify-center items-center m-0 border-0 cursor-default"
 					>
 						<Star styles="w-8 h-8 mt-1.5" />
 					</button>
