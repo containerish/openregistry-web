@@ -20,9 +20,10 @@
 	<div class="min-w-max bg-slate-50 p-20 rounded-sm border border-primary-100 w-3/4">
 		<div class="flex flex-col justify-center items-center space-x-5 space-y-5">
 			<span class="text-2xl font-bold text-primary-600">Deploy a site from your account</span>
+			*****must change******.
 			<span class="text-center text-lg desktop:text-sm text-slate-600"
 				>Select a repository to connect as your project’s source code. New commits will trigger
-				OpenRegistry to <br /> automatically build and your changes.
+				OpenRegistry to <br /> automatically build and your changes
 				<!-- </span> -->
 			</span>
 		</div>

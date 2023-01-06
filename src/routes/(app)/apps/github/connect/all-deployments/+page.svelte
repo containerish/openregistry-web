@@ -10,7 +10,7 @@
 	};
 </script>
 
-<div class="bg-cream-50 items-start space-y-6 px-20 pb-52 pt-20 min-h-max w-[100vw]">
+<div class="bg-white items-start space-y-6 px-20 pb-52 pt-20 min-h-[1500px]">
 	<TabGroup>
 		<TabList class="text-lg space-x-5 ml-2">
 			<Tab class={handleTabSelect}>Builds</Tab>
