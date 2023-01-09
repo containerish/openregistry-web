@@ -7,135 +7,121 @@
 	<title>About|Open Registry</title>
 </svelte:head>
 
-<Card styles="bg-brown-400">
-	<div class="flex flex-col w-full min-h-[90vh] m-w-[70vw] mx-10 half:mx-4 my-20">
-		<div class="bg-brown-400 justify-start items-center px-10 py-10 mx-5 my-0 rounded-xl">
-			<h1 class="text-5xl font-semibold text-brown-900">Decentralisation is the Future!</h1>
-			<h1 class="text-5xl font-semibold text-brown-900 mb-8 ">
-				and we want to play a role in making it better
-			</h1>
-			<span class="text-lg text-black">
-				Our Vision is derived and powered by the principals of Web 3.0 and Dworld of Dapps. With
-				increasing awareness and adaption of distributed network, the worlds are moving towards a
-				better future for everyone. OpenRegistry is an effort to bring a change with community's own
-				container registry which is Open and Free to use. A true decentralised entity with promise
-				of scalability, reliability and transparency.
-			</span>
+<Card styles="bg-white bg-primary-50 relative">
+	<div
+		class="flex flex-col w-full min-h-[1500px] justify-start items-center mx-10 half:mx-4 my-20 "
+	>
+		<div
+			class="flex flex-col gap-[32px] justify-start min-h-[1000px] items-center text-center px-10 
+			py-20 mx-5 my-10 "
+		>
 			<div>
-				<h1 class="text-3xl font-semibold text-brown-900 mt-4 mb-2">
-					Help build an Open Source World with us
+				<h1 class="text-5xl font-semibold text-primary-600">Decentralisation is the Future!</h1>
+				<h1 class="text-5xl font-semibold text-primary-600 mb-8 ">
+					and we want to play a role in making it better
 				</h1>
-				<span class="text-lg text-black">
+				<span class="text-lg text-slate-700">
+					Our Vision is derived and powered by the principals of Web 3.0 and Dworld of Dapps. With
+					increasing awareness and adaption of distributed network, the worlds are moving towards a
+					better future for everyone. OpenRegistry is an effort to bring a change with community's
+					own container registry which is Open and Free to use. A true decentralised entity with
+					promise of scalability, reliability and transparency.
+				</span>
+			</div>
+			<div>
+				<span class="text-lg text-slate-700">
 					We started off as a fun project which eventually opened many doors for us. Although we are
 					a small team, we are Passionate about what we do. We have learned, built and evolved our
 					careers with help of OpenSource projects. With OpenRegistry, we want to built yet another
 					project for public good.
 				</span>
 			</div>
-			<h1 class="text-5xl font-semibold text-brown-900 mt-14">Get to know our Team</h1>
-		</div>
-		<div class="flex flex-row items-center">
-			<section class="bg-brown-400 rounded-xl mx-4">
-				<div class="container px-6 half:px-0 py-89 mx-auto">
-					<div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2">
-						<div
-							class="px-12 py-8 half:px-5 transition-colors duration-200 transform border-none bg-brown-500 rounded-xl
-						hover:border-transparent group hover:bg-brown-700"
-						>
-							<div class="flex flex-col sm:-mx-4 sm:flex-row">
-								<img
-									class="flex-shrink-0 object-cover w-24 h-24 rounded-full sm:mx-4 ring-4 ring-brown-900"
-									src="https://avatars.githubusercontent.com/u/10788442?v=4"
-									alt=""
-								/>
+			<span class="text-[40px] font-semibold text-primary-500 mt-14">Get to know our Team</span>
+			<div class="flex flex-col gap-20 mt-8 xl:mt-16 w-full">
+				<div class="flex justify-center">
+					<div class="flex flex-col gap-4 px-12 py-8 bg-white rounded-sm shadow-3xl mr-32">
+						<div class="flex flex-col">
+							<span class="text-xl font-semibold text-slate-700 capitalize min-w-[800px] ">
+								Jasdeep Singh
+							</span>
 
-								<div class="mt-4 sm:mx-4 sm:mt-0">
-									<h1
-										class="text-xl font-semibold text-brown-900 capitalize md:text-2xl group-hover:text-white"
-									>
-										Jasdeep Singh
-									</h1>
-
-									<p class="mt-2 text-brown-800 capitalize group-hover:text-cream-50">Engineer</p>
-								</div>
-							</div>
-
-							<p class="mt-4 text-brown-900 group-hover:text-cream-50">
-								Loves developing Developer Tools. Digs Kernel development, Raspberry Pi Projects and
-								Building Keyboards, in that order. Reads a lot of books(mostly/only Manga)
-							</p>
-
-							<div class="flex mt-4">
-								<a
-									href="https://twitter.com/_jsdp"
-									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
-									target="_blank"
-								>
-									<TwitterIcon styles="h-10 w-10 mt-0.5" />
-								</a>
-
-								<a
-									href="https://github.com/jay-dee7"
-									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
-									aria-label="Github"
-									target="_blank"
-								>
-									<GithubIcon styles="h-11 w-11 text-brown-900" />
-								</a>
-							</div>
+							<p class=" text-slate-700 capitalize">Engineer</p>
 						</div>
 
-						<div
-							class="px-12 py-8 half:px-5 transition-colors duration-200 transform border-none bg-brown-500 rounded-xl
-						hover:border-transparent group hover:bg-brown-700"
-						>
-							<div class="flex flex-col sm:-mx-4 sm:flex-row">
-								<img
-									class="flex-shrink-0 object-cover w-24 h-24 rounded-full sm:mx-4 ring-4 ring-cream-50"
-									src="https://avatars.githubusercontent.com/u/68041753?v=4"
-									alt=""
-								/>
+						<p class="text-center text-base text-slate-700">
+							Incharge of backend development at OpenRegistry Loves developing Developer Tools.<br
+							/>
+							Digs Kernel development, Raspberry Pi Projects and Building Keyboards.
+							<br />Reads a lot of books(mostly/only Manga)
+						</p>
 
-								<div class="mt-4 sm:mx-4 sm:mt-0">
-									<h1
-										class="text-xl font-semibold text-brown-900 capitalize md:text-2xl group-hover:text-white "
-									>
-										Gunjan Valecha
-									</h1>
-
-									<p class="mt-2 text-brown-800 capitalize group-hover:text-cream-50">
-										Also Engineer
-									</p>
-								</div>
-							</div>
-
-							<p class="mt-5 mb-8 text-brown-900 group-hover:text-cream-50">
-								Can do a little bit of everything kind of Developer. Loves to design and develop
-								web-apps as well as merchandise
-							</p>
-
-							<div class="flex mt-4 -mx-2">
-								<a
-									href="https://twitter.com/guacaemole"
-									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
-									target="_blank"
-								>
+						<div class="flex justify-center">
+							<a
+								href="https://twitter.com/_jsdp"
+								rel="noreferrer"
+								class="mx-2 text-primary-300 hover:text-gray-500"
+								target="_blank"
+							>
 								<TwitterIcon styles="h-10 w-10 mt-0.5" />
-								</a>
+							</a>
 
-								<a
-									href="https://github.com/guacamole"
-									class="mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white"
-									aria-label="Github"
-									target="_blank"
-								>
-								<GithubIcon styles="h-11 w-11 text-brown-900" />
-								</a>
-							</div>
+							<a
+								rel="noreferrer"
+								href="https://github.com/jay-dee7"
+								class="mx-2 text-primary-300 hover:text-gray-500"
+								aria-label="Github"
+								target="_blank"
+							>
+								<GithubIcon styles="h-11 w-11" />
+							</a>
 						</div>
 					</div>
+					<div class="w-1/2 absolute top-[35%] left-0">
+						<img src="about-1.svg" alt="about us" width="500px" />
+					</div>
 				</div>
-			</section>
+
+				<div class="flex justify-center">
+					<div class="flex flex-col gap-4 px-12 py-8 bg-white rounded-sm shadow-3xl ml-32">
+						<div class="flex flex-col">
+							<span class="text-xl font-semibold text-slate-700 capitalize min-w-[800px]">
+								Gunjan Valecha
+							</span>
+							<p class="text-slate-700 capitalize">Engineer</p>
+						</div>
+
+						<p class=" text-slate-700 group-hover:text-cream-50">
+							Incharge of developer experience at OpenRegistry. Works mostly on UI/UX and <br
+							/>frontend development. Loves illustrating, animating and designing merchandise
+						</p>
+
+						<div class="flex justify-center">
+							<a
+								href="https://twitter.com/guacaemole"
+								rel="noreferrer"
+								class="mx-2 hover:text-gray-500"
+								target="_blank"
+							>
+								<TwitterIcon styles="h-10 w-10 mt-0.5" />
+							</a>
+
+							<a
+								href="https://github.com/guacamole"
+								rel="noreferrer"
+								class="mx-2 text-primary-300 hover:text-gray-500"
+								aria-label="Github"
+								target="_blank"
+							>
+								<GithubIcon styles="h-11 w-11" />
+							</a>
+						</div>
+					</div>
+
+					<div class="w-1/2 absolute top-[60%] right-[-22%]">
+						<img src="about-2.svg" alt="about us" width="500px" />
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </Card>

@@ -97,7 +97,7 @@
 						on:click={() => handleRepoSelect(repo)}
 						class="bg-white text-slate-700 rounded-sm border-2 gap-2 border-primary-100 flex justify-center 
 						items-center py-3 hover:shadow-2xl {repo.repository.name === selectedRepo
-							? 'bg-slate-50 shadow-2xl shadow-primary-100'
+							? 'bg-primary-100 shadow-2xl shadow-primary-300'
 							: ''}"
 					>
 						{repo.repository.name}
