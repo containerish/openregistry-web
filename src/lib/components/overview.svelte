@@ -15,13 +15,15 @@
 				</picture>
 			</div>
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
-				<h3
+				<span
 					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl"
+					half:text-3xl desktop:text-4xl"
 				>
 					Overview
-				</h3>
-				<p class="text-lg text-primary-700 text-center font-normal leading-6 tracking-wide">
+				</span>
+				<p
+					class="text-lg desktop:text-[16px] half:text-[16px] text-primary-700 text-center font-normal"
+				>
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
 					difference in operations of OpenRegistry than any other popular container registries like
@@ -46,7 +48,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 font-semibold text-xl mt-1"
+						class="text-primary-400 font-semibold text-lg mt-1 desktop:font-normal"
 						href="https://conformance.opencontainers.org/"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -65,13 +67,15 @@
 			laptop:py-10 ipad:flex-col-reverse ipad:py-10 my-28"
 		>
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
-				<h3
+				<span
 					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl"
+					half:text-3xl desktop:text-4xl"
 				>
 					Collaborations
-				</h3>
-				<p class="text-lg text-primary-700 text-center font-normal leading-6 tracking-wide">
+				</span>
+				<p
+					class="text-lg desktop:text-[16px] half:text-[16px] text-primary-700 text-center font-normal leading-6 tracking-wide"
+				>
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
 					integrated together to serve larger audience. Simply contribute to OpenRegistry by helping
@@ -92,7 +96,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-xl mt-1 font-semibold"
+						class="text-primary-400 text-lg mt-1 font-semibold desktop:font-normal"
 						href="https://blog.openregistry.dev/posts/collaborations"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -124,13 +128,15 @@
 				<div class="flex justify-center items-center text-center">
 					<span
 						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl ipad:self-center"
+					half:text-3xl desktop:text-3xl ipad:self-center"
 					>
 						Web 3.0 Infrastructure
 					</span>
 				</div>
 
-				<p class="text-lg text-primary-700 text-center font-normal leading-6 tracking-wide">
+				<p
+					class="text-lg desktop:text-[16px] half:text-[16px] text-primary-700 text-center font-normal"
+				>
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
 					at OpenRegistry believe in dWorld full of dApps. With our initiative, we want to make
@@ -138,7 +144,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-xl mt-1 font-semibold"
+						class="text-primary-400 text-lg mt-1 font-semibold desktop:font-normal"
 						href="https://blog.openregistry.dev/posts/web3-infrastructure"
 						target="_blank"
 						rel="noreferrer">More</a

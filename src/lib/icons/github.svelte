@@ -2,7 +2,7 @@
 	export let styles = '';
 </script>
 
-<svg class="{styles} w-8 h-8 " viewBox="0 0 24 24" fill="none">
+<svg class="{styles} w-8 h-8" viewBox="0 0 24 24" fill="none">
 	<path
 	class="fill-current"
 	d="M12.026 2C7.13295 1.99937 2.96183 5.54799 2.17842 10.3779C1.395 15.2079 

@@ -89,10 +89,10 @@
 	};
 </script>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
-		<div class="flex justify-center py-4 mb-8">
-			<Logo />
+<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden lg:max-w-4xl">
+	<div class="flex flex-col w-4/5 px-6 py-8 lg:w-full">
+		<div class="flex justify-center py-4 desktop:py-1 desktop:mb-6 mb-8">
+			<Logo type="dark" />
 		</div>
 
 		<ButtonOutlined onClick={auth.LoginWithGithub}>
@@ -110,13 +110,18 @@
 			<div class="flex items-center justify-between mt-4">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
-				<span class="text-sm text-center text-slate-600 capitalize hover:no-underline">
+				<span class="text-sm desktop:text-xs text-center text-slate-600 capitalize hover:no-underline">
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />
 			</div>
-			<form method="POST" action="?/signin" use:enhance={handleSignInSubmit}>
-				<div class="mt-4">
+			<form
+				class="flex flex-col gap-4 mt-2"
+				method="POST"
+				action="?/signin"
+				use:enhance={handleSignInSubmit}
+			>
+				<div class="">
 					<Textfield
 						errors={$page.form?.errors?.email}
 						name="email"
@@ -125,7 +130,7 @@
 						value={$page.form?.data?.email || ''}
 					/>
 				</div>
-				<div class="mt-4">
+				<div class="">
 					<Textfield
 						errors={$page.form?.errors?.password}
 						name="password"
@@ -143,7 +148,7 @@
 					</div>
 				{/if}
 
-				<div class="flex mt-4 w-full justify-center space-x-5">
+				<div class="flex w-full justify-center space-x-5 mt-4">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
 				</div>
@@ -233,7 +238,7 @@
 			<span
 				on:click={() => toggleSignupForm()}
 				on:keypress={() => toggleSignupForm()}
-				class="text-sm cursor-pointer underline m-0 border-none font-semibold text-slate-700 uppercase hover:underline"
+				class="text-sm desktop:text-xs cursor-pointer no-underline m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
 			>
 				sign up
 			</span>
@@ -241,7 +246,7 @@
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
-				class="text-sm cursor-pointer underline m-0 border-none font-semibold text-slate-700 uppercase hover:underline"
+				class="text-sm desktop:text-xs no-underline cursor-pointer m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
 			>
 				Forgot password?
 			</span>

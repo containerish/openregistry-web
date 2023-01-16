@@ -20,25 +20,26 @@
 			<div class="flex flex-col gap-12 w-1/2">
 				<div class="flex flex-col justify-center gap-3 half:px-4">
 					<span
-						class="text-7xl laptop:text-4xl desktop:text-5xl half:text-3xl font-black text-primary-700"
+						class="text-4xl apple:text-5xl uw:text-5xl half:text-3xl font-black
+						 text-primary-700"
 					>
 						A truly decentralized container registry
 					</span>
-					<span class="text-2xl half:text-xl text-primary-600"
+					<span class="text-[17px] apple:text-[24px] uw:text-[24px] text-primary-600"
 						>in just a few simple steps, you can get started with OpenRegsitry</span
 					>
 
 					<ul class="text-center font-normal list-disc ml-4 mt-4">
-						<li class="text-left text-primary-600 text-xl half:text-[18px]">
+						<li class="text-left text-primary-600 text-xl desktop:text-[16px] half:text-[16px]">
 							Create an account on
 							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-400">
 								OpenRegistry.dev
 							</a>
 						</li>
-						<li class="text-left text-primary-600 text-xl half:text-[18px]">
+						<li class="text-left text-primary-600 text-xl desktop:text-[16px] half:text-[16px]">
 							Install Docker/Nerdctl/Podman
 						</li>
-						<li class="text-left text-primary-600 text-xl half:text-[18px]">
+						<li class="text-left text-primary-600 text-xl desktop:text-[16px] half:text-[16px]">
 							Login into OpenRegistry using Docker CLI
 						</li>
 					</ul>
@@ -50,7 +51,7 @@
 				</div>
 			</div>
 
-			<div class="w-3/4 apple:w-3/5 max-h-fit half:w-1/2 half:my-2 pt-4 uw:px-32">
+			<div class="w-3/4 apple:w-3/5 max-h-fit half:w-1/2 half:my-2 pt-14 uw:px-32">
 				<Xterm />
 			</div>
 		</div>
@@ -58,7 +59,7 @@
 			class="grid grid-cols-4 laptop:grid-cols-2 gap-12 laptop:gap-4 laptop:w-4/5 half:flex half:flex-col half:w-96 half:gap-4 py-20 px-4"
 		>
 			<span
-				class="text-primary-600 col-span-4 laptop:col-span-2 text-center whitespace-nowrap pb-4 text-4xl md:text-5xl desktop:text-5xl font-semibold"
+				class="text-primary-600 col-span-4 laptop:col-span-2 text-center whitespace-nowrap pb-4 text-4xl apple:text-5xl uw:5xl desktop:text-4xl font-semibold"
 			>
 				How does it work?
 			</span>
@@ -66,7 +67,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 px-4 py-10"
 			>
 				<LaboratoryIcon />
-				<span class="text-center text-primary-600 text-lg"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>
@@ -76,7 +77,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<LayersIcon />
-				<span class="text-center text-primary-600 text-lg"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>
@@ -86,7 +87,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<CloudIcon />
-				<span class="text-center text-primary-600 text-lg"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>
@@ -96,7 +97,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<ConfirmIcon />
-				<span class="text-center text-primary-600 text-lg"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>

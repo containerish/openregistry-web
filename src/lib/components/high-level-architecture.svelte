@@ -10,7 +10,7 @@
 				<div class="flex justify-center items-center text-center">
 					<span
 						class="text-center whitespace-nowrap font-bold
-				pb-4 text-6xl half:invisible ipad:self-center text-primary-700"
+				pb-4 text-6xl desktop:text-5xl desktop:font-semibold half:invisible ipad:self-center text-primary-700"
 					>
 						High Level Architecture
 					</span>
@@ -30,9 +30,9 @@
 						&nbsp;Architecture
 					</span>
 				</div>
-				<div class="half:px-4">
+				<div class="half:px-4 desktop:-mt-10">
 					<p
-						class="text-lg half:text-sm text-center font-normal leading-6 tracking-wide half:tracking-normal text-primary-600"
+						class="text-lg desktop:text-[16px] leading-normal half:text-sm text-center font-normal text-primary-600"
 					>
 						The following diagram tries to depict the high level architecture of OpenRegistry. We
 						are hosted on Akash dCloud and the container images are stored on decentralised storage
@@ -44,7 +44,7 @@
 
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-xl mt-1 font-semibold"
+						class="text-primary-400 text-lg mt-1 font-semibold desktop:font-normal"
 						href="https://blog.openregistry.dev/posts/overview"
 						target="_blank"
 						rel="noreferrer">More</a

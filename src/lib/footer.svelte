@@ -1,5 +1,6 @@
 <script>
 	import { GithubIcon, DiscordIcon, TwitterIcon } from './icons';
+	import Logo from './components/logo.svelte';
 </script>
 
 <footer class="bg-primary-700">
@@ -8,15 +9,14 @@
 			<div class="w-full -mx-6">
 				<div class="px-6 flex justify-between pb-8">
 					<div>
-						<picture class="flex items-center gap-2">
-							<img
-								class="w-[60px] half:w-[40px] lg:max-w-4xl"
-								src="/logo-light.png"
-								alt="OpenRegistry-Logo"
-							/>
-							<span class="text-3xl half:text-xl font-bold text-primary-50"> OpenRegistry</span>
-						</picture>
-						<p class="max-w-md mt-2 text-lg text-slate-200 tracking-wider">
+						<div
+							on:keydown={() => {}}
+							on:click={() => goto('/')}
+							class="cursor-pointer flex items-center half:ml-5"
+						>
+							<Logo type="light" />
+						</div>
+						<p class="max-w-md mt-2 text-lg desktop:text-[16px] antialiased text-slate-200">
 							Join us and become a part of <br />the decentralised future of internet
 						</p>
 					</div>
@@ -24,9 +24,9 @@
 				</div>
 
 				<div class="mt-6 lg:mt-0 lg:flex-1 px-6">
-					<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+					<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 desktop:text-sm">
 						<div>
-							<h3 class="text-white pb-2 font-semibold uppercase">About</h3>
+							<span class="text-white pb-2 font-semibold uppercase">About</span>
 							<a
 								href="https://blog.openregistry.dev"
 								target="_blank"
@@ -42,7 +42,7 @@
 						</div>
 
 						<div>
-							<h3 class="text-white pb-2 uppercase font-semibold">Developers</h3>
+							<span class="text-white pb-2 uppercase font-semibold">Developers</span>
 							<a
 								href="https://blog.openregistry.dev"
 								target="_blank"
@@ -58,7 +58,7 @@
 						</div>
 
 						<div>
-							<h3 class="text-white pb-2 uppercase font-semibold">Community</h3>
+							<span class="text-white pb-2 uppercase font-semibold">Community</span>
 							<span
 								on:click={() => window.open('https://ipfs.tech', '_blank')}
 								on:keypress={() => window.open('https://ipfs.tech', '_blank')}
@@ -72,9 +72,9 @@
 						</div>
 
 						<div>
-							<h3 class="text-white pb-2 uppercase font-semibold">Contact Us</h3>
+							<span class="text-white pb-2 uppercase font-semibold">Contact Us</span>
 							<span class="block mt-2 text-slate-400 hover:underline">team@openregistry.dev</span>
-							<div class="flex mt-4 -mx-2">
+							<div class="flex justify-start items-center mt-4 -mx-2">
 								<a
 									href="https://twitter.com/containerish"
 									target="_blank"
@@ -82,7 +82,7 @@
 									aria-label="Twitter"
 									rel="noreferrer"
 								>
-									<TwitterIcon />
+									<TwitterIcon styles='desktop:w-7'/>
 								</a>
 								<a
 									href="https://github.com/containerish/OpenRegistry.git"
@@ -91,7 +91,7 @@
 									aria-label="Github"
 									rel="noreferrer"
 								>
-									<GithubIcon styles="w-11 h-11 " />
+									<GithubIcon styles="w-11 h-11 desktop:w-8" />
 								</a>
 								<a
 									href="https://discord.gg/Mx8HAazrHc"
@@ -100,7 +100,7 @@
 									aria-label="Discord"
 									rel="noreferrer"
 								>
-									<DiscordIcon />
+									<DiscordIcon styles='desktop:w-7'/>
 								</a>
 							</div>
 						</div>

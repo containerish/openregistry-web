@@ -8,7 +8,7 @@
 
 	export let user: User;
 
-	let showMenu = false;
+	let showMenu = true;
 
 	const registry = new RegistryBackend();
 
@@ -39,7 +39,7 @@
 						on:keypress={checkUserAuth}
 						class="cursor-pointer flex-1 flex items-center half:ml-5"
 					>
-						<Logo />
+						<Logo type='dark'/>
 					</div>
 
 					<div class="flex-[2] pt-2 mx-10 justify-center items-center flex md:block half:hidden">

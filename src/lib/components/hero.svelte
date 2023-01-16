@@ -50,7 +50,7 @@
 		<div class="text-primary-600 half:w-4/6 laptop:w-3/5">
 			<div class="text-center">
 				<span
-					class="text-6xl uw:font-bold font-semibold 
+					class="text-5xl uw:font-bold font-semibold 
 				break-words half:text-3xl half:font-semibold apple:text-7xl uw:text-8xl"
 				>
 					A Decentralised Container Registry
@@ -59,22 +59,22 @@
 
 			<div class="w-full">
 				<p
-					class="text-center text-primary-600 break-words half:text-[19px] half:font-normal
-					text-xl half:text-md mt-5 uw:text-3xl apple:text-2xl"
+					class="text-center text-primary-600 break-words text-lg half:text-md mt-5 
+					uw:text-3xl apple:text-2xl"
 				>
 					OpenRegistry is an open source container registry developed for people by people.
 					<!-- Store, Download, and Share your container images with decentralized OpenRegistry -->
 				</p>
 				<p
-					class="text-center text-primary-600 break-words half:text-[19px] half:font-normal
-					text-xl half:text-md uw:text-3xl apple:text-2xl"
+					class="text-center text-primary-600 break-words text-lg half:text-md 
+					uw:text-3xl apple:text-2xl"
 				>
 					Backed by amazing distributed communities, OpenRegistry offers all the features of a
 					container registry
 				</p>
 				<p
-					class="text-center text-primary-600 break-words half:text-[19px] half:font-normal
-					text-xl half:text-md uw:text-3xl apple:text-2xl"
+					class="text-center text-primary-600 break-words text-lg half:text-md 
+					uw:text-3xl apple:text-2xl"
 				>
 					along with amazing additions like automated build system
 				</p>
@@ -93,7 +93,7 @@
 						name="search"
 						type="text"
 						placeholder="Search container images"
-						class="placeholder-gray-500 form-control block w-96 half:w-80 px-3 py-4 half:py-3 text-base font-normal
+						class="placeholder-gray-500 form-control block w-96 half:w-80 px-3 py-2 apple:py-4 text-base font-normal
 						text-gray-700 bg-white bg-clip-padding border-2 transition ease-in-out m-0
 						focus:text-gray-700 rounded-md focus:border-primary-500 focus:ring-opacity-40
 						focus:outline-none focus:ring focus:ring-priamry-400"
@@ -107,13 +107,13 @@
 	</div>
 
 	<div
-		class="grid grid-cols-5 laptop:grid-cols-3 half:grid-cols-2 gap-16 half:gap-2 laptop:gap-4
+		class="grid grid-cols-5 laptop:grid-cols-3 half:grid-cols-2 gap-10 half:gap-2 laptop:gap-8
 		py-20 half:py-0 laptop:py-0 laptop:pb-4 half:pb-4 half:w-1/2 laptop:w-3/5 half:place-items-center half:px-10"
 	>
-		<div class="col-span-5 laptop:col-span-3 half:col-span-2 pb-4">
+		<div class="col-span-5 laptop:col-span-3 half:col-span-2">
 			<span
-				class="text-center flex justify-center items-center text-primary-600 tracking-wider 
-				text-xl half:text-sm half:break-words half:invisible laptop:invisible"
+				class="text-center flex justify-center items-center text-primary-600 
+				text-lg apple:text-xl half:text-sm half:break-words half:invisible laptop:invisible"
 			>
 				Browse, Pull, Push and Share 100s of container images by open source projects, software
 				vendors and communities.
@@ -128,7 +128,7 @@
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border
 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
@@ -136,60 +136,60 @@
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./ipfs-logo.png" width="80px" /></div>
 			<span class="text-lg font-semibold text-primary-600 tracking-wider" />
 		</div>
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center border border-pr
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border border-pr
 			imary-800 rounded gap-3 bg-stone-700 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<IexecIcon />
 		</div>
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<AkashIcon />
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-primary-600 b
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-primary-600 b
 			order border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./solanaLogo.png" width="120px" /></div>
 		</div>
 
 		<div
-			class="border w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
+			class="border desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
 			bg-primary-800 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nginx" src="./nginx.png" width="100px" /></div>
 		</div>
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nginx" src="./busybox1.png" width="50px" /></div>
 			<span class="text-lg font-semibold">BusyBox</span>
 		</div>
 		<div
-			class="border w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
+			class="border desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
 			bg-primary-800 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl gap-2"
 		>
 			<div><img alt="nginx" src="./library-alpine-logo.png" width="50px" /></div>
 			<span class="text-white font-semibold text-lg">Alpine</span>
 		</div>
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><MongoIcon /></div>
 		</div>
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./Redis-Logo.png" width="120px" /></div>
@@ -197,7 +197,7 @@
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./nodejs.png" width="30px" /></div>
@@ -205,14 +205,14 @@
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./ubuntu-logo32.png" width="30px" /></div>
 			<span class="text-lg font-semibold text-primary-600 tracking-wider">ubuntu</span>
 		</div>
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./traefik-logo.png" width="30px" /></div>
@@ -220,7 +220,7 @@
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./python-logo-only.png" width="30px" /></div>
@@ -228,7 +228,7 @@
 		</div>
 
 		<div
-			class="w-48 laptop:w-44 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./library-httpd-logo.png" width="50px" /></div>

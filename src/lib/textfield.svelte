@@ -12,7 +12,7 @@
 </script>
 
 <div class="flex items-center px-2">
-	<label for={label} class="block font-semibold text-sm text-gray-800">{label}</label>
+	<label for={label} class="block font-semibold text-sm desktop:text-xs text-slate-700">{label}</label>
 	{#if subHeading !== ''}
 		<span class="px-2 text-xs text-primary-700">({subHeading})</span>
 
@@ -25,7 +25,7 @@
 	value={value ?? ''}
 	{placeholder}
 	{disabled}
-	class="{styles} placeholder-slate-500 form-control block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white
+	class="{styles} placeholder-slate-500 form-control block w-full px-3 py-3 desktop:h-10 text-base desktop:text-sm font-normal text-slate-700 bg-white
 	 bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
      border rounded-md focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
 	disabled:text-slate-400
