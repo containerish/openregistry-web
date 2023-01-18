@@ -69,11 +69,11 @@
 <div class="relative flex w-full flex-wrap items-stretch">
 	<span
 		class="z-10 font-normal text-center absolute bg-transparent 
-		rounded text-base items-center justify-center pl-4 pt-4"
+		rounded text-base items-center justify-center pl-4 pt-3 desktop:pt-2"
 	>
-		<Search styles="" />
+		<Search styles="desktop:w-4 text-primary-400" />
 	</span>
-		<Textfield type="search" styles="pl-10"/>
+	<Textfield type="search" styles="pl-10" placeholder="replace with sidebar" />
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}
 		<div class="pt-6 z-50">

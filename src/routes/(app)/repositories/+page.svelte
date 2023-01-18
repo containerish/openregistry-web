@@ -103,11 +103,12 @@
 </script>
 
 <Pulse>
-	<!-- <div class="flex h-full">
-		<Sidebar />
-	</div> -->
-	<Card styles="w-full min-h-[1500px] m-w-[70vw] py-8 h-max bg-white">
-		<div class="flex w-full h-full max-w-[3000px]">
+	
+	<div class="flex justify-center items-start desktop:items-start w-full min-h-[1500px] desktop:min-h-max m-w-[70vw] h-max bg-white">
+		<div class="flex h-full">
+			<Sidebar />
+		</div>
+		<div class="flex w-full min-h-full max-w-[3000px] items-center">
 			<div class="w-3/4 px-8 my-8">
 				<div class="flex px-4 justify-between lg:px-8">
 					<div class="w-2/5">
@@ -116,13 +117,13 @@
 					{#if showTooltip}
 						<div
 							id="tooltip"
-							class=" bg-cyan-200 rounded py-3 px-4"
+							class=" bg-cyan-200 rounded py-3 px-4 desktop:min-w-max desktop:py-1 desktop:px-2"
 							use:popperContent={extraOpts}
 						>
-							<span class=" text-slate-800">
+							<span class=" text-slate-700 desktop:text-xs">
 								Coming soon
 								<svg
-									class="absolute text-cyan-100 h-5 w-5 left-0 pb-1 ml-3 top-full"
+									class="absolute text-cyan-200 h-5 w-5 left-0 pb-1 ml-3 top-full"
 									x="0px"
 									y="0px"
 									viewBox="0 0 255 255"
@@ -172,31 +173,33 @@
 				{/if}
 			</div>
 
-			<div class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"/>
-				<div class="rounded-md px-4 py-2 bg-slate-100">
-					<Advert
-						link="https://akash.network"
-						styles="hover:bg-red-600"
-						logo="akash-logo.svg"
-						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
+			<div
+				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
+			/>
+			<!-- <div class="rounded-md px-4 py-2 bg-slate-100">
+				<Advert
+					link="https://akash.network"
+					styles="hover:bg-red-600"
+					logo="akash-logo.svg"
+					body="Infrastructure that powers web3 for cloud compute akash network is a distributed
 					peer-to-peer marketplace for cloud compute"
-					/>
-					<Advert
-						link="https://ipfs.io"
-						styles="hover:bg-[#65c3ca]"
-						logo="ipfs-logo.png"
-						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
-            upgradeable, resilient, and more open."
-					/>
-					<Advert
-						link="https://skynetlabs.com/developers"
-						styles="hover:bg-[#00C65E]"
-						logo="skynet-logo.png"
-						body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
-          and applications."
-					/>
-				</div>
-			</div>
-	</Card> 
+				/>
+				<Advert
+					link="https://ipfs.io"
+					styles="hover:bg-[#65c3ca]"
+					logo="ipfs-logo.png"
+					body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
+            		upgradeable, resilient, and more open."
+				/>
+				<Advert
+					link="https://skynetlabs.com/developers"
+					styles="hover:bg-[#00C65E]"
+					logo="skynet-logo.png"
+					body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
+          			and applications."
+				/>
+			</div> -->
+		</div>
+	</div>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />

@@ -30,8 +30,8 @@
 </script>
 
 {#if user}
-	<header class="py-3 border-b-2 border-slate-200 sticky top-0 bg-white z-40">
-		<nav class="uw:max-w-[70vw] max-w-[100vw] py-2 px-16 mx-auto">
+	<header class="py-2 border-b-2 border-slate-200 sticky top-0 bg-white z-40">
+		<nav class="uw:max-w-[70vw] max-w-[100vw]  px-16 mx-auto">
 			<div class="w-full px-6 mx-auto half:px-1 uw:px-12">
 				<div class="flex justify-between w-full md:justify-between md:items-center">
 					<div
@@ -53,21 +53,21 @@
 							<a
 								sveltekit:prefetch
 								href="/search"
-								class="text-primary-500 hover:scale-110 transform duration-500 text-[22px] font-normal"
+								class="text-primary-500 hover:scale-110 transform duration-500 font-normal"
 							>
 								Explore
 							</a>
 							<a
 								href="/repositories"
 								sveltekit:prefetch
-								class="text-primary-500 hover:scale-110 transform duration-500 text-[22px] font-normal"
+								class="text-primary-500 hover:scale-110 transform duration-500 font-normal"
 							>
 								Repositories
 							</a>
 							<a
 								sveltekit:prefetch
 								href="/faq"
-								class="text-primary-500 hover:scale-110 transform duration-500 text-[22px] font-normal"
+								class="text-primary-500 hover:scale-110 transform duration-500 font-normal"
 							>
 								FAQ
 							</a>

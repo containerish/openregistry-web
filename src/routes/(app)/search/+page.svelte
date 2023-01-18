@@ -89,7 +89,7 @@
 </script>
 
 <Pulse>
-	<Card styles="w-full h-full min-w-max min-h-[1500px] py-8 bg-white px-0">
+	<div class="flex justify-center items-start w-full h-full min-w-max min-h-[1500px] desktop:min-h-max py-8 bg-white px-0">
 		<div class="flex w-full h-full max-w-[3000px]">
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
@@ -112,18 +112,18 @@
 				use:popperRef
 				on:mouseenter={() => (showTooltip = true)}
 				on:mouseleave={() => (showTooltip = false)}
-				class="flex flex-col gap-20 hover:opacity-50 opacity-60 h-full w-1/5 mx-10 my-4 border-r-2 border-slate-200"
+				class="flex flex-col gap-20 desktop:gap-6 hover:opacity-40 opacity-60 h-full w-1/5 mx-10 my-4 border-r-2 border-slate-200"
 			>
-				<div class="flex flex-col gap-4">
+				<div class="flex flex-col gap-4 desktop:gap-2">
 					<div class="flex gap-3 items-center text-primary-500">
-						<Filter />
-						<span class="text-[25px] font-medium">Filters</span>
+						<Filter styles="desktop:w-5 desktop:h-5"/>
+						<span class="text-xl desktop:text-lg font-medium">Filters</span>
 					</div>
 					<hr />
 				</div>
 
-				<div class="flex flex-col gap-4 text-lg text-slate-800">
-					<span class="text-xl">Operating System</span>
+				<div class="flex flex-col gap-4 text-lg desktop:text-sm text-slate-800">
+					<span class="text-xl desktop:text-[16px] font-medium">Operating System</span>
 					<ul>
 						<li><Checkbox label="Linux" /></li>
 						<li><Checkbox label="Windows" /></li>
@@ -131,8 +131,8 @@
 					<hr />
 				</div>
 
-				<div class="flex flex-col gap-4 text-lg text-slate-800">
-					<span class="text-xl">Categories</span>
+				<div class="flex flex-col gap-4 text-lg desktop:text-sm text-slate-800">
+					<span class="text-xl desktop:text-[16px] font-medium">Categories</span>
 					<ul>
 						<li>
 							<Checkbox label="Analytics" />
@@ -148,8 +148,8 @@
 					</ul>
 					<hr />
 				</div>
-				<div class="flex flex-col gap-4 text-lg text-slate-700">
-					<span class="text-xl text-slate-800">Architectures</span>
+				<div class="flex flex-col gap-4 text-lg desktop:text-sm text-slate-700">
+					<span class="text-xl desktop:text-[16px] font-medium">Architectures</span>
 					<ul>
 						<li><Checkbox label="ARM32" /></li>
 						<li><Checkbox label="ARM64" /></li>
@@ -159,7 +159,7 @@
 					<hr />
 				</div>
 			</div>
-			<div class="w-3/4 my-8">
+			<div class="flex flex-col w-3/4 my-8">
 				<div class="flex px-4 pb-2 justify-between uw:px-36 apple:px-24">
 					<Menu title="Sort">
 						<MenuItem>
@@ -169,7 +169,7 @@
 									fetchPageData(0);
 								}}
 								class="{sortBy === 'last_updated' ? 'font-normal bg-white' : ''} 
-                w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none rounded-md gap-2 m-0 hover:bg-slate-100 text-sm"
+                				w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none rounded-md gap-2 m-0 hover:bg-slate-100 text-sm"
 							>
 								<ClockIcon styles="h-5 w-5" />
 								Last Updated
@@ -182,7 +182,7 @@
 									fetchPageData(0);
 								}}
 								class="{sortBy === 'namespace' ? 'font-normal bg-white' : ''} 
-         inline-flex py-3 justify-center gap-2 items-center w-full  m-0 border-none rounded-t-none rounded-md hover:bg-slate-100 text-sm"
+         						inline-flex py-3 justify-center gap-2 items-center w-full  m-0 border-none rounded-t-none rounded-md hover:bg-slate-100 text-sm"
 							>
 								<div
 									class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4 inline-flex justify-center items-center w-4"
@@ -221,6 +221,6 @@
 				{/if}
 			</div>
 		</div>
-	</Card>
+	</div>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />

@@ -47,8 +47,8 @@
 				<Menu>
 					<MenuButton
 						class="transition ease-in-out duration-200
-						flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] border-2 border-primary-500 text-primary-500 
-						rounded-md bg-transparent capitalize text-lg font-medium hover:rounded-full hover:ease-in py-3 px-4 laptop:py-1.5 desktop:text-base desktop:border-[1.5px]"
+						flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[100px] border-2 border-primary-500 text-primary-500 
+						rounded-md bg-transparent capitalize text-lg font-medium hover:rounded-full hover:ease-in py-3 desktop:py-2 px-4 laptop:py-1.5 desktop:text-base desktop:border-[1.5px]"
 					>
 						<ProfileIcon styles="h-5 w-5" />
 						{user.username}
@@ -70,7 +70,7 @@
 								<MenuItem let:active class="no-underline">
 									<button
 										class="my-1 desktop:my-0 bg-transparent group border-0 flex flex-col items-start
-								 		w-full px-2 text-lg text-start text-slate-600"
+								 		w-full px-2 text-lg desktop:text-[16px] desktop:font-medium text-start text-slate-600"
 									>
 										<span class="">{user.username}</span>
 										{user.email}
