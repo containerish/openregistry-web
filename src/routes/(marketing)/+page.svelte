@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>OpenRegistry | Home</title>
 </svelte:head>
 
 <Hero />

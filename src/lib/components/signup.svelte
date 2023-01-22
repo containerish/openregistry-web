@@ -146,10 +146,14 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Sign up | OpenRegistry</title>
+</svelte:head>
+
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
 	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
 		<div class="flex justify-center py-4 mb-8">
-			<Logo type='dark'/>
+			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}
 			<ButtonOutlined onClick={auth.LoginWithGithub}>

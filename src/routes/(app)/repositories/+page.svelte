@@ -102,12 +102,13 @@
 	let httpError: string;
 </script>
 
+<svelte:head>
+	<title>Repositories | OpenRegistry</title>
+</svelte:head>
+
 <Pulse>
 	
 	<div class="flex justify-center items-start desktop:items-start w-full min-h-[1500px] desktop:min-h-max m-w-[70vw] h-max bg-white">
-		<div class="flex h-full">
-			<Sidebar />
-		</div>
 		<div class="flex w-full min-h-full max-w-[3000px] items-center">
 			<div class="w-3/4 px-8 my-8">
 				<div class="flex px-4 justify-between lg:px-8">

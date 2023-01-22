@@ -7,13 +7,13 @@
 	<title>About|Open Registry</title>
 </svelte:head>
 
-<Card styles="bg-white bg-primary-50 relative">
+<div class="flex bg-primary-50 relative">
 	<div
-		class="flex flex-col w-full min-h-[1500px] justify-start items-center mx-10 half:mx-4 my-20 "
+		class="flex flex-col w-full min-h-[1500px] desktop:min-h-max justify-start items-center mx-10 half:mx-4 my-20 desktop:mx-10 desktop:my-2 "
 	>
 		<div
 			class="flex flex-col gap-[32px] justify-start min-h-[1000px] items-center text-center px-10 
-			py-20 mx-5 my-10 "
+			py-20 mx-5 my-10 desktop:my-1"
 		>
 			<div>
 				<h1 class="text-5xl font-semibold text-primary-600">Decentralisation is the Future!</h1>
@@ -39,7 +39,9 @@
 			<span class="text-[40px] font-semibold text-primary-500 mt-14">Get to know our Team</span>
 			<div class="flex flex-col gap-20 mt-8 xl:mt-16 w-full">
 				<div class="flex justify-center">
-					<div class="flex flex-col gap-4 px-12 py-8 bg-white rounded-sm shadow-3xl mr-32">
+					<div
+						class="flex flex-col gap-4 px-12 py-8 bg-white rounded-sm shadow-3xl mr-32 desktop:mr-0"
+					>
 						<div class="flex flex-col">
 							<span class="text-xl font-semibold text-slate-700 capitalize min-w-[800px] ">
 								Jasdeep Singh
@@ -117,11 +119,11 @@
 						</div>
 					</div>
 
-					<div class="w-1/2 absolute top-[60%] right-[-22%]">
+					<div class="w-1/2 absolute top-[60%] right-[-22%] desktop:right-[-18%]">
 						<img src="about-2.svg" alt="about us" width="500px" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</Card>
+</div>

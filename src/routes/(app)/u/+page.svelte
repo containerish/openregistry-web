@@ -49,7 +49,7 @@
 </script>
 
 <svelte:head>
-	<title>User|Open Registry</title>
+	<title>User | Open Registry</title>
 </svelte:head>
 
 {#if data.user}

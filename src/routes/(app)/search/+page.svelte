@@ -88,6 +88,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Explore | OpenRegistry</title>
+</svelte:head>
+
 <Pulse>
 	<div class="flex justify-center items-start w-full h-full min-w-max min-h-[1500px] desktop:min-h-max py-8 bg-white px-0">
 		<div class="flex w-full h-full max-w-[3000px]">

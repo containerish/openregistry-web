@@ -89,6 +89,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Sign in | OpenRegistry</title>
+</svelte:head>
+
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden lg:max-w-4xl">
 	<div class="flex flex-col w-4/5 px-6 py-8 lg:w-full">
 		<div class="flex justify-center py-4 desktop:py-1 desktop:mb-6 mb-8">
@@ -110,7 +114,9 @@
 			<div class="flex items-center justify-between mt-4">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
-				<span class="text-sm desktop:text-xs text-center text-slate-600 capitalize hover:no-underline">
+				<span
+					class="text-sm desktop:text-xs text-center text-slate-600 capitalize hover:no-underline"
+				>
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />

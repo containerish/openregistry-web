@@ -63,7 +63,7 @@
 				<picture>
 					<img
 						class="w-full"
-						src="/openregistry-highlevel.png"
+						src="/high-level-arch.png"
 						alt="OpenRegistry High Level Architecture Diagram"
 					/>
 				</picture>

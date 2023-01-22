@@ -13,7 +13,7 @@
 	const registry = new RegistryBackend();
 
 	const handleAutoComplete = async (query: string) => {
-		return await registry.SearchRepositories(query);
+		return await registry.SearchRepositories(query); 
 	};
 
 	const closeMenu = () => {

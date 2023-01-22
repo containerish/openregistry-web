@@ -32,7 +32,7 @@
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img src="/connect-github.png" alt="upload-file-image" class="w-80" />
 			<div class="flex flex-col space-y-9">
-				<span class="text-lg text-slate-600"
+				<span class="text-lg text-slate-600 desktop:text-[16px]"
 					>To deploy a site, first select it from your personal or team <br />GitHub account.</span
 				>
 				<div class="w-full">

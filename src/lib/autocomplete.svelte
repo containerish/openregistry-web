@@ -73,7 +73,7 @@
 	>
 		<Search styles="desktop:w-4 text-primary-400" />
 	</span>
-	<Textfield type="search" styles="pl-10" placeholder="replace with sidebar" />
+	<Textfield type="search" styles="pl-12" />
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}
 		<div class="pt-6 z-50">

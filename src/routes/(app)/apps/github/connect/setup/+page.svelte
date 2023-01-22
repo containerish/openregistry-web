@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="bg-white rounded-md shadow-inner border border-primary-100 space-y-6 my-10 
-	min-h-max min-w-[1390px] p-20">
+	min-h-max min-w-[1390px] desktop:min-w-max p-20">
 		{#if selectedTab === 0}
 			<SelectRepo {data} {handleNext} />
 		{/if}
