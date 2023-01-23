@@ -108,7 +108,7 @@
 
 <Pulse>
 	
-	<div class="flex justify-center items-start desktop:items-start w-full min-h-[1500px] desktop:min-h-max m-w-[70vw] h-max bg-white">
+	<div class="flex justify-center items-start desktop:items-start w-full desktop:min-h-[1500px] min-h-[1700px] m-w-[70vw] h-max bg-white">
 		<div class="flex w-full min-h-full max-w-[3000px] items-center">
 			<div class="w-3/4 px-8 my-8">
 				<div class="flex px-4 justify-between lg:px-8">
@@ -158,7 +158,7 @@
 						{/each}
 					</div>
 
-					<div class="flex justify-center py-4 bg-white">
+					<div class="flex justify-center py-4">
 						{#if catalog.total > backend.DefaultPageSize}
 							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
 						{/if}
@@ -175,7 +175,7 @@
 			</div>
 
 			<div
-				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
+				class=" invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
 			/>
 			<!-- <div class="rounded-md px-4 py-2 bg-slate-100">
 				<Advert

@@ -62,98 +62,97 @@
 	onDestroy(() => clearTimeout(timeout));
 </script>
 
-<div class="min-h-[1500px] desktop:min-h-max bg-slate-100">
-	<div class="flex flex-col w-full h-full my-20 desktop:my-14">
-		<div
-			class="flex py-24 desktop:py-12 px-20 mx-3 gap-8 bg-white border-b-0 border-2 border-slate-300"
-		>
-			<div class="flex items-center">
-				<Globe styles="h-16 w-16 desktop:h-11 desktop:w-11 text-slate-700" />
-			</div>
-			<div class="w-full text-slate-700">
-				<div class="flex gap-4">
-					<span class="text-[41px] half:text-2xl desktop:text-3xl">{data.username}/{data.repo}</span>
-					<button
-						class="bg-inherit p-0 inline-flex justify-center items-center m-0 border-0 cursor-default"
-					>
-						<Star styles="w-8 h-8 mt-1.5" />
-					</button>
-				</div>
-				<span class="text-md desktop:text-sm capitalize">by {data.username}</span>
-			</div>
+<div class="desktop:min-h-max min-h-[1700px] w-full flex flex-col mx-2 py-4">
+	<div
+		class="flex py-24 desktop:py-14 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
+	>
+		<div class="flex items-center">
+			<Globe styles="h-16 w-16 desktop:h-11 desktop:w-11 text-slate-700" />
 		</div>
+		<div class="w-full text-slate-700">
+			<div class="flex gap-4">
+				<span class="text-[41px] half:text-2xl desktop:text-3xl">{data.username}/{data.repo}</span>
+				<button
+					class="bg-inherit p-0 inline-flex justify-center items-center m-0 border-0 cursor-default"
+				>
+					<Star styles="w-8 h-8 mt-1.5" />
+				</button>
+			</div>
+			<span class="text-md desktop:text-sm capitalize">by {data.username}</span>
+		</div>
+	</div>
 
-		<div
-			class="flex gap-5 items-start justify-items-center mx-3 bg-white px-16 mb-8 border-t-0 border-2 border-slate-300"
-		>
-			<button
-				on:click={toggleOverview}
-				class="ease-in duration-300 h-10 px-4 pb-12 desktop:pb-6 text-center text-primary-500 bg-transparent border-b-2
+	<div
+		class="flex gap-5 items-start justify-items-center mx-3 bg-primary-50 px-16 mb-8 border-t-0 border-2 border-primary-100"
+	>
+		<button
+			on:click={toggleOverview}
+			class="ease-in duration-300 h-10 px-4 pb-12 desktop:pb-6 text-center text-primary-500 bg-transparent border-b-2
 					border-transparent text-[16px] apple:text-[22px] uw:text-2xl whitespace-nowrap cursor-base m-0
           hover:border-b-primary-400
           {isOverview ? 'border-b-primary-500' : 'border-transparent'}"
-			>
-				Overview
-			</button>
+		>
+			Overview
+		</button>
 
-			<button
-				on:click={toggleTags}
-				class="ease-in duration-300 h-10 px-4 pb-12 desktop:pb-6 text-center text-primary-500 bg-transparent border-b-2
+		<button
+			on:click={toggleTags}
+			class="ease-in duration-300 h-10 px-4 pb-12 desktop:pb-6 text-center text-primary-500 bg-transparent border-b-2
 					border-transparent apple:text-[22px] uw:text-2xl whitespace-nowrap cursor-base m-0
           hover:border-b-primary-400
           {isTags ? 'border-b-primary-500' : 'border-transparent'}"
+		>
+			Tags
+		</button>
+	</div>
+
+	<div class="w-full h-full py-4 flex px-4 justify-center">
+		{#if isTags}
+			<div
+				class="bg-slate-50 w-full max-w-[2000px] mx-3 flex-col gap-4 rounded-sm px-8 py-8 flex justify-center items-center border
+				border-primary-50"
 			>
-				Tags
-			</button>
-		</div>
+				{#each repository.tags as tag}
+					<Tag {tag} namespace={repository.namespace} />
+				{/each}
+			</div>
+		{/if}
 
-		<div class="w-full h-full py-4 flex px-4 justify-center">
-			{#if isTags}
+		{#if isOverview}
+			<div class="flex justify-center items-center gap-10 w-full">
 				<div
-					class="bg-white w-full max-w-[2000px] mx-3 flex-col gap-4 rounded-sm px-8 py-8 flex justify-center items-center"
-				>
-					{#each repository.tags as tag}
-						<Tag {tag} namespace={repository.namespace} />
-					{/each}
-				</div>
-			{/if}
-
-			{#if isOverview}
-				<div class="flex justify-center items-center gap-10 w-full">
-					<div
-						class="min-w-max max-w-[1500px] w-2/3 min-h-[300px] bg-white border border-primary-50  mx-3 
+					class="min-w-max max-w-[1500px] w-2/3 min-h-[300px] bg-slate-50 border border-primary-50  mx-3 
 					h-full rounded-sm px-8 py-8 flex justify-center items-center"
-					>
-						<span class="text-slate-500 text-3xl desktop:text-2xl">No Overview Available</span>
-					</div>
-					<div
-						class="min-w-max max-w-[500px] min-h-[280px] flex flex-col justify-center items-center gap-5 bg-white border
-						border-primary-50 w-4/12 rounded-sm mx-4 px-4 py-"
-					>
-						<span class="text-xl text-slate-700 font-medium mb-4">Quick Docker Commands</span>
-
-						<ButtonOutlined styles="lowercase" onClick={() => handleCopy('pull')}>
-							<span
-								class="{isCopied === 'pull'
-									? 'font-semibold'
-									: ''} select-all text-lg desktop:text-[16px] text-primary-400 py-2 px-2 lowercase tracking-wide"
-							>
-								{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
-							</span>
-						</ButtonOutlined>
-
-						<ButtonOutlined onClick={() => handleCopy('push')}>
-							<span
-								class="{isCopied === 'push'
-									? 'font-semibold'
-									: ''} select-all text-lg desktop:text-[16px] text-primary-400 px-2 py-2 lowercase tracking-wide"
-							>
-								{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}
-							</span>
-						</ButtonOutlined>
-					</div>
+				>
+					<span class="text-slate-500 text-3xl desktop:text-2xl">No Overview Available</span>
 				</div>
-			{/if}
-		</div>
+				<div
+					class="min-w-max max-w-[500px] min-h-[280px] flex flex-col justify-center items-center gap-5 bg-slate-50 border
+						border-primary-50 w-4/12 rounded-sm mx-4 px-4 py-"
+				>
+					<span class="text-xl text-slate-700 font-medium mb-4">Quick Docker Commands</span>
+
+					<ButtonOutlined styles="lowercase" onClick={() => handleCopy('pull')}>
+						<span
+							class="{isCopied === 'pull'
+								? 'font-semibold'
+								: ''} select-all text-lg desktop:text-[16px] text-primary-400 py-2 px-2 lowercase tracking-wide"
+						>
+							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
+						</span>
+					</ButtonOutlined>
+
+					<ButtonOutlined onClick={() => handleCopy('push')}>
+						<span
+							class="{isCopied === 'push'
+								? 'font-semibold'
+								: ''} select-all text-lg desktop:text-[16px] text-primary-400 px-2 py-2 lowercase tracking-wide"
+						>
+							{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}
+						</span>
+					</ButtonOutlined>
+				</div>
+			</div>
+		{/if}
 	</div>
 </div>

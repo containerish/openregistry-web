@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
+	import { ProfileIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	export let data: PageData;
@@ -42,24 +43,24 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1500px] bg-white">
-		<div class="flex flex-col gap-16 pb-28">
+	<div class="min-h-[1500px] bg-white w-full">
+		<div class="flex flex-col gap-16 desktop:gap-8 pb-24">
 			<div
-				class="flex gap-5 space-x-10 min-w-max max-w-[] justify-start items-center py-24 mt-20 px-20 
-		bg-primary-50 text-slate-700 mx-5 border-2 border-primary-200"
+				class="flex gap-5 space-x-10 min-w-max justify-start items-center py-24 desktop:py-16 mt-20 desktop:mt-12 px-8 
+				bg-primary-50 text-slate-700 mx- border-2 border-primary-100"
 			>
 				<div class="px-4" />
 				<div>
-					<UserIcon styles="h-24 w-24" />
+					<ProfileIcon styles="h-24 w-24 desktop:h-12 desktop:w-12 text-primary-500" />
 				</div>
 				<div class="flex-initial">
-					<h1 class="text-4xl font-medium capitalize">
+					<h1 class="text-4xl desktop:text-3xl font-medium capitalize">
 						{data.user.name ? data.user.name : data.user.username}
 					</h1>
-					<div class="flex mt-3">
-						<UserIcon styles="h-6 w-6" />
-						<span class="text-lg mr-5">Community User</span>
-						<span class="text-lg">
+					<div class="flex mt-3 desktop:mt-2 items-center gap-1">
+						<ProfileIcon styles="h-6 w-6 desktop:h-4 desktop:w-4" />
+						<span class="text-lg mr-5 desktop:text-base">Community User</span>
+						<span class="text-lg desktop:text-xs">
 							Joined
 							<span class="font-semibold">
 								{new Date(data.user.created_at).toDateString()}
@@ -71,10 +72,12 @@
 			<Card>
 				<div
 					class="rounded-sm flex flex-col w-4/5 max-w-[1200px] justify-center items-start
-					gap-10 bg-slate-50 border border-primary-50 shadow-inner px-20 pb-8 pt-10"
+					gap-10 desktop:gap-6 bg-slate-50 border border-primary-50 shadow-2xl px-20 desktop:px-14 desktop:py-6 pb-8 pt-10"
 				>
 					<div class="w-full flex flex-col gap-1">
-						<span class="text-2xl mx-1 font-medium text-slate-500">Email Address</span>
+						<span class="text-2xl desktop:text-lg mx-1 font-medium text-slate-700"
+							>Email Address</span
+						>
 						<Textfield
 							type="email"
 							placeholder="email"
@@ -91,9 +94,9 @@
 			<Card>
 				<div
 					class="rounded-sm flex flex-col w-4/5 max-w-[1200px] justify-center items-start
-					gap-4 bg-slate-50 border border-primary-50 shadow-inner px-20 pb-8 pt-10"
+					gap-4 desktop:gap-2 bg-slate-50 border border-primary-50 shadow-2xl px-20 desktop:px-14 desktop:py-6 pb-8 pt-10"
 				>
-					<h1 class="text-2xl text-slate-500 font-medium">Change Password</h1>
+					<h1 class="text-2xl desktop:text-lg text-slate-600 font-medium">Change Password</h1>
 					<Textfield
 						placeholder="current password"
 						type="password"
@@ -110,8 +113,8 @@
 					<input
 						type="password"
 						bind:value={$confirmPassword.value}
-						class="w-1/2 placeholder-gray-500 form-control block px-3 py-3 text-base font-normal text-gray-700 bg-white
-						bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
+						class="w-1/2 placeholder-slate-500 form-control block px-3 py-3 text-base desktop:text-sm font-normal text-slate-700 bg-white
+						bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-slate-700 focus:bg-white 
 						border rounded-md 
           				{!$passwordForm.hasError('confirm_password.match_field')
 							? 'focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500'
@@ -142,15 +145,17 @@
 			<Card>
 				<div
 					class="rounded-sm flex flex-col w-4/5 max-w-[1200px] justify-center items-start
-				gap-4 bg-slate-50 border border-primary-50 shadow-inner px-20 pb-8 pt-10"
+				gap-4 desktop:gap-2 bg-slate-50 border border-primary-50 shadow-2xl px-20 desktop:px-14 desktop:py-6 pb-8 pt-10"
 				>
-					<div class="flex flex-col gap-2">
-						<span class="text-2xl text-slate-500 font-medium">Account Information</span>
-						<span class="text-slate-600">
+					<div class="flex flex-col gap-2 desktop:gap-1">
+						<span class="text-2xl desktop:text-lg text-slate-700 font-medium"
+							>Account Information</span
+						>
+						<span class="text-slate-600 desktop:text-sm">
 							This information is public and visible to all users of OpenRegistry
 						</span>
 					</div>
-					<div class="w-full flex flex-col gap-4 justify-start items-start">
+					<div class="w-full flex flex-col gap-4 desktop:gap-2 justify-start items-start">
 						<Textfield
 							type="text"
 							disabled

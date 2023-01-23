@@ -93,7 +93,7 @@
 </svelte:head>
 
 <Pulse>
-	<div class="flex justify-center items-start w-full h-full min-w-max min-h-[1500px] desktop:min-h-max py-8 bg-white px-0">
+	<div class="flex justify-center items-start w-full h-full min-w-max min-h-[1700px] desktop:min-h-max py-8 bg-white px-0">
 		<div class="flex w-full h-full max-w-[3000px]">
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>

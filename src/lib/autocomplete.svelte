@@ -29,6 +29,7 @@
 	};
 
 	const autoComplete = async (q: string) => {
+		console.log('auto complete input:', q);
 		if (q === '') {
 			catalog.repositories = [];
 			showItems = false;
@@ -73,7 +74,14 @@
 	>
 		<Search styles="desktop:w-4 text-primary-400" />
 	</span>
-	<Textfield type="search" styles="pl-12" />
+	<input
+		on:input={handleOnChange}
+		type="search"
+		class="placeholder-slate-500 form-control block w-full px-3 py-3 desktop:h-10 text-base desktop:text-sm font-normal text-slate-700 bg-white
+	 bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
+     border rounded-md focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
+	disabled:text-slate-400 pl-12"
+	/>
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}
 		<div class="pt-6 z-50">

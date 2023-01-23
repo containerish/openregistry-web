@@ -47,6 +47,7 @@ const config = {
 				"primary-200":"#A3AEFD",
 				"primary-100":"#C2C9FD",
 				"primary-50":"#EEEDFF",
+				"primary-light":"#F6F5FF",
 
 				"gray-800":"#",
 				"gray-700":"#",

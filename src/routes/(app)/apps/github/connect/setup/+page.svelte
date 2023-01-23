@@ -27,7 +27,7 @@
 	}
 </script>
 
-<div class="bg-white flex flex-col justify-start items-center min-h-[1500px] py-10 desktop:py-8">
+<div class="bg-slate-100 w-full flex flex-col justify-start items-center min-h-[1500px] py-10 desktop:py-8">
 	<div
 		class="w-3/4 text-xs desktop:w-1/2 px-2 py-16 desktop:py-2 desktop:text-xs apple:text-sm uw:text-lg"
 	>
@@ -42,8 +42,8 @@
 		/>
 	</div>
 
-	<div class="bg-white rounded-md shadow-inner border border-primary-100 space-y-6 my-10 
-	min-h-max min-w-[1390px] desktop:min-w-max p-20">
+	<div class="bg-white rounded-sm shadow-2xl border border-primary-100 space-y-6 my-10 
+	min-h-max min-w-[1390px] desktop:min-w-max p-20 mx-2">
 		{#if selectedTab === 0}
 			<SelectRepo {data} {handleNext} />
 		{/if}

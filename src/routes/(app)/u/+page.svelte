@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Repository } from '$lib/components';
 	import { RegistryBackend, type Catalog } from '$apis/registry';
-	import { UserIcon, StarIcon, UserGroupIcon } from '$lib/icons';
+	import { ProfileIcon, StarIcon, UserGroupIcon } from '$lib/icons';
 
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -53,27 +53,29 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1500px] bg-white">
+	<div class="min-h-[1700px] desktop:min-h-max w-full">
 		<div
-			class="flex gap-5 space-x-10 min-w-max max-w-[] justify-start items-center py-24 mt-20 px-20 
-			bg-primary-50 text-slate-700 border-b-0 mx-5 border-2 border-primary-200"
+			class="flex gap-5 min-w-max justify-start items-center py-24 desktop:py-14 mt-20 desktop:mt-12 px-8 
+			bg-primary-50 text-slate-700 border-b-0 mx- border-2 border-primary-100"
 		>
 			<div class="px-4" />
 			<div>
-				<UserIcon styles="h-24 w-24 text-slate-700" />
+				<ProfileIcon styles="text-primary-500 h-20 w-20 text-slate-700 desktop:h-12 desktop:w-12" />
 			</div>
-			<div class="flex-initial w-64">
-				<h1 class="text-4xl font-medium capitalize text-slate-700">
+			<div class="flex-initial w-64 justify-center">
+				<h1 class="text-4xl desktop:text-3xl font-medium capitalize text-slate-700">
 					{data.user.name ? data.user.name : data.user.username}
 				</h1>
-				<div class="flex mt-3">
-					<UserIcon styles="h-6 w-6" />
-					<span class="text-lg font-normal">Community User</span>
+				<div class="flex mt-3 desktop:mt-2 items-center gap-1">
+					<ProfileIcon styles="h-6 w-6 desktop:h-4 desktop:w-4" />
+					<span class="text-lg desktop:text-base font-normal">Community User</span>
 				</div>
 			</div>
 			<div class="flex flex-col flex-initial w-32 lg:w-72">
-				<a class="text-xl underline-offset-4" href="/settings"><u>Edit Profile</u></a>
-				<span class="mt-3 text-md">
+				<a class="text-xl desktop:text-base underline-offset-4" href="/settings"
+					><u>Edit Profile</u></a
+				>
+				<span class="mt-3 text-md desktop:text-xs">
 					Joined
 					<span>
 						{new Date(data.user.created_at).toDateString()}
@@ -83,12 +85,12 @@
 		</div>
 
 		<div
-			class="flex gap-5 min-w-max items-start justify-items-center bg-primary-50 space-x-10 pb-2 
-			px-20 mb-10 border-t-0 border-2 border-primary-200 mx-5"
+			class="flex gap-5 min-w-max items-start justify-items-center bg-primary-50 space-x-10 pb-
+			px-20 mb-10 border-t-0 border-2 border-primary-100 mx-"
 		>
 			<button
 				on:click={toggleRepo}
-				class="ease-in duration-300 h-10 pb-9 py-2 text-center bg-transparent border-b-2
+				class="ease-in duration-200 h-10 pb-10 py-5 desktop:py-2 m-0 text-center bg-transparent border-b-[3px]
 					border-transparent apple:text-[22px] uw:text-2xl whitespace-nowrap cursor-base 
           hover:border-b-primary-200 text-primary-600
           {isRepo ? 'border-b-primary-500' : 'border-b-transparent'}
@@ -99,7 +101,7 @@
 
 			<button
 				on:click={toggleStarred}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-2
+				class="ease-in duration-200 h-10 px-4 pb-10 py-5 desktop:py-2 m-0 text-center bg-transparent border-b-[3px]
 					border-transparent apple:text-[22px] uw:text-2xl whitespace-nowrap cursor-base
           hover:border-b-primary-200 text-primary-600
           {isStarred ? 'border-b-primary-500' : 'border-b-transparent'}
@@ -110,7 +112,7 @@
 
 			<button
 				on:click={toggleisContrib}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-2
+				class="ease-in duration-200 h-10 px-4 pb-10 py-5 desktop:py-2 m-0 text-center bg-transparent border-b-[3px]
 					border-transparent apple:text-[22px] uw:text-2xl whitespace-nowrap cursor-base
           hover:border-b-primary-200 text-primary-600
           {isContrib ? 'border-b-primary-500' : 'border-b-transparent'}
@@ -131,7 +133,7 @@
 						<div
 							class="h-80 bg-slate-50 w-full shadow-inner rounded-md px-28 py-20 flex justify-center items-center"
 						>
-							<span class="text-slate-500 text-3xl">No Repositories</span>
+							<span class="text-slate-500 text-3xl desktop:text-2xl">No Repositories</span>
 						</div>
 					{/if}
 				</div>
@@ -144,8 +146,8 @@
 					class="h-80 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
 					<StarIcon styles="h-10 w-10 text-slate-500" />
-					<span class="text-slate-500 text-3xl">Your starred repositories will show here</span>
-					<span class="text-slate-600 font-light text-lg xl:text-xl">
+					<span class="text-slate-500 text-3xl desktop:text-2xl">Your starred repositories will show here</span>
+					<span class="text-slate-600 font-light text-lg xl:text-xl desktop:text-base">
 						We're working on bringing this feature as we build more analytics
 					</span>
 				</div>
@@ -158,8 +160,8 @@
 					class="h-80 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
 					<UserGroupIcon styles="h-10 w-10 text-slate-600" />
-					<span class="text-slate-500 text-3xl">Your Contributions will be placed here</span>
-					<span class="text-slate-500 font-light text-lg xl:text-xl">
+					<span class="text-slate-500 text-3xl desktop:text-2xl">Your Contributions will be placed here</span>
+					<span class="text-slate-500 font-light text-lg xl:text-xl desktop:text-base">
 						We're working on bringing this feature as we build more analytics
 					</span>
 				</div>
