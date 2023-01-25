@@ -93,7 +93,7 @@
 </svelte:head>
 
 <Pulse>
-	<div class="flex justify-center items-start w-full h-full min-w-max min-h-[1700px] desktop:min-h-max py-8 bg-white px-0">
+	<div class="flex justify-center items-start w-full h-full min-w-max min-h-[1700px] desktop:min-h-max laptop:min-h-max py-8 laptop:py-2 bg-white px-0">
 		<div class="flex w-full h-full max-w-[3000px]">
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
@@ -116,18 +116,19 @@
 				use:popperRef
 				on:mouseenter={() => (showTooltip = true)}
 				on:mouseleave={() => (showTooltip = false)}
-				class="flex flex-col gap-20 desktop:gap-6 hover:opacity-40 opacity-60 h-full w-1/5 mx-10 my-4 border-r-2 border-slate-200"
+				class="flex flex-col gap-20 desktop:gap-6 laptop:gap-4 hover:opacity-40 opacity-60 h-full 
+				w-1/5 mx-10 laptop:mx-2 my-4 border-r-2 border-slate-200"
 			>
-				<div class="flex flex-col gap-4 desktop:gap-2">
+				<div class="flex flex-col gap-4 laptop:gap-2 desktop:gap-2">
 					<div class="flex gap-3 items-center text-primary-500">
-						<Filter styles="desktop:w-5 desktop:h-5"/>
-						<span class="text-xl desktop:text-lg font-medium">Filters</span>
+						<Filter styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5"/>
+						<span class="text-xl desktop:text-lg laptop:text-lg font-medium">Filters</span>
 					</div>
 					<hr />
 				</div>
 
-				<div class="flex flex-col gap-4 text-lg desktop:text-sm text-slate-800">
-					<span class="text-xl desktop:text-[16px] font-medium">Operating System</span>
+				<div class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm text-slate-800">
+					<span class="text-xl desktop:text-base laptop:text-base font-medium">Operating System</span>
 					<ul>
 						<li><Checkbox label="Linux" /></li>
 						<li><Checkbox label="Windows" /></li>
@@ -135,8 +136,8 @@
 					<hr />
 				</div>
 
-				<div class="flex flex-col gap-4 text-lg desktop:text-sm text-slate-800">
-					<span class="text-xl desktop:text-[16px] font-medium">Categories</span>
+				<div class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm text-slate-800">
+					<span class="text-xl desktop:text-base laptop:text-base font-medium">Categories</span>
 					<ul>
 						<li>
 							<Checkbox label="Analytics" />
@@ -152,8 +153,8 @@
 					</ul>
 					<hr />
 				</div>
-				<div class="flex flex-col gap-4 text-lg desktop:text-sm text-slate-700">
-					<span class="text-xl desktop:text-[16px] font-medium">Architectures</span>
+				<div class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm text-slate-700">
+					<span class="text-xl desktop:text-base laptop:text-base font-medium">Architectures</span>
 					<ul>
 						<li><Checkbox label="ARM32" /></li>
 						<li><Checkbox label="ARM64" /></li>

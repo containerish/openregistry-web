@@ -30,16 +30,22 @@
 					>
 
 					<ul class="text-center font-normal list-disc ml-4 mt-4">
-						<li class="text-left text-primary-600 text-xl desktop:text-[16px] half:text-[16px]">
+						<li
+							class="text-left text-primary-600 text-xl desktop:text-[16px] laptop:text-base half:text-[16px]"
+						>
 							Create an account on
 							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-400">
 								OpenRegistry.dev
 							</a>
 						</li>
-						<li class="text-left text-primary-600 text-xl desktop:text-[16px] half:text-[16px]">
+						<li
+							class="text-left text-primary-600 text-xl desktop:text-[16px] laptop:text-base half:text-[16px]"
+						>
 							Install Docker/Nerdctl/Podman
 						</li>
-						<li class="text-left text-primary-600 text-xl desktop:text-[16px] half:text-[16px]">
+						<li
+							class="text-left text-primary-600 text-xl desktop:text-[16px] laptop:text-base half:text-[16px]"
+						>
 							Login into OpenRegistry using Docker CLI
 						</li>
 					</ul>
@@ -67,7 +73,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 px-4 py-10"
 			>
 				<LaboratoryIcon />
-				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>
@@ -77,7 +83,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<LayersIcon />
-				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>
@@ -87,7 +93,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<CloudIcon />
-				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>
@@ -97,7 +103,7 @@
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 p-4"
 			>
 				<ConfirmIcon />
-				<span class="text-center text-primary-600 text-lg desktop:text-[17px]"
+				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
 					>The container image is divided in smaller chunks called layers which are further divided
 					into blobs</span
 				>

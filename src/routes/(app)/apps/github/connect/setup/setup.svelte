@@ -11,8 +11,8 @@
 	export let handleNext;
 </script>
 
-<div>
-	<div class="flex flex-col justify-center items-center gap-4">
+<div class="desktop:w-[800px]">
+	<div class="flex flex-col justify-center items-center gap-4 desktop:gap-2">
 		<span class="text-2xl font-bold text-primary-600">Set up builds and deployments</span>
 		<div class="flex space-x-3 justify-center items-center">
 			<span class="text-base desktop:text-base apple:text-lg uw:text-lg text-slate-600">
@@ -32,21 +32,21 @@
 			</a>
 		</div>
 	</div>
-	<hr class="mt-10" />
+	<hr class="mt-10 half:mt-5 desktop:mt-5" />
 
-	<div class="flex flex-col justify-center my-10 gap-4">
+	<div class="flex flex-col justify-center my-10 gap-4 desktop:gap-2">
 		<span
-			class="font-semibold text-primary-600 text-base desktop:text-base apple:text-xl uw:text-xl"
+			class="font-semibold text-primary-600 text-base desktop:text-lg apple:text-xl uw:text-xl"
 			>Project name</span
 		>
 		<div class="w-2/5">
 			<Textfield />
 		</div>
-		<span class="text-sm text-slate-600 desktop:text-sm apple:text-base uw:text-base">
+		<span class="text-sm text-slate-700 desktop:text-sm apple:text-base uw:text-base antialiased">
 			Your project will be deployed to akash network</span
 		>
 	</div>
-	<div class="flex flex-col my-10 space-y-2">
+	<div class="flex flex-col my-10 gap-2">
 		<ListBox
 			items={$ghStore.selectedRepository.branches.map((b, i) => ({
 				name: b.name,
@@ -57,19 +57,17 @@
 				disabled: false
 			}))}
 		/>
-		<span class="text-sm text-slate-600 desktop:text-sm apple:text-base uw:text-base">
-			Pushes to this branch automatically trigger deployments to the Production environment. Pushes
+		<span class="text-sm text-slate-700 desktop:text-sm apple:text-base uw:text-base antialiased">
+			Pushes to this branch automatically trigger deployments to the Production environment.
+			 Pushes branches will trigger deployments within the Preview environment
 			to all other
 		</span>
-		<span class="text-sm text-slate-600 desktop:text-sm apple:text-base uw:text-base">
-			branches will trigger deployments within the Preview environment</span
-		>
 	</div>
-	<hr class="my-16" />
-	<div class="flex flex-col gap-4">
+	<hr class="my-12 desktop:my-6" />
+	<div class="flex flex-col gap-4 desktop:gap-2">
 		<div class="flex space-x-2">
 			<span
-				class="text-base text-primary-600 desktop:text-base apple:text-xl uw:text-xl font-semibold"
+				class="text-base text-primary-600 desktop:text-lg apple:text-xl uw:text-xl font-semibold"
 			>
 				Build Settings</span
 			>
@@ -81,26 +79,26 @@
 				<span class="text-xs">Configuring build</span>
 			</div>
 		</div>
-		<span class="text-sm desktop:text-sm apple:text-base uw:text-base text-slate-700">
+		<span class="text-sm desktop:text-sm apple:text-base uw:text-base text-slate-700 antialiased">
 			If your project uses a different tool than Docker (like nerdctl), then please set the build
 			instructions for OpenRegistry
 		</span>
-		<div>
-			<div class="flex flex-col my-10 space-y-1 text-sm apple:text-base uw:text-base">
+		<div class="flex flex-col">
+			<div class="flex flex-col my-8 desktop:my-4 space-y-1 text-sm apple:text-base uw:text-base">
 				<ListBox
 					items={[
 						{ name: 'Docker', id: 0, disabled: false },
 						{ name: 'NerdCtl', disabled: false, id: 1 }
 					]}
 				/>
-				<span class="text-md text-slate-600">
+				<span class="text-md text-slate-700 antialiased">
 					select a framework to prefill recommended settings
 				</span>
 			</div>
 
-			<div class="flex flex-col my-10 space-y-1">
+			<div class="flex flex-col my-10 space-y-3">
 				<div class="flex items-center space-x-1 w-2/5 text-primary-500">
-					<span class="font-normal desktop:font-medium apple:font-semibold uw:font-semibold ">
+					<span class="font-normal apple:font-semibold uw:font-semibold desktop:text-base">
 						Build command</span
 					>
 					<InfoIcon />
@@ -108,12 +106,12 @@
 				<div class="w-2/5">
 					<Textfield type="search" />
 				</div>
-				<span class="text-md text-slate-600">
+				<span class="text-md text-slate-600 desktop:text-sm">
 					e.g. docker build -f Dockerfile -t openregistry.dev/test-user/myapp:latest .
 				</span>
 			</div>
 
-			<div class="flex flex-col space-y-8">
+			<div class="flex flex-col space-y-8 desktop:space-y-4">
 				<div class="flex items-center justify-start space-x-1">
 					<Disclosure title="Dockerfile directory (advanced)">
 						<Textfield styles="w-1/4 ml-10" type="search" />
@@ -137,12 +135,14 @@
 				</div>
 			</div>
 
-			<hr class="my-16" />
+			<hr class="my-16 desktop:my-8" />
 
 			<div class="flex justify-between items-center mt-10">
-				<div on:click={() => handleNext(0)}
+				<div
+					on:click={() => handleNext(0)}
 					on:keypress={() => handleNext(0)}
-					class="flex space-x-1 cursor-pointer">
+					class="flex space-x-1 cursor-pointer"
+				>
 					<ArrowLeftIcon styles="text-slate-700" />
 					<span class="text-slate-700 text-base desktop:text-base apple:text-lg uw:text-lg"
 						>Change repository</span

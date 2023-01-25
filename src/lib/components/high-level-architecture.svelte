@@ -3,14 +3,14 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card styles="bg-primary-100 block py-12 lg:py-20 laptop:pt-20">
+<Card styles="bg-primary-100 block py-12 lg:py-20 laptop:pt-10">
 	<div class="w-full h-full">
 		<div class="px-6 my-6 w-full h-full flex justify-center flex-col items-center">
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<div class="flex justify-center items-center text-center">
 					<span
 						class="text-center whitespace-nowrap font-bold
-				pb-4 text-6xl desktop:text-5xl desktop:font-semibold half:invisible ipad:self-center text-primary-700"
+				pb-4 text-6xl desktop:text-5xl laptop:text-5xl desktop:font-semibold half:invisible ipad:self-center text-primary-700"
 					>
 						High Level Architecture
 					</span>
@@ -30,7 +30,7 @@
 						&nbsp;Architecture
 					</span>
 				</div>
-				<div class="half:px-4 desktop:-mt-10">
+				<div class="half:px-4 desktop:-mt-10 laptop:-mt-10">
 					<p
 						class="text-lg desktop:text-[16px] leading-normal half:text-sm text-center font-normal text-primary-600"
 					>

@@ -151,8 +151,8 @@
 </svelte:head>
 
 <div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
-		<div class="flex justify-center py-4 mb-8">
+	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
+		<div class="flex justify-center py-4 mb-8 laptop:mb-4 laptop:py-1">
 			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}
@@ -296,9 +296,9 @@
 		{:else}
 			<div class="flex flex-col items-center gap-4 justify-start h-full w-full">
 				<div id="confetti">
-					<CheckIcon styles="h-24 w-24 text-brown-800" />
+					<CheckIcon styles="h-24 w-24 text-primary-500" />
 				</div>
-				<span class="text-lg capitalize text-brown-900">{successMessage}</span>
+				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="w-full text-center flex flex-row justify-center gap-2 px-4 items-center">
 					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>

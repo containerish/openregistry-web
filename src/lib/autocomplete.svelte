@@ -70,17 +70,17 @@
 <div class="relative flex w-full flex-wrap items-stretch">
 	<span
 		class="z-10 font-normal text-center absolute bg-transparent 
-		rounded text-base items-center justify-center pl-4 pt-3 desktop:pt-2"
+		rounded text-base items-center justify-center pl-4 pt-3 desktop:pt-2 laptop:pt-2"
 	>
-		<Search styles="desktop:w-4 text-primary-400" />
+		<Search styles="desktop:w-5 laptop:w-5 text-primary-400" />
 	</span>
 	<input
 		on:input={handleOnChange}
 		type="search"
-		class="placeholder-slate-500 form-control block w-full px-3 py-3 desktop:h-10 text-base desktop:text-sm font-normal text-slate-700 bg-white
-	 bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
-     border rounded-md focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
-	disabled:text-slate-400 pl-12"
+		class="placeholder-slate-500 form-control block w-full px-3 py-3 desktop:h-10 laptop:h-10 text-base desktop:text-sm laptop:text-sm
+		font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
+        border rounded-md focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
+      disabled:text-slate-400 pl-12"
 	/>
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}

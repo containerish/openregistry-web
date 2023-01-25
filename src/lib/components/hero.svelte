@@ -51,7 +51,7 @@
 			<div class="text-center">
 				<span
 					class="text-5xl uw:font-bold font-semibold 
-				break-words half:text-3xl half:font-semibold apple:text-7xl uw:text-8xl"
+				break-words half:text-3xl half:font-semibold apple:text-7xl uw:text-7xl"
 				>
 					A Decentralised Container Registry
 				</span>
@@ -60,21 +60,21 @@
 			<div class="w-full">
 				<p
 					class="text-center text-primary-600 break-words text-lg half:text-md mt-5 
-					uw:text-3xl apple:text-2xl"
+					uw:text-2xl apple:text-2xl"
 				>
 					OpenRegistry is an open source container registry developed for people by people.
 					<!-- Store, Download, and Share your container images with decentralized OpenRegistry -->
 				</p>
 				<p
 					class="text-center text-primary-600 break-words text-lg half:text-md 
-					uw:text-3xl apple:text-2xl"
+					uw:text-2xl apple:text-2xl"
 				>
 					Backed by amazing distributed communities, OpenRegistry offers all the features of a
 					container registry
 				</p>
 				<p
 					class="text-center text-primary-600 break-words text-lg half:text-md 
-					uw:text-3xl apple:text-2xl"
+					uw:text-2xl apple:text-2xl"
 				>
 					along with amazing additions like automated build system
 				</p>

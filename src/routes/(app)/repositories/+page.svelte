@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Advert from '$lib/advert.svelte';
-	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
@@ -107,11 +105,13 @@
 </svelte:head>
 
 <Pulse>
-	
-	<div class="flex justify-center items-start desktop:items-start w-full desktop:min-h-[1500px] min-h-[1700px] m-w-[70vw] h-max bg-white">
+	<div
+		class="flex justify-center items-center desktop:items-start laptop:items-start w-full 
+	desktop:min-h-[1500px] laptop:min-h-max min-h-[1700px] h-max bg-white laptop:min-w-[500px]"
+	>
 		<div class="flex w-full min-h-full max-w-[3000px] items-center">
-			<div class="w-3/4 px-8 my-8">
-				<div class="flex px-4 justify-between lg:px-8">
+			<div class="w-3/4 px-8 my-8 laptop:w-full laptop:px-2">
+				<div class="flex gap-4 px-4 justify-between lg:px-8">
 					<div class="w-2/5">
 						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 					</div>
@@ -136,13 +136,8 @@
 							<div id="arrow" data-popper-arrow />
 						</div>
 					{/if}
-					<div
-						use:popperRef
-						on:mouseenter={() => (showTooltip = true)}
-						on:mouseleave={() => (showTooltip = false)}
-					>
-						<ButtonOutlined disabled>Create Respository</ButtonOutlined>
-					</div>
+
+					<ButtonOutlined onClick={toggleModal}>Create Respository</ButtonOutlined>
 
 					{#if showModal}
 						<Modal>
@@ -168,7 +163,9 @@
 						<div
 							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 						>
-							<span class="text-primary-600 text-4xl">No Repositories</span>
+							<span class="text-primary-600 text-4xl laptop:text-2xl desktop:text-3xl"
+								>No Repositories</span
+							>
 						</div>
 					</div>
 				{/if}
@@ -177,29 +174,6 @@
 			<div
 				class=" invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
 			/>
-			<!-- <div class="rounded-md px-4 py-2 bg-slate-100">
-				<Advert
-					link="https://akash.network"
-					styles="hover:bg-red-600"
-					logo="akash-logo.svg"
-					body="Infrastructure that powers web3 for cloud compute akash network is a distributed
-					peer-to-peer marketplace for cloud compute"
-				/>
-				<Advert
-					link="https://ipfs.io"
-					styles="hover:bg-[#65c3ca]"
-					logo="ipfs-logo.png"
-					body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
-            		upgradeable, resilient, and more open."
-				/>
-				<Advert
-					link="https://skynetlabs.com/developers"
-					styles="hover:bg-[#00C65E]"
-					logo="skynet-logo.png"
-					body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
-          			and applications."
-				/>
-			</div> -->
 		</div>
 	</div>
 </Pulse>

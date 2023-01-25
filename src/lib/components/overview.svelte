@@ -17,12 +17,12 @@
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<span
 					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl desktop:text-4xl"
+					half:text-3xl desktop:text-4xl laptop:text-4xl"
 				>
 					Overview
 				</span>
 				<p
-					class="text-lg desktop:text-[16px] half:text-[16px] text-primary-700 text-center font-normal"
+					class="text-lg desktop:text-base laptop:text-base half:text-base text-primary-700 text-center font-normal"
 				>
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
@@ -69,12 +69,13 @@
 			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<span
 					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl desktop:text-4xl"
+					half:text-3xl desktop:text-4xl laptop:text-4xl"
 				>
 					Collaborations
 				</span>
 				<p
-					class="text-lg desktop:text-[16px] half:text-[16px] text-primary-700 text-center font-normal leading-6 tracking-wide"
+					class="text-lg desktop:text-base half:text-base laptop:text-base text-primary-700 text-center font-normal 
+					leading-6 tracking-wide "
 				>
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
@@ -128,14 +129,14 @@
 				<div class="flex justify-center items-center text-center">
 					<span
 						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl desktop:text-3xl ipad:self-center"
+					half:text-3xl desktop:text-3xl ipad:self-center laptop:text-4xl"
 					>
 						Web 3.0 Infrastructure
 					</span>
 				</div>
 
 				<p
-					class="text-lg desktop:text-[16px] half:text-[16px] text-primary-700 text-center font-normal"
+					class="text-lg desktop:text-base half:text-base laptop:text-base text-primary-700 text-center font-normal"
 				>
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
