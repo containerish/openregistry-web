@@ -53,7 +53,7 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1700px] desktop:min-h-max w-full">
+	<div class="min-h-[1700px] desktop:min-h-max laptop:min-h-max w-full">
 		<div
 			class="flex gap-5 min-w-max justify-start items-center py-24 desktop:py-14 mt-20 desktop:mt-12 px-8 
 			bg-primary-50 text-slate-700 border-b-0 mx- border-2 border-primary-100"

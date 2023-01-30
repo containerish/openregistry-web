@@ -37,8 +37,8 @@
 		return result;
 	};
 
-	let compact: Boolean = false;
-	let extended: Boolean = true;
+	let compact: Boolean = true;
+	let extended: Boolean = false;
 
 	const handleSidebar = () => {
 		compact = !compact;
@@ -55,51 +55,88 @@
 	const toggleModal = () => (showModal = !showModal);
 </script>
 
-<div class="bg-slate-50 desktop:min-h-max laptop:min-h-max rounded-sm flex flex-col justify-center items-center gap-14">
+<div
+	class="bg-slate-50 desktop:min-h-max laptop:min-h-max rounded-sm flex flex-col justify-center items-center gap-14"
+>
 	{#if compact == true}
 		<div
 			in:fly={{ delay: 150, duration: 300, x: 50, opacity: 1, easing: backOut }}
-			class="flex flex-col justify-start px-4 laptop:px-2 items-center gap-14 desktop:gap-8 laptop:gap-8 border-2 border-primary-50 
-			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5"
+			class="flex flex-col justify-start px-4 laptop:px-2 items-center gap-14 desktop:gap-8 laptop:gap-8 half:gap-5 border-2 border-primary-50 
+			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 half:min-h-max"
 		>
 			<div>
 				<picture>
 					<img class="" src="logo-new.png" alt="logo" width="60px" />
 				</picture>
-				
 			</div>
 			<button on:click={handleSidebar} class="bg-transparent border-transparent m-0 p-0">
-				<ArrowRIcon styles="w-7 h-7 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 laptop:w-6 laptop:h-6 text-primary-400" />
+				<ArrowRIcon
+					styles="w-7 h-7 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400"
+				/>
 			</button>
-			<a href="/"><HomeIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a>
-			<a href="https://docs.openregistry.dev/"
-				><ReportIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+			<a href="/"
+				><HomeIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
-			<a href="/search"><SearchIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a>
+			<a href="https://docs.openregistry.dev/"
+				><ReportIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
+			>
+			<a href="/search"
+				><SearchIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
+			>
 			<a href="/repositories"
-				><CubeIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+				><CubeIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
 			<a href="/apps/github/connect"
-				><GithubOutlinedIcon styles="h-9 w-9 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+				><GithubOutlinedIcon
+					styles="h-9 w-9 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
 			<a href="/faq"
-				><QuestionMarkIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+				><QuestionMarkIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
 			<a href="https://blog.openregistry.dev/"
-				><PencilIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+				><PencilIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
-			<a href=""><HeartIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a>
+			<a href=""
+				><HeartIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
+			>
 			<a href="https://github.com/containerish/OpenRegistry"
-				><StarIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+				><StarIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
 			<button class="bg-transparent border-0" on:click={toggleModal}
-				><UserPlusIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></button
+				><UserPlusIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></button
 			>
-			<a href="/u"><ProfileIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a>
+			<a href="/u"
+				><ProfileIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
+			>
 			<a href="/settings"
-				><SettingsIcon styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400" /></a
+				><SettingsIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/></a
 			>
-			<SignOutIcon styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 desktop:mb-4" />
+			<SignOutIcon
+				styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 desktop:mb-4"
+			/>
 		</div>
 	{/if}
 	{#if extended == true}
@@ -111,7 +148,9 @@
 			<div class="flex flex-row justify-between items-center gap-4 desktop:gap-2">
 				<Logo type="dark" />
 				<button on:click={handleSidebar} class="bg-transparent border-transparent mt-2">
-					<ArrowLIcon styles="h-7 w-7 desktop:h-5 desktop:w-5 laptop:h-5 laptop:w-5 text-primary-500 cursor-pointer" />
+					<ArrowLIcon
+						styles="h-7 w-7 desktop:h-5 desktop:w-5 laptop:h-5 laptop:w-5 text-primary-500 cursor-pointer"
+					/>
 				</button>
 			</div>
 

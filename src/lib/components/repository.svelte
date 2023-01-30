@@ -46,7 +46,7 @@
 		on:click={handleRepoDetail}
 		on:keypress={handleRepoDetail}
 		class="hover:shadow-primary-100 z-0 cursor-pointer hover:shadow-2xl w-full 
-		px-8 py-2 desktop:py-1.5 laptop:py-1 half:py-1 my-2 mx-2 bg-slate-50 border-2 border-primary-100 rounded-sm"
+		px-8 py-2 desktop:py-1.5 laptop:py-1 half:py-1 my-2 mx-2 bg-slate-50 border-2 border-primary-100 rounded-sm max-w-[850px]"
 	>
 		<div class="pt-2 text-xl desktop:text-base laptop:text-base half:text-base text-slate-700">
 			<span>

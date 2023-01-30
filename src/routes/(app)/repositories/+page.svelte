@@ -106,13 +106,13 @@
 
 <Pulse>
 	<div
-		class="flex justify-center items-center desktop:items-start laptop:items-start w-full 
-	desktop:min-h-[1500px] laptop:min-h-max min-h-[1700px] h-max bg-white laptop:min-w-[500px]"
+		class="flex justify-center items-center desktop:items-start laptop:items-start half:items-start w-full 
+	desktop:min-h-[1500px] laptop:min-h-max half:min-h-max min-h-[1700px] h-max bg-white laptop:min-w-[500px]"
 	>
 		<div class="flex w-full min-h-full max-w-[3000px] items-center">
-			<div class="w-3/4 px-8 my-8 laptop:w-full laptop:px-2">
-				<div class="flex gap-4 px-4 justify-between lg:px-8">
-					<div class="w-2/5">
+			<div class="w-3/4 px-8 my-8 laptop:w-full laptop:px-2 half:w-full half:px-0">
+				<div class="flex half:flex-col gap-4 px-4 justify-between lg:px-8">
+					<div class="w-2/5 half:w-full">
 						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 					</div>
 					{#if showTooltip}

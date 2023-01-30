@@ -5,12 +5,12 @@
 
 	const handleTabSelect = (opts: any) => {
 		return opts.selected
-			? `font-semibold  border-0 border-b-4 border-brown-700 text-lg tracking-wide`
-			: `border-none selection:bg-brown-500 text-lg tracking-wide`;
+			? `font-semibold border-0 border-b-4 border-primary-400 text-lg text-slate-700`
+			: `border-none selection:bg-primary-100 text-lg text-slate-700`;
 	};
 </script>
 
-<div class="bg-white items-start space-y-6 px-20 pb-52 pt-20 min-h-[1500px]">
+<div class="bg-slate-100 w-full items-start space-y-6 px-20 pb-52 pt-20 min-h-[1500px] desktop:min-h-max laptop:min-h-max half:min-h-max">
 	<TabGroup>
 		<TabList class="text-lg space-x-5 ml-2">
 			<Tab class={handleTabSelect}>Builds</Tab>
@@ -22,43 +22,44 @@
 			<TabPanels>
 				<TabPanel>
 					<div
-						class="flex space-x-8 relative bg-white rounded-md px-20 py-12 min-h-max border-2 border-gray-500 border-opacity-50 mt-10"
+						class="flex laptop:flex-col space-x-8 relative bg-white rounded-sm px-20 py-12 min-h-max border-2 border-primary-100 shadow-3xl mt-10"
 					>
 						<picture>
-							<img src="/deployment.svg" alt="logo" />
+							<img src="/build.svg" alt="logo" class="apple:w-56 uw:w-56" width="200px"/>
 						</picture>
-						<div class="flex flex-col space-y-10 justify-center">
-							<span class="text-2xl font-semibold text-brown-900">
+						<div class="flex flex-col gap-4 laptop:gap-2 justify-center">
+							<span class="text-2xl laptop:text-lg half:text-lg font-semibold text-slate-700">
 								Congratulations on your first Build!</span
 							>
-							<span class="text-lg">
+							<span class="text-lg desktop:text-base laptop:text-sm half:text-sm text-slate-600 ml-1">
 								you can now do more with your site. invite collaborators, protect previews, enable
 								web analytics <br /> and more.</span
 							>
 							<button class="border-0 bg-transparent w-44 rounded-lg">
 								<div class="flex space-x-2">
-									<SettingsIcon styles="text-brown-800" />
-									<span> Explore Settings</span>
+									<SettingsIcon styles="text-primary-400" />
+									<span class="text-primary-400"> Explore Settings</span>
 								</div>
 							</button>
 						</div>
 						<button class="absolute right-4 top-4 bg-transparent border-none">
-							<PlainCrossIcon styles="w-6 h-6" />
+							<PlainCrossIcon styles="w-6 h-6 text-slate-600" />
 						</button>
 					</div>
 					<div
-						class="flex flex-col bg-white rounded-md px-12 py-12 min-h-max border-2 border-gray-400 mt-10 border-l-4 border-l-green-600 border-opacity-100"
+						class="flex flex-col bg-white rounded-sm px-12 py-12 min-h-max border-2 border-primary-100 mt-10 
+						border-l-4 border-l-green-600 border-opacity-100 shadow-2xl"
 					>
 						<div class="flex justify-between">
-							<span class="text-xl font-semibold">Production</span>
+							<span class="text-xl laptop:text-lg half:text-lg font-semibold">Production</span>
 							<button class="flex space-x-1 bg-transparent border-0">
-								<span class="underline underline-offset-4 text-lg text-brown-800">visit site</span>
-								<ExternalLinkIcon styles="h-4 w-4 text-brown-800" />
+								<span class="underline underline-offset-4 text-lg desktop:text-base laptop:text-base half:text-sm text-slate-600">visit site</span>
+								<ExternalLinkIcon styles="h-4 w-4 text-slate-700" />
 							</button>
 						</div>
 						<div class="flex space-x-2">
-							<RecycleIcon styles="w-5 h-5 text-brown-800" />
-							<span class="tracking-wide text-lg"> Automatic deployments enabled</span>
+							<RecycleIcon styles="w-5 h-5 text-slate-700" />
+							<span class="tracking-wide text-lg laptop:text-base half:text-base"> Automatic deployments enabled</span>
 						</div>
 					</div>
 				</TabPanel>

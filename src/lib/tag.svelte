@@ -21,10 +21,10 @@
 
 {#if tag}
 	<div class="flex flex-col gap-5 w-full p-4">
-		<div class="flex py-2 items-center justify-between laptop:justify-start">
+		<div class="flex py-2 items-center justify-between laptop:justify-start half:justify-start">
 			<div>
-				<span class="text-lg desktop:text-base laptop:text-sm text-slate-600">
-					Tag: <span class="font-semibold text-lg desktop:text-base laptop:text-sm text-primary-300"
+				<span class="text-lg desktop:text-base laptop:text-sm half:text-sm text-slate-600">
+					Tag: <span class="font-semibold text-lg desktop:text-base laptop:text-sm half:text-sm text-primary-300"
 						>{tag.reference}</span
 					>
 				</span>
@@ -38,7 +38,7 @@
 					Command copied!!
 				{:else}
 					<CopyIcon
-						styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-5 laptop:h-5"
+						styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-5 laptop:h-5 half:w-5 half:h-5"
 					/>
 				{/if}
 			</div>
@@ -46,14 +46,14 @@
 
 		<div class="table w-full">
 			<div class="table-header-group">
-				<div class="w-full table-row h-10 text-lg desktop:text-base laptop:text-sm">
+				<div class="w-full table-row h-10 text-lg desktop:text-base laptop:text-sm half:text-sm">
 					<div class="table-cell text-slate-600 font-medium text-left">Digest (SHA256)</div>
 					<div class="table-cell text-slate-600 font-medium text-left">Updated At</div>
 					<div class="table-cell text-slate-600 font-medium text-left">Content Link</div>
 					<div class="table-cell text-slate-600 font-medium text-left">Size (compressed)</div>
 				</div>
 			</div>
-			<div class="table-row-group text-slate-500 text-lg desktop:text-base laptop:text-sm">
+			<div class="table-row-group text-slate-500 text-lg desktop:text-base laptop:text-sm half:text-xs">
 				<div class="table-row">
 					<div class="table-cell text-ellipsis max-w-xs">{tag.digest.slice(7, 28)}</div>
 					<div class="table-cell">{new Date(tag.updated_at).toDateString()}</div>
