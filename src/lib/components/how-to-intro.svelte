@@ -14,7 +14,7 @@
 
 <div class=" bg-slate-100 relative">
 	<Card
-		styles="min-h-[800px] desktop:min-h-[800px] flex flex-col desktop:items-center desktop:py-2 space-y-8 gap-10 py-20"
+		styles="min-h-[800px] desktop:min-h-[800px] flex flex-col desktop:items-center desktop:py-2 space-y-8 gap-10 py-20 laptop:min-w-[1000px]"
 	>
 		<div class="w-full flex justify-between half:flex-col laptop:flex-col items-center">
 			<div class="flex flex-col gap-12 w-1/2">
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 
-			<div class="w-3/4 apple:w-3/5 max-h-fit half:w-1/2 half:my-2 pt-14 uw:px-32">
+			<div class="w-3/4 apple:w-3/5 max-h-fit half:w-1/2 half:my-2 pt-14 uw:px-32 laptop:max-w-[950px]">
 				<Xterm />
 			</div>
 		</div>

@@ -13,7 +13,7 @@
 	class="{isLoading ? 'px-2' : 'px-4'} {styles}
 	flex justify-center space-x-2 items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] laptop:min-w-[120px] h-[60px] 
 	desktop:h-11 laptop:h-11 half:h-11 rounded-md text-lg laptop:text-base half:text-base desktop:text-base capitalize font-medium border-2 
-	bg-primary-300 border-primary-700 text-primary-800 half:leading-4 half:font-normal
+	bg-primary-300 border-primary-700 text-primary-800 half:leading-4
 	bg-opacity-80 hover:shadow-primary-600 hover:shadow-3xl disabled:bg-slate-300 disabled:shadow-none transition-all duration-200
 	disabled:text-slate-400 gap-1 tracking-wide px-5"
 >

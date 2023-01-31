@@ -55,6 +55,7 @@ export { HomeIcon };
 export { ReportIcon };
 export { PencilIcon };
 export { HeartIcon };
+export { FilterIcon };
 
 import AddAccountIcon from './add-account.svelte';
 import ArrowDownIcon from './arrow-down.svelte';
@@ -75,6 +76,7 @@ import CubeIcon from './cube.svelte';
 import DiscordIcon from './discord.svelte';
 import DownloadIcon from './download.svelte';
 import ExternalLinkIcon from './external-link.svelte';
+import FilterIcon from './filter.svelte';
 import GitBranchIcon from './git-branch.svelte';
 import GithubIcon from './github.svelte';
 import GlobeIcon from './globe.svelte';

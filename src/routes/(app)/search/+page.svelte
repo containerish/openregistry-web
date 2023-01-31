@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
@@ -10,14 +9,13 @@
 	import { navigating } from '$app/stores';
 	import Menu from '$lib/headless/menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import ClockIcon from '$lib/icons/clock.svelte';
+	import { ClockIcon, ArrowRIcon, FilterIcon } from '$lib/icons';
 	import { pulseStore } from '$lib/components/pulse';
 	import { NewRepository, Repository, Pulse } from '$lib/components';
-
 	import ErrorModal from '$lib/errorModal.svelte';
-	import Filter from '$lib/icons/filter.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
+	import Dialog from '$lib/dialog.svelte';
 	export let query: string = '';
 	let sortBy = 'namespace';
 	let httpError: string;
@@ -77,6 +75,11 @@
 		catalog = data;
 	});
 
+	let showFilter = false;
+	const toggleFilter = () => {
+		showFilter = !showFilter;
+	};
+
 	let showModal = false;
 	const toggleModal = () => {
 		showModal = !showModal;
@@ -119,59 +122,75 @@
 					<div id="arrow" data-popper-arrow />
 				</div>
 			{/if}
-			<div
-				use:popperRef
-				on:mouseenter={() => (showTooltip = true)}
-				on:mouseleave={() => (showTooltip = false)}
-				class="flex flex-col gap-20 desktop:gap-6 laptop:gap-4 hover:opacity-40 opacity-60 h-full 
-				w-1/5 mx-10 laptop:mx-2 my-4 border-r-2 border-slate-200"
-			>
-				<div class="flex flex-col gap-4 laptop:gap-2 desktop:gap-2">
-					<div class="flex gap-3 items-center text-primary-500">
-						<Filter styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5" />
-						<span class="text-xl desktop:text-lg laptop:text-lg font-medium">Filters</span>
+			{#if showFilter}
+				<Dialog>
+					<div class="flex flex-col gap-5 items-center p-8 laptop:p-2 half:p-2 half:overflow-auto">
+						<div class="flex justify-center items-center gap-4">
+							<span class="text-xl apple:text-2xl uw:text-2xl text-primary-500 font-bold"
+								>Advance Filters</span
+							>
+							<FilterIcon styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5 text-primary-500" />
+						</div>
+
+						<div class="flex gap-8 half:gap-3 justify-center items-start px-6 py-3">
+							<div
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500"
+							>
+								<span
+									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
+									>Operating System</span
+								>
+								<ul class="text-slate-600">
+									<li><Checkbox label="Linux" /></li>
+									<li><Checkbox label="Windows" /></li>
+								</ul>
+							</div>
+							<div
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500"
+							>
+								<span
+									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
+									>Categories</span
+								>
+								<ul class="text-slate-600">
+									<li>
+										<Checkbox label="Analytics" />
+									</li>
+									<li><Checkbox label="Base Images" /></li>
+									<li><Checkbox label="Databases" /></li>
+									<li><Checkbox label="Devops tools" /></li>
+									<li><Checkbox label="Featured Images" /></li>
+									<li><Checkbox label="Operating Systems" /></li>
+									<li><Checkbox label="Programming Languages" /></li>
+									<li><Checkbox label="Messaging Services" /></li>
+									<li><Checkbox label="Application Frameworks" /></li>
+								</ul>
+							</div>
+							<div
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500"
+							>
+								<span
+									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
+									>Architectures</span
+								>
+								<ul class="text-slate-600">
+									<li><Checkbox label="ARM32" /></li>
+									<li><Checkbox label="ARM64" /></li>
+									<li><Checkbox label="X86" /></li>
+									<li><Checkbox label="X86-64" /></li>
+								</ul>
+							</div>
+						</div>
+						<div class="flex w-full justify-between px-20">
+							<ButtonOutlined onClick={toggleFilter}>Cancel</ButtonOutlined>
+							<ButtonSolid
+								>Apply
+								<ArrowRIcon styles="desktop:w-4 desktop:h-4 laptop:w-4 laptop:h-4 mt-0.5" />
+							</ButtonSolid>
+						</div>
 					</div>
-					<hr />
-				</div>
-
-				<div class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm text-slate-800">
-					<span class="text-xl desktop:text-base laptop:text-base font-medium"
-						>Operating System</span
-					>
-					<ul>
-						<li><Checkbox label="Linux" /></li>
-						<li><Checkbox label="Windows" /></li>
-					</ul>
-					<hr />
-				</div>
-
-				<div class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm text-slate-800">
-					<span class="text-xl desktop:text-base laptop:text-base font-medium">Categories</span>
-					<ul>
-						<li>
-							<Checkbox label="Analytics" />
-						</li>
-						<li><Checkbox label="Base Images" /></li>
-						<li><Checkbox label="Databases" /></li>
-						<li><Checkbox label="Devops tools" /></li>
-						<li><Checkbox label="Featured Images" /></li>
-						<li><Checkbox label="Operating Systems" /></li>
-						<li><Checkbox label="Programming Languages" /></li>
-						<li><Checkbox label="Messaging Services" /></li>
-						<li><Checkbox label="Application Frameworks" /></li>
-					</ul>
-					<hr />
-				</div>
-				<div class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm text-slate-700">
-					<span class="text-xl desktop:text-base laptop:text-base font-medium">Architectures</span>
-					<ul>
-						<li><Checkbox label="ARM32" /></li>
-						<li><Checkbox label="ARM64" /></li>
-						<li><Checkbox label="X86" /></li>
-						<li><Checkbox label="X86-64" /></li>
-					</ul>
-				</div>
-			</div>
+				</Dialog>
+			{/if}
 			<div class="flex flex-col w-3/4 my-8 items-start">
 				<div class="flex flex-row gap-10 justify-between w-full max-w-[850px] pb-2">
 					<Menu title="Sort">
@@ -207,9 +226,9 @@
 						</MenuItem>
 					</Menu>
 
-					<ButtonOutlined styles="gap-2"
+					<ButtonOutlined styles="gap-2" onClick={toggleFilter}
 						>Advance Filter
-						<Filter styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5" />
+						<FilterIcon styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5" />
 					</ButtonOutlined>
 					{#if showModal}
 						<Modal>

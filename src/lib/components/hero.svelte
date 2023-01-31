@@ -108,7 +108,7 @@
 
 	<div
 		class="grid grid-cols-5 laptop:grid-cols-3 half:grid-cols-2 gap-10 half:gap-2 laptop:gap-8
-		py-20 half:py-0 laptop:py-0 laptop:pb-4 half:pb-4 half:w-1/2 laptop:w-3/5 half:place-items-center half:px-10"
+		py-20 half:py-0 laptop:py-0 laptop:pb-4 half:pb-4 half:w-1/2 laptop:w-3/5 laptop:min-w-[600px] half:place-items-center half:px-10"
 	>
 		<div class="col-span-5 laptop:col-span-3 half:col-span-2">
 			<span

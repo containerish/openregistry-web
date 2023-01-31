@@ -107,11 +107,13 @@
 <Pulse>
 	<div
 		class="flex justify-center items-center desktop:items-start laptop:items-start half:items-start w-full 
-	desktop:min-h-[1500px] laptop:min-h-max half:min-h-max min-h-[1700px] h-max bg-white laptop:min-w-[500px]"
+	desktop:min-h-[1000px] laptop:min-h-max half:min-h-max min-h-[1700px] h-max bg-white laptop:min-w-[500px]"
 	>
-		<div class="flex w-full min-h-full max-w-[3000px] items-center">
-			<div class="w-3/4 px-8 my-8 laptop:w-full laptop:px-2 half:w-full half:px-0">
-				<div class="flex half:flex-col gap-4 px-4 justify-between lg:px-8">
+		<div class="flex w-full">
+			<div
+				class="w-full flex flex-col my-8 laptop:w-full laptop:px-2 half:w-full half:px-0 max-w-[850px]"
+			>
+				<div class="flex flex-row half:flex-col gap-4 justify-between px-6">
 					<div class="w-2/5 half:w-full">
 						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 					</div>
@@ -170,10 +172,6 @@
 					</div>
 				{/if}
 			</div>
-
-			<div
-				class=" invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
-			/>
 		</div>
 	</div>
 </Pulse>

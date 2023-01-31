@@ -53,29 +53,37 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1700px] desktop:min-h-max laptop:min-h-max w-full">
+	<div class="min-h-[1700px] desktop:min-h-max laptop:min-h-max half:min-h-max w-full">
 		<div
-			class="flex gap-5 min-w-max justify-start items-center py-24 desktop:py-14 mt-20 desktop:mt-12 px-8 
+			class="flex gap-5 min-w-max justify-start items-center py-24 desktop:py-14 laptop:py-10 half:py-10 mt-20 desktop:mt-12 px-8 
 			bg-primary-50 text-slate-700 border-b-0 mx- border-2 border-primary-100"
 		>
 			<div class="px-4" />
 			<div>
-				<ProfileIcon styles="text-primary-500 h-20 w-20 text-slate-700 desktop:h-12 desktop:w-12" />
+				<ProfileIcon
+					styles="text-primary-500 h-20 w-20 text-slate-700 desktop:h-12 desktop:w-12 laptop:w-12 laptop:h-12 half:h-12 half:w-12"
+				/>
 			</div>
 			<div class="flex-initial w-64 justify-center">
-				<h1 class="text-4xl desktop:text-3xl font-medium capitalize text-slate-700">
+				<span
+					class="text-4xl desktop:text-3xl laptop:text-2xl half:text-2xl font-medium capitalize text-slate-700"
+				>
 					{data.user.name ? data.user.name : data.user.username}
-				</h1>
-				<div class="flex mt-3 desktop:mt-2 items-center gap-1">
-					<ProfileIcon styles="h-6 w-6 desktop:h-4 desktop:w-4" />
-					<span class="text-lg desktop:text-base font-normal">Community User</span>
+				</span>
+				<div class="flex mt-3 desktop:mt-2 laptop:mt-1 half:mt-1 items-center gap-1">
+					<ProfileIcon
+						styles="h-6 w-6 desktop:h-4 desktop:w-4 laptop:w-4 laptop:h-4 half:w-4 half:h-4"
+					/>
+					<span class="text-lg desktop:text-base laptop:text-sm half:text-sm font-normal"
+						>Community User</span
+					>
 				</div>
 			</div>
 			<div class="flex flex-col flex-initial w-32 lg:w-72">
-				<a class="text-xl desktop:text-base underline-offset-4" href="/settings"
+				<a class="text-xl desktop:text-base laptop:text-sm half:text-sm underline-offset-4" href="/settings"
 					><u>Edit Profile</u></a
 				>
-				<span class="mt-3 text-md desktop:text-xs">
+				<span class="mt-3 text-md desktop:text-xs laptop:text-xs half:text-xs">
 					Joined
 					<span>
 						{new Date(data.user.created_at).toDateString()}
@@ -131,9 +139,11 @@
 						{/each}
 					{:else}
 						<div
-							class="h-80 bg-slate-50 w-full shadow-inner rounded-md px-28 py-20 flex justify-center items-center"
+							class="h-80 laptop:h-40 half:h-40 bg-slate-50 w-full shadow-inner rounded-md px-28 py-20 flex justify-center items-center"
 						>
-							<span class="text-slate-500 text-3xl desktop:text-2xl">No Repositories</span>
+							<span class="text-slate-500 text-3xl desktop:text-2xl laptop:text-xl half:text-xl"
+								>No Repositories</span
+							>
 						</div>
 					{/if}
 				</div>
@@ -143,11 +153,16 @@
 		{#if isStarred}
 			<div class="w-full px-16 py-8">
 				<div
-					class="h-80 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
+					class="h-80 laptop:h-50 half:h-40 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
 					<StarIcon styles="h-10 w-10 text-slate-500" />
-					<span class="text-slate-500 text-3xl desktop:text-2xl">Your starred repositories will show here</span>
-					<span class="text-slate-600 font-light text-lg xl:text-xl desktop:text-base">
+					<span
+						class="text-slate-500 text-3xl desktop:text-2xl laptop:text-xl half:text-xl text-center"
+						>Your starred repositories will show here</span
+					>
+					<span
+						class="text-slate-600 font-light text-lg xl:text-xl desktop:text-base laptop:text-base half:text-base text-center"
+					>
 						We're working on bringing this feature as we build more analytics
 					</span>
 				</div>
@@ -157,11 +172,16 @@
 		{#if isContrib}
 			<div class=" w-full px-16 py-8">
 				<div
-					class="h-80 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
+					class="h-80 laptop:h-50 half:h-40 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
 					<UserGroupIcon styles="h-10 w-10 text-slate-600" />
-					<span class="text-slate-500 text-3xl desktop:text-2xl">Your Contributions will be placed here</span>
-					<span class="text-slate-500 font-light text-lg xl:text-xl desktop:text-base">
+					<span
+						class="text-slate-500 text-3xl desktop:text-2xl laptop:text-xl half:text-xl text-center"
+						>Your Contributions will be placed here</span
+					>
+					<span
+						class="text-slate-500 font-light text-lg apple:text-xl desktop:text-base laptop:text-base half:text-base text-center"
+					>
 						We're working on bringing this feature as we build more analytics
 					</span>
 				</div>

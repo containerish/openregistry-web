@@ -67,7 +67,7 @@
 </svelte:head>
 
 <Card styles="bg-white">
-	<div class="w-full min-h-[90vh] m-w-[70vw] mx-10 my-20 desktop:my-4">
+	<div class="w-full min-h-[90vh] m-w-[70vw] mx-10 my-20 desktop:my-4 laptop:my-2 half:my-2">
 		<div
 			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-5 rounded-sm border border-primary-100"
 		>
@@ -112,7 +112,7 @@
 				will same as your GitHub username
 			</span>
 			<div
-				class="w-full p-8 max-h-fit half:px-10 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32"
+				class="w-full p-8 max-h-fit half:px-0 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32"
 			>
 				<FaqTerminal />
 			</div>
