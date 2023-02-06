@@ -43,7 +43,7 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1500px] desktop:min-h-max laptop:min-h-max half:min-h-max bg-white w-full">
+	<div class="min-h-[1500px] desktop:min-h-max laptop:min-h-max half:min-h-max  w-full">
 		<div class="flex flex-col gap-16 desktop:gap-8 laptop:gap-8 half:gap-8 pb-24">
 			<div
 				class="flex gap-5 half:gap-2 space-x-10 min-w-max justify-start items-center py-24 desktop:py-16 laptop:py-10 half:py-10 mt-20 
@@ -80,7 +80,7 @@
 			<Card>
 				<div
 					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-10 
-					desktop:gap-6 bg-slate-50 border border-primary-50 shadow-2xl px-20 desktop:px-14 desktop:py-6 laptop:px-14 
+					desktop:gap-6 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 laptop:px-14 
 					laptop:py-6 half:py-6 half:px-8 pb-8 pt-10"
 				>
 					<div class="w-full flex flex-col gap-1">
@@ -104,7 +104,7 @@
 			<Card>
 				<div
 					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-4 
-					desktop:gap-2 laptop:gap-2 half:gap-2 bg-slate-50 border border-primary-50 shadow-2xl px-20 desktop:px-14 desktop:py-6 
+					desktop:gap-2 laptop:gap-2 half:gap-2 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 
 					laptop:px-14 laptop:py-6 half:px-8 half:py-6 pb-8 pt-10"
 				>
 					<h1
@@ -129,7 +129,7 @@
 						type="password"
 						bind:value={$confirmPassword.value}
 						class="w-1/2 laptop:w-full half:w-full placeholder-slate-500 form-control block px-3 py-3 text-base desktop:text-sm font-normal text-slate-700 bg-white
-						bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-slate-700 focus:bg-white 
+						bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-slate-700
 						border rounded-md 
           				{!$passwordForm.hasError('confirm_password.match_field')
 							? 'focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500'
@@ -160,7 +160,7 @@
 			<Card>
 				<div
 					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-4 
-					desktop:gap-2 laptop:gap-1 bg-slate-50 border border-primary-50 shadow-2xl px-20 desktop:px-14 desktop:py-6 
+					desktop:gap-2 laptop:gap-1 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 
 					laptop:px-14 laptop:py-6 half:px-14 half:py-6 pb-8 pt-10"
 				>
 					<div class="flex flex-col gap-2 desktop:gap-1 laptop:gap-0 half:gap-0">

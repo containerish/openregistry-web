@@ -106,12 +106,12 @@
 
 <Pulse>
 	<div
-		class="flex justify-center items-center desktop:items-start laptop:items-start half:items-start w-full 
-	desktop:min-h-[1000px] laptop:min-h-max half:min-h-max min-h-[1700px] h-max bg-white laptop:min-w-[500px]"
+		class="flex justify-center items-start pt-10 w-full 
+	desktop:min-h-[1000px] laptop:min-h-max half:min-h-max min-h-[1700px] h-max laptop:min-w-[500px]"
 	>
-		<div class="flex w-full">
+		<div class="flex w-full justify-start">
 			<div
-				class="w-full flex flex-col my-8 laptop:w-full laptop:px-2 half:w-full half:px-0 max-w-[850px]"
+				class="w-full  flex flex-col my-8 laptop:w-full laptop:px-2 half:w-full half:px-0 max-w-[850px]"
 			>
 				<div class="flex flex-row half:flex-col gap-4 justify-between px-6">
 					<div class="w-2/5 half:w-full">
@@ -161,7 +161,7 @@
 						{/if}
 					</div>
 				{:else}
-					<div class="flex justify-center items-center">
+					<div class="w-full flex justify-center items-center">
 						<div
 							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 						>

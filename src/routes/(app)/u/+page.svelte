@@ -80,8 +80,9 @@
 				</div>
 			</div>
 			<div class="flex flex-col flex-initial w-32 lg:w-72">
-				<a class="text-xl desktop:text-base laptop:text-sm half:text-sm underline-offset-4" href="/settings"
-					><u>Edit Profile</u></a
+				<a
+					class="text-xl desktop:text-base laptop:text-sm half:text-sm underline-offset-4"
+					href="/settings"><u>Edit Profile</u></a
 				>
 				<span class="mt-3 text-md desktop:text-xs laptop:text-xs half:text-xs">
 					Joined
@@ -139,7 +140,7 @@
 						{/each}
 					{:else}
 						<div
-							class="h-80 laptop:h-40 half:h-40 bg-slate-50 w-full shadow-inner rounded-md px-28 py-20 flex justify-center items-center"
+							class="h-80 laptop:h-40 half:h-40 border border-primary-200 bg-white w-full shadow-2xl rounded-md px-28 py-20 flex justify-center items-center"
 						>
 							<span class="text-slate-500 text-3xl desktop:text-2xl laptop:text-xl half:text-xl"
 								>No Repositories</span
@@ -153,7 +154,7 @@
 		{#if isStarred}
 			<div class="w-full px-16 py-8">
 				<div
-					class="h-80 laptop:h-50 half:h-40 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
+					class="h-80 laptop:h-50 half:h-40 bg-white border border-primary-200 shadow-2xl w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
 					<StarIcon styles="h-10 w-10 text-slate-500" />
 					<span
@@ -172,7 +173,7 @@
 		{#if isContrib}
 			<div class=" w-full px-16 py-8">
 				<div
-					class="h-80 laptop:h-50 half:h-40 bg-slate-50 shadow-inner w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
+					class="h-80 laptop:h-50 half:h-40 bg-white border border-primary-200 shadow-2xl w-full rounded-md px-28 py-20 flex flex-col justify-center items-center space-y-2"
 				>
 					<UserGroupIcon styles="h-10 w-10 text-slate-600" />
 					<span

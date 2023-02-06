@@ -28,6 +28,7 @@
 	import Invite from './invite.svelte';
 	import Autocomplete from '../autocomplete.svelte';
 	import { RegistryBackend } from '$apis/registry';
+	import { onDestroy, onMount } from 'svelte';
 
 	const registry = new RegistryBackend();
 
@@ -37,11 +38,9 @@
 		return result;
 	};
 
-	let compact: Boolean = true;
-	let extended: Boolean = false;
+	let extended: Boolean = true;
 
 	const handleSidebar = () => {
-		compact = !compact;
 		extended = !extended;
 	};
 
@@ -53,27 +52,34 @@
 
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
+
+	const handleScreenChange = () => {
+		if (window.matchMedia('(max-width: 800px)').matches) {
+			extended = false;
+		} else {
+			extended = true;
+		}
+	};
+
+	onMount(() => {
+		handleScreenChange();
+		window.addEventListener('resize', handleScreenChange);
+	});
 </script>
 
 <div
 	class="bg-slate-50 desktop:min-h-max laptop:min-h-max rounded-sm flex flex-col justify-center items-center gap-14"
 >
-	{#if compact == true}
+	{#if !extended}
 		<div
-			in:fly={{ delay: 150, duration: 300, x: 50, opacity: 1, easing: backOut }}
 			class="flex flex-col justify-start px-4 laptop:px-2 items-center gap-14 desktop:gap-8 laptop:gap-8 half:gap-5 border-2 border-primary-50 
 			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 half:min-h-max"
 		>
-			<div>
+			<a href="/">
 				<picture>
 					<img class="" src="logo-new.png" alt="logo" width="60px" />
 				</picture>
-			</div>
-			<button on:click={handleSidebar} class="bg-transparent border-transparent m-0 p-0">
-				<ArrowRIcon
-					styles="w-7 h-7 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 text-primary-400"
-				/>
-			</button>
+			</a>
 			<a href="/"
 				><HomeIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
@@ -109,7 +115,7 @@
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href=""
+			<a href="/about"
 				><HeartIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
@@ -138,21 +144,17 @@
 				styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 desktop:mb-4"
 			/>
 		</div>
-	{/if}
-	{#if extended == true}
+	{:else}
 		<div
-			in:fly={{ delay: 150, duration: 300, x: -100, opacity: 1, easing: backOut }}
 			class="flex flex-col justify-between gap-10 px-5 border-2 border-primary-50 
 			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 laptop:max-w-[316px]"
 		>
-			<div class="flex flex-row justify-between items-center gap-4 desktop:gap-2">
+			<a
+				href="/"
+				class="flex flex-row justify-between items-center gap-4 desktop:gap-2 hover:no-underline"
+			>
 				<Logo type="dark" />
-				<button on:click={handleSidebar} class="bg-transparent border-transparent mt-2">
-					<ArrowLIcon
-						styles="h-7 w-7 desktop:h-5 desktop:w-5 laptop:h-5 laptop:w-5 text-primary-500 cursor-pointer"
-					/>
-				</button>
-			</div>
+			</a>
 
 			<div class="flex flex-col justify-center gap-10 desktop:gap-4 laptop:gap-4">
 				<Autocomplete onAutoComplete={handleAutoComplete} />

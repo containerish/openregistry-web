@@ -100,10 +100,10 @@
 <Pulse>
 	<div
 		class="flex justify-center items-start w-full h-full min-w-max min-h-[1610px] desktop:min-h-max laptop:min-h-max 
-	half:min-h-max py-8 laptop:py-2 bg-white px-0"
+	half:min-h-max py-8 laptop:py-2 px-4"
 	>
 		<div
-			class="flex justify-center apple:items-center uw:items-center w-full h-full max-w-[3000px]"
+			class="flex justify-start apple:items-center uw:items-center w-full h-full max-w-[3000px]"
 		>
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
@@ -191,7 +191,7 @@
 					</div>
 				</Dialog>
 			{/if}
-			<div class="flex flex-col w-3/4 my-8 items-start">
+			<div class="flex flex-col w-3/4 laptop:w-full laptop:px-2 my-8 items-start">
 				<div class="flex flex-row gap-10 justify-between w-full max-w-[850px] pb-2">
 					<Menu title="Sort">
 						<MenuItem>
