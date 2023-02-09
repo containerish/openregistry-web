@@ -2,6 +2,7 @@
 	import { onMount, setContext } from 'svelte';
 	import Card from '$lib/card.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
+	import IconButton from '$lib/icon-button.svelte';
 	import { goto } from '$app/navigation';
 	import { MongoIcon, StorjIcon, IexecIcon, AkashIcon } from '$lib/icons';
 
@@ -128,7 +129,7 @@
 		</div>
 
 		<div
-			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#081c45] border
 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
@@ -136,11 +137,10 @@
 		</div>
 
 		<div
-			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#031828] border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
-			<div><img alt="nodejs" src="./ipfs-logo.png" width="80px" /></div>
-			<span class="text-lg font-semibold text-primary-600 tracking-wider" />
+			<div><img alt="nodejs" src="./ipfs-logo.png" width="165px" /></div>
 		</div>
 		<div
 			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border border-pr
@@ -149,7 +149,7 @@
 			<IexecIcon />
 		</div>
 		<div
-			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#ce4748] border 
 			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<AkashIcon />
@@ -164,7 +164,7 @@
 
 		<div
 			class="border desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
-			bg-primary-800 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
+			bg-white transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nginx" src="./nginx.png" width="100px" /></div>
 		</div>
@@ -177,10 +177,10 @@
 		</div>
 		<div
 			class="border desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
-			bg-primary-800 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl gap-2"
+			bg-white transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl gap-2"
 		>
 			<div><img alt="nginx" src="./library-alpine-logo.png" width="50px" /></div>
-			<span class="text-white font-semibold text-lg">Alpine</span>
+			<span class="text-blue-800 font-semibold text-xl">Alpine</span>
 		</div>
 		<div
 			class="desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 

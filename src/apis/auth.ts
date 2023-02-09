@@ -1,6 +1,7 @@
 import HttpClient from './httpClient';
 import { goto } from '$app/navigation';
 import type { AxiosResponse } from 'axios';
+import { env } from '$env/dynamic/public';
 
 export interface LoginResponse {
 	access: string;
@@ -89,7 +90,7 @@ export const ValidateSignupRequest = (input: SignupRequest): boolean => {
 
 export class Auth extends HttpClient {
 	public constructor() {
-		super(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth');
+		super(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth');
 	}
 
 	public BrowserSupportsWebAuthN = (): boolean => {
@@ -315,7 +316,7 @@ export class Auth extends HttpClient {
 	};
 
 	public LoginWithGithub = () => {
-		goto(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login');
+		goto(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login');
 	};
 
 	public static publicPaths = new Map([

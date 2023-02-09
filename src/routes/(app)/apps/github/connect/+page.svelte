@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import GihubIcon from '$lib/github.svelte';
+	import { env } from '$env/dynamic/public';
 
 	let toggleSteps = false;
 	const handleToggleSteps = () => {
@@ -9,7 +10,7 @@
 	};
 
 	const installGithubApp = () => {
-		const installationUrl = import.meta.env.VITE_GITHUB_APP_PUBLIC_LINK + '/installations/new';
+		const installationUrl = env.PUBLIC_GITHUB_APP_PUBLIC_LINK + '/installations/new';
 		goto(installationUrl);
 	};
 </script>
@@ -18,7 +19,9 @@
 	class="flex flex-col min-h-[75vh] desktop:min-h-max laptop:min-h-max half:min-h-max bg-slate-100 items-center space-y-6 p-10 
 	pb-52 pt-32 desktop:pt-10 w-full laptop:min-w-max laptop:p-4 half:p-0 half:min-w-max"
 >
-	<div class="min-w-max bg-white p-20 rounded-sm border border-primary-200 shadow-2xl w-3/4 laptop:p-4 half:p-2">
+	<div
+		class="min-w-max bg-white p-20 rounded-sm border border-primary-200 shadow-2xl w-3/4 laptop:p-4 half:p-2"
+	>
 		<div class="flex flex-col justify-center items-center space-x-5 space-y-5">
 			<span class="text-2xl font-bold text-primary-600 laptop:text-xl half:text-xl"
 				>Deploy a site from your account</span

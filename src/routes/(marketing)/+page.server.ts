@@ -6,7 +6,7 @@ import { Auth } from '$apis/auth';
 import type { RequestEvent } from './$types';
 import { ZodError } from 'zod';
 import { signInSchema, signUpSchema } from '$lib/formSchemas';
-import { VITE_OPEN_REGISTRY_BACKEND_URL } from '$env/static/private';
+import { env } from '$env/dynamic/public';
 
 const auth = new Auth();
 
@@ -60,7 +60,7 @@ export const actions: Actions = {
 		const { cookies, locals, fetch } = event;
 
 		try {
-			const resp = await fetch(`${VITE_OPEN_REGISTRY_BACKEND_URL}/auth/signout`, {
+			const resp = await fetch(`${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/auth/signout`, {
 				method: 'DELETE',
 				credentials: 'always',
 				headers: {

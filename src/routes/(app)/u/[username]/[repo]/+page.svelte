@@ -43,7 +43,7 @@
 	let timeout: any;
 
 	const handleCopy = (cmd: string) => {
-		const u = new URL(import.meta.env.VITE_OPEN_REGISTRY_BACKEND_URL);
+		const u = new URL(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		switch (cmd) {
 			case 'push':
 				isCopied = 'push';

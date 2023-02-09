@@ -150,8 +150,8 @@
 	<title>Sign up | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
+<div class="flex w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+	<div class="flex flex-col w-full px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
 		<div class="flex justify-center py-4 mb-8 laptop:mb-4 laptop:py-1">
 			<Logo type="dark" />
 		</div>
@@ -233,7 +233,7 @@
 						</div>
 					{/if}
 
-					<div class="flex mt-8 w-full space-x-8">
+					<div class="flex mt-8 w-full space-x-8 justify-center">
 						<ButtonSolid type="submit" {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
 						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 					</div>

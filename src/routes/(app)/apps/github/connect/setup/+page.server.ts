@@ -1,10 +1,10 @@
 import { ghStore } from '$lib/stores';
 import { error, redirect } from '@sveltejs/kit';
 import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
-import type { PageServerLoadEvent } from './$types';
-import { VITE_OPEN_REGISTRY_BACKEND_URL } from '$env/static/private';
+import type { PageServerLoad } from './$types';
+import { env } from '$env/dynamic/public';
 
-export const load = async (event: PageServerLoadEvent) => {
+export const load = (async (event) => {
 	const { cookies, url, fetch } = event;
 
 	const sessionId = cookies.get('session_id');
@@ -12,32 +12,35 @@ export const load = async (event: PageServerLoadEvent) => {
 	const action = url.searchParams.get('setup_action');
 
 	if (action && (action === 'install' || action === 'update')) {
+		const uri = `${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`;
+		console.log('github api resp: ', uri);
+
 		try {
-			const setupResp = await fetch(
-				`${VITE_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`,
-				{
-					method: 'POST',
-					headers: {
-						cookie: `session_id=${sessionId}`
-					},
-					credentials: 'include',
-					redirect: 'follow'
-				} as RequestInit
-			);
-			const resp = await setupResp.json();
-			if (setupResp.status !== 200) {
+			const setupResp = await fetch(uri, {
+				method: 'POST',
+				headers: {
+					cookie: `session_id=${sessionId}`
+				},
+				credentials: 'include'
+			} as RequestInit);
+
+			console.log('uri: ', setupResp);
+			if (setupResp.status !== 201) {
+				const resp = await setupResp.json();
+				console.log('resp in erorr: ', resp);
 				throw error(400, {
-					message: resp?.message
+					message: resp.error
 				});
 			}
 		} catch (err) {
+			console.log('error in gijtihb api: ', err);
 			throw error(err?.status, {
 				message: err?.body.message as string
 			});
 		}
 	}
 
-	const resp = await fetch(`${VITE_OPEN_REGISTRY_BACKEND_URL}/github/app/repo/list`, {
+	const resp = await fetch(`${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/repo/list`, {
 		headers: {
 			cookie: `session_id=${sessionId}`
 		}
@@ -57,4 +60,4 @@ export const load = async (event: PageServerLoadEvent) => {
 	throw error(500, {
 		message: 'Got invalid response from GitHub Server'
 	});
-};
+}) satisfies PageServerLoad;

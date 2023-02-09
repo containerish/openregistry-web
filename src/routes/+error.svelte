@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import '../app.css';
@@ -17,7 +18,11 @@
 				{JSON.stringify($page.error)}
 			</span>
 			<div class="flex gap-4 justify-center items-center">
-				<ButtonSolid>Login</ButtonSolid>
+				<ButtonSolid
+					onClick={() => {
+						goto('/');
+					}}>Home</ButtonSolid
+				>
 				<span class="font-bold">Or</span>
 				<ButtonSolid>Sign Up</ButtonSolid>
 			</div>

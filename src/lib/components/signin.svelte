@@ -93,8 +93,8 @@
 	<title>Sign in | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden lg:max-w-4xl">
-	<div class="flex flex-col w-4/5 px-6 py-8 lg:w-full laptop:w-full laptop:py-4">
+<div class="flex w-full max-w-sm mx-auto overflow-hidden lg:max-w-4xl">
+	<div class="flex flex-col w-full px-6 py-8 lg:w-full laptop:w-full laptop:py-4">
 		<div class="flex justify-center py-4 desktop:py-1 laptop:py-1 laptop:mb-6 desktop:mb-6 mb-8">
 			<Logo type="dark" />
 		</div>

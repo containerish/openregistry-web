@@ -161,7 +161,7 @@
 						{/if}
 					</div>
 				{:else}
-					<div class="w-full flex justify-center items-center">
+					<div class="w-full flex justify-center items-center px-6">
 						<div
 							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 						>

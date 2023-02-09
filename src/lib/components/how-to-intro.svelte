@@ -10,6 +10,7 @@
 		ConfirmIcon,
 		LayersIcon
 	} from '$lib/icons';
+	import { goto } from '$app/navigation';
 </script>
 
 <div class=" bg-slate-100 relative">
@@ -53,29 +54,41 @@
 
 				<div class="flex half:justify-center items-center gap-5">
 					<ButtonSolid>Sign up for free</ButtonSolid>
-					<ButtonOutlined>Learn more</ButtonOutlined>
+					<ButtonOutlined
+						onClick={() => {
+							goto('https://docs.openregistry.dev');
+						}}>Learn more</ButtonOutlined
+					>
 				</div>
 			</div>
 
-			<div class="w-3/4 apple:w-3/5 max-h-fit half:w-1/2 half:my-2 pt-14 uw:px-32 laptop:max-w-[950px]">
+			<div
+				class="w-3/4 apple:w-3/5 max-h-fit half:w-1/2 half:my-2 pt-14 uw:px-32 laptop:max-w-[950px]"
+			>
 				<Xterm />
 			</div>
 		</div>
 		<div
 			class="grid grid-cols-4 laptop:grid-cols-2 gap-12 laptop:gap-4 laptop:w-4/5 half:flex half:flex-col half:w-96 half:gap-4 py-20 px-4"
 		>
-			<span
-				class="text-primary-600 col-span-4 laptop:col-span-2 text-center whitespace-nowrap pb-4 text-4xl apple:text-5xl uw:5xl desktop:text-4xl font-semibold"
-			>
-				How does it work?
-			</span>
+			<div class="col-span-4 text-center flex flex-col">
+				<span
+					class="text-primary-600  laptop:col-span-2 text-center whitespace-nowrap pb-4 text-4xl apple:text-5xl uw:5xl desktop:text-4xl font-semibold"
+				>
+					How does it work?
+				</span>
+				<span class="text-lg text-slate-700"
+					>A step by step description on how a layer is pushed to OpenRegistry</span
+				>
+			</div>
+
 			<div
 				class="rounded border-2 border-primary-100 flex flex-col items-center justify-center shadow-2xl bg-slate-100 px-4 py-10"
 			>
 				<LaboratoryIcon />
 				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
-					>The container image is divided in smaller chunks called layers which are further divided
-					into blobs</span
+					>The container image subitted by user is divided into 1 or more layers depending on a few
+					factors like size.</span
 				>
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 1</span>
 			</div>
@@ -84,8 +97,8 @@
 			>
 				<LayersIcon />
 				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
-					>The container image is divided in smaller chunks called layers which are further divided
-					into blobs</span
+					>The layers are further divided into blobs and sequentially uploaded to the storage
+					backend of user's preference like IPFS or Storj</span
 				>
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 2</span>
 			</div>
@@ -94,8 +107,8 @@
 			>
 				<CloudIcon />
 				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
-					>The container image is divided in smaller chunks called layers which are further divided
-					into blobs</span
+					>A resolver component uploads the blobs to IPFS/Stoj and brings back the content hash
+					which is mapped to the container image</span
 				>
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 3</span>
 			</div>
@@ -104,8 +117,8 @@
 			>
 				<ConfirmIcon />
 				<span class="text-center text-primary-600 text-lg desktop:text-[17px] laptop:text-base"
-					>The container image is divided in smaller chunks called layers which are further divided
-					into blobs</span
+					>Once all the blobs for a layer are recieved,a digest is calculated which is used with
+					content hash while retrival of the layer</span
 				>
 				<span class="text-3xl font-bold text-primary-500 mt-3">step 4</span>
 			</div>

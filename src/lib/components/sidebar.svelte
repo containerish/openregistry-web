@@ -71,7 +71,8 @@
 	class="bg-slate-50 desktop:min-h-max laptop:min-h-max rounded-sm flex flex-col justify-center items-center gap-14"
 >
 	{#if !extended}
-		<div
+		<form
+			method="POST"
 			class="flex flex-col justify-start px-4 laptop:px-2 items-center gap-14 desktop:gap-8 laptop:gap-8 half:gap-5 border-2 border-primary-50 
 			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 half:min-h-max"
 		>
@@ -105,7 +106,7 @@
 					styles="h-9 w-9 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="/faq"
+			<a href="/?/faq"
 				><QuestionMarkIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
@@ -140,12 +141,15 @@
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<SignOutIcon
-				styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 desktop:mb-4"
-			/>
-		</div>
+			<button class="border-none bg-transparent" formaction="/?/signout">
+				<SignOutIcon
+					styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 desktop:mb-4"
+				/>
+			</button>
+		</form>
 	{:else}
-		<div
+		<form
+			method="POST"
 			class="flex flex-col justify-between gap-10 px-5 border-2 border-primary-50 
 			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 laptop:max-w-[316px]"
 		>
@@ -288,13 +292,14 @@
 					<span>{user.email}</span>
 				</div>
 			</div>
-			<div
-				class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+			<button
+				formaction="/?/signout"
+				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
                      py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 			>
 				<SignOutIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 				<span>Sign out</span>
-			</div>
+			</button>
 			<div class="bg-slate-100 px-4 shadow-inner opacity-90 mt-10">
 				<Carousel>
 					<Advert
@@ -307,13 +312,13 @@
 					<Advert
 						link="https://ipfs.io"
 						styles="hover:bg-[#65c3ca]"
-						logo="ipfs-logo.png"
+						logo="IPFS_ad.png"
 						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
             				upgradeable, resilient, and more open."
 					/>
 				</Carousel>
 			</div>
-		</div>
+		</form>
 		{#if showModal}
 			<Modal>
 				<Invite handleModal={toggleModal} />

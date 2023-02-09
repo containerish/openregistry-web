@@ -100,7 +100,7 @@
 <Pulse>
 	<div
 		class="flex justify-center items-start w-full h-full min-w-max min-h-[1610px] desktop:min-h-max laptop:min-h-max 
-	half:min-h-max py-8 laptop:py-2 px-4"
+	half:min-h-max py-8 laptop:py-2 px-6"
 	>
 		<div
 			class="flex justify-start apple:items-center uw:items-center w-full h-full max-w-[3000px]"
@@ -134,7 +134,7 @@
 
 						<div class="flex gap-8 half:gap-3 justify-center items-start px-6 py-3">
 							<div
-								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500"
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500 text-start"
 							>
 								<span
 									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
@@ -146,7 +146,7 @@
 								</ul>
 							</div>
 							<div
-								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500"
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500 text-start"
 							>
 								<span
 									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
@@ -167,7 +167,7 @@
 								</ul>
 							</div>
 							<div
-								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500"
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500 text-start"
 							>
 								<span
 									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
@@ -191,7 +191,7 @@
 					</div>
 				</Dialog>
 			{/if}
-			<div class="flex flex-col w-3/4 laptop:w-full laptop:px-2 my-8 items-start">
+			<div class="flex flex-col w-3/4 laptop:w-full laptop:px-2 my-8 items-start ">
 				<div class="flex flex-row gap-10 justify-between w-full max-w-[850px] pb-2">
 					<Menu title="Sort">
 						<MenuItem>
@@ -248,7 +248,7 @@
 							<Pagination pages={Math.ceil(catalog.total / backend.DefaultPageSize)} />
 						</div>
 					{:else}
-						<div class="flex justify-center items-center">
+						<div class="flex w-full justify-center items-center">
 							<div
 								class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 							>
