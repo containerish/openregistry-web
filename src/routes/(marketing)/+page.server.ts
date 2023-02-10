@@ -1,4 +1,4 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { AxiosResponseHeaders } from 'axios';
 import * as c from 'cookie';
 import type { Actions } from './$types';
@@ -56,28 +56,33 @@ export const actions: Actions = {
 		}
 	},
 	signout: async (event: RequestEvent) => {
-		console.log('came her at signout');
 		const { cookies, locals, fetch } = event;
 
 		try {
 			const resp = await fetch(`${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/auth/signout`, {
 				method: 'DELETE',
-				credentials: 'always',
+				credentials: 'include',
 				headers: {
-					'set-cookie': cookies.get('session_id')
+					cookie: `session_id=${cookies.get('session_id')}`
 				}
 			});
-			const data = await resp.json();
-			console.log('data from signout', data);
-			console.log('session id from sign-out:', cookies.get('session_id'));
-			cookies.delete('session_id');
-			cookies.delete('access');
-			cookies.delete('refresh');
-			locals.user = null;
-			locals.sessionId = '';
-			locals.authenticated = false;
+			if (resp.status === 202) {
+				const data = await resp.json();
+				cookies.delete('session_id');
+				cookies.delete('access');
+				cookies.delete('refresh');
+				locals.user = null;
+				locals.sessionId = '';
+				locals.authenticated = false;
 
-			throw redirect(303, '/');
+				return {
+					data: data
+				};
+			}
+
+			throw error(400, {
+				message: JSON.stringify(await resp.json())
+			});
 		} catch (err) {
 			return fail(400, {
 				error: err
