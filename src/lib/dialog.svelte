@@ -1,12 +1,5 @@
 <script>
-	import {
-		Dialog,
-		DialogOverlay,
-		DialogTitle,
-		DialogDescription,
-		Transition,
-		TransitionChild
-	} from '@rgossiaux/svelte-headlessui';
+	import { Dialog, DialogOverlay, Transition, TransitionChild } from '@rgossiaux/svelte-headlessui';
 	let isOpen = true;
 	export let styles = '';
 </script>
@@ -27,7 +20,7 @@
 			leaveFrom="opacity-100"
 			leaveTo="opacity-0"
 		>
-			<div class="fixed inset-0 bg-gray-900 bg-opacity-50" />
+			<div class="fixed inset-0 bg-gray-900 bg-opacity-60" />
 			<DialogOverlay />
 		</TransitionChild>
 

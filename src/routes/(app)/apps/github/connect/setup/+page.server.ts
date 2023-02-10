@@ -25,7 +25,7 @@ export const load = (async (event) => {
 			} as RequestInit);
 
 			console.log('uri: ', setupResp);
-			if (setupResp.status !== 201) {
+			if (setupResp.status !== 202) {
 				const resp = await setupResp.json();
 				console.log('resp in erorr: ', resp);
 				throw error(400, {

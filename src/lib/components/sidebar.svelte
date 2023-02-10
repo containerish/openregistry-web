@@ -24,6 +24,7 @@
 	import Autocomplete from '../autocomplete.svelte';
 	import { RegistryBackend } from '$apis/registry';
 	import { onMount } from 'svelte';
+	import Dialog from '$lib/dialog.svelte';
 
 	export let authorised = false;
 	const registry = new RegistryBackend();
@@ -76,7 +77,7 @@
 		>
 			<a href="/">
 				<picture>
-					<img class="" src="logo-new.png" alt="logo" width="60px" />
+					<img class="" src="/logo-new.png" alt="logo" width="60px" />
 				</picture>
 			</a>
 			<a href="/"
@@ -124,11 +125,11 @@
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<button class="bg-transparent border-0" on:click={toggleModal}
-				><UserPlusIcon
+			<a href="#" class="bg-transparent border-0" on:click={toggleModal}>
+				<UserPlusIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></button
-			>
+				/>
+			</a>
 			<a href="/u"
 				><ProfileIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
@@ -247,14 +248,15 @@
 							<StarIcon styles="w-6 h-6 desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Star us on Github</span>
 						</a>
-						<button
+						<a
+							href="#"
 							on:click={toggleModal}
 							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<UserPlusIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Invite People</span>
-						</button>
+						</a>
 					</div>
 					<hr />
 					<div class="flex flex-col gap-3.5 desktop:gap-2">
@@ -303,14 +305,14 @@
 					<Advert
 						link="https://akash.network"
 						styles="hover:bg-red-600"
-						logo="akash-logo.svg"
+						logo="/akash-logo.svg"
 						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
 								peer-to-peer marketplace for cloud compute"
 					/>
 					<Advert
 						link="https://ipfs.io"
 						styles="hover:bg-[#65c3ca]"
-						logo="IPFS_ad.png"
+						logo="/IPFS_ad.png"
 						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
             				upgradeable, resilient, and more open."
 					/>
