@@ -1,5 +1,4 @@
 <script>
-	import Card from '$lib/card.svelte';
 	import { TwitterIcon, GithubIcon } from '$lib/icons';
 </script>
 
@@ -15,7 +14,7 @@
 		<div
 			class="flex flex-col gap-8 laptop:gap-1 half:gap-1 justify-start min-h-[1000px] items-center text-center px-10 
 			py-20 mx-5 my-10 desktop:my-1 laptop:max-w-[600px] half:max-w-[500px] laptop:py-2 half:py-4"
-		 >
+		>
 			<div>
 				<h1 class="text-5xl laptop:text-3xl half:text-3xl font-semibold text-primary-600">
 					Decentralisation is the Future!
@@ -46,9 +45,11 @@
 				<div class="flex justify-center">
 					<div
 						class="flex flex-col gap-4 px-12 half:px-4 py-8 bg-white rounded-sm shadow-3xl mr-32 laptop:mr-0 half:mr-0 desktop:mr-0"
-					 >
+					>
 						<div class="flex flex-col">
-							<span class="text-xl font-semibold text-slate-700 capitalize min-w-[800px] half:min-w-max">
+							<span
+								class="text-xl font-semibold text-slate-700 capitalize min-w-[800px] half:min-w-max"
+							>
 								Jasdeep Singh
 							</span>
 
@@ -93,7 +94,9 @@
 						class="flex flex-col gap-4 px-12 half:px-4 py-8 bg-white rounded-sm shadow-3xl ml-32 desktop:ml-0 laptop:ml-0 half:ml-0"
 					>
 						<div class="flex flex-col">
-							<span class="text-xl font-semibold text-slate-700 capitalize min-w-[800px] half:min-w-max">
+							<span
+								class="text-xl font-semibold text-slate-700 capitalize min-w-[800px] half:min-w-max"
+							>
 								Gunjan Valecha
 							</span>
 							<p class="text-slate-700 capitalize">Engineer</p>

@@ -29,9 +29,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const isProtectedRoute = (route: string): boolean => {
 	return (
-		route.startsWith('/settings') ||
-		route.startsWith('/repositories') ||
-		route.startsWith('/apps') ||
-		route.startsWith('/faq')
+		route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps')
 	);
 };

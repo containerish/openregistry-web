@@ -8,7 +8,7 @@
 	export let data: LayoutServerData;
 
 	onMount(() => {
-		if (data.isAuthenticated && data.user) {
+		if (data.isAuthenticated && data.user && data.pathname === '/') {
 			goto('/repositories');
 		}
 	});

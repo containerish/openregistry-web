@@ -1,19 +1,18 @@
-import { Auth } from '$apis/auth';
-import type { LayoutServerLoadEvent } from './$types';
+import type { LayoutServerLoad } from './$types';
 import type { User } from '$apis/auth';
-import { session } from '$stores/session';
-import * as cookie from 'cookie';
-import { redirect } from '@sveltejs/kit';
 
-export const load = async (loadEvent: LayoutServerLoadEvent) => {
-	const { cookies, locals } = loadEvent;
+export const load = (async ({ url, locals }) => {
 	if (locals.authenticated && locals.user) {
 		return {
 			user: locals.user,
 			isAuthenticated: locals.authenticated,
-		}
+			pathname: url.pathname
+		};
 	}
-}
+	return {
+		pathname: url.pathname
+	};
+}) satisfies LayoutServerLoad;
 
 export type AuthorisedRepository = {
 	branches: Branch[];
