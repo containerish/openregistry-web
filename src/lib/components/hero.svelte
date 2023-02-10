@@ -84,9 +84,8 @@
 
 		<div class="h-full pb-8 desktop:ml-20">
 			<form
-				on:submit|preventDefault={() => goto(`/search?query=${query}`)}
+				on:submit|preventDefault={() => goto(`/search?q=${query}`)}
 				class="flex half:flex-col justify-center gap-5 items-center"
-				action=""
 			>
 				<div>
 					<input
@@ -101,7 +100,7 @@
 					/>
 				</div>
 				<div class="flex w-full justify-start half:justify-center mt-2">
-					<ButtonSolid on:click={() => goto(`/search?query=${query}`)}>Search</ButtonSolid>
+					<ButtonSolid on:click={() => goto(`/search?q=${query}`)}>Search</ButtonSolid>
 				</div>
 			</form>
 		</div>

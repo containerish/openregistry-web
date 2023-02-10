@@ -16,7 +16,10 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
-	export let query: string = '';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
 	let sortBy = 'namespace';
 	let httpError: string;
 	let openErrorModal: boolean = false;
@@ -52,8 +55,8 @@
 	let catalog: Catalog;
 
 	onMount(async () => {
-		if (query && query !== '') {
-			const { error, data } = await backend.SearchRepositories(query);
+		if (data.query && data.query !== '') {
+			const { error, data: repositories } = await backend.SearchRepositories(data.query);
 			if (error) {
 				console.error('error in search/ListCatalog: ', error);
 				httpError = error.message;
@@ -61,18 +64,18 @@
 				return;
 			}
 
-			catalog = data;
+			catalog = repositories;
 			return;
 		}
 
-		let { data, error } = await backend.ListCatalog(backend.DefaultPageSize);
+		let { data: repoCatalog, error } = await backend.ListCatalog(backend.DefaultPageSize);
 		if (error) {
 			console.error('error in search/ListCatalog: ', error);
 			httpError = error.message;
 			openErrorModal = true;
 			return;
 		}
-		catalog = data;
+		catalog = repoCatalog;
 	});
 
 	let showFilter = false;
@@ -103,7 +106,9 @@
 	half:min-h-max py-8 laptop:py-2 px-6"
 	>
 		<div
-			class="flex justify-start apple:items-center uw:items-center w-full h-full max-w-[3000px]"
+			class="{data.authenticated
+				? 'justify-start'
+				: 'justify-center'} flex apple:items-center uw:items-center w-full h-full max-w-[3000px]"
 		>
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>

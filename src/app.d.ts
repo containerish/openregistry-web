@@ -16,6 +16,7 @@ declare global {
 		interface Locals {
 			user: User | null;
 			authenticated: boolean;
+			isRouteProtected: boolean;
 			sessionId: string | null;
 		}
 		// interface Platform { }

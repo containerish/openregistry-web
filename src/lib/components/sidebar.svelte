@@ -1,7 +1,5 @@
 <script lang="ts">
 	import {
-		ArrowLIcon,
-		ArrowRIcon,
 		HomeIcon,
 		ReportIcon,
 		SearchIcon,
@@ -17,19 +15,17 @@
 		SignOutIcon,
 		StarIcon
 	} from '$lib/icons';
-	import Textfield from '$lib/textfield.svelte';
 	import Logo from './logo.svelte';
-	import { slide, fade, fly } from 'svelte/transition';
 	import type { User } from '$apis/auth';
-	import { backOut, bounceIn, quintIn, quintOut } from 'svelte/easing';
 	import Advert from '../advert.svelte';
 	import Carousel from './carousel.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import Autocomplete from '../autocomplete.svelte';
 	import { RegistryBackend } from '$apis/registry';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
+	export let authorised = false;
 	const registry = new RegistryBackend();
 
 	const handleAutoComplete = async (query: string) => {
@@ -64,6 +60,8 @@
 	onMount(() => {
 		handleScreenChange();
 		window.addEventListener('resize', handleScreenChange);
+
+		return () => window.removeEventListener('resize', handleScreenChange);
 	});
 </script>
 

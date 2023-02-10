@@ -1,16 +1,16 @@
-import { error, fail } from '@sveltejs/kit';
-import type { LayoutServerLoadEvent } from '../$types';
+import { error } from '@sveltejs/kit';
+import type { LayoutServerLoad } from './$types';
 
-export const load = async (event: LayoutServerLoadEvent) => {
-	const { locals, parent } = event;
-	await parent();
-	if (locals.user) {
+export const load = (async (event) => {
+	const { url, locals } = event;
+
+	if (locals.user || url.pathname === '/search') {
 		return {
-			user: locals.user
+			user: locals.user,
+			pathname: url.pathname
 		};
 	}
-
 	throw error(401, {
 		message: 'please login'
 	});
-};
+}) satisfies LayoutServerLoad;
