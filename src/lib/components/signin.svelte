@@ -10,8 +10,8 @@
 	import Textfield from '$lib/textfield.svelte';
 	import Logo from './logo.svelte';
 
-	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
-	const toggleModal = getContext<VoidFunction>('toggleSignInForm');
+	export let toggleSignUpForm: () => void;
+	export let toggleSignInForm: () => void;
 	let isLoading = false;
 
 	const auth = new Auth();
@@ -156,7 +156,7 @@
 
 				<div class="flex w-full justify-center space-x-5 mt-4">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
-					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -183,7 +183,7 @@
 				<div class="flex mt-4 w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 
-					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -236,14 +236,14 @@
 					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}>
 						Submit
 					</ButtonSolid>
-					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
 		<div class="flex items-center w-full justify-center gap-4 mt-4">
 			<span
-				on:click={() => toggleSignupForm()}
-				on:keypress={() => toggleSignupForm()}
+				on:click={toggleSignUpForm}
+				on:keypress={toggleSignUpForm}
 				class="text-sm desktop:text-xs laptop:text-sm half:text-sm cursor-pointer no-underline 
 				m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
 			>

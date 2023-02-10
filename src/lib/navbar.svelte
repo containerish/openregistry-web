@@ -17,14 +17,15 @@
 	};
 
 	const toggleSignUpForm = () => {
+		console.log('in signup func');
 		showSignInForm = !showSignInForm;
 		showSignUpForm = !showSignUpForm;
 		openSignInModal = false;
 	};
 
-	// @ts-ignore
-	setContext('toggleSignInForm', toggleSignInForm);
-	setContext('toggleSignUpForm', toggleSignUpForm);
+	// // @ts-ignore
+	// setContext('toggleSignInForm', toggleSignInForm);
+	// setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
 <header class="apple:pt-6 bg-primary-50 sticky top-0 z-50">
@@ -76,21 +77,23 @@
 							</a>
 						</div>
 
-						<div class="flex items-center desktop:mt-1 -mx-1 sm:mx-0 uw:py-4 half:hidden laptop:ml-2">
+						<div
+							class="flex items-center desktop:mt-1 -mx-1 sm:mx-0 uw:py-4 half:hidden laptop:ml-2"
+						>
 							<ButtonSolid onClick={() => toggleSignInForm()}>Sign In</ButtonSolid>
 						</div>
 
 						{#if showSignInForm || openSignInModal}
 							<div>
 								<Dialog>
-									<Signin />
+									<Signin {toggleSignUpForm} {toggleSignInForm} />
 								</Dialog>
 							</div>
 						{/if}
 
 						{#if showSignUpForm}
-							<Dialog styles='top-0'>
-								<Signup />
+							<Dialog styles="top-0">
+								<Signup {toggleSignUpForm} {toggleSignInForm} />
 							</Dialog>
 						{/if}
 					</div>

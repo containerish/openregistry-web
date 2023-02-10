@@ -11,6 +11,13 @@
 		LayersIcon
 	} from '$lib/icons';
 	import { goto } from '$app/navigation';
+	import { setContext } from 'svelte';
+	import Dialog from '$lib/dialog.svelte';
+	import Signup from './signup.svelte';
+	let showSignUpForm = false;
+	const handleSignupForm = () => {
+		showSignUpForm = !showSignUpForm;
+	};
 </script>
 
 <div class=" bg-slate-100 relative">
@@ -53,7 +60,7 @@
 				</div>
 
 				<div class="flex half:justify-center items-center gap-5">
-					<ButtonSolid>Sign up for free</ButtonSolid>
+					<ButtonSolid onClick={handleSignupForm}>Sign up for free</ButtonSolid>
 					<ButtonOutlined
 						onClick={() => {
 							goto('https://docs.openregistry.dev');
@@ -125,3 +132,8 @@
 		</div>
 	</Card>
 </div>
+{#if showSignUpForm}
+	<Dialog styles="top-0">
+		<Signup toggleSignInForm={() => {}} toggleSignUpForm={handleSignupForm} />
+	</Dialog>
+{/if}

@@ -38,8 +38,8 @@
 		fire(0.1, { spread: 120, startVelocity: 45 });
 	};
 
-	const toggleSignUpForm: Function = getContext('toggleSignUpForm');
-	const toggleSignInForm: Function = getContext('toggleSignInForm');
+	export let toggleSignUpForm: () => void
+	export let toggleSignInForm: () => void
 	let isLoading = false;
 	let showSuccessMsg = false;
 	const auth = new Auth();
