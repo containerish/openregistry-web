@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
-	import { GithubIcon, FingerprintIcon } from '$lib/icons';
+	import { GithubIcon, FingerprintIcon, EmailIcon } from '$lib/icons';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { Auth } from '$apis/auth';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
@@ -163,7 +163,7 @@
 
 		{#if isWebAuthN}
 			<ButtonOutlined onClick={handleIsWebAuthn}>
-				<FingerprintIcon styles="text-brown-800 mr-2" />
+				<EmailIcon styles="text-black mr-2" />
 				Sign in using Email Password
 			</ButtonOutlined>
 
