@@ -7,11 +7,11 @@
 <Menu let:open class="relative z-10 inline-block text-left">
 	<div class="max-w-2xl">
 		<MenuButton
-			class="px-4 mx-1 lg:mr-0 text-gray-700 border-2 border-brown-100 bg-cream-50 rounded-md sm:inline flex hover:bg-brown-50 hover:text-gray-700"
+			class="px-4 mx-2 lg:mr-0 text-gray-700 border-2 border-primary-100 rounded-sm flex hover:bg-primary-100 hover:text-slate-700"
 		>
-			<div class="flex font-semibold text-brown-800 gap-2">
+			<div class="flex font-semibold text-primary-600 gap-2">
 				{title}
-				<SortIcon styles="h-6 w-6 text-brown-800" />
+				<SortIcon styles="h-6 w-6 text-primary-500" />
 			</div>
 		</MenuButton>
 	</div>

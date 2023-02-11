@@ -1,32 +1,34 @@
 import { session } from './stores/session';
-import { Auth } from "$apis/auth";
-import { redirect, type Handle } from "@sveltejs/kit";
+import { Auth } from '$apis/auth';
+import { redirect, type Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const { cookies, request, locals, url } = event;
-	const sessionId = cookies.get('session_id')
+	const { cookies, locals, url } = event;
+
+	const sessionId = cookies.get('session_id');
 	if (sessionId && (!locals.user || !locals.authenticated)) {
 		const auth = new Auth();
 		const { data, error, status } = await auth.GetUserWithSession(sessionId);
 		if (data) {
-			session.setUser(data)
-			session.setIsAuthenticated(true)
-			locals.user = data
-			locals.authenticated = true
-			locals.sessionId = sessionId
+			session.setUser(data);
+			session.setIsAuthenticated(true);
+			locals.user = data;
+			locals.authenticated = true;
+			locals.sessionId = sessionId;
 		}
 	}
-
+	if (url.pathname === '/search' && !locals.user) {
+		return await resolve(event);
+	}
 	if (isProtectedRoute(url.pathname) && !locals.user) {
-		throw redirect(303, '/')
+		throw redirect(303, '/');
 	}
 
-	return await resolve(event)
-}
+	return await resolve(event);
+};
 
 export const isProtectedRoute = (route: string): boolean => {
-	return route.startsWith('/settings') ||
-		route.startsWith('/repositories') ||
-		route.startsWith('/apps') ||
-		route.startsWith('/faq')
-}
+	return (
+		route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps')
+	);
+};

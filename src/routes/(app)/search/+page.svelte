@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
@@ -10,12 +9,17 @@
 	import { navigating } from '$app/stores';
 	import Menu from '$lib/headless/menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import ClockIcon from '$lib/icons/clock.svelte';
+	import { ClockIcon, ArrowRIcon, FilterIcon } from '$lib/icons';
 	import { pulseStore } from '$lib/components/pulse';
 	import { NewRepository, Repository, Pulse } from '$lib/components';
-
 	import ErrorModal from '$lib/errorModal.svelte';
-	export let query: string = '';
+	import ButtonSolid from '$lib/button-solid.svelte';
+	import ButtonOutlined from '$lib/button-outlined.svelte';
+	import Dialog from '$lib/dialog.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
 	let sortBy = 'namespace';
 	let httpError: string;
 	let openErrorModal: boolean = false;
@@ -51,8 +55,8 @@
 	let catalog: Catalog;
 
 	onMount(async () => {
-		if (query && query !== '') {
-			const { error, data } = await backend.SearchRepositories(query);
+		if (data.query && data.query !== '') {
+			const { error, data: repositories } = await backend.SearchRepositories(data.query);
 			if (error) {
 				console.error('error in search/ListCatalog: ', error);
 				httpError = error.message;
@@ -60,19 +64,24 @@
 				return;
 			}
 
-			catalog = data;
+			catalog = repositories;
 			return;
 		}
 
-		let { data, error } = await backend.ListCatalog(backend.DefaultPageSize);
+		let { data: repoCatalog, error } = await backend.ListCatalog(backend.DefaultPageSize);
 		if (error) {
 			console.error('error in search/ListCatalog: ', error);
 			httpError = error.message;
 			openErrorModal = true;
 			return;
 		}
-		catalog = data;
+		catalog = repoCatalog;
 	});
+
+	let showFilter = false;
+	const toggleFilter = () => {
+		showFilter = !showFilter;
+	};
 
 	let showModal = false;
 	const toggleModal = () => {
@@ -87,76 +96,117 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Explore | OpenRegistry</title>
+</svelte:head>
+
 <Pulse>
-	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
-		<div class="flex w-full h-full max-w-[3000px]">
+	<div
+		class="flex justify-center items-start w-full h-full min-w-max min-h-[1610px] desktop:min-h-max laptop:min-h-max 
+	half:min-h-max py-8 laptop:py-2 px-6"
+	>
+		<div
+			class="{data.authenticated
+				? 'justify-start'
+				: 'justify-center'} flex apple:items-center uw:items-center w-full h-full max-w-[3000px]"
+		>
 			{#if showTooltip}
-				<div id="tooltip" class="z-50 bg-white rounded-lg py-4 px-4" use:popperContent={extraOpts}>
-					<span class=" text-gray-800">
+				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
+					<span class=" text-slate-800">
 						Coming soon
 						<svg
-							class="absolute text-white h-6 left-0 ml-3 top-full"
+							class="absolute text-cyan-100 h-5 w-5 left-0 pb-1 ml-3 top-full"
 							x="0px"
 							y="0px"
 							viewBox="0 0 255 255"
 							xml:space="preserve"
-							><polygon class="fill-current" points="0,0 127.5,127.5 255,0" /></svg
 						>
+							<polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+						</svg>
 					</span>
 					<div id="arrow" data-popper-arrow />
 				</div>
 			{/if}
-			<div
-				use:popperRef
-				on:mouseenter={() => (showTooltip = true)}
-				on:mouseleave={() => (showTooltip = false)}
-				class="hover:opacity-50 opacity-60 h-full w-1/3 px-4 py-4 my-4"
-			>
-				<h3 class="font-semibold font-lato text-xl mb-4 text-brown-900">Filters</h3>
-				<div class="my-5">
-					<span class="text-lg font-lato text-brown-800">Operating System</span>
-					<ul>
-						<li><Checkbox label="Linux" /></li>
-						<li><Checkbox label="Windows" /></li>
-					</ul>
-				</div>
-				<div class="my-5">
-					<span class="text-lg font-lato text-brown-800">Categories</span>
-					<ul>
-						<li>
-							<Checkbox label="Analytics" />
-						</li>
-						<li><Checkbox label="Base Images" /></li>
-						<li><Checkbox label="Databases" /></li>
-						<li><Checkbox label="Devops tools" /></li>
-						<li><Checkbox label="Featured Images" /></li>
-						<li><Checkbox label="Operating Systems" /></li>
-						<li><Checkbox label="Programming Languages" /></li>
-						<li><Checkbox label="Messaging Services" /></li>
-						<li><Checkbox label="Application Frameworks" /></li>
-					</ul>
-				</div>
-				<div class="my-5">
-					<span class="text-lg font-lato text-brown-800">Architectures</span>
-					<ul>
-						<li><Checkbox label="ARM32" /></li>
-						<li><Checkbox label="ARM64" /></li>
-						<li><Checkbox label="X86" /></li>
-						<li><Checkbox label="X86-64" /></li>
-					</ul>
-				</div>
-			</div>
-			<div class="w-3/4 my-8">
-				<div class="flex px-4 pb-2 justify-between uw:px-36 apple:px-24">
+			{#if showFilter}
+				<Dialog>
+					<div class="flex flex-col gap-5 items-center p-8 laptop:p-2 half:p-2 half:overflow-auto">
+						<div class="flex justify-center items-center gap-4">
+							<span class="text-xl apple:text-2xl uw:text-2xl text-primary-500 font-bold"
+								>Advance Filters</span
+							>
+							<FilterIcon styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5 text-primary-500" />
+						</div>
+
+						<div class="flex gap-8 half:gap-3 justify-center items-start px-6 py-3">
+							<div
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500 text-start"
+							>
+								<span
+									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
+									>Operating System</span
+								>
+								<ul class="text-slate-600">
+									<li><Checkbox label="Linux" /></li>
+									<li><Checkbox label="Windows" /></li>
+								</ul>
+							</div>
+							<div
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500 text-start"
+							>
+								<span
+									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
+									>Categories</span
+								>
+								<ul class="text-slate-600">
+									<li>
+										<Checkbox label="Analytics" />
+									</li>
+									<li><Checkbox label="Base Images" /></li>
+									<li><Checkbox label="Databases" /></li>
+									<li><Checkbox label="Devops tools" /></li>
+									<li><Checkbox label="Featured Images" /></li>
+									<li><Checkbox label="Operating Systems" /></li>
+									<li><Checkbox label="Programming Languages" /></li>
+									<li><Checkbox label="Messaging Services" /></li>
+									<li><Checkbox label="Application Frameworks" /></li>
+								</ul>
+							</div>
+							<div
+								class="flex flex-col gap-4 text-lg desktop:text-sm laptop:text-sm half:text-sm text-primary-500 text-start"
+							>
+								<span
+									class="text-xl desktop:text-base laptop:text-base half:text-base font-medium antialiased"
+									>Architectures</span
+								>
+								<ul class="text-slate-600">
+									<li><Checkbox label="ARM32" /></li>
+									<li><Checkbox label="ARM64" /></li>
+									<li><Checkbox label="X86" /></li>
+									<li><Checkbox label="X86-64" /></li>
+								</ul>
+							</div>
+						</div>
+						<div class="flex w-full justify-between px-20">
+							<ButtonOutlined onClick={toggleFilter}>Cancel</ButtonOutlined>
+							<ButtonSolid
+								>Apply
+								<ArrowRIcon styles="desktop:w-4 desktop:h-4 laptop:w-4 laptop:h-4 mt-0.5" />
+							</ButtonSolid>
+						</div>
+					</div>
+				</Dialog>
+			{/if}
+			<div class="flex flex-col w-3/4 laptop:w-full laptop:px-2 my-8 items-start ">
+				<div class="flex flex-row gap-10 justify-between w-full max-w-[850px] pb-2">
 					<Menu title="Sort">
-						<MenuItem class="bg-gray-100">
+						<MenuItem>
 							<button
 								on:click={() => {
 									sortBy = 'last_updated';
 									fetchPageData(0);
 								}}
-								class="{sortBy === 'last_updated' ? 'font-semibold bg-white' : ''} 
-                w-full py-3 border-none inline-flex items-center justify-center bg-cream-50 rounded-b-none rounded-md gap-2 m-0 hover:bg-brown-50 text-sm"
+								class="{sortBy === 'last_updated' ? 'font-normal bg-white' : ''} 
+                				w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none rounded-sm gap-2 m-0 hover:bg-slate-100 text-sm"
 							>
 								<ClockIcon styles="h-5 w-5" />
 								Last Updated
@@ -168,11 +218,11 @@
 									sortBy = 'namespace';
 									fetchPageData(0);
 								}}
-								class="{sortBy === 'namespace' ? 'font-semibold bg-white' : ''} 
-         inline-flex py-3 justify-center gap-2 items-center w-full bg-cream-50 m-0 border-none rounded-t-none rounded-md hover:bg-brown-50 text-sm"
+								class="{sortBy === 'namespace' ? 'font-normal bg-white' : ''} 
+         						inline-flex py-3 justify-center gap-2 items-center w-full  m-0 border-none rounded-t-none rounded-md hover:bg-slate-100 text-sm"
 							>
 								<div
-									class="rounded-full border-2 border-black text-sm h-4 inline-flex justify-center items-center w-4"
+									class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4 inline-flex justify-center items-center w-4"
 								>
 									A
 								</div>
@@ -180,34 +230,40 @@
 							</button>
 						</MenuItem>
 					</Menu>
+
+					<ButtonOutlined styles="gap-2" onClick={toggleFilter}
+						>Advance Filter
+						<FilterIcon styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5" />
+					</ButtonOutlined>
 					{#if showModal}
 						<Modal>
 							<NewRepository />
 						</Modal>
 					{/if}
 				</div>
-
-				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
-					<div class="w-full">
-						{#each catalog.repositories as repo}
-							<Repository data={repo} compact={false} />
-						{/each}
-					</div>
-
-					<div class="flex justify-center py-4 bg-cream-50">
-						<Pagination pages={Math.ceil(catalog.total / backend.DefaultPageSize)} />
-					</div>
-				{:else}
-					<div class="flex justify-center items-center">
-						<div
-							class="bg-gray-50 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
-						>
-							<span class="text-brown-800 text-4xl">No Repositories</span>
+				<div class="w-full flex flex-col justify-center items-center max-w-[850px]">
+					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
+						<div class="w-full">
+							{#each catalog.repositories as repo}
+								<Repository data={repo} compact={false} />
+							{/each}
 						</div>
-					</div>
-				{/if}
+
+						<div class="flex py-4">
+							<Pagination pages={Math.ceil(catalog.total / backend.DefaultPageSize)} />
+						</div>
+					{:else}
+						<div class="flex w-full justify-center items-center">
+							<div
+								class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
+							>
+								<span class="text-primary-600 text-4xl">No Repositories</span>
+							</div>
+						</div>
+					{/if}
+				</div>
 			</div>
 		</div>
-	</Card>
+	</div>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />

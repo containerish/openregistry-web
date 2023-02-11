@@ -10,6 +10,7 @@
 	let conf = confetti.create(canvas, { resize: true });
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
+	import Logo from './logo.svelte';
 
 	var count = 200;
 	var defaults = {
@@ -37,8 +38,8 @@
 		fire(0.1, { spread: 120, startVelocity: 45 });
 	};
 
-	const toggleSignUpForm: Function = getContext('toggleSignUpForm');
-	const toggleSignInForm: Function = getContext('toggleSignInForm');
+	export let toggleSignUpForm: () => void
+	export let toggleSignInForm: () => void
 	let isLoading = false;
 	let showSuccessMsg = false;
 	const auth = new Auth();
@@ -145,23 +146,25 @@
 	};
 </script>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
-		<div class="flex justify-center py-4 mb-8">
-			<picture>
-				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
-			</picture>
+<svelte:head>
+	<title>Sign up | OpenRegistry</title>
+</svelte:head>
+
+<div class="flex w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+	<div class="flex flex-col w-full px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
+		<div class="flex justify-center py-4 mb-8 laptop:mb-4 laptop:py-1">
+			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}
 			<ButtonOutlined onClick={auth.LoginWithGithub}>
-				<GithubIcon styles="text-brown-800 mr-2" />
+				<GithubIcon styles="text-black mr-2" />
 				Sign in with Github
 			</ButtonOutlined>
 			<div class="mt-4" />
 
 			{#if !isWebAuthn}
 				<ButtonOutlined onClick={handleIsWebAuthn}>
-					<FingerprintIcon styles="text-brown-800 mr-2" />
+					<FingerprintIcon styles="text-black mr-2" />
 					Sign up with Security key
 				</ButtonOutlined>
 
@@ -230,7 +233,7 @@
 						</div>
 					{/if}
 
-					<div class="flex mt-8 w-full space-x-8">
+					<div class="flex mt-8 w-full space-x-8 justify-center">
 						<ButtonSolid type="submit" {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
 						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 					</div>
@@ -293,9 +296,9 @@
 		{:else}
 			<div class="flex flex-col items-center gap-4 justify-start h-full w-full">
 				<div id="confetti">
-					<CheckIcon styles="h-24 w-24 text-brown-800" />
+					<CheckIcon styles="h-24 w-24 text-primary-500" />
 				</div>
-				<span class="text-lg capitalize text-brown-900">{successMessage}</span>
+				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="w-full text-center flex flex-row justify-center gap-2 px-4 items-center">
 					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>

@@ -7,8 +7,6 @@
 		Transition
 	} from '@rgossiaux/svelte-headlessui';
 	import { CheckIcon, ChevronIcon } from './icons/';
-	import { ghStore } from './stores';
-
 	type ListItem = {
 		name: string;
 		id: number;
@@ -31,7 +29,10 @@
 			<div class="relative mt-1">
 				<Listbox value={selectedItem} on:change={(e) => setSelectItem(e.detail)}>
 					<ListboxButton
-						class="flex w-full px-4 justify-between items-center border-2 border-brown-400 rounded-md"
+						class="flex w-full px-4 py-3 justify-between items-center border border-primary-100 rounded-md
+						placeholder-slate-700 focus:bg-slate-50
+						 focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
+						disabled:text-slate-400"
 					>
 						{selectedItem.name}
 						<ChevronIcon />
@@ -45,19 +46,20 @@
 						leaveTo="transform scale-95 opacity-0"
 					>
 						<ListboxOptions
-							class="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+							class="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1
+							 ring-black ring-opacity-5 focus:outline-none"
 						>
 							{#each items as item (item.id)}
 								<ListboxOption
-									class="hover:bg-cream-50 cursor-pointer flex gap-2 select-none relative py-2 pr-4 text-gray-900 {selectedItem.id ===
+									class="hover:bg-slate-50 cursor-pointer flex gap-2 select-none relative py-2 pr-4 text-slate-600 {selectedItem.id ===
 									item.id
-										? 'bg-cream-50 text-brown-800 font-semibold pl-4'
+										? 'bg-primary-50 text-slate-600 font-semibold pl-4'
 										: 'pl-10'}"
 									value={item}
 									disabled={item.disabled}
 								>
 									{#if selectedItem.id === item.id}
-										<span><CheckIcon styles="h-5 w-5 text-brown-600" /></span>
+										<span><CheckIcon styles="h-5 w-5 text-slate-600" /></span>
 									{/if}
 									<span>{item.name}</span>
 								</ListboxOption>

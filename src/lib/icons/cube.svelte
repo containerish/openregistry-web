@@ -1,13 +1,17 @@
+<script>
+	export let styles = '';
+</script>
+
 <svg
-	class="h-6 w-6 stroke-brown-800 opacity-75"
+	class="{styles} w-6 h-6"
 	fill="none"
 	viewBox="0 0 24 24"
-	stroke="currentColor"
 	stroke-width="2"
+	stroke="currentColor"
 >
 	<path
 		stroke-linecap="round"
 		stroke-linejoin="round"
-		d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+		d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
 	/>
 </svg>

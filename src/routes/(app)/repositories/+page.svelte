@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Advert from '$lib/advert.svelte';
-	import Card from '$lib/card.svelte';
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
@@ -24,6 +22,8 @@
 	const pageSize = 10;
 	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
+	import ButtonOutlined from '$lib/button-outlined.svelte';
+	import Sidebar from '$lib/components/sidebar.svelte';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -100,24 +100,33 @@
 	let httpError: string;
 </script>
 
+<svelte:head>
+	<title>Repositories | OpenRegistry</title>
+</svelte:head>
+
 <Pulse>
-	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-cream-50">
-		<div class="flex w-full h-full max-w-[3000px]">
-			<div class="w-3/4 px-8 my-8">
-				<div class="flex px-4 justify-between lg:px-8">
-					<div class="w-2/5">
+	<div
+		class="flex justify-center items-start pt-10 w-full 
+	desktop:min-h-[1000px] laptop:min-h-max half:min-h-max min-h-[1700px] h-max laptop:min-w-[500px]"
+	>
+		<div class="flex w-full justify-start">
+			<div
+				class="w-full  flex flex-col my-8 laptop:w-full laptop:px-2 half:w-full half:px-0 max-w-[850px]"
+			>
+				<div class="flex flex-row half:flex-col gap-4 justify-between px-6">
+					<div class="w-2/5 half:w-full">
 						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 					</div>
 					{#if showTooltip}
 						<div
 							id="tooltip"
-							class="z-50 bg-white rounded-lg py-3 px-4"
+							class=" bg-cyan-200 rounded py-3 px-4 desktop:min-w-max desktop:py-1 desktop:px-2"
 							use:popperContent={extraOpts}
 						>
-							<span class=" text-gray-800">
+							<span class=" text-slate-700 desktop:text-xs">
 								Coming soon
 								<svg
-									class="absolute text-white h-6 left-0 ml-3 top-full"
+									class="absolute text-cyan-200 h-5 w-5 left-0 pb-1 ml-3 top-full"
 									x="0px"
 									y="0px"
 									viewBox="0 0 255 255"
@@ -129,15 +138,9 @@
 							<div id="arrow" data-popper-arrow />
 						</div>
 					{/if}
-					<button
-						use:popperRef
-						on:mouseenter={() => (showTooltip = true)}
-						on:mouseleave={() => (showTooltip = false)}
-						class="cursor-not-allowed px-4 mx-1 lg:mr-0 text-brown-800 border-2 border-brown-100 bg-transparent rounded-md sm:inline
-					"
-					>
-						Create Repository
-					</button>
+
+					<ButtonOutlined onClick={toggleModal}>Create Respository</ButtonOutlined>
+
 					{#if showModal}
 						<Modal>
 							<NewRepository />
@@ -152,50 +155,24 @@
 						{/each}
 					</div>
 
-					<div class="flex justify-center py-4 bg-cream-50">
+					<div class="flex justify-center py-4">
 						{#if catalog.total > backend.DefaultPageSize}
 							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
 						{/if}
 					</div>
 				{:else}
-					<div class="flex justify-center items-center">
+					<div class="w-full flex justify-center items-center px-6">
 						<div
-							class="bg-gray-50 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
+							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
 						>
-							<span class="text-brown-800 text-4xl">No Repositories</span>
+							<span class="text-primary-600 text-4xl laptop:text-2xl desktop:text-3xl"
+								>No Repositories</span
+							>
 						</div>
 					</div>
 				{/if}
 			</div>
-
-			<div
-				class="invisible lg:visible py-2 rounded-lg px-4 my-20 flex justify-start flex-col items-center w-1/4"
-			>
-				<div class="border rounded-lg px-4 py-2 border-brown-500">
-					<Advert
-						link="https://akash.network"
-						styles="hover:bg-red-600"
-						logo="akash-logo.svg"
-						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
-					peer-to-peer marketplace for cloud compute"
-					/>
-					<Advert
-						link="https://ipfs.io"
-						styles="hover:bg-[#65c3ca]"
-						logo="ipfs-logo.png"
-						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
-            upgradeable, resilient, and more open."
-					/>
-					<Advert
-						link="https://skynetlabs.com/developers"
-						styles="hover:bg-[#00C65E]"
-						logo="skynet-logo.png"
-						body="Skynet is an open protocol and toolkit for creating a better web — one built on decentralized storage
-          and applications."
-					/>
-				</div>
-			</div>
 		</div>
-	</Card>
+	</div>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />

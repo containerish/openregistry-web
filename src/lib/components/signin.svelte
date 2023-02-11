@@ -8,9 +8,10 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
+	import Logo from './logo.svelte';
 
-	const toggleSignupForm = getContext<VoidFunction>('toggleSignUpForm');
-	const toggleModal = getContext<VoidFunction>('toggleSignInForm');
+	export let toggleSignUpForm: () => void;
+	export let toggleSignInForm: () => void;
 	let isLoading = false;
 
 	const auth = new Auth();
@@ -88,23 +89,25 @@
 	};
 </script>
 
-<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex flex-col w-4/5 px-6 py-8 md:px-8 lg:w-full">
-		<div class="flex justify-center py-4 mb-8">
-			<picture>
-				<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
-			</picture>
+<svelte:head>
+	<title>Sign in | OpenRegistry</title>
+</svelte:head>
+
+<div class="flex w-full max-w-sm mx-auto overflow-hidden lg:max-w-4xl">
+	<div class="flex flex-col w-full px-6 py-8 lg:w-full laptop:w-full laptop:py-4">
+		<div class="flex justify-center py-4 desktop:py-1 laptop:py-1 laptop:mb-6 desktop:mb-6 mb-8">
+			<Logo type="dark" />
 		</div>
 
 		<ButtonOutlined onClick={auth.LoginWithGithub}>
-			<GithubIcon styles="text-brown-800 mr-2" />
+			<GithubIcon styles="text-black mr-2" />
 			Sign in with Github
 		</ButtonOutlined>
 		<div class="mt-4" />
 
 		{#if !showForgotPasswordForm && !isWebAuthN}
 			<ButtonOutlined onClick={handleIsWebAuthn}>
-				<FingerprintIcon styles="text-brown-800 mr-2" />
+				<FingerprintIcon styles="text-black mr-2" />
 				Sign in using Security key
 			</ButtonOutlined>
 
@@ -112,15 +115,19 @@
 				<span class="w-1/5 border-b lg:w-1/4" />
 
 				<span
-					href="#"
-					class="text-xs font-semibold text-center text-gray-600 capitalize hover:no-underline"
+					class="text-sm desktop:text-xs laptop:text-xs text-center text-slate-600 capitalize hover:no-underline"
 				>
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />
 			</div>
-			<form method="POST" action="?/signin" use:enhance={handleSignInSubmit}>
-				<div class="mt-4">
+			<form
+				class="flex flex-col gap-4 mt-2"
+				method="POST"
+				action="?/signin"
+				use:enhance={handleSignInSubmit}
+			>
+				<div class="">
 					<Textfield
 						errors={$page.form?.errors?.email}
 						name="email"
@@ -129,7 +136,7 @@
 						value={$page.form?.data?.email || ''}
 					/>
 				</div>
-				<div class="mt-4">
+				<div class="">
 					<Textfield
 						errors={$page.form?.errors?.password}
 						name="password"
@@ -147,9 +154,9 @@
 					</div>
 				{/if}
 
-				<div class="flex mt-4 w-full justify-center space-x-5">
+				<div class="flex w-full justify-center space-x-5 mt-4">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
-					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -176,7 +183,7 @@
 				<div class="flex mt-4 w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 
-					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -229,21 +236,25 @@
 					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}>
 						Submit
 					</ButtonSolid>
-					<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
 		<div class="flex items-center w-full justify-center gap-4 mt-4">
 			<span
-				on:click={() => toggleSignupForm()}
-				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
+				on:click={toggleSignUpForm}
+				on:keypress={toggleSignUpForm}
+				class="text-sm desktop:text-xs laptop:text-sm half:text-sm cursor-pointer no-underline 
+				m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
 			>
 				sign up
 			</span>
-			<span class="border-2">|</span>
+			<span class="">|</span>
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
-				class="text-xs cursor-pointer underline m-0 border-none font-semibold text-gray-700 uppercase hover:underline"
+				on:keypress={() => (showForgotPasswordForm = true)}
+				class="text-sm desktop:text-xs laptop:text-xs half:text-xs no-underline 
+				cursor-pointer m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
 			>
 				Forgot password?
 			</span>

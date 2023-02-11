@@ -19,8 +19,8 @@
 			>&#8203;</span
 		>
 		<div
-			class="modal-close modal inline-block align-bottom bg-cream-50 duration-500 rounded-lg text-left
-			overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+			class="modal-close bg-slate-50 modal inline-block align-bottom duration-500 rounded-lg text-left
+			overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
 		>
 			<slot />
 		</div>

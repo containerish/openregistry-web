@@ -11,7 +11,7 @@ const config = {
 			'$apis': 'src/apis',
 			'$stores': 'src/stores',
 		},
-	}
+}
 };
 
 export default config;

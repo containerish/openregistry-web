@@ -10,6 +10,7 @@ import Register from './register.svelte';
 import Repository from './repository.svelte';
 import Signin from './signin.svelte';
 import Signup from './signup.svelte';
+import Sidebar from './sidebar.svelte';
 
 export { DropDown };
 export { Hero };
@@ -23,3 +24,4 @@ export { Register };
 export { Repository };
 export { Signin };
 export { Signup };
+export { Sidebar };

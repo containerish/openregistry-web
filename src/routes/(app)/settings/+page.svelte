@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
 	import UserIcon from '$lib/icons/user.svelte';
+	import { ProfileIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	export let data: PageData;
@@ -10,6 +11,7 @@
 	import { form, field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+	import Textfield from '$lib/textfield.svelte';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
@@ -41,132 +43,156 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[93vh] bg-cream-50">
-		<div
-			class="flex gap-5 space-x-10 min-w-full justify-start items-center py-28 my-20 px-20 bg-brown-500"
-		>
-			<div class="px-4" />
-			<div>
-				<UserIcon styles="h-24 w-24" />
-			</div>
-			<div class="flex-initial">
-				<h1 class="text-4xl font-medium capitalize">
-					{data.user.name ? data.user.name : data.user.username}
-				</h1>
-				<div class="flex mt-3">
-					<UserIcon styles="h-6 w-6" />
-					<span class="text-lg mr-5">Community User</span>
-					<span class="text-lg">
-						Joined
-						<span class="font-semibold">
-							{new Date(data.user.created_at).toDateString()}
-						</span>
-					</span>
-				</div>
-			</div>
-		</div>
-		<Card>
-			<div class="rounded-xl flex flex-col w-3/4 bg-brown-400 px-20 py-8">
-				<h1 class="text-2xl font-medium">Email Address</h1>
-				<div class="flex items-center justify-start mt-5">
-					<input
-						id="email"
-						type="text"
-						class="w-1/2 px-4 py-3 -ml-1.5 text-md disabled:text-gray-400
-                    text-gray-700 bg-white border rounded-md sm:mr-5 focus:border-brown-800
-                    focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
-						disabled
-						bind:value={data.user.email}
-						placeholder="email"
-					/>
-
-					<ButtonSolid>Edit</ButtonSolid>
-				</div>
-			</div>
-		</Card>
-
-		<Card>
+	<div class="min-h-[1500px] desktop:min-h-max laptop:min-h-max half:min-h-max  w-full">
+		<div class="flex flex-col gap-16 desktop:gap-8 laptop:gap-8 half:gap-8 pb-24">
 			<div
-				class="rounded-xl flex-col w-3/4 flex space-y-6 justify-start items-start bg-brown-400 px-20 py-8 mt-5"
+				class="flex gap-5 half:gap-2 space-x-10 min-w-max justify-start items-center py-24 desktop:py-16 laptop:py-10 half:py-10 mt-20 
+				desktop:mt-12 laptop:mt-8 half:mt-8 px-8 laptop:px-0 bg-primary-50 text-slate-700 border-2 border-primary-100"
 			>
-				<h1 class="text-2xl font-medium">Change Password</h1>
-				<input
-					type="password"
-					bind:value={$currentPassword.value}
-					class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md
-                     sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700
-                     focus:ring-opacity-40"
-					placeholder="current password"
-				/>
-
-				<input
-					type="password"
-					bind:value={$newPassword.value}
-					class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md
-                     sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
-					placeholder="new password"
-				/>
-
-				<input
-					type="password"
-					bind:value={$confirmPassword.value}
-					class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5
-focus:outline-none focus:ring focus:ring-opacity-40
-          {!$passwordForm.hasError('confirm_password.match_field')
-						? 'focus:border-brown-800 focus:ring-brown-700 '
-						: 'border-red-800 outline-none ring ring-opacity-40 ring-red-700'} "
-					placeholder="confirm password"
-				/>
-				{#if $passwordForm.hasError('current_password.required')}
-					<span class="text-red-700">Error - Current Password is a required field</span>
-				{/if}
-				{#if $passwordForm.hasError('new_password.required')}
-					<span class="text-red-700">Error - New Password is a required field</span>
-				{/if}
-				{#if $passwordForm.hasError('new_password.min')}
-					<span class="text-red-700">Error - New Password can not be shorter than 8 chars</span>
-				{/if}
-				{#if $passwordForm.hasError('confirm_password.match_field')}
-					<span class="text-red-700">Error - passwords don't match</span>
-				{/if}
-				{#if formResp.message}
-					<span class={!formResp.type ? 'text-green-600' : 'text-red-600'}>
-						{formResp.message}
-					</span>
-				{/if}
-				<ButtonSolid onClick={resetPassword}>Save</ButtonSolid>
-			</div>
-		</Card>
-
-		<Card>
-			<div class="rounded-xl flex-col w-3/4 flex bg-brown-400 px-20 py-8 mt-5 mb-20">
-				<h1 class="text-2xl font-medium">Account Information</h1>
-				<div class="flex flex-col space-y-6 justify-start items-start">
-					<span class="mt-2 text-brown-800 text-md">
-						This information will be public and visible to all us of OpenRegistry
-					</span>
-					<input
-						type="text"
-						class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md sm:mr-5 disabled:text-gray-400
-              focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700 focus:ring-opacity-40"
-						bind:value={data.user.username}
-						disabled
-						placeholder="Username"
+				<div class="px-4 laptop:px-1 half:px-0" />
+				<div>
+					<ProfileIcon
+						styles="h-24 w-24 desktop:h-12 desktop:w-12 laptop:h-12 laptop:w-12 half:w-12 half:h-12 text-primary-500"
 					/>
-
-					<input
-						type="text"
-						class="w-1/2 px-4 py-3 -ml-1.5 text-md text-gray-700 bg-white border rounded-md disabled:text-gray-400
-                    sm:mr-5 focus:border-brown-800 focus:outline-none focus:ring focus:ring-brown-700
-                    focus:ring-opacity-40"
-						disabled
-						bind:value={data.user.html_url}
-						placeholder="Github"
-					/>
-
-					<ButtonSolid>Save</ButtonSolid>
+				</div>
+				<div class="flex-initial">
+					<h1
+						class="text-4xl desktop:text-3xl laptop:text-3xl half:text-2xl font-medium capitalize"
+					>
+						{data.user.name ? data.user.name : data.user.username}
+					</h1>
+					<div class="flex mt-3 desktop:mt-2 half:mt-1 items-center gap-1">
+						<ProfileIcon
+							styles="h-6 w-6 desktop:h-4 desktop:w-4 laptop:h-4 laptop:w-4 half:w-4 half:h-4"
+						/>
+						<span class="text-lg mr-5 desktop:text-base laptop:text-sm half:text-sm"
+							>Community User</span
+						>
+						<span class="text-lg desktop:text-sm laptop:text-xs half:text-xs">
+							Joined
+							<span class="font-semibold">
+								{new Date(data.user.created_at).toDateString()}
+							</span>
+						</span>
+					</div>
 				</div>
 			</div>
-		</Card>
+			<Card>
+				<div
+					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-10 
+					desktop:gap-6 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 laptop:px-14 
+					laptop:py-6 half:py-6 half:px-8 pb-8 pt-10"
+				>
+					<div class="w-full flex flex-col gap-1">
+						<span
+							class="text-2xl desktop:text-lg laptop:text-lg half:text-lg mx-1 font-medium text-slate-700"
+							>Email Address</span
+						>
+						<Textfield
+							type="email"
+							placeholder="email"
+							styles="w-1/2 laptop:w-full half:w-full"
+							disabled
+							bind:value={data.user.email}
+						/>
+					</div>
+
+					<ButtonSolid styles="-mt-2">Edit</ButtonSolid>
+				</div>
+			</Card>
+
+			<Card>
+				<div
+					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-4 
+					desktop:gap-2 laptop:gap-2 half:gap-2 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 
+					laptop:px-14 laptop:py-6 half:px-8 half:py-6 pb-8 pt-10"
+				>
+					<h1
+						class="text-2xl desktop:text-lg laptop:text-lg half:text-lg text-slate-600 font-medium"
+					>
+						Change Password
+					</h1>
+					<Textfield
+						placeholder="current password"
+						type="password"
+						styles="w-1/2 laptop:w-full half:w-full"
+						bind:value={$currentPassword.value}
+					/>
+					<Textfield
+						placeholder="new password"
+						type="password"
+						styles="w-1/2 laptop:w-full half:w-full"
+						bind:value={$newPassword.value}
+					/>
+					<div />
+					<input
+						type="password"
+						bind:value={$confirmPassword.value}
+						class="w-1/2 laptop:w-full half:w-full placeholder-slate-500 form-control block px-3 py-3 text-base desktop:text-sm font-normal text-slate-700 bg-white
+						bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-slate-700
+						border rounded-md 
+          				{!$passwordForm.hasError('confirm_password.match_field')
+							? 'focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500'
+							: 'border-red-800 outline-none ring ring-opacity-40 ring-red-700'} "
+						placeholder="confirm password"
+					/>
+					{#if $passwordForm.hasError('current_password.required')}
+						<span class="text-red-700">Error - Current Password is a required field</span>
+					{/if}
+					{#if $passwordForm.hasError('new_password.required')}
+						<span class="text-red-700">Error - New Password is a required field</span>
+					{/if}
+					{#if $passwordForm.hasError('new_password.min')}
+						<span class="text-red-700">Error - New Password can not be shorter than 8 chars</span>
+					{/if}
+					{#if $passwordForm.hasError('confirm_password.match_field')}
+						<span class="text-red-700">Error - passwords don't match</span>
+					{/if}
+					{#if formResp.message}
+						<span class={!formResp.type ? 'text-green-600' : 'text-red-600'}>
+							{formResp.message}
+						</span>
+					{/if}
+					<ButtonSolid styles="mt-6" onClick={resetPassword}>Save</ButtonSolid>
+				</div>
+			</Card>
+
+			<Card>
+				<div
+					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-4 
+					desktop:gap-2 laptop:gap-1 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 
+					laptop:px-14 laptop:py-6 half:px-14 half:py-6 pb-8 pt-10"
+				>
+					<div class="flex flex-col gap-2 desktop:gap-1 laptop:gap-0 half:gap-0">
+						<span
+							class="text-2xl desktop:text-lg laptop:text-lg half:text-lg text-slate-700 font-medium"
+							>Account Information</span
+						>
+						<span class="text-slate-600 desktop:text-sm laptop:text-xs half:text-xs antialiased">
+							This information is public and visible to all users of OpenRegistry
+						</span>
+					</div>
+					<div
+						class="w-full flex flex-col gap-4 desktop:gap-2 laptop:gap-2 half:gap-2 justify-start items-start"
+					>
+						<Textfield
+							type="text"
+							disabled
+							placeholder="username"
+							styles="w-1/2 laptop:w-full half:w-full"
+							bind:value={data.user.username}
+						/>
+						<Textfield
+							placeholder="Gihub handle"
+							disabled
+							type="text"
+							styles="w-1/2 laptop:w-full half:w-full"
+							bind:value={data.user.html_url}
+						/>
+						<ButtonSolid styles="mt-6">Save</ButtonSolid>
+					</div>
+				</div>
+			</Card>
+		</div>
 	</div>
 {/if}

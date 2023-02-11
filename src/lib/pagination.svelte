@@ -26,9 +26,9 @@
 	<button
 		on:click={() => setActivePage(activePage - 1)}
 		class="{activePage === 0
-			? 'disabled cursor-not-allowed bg-cream-50'
-			: 'bg-cream-50 hover:bg-gray-200 hover:text-gray-700'}
-			flex items-center justify-center px-4 mx-1 text-gray-500 capitalize rounded-md border-brown-100"
+			? 'disabled cursor-not-allowed bg-slate-100'
+			: 'bg-slate-100 hover:bg-gray-200 hover:text-gray-700'}
+			flex items-center justify-center px-4 mx-1 text-gray-500 capitalize rounded-md border-primary-100"
 	>
 		<ArrowLeftIcon />
 	</button>
@@ -36,8 +36,8 @@
 		<button
 			id={i}
 			on:click={() => setActivePage(page)}
-			class=" {activePage === page ? 'bg-brown-400' : 'bg-cream-50'} px-4 py-2 mx-1 text-gray-700
-				transition-colors duration-200 transform rounded-md sm:inline hover:bg-gray-200 hover:text-gray-700 border-brown-100"
+			class=" {activePage === page ? 'bg-primary-200' : 'bg-primary-50'} px-4 py-2 mx-1 text-gray-700
+				transition-colors duration-200 transform rounded-md sm:inline hover:bg-gray-200 hover:text-gray-700 border-primary-100"
 		>
 			{page + 1}
 		</button>
@@ -45,9 +45,9 @@
 	<button
 		on:click={() => setActivePage(activePage + 1)}
 		class="{activePage === pages - 1
-			? 'disabled cursor-not-allowed bg-cream-50 border-1 focus:border-1'
-			: 'bg-cream-50 hover:bg-gray-200 hover:text-gray-700'}
-		px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform rounded-md sm:inline border-brown-100"
+			? 'disabled cursor-not-allowed bg-slate-100 border-1 focus:border-1'
+			: 'bg-slate-100 hover:bg-gray-200 hover:text-gray-700'}
+		px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform rounded-md sm:inline border-primary-100"
 	>
 		<ArrowRightIcon />
 	</button>
