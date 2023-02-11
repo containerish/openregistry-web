@@ -3,7 +3,7 @@
 	import ButtonOutlined from '../button-outlined.svelte';
 	import Textfield from '../textfield.svelte';
 	import { getContext } from 'svelte';
-	import { CheckIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
+	import { CheckIcon, EmailIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import confetti from 'canvas-confetti';
 	var canvas = document.getElementById('confetti');
@@ -241,7 +241,7 @@
 			{/if}
 			{#if isWebAuthn}
 				<ButtonOutlined onClick={handleIsWebAuthn}>
-					<FingerprintIcon styles="text-brown-800 mr-2" />
+					<EmailIcon styles="text-black mr-2" />
 					Sign up with Email Password
 				</ButtonOutlined>
 

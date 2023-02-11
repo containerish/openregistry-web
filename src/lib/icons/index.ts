@@ -56,6 +56,7 @@ export { ReportIcon };
 export { PencilIcon };
 export { HeartIcon };
 export { FilterIcon };
+export { EmailIcon };
 
 import AddAccountIcon from './add-account.svelte';
 import ArrowDownIcon from './arrow-down.svelte';
@@ -115,3 +116,4 @@ import HomeIcon from './home.svelte';
 import ReportIcon from './document.svelte';
 import PencilIcon from './pencil.svelte';
 import HeartIcon from './heart.svelte';
+import EmailIcon from './email.svelte';
