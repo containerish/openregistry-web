@@ -24,12 +24,12 @@
 	>
 		<div class="flex flex-col justify-center items-center space-x-5 space-y-5">
 			<span class="text-2xl font-bold text-primary-600 laptop:text-xl half:text-xl"
-				>Deploy a site from your account</span
+				>Automated builds with Github Integration</span
 			>
-			*****must change******.
 			<span class="text-center text-lg desktop:text-sm laptop:text-sm half:text-xs text-slate-600"
-				>Select a repository to connect as your project’s source code. New commits will trigger
-				OpenRegistry to <br /> automatically build and your changes
+				>With three simple steps, you can set up automated builds with OpenRegistry.
+				<br /> With every consequtive trigger (push/commit), OpenRegistry will bundle a build for
+				you.
 				<!-- </span> -->
 			</span>
 		</div>
