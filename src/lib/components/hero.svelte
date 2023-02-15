@@ -37,7 +37,7 @@
 	setContext('onClickRegister', onClickRegister);
 </script>
 
-<Card styles="w-full flex flex-col px-0">
+<Card id="top" styles="w-full flex flex-col px-0">
 	<div
 		class="flex w-full flex-col items-center justify-center gap-24 lg:w-full half:w-3/5 half:gap-4
 		laptop:w-full ipad:w-full desktop:w-full desktop:gap-8 apple:w-full"
