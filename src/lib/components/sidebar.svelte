@@ -100,17 +100,17 @@
 					styles="h-9 w-9 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="https://docs.openregistry.dev/"
-				><ReportIcon
+			<a href="https://docs.openregistry.dev/" target="_blank" rel="noreferrer">
+				<ReportIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
+				/>
+			</a>
 			<a href="/?/faq"
 				><QuestionMarkIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="https://blog.openregistry.dev/"
+			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer"
 				><PencilIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
@@ -120,7 +120,7 @@
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="https://github.com/containerish/OpenRegistry"
+			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer"
 				><StarIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
@@ -189,7 +189,7 @@
 							<CubeIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Your Repositories</span>
 						</a>
-						
+
 						<a
 							href="/apps/github/connect"
 							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
@@ -198,13 +198,10 @@
 							<GithubOutlinedIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Connect Gihub</span>
 						</a>
-
-						
 					</div>
 					<hr />
 
 					<div class="flex flex-col gap-3.5 desktop:gap-2 laptop:gap-2">
-						
 						<a
 							href="https://docs.openregistry.dev"
 							target="_blank"
@@ -215,7 +212,7 @@
 							<ReportIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Docs</span>
 						</a>
-						
+
 						<a
 							href="/faq"
 							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
@@ -237,7 +234,6 @@
 					</div>
 					<hr />
 					<div class="flex flex-col gap-3.5 desktop:gap-2">
-						
 						<a
 							href="/about"
 							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
