@@ -37,7 +37,7 @@
 	setContext('onClickRegister', onClickRegister);
 </script>
 
-<Card styles="w-full flex flex-col px-0">
+<Card id="top" styles="w-full flex flex-col px-0">
 	<div
 		class="flex w-full flex-col items-center justify-center gap-24 lg:w-full half:w-3/5 half:gap-4
 		laptop:w-full ipad:w-full desktop:w-full desktop:gap-8 apple:w-full"
@@ -127,111 +127,126 @@
 			</div>
 		</div>
 
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-[#081c45] transition
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#081c45] border
 
 			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
 		>
 			<StorjIcon />
-		</div>
+		</a>
 
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-[#031828] transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#031828] border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-200 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./ipfs-logo.png" width="165px" /></div>
-		</div>
-		<div
-			class="border-pr imary-800 flex h-24 items-center justify-center gap-3 rounded border bg-stone-700
-			transition delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		</a>
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border border-pr
+			imary-800 rounded gap-3 bg-stone-700 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<IexecIcon />
-		</div>
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-[#ce4748] transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		</a>
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#ce4748] border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<AkashIcon />
-		</div>
+		</a>
 
-		<div
-			class="b order flex h-24 items-center justify-center gap-3 rounded border-primary-800 bg-primary-600
-			transition delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-primary-600 b
+			order border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./solanaLogo.png" width="120px" /></div>
-		</div>
+		</a>
 
-		<div
-			class="flex h-24 items-center justify-center rounded border border-primary-600 bg-white transition delay-100 ease-in-out 
-			hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="border hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
+			bg-white transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nginx" src="./nginx.png" width="100px" /></div>
-		</div>
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		</a>
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nginx" src="./busybox1.png" width="50px" /></div>
 			<span class="text-lg font-semibold">BusyBox</span>
-		</div>
-		<div
-			class="flex h-24 items-center justify-center gap-2 rounded border border-primary-600 bg-white transition delay-100 
-			ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		</a>
+		<a
+			href="#"
+			class="border hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center border-primary-600 rounded 
+			bg-white transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl gap-2"
 		>
 			<div><img alt="nginx" src="./library-alpine-logo.png" width="50px" /></div>
-			<span class="text-xl font-semibold text-blue-800">Alpine</span>
-		</div>
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+			<span class="text-blue-800 font-semibold text-xl">Alpine</span>
+		</a>
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><MongoIcon /></div>
-		</div>
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		</a>
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./Redis-Logo.png" width="120px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600" />
-		</div>
+			<span class="text-lg font-semibold text-primary-600 tracking-wider" />
+		</a>
 
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./nodejs.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">node</span>
-		</div>
+			<span class="text-lg font-semibold text-primary-600 tracking-wider">node</span>
+		</a>
 
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./ubuntu-logo32.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">ubuntu</span>
-		</div>
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+			<span class="text-lg font-semibold text-primary-600 tracking-wider">ubuntu</span>
+		</a>
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./traefik-logo.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">traefik</span>
-		</div>
+			<span class="text-lg font-semibold text-primary-600 tracking-wider">traefik</span>
+		</a>
 
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./python-logo-only.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">python</span>
-		</div>
+			<span class="text-lg font-semibold text-primary-600 tracking-wider">python</span>
+		</a>
 
-		<div
-			class="flex h-24 items-center justify-center gap-3 rounded border border-primary-800 bg-white transition 
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+		<a
+			href="#"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-white border 
+			border-primary-800 rounded gap-3 transition ease-in-out delay-100 hover:shadow-primary-100 hover:shadow-2xl"
 		>
 			<div><img alt="nodejs" src="./library-httpd-logo.png" width="50px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">httpd</span>
-		</div>
+			<span class="text-lg font-semibold text-primary-600 tracking-wider">httpd</span>
+		</a>
 	</div>
 </Card>

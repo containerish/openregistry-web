@@ -85,11 +85,6 @@
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="https://docs.openregistry.dev/"
-				><ReportIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
 			<a href="/search"
 				><SearchIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
@@ -105,12 +100,17 @@
 					styles="h-9 w-9 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
+			<a href="https://docs.openregistry.dev/" target="_blank" rel="noreferrer">
+				<ReportIcon
+					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
+				/>
+			</a>
 			<a href="/?/faq"
 				><QuestionMarkIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="https://blog.openregistry.dev/"
+			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer"
 				><PencilIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
@@ -120,7 +120,7 @@
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
 			>
-			<a href="https://github.com/containerish/OpenRegistry"
+			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer"
 				><StarIcon
 					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
 				/></a
@@ -171,6 +171,37 @@
 							<HomeIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Home</span>
 						</a>
+
+						<a
+							href="/search"
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+						>
+							<SearchIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<span>Explore</span>
+						</a>
+
+						<a
+							href="/repositories"
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+						>
+							<CubeIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<span>Your Repositories</span>
+						</a>
+
+						<a
+							href="/apps/github/connect"
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+						>
+							<GithubOutlinedIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<span>Connect Gihub</span>
+						</a>
+					</div>
+					<hr />
+
+					<div class="flex flex-col gap-3.5 desktop:gap-2 laptop:gap-2">
 						<a
 							href="https://docs.openregistry.dev"
 							target="_blank"
@@ -181,34 +212,7 @@
 							<ReportIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Docs</span>
 						</a>
-					</div>
-					<hr />
 
-					<div class="flex flex-col gap-3.5 desktop:gap-2 laptop:gap-2">
-						<a
-							href="/search"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<SearchIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
-							<span>Explore</span>
-						</a>
-						<a
-							href="/repositories"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<CubeIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
-							<span>Your Repositories</span>
-						</a>
-						<a
-							href="/apps/github/connect"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<GithubOutlinedIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
-							<span>Connect Gihub</span>
-						</a>
 						<a
 							href="/faq"
 							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
@@ -217,9 +221,6 @@
 							<QuestionMarkIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Help</span>
 						</a>
-					</div>
-					<hr />
-					<div class="flex flex-col gap-3.5 desktop:gap-2">
 						<a
 							href="https://blog.openregistry.dev"
 							target="_blank"
@@ -230,6 +231,9 @@
 							<PencilIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>Blog</span>
 						</a>
+					</div>
+					<hr />
+					<div class="flex flex-col gap-3.5 desktop:gap-2">
 						<a
 							href="/about"
 							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
