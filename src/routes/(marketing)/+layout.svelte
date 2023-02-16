@@ -14,9 +14,10 @@
 	});
 </script>
 
+<!-- uw:max-w-[2000px] apple:max-w-[2000px] -->
 <main
-	class="lg:w-screen uw:min-w-[30vw] uw:max-w-[2000px] apple:max-w-[2000px] flex justify-center flex-col selection:bg-primary-500
-      selection:text-white"
+	class="lg:w-screen uw:min-w-[30vw] flex justify-center flex-col 
+	selection:bg-primary-500 selection:text-white"
 >
 	<Navbar openSignInModal={false} />
 	<slot />

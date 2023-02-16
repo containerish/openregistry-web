@@ -39,10 +39,11 @@
 
 <Card id="top" styles="w-full flex flex-col px-0">
 	<div
-		class="flex w-full flex-col items-center justify-center gap-24 lg:w-full half:w-3/5 half:gap-4
-		laptop:w-full ipad:w-full desktop:w-full desktop:gap-8 apple:w-full"
+		class="flex flex-col gap-24 desktop:gap-8 half:gap-4 w-full desktop:w-full lg:w-full half:w-4/5
+	justify-center items-center laptop:w-full apple:w-full ipad:w-full"
 	>
 		<picture class="w-full">
+			<source media="(min-width: 2000px)" srcset="./big-hero.svg" />
 			<source media="(min-width: 650px)" srcset="./hero1.svg" />
 			<source media="(min-width: 465px)" srcset="./small-hero.svg" />
 			<img alt="hero svg" class="w-full" src="./hero.svg" />
@@ -108,7 +109,7 @@
 
 	<div
 		class="grid grid-cols-5 gap-10 py-20 half:w-1/2 half:grid-cols-2 half:place-items-center
-		half:gap-2 half:py-0 half:px-10 half:pb-4 laptop:w-3/5 laptop:min-w-[600px] laptop:grid-cols-3 laptop:gap-8 laptop:py-0 laptop:pb-4"
+		half:gap-2 half:py-0 half:px-2 half:pb-4 laptop:w-3/5 laptop:min-w-[600px] laptop:grid-cols-3 laptop:gap-8 laptop:py-0 laptop:pb-4"
 	>
 		<div class="col-span-5 half:col-span-2 laptop:col-span-3">
 			<span
@@ -129,9 +130,8 @@
 
 		<a
 			href="#"
-			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center bg-[#081c45] border
-
-			delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 half:h-20 half:w-40 laptop:w-48 desktop:w-44"
+			class="hover:no-underline desktop:w-44 laptop:w-48 half:w-40 half:h-20 h-24 flex justify-center items-center
+			bg-[#081c45] border delay-100 ease-in-out hover:shadow-2xl hover:shadow-primary-200 "
 		>
 			<StorjIcon />
 		</a>

@@ -102,7 +102,7 @@
 
 <Pulse>
 	<div
-		class="flex justify-center items-start w-full h-full min-w-max min-h-[1610px] desktop:min-h-max laptop:min-h-max 
+		class="flex justify-center items-start w-full h-full min-w-max min-h-[1710px] desktop:min-h-max laptop:min-h-max 
 	half:min-h-max py-8 laptop:py-2 px-6"
 	>
 		<div

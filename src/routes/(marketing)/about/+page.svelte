@@ -6,10 +6,10 @@
 	<title>About|Open Registry</title>
 </svelte:head>
 
-<div class="flex bg-primary-50 relative">
+<div class="flex bg-primary-50 ">
 	<div
 		class="flex flex-col w-full min-h-[1500px] desktop:min-h-max laptop:min-h-max half:min-h-max justify-start items-center mx-10 half:mx-4 my-20 
-		desktop:mx-10 desktop:my-2 laptop:my-2 half:my-2"
+		desktop:mx-10 desktop:my-2 laptop:my-2 half:my-2 relative max-w-[2000px] mx-auto"
 	>
 		<div
 			class="flex flex-col gap-8 laptop:gap-1 half:gap-1 justify-start min-h-[1000px] items-center text-center px-10 
@@ -63,11 +63,11 @@
 							<br />Reads a lot of books(mostly/only Manga)
 						</p>
 
-						<div class="flex justify-center">
+						<div class="flex justify-center z-50">
 							<a
 								href="https://twitter.com/_jsdp"
 								rel="noreferrer"
-								class="mx-2 text-primary-300 hover:text-gray-500"
+								class="mx-2 text-primary-300 hover:text-primary-400"
 								target="_blank"
 							>
 								<TwitterIcon styles="h-10 w-10 mt-0.5" />
@@ -76,11 +76,11 @@
 							<a
 								rel="noreferrer"
 								href="https://github.com/jay-dee7"
-								class="mx-2 text-primary-300 hover:text-gray-500"
+								class="mx-2 text-primary-300 hover:text-primary-400"
 								aria-label="Github"
 								target="_blank"
 							>
-								<GithubIcon styles="h-11 w-11" />
+								<GithubIcon styles="h-12 w-12" />
 							</a>
 						</div>
 					</div>
@@ -111,7 +111,7 @@
 							<a
 								href="https://twitter.com/guacaemole"
 								rel="noreferrer"
-								class="mx-2 hover:text-gray-500"
+								class="mx-2 text-primary-300 hover:text-primary-400"
 								target="_blank"
 							>
 								<TwitterIcon styles="h-10 w-10 mt-0.5" />
@@ -120,11 +120,11 @@
 							<a
 								href="https://github.com/guacamole"
 								rel="noreferrer"
-								class="mx-2 text-primary-300 hover:text-gray-500"
+								class="mx-2 text-primary-300 hover:text-primary-400"
 								aria-label="Github"
 								target="_blank"
 							>
-								<GithubIcon styles="h-11 w-11" />
+								<GithubIcon styles="h-12 w-12" />
 							</a>
 						</div>
 					</div>
