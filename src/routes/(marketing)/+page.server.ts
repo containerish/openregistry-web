@@ -69,8 +69,8 @@ export const actions: Actions = {
 			if (resp.status === 202) {
 				const data = await resp.json();
 				cookies.delete('session_id');
-				cookies.delete('access');
-				cookies.delete('refresh');
+				cookies.delete('access_token');
+				cookies.delete('refresh_token');
 				locals.user = null;
 				locals.sessionId = '';
 				locals.authenticated = false;

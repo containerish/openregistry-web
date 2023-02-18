@@ -115,7 +115,6 @@ export class Auth extends HttpClient {
 		if (status !== 200) {
 			return { error, data, status };
 		}
-		console.log('data from begin register:', data);
 
 		const options = (data as { options: CredentialCreationOptionsJSON }).options;
 		const finishResponse = await this.WebAuthNFinishRegister(username, options);
@@ -126,36 +125,6 @@ export class Auth extends HttpClient {
 		username: string,
 		credentialCreationOptions: CredentialCreationOptionsJSON
 	) => {
-		// credentialCreationOptions.publicKey.challenge = this.bufferDecode(
-		// 	credentialCreationOptions.publicKey.challenge
-		// );
-		// credentialCreationOptions.publicKey.user.id = this.bufferDecode(
-		// 	credentialCreationOptions.publicKey.user.id
-		// );
-
-		// const credential = (await window.navigator.credentials.create({
-		// 	publicKey: credentialCreationOptions.publicKey
-		// })) as PublicKeyCredential;
-
-		// const response = <AuthenticatorAttestationResponse>credential.response;
-		// const attestationObject = response.attestationObject;
-		// const clientDataJSON = response.clientDataJSON;
-		// const rawId = credential.rawId;
-
-		// const body = {
-		// 	id: credential.id,
-		// 	rawId: this.bufferEncode(rawId),
-		// 	type: credential.type,
-		// 	response: {
-		// 		attestationObject: this.bufferEncode(attestationObject),
-		// 		clientDataJSON: this.bufferEncode(clientDataJSON)
-		// 	}
-		// };
-
-		// const path = `/webauthn/registration/finish?username=${username}`;
-		// const resp = await this.http.post(path, body);
-		// return resp;
-
 		const options = parseCreationOptionsFromJSON(credentialCreationOptions);
 		const path = `/webauthn/registration/finish?username=${username}`;
 		const response = await create(options);
@@ -168,46 +137,11 @@ export class Auth extends HttpClient {
 		if (status !== 200) {
 			return { error, data, status };
 		}
-
 		const options = (data as { options: CredentialRequestOptionsJSON }).options;
-
 		const requestOptions = parseRequestOptionsFromJSON(options);
 		const credential = await get(requestOptions);
-
-		// const bufDecode = this.bufferDecode;
-		// credentialRequestOptions.publicKey.challenge = bufDecode(
-		// 	credentialRequestOptions.publicKey.challenge
-		// );
-		// credentialRequestOptions.publicKey.allowCredentials.forEach((listItem) => {
-		// 	listItem.id = bufDecode(listItem.id);
-		// });
-
-		// const credential = (await window.navigator.credentials.get({
-		// 	publicKey: credentialRequestOptions.publicKey
-		// })) as PublicKeyCredential;
-
-		// const response = <AuthenticatorAssertionResponse>credential.response;
-		// const authData = response.authenticatorData;
-		// const clientDataJSON = resp.signature;
-		// const userHandle = responsonse.clientDataJSON;
-		// const rawId = credential.rawId;
-		// const sig = responsee.userHandle;
-
 		const finishLoginPath = `/webauthn/login/finish?username=${username}`;
-		// const body = {
-		// 	id: credential.id,
-		// 	rawId: this.bufferEncode(rawId),
-		// 	type: credential.type,
-		// 	response: {
-		// 		authenticatorData: this.bufferEncode(authData),
-		// 		clientDataJSON: this.bufferEncode(clientDataJSON),
-		// 		signature: this.bufferEncode(sig),
-		// 		userHandle: this.bufferEncode(userHandle)
-		// 	}
-		// };
-
 		const finishLoginResp = await this.http.post(finishLoginPath, credential);
-		console.log('final response ', finishLoginResp);
 		return finishLoginResp;
 	};
 

@@ -12,6 +12,8 @@
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 
+	import type { WebAuthnFieldErrors, WebAuthnState } from '$lib/types/webauthn';
+
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
 	let isLoading = false;
@@ -27,7 +29,6 @@
 	let formMsg: string;
 	const handleForgotPassword = async (e: any) => {
 		// dont know why, but this is the way
-		e.preventDefault();
 		if (!email || email === '') {
 			emailErr = 'email is a required field';
 			return;
@@ -68,47 +69,43 @@
 			isLoading = false;
 		};
 	};
-
-	type WebAuthnFieldErrors = {
-		[x: string]: string[] | undefined;
-	};
-
 	let isWebAuthN: boolean = false;
 	const handleIsWebAuthn = () => {
 		isWebAuthN = !isWebAuthN;
 	};
 
-	let webAuthnFieldErrors: WebAuthnFieldErrors | null;
-	let webAuthnFormErrors: string[] | null;
+	let webAuthnForm: WebAuthnState = {
+		fieldErrors: {},
+		formErrors: []
+	};
+
 	const webAuthnSignIn = async (e: SubmitEvent) => {
-		e.preventDefault();
 		const formdata = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
 		isLoading = true;
+
 		try {
 			const body = WebAuthnSignInSchema.parse(formdata);
-			webAuthnFieldErrors = null;
-			webAuthnFormErrors = null;
 			const username = body.username;
 			const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
 			if (error) {
 				isLoading = false;
-				webAuthnFormErrors = [error.message];
+				webAuthnForm.formErrors = [error.message];
 				return;
 			}
 
 			isLoading = false;
 
 			if (status === 200) {
-				console.log('status from webauth:', headers);
 				goto('/repositories', { invalidateAll: true });
 				return;
 			}
 		} catch (err) {
 			if (err instanceof ZodError) {
+				isLoading = false;
 				const zError = err.flatten();
-				webAuthnFieldErrors = zError.fieldErrors;
-				webAuthnFormErrors = [...zError.formErrors];
+				webAuthnForm.fieldErrors = zError.fieldErrors;
+				webAuthnForm.formErrors = [...zError.formErrors];
 			}
 		}
 	};
@@ -192,10 +189,10 @@
 				Sign in using Email Password
 			</ButtonOutlined>
 
-			<form on:submit={webAuthnSignIn}>
+			<form on:submit|preventDefault={webAuthnSignIn}>
 				<div class="mt-4">
 					<Textfield
-						errors={webAuthnFieldErrors?.username}
+						errors={webAuthnForm?.fieldErrors?.username}
 						name="username"
 						label="Username"
 						type="text"
@@ -203,10 +200,10 @@
 					/>
 				</div>
 
-				{#if webAuthnFormErrors && webAuthnFormErrors.length > 0}
+				{#if webAuthnForm?.formErrors && webAuthnForm?.formErrors.length > 0}
 					<div class="w-full pt-1 text-center capitalize">
 						<span class="text-center text-xs font-semibold uppercase text-red-600">
-							{webAuthnFormErrors[0]}
+							{webAuthnForm.formErrors[0]}
 						</span>
 					</div>
 				{/if}
