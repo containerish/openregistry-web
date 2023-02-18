@@ -9,6 +9,8 @@
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
 	import Logo from './logo.svelte';
+	import { WebAuthnSignInSchema } from '$lib/formSchemas';
+	import { ZodError } from 'zod';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
@@ -67,24 +69,47 @@
 		};
 	};
 
+	type WebAuthnFieldErrors = {
+		[x: string]: string[] | undefined;
+	};
+
 	let isWebAuthN: boolean = false;
 	const handleIsWebAuthn = () => {
 		isWebAuthN = !isWebAuthN;
 	};
-	const webAuthnSignIn = async (e: any) => {
-		e.preventDefault();
-		isLoading = true;
-		const email = e.target.username.value;
-		const { error, status } = await auth.WebAuthNBeginLogin(email);
-		if (error) {
-			isLoading = false;
-			formErr = error.message;
-			return;
-		}
 
-		isLoading = false;
-		if (status === 200) {
-			dispatch('success');
+	let webAuthnFieldErrors: WebAuthnFieldErrors | null;
+	let webAuthnFormErrors: string[] | null;
+	const webAuthnSignIn = async (e: SubmitEvent) => {
+		e.preventDefault();
+		const formdata = Object.fromEntries(new FormData(e.target as HTMLFormElement));
+
+		isLoading = true;
+		try {
+			const body = WebAuthnSignInSchema.parse(formdata);
+			webAuthnFieldErrors = null;
+			webAuthnFormErrors = null;
+			const username = body.username;
+			const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
+			if (error) {
+				isLoading = false;
+				webAuthnFormErrors = [error.message];
+				return;
+			}
+
+			isLoading = false;
+
+			if (status === 200) {
+				console.log('status from webauth:', headers);
+				goto('/repositories', { invalidateAll: true });
+				return;
+			}
+		} catch (err) {
+			if (err instanceof ZodError) {
+				const zError = err.flatten();
+				webAuthnFieldErrors = zError.fieldErrors;
+				webAuthnFormErrors = [...zError.formErrors];
+			}
 		}
 	};
 </script>
@@ -93,9 +118,9 @@
 	<title>Sign in | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex w-full max-w-sm mx-auto overflow-hidden lg:max-w-4xl">
-	<div class="flex flex-col w-full px-6 py-8 lg:w-full laptop:w-full laptop:py-4">
-		<div class="flex justify-center py-4 desktop:py-1 laptop:py-1 laptop:mb-6 desktop:mb-6 mb-8">
+<div class="mx-auto flex w-full max-w-sm overflow-hidden lg:max-w-4xl">
+	<div class="flex w-full flex-col px-6 py-8 lg:w-full laptop:w-full laptop:py-4">
+		<div class="mb-8 flex justify-center py-4 laptop:mb-6 laptop:py-1 desktop:mb-6 desktop:py-1">
 			<Logo type="dark" />
 		</div>
 
@@ -111,18 +136,18 @@
 				Sign in using Security key
 			</ButtonOutlined>
 
-			<div class="flex items-center justify-between mt-4">
+			<div class="mt-4 flex items-center justify-between">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
 				<span
-					class="text-sm desktop:text-xs laptop:text-xs text-center text-slate-600 capitalize hover:no-underline"
+					class="text-center text-sm capitalize text-slate-600 hover:no-underline laptop:text-xs desktop:text-xs"
 				>
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />
 			</div>
 			<form
-				class="flex flex-col gap-4 mt-2"
+				class="mt-2 flex flex-col gap-4"
 				method="POST"
 				action="?/signin"
 				use:enhance={handleSignInSubmit}
@@ -147,14 +172,14 @@
 				</div>
 
 				{#if $page.form?.formErrors && $page.form?.formErrors.length}
-					<div class="w-full pt-1 capitalize text-center">
-						<span class="text-xs font-semibold text-center text-red-600 uppercase">
+					<div class="w-full pt-1 text-center capitalize">
+						<span class="text-center text-xs font-semibold uppercase text-red-600">
 							{$page.form?.formErrors[0]}
 						</span>
 					</div>
 				{/if}
 
-				<div class="flex w-full justify-center space-x-5 mt-4">
+				<div class="mt-4 flex w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
@@ -167,20 +192,26 @@
 				Sign in using Email Password
 			</ButtonOutlined>
 
-			<form on:submit={(e) => webAuthnSignIn(e)}>
+			<form on:submit={webAuthnSignIn}>
 				<div class="mt-4">
-					<Textfield name="username" label="Username" type="text" />
+					<Textfield
+						errors={webAuthnFieldErrors?.username}
+						name="username"
+						label="Username"
+						type="text"
+						value={$page.form?.data?.username || ''}
+					/>
 				</div>
 
-				{#if formErr}
-					<div class="w-full pt-1 capitalize text-center">
-						<span class="text-xs font-semibold text-center text-red-600 uppercase">
-							{formErr}
+				{#if webAuthnFormErrors && webAuthnFormErrors.length > 0}
+					<div class="w-full pt-1 text-center capitalize">
+						<span class="text-center text-xs font-semibold uppercase text-red-600">
+							{webAuthnFormErrors[0]}
 						</span>
 					</div>
 				{/if}
 
-				<div class="flex mt-4 w-full justify-center space-x-5">
+				<div class="mt-4 flex w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 
 					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
@@ -193,7 +224,7 @@
 				<div class="mt-4">
 					{#if !formMsg}
 						<div class="flex items-center px-2">
-							<label for="reset_password" class="block font-semibold text-sm text-gray-800">
+							<label for="reset_password" class="block text-sm font-semibold text-gray-800">
 								Email
 							</label>
 						</div>
@@ -202,13 +233,13 @@
 							name="reset_password"
 							bind:value={email}
 							placeholder="Email"
-							class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 
-							bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 
-							focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+							class="form-control m-0 block w-full rounded-md border border-solid border-brown-300 bg-white 
+							bg-clip-padding px-3 py-2 text-base font-normal text-gray-700 placeholder-gray-500 transition 
+							ease-in-out focus:border-brown-100 focus:bg-white focus:text-gray-700 focus:outline-none focus:ring focus:ring-brown-800 focus:ring-opacity-40"
 						/>
 						{#if emailErr}
-							<div class="w-full pt-1 capitalize text-center">
-								<span class="text-xs font-semibold text-center text-red-600 uppercase">
+							<div class="w-full pt-1 text-center capitalize">
+								<span class="text-center text-xs font-semibold uppercase text-red-600">
 									{emailErr}
 								</span>
 							</div>
@@ -217,22 +248,22 @@
 				</div>
 
 				{#if formErr}
-					<div class="w-full pt-1 capitalize text-center">
-						<span class="text-xs font-semibold text-center text-red-600 uppercase">
+					<div class="w-full pt-1 text-center capitalize">
+						<span class="text-center text-xs font-semibold uppercase text-red-600">
 							{formErr}
 						</span>
 					</div>
 				{/if}
 
 				{#if formMsg}
-					<div class="w-full pt-1 capitalize text-center">
-						<span class="text-xs font-semibold text-center text-green-600 uppercase">
+					<div class="w-full pt-1 text-center capitalize">
+						<span class="text-center text-xs font-semibold uppercase text-green-600">
 							{formMsg}
 						</span>
 					</div>
 				{/if}
 
-				<div class="flex justify-center mt-4 w-full space-x-5">
+				<div class="mt-4 flex w-full justify-center space-x-5">
 					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}>
 						Submit
 					</ButtonSolid>
@@ -240,12 +271,12 @@
 				</div>
 			</form>
 		{/if}
-		<div class="flex items-center w-full justify-center gap-4 mt-4">
+		<div class="mt-4 flex w-full items-center justify-center gap-4">
 			<span
 				on:click={toggleSignUpForm}
 				on:keypress={toggleSignUpForm}
-				class="text-sm desktop:text-xs laptop:text-sm half:text-sm cursor-pointer no-underline 
-				m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
+				class="m-0 cursor-pointer border-none text-sm font-semibold uppercase 
+				text-slate-700 no-underline antialiased hover:underline half:text-sm laptop:text-sm desktop:text-xs"
 			>
 				sign up
 			</span>
@@ -253,8 +284,8 @@
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
-				class="text-sm desktop:text-xs laptop:text-xs half:text-xs no-underline 
-				cursor-pointer m-0 border-none font-semibold text-slate-700 uppercase antialiased hover:underline"
+				class="m-0 cursor-pointer border-none text-sm font-semibold 
+				uppercase text-slate-700 no-underline antialiased hover:underline half:text-xs laptop:text-xs desktop:text-xs"
 			>
 				Forgot password?
 			</span>
