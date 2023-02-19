@@ -7,6 +7,7 @@
 	import { Pulse } from '$lib/components';
 	import ErrorModal from '$lib/errorModal.svelte';
 	import type { PageData } from './$types';
+	import Logo from '$lib/icons/logo.svelte';
 	export let unhandledErr: string;
 	let showModal = false;
 	let password = '';
@@ -33,7 +34,7 @@
 			return;
 		}
 
-		const { error, data, status } = await auth.ForgotPasswordCallback(password, token);
+		const { error, data: response, status } = await auth.ForgotPasswordCallback(password, token);
 		if (error) {
 			if (status === 401) {
 				formErr = 'your link has expired, please try again';
@@ -43,7 +44,7 @@
 			return;
 		}
 
-		formMsg = data.message;
+		formMsg = response.message;
 		password = '';
 		confirmPassword = '';
 
@@ -76,7 +77,7 @@
 				break;
 			case githubCallback:
 				if (data.error) {
-					formErr = data.error.message;
+					formErr = data.error?.message;
 					showErrorModal = true;
 					return;
 				}
@@ -85,7 +86,7 @@
 				break;
 			case unhandled:
 				showErrorModal = true;
-				formErr = unhandledErr;
+				formErr = data?.error?.message ?? unhandledErr;
 		}
 	};
 
@@ -128,15 +129,13 @@
 	<div>
 		{#if showModal}
 			<Modal>
-				<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+				<div class="mx-auto flex w-4/5 max-w-sm overflow-hidden rounded-lg lg:max-w-4xl">
 					<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
-						<div class="flex justify-center py4 mb-8">
-							<picture>
-								<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
-							</picture>
+						<div class="py4 mb-8 flex justify-center">
+							<Logo />
 						</div>
 
-						<div class="flex items-center justify-between mt-4">
+						<div class="mt-4 flex items-center justify-between">
 							<span class="w-1/5 border-b lg:w-1/4" />
 
 							<span class="w-1/5 border-b lg:w-1/4" />
@@ -144,7 +143,7 @@
 						<form on:submit|preventDefault={setNewPassword}>
 							<div class="mt-4">
 								<div class="flex items-center px-2">
-									<label for="password" class="block font-semibold text-sm text-gray-800">
+									<label for="password" class="block text-sm font-semibold text-gray-800">
 										Password
 									</label>
 									<span class="px-2 text-xs text-brown-800">
@@ -156,11 +155,11 @@
 									name="password"
 									bind:value={password}
 									type="password"
-									class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+									class="form-control m-0 block w-full rounded-md border border-solid border-brown-300 bg-white bg-clip-padding px-3 py-2 text-base font-normal text-gray-700 placeholder-gray-500 transition ease-in-out focus:border-brown-100 focus:bg-white focus:text-gray-700 focus:outline-none focus:ring focus:ring-brown-800 focus:ring-opacity-40"
 								/>
 								{#if passwordErr}
-									<div class="w-full pt-1 capitalize text-center">
-										<span class="text-xs font-semibold text-center text-red-600 uppercase">
+									<div class="w-full pt-1 text-center capitalize">
+										<span class="text-center text-xs font-semibold uppercase text-red-600">
 											{passwordErr}
 										</span>
 									</div>
@@ -168,7 +167,7 @@
 							</div>
 							<div class="mt-4">
 								<div class="flex items-center px-2">
-									<label for="password" class="block font-semibold text-sm text-gray-800">
+									<label for="password" class="block text-sm font-semibold text-gray-800">
 										Confirm Password
 									</label>
 								</div>
@@ -177,11 +176,11 @@
 									bind:value={confirmPassword}
 									name="confirm_password"
 									type="password"
-									class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+									class="form-control m-0 block w-full rounded-md border border-solid border-brown-300 bg-white bg-clip-padding px-3 py-2 text-base font-normal text-gray-700 placeholder-gray-500 transition ease-in-out focus:border-brown-100 focus:bg-white focus:text-gray-700 focus:outline-none focus:ring focus:ring-brown-800 focus:ring-opacity-40"
 								/>
 								{#if confirmPasswordErr}
-									<div class="w-full pt-1 capitalize text-center">
-										<span class="text-xs font-semibold text-center text-red-600 uppercase">
+									<div class="w-full pt-1 text-center capitalize">
+										<span class="text-center text-xs font-semibold uppercase text-red-600">
 											{confirmPasswordErr}
 										</span>
 									</div>
@@ -189,40 +188,39 @@
 							</div>
 
 							{#if formErr}
-								<div class="w-full pt-1 capitalize text-center">
-									<span class="text-xs font-semibold text-center text-red-600 uppercase">
+								<div class="w-full pt-1 text-center capitalize">
+									<span class="text-center text-xs font-semibold uppercase text-red-600">
 										{formErr}
 									</span>
 								</div>
 							{/if}
 
 							{#if formMsg}
-								<div class="w-full pt-1 capitalize text-center">
-									<span class="text-xs font-semibold text-center text-green-600 uppercase">
+								<div class="w-full pt-1 text-center capitalize">
+									<span class="text-center text-xs font-semibold uppercase text-green-600">
 										{formMsg}
 									</span>
 								</div>
-								<div class="w-full pt-1 capitalize text-center">
+								<div class="w-full pt-1 text-center capitalize">
 									<span
-										class="text-xs font-semibold animate-pulse text-center text-green-600 uppercase"
+										class="animate-pulse text-center text-xs font-semibold uppercase text-green-600"
 									>
 										Redirecting you back to Sign In Page
 									</span>
 								</div>
 							{/if}
 
-							<div class="flex mt-8 w-full">
+							<div class="mt-8 flex w-full">
 								<Button
 									disabled={!!passwordErr || !!confirmPasswordErr}
 									onClick={setNewPassword}
 									styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
-									label="Update Password"
-								/>
-								<Button
-									onClick={toggleModal}
-									styles="bg-gray-50 text-gray-800 w-2/3 ml-2"
-									label="Close"
-								/>
+								>
+									Update Password
+								</Button>
+								<Button onClick={toggleModal} styles="bg-gray-50 text-gray-800 w-2/3 ml-2">
+									Close
+								</Button>
 							</div>
 						</form>
 					</div>

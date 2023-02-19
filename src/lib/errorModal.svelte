@@ -3,6 +3,7 @@
 	import CrossIcon from './icons/crossIcon.svelte';
 	import Modal from './modal.svelte';
 	import ButtonOutlined from './button-outlined.svelte';
+	import Logo from './icons/logo.svelte';
 
 	export let error: string;
 	export let open: boolean = false;
@@ -14,25 +15,23 @@
 <ClickOutside on:clickoutside={closeModal}>
 	{#if open}
 		<Modal>
-			<div class="flex w-4/5 max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
+			<div class="mx-auto flex w-4/5 max-w-sm overflow-hidden rounded-lg lg:max-w-4xl">
 				<div class="w-4/5 px-6 py-8 md:px-8 lg:w-full">
-					<div class="flex justify-center py4 mb-8">
-						<picture>
-							<img class="" src="/logo.svg" alt="openregistry-logo.svg" />
-						</picture>
+					<div class="py4 mb-8 flex justify-center">
+						<Logo />
 					</div>
 
-					<div class="flex items-center justify-between mt-4">
+					<div class="mt-4 flex items-center justify-between">
 						<span class="w-1/5 border-b lg:w-1/4" />
 
 						<span class="w-1/5 border-b lg:w-1/4" />
 					</div>
-					<div class="w-full flex justify-center gap-2 items-center flex-col text-center">
+					<div class="flex w-full flex-col items-center justify-center gap-2 text-center">
 						<CrossIcon styles="h-16 w-16 text-red-600" />
-						<span class="font-semibold text-red-600 capitalize tracking-wider">
+						<span class="font-semibold capitalize tracking-wider text-red-600">
 							{error}
 						</span>
-						<span class="font-semibold text-gray-600 text-xs capitalize tracking-wider">
+						<span class="text-xs font-semibold capitalize tracking-wider text-gray-600">
 							If this error is persistent, please reach out to us on by creating a
 							<a
 								href="https://github.com/containerish/OpenRegistry/issues/new?assignees=&labels=bug&template=bug_report.md&title=OpenRegistry%20Bug"
@@ -43,7 +42,7 @@
 						</span>
 					</div>
 
-					<div class="flex mt-8 justify-center items-center w-full">
+					<div class="mt-8 flex w-full items-center justify-center">
 						<ButtonOutlined onClick={closeModal}>Close</ButtonOutlined>
 					</div>
 				</div>
