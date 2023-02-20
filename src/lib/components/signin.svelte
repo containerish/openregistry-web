@@ -225,15 +225,8 @@
 								Email
 							</label>
 						</div>
-						<input
-							on:input={(e) => validateEmail(e)}
-							name="reset_password"
-							bind:value={email}
-							placeholder="Email"
-							class="form-control m-0 block w-full rounded-md border border-solid border-brown-300 bg-white 
-							bg-clip-padding px-3 py-2 text-base font-normal text-gray-700 placeholder-gray-500 transition 
-							ease-in-out focus:border-brown-100 focus:bg-white focus:text-gray-700 focus:outline-none focus:ring focus:ring-brown-800 focus:ring-opacity-40"
-						/>
+						
+						<Textfield onInput={(e) => validateEmail(e)} name="reset_password" bind:value={email} placeholder="Email"></Textfield>
 						{#if emailErr}
 							<div class="w-full pt-1 text-center capitalize">
 								<span class="text-center text-xs font-semibold uppercase text-red-600">

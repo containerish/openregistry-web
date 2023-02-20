@@ -7,7 +7,7 @@
 	import { Pulse } from '$lib/components';
 	import ErrorModal from '$lib/errorModal.svelte';
 	import type { PageData } from './$types';
-	import Logo from '$lib/icons/logo.svelte';
+	import Logo from '$lib/components/logo.svelte';
 	export let unhandledErr: string;
 	let showModal = false;
 	let password = '';
@@ -24,7 +24,7 @@
 
 	const toggleModal = async () => {
 		showModal = !showModal;
-		await goto('/');
+		goto('/', { invalidateAll: true });
 	};
 
 	let timer: any;

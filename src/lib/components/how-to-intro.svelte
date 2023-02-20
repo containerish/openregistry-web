@@ -61,9 +61,9 @@
 				</div>
 
 				<div class="flex half:justify-center items-center gap-5">
-					<ButtonSolid onClick={handleSignupForm}>Sign up for free</ButtonSolid>
+					<ButtonSolid on:click={handleSignupForm}>Sign up for free</ButtonSolid>
 					<ButtonOutlined
-						onClick={() => {
+						on:click={() => {
 							goto('https://docs.openregistry.dev');
 						}}>Learn more</ButtonOutlined
 					>

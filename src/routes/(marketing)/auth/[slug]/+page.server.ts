@@ -7,15 +7,23 @@ export async function load(loadEvent: PageServerLoadEvent) {
 	const auth = new Auth();
 	const { request, params, url } = loadEvent;
 
-	const serverErr = url.searchParams.get('error');
+	let serverErr = url.searchParams.get('error');
 	const serverErrStatus = url.searchParams.get('status');
 
 	if (serverErr && serverErr !== '') {
+		try {
+			const errJson = JSON.parse(serverErr) as { error: string; message: string };
+			serverErr = decodeURIComponent(errJson.message);
+		} catch {
+			serverErr = decodeURIComponent(serverErr);
+		}
+
+		console.log('server error:', serverErr);
 		return {
 			slug: params.slug,
 			status: Number(serverErrStatus),
 			error: {
-				message: decodeURIComponent(serverErr)
+				message: serverErr
 			},
 			authenticated: false
 		};
