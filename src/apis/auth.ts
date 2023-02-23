@@ -132,6 +132,11 @@ export class Auth extends HttpClient {
 	};
 
 	public WebAuthNBeginLogin = async (username: string) => {
+		if (!supported()) {
+			return {
+				error: 'Browser does not support WebAuthN'
+			};
+		}
 		const path = `/webauthn/login/begin?username=${username}`;
 		const { error, data, status } = await this.http.get(path);
 		if (status !== 200) {
