@@ -4,8 +4,8 @@
 
 <footer class="bg-primary-700 p-10">
 	<div class="container px-10 mx-auto half:px-0">
-		<div class="flex items-center justify-between">
-			<div class="flex gap-4 -mb-16">
+		<div class="flex items-center half:gap-16 justify-between">
+			<div class="flex half:flex-col gap-4 half:gap-2 -mb-16 half:mb-0">
 				<a
 					href="https://docs.openregistry.dev"
 					target="_blank"

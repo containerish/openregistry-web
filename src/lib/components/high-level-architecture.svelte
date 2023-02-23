@@ -59,7 +59,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="half:w-[45%] laptop:w-1/2 laptop:mr-14 ipad:w-3/4 mr-14 half:mr-0 w-11/12">
+			<div class="half:w-[45%] laptop:w-1/2 laptop:mr-14 ipad:w-3/4 mr-14 half:mr-0 w-11/12 max-w-[2300px]">
 				<picture>
 					<img
 						class="w-full"

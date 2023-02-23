@@ -3,7 +3,7 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card styles="bg-primary-50 block py-12">
+<Card styles="bg-primary-50  py-12">
 	<div class="w-full h-full half:w-4/5">
 		<div
 			class="px-6 w-full flex justify-center items-center half:flex-col
