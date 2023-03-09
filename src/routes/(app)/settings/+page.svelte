@@ -43,13 +43,13 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1500px] desktop:min-h-max laptop:min-h-max half:min-h-max  w-full">
-		<div class="flex flex-col gap-16 desktop:gap-8 laptop:gap-8 half:gap-8 pb-24">
+	<div class="min-h-[1500px] w-full half:min-h-max laptop:min-h-max  desktop:min-h-max">
+		<div class="flex flex-col gap-16 pb-24 half:gap-8 laptop:gap-8 desktop:gap-8">
 			<div
-				class="flex gap-5 half:gap-2 space-x-10 min-w-max justify-start items-center py-24 desktop:py-16 laptop:py-10 half:py-10 mt-20 
-				desktop:mt-12 laptop:mt-8 half:mt-8 px-8 laptop:px-0 bg-primary-50 text-slate-700 border-2 border-primary-100"
+				class="mt-20 flex min-w-max items-center justify-start gap-5 space-x-10 border-2 border-primary-100 bg-primary-50 py-24 px-8 
+				text-slate-700 half:mt-8 half:gap-2 half:py-10 laptop:mt-8 laptop:py-10 laptop:px-0 desktop:mt-12 desktop:py-16"
 			>
-				<div class="px-4 laptop:px-1 half:px-0" />
+				<div class="px-4 half:px-0 laptop:px-1" />
 				<div>
 					<ProfileIcon
 						styles="h-24 w-24 desktop:h-12 desktop:w-12 laptop:h-12 laptop:w-12 half:w-12 half:h-12 text-primary-500"
@@ -57,18 +57,18 @@
 				</div>
 				<div class="flex-initial">
 					<h1
-						class="text-4xl desktop:text-3xl laptop:text-3xl half:text-2xl font-medium capitalize"
+						class="text-4xl font-medium capitalize half:text-2xl laptop:text-3xl desktop:text-3xl"
 					>
 						{data.user.name ? data.user.name : data.user.username}
 					</h1>
-					<div class="flex mt-3 desktop:mt-2 half:mt-1 items-center gap-1">
+					<div class="mt-3 flex items-center gap-1 half:mt-1 desktop:mt-2">
 						<ProfileIcon
 							styles="h-6 w-6 desktop:h-4 desktop:w-4 laptop:h-4 laptop:w-4 half:w-4 half:h-4"
 						/>
-						<span class="text-lg mr-5 desktop:text-base laptop:text-sm half:text-sm"
+						<span class="mr-5 text-lg half:text-sm laptop:text-sm desktop:text-base"
 							>Community User</span
 						>
-						<span class="text-lg desktop:text-sm laptop:text-xs half:text-xs">
+						<span class="text-lg half:text-xs laptop:text-xs desktop:text-sm">
 							Joined
 							<span class="font-semibold">
 								{new Date(data.user.created_at).toDateString()}
@@ -79,19 +79,19 @@
 			</div>
 			<Card>
 				<div
-					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-10 
-					desktop:gap-6 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 laptop:px-14 
-					laptop:py-6 half:py-6 half:px-8 pb-8 pt-10"
+					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded-sm border border-primary-200 
+					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:py-6 half:px-8 laptop:w-full 
+					laptop:px-14 laptop:py-6 desktop:gap-6 desktop:px-14 desktop:py-6"
 				>
-					<div class="w-full flex flex-col gap-1">
+					<div class="flex w-full flex-col gap-1">
 						<span
-							class="text-2xl desktop:text-lg laptop:text-lg half:text-lg mx-1 font-medium text-slate-700"
+							class="mx-1 text-2xl font-medium text-slate-700 half:text-lg laptop:text-lg desktop:text-lg"
 							>Email Address</span
 						>
 						<Textfield
 							type="email"
 							placeholder="email"
-							styles="w-1/2 laptop:w-full half:w-full"
+							styles="max-w-[450px]"
 							disabled
 							bind:value={data.user.email}
 						/>
@@ -103,37 +103,37 @@
 
 			<Card>
 				<div
-					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-4 
-					desktop:gap-2 laptop:gap-2 half:gap-2 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 
-					laptop:px-14 laptop:py-6 half:px-8 half:py-6 pb-8 pt-10"
+					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-4 rounded-sm border border-primary-200 
+					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:gap-2 half:px-8 half:py-6 laptop:w-full 
+					laptop:gap-2 laptop:px-14 laptop:py-6 desktop:gap-2 desktop:px-14 desktop:py-6"
 				>
 					<h1
-						class="text-2xl desktop:text-lg laptop:text-lg half:text-lg text-slate-600 font-medium"
+						class="text-2xl font-medium text-slate-600 half:text-lg laptop:text-lg desktop:text-lg"
 					>
 						Change Password
 					</h1>
 					<Textfield
 						placeholder="current password"
 						type="password"
-						styles="w-1/2 laptop:w-full half:w-full"
+						styles="max-w-[450px]"
 						bind:value={$currentPassword.value}
 					/>
 					<Textfield
 						placeholder="new password"
 						type="password"
-						styles="w-1/2 laptop:w-full half:w-full"
+						styles="max-w-[450px]"
 						bind:value={$newPassword.value}
 					/>
 					<div />
 					<input
 						type="password"
 						bind:value={$confirmPassword.value}
-						class="w-1/2 laptop:w-full half:w-full placeholder-slate-500 form-control block px-3 py-3 text-base desktop:text-sm font-normal text-slate-700 bg-white
-						bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-slate-700
-						border rounded-md 
+						class="form-control m-0 block w-full max-w-[450px] rounded-md border border-solid border-primary-100 bg-white bg-clip-padding px-3
+						py-3 text-base font-normal text-slate-700 placeholder-slate-500 transition ease-in-out
+						focus:text-slate-700 desktop:text-sm 
           				{!$passwordForm.hasError('confirm_password.match_field')
-							? 'focus:border-priamry-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500'
-							: 'border-red-800 outline-none ring ring-opacity-40 ring-red-700'} "
+							? 'focus:border-priamry-200 focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-40'
+							: 'border-red-800 outline-none ring ring-red-700 ring-opacity-40'} "
 						placeholder="confirm password"
 					/>
 					{#if $passwordForm.hasError('current_password.required')}
@@ -159,34 +159,34 @@
 
 			<Card>
 				<div
-					class="rounded-sm flex flex-col w-4/5 laptop:w-full half:w-full max-w-[1200px] justify-center items-start gap-4 
-					desktop:gap-2 laptop:gap-1 bg-white border border-primary-200 shadow-2xl px-20 desktop:px-14 desktop:py-6 
-					laptop:px-14 laptop:py-6 half:px-14 half:py-6 pb-8 pt-10"
+					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-4 rounded-sm border border-primary-200 
+					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:px-14 half:py-6 laptop:w-full 
+					laptop:gap-1 laptop:px-14 laptop:py-6 desktop:gap-2 desktop:px-14 desktop:py-6"
 				>
-					<div class="flex flex-col gap-2 desktop:gap-1 laptop:gap-0 half:gap-0">
+					<div class="flex flex-col gap-2 half:gap-0 laptop:gap-0 desktop:gap-1">
 						<span
-							class="text-2xl desktop:text-lg laptop:text-lg half:text-lg text-slate-700 font-medium"
+							class="text-2xl font-medium text-slate-700 half:text-lg laptop:text-lg desktop:text-lg"
 							>Account Information</span
 						>
-						<span class="text-slate-600 desktop:text-sm laptop:text-xs half:text-xs antialiased">
+						<span class="text-slate-600 antialiased half:text-xs laptop:text-xs desktop:text-sm">
 							This information is public and visible to all users of OpenRegistry
 						</span>
 					</div>
 					<div
-						class="w-full flex flex-col gap-4 desktop:gap-2 laptop:gap-2 half:gap-2 justify-start items-start"
+						class="flex w-full flex-col items-start justify-start gap-4 half:gap-2 laptop:gap-2 desktop:gap-2"
 					>
 						<Textfield
 							type="text"
 							disabled
 							placeholder="username"
-							styles="w-1/2 laptop:w-full half:w-full"
+							styles="max-w-[450px]"
 							bind:value={data.user.username}
 						/>
 						<Textfield
 							placeholder="Gihub handle"
 							disabled
 							type="text"
-							styles="w-1/2 laptop:w-full half:w-full"
+							styles="max-w-[450px]"
 							bind:value={data.user.html_url}
 						/>
 						<ButtonSolid styles="mt-6">Save</ButtonSolid>

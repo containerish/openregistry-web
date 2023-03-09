@@ -2,7 +2,6 @@
 	import ButtonSolid from '../button-solid.svelte';
 	import ButtonOutlined from '../button-outlined.svelte';
 	import Textfield from '../textfield.svelte';
-	import { getContext } from 'svelte';
 	import { CheckIcon, EmailIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import confetti from 'canvas-confetti';
@@ -38,8 +37,8 @@
 		fire(0.1, { spread: 120, startVelocity: 45 });
 	};
 
-	export let toggleSignUpForm: () => void
-	export let toggleSignInForm: () => void
+	export let toggleSignUpForm: () => void;
+	export let toggleSignInForm: () => void;
 	let isLoading = false;
 	let showSuccessMsg = false;
 	const auth = new Auth();
@@ -150,14 +149,14 @@
 	<title>Sign up | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex flex-col w-full px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
-		<div class="flex justify-center py-4 mb-8 laptop:mb-4 laptop:py-1">
+<div class="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg lg:max-w-4xl">
+	<div class="flex w-full flex-col px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
+		<div class="mb-8 flex justify-center py-4 laptop:mb-4 laptop:py-1">
 			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}
 			<ButtonOutlined onClick={auth.LoginWithGithub}>
-				<GithubIcon styles="text-black mr-2" />
+				<GithubIcon styles="text-black mr-2 h-8 w-8" />
 				Sign in with Github
 			</ButtonOutlined>
 			<div class="mt-4" />
@@ -168,12 +167,12 @@
 					Sign up with Security key
 				</ButtonOutlined>
 
-				<div class="flex items-center justify-between mt-4">
+				<div class="mt-4 flex items-center justify-between">
 					<span class="w-1/5 border-b lg:w-1/4" />
 
 					<span
 						href="#"
-						class="text-xs font-semibold text-center text-gray-600 capitalize hover:no-underline"
+						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
 					>
 						or sign up with email
 					</span>
@@ -226,14 +225,14 @@
 					</div>
 
 					{#if $page.form?.formErrors && $page.form?.formErrors.length}
-						<div class="w-full pt-1 capitalize text-center">
-							<span class="text-xs font-semibold text-center text-red-600 uppercase">
+						<div class="w-full pt-1 text-center capitalize">
+							<span class="text-center text-xs font-semibold uppercase text-red-600">
 								{$page.form?.formErrors[0]}
 							</span>
 						</div>
 					{/if}
 
-					<div class="flex mt-8 w-full space-x-8 justify-center">
+					<div class="mt-8 flex w-full justify-center space-x-8">
 						<ButtonSolid type="submit" {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
 						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 					</div>
@@ -245,12 +244,12 @@
 					Sign up with Email Password
 				</ButtonOutlined>
 
-				<div class="flex items-center justify-between mt-4">
+				<div class="mt-4 flex items-center justify-between">
 					<span class="w-1/5 border-b lg:w-1/4" />
 
 					<span
 						href="#"
-						class="text-xs font-semibold text-center text-gray-600 capitalize hover:no-underline"
+						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
 					>
 						or sign up with email
 					</span>
@@ -279,14 +278,14 @@
 						/>
 					</div>
 					{#if $page.form?.formErrors && $page.form?.formErrors.length}
-						<div class="w-full pt-1 capitalize text-center">
-							<span class="text-xs font-semibold text-center text-red-600 uppercase">
+						<div class="w-full pt-1 text-center capitalize">
+							<span class="text-center text-xs font-semibold uppercase text-red-600">
 								{$page.form?.formErrors[0]}
 							</span>
 						</div>
 					{/if}
 
-					<div class="flex mt-8 w-full space-x-8">
+					<div class="mt-8 flex w-full space-x-8">
 						<ButtonSolid {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
 
 						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
@@ -294,12 +293,12 @@
 				</form>
 			{/if}
 		{:else}
-			<div class="flex flex-col items-center gap-4 justify-start h-full w-full">
+			<div class="flex h-full w-full flex-col items-center justify-start gap-4">
 				<div id="confetti">
-					<CheckIcon styles="h-24 w-24 text-primary-500" />
+					<CheckIcon styles="h-24 w-24 text-green-600" />
 				</div>
-				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
-				<div class="w-full text-center flex flex-row justify-center gap-2 px-4 items-center">
+				<span class="text-lg capitalize text-slate-700">{successMessage}</span>
+				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">
 					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
 				</div>
