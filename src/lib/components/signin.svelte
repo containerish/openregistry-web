@@ -100,7 +100,7 @@
 		</div>
 
 		<ButtonOutlined onClick={auth.LoginWithGithub}>
-			<GithubIcon styles="text-black mr-2" />
+			<GithubIcon styles="text-black mr-2 h-8 w-8" />
 			Sign in with Github
 		</ButtonOutlined>
 		<div class="mt-4" />

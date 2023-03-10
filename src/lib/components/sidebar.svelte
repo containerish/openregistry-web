@@ -269,7 +269,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<ProfileIcon styles="text-slate-600 desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<ProfileIcon styles="text-slate-600 h-6 w-6 desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
 							<span>View Profile</span>
 						</a>
 						<a

@@ -41,7 +41,7 @@
 	</div>
 	<hr class="mt-10 desktop:mt-5 laptop:mt-5 half:mt-5 border-1 border-gray-300" />
 	<div class="flex gap-2 desktop:gap-1 items-center mt-10 text-primary-600">
-		<GithubIcon styles="desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6" />
+		<GithubIcon styles="h-6 w-6" />
 		<span class="text-base desktop:text-base apple:text-xl font-semibold">Github | </span>
 		<span class="font-light laptop:text-sm half:text-sm"> more coming soon</span>
 	</div>

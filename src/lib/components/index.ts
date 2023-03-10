@@ -1,4 +1,3 @@
-import DropDown from './dropdown.svelte';
 import Hero from './hero.svelte';
 import HighLevelArchitecture from './high-level-architecture.svelte';
 import HowToIntro from './how-to-intro.svelte';
@@ -12,7 +11,6 @@ import Signin from './signin.svelte';
 import Signup from './signup.svelte';
 import Sidebar from './sidebar.svelte';
 
-export { DropDown };
 export { Hero };
 export { HighLevelArchitecture };
 export { HowToIntro };
