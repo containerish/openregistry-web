@@ -16,7 +16,7 @@
 		showSignInForm = !showSignInForm;
 	};
 
-	const toggleSignUpForm = () => {
+	const toggleSignUpForm = () => {''
 		console.log('in signup func');
 		showSignInForm = !showSignInForm;
 		showSignUpForm = !showSignUpForm;
@@ -28,24 +28,24 @@
 	// setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
-<header class="apple:pt-6 bg-primary-50 sticky top-0 z-50">
-	<nav class="uw:max-w-[50vw] apple:max-w-[100vw] px-16 mx-auto">
-		<div class="container px-6 mx-auto half:px-1 uw:px-12">
-			<div class="flex flex-col md:justify-between md:items-center">
-				<div class="flex items-center justify-between w-full">
+<header class="sticky top-0 z-50 bg-primary-50 apple:pt-6">
+	<nav class="mx-auto px-16 apple:max-w-[100vw] uw:max-w-[50vw]">
+		<div class="container mx-auto px-1 sm:px-6 uw:px-12">
+			<div class="flex flex-col md:items-center md:justify-between">
+				<div class="flex w-full items-center justify-between">
 					<div
 						on:keydown={() => {}}
 						on:click={() => goto('/')}
-						class="cursor-pointer flex items-center half:ml-5"
+						class="flex cursor-pointer items-center sm:ml-5"
 					>
 						<Logo type="dark" />
 					</div>
-					<div class="items-center flex justify-center py-2">
-						<div class="flex flex-row half:flex-col md:mt-0 md:mx-1 laptop:gap-3">
+					<div class="flex items-center justify-center py-2">
+						<div class="flex flex-col md:mx-1 md:mt-0 md:flex-row laptop:gap-3">
 							<a
 								rel="noreferrer"
-								class="my-1 hover:scale-125 tracking-wider half:text-[16px] apple:text-lg leading-5 text-primary-600
-			duration-500 transform md:mx-4 md:my-0 uw:leading-10"
+								class="my-1 transform text-base leading-5 tracking-wider text-primary-600 duration-500
+			hover:scale-125 md:mx-4 md:my-0 apple:text-lg uw:leading-10"
 								href="https://blog.openregistry.dev"
 								target="_blank"
 							>
@@ -53,24 +53,24 @@
 							</a>
 
 							<a
-								class="my-1 hover:scale-125 tracking-wider text-[16px] apple:text-lg leading-5 text-primary-600
-			duration-500 transform md:mx-4 md:my-0 uw:leading-10"
+								class="my-1 transform text-base leading-5 tracking-wider text-primary-600 duration-500
+			hover:scale-125 md:mx-4 md:my-0 apple:text-lg uw:leading-10"
 								href="/about"
 							>
 								About
 							</a>
 							<a
 								rel="noreferrer"
-								class="my-1 hover:scale-125 tracking-wider text-[16px] apple:text-lg leading-5 text-primary-600
-			duration-500 transform md:mx-4 md:my-0 uw:leading-10"
+								class="my-1 transform text-base leading-5 tracking-wider text-primary-600 duration-500
+			hover:scale-125 md:mx-4 md:my-0 apple:text-lg uw:leading-10"
 								href="https://github.com/containerish/OpenRegistry.git"
 								target="_blank"
 							>
 								Github
 							</a>
 							<a
-								class="my-1 hover:scale-125 tracking-wider text-[16px] apple:text-lg leading-5 text-primary-600
-			duration-500 transform md:mx-4 md:my-0 uw:leading-10"
+								class="my-1 transform text-base leading-5 tracking-wider text-primary-600 duration-500
+			hover:scale-125 md:mx-4 md:my-0 apple:text-lg uw:leading-10"
 								href="/faq"
 							>
 								FAQ
@@ -78,7 +78,7 @@
 						</div>
 
 						<div
-							class="flex items-center desktop:mt-1 -mx-1 sm:mx-0 uw:py-4 half:hidden laptop:ml-2"
+							class="-mx-1 hidden md:flex items-center sm:mx-0 laptop:ml-2 desktop:mt-1 uw:py-4"
 						>
 							<ButtonSolid onClick={() => toggleSignInForm()}>Sign In</ButtonSolid>
 						</div>
