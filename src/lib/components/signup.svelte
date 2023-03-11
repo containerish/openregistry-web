@@ -176,14 +176,14 @@
 			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}
-			<ButtonOutlined onClick={auth.LoginWithGithub}>
+			<ButtonOutlined on:click={auth.LoginWithGithub}>
 				<GithubIcon styles="text-black mr-2 h-8 w-8" />
 				Sign in with Github
 			</ButtonOutlined>
 			<div class="mt-4" />
 
 			{#if !isWebAuthn}
-				<ButtonOutlined onClick={handleIsWebAuthn}>
+				<ButtonOutlined on:click={handleIsWebAuthn}>
 					<FingerprintIcon styles="text-black mr-2" />
 					Sign up with Security key
 				</ButtonOutlined>
@@ -254,13 +254,13 @@
 					{/if}
 
 					<div class="mt-8 flex w-full justify-center space-x-8">
-						<ButtonSolid type="submit" {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
-						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
+						<ButtonSolid type="submit" {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
+						<ButtonOutlined on:click={toggleModals}>Close</ButtonOutlined>
 					</div>
 				</form>
 			{/if}
 			{#if isWebAuthn}
-				<ButtonOutlined onClick={handleIsWebAuthn}>
+				<ButtonOutlined on:click={handleIsWebAuthn}>
 					<EmailIcon styles="text-black mr-2" />
 					Sign up with Email Password
 				</ButtonOutlined>
@@ -306,9 +306,9 @@
 					{/if}
 
 					<div class="mt-8 flex w-full space-x-8">
-						<ButtonSolid {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
+						<ButtonSolid {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
 
-						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
+						<ButtonOutlined on:click={toggleModals}>Close</ButtonOutlined>
 					</div>
 				</form>
 			{/if}
@@ -319,8 +319,8 @@
 				</div>
 				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">
-					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
-					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
+					<ButtonSolid on:click={toggleModals}>Sign In</ButtonSolid>
+					<ButtonOutlined on:click={toggleModals}>Close</ButtonOutlined>
 				</div>
 			</div>
 		{/if}

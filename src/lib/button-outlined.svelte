@@ -9,9 +9,9 @@
 	on:click
 	class="{isLoading ? 'px-2' : 'px-4'} 
 	{styles} transition ease-in-out duration-200
-	flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] border-2 border-primary-200 text-primary-400 
-	rounded-md bg-transparent h-[60px] desktop:h-11 laptop:h-11 half:h-11 capitalize text-lg half:text-base half:leading-5 font-medium hover:shadow-primary-100 hover:shadow-3xl 
-	laptop:text-base desktop:text-base desktop:font-normal desktop:border-[1.5px] disabled:bg-slate-200 disabled:hover:rounded-md disabled:shadow-none"
+	flex justify-center space-x-2 items-center border-2 rounded-md font-medium text-primary-400 bg-transparent 
+	border-primary-200 tracking-wide px-3 min-w-28 h-11 lg:h-14 lg:lg:min-w-[144px] text-base lg:text-lg hover:shadow-primary-100 
+	hover:shadow-3xl disabled:bg-slate-200 disabled:hover:rounded-md disabled:shadow-none"
 >
 	{#if isLoading}
 		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50" fill="none" viewBox="0 0 24 24">

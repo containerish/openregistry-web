@@ -36,7 +36,7 @@
 			</div>
 			<div class="flex px-16 pt-2 w-full justify-center items-center space-x-5">
 				<ButtonSolid>Create</ButtonSolid>
-				<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+				<ButtonOutlined on:click={toggleModal}>Close</ButtonOutlined>
 			</div>
 		</div>
 	</form>

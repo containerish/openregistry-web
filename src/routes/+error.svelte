@@ -19,7 +19,7 @@
 			</span>
 			<div class="flex gap-4 justify-center items-center">
 				<ButtonSolid
-					onClick={() => {
+					on:click={() => {
 						goto('/');
 					}}>Home</ButtonSolid
 				>

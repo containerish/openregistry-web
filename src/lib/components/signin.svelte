@@ -121,14 +121,14 @@
 			<Logo type="dark" />
 		</div>
 
-		<ButtonOutlined onClick={auth.LoginWithGithub}>
+		<ButtonOutlined on:click={auth.LoginWithGithub}>
 			<GithubIcon styles="text-black mr-2 h-8 w-8" />
 			Sign in with Github
 		</ButtonOutlined>
 		<div class="mt-4" />
 
 		{#if !showForgotPasswordForm && !isWebAuthN}
-			<ButtonOutlined onClick={handleIsWebAuthn}>
+			<ButtonOutlined on:click={handleIsWebAuthn}>
 				<FingerprintIcon styles="text-black mr-2" />
 				Sign in using Security key
 			</ButtonOutlined>
@@ -178,13 +178,13 @@
 
 				<div class="mt-4 flex w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
-					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
+					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
 
 		{#if isWebAuthN}
-			<ButtonOutlined onClick={handleIsWebAuthn}>
+			<ButtonOutlined on:click={handleIsWebAuthn}>
 				<EmailIcon styles="text-black mr-2" />
 				Sign in using Email Password
 			</ButtonOutlined>
@@ -211,7 +211,7 @@
 				<div class="mt-4 flex w-full justify-center space-x-5">
 					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
 
-					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
+					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}
@@ -254,10 +254,10 @@
 				{/if}
 
 				<div class="mt-4 flex w-full justify-center space-x-5">
-					<ButtonSolid disabled={!!emailErr} onClick={handleForgotPassword} {isLoading}>
+					<ButtonSolid disabled={!!emailErr} on:click={handleForgotPassword} {isLoading}>
 						Submit
 					</ButtonSolid>
-					<ButtonOutlined onClick={toggleSignInForm}>Close</ButtonOutlined>
+					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
 				</div>
 			</form>
 		{/if}

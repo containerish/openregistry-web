@@ -125,13 +125,13 @@
 		{#if !selectedRepo}
 			<ButtonSolid
 				{disabled}
-				onClick={() => {
+				on:click={() => {
 					openDialog = true;
 					disabled = true;
 				}}>Begin setup</ButtonSolid
 			>
 		{:else}
-			<ButtonSolid onClick={() => handleNext(1)}>Begin setup</ButtonSolid>
+			<ButtonSolid on:click={() => handleNext(1)}>Begin setup</ButtonSolid>
 		{/if}
 	</div>
 
@@ -144,7 +144,7 @@
 				<span class="text-lg text-slate-700">
 					in order to build the project, you must select a repository
 				</span>
-				<ButtonSolid type="submit" onClick={() => (openDialog = false)}>Got it!</ButtonSolid>
+				<ButtonSolid type="submit" on:click={() => (openDialog = false)}>Got it!</ButtonSolid>
 			</div>
 		</Dialog>
 	{/if}

@@ -3,26 +3,21 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card styles="bg-primary-50  py-12">
-	<div class="w-full h-full half:w-4/5">
-		<div
-			class="px-6 w-full flex justify-center items-center half:flex-col
-			laptop:flex-col laptop:py-10 ipad:flex-col ipad:py-10 my-28 half:my-5"
-		>
-			<div class="half:w-80">
+<Card styles="bg-primary-50 py-12">
+	<div class="w-full h-full">
+		<div class="px-6 w-full flex justify-center items-center flex-col xl:flex-row my-3 lg:my-28">
+			<div class="w-80 md:w-fit">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
 				</picture>
 			</div>
-			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
+			<div class="w-3/5 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<span
-					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl desktop:text-4xl laptop:text-4xl"
-				>
+					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
 					Overview
 				</span>
 				<p
-					class="text-lg desktop:text-base laptop:text-base half:text-base text-primary-700 text-center font-normal"
+					class="text-base lg:text-lg text-primary-700 text-center font-normal"
 				>
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
@@ -48,14 +43,14 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 font-semibold text-lg mt-1 desktop:font-normal"
+						class="text-primary-400 font-medium text-lg mt-1"
 						href="https://conformance.opencontainers.org/"
 						target="_blank"
 						rel="noreferrer">More</a
 					>
 					<button
 						class="transition-all duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
-            hover:scale-110 pb-3 border border-none"
+            			hover:scale-110 pb-3 border border-none"
 					>
 						<Arrow styles="text-primary-400" />
 					</button>
@@ -63,18 +58,15 @@
 			</div>
 		</div>
 		<div
-			class="px-6 w-full flex justify-center items-center half:flex-col-reverse laptop:flex-col-reverse
-			laptop:py-10 ipad:flex-col-reverse ipad:py-10 my-28"
+			class="px-6 w-full flex justify-center items-center flex-col-reverse xl:flex-row my-2 lg:my-28"
 		>
-			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
+			<div class="w-3/5 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<span
-					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl desktop:text-4xl laptop:text-4xl"
-				>
+					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
 					Collaborations
 				</span>
 				<p
-					class="text-lg desktop:text-base half:text-base laptop:text-base text-primary-700 text-center font-normal 
+					class="text-base lg:text-lg text-primary-700 text-center font-normal 
 					leading-6 tracking-wide "
 				>
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
@@ -97,46 +89,42 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-lg mt-1 font-semibold desktop:font-normal"
+						class="text-primary-400 text-lg mt-1 font-medium"
 						href="https://blog.openregistry.dev/posts/collaborations"
 						target="_blank"
 						rel="noreferrer">More</a
 					>
 					<button
 						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
-       hover:scale-110 pb-3 border border-none"
+       				hover:scale-110 pb-3 border border-none"
 					>
 						<Arrow styles="text-primary-400" />
 					</button>
 				</div>
 			</div>
-			<div class="half:w-80">
+			<div class="w-80 md:w-fit">
 				<picture>
 					<img src="/collaboration.svg" alt="Collaborations" width="600px" />
 				</picture>
 			</div>
 		</div>
 		<div
-			class="px-6 w-full flex justify-center items-center half:flex-col laptop:flex-col
-			laptop:py-10 ipad:flex-col ipad:py-10 my-28"
-		>
-			<div class="half:w-80 ipad:pb-4 half:pb-4">
+			class="px-6 w-full flex justify-center items-center flex-col xl:flex-row my-28">
+			<div class="w-80 md:w-fit">
 				<picture>
 					<img src="man-arrow-up.svg" alt="Storage" width="600px" />
 				</picture>
 			</div>
-			<div class="w-1/2 mx-8 flex justify-center flex-col lg:max-w-2xl">
+			<div class="w-3/5 mx-8 flex justify-center flex-col lg:max-w-2xl">
 				<div class="flex justify-center items-center text-center">
 					<span
-						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-6xl
-					half:text-3xl desktop:text-3xl ipad:self-center laptop:text-4xl"
-					>
+						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
 						Web 3.0 Infrastructure
 					</span>
 				</div>
 
 				<p
-					class="text-lg desktop:text-base half:text-base laptop:text-base text-primary-700 text-center font-normal"
+					class="text-base lg:text-lg text-primary-700 text-center font-normal"
 				>
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
@@ -145,14 +133,14 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-lg mt-1 font-semibold desktop:font-normal"
+						class="text-primary-400 text-lg mt-1 font-medium"
 						href="https://blog.openregistry.dev/posts/web3-infrastructure"
 						target="_blank"
 						rel="noreferrer">More</a
 					>
 					<button
-						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
-          hover:scale-110 pb-3 border border-none"
+						class="transition duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
+          				hover:scale-110 lg:pb-3 border border-none"
 					>
 						<Arrow styles="text-primary-400" />
 					</button>

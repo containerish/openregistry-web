@@ -149,7 +149,7 @@
 					>
 				</div>
 
-				<ButtonSolid onClick={() => handleNext(2)}>Save and Deploy</ButtonSolid>
+				<ButtonSolid on:click={() => handleNext(2)}>Save and Deploy</ButtonSolid>
 			</div>
 		</div>
 	</div>

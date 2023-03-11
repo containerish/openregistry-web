@@ -45,7 +45,7 @@
 					>To deploy a site, first select it from your personal or team <br />GitHub account.</span
 				>
 				<div class="w-full">
-					<ButtonSolid onClick={installGithubApp}>
+					<ButtonSolid on:click={installGithubApp}>
 						<GihubIcon />
 						Connect Github
 					</ButtonSolid>

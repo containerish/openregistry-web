@@ -187,7 +187,7 @@
 							</div>
 						</div>
 						<div class="flex w-full justify-between px-20">
-							<ButtonOutlined onClick={toggleFilter}>Cancel</ButtonOutlined>
+							<ButtonOutlined on:click={toggleFilter}>Cancel</ButtonOutlined>
 							<ButtonSolid
 								>Apply
 								<ArrowRIcon styles="desktop:w-4 desktop:h-4 laptop:w-4 laptop:h-4 mt-0.5" />
@@ -231,7 +231,7 @@
 						</MenuItem>
 					</Menu>
 
-					<ButtonOutlined styles="gap-2" onClick={toggleFilter}
+					<ButtonOutlined styles="gap-2" on:click={toggleFilter}
 						>Advance Filter
 						<FilterIcon styles="desktop:w-5 desktop:h-5 laptop:w-5 laptop:h-5" />
 					</ButtonOutlined>

@@ -153,7 +153,7 @@
 							{formResp.message}
 						</span>
 					{/if}
-					<ButtonSolid styles="mt-6" onClick={resetPassword}>Save</ButtonSolid>
+					<ButtonSolid styles="mt-6" on:click={resetPassword}>Save</ButtonSolid>
 				</div>
 			</Card>
 

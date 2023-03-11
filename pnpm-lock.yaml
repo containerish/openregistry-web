@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@github/webauthn-json': ^2.1.1
   '@lukeed/uuid': ^2.0.0
   '@octokit/types': ^9.0.0
   '@playwright/test': ^1.30.0
@@ -59,6 +60,7 @@ dependencies:
   zod: 3.21.4
 
 devDependencies:
+  '@github/webauthn-json': 2.1.1
   '@playwright/test': 1.31.2
   '@popperjs/core': 2.11.6
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.56.0
@@ -335,6 +337,11 @@ packages:
   /@eslint/js/8.36.0:
     resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@github/webauthn-json/2.1.1:
+    resolution: {integrity: sha512-XrftRn4z75SnaJOmZQbt7Mk+IIjqVHw+glDGOxuHwXkZBZh/MBoRS7MHjSZMDaLhT4RjN2VqiEU7EOYleuJWSQ==}
+    hasBin: true
     dev: true
 
   /@humanwhocodes/config-array/0.11.8:

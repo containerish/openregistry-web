@@ -139,7 +139,7 @@
 						</div>
 					{/if}
 
-					<ButtonOutlined onClick={toggleModal}>Create Respository</ButtonOutlined>
+					<ButtonOutlined on:click={toggleModal}>Create Respository</ButtonOutlined>
 
 					{#if showModal}
 						<Modal>

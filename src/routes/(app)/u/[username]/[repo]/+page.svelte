@@ -143,7 +143,7 @@
 						>Quick Docker Commands</span
 					>
 
-					<ButtonOutlined styles="lowercase" onClick={() => handleCopy('pull')}>
+					<ButtonOutlined styles="lowercase" on:click={() => handleCopy('pull')}>
 						<span
 							class="{isCopied === 'pull'
 								? 'font-semibold'
@@ -153,7 +153,7 @@
 						</span>
 					</ButtonOutlined>
 
-					<ButtonOutlined onClick={() => handleCopy('push')}>
+					<ButtonOutlined on:click={() => handleCopy('push')}>
 						<span
 							class="{isCopied === 'push'
 								? 'font-semibold'

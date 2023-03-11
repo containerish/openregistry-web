@@ -248,13 +248,13 @@
 				</div>
 			</div>
 			<div class="flex justify-center items-center space-x-5 py-4 px-8 min-h-max">
-				<ButtonSolid onClick={handleShowModal}>continue</ButtonSolid>
-				<ButtonOutlined onClick={handleShowModal}>Cancel</ButtonOutlined>
+				<ButtonSolid on:click={handleShowModal}>continue</ButtonSolid>
+				<ButtonOutlined on:click={handleShowModal}>Cancel</ButtonOutlined>
 			</div>
 		</Dialog>
 	{/if}
 	<div class="flex justify-end items-end my-10">
-		<ButtonOutlined onClick={handleShowModal}>Cancel deployment</ButtonOutlined>
+		<ButtonOutlined on:click={handleShowModal}>Cancel deployment</ButtonOutlined>
 	</div>
 	<span class="text-xl font-bold text-primary-600 ml-2 desktop:text-lg laptop:text-lg">
 		Building and deployment settings</span
@@ -320,7 +320,7 @@
 			>
 		</button>
 
-		<ButtonSolid onClick={() => goto('/apps/github/connect/all-deployments')}>
+		<ButtonSolid on:click={() => goto('/apps/github/connect/all-deployments')}>
 			Continue to project
 		</ButtonSolid>
 	</div>
