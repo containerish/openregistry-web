@@ -2,26 +2,33 @@
 	"name": "openregistry-web",
 	"version": "0.0.1",
 	"type": "module",
-    "author": "Containerish OSS",
-    "description": "OpenRegistry Web Interface",
-    "keywords": ["container", "registry", "oci", "web", "ui"],
-    "bugs": {
-        "url": "https://github.com/containerish/openregistry-web/issues"
-    },
-    "homepage": "https://github.com/containerish/openregistry-web",
+	"author": "Containerish OSS",
+	"description": "OpenRegistry Web Interface",
+	"keywords": [
+		"container",
+		"registry",
+		"oci",
+		"web",
+		"ui"
+	],
+	"bugs": {
+		"url": "https://github.com/containerish/openregistry-web/issues"
+	},
+	"homepage": "https://github.com/containerish/openregistry-web",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
 		"package": "vite package",
 		"preview": "vite preview",
-        "test": "playwright test",
-        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "test:unit": "vitest",
+		"test": "playwright test",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@github/webauthn-json": "^2.1.1",
 		"@playwright/test": "^1.30.0",
 		"@popperjs/core": "^2.11.4",
 		"@rgossiaux/svelte-headlessui": "^1.0.2",

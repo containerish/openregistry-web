@@ -5,7 +5,7 @@ import type { Actions } from './$types';
 import { Auth } from '$apis/auth';
 import type { RequestEvent } from './$types';
 import { ZodError } from 'zod';
-import { signInSchema, signUpSchema } from '$lib/formSchemas';
+import { SignInSchema, SignUpSchema } from '$lib/formSchemas';
 import { env } from '$env/dynamic/public';
 
 const auth = new Auth();
@@ -16,7 +16,7 @@ export const actions: Actions = {
 		const formData = Object.fromEntries(await request.formData());
 
 		try {
-			const user = signInSchema.parse(formData);
+			const user = SignInSchema.parse(formData);
 			const { data, error: err, status, headers } = await auth.Login(user.email, user.password);
 			if (status === 200) {
 				const cookieList = (headers as AxiosResponseHeaders)['set-cookie'];
@@ -69,8 +69,8 @@ export const actions: Actions = {
 			if (resp.status === 202) {
 				const data = await resp.json();
 				cookies.delete('session_id');
-				cookies.delete('access');
-				cookies.delete('refresh');
+				cookies.delete('access_token');
+				cookies.delete('refresh_token');
 				locals.user = null;
 				locals.sessionId = '';
 				locals.authenticated = false;
@@ -95,7 +95,7 @@ export const actions: Actions = {
 		const formData = Object.fromEntries(await request.formData());
 
 		try {
-			const body = signUpSchema.parse(formData);
+			const body = SignUpSchema.parse(formData);
 			const {
 				error: err,
 				status,

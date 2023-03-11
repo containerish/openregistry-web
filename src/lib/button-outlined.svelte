@@ -1,5 +1,4 @@
 <script lang="ts">
-	export let onClick: Function = () => {};
 	export let isLoading = false;
 	export let disabled = false;
 	export let styles = '';
@@ -7,7 +6,7 @@
 
 <button
 	{disabled}
-	on:click={() => onClick()}
+	on:click
 	class="{isLoading ? 'px-2' : 'px-4'} 
 	{styles} transition ease-in-out duration-200
 	flex space-x-2 justify-center items-center max-w-[48rem] min-w-[144px] desktop:min-w-[120px] border-2 border-primary-200 text-primary-400 

@@ -61,8 +61,8 @@
 				</div>
 			{/if}
 			<div class="flex pt-4 w-full space-x-5 justify-center">
-				<ButtonSolid {isLoading} onClick={sendInvites}>Send Invites</ButtonSolid>
-				<ButtonOutlined onClick={handleModal}>Cancel</ButtonOutlined>
+				<ButtonSolid {isLoading} on:click={sendInvites}>Send Invites</ButtonSolid>
+				<ButtonOutlined on:click={handleModal}>Cancel</ButtonOutlined>
 			</div>
 		</div>
 	</form>

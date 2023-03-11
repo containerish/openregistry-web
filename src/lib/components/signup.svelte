@@ -10,6 +10,10 @@
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
 	import Logo from './logo.svelte';
+	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
+	import User from '$lib/icons/user.svelte';
+	import { ZodError } from 'zod';
+	import type { WebAuthnState } from '$lib/types/webauthn';
 
 	var count = 200;
 	var defaults = {
@@ -90,26 +94,43 @@
 		isWebAuthn = !isWebAuthn;
 	};
 
-	const webAuthNSignup = async (e: any) => {
-		isLoading = true;
-		setTimeout(async () => {
-			const { error, status, data } = await auth.WebAuthNBeginRegister(
-				e.target.username.value,
-				e.target.email.value
-			);
-			if (error || status !== 200) {
-				console.error('error signup: ', status, error);
-				formErr = error.message;
-				isLoading = false;
-				return;
-			}
+	let webAuthnForm: WebAuthnState = {
+		fieldErrors: {},
+		formErrors: []
+	};
 
-			isLoading = false;
-			showSuccessMsg = true;
-			successMessage = data.message;
-			throwSomeConfetti();
-			throwSomeConfetti();
-		}, 1000);
+	const webAuthNSignup = async (e: SubmitEvent) => {
+		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
+
+		isLoading = true;
+		try {
+			const body = WebAuthnSignUpSchema.parse(formData);
+			const username = body.username;
+			const email = body.email;
+
+			setTimeout(async () => {
+				const { error, status, data } = await auth.WebAuthNBeginRegister(username, email);
+				if (error || status !== 200) {
+					console.error('error signup: ', status, error);
+					webAuthnForm.formErrors = [error.message];
+					isLoading = false;
+					return;
+				}
+
+				isLoading = false;
+				showSuccessMsg = true;
+				successMessage = data.message;
+				throwSomeConfetti();
+				throwSomeConfetti();
+			}, 1000);
+		} catch (err) {
+			if (err instanceof ZodError) {
+				isLoading = false;
+				const zError = err.flatten();
+				webAuthnForm.fieldErrors = zError.fieldErrors;
+				webAuthnForm.formErrors = [...zError.formErrors];
+			}
+		}
 	};
 
 	const validateUsername = (e: any) => {
@@ -248,7 +269,6 @@
 					<span class="w-1/5 border-b lg:w-1/4" />
 
 					<span
-						href="#"
 						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
 					>
 						or sign up with email
@@ -261,7 +281,7 @@
 					<div class="mt-4">
 						<Textfield
 							onInput={validateUsername}
-							errors={[usernameErr]}
+							errors={webAuthnForm?.fieldErrors?.username}
 							label="Username"
 							type="text"
 							name="username"
@@ -271,7 +291,7 @@
 					<div class="mt-4">
 						<Textfield
 							onInput={validateEmail}
-							errors={[emailErr]}
+							errors={webAuthnForm?.fieldErrors?.email}
 							label="Email Address"
 							type="email"
 							name="email"
@@ -295,9 +315,9 @@
 		{:else}
 			<div class="flex h-full w-full flex-col items-center justify-start gap-4">
 				<div id="confetti">
-					<CheckIcon styles="h-24 w-24 text-green-600" />
+					<CheckIcon styles="h-24 w-24 text-primary-500" />
 				</div>
-				<span class="text-lg capitalize text-slate-700">{successMessage}</span>
+				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">
 					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
 					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
