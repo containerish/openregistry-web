@@ -38,8 +38,6 @@
 		"@tailwindcss/typography": "^0.5.7",
 		"@tsconfig/svelte": "^3.0.0",
 		"@types/cookie": "0.5.1",
-		"@types/cssnano": "^5.0.0",
-		"@types/tailwindcss": "^3.0.2",
 		"@types/webappsec-credential-management": "^0.6.3",
 		"@typescript-eslint/eslint-plugin": "^5.52.0",
 		"@typescript-eslint/parser": "^5.52.0",
@@ -66,7 +64,7 @@
 		"tslib": "^2.4.0",
 		"typescript": "^4.7.4",
 		"vite": "^4.0.3",
-		"vitest": "^0.28.5"
+		"vitest": "^0.29.2"
 	},
 	"dependencies": {
 		"@lukeed/uuid": "^2.0.0",
