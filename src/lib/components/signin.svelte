@@ -115,9 +115,9 @@
 	<title>Sign in | OpenRegistry</title>
 </svelte:head>
 
-<div class="mx-auto flex w-full max-w-sm overflow-hidden lg:max-w-4xl">
-	<div class="flex w-full flex-col px-6 py-8 lg:w-full laptop:w-full laptop:py-4">
-		<div class="mb-8 flex justify-center py-4 laptop:mb-6 laptop:py-1 desktop:mb-6 desktop:py-1">
+<div class="mx-auto flex w-full max-w-sm overflow-hidden">
+	<div class="flex w-full flex-col px-6 py-4">
+		<div class="pb-8 pt-4 flex justify-center">
 			<Logo type="dark" />
 		</div>
 
@@ -137,7 +137,7 @@
 				<span class="w-1/5 border-b lg:w-1/4" />
 
 				<span
-					class="text-center text-sm capitalize text-slate-600 hover:no-underline laptop:text-xs desktop:text-xs"
+					class="text-center text-xs lg:text-sm capitalize text-slate-600"
 				>
 					or sign in with email
 				</span>
@@ -169,8 +169,8 @@
 				</div>
 
 				{#if $page.form?.formErrors && $page.form?.formErrors.length}
-					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-red-600">
+					<div class="w-full pt-1 text-center">
+						<span class="text-center text-xs font-semibold capitalize text-red-600">
 							{$page.form?.formErrors[0]}
 						</span>
 					</div>
@@ -225,8 +225,13 @@
 								Email
 							</label>
 						</div>
-						
-						<Textfield onInput={(e) => validateEmail(e)} name="reset_password" bind:value={email} placeholder="Email"></Textfield>
+
+						<Textfield
+							onInput={(e) => validateEmail(e)}
+							name="reset_password"
+							bind:value={email}
+							placeholder="Email"
+						/>
 						{#if emailErr}
 							<div class="w-full pt-1 text-center capitalize">
 								<span class="text-center text-xs font-semibold uppercase text-red-600">
@@ -265,8 +270,8 @@
 			<span
 				on:click={toggleSignUpForm}
 				on:keypress={toggleSignUpForm}
-				class="m-0 cursor-pointer border-none text-sm font-semibold uppercase 
-				text-slate-700 no-underline antialiased hover:underline half:text-sm laptop:text-sm desktop:text-xs"
+				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase 
+				text-slate-700 no-underline antialiased hover:underline"
 			>
 				sign up
 			</span>
@@ -274,8 +279,8 @@
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
-				class="m-0 cursor-pointer border-none text-sm font-semibold 
-				uppercase text-slate-700 no-underline antialiased hover:underline half:text-xs laptop:text-xs desktop:text-xs"
+				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700 
+				antialiased hover:underline"
 			>
 				Forgot password?
 			</span>

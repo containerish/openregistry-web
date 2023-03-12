@@ -10,7 +10,7 @@
 	class="{isLoading ? 'px-2' : 'px-4'} 
 	{styles} transition ease-in-out duration-200
 	flex justify-center space-x-2 items-center border-2 rounded-md font-medium text-primary-400 bg-transparent 
-	border-primary-200 tracking-wide px-3 min-w-28 h-11 lg:h-14 lg:lg:min-w-[144px] text-base lg:text-lg hover:shadow-primary-100 
+	border-primary-200 tracking-wide px-3 min-w-[120px] h-11 lg:h-14 lg:lg:min-w-[144px] text-base lg:text-lg hover:shadow-primary-100 
 	hover:shadow-3xl disabled:bg-slate-200 disabled:hover:rounded-md disabled:shadow-none"
 >
 	{#if isLoading}

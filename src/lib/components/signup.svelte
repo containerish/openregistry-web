@@ -170,9 +170,9 @@
 	<title>Sign up | OpenRegistry</title>
 </svelte:head>
 
-<div class="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex w-full flex-col px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
-		<div class="mb-8 flex justify-center py-4 laptop:mb-4 laptop:py-1">
+<div class="mx-auto flex w-full max-w-sm overflow-hidden">
+	<div class="flex w-full flex-col px-6 py-4">
+		<div class="pb-8 pt-4 flex justify-center">
 			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}

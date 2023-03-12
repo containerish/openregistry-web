@@ -61,7 +61,7 @@
 			</p>
 		</div>
 
-		<div class="h-full pb-8 lg:ml-20">
+		<div class="h-full pb-8">
 			<form
 				on:submit|preventDefault={() => goto(`/search?q=${query}`)}
 				class="flex flex-col items-center justify-center gap-5 md:flex-row"
