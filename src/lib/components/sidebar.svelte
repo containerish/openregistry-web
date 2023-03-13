@@ -66,218 +66,185 @@
 	});
 </script>
 
-<div
-	class="bg-slate-50 desktop:min-h-max laptop:min-h-max rounded-sm flex flex-col justify-center items-center gap-14"
->
+<div class="bg-slate-50 rounded-sm flex flex-col justify-center items-center gap-14">
 	{#if !extended}
 		<form
 			method="POST"
-			class="flex flex-col justify-start px-4 laptop:px-2 items-center gap-14 desktop:gap-8 laptop:gap-8 half:gap-5 border-2 border-primary-50 
-			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 half:min-h-max"
+			class="flex flex-col justify-start px-4 items-center gap-9 border-2 border-primary-50 shadow-2xl py-6"
 		>
 			<a href="/">
 				<picture>
 					<img class="" src="/logo-new.png" alt="logo" width="60px" />
 				</picture>
 			</a>
-			<a href="/"
-				><HomeIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
-			<a href="/search"
-				><SearchIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
-			<a href="/repositories"
-				><CubeIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
+
+			<a href="/"><HomeIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
+			<a href="/search"><SearchIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
+			<a href="/repositories"><CubeIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
 			<a href="/apps/github/connect"
-				><GithubOutlinedIcon
-					styles="h-9 w-9 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
+				><GithubOutlinedIcon styles="w-6 h-6 lg:h-9 lg:w-9 text-primary-400" /></a
 			>
+
 			<a href="https://docs.openregistry.dev/" target="_blank" rel="noreferrer">
-				<ReportIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/>
+				<ReportIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</a>
-			<a href="/?/faq"
-				><QuestionMarkIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
+
+			<a href="/?/faq"><QuestionMarkIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
+			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer">
+				<PencilIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a
 			>
-			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer"
-				><PencilIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
+
+			<a href="/about"><HeartIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
+			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer">
+				<StarIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a
 			>
-			<a href="/about"
-				><HeartIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
-			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer"
-				><StarIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
+
 			<a href="#" class="bg-transparent border-0" on:click={toggleModal}>
-				<UserPlusIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/>
+				<UserPlusIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</a>
-			<a href="/u"
-				><ProfileIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
-			<a href="/settings"
-				><SettingsIcon
-					styles="w-8 h-8 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 text-primary-400"
-				/></a
-			>
+
+			<a href="/u"><ProfileIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
+			<a href="/settings"><SettingsIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+
 			<button class="border-none bg-transparent" formaction="/?/signout">
-				<SignOutIcon
-					styles="w-8 h-8 text-primary-400 desktop:w-6 desktop:h-6 laptop:w-6 laptop:h-6 half:w-6 half:h-6 desktop:mb-4"
-				/>
+				<SignOutIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</button>
 		</form>
 	{:else}
 		<form
 			method="POST"
-			class="flex flex-col justify-between gap-10 px-5 border-2 border-primary-50 
-			shadow-2xl py-6 min-h-[1610px] desktop:min-h-max laptop:min-h-max my-0.5 laptop:max-w-[316px]"
+			class="flex flex-col justify-between gap-10 border-2 border-primary-50 shadow-2xl py-6 px-12"
 		>
-			<a
-				href="/"
-				class="flex flex-row justify-between items-center gap-4 desktop:gap-2 hover:no-underline"
-			>
+			<a href="/" class="flex flex-row justify-between items-center gap-4 hover:no-underline">
 				<Logo type="dark" />
 			</a>
 
-			<div class="flex flex-col justify-center gap-10 desktop:gap-4 laptop:gap-4">
+			<div class="flex flex-col justify-center gap-10">
 				<Autocomplete onAutoComplete={handleAutoComplete} />
-				<div class="flex flex-col gap-10 desktop:gap-4">
-					<div class="flex flex-col gap-3.5 desktop:gap-2">
+				<div class="flex flex-col gap-10">
+					<div class="flex flex-col gap-3.5">
 						<a
 							href="/"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<HomeIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<HomeIcon styles="" />
 							<span>Home</span>
 						</a>
 
 						<a
 							href="/search"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<SearchIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<SearchIcon styles="" />
 							<span>Explore</span>
 						</a>
 
 						<a
 							href="/repositories"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<CubeIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<CubeIcon styles="" />
 							<span>Your Repositories</span>
 						</a>
 
 						<a
 							href="/apps/github/connect"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<GithubOutlinedIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<GithubOutlinedIcon styles="h-7 w-6.5" />
 							<span>Connect Gihub</span>
 						</a>
 					</div>
 					<hr />
 
-					<div class="flex flex-col gap-3.5 desktop:gap-2 laptop:gap-2">
+					<div class="flex flex-col gap-3.5">
 						<a
 							href="https://docs.openregistry.dev"
 							target="_blank"
 							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<ReportIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<ReportIcon styles="" />
 							<span>Docs</span>
 						</a>
 
 						<a
 							href="/faq"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<QuestionMarkIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<QuestionMarkIcon styles="" />
 							<span>Help</span>
 						</a>
 						<a
 							href="https://blog.openregistry.dev"
 							target="_blank"
 							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<PencilIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<PencilIcon styles="" />
 							<span>Blog</span>
 						</a>
 					</div>
 					<hr />
-					<div class="flex flex-col gap-3.5 desktop:gap-2">
+					<div class="flex flex-col gap-3.5">
 						<a
 							href="/about"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg py-2.5
+							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<HeartIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<HeartIcon styles="" />
 							<span>About us</span>
 						</a>
 						<a
 							href="https://github.com/containerish/OpenRegistry"
 							target="_blank"
 							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg  py-2.5
+							 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<StarIcon styles="w-6 h-6 desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<StarIcon styles="w-6 h-6 " />
 							<span>Star us on Github</span>
 						</a>
 						<a
 							href="#"
 							on:click={toggleModal}
-							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
+							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-600 
+							text-lg py-2.5 hover:bg-slate-100 hover:shadow-2xl 
+							hover:no-underline"
 						>
-							<UserPlusIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<UserPlusIcon styles="" />
 							<span>Invite People</span>
 						</a>
 					</div>
 					<hr />
-					<div class="flex flex-col gap-3.5 desktop:gap-2">
+					<div class="flex flex-col gap-3.5 ">
 						<a
 							href="/u"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<ProfileIcon styles="text-slate-600 h-6 w-6 desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<ProfileIcon styles="text-slate-600 h-6 w-6 " />
 							<span>View Profile</span>
 						</a>
 						<a
 							href="/settings"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
                      		py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 						>
-							<SettingsIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+							<SettingsIcon styles="" />
 							<span>Settings</span>
 						</a>
 					</div>
@@ -291,17 +258,17 @@
 				<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
 					<UserIcon styles="h-6 w-6" />
 				</div>
-				<div class="flex flex-col desktop:text-base">
+				<div class="flex flex-col">
 					<span>{user.username}</span>
 					<span>{user.email}</span>
 				</div>
 			</div>
 			<button
 				formaction="/?/signout"
-				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-600 text-xl desktop:text-base laptop:text-base px-3
-                     py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
+				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-600 text-lg 
+		        py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 			>
-				<SignOutIcon styles="desktop:w-5 desktop:h-5 laptop:h-5 laptop:w-5" />
+				<SignOutIcon styles="" />
 				<span>Sign out</span>
 			</button>
 			<div class="bg-slate-100 px-4 shadow-inner opacity-90 mt-10">
@@ -317,8 +284,8 @@
 						link="https://ipfs.io"
 						styles="hover:bg-[#65c3ca]"
 						logo="/IPFS_ad.png"
-						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web
-            				upgradeable, resilient, and more open."
+						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by 
+						making the web upgradeable, resilient, and more open."
 					/>
 				</Carousel>
 			</div>

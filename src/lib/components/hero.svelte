@@ -46,7 +46,9 @@
 			<img alt="hero svg" class="w-full" src="./hero.svg" />
 		</picture>
 
-		<div class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-3/5 sm:w-4/5 lg:w-full">
+		<div
+			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-3/5 sm:w-4/5 lg:w-full"
+		>
 			<span class="text-3xl font-semibold md:text-5xl xl:font-bold 2xl:text-6xl">
 				A Decentralised Container Registry
 			</span>
@@ -87,15 +89,17 @@
 
 	<div
 		class="grid w-2/3 lg:w-full max-w-[1100px] grid-cols-2 place-items-center gap-2 py-10 px-4 md:w-3/5 md:min-w-[600px]
-		md:grid-cols-3 lg:gap-8 lg:py-20 lg:grid-cols-5">
+		md:grid-cols-3 lg:gap-8 lg:py-20 lg:grid-cols-5"
+	>
 		<div class="col-span-2 pb-10 md:col-span-3 lg:col-span-5">
 			<div
 				class="flex flex-col items-center justify-center text-center 
 				text-base text-primary-600 lg:text-lg"
 			>
-				<span> Browse, Pull, Push and Share 100s of container images by open source projects, software vendors 
-				and communities.</span>
-				
+				<span>
+					Browse, Pull, Push and Share 100s of container images by open source projects, software
+					vendors and communities.</span
+				>
 			</div>
 		</div>
 		<RepoBox styles="bg-[#081c45]" href="#">
@@ -103,7 +107,9 @@
 		</RepoBox>
 
 		<RepoBox>
-			<div class="h-full w-full bg-cover" style="background-image:url(./ipfs-logo.png);">.</div>
+			<div class="h-full w-full flex justify-center items-center">
+				<img src="./IPFS_ad.png" alt="" width="150px" />
+			</div>
 		</RepoBox>
 
 		<RepoBox href="#" styles="bg-stone-700">
