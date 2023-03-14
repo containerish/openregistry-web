@@ -105,7 +105,7 @@
 		<div
 			class="{data.authenticated
 				? 'justify-start'
-				: 'justify-center'} flex items-center w-full h-full max-w-[3000px]"
+				: 'justify-center'} flex apple:items-center uw:items-center w-full h-full max-w-[3000px]"
 		>
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>

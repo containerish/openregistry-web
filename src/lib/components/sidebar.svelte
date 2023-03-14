@@ -51,7 +51,7 @@
 	const toggleModal = () => (showModal = !showModal);
 
 	const handleScreenChange = () => {
-		if (window.matchMedia('(max-width: 800px)').matches) {
+		if (window.matchMedia('(max-width: 821px)').matches) {
 			extended = false;
 		} else {
 			extended = true;
@@ -158,7 +158,7 @@
 
 						<a
 							href="/apps/github/connect"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<GithubOutlinedIcon styles="h-7 w-6.5" />

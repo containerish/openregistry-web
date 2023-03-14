@@ -66,7 +66,7 @@ const config = {
 				'desktop': {'min': '1280px', 'max': '1600px'},
 				'apple': {'min': '1601px', 'max': '2560px'},
 				'uw': {'min': '2561px'},
-				'tall': { 'raw': '(min-height: 900px)' },
+				'tall': { 'raw': '(min-height: 1200px)' },
 				
 			},
 			animation: {

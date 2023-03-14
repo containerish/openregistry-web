@@ -67,7 +67,7 @@
 </svelte:head>
 
 <Card styles="bg-white mx-auto">
-	<div class="w-full min-h-[90vh] mx-10 my-20 desktop:my-4 laptop:my-2 half:my-2 max-w-[3000px]">
+	<div class="w-3/4 lg:w-full min-h-[90vh] mx-10 my-20 desktop:my-4 laptop:my-2 half:my-2 max-w-[3000px]">
 		<div
 			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-5 rounded-sm border border-primary-100"
 		>
@@ -169,7 +169,7 @@
 		</div>
 
 		<Card>
-			<div class="w-full -ml-10">
+			<div class="w-4/5 lg:w-full mx-5">
 				<span class="mt-1 ml-2 text-2xl font-normal text-left text-slate-700 ">Need More Help?</span
 				>
 				<form

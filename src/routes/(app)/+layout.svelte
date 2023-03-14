@@ -18,7 +18,7 @@
 		</div>
 	{:else}
 		<div
-			class="bg-slate-100 flex flex-row gap-1 items-start overflow-y-auto tall:min-h-[1836px]"
+			class="bg-slate-100 flex flex-row gap-1 items-start overflow-y-auto tall:min-h-[1700px]"
 		>
 			<Sidebar user={data.user} />
 			<slot />
