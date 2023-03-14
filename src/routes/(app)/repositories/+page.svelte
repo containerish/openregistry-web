@@ -24,6 +24,7 @@
 	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Sidebar from '$lib/components/sidebar.svelte';
+	import Dialog from '$lib/dialog.svelte';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -106,16 +107,11 @@
 </svelte:head>
 
 <Pulse>
-	<div
-		class="flex justify-center items-start pt-10 w-full 
-	desktop:min-h-[1000px] laptop:min-h-max half:min-h-max min-h-[1710px] h-max laptop:min-w-[500px]"
-	>
+	<div class="flex justify-center items-start pt-10 w-full">
 		<div class="flex w-full justify-start">
-			<div
-				class="w-full  flex flex-col my-8 laptop:w-full laptop:px-2 half:w-full half:px-0 max-w-[850px]"
-			>
-				<div class="flex flex-row half:flex-col gap-4 justify-between px-6">
-					<div class="w-2/5 half:w-full">
+			<div class="w-full flex flex-col my-8 lg:px-2 max-w-[850px]">
+				<div class="flex flex-col lg:flex-row gap-4 justify-between px-6">
+					<div class="w-4/5 lg:w-3/5">
 						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 					</div>
 					{#if showTooltip}
@@ -140,12 +136,14 @@
 						</div>
 					{/if}
 
-					<ButtonOutlined on:click={toggleModal}>Create Respository</ButtonOutlined>
+					<ButtonOutlined styles="max-w-[202px]" on:click={toggleModal}
+						>Create Respository</ButtonOutlined
+					>
 
 					{#if showModal}
-						<Modal>
+						<Dialog>
 							<NewRepository />
-						</Modal>
+						</Dialog>
 					{/if}
 				</div>
 
@@ -164,11 +162,12 @@
 				{:else}
 					<div class="w-full flex justify-center items-center px-6">
 						<div
-							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
+							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 
+							flex justify-center items-center"
 						>
-							<span class="text-primary-600 text-4xl laptop:text-2xl desktop:text-3xl"
-								>No Repositories</span
-							>
+							<span class="text-slate-500 text-2xl md:text-3xl lg:text-4xl">
+								No Repositories Yet
+							</span>
 						</div>
 					</div>
 				{/if}

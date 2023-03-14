@@ -9,8 +9,7 @@
 </script>
 
 <main
-	class="flex flex-col selection:bg-primary-500 min-h-[1500px] desktop:min-h-max laptop:min-h-max
-      selection:text-white w-screen uw:min-w-[30vw] uw:max-w-[2000px] apple:max-w-[2000px]"
+	class="flex flex-col selection:bg-primary-500 selection:text-white w-screen max-w-[2000px]"
 >
 	{#if !data.user}
 		<Navbar openSignInModal={false} />
@@ -19,7 +18,7 @@
 		</div>
 	{:else}
 		<div
-			class="bg-slate-100 flex flex-row gap-1 items-start half:overflow-y-auto laptop:overflow-y-auto"
+			class="bg-slate-100 flex flex-row gap-1 items-start overflow-y-auto tall:min-h-[1836px]"
 		>
 			<Sidebar user={data.user} />
 			<slot />

@@ -119,7 +119,7 @@
 	{:else}
 		<form
 			method="POST"
-			class="flex flex-col justify-between gap-10 border-2 border-primary-50 shadow-2xl py-6 px-12"
+			class="flex flex-col justify-between gap-10 border-2 border-primary-50 shadow-2xl py-6 px-6 lg:px-9"
 		>
 			<a href="/" class="flex flex-row justify-between items-center gap-4 hover:no-underline">
 				<Logo type="dark" />
