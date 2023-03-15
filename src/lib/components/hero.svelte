@@ -37,7 +37,7 @@
 	setContext('onClickRegister', onClickRegister);
 </script>
 
-<Card id="top" styles="w-full flex flex-col px-0">
+<Card id="top" styles="w-full flex flex-col px-0 bg-white">
 	<div class="flex flex-col items-center justify-center gap-4 md:w-full md:gap-8 xl:gap-24">
 		<picture class="w-full">
 			<source media="(min-width: 2000px)" srcset="./big-hero.svg" />

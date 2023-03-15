@@ -33,7 +33,7 @@
 	};
 </script>
 
-<div class="px-10 py-10">
+<div class="px-10 py-10 z-50">
 	<form
 		on:submit|preventDefault={() => sendInvites()}
 		class="flex justify-around items-center gap-8 flex-col h-full w-full"
