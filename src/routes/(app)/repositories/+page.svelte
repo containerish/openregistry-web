@@ -107,20 +107,19 @@
 </svelte:head>
 
 <Pulse>
-	<div class="flex justify-center items-start pt-10 w-full">
-		<div class="flex w-full justify-start">
-			<div class="w-full flex flex-col my-8 lg:px-2 max-w-[850px]">
-				<div class="flex flex-col lg:flex-row gap-4 justify-between px-6">
+	<div class="flex justify-start items-start w-full h-full min-w-max min-h-max py-8">
+			<div class="w-full flex flex-col my-8 max-w-[850px] px-9 lg:px-16">
+				<div class="flex flex-col lg:flex-row gap-4 px-2 justify-between ">
 					<div class="w-4/5 lg:w-3/5">
 						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 					</div>
 					{#if showTooltip}
 						<div
 							id="tooltip"
-							class=" bg-cyan-200 rounded py-3 px-4 desktop:min-w-max desktop:py-1 desktop:px-2"
+							class=" bg-cyan-200 rounded py-1 px-3"
 							use:popperContent={extraOpts}
 						>
-							<span class=" text-slate-700 desktop:text-xs">
+							<span class=" text-slate-700">
 								Coming soon
 								<svg
 									class="absolute text-cyan-200 h-5 w-5 left-0 pb-1 ml-3 top-full"
@@ -148,19 +147,19 @@
 				</div>
 
 				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
-					<div class="w-full px-4">
+					<div class="w-full">
 						{#each catalog.repositories as repo}
 							<Repository data={repo} compact={false} />
 						{/each}
 					</div>
 
-					<div class="flex justify-center py-4">
+					<div class="flex justify-center">
 						{#if catalog.total > backend.DefaultPageSize}
 							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
 						{/if}
 					</div>
 				{:else}
-					<div class="w-full flex justify-center items-center px-6">
+					<div class="w-full flex justify-center items-center">
 						<div
 							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 
 							flex justify-center items-center"
@@ -172,7 +171,6 @@
 					</div>
 				{/if}
 			</div>
-		</div>
 	</div>
 </Pulse>
 <ErrorModal open={openErrorModal} error={httpError} />

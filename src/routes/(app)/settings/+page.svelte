@@ -43,34 +43,23 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1500px] w-full half:min-h-max laptop:min-h-max  desktop:min-h-max">
-		<div class="flex flex-col gap-16 pb-24 half:gap-8 laptop:gap-8 desktop:gap-8">
-			<div
-				class="mt-20 flex min-w-max items-center justify-start gap-5 space-x-10 border-2 border-primary-100 bg-primary-50 py-24 px-8 
-				text-slate-700 half:mt-8 half:gap-2 half:py-10 laptop:mt-8 laptop:py-10 laptop:px-0 desktop:mt-12 desktop:py-16"
-			>
-				<div class="px-4 half:px-0 laptop:px-1" />
-				<div>
-					<ProfileIcon
-						styles="h-24 w-24 desktop:h-12 desktop:w-12 laptop:h-12 laptop:w-12 half:w-12 half:h-12 text-primary-500"
-					/>
+	<div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
+		<div class="flex flex-col gap-9">
+			<div class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-2 border-primary-100">
+				<div class="flex items-center">
+					<ProfileIcon styles="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
 				</div>
-				<div class="flex-initial">
-					<h1
-						class="text-4xl font-medium capitalize half:text-2xl laptop:text-3xl desktop:text-3xl"
-					>
+				<div class="flex flex-col justify-center w-full">
+					<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-700">
 						{data.user.name ? data.user.name : data.user.username}
-					</h1>
-					<div class="mt-3 flex items-center gap-1 half:mt-1 desktop:mt-2">
-						<ProfileIcon
-							styles="h-6 w-6 desktop:h-4 desktop:w-4 laptop:h-4 laptop:w-4 half:w-4 half:h-4"
-						/>
-						<span class="mr-5 text-lg half:text-sm laptop:text-sm desktop:text-base"
-							>Community User</span
-						>
-						<span class="text-lg half:text-xs laptop:text-xs desktop:text-sm">
+					</span>
+					<div class="flex mt-3 desktop:mt-2 laptop:mt-1 half:mt-1 items-center gap-1">
+						<ProfileIcon styles="h-5 w-5 text-slate-600" />
+						<span class="text-sm lg:text-base text-slate-600">Community User</span>
+
+						<span class="text-xs lg:text-sm text-slate-600 antialiased px-5">
 							Joined
-							<span class="font-semibold">
+							<span>
 								{new Date(data.user.created_at).toDateString()}
 							</span>
 						</span>
@@ -79,9 +68,8 @@
 			</div>
 			<Card>
 				<div
-					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded-sm border border-primary-200 
-					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:py-6 half:px-8 laptop:w-full 
-					laptop:px-14 laptop:py-6 desktop:gap-6 desktop:px-14 desktop:py-6"
+					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded-sm border border-primary-200 
+					bg-white px-9 lg:px-20 py-6 lg:py-9 shadow-2xl"
 				>
 					<div class="flex w-full flex-col gap-1">
 						<span

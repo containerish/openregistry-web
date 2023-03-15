@@ -101,11 +101,11 @@
 </svelte:head>
 
 <Pulse>
-	<div class="flex justify-center items-start w-full h-full min-w-max min-h-max py-8 px-6">
+	<div class="flex justify-center items-start w-full h-full min-w-max min-h-max py-8">
 		<div
 			class="{data.authenticated
 				? 'justify-start'
-				: 'justify-center'} flex apple:items-center uw:items-center w-full h-full max-w-[3000px]"
+				: 'justify-center'} flex items-center w-full h-full max-w-[3000px]"
 		>
 			{#if showTooltip}
 				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
@@ -176,8 +176,8 @@
 					</div>
 				</Dialog>
 			{/if}
-			<div class="flex flex-col w-3/4 my-8 items-start ">
-				<div class="flex flex-row gap-10 justify-between w-full max-w-[850px] pb-2">
+			<div class="flex flex-col w-full my-8 items-start max-w-[850px] px-9 lg:px-16">
+				<div class="flex flex-row gap-10 justify-between w-full pb-2">
 					<Menu title="Sort">
 						<MenuItem>
 							<button
@@ -187,7 +187,7 @@
 								}}
 								class="{sortBy === 'last_updated' ? 'font-normal bg-white' : ''} 
                 				w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none
-								rounded-sm gap-2 m-0 hover:bg-slate-100 text-sm"
+								rounded gap-2 m-0 hover:bg-slate-100 text-sm"
 							>
 								<ClockIcon styles="h-5 w-5" />
 								Last Updated
@@ -218,13 +218,8 @@
 						>Advance Filter
 						<FilterIcon />
 					</ButtonOutlined>
-					{#if showModal}
-						<Modal>
-							<NewRepository />
-						</Modal>
-					{/if}
 				</div>
-				<div class="w-full flex flex-col justify-center items-center max-w-[850px]">
+				<div class="w-full flex flex-col justify-center items-center">
 					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 						<div class="w-full">
 							{#each catalog.repositories as repo}
