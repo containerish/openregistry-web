@@ -20,23 +20,20 @@
 
 		<div class="flex cursor-pointer justify-center pt-2">
 			<a
-				class="mt-1 text-lg font-semibold text-primary-400 desktop:font-normal"
+				class="mt-1 text-lg font-semibold text-primary-400"
 				href="https://blog.openregistry.dev/posts/overview"
 				target="_blank"
 				rel="noreferrer">More</a
 			>
 			<button
-				class="hover: transform border
-                       border-none bg-transparent pb-3
-                       transition duration-500
-                      	 ease-in-out hover:translate-x-2 hover:scale-110"
-			>
+				class="hover: transform border border-none bg-transparent pb-3 transition 
+				duration-500 ease-in-out hover:translate-x-2 hover:scale-110">
 				<Arrow styles="text-primary-400" />
 			</button>
 		</div>
 	</div>
 	<div
-		class="mr-14 w-11/12 max-w-[2300px] half:mr-0 half:w-[45%] laptop:mr-14 laptop:w-1/2 ipad:w-3/4"
+		class="w-11/12 max-w-[2300px]"
 	>
 		<picture>
 			<img

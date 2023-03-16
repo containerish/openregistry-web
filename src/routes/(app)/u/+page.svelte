@@ -62,7 +62,7 @@
 				<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-700">
 					{data.user.name ? data.user.name : data.user.username}
 				</span>
-				<div class="flex mt-3 desktop:mt-2 laptop:mt-1 half:mt-1 items-center gap-1">
+				<div class="flex items-center gap-1">
 					<ProfileIcon styles="h-5 w-5 text-slate-600" />
 					<span class="text-sm lg:text-base text-slate-600">Community User</span>
 				</div>

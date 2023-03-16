@@ -14,7 +14,6 @@
 	});
 </script>
 
-<!-- uw:max-w-[2000px] apple:max-w-[2000px] -->
 <main
 	class="w-screen flex justify-center flex-col selection:bg-primary-500 selection:text-white"
 >

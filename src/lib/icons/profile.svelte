@@ -1,6 +1,7 @@
 <script>
     export let styles="w-10 h-10";
 </script>
+
 <svg fill="none"
  viewBox="0 0 24 24" 
  stroke-width="2"

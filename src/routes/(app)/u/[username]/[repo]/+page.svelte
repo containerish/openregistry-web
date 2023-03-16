@@ -134,7 +134,7 @@
 						<span
 							class="{isCopied === 'pull'
 								? 'font-semibold'
-								: ''} select-all text-sm lg:text-base desktop:text-base text-primary-400 
+								: ''} select-all text-sm lg:text-base text-primary-400 
 								py-2 px-2 lowercase tracking-wide"
 						>
 							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
@@ -145,7 +145,7 @@
 						<span
 							class="{isCopied === 'push'
 								? 'font-semibold'
-								: ''} select-all text-sm lg:text-base desktop:text-base text-primary-400 
+								: ''} select-all text-sm lg:text-base text-primary-400 
 								px-2 py-2 lowercase tracking-wide"
 						>
 							{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}

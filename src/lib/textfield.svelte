@@ -12,7 +12,7 @@
 </script>
 
 <div class="flex items-center px-2">
-	<label for={label} class="block font-semibold text-sm apple:text-base -ml-2 text-slate-700"
+	<label for={label} class="block font-semibold text-sm lg:text-base -ml-2 text-slate-700"
 		>{label}</label
 	>
 	{#if subHeading !== ''}
