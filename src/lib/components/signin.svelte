@@ -13,6 +13,7 @@
 	import { ZodError } from 'zod';
 
 	import type { WebAuthnFieldErrors, WebAuthnState } from '$lib/types/webauthn';
+	import { env } from '$env/dynamic/public';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
@@ -121,7 +122,10 @@
 			<Logo type="dark" />
 		</div>
 
-		<ButtonOutlined on:click={auth.LoginWithGithub}>
+		<ButtonOutlined
+			on:click={() =>
+				window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
+		>
 			<GithubIcon styles="text-black mr-2 h-8 w-8" />
 			Sign in with Github
 		</ButtonOutlined>
@@ -136,9 +140,7 @@
 			<div class="mt-4 flex items-center justify-between">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
-				<span
-					class="text-center text-xs lg:text-sm capitalize text-slate-600"
-				>
+				<span class="text-center text-xs lg:text-sm capitalize text-slate-600">
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />

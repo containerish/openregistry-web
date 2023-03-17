@@ -11,7 +11,7 @@
 
 	const installGithubApp = () => {
 		const installationUrl = env.PUBLIC_GITHUB_APP_PUBLIC_LINK + '/installations/new';
-		goto(installationUrl);
+		window.open(installationUrl, '_self');
 	};
 </script>
 
@@ -30,21 +30,18 @@
 				</span>
 			</div>
 			<hr class="mx-0 my-10 lg:mx-10" />
-			<div
-				class="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-10 py-10"
-			>
+			<div class="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-10 py-10">
 				<!-- svelte-ignore a11y-img-redundant-alt -->
 				<img src="/connect-github.png" alt="upload-file-image" class="w-40 lg:w-80" />
 				<div class="flex flex-col items-center lg:items-start space-y-3 lg:space-y-9">
 					<span class="text-sm text-slate-600 lg:text-base text-center lg:text-start"
 						>To deploy a site, first select it from your personal or team GitHub account.</span
 					>
-					
-						<ButtonSolid styles="max-w-[208px]" on:click={installGithubApp}>
-							<GihubIcon />
-							Connect Github
-						</ButtonSolid>
-					
+
+					<ButtonSolid styles="max-w-[208px]" on:click={installGithubApp}>
+						<GihubIcon />
+						Connect Github
+					</ButtonSolid>
 				</div>
 			</div>
 			<hr class="m-10 laptop:mx-0" />
@@ -66,6 +63,5 @@
 				</p>
 			</div>
 		</div>
-		
 	</div>
 </div>

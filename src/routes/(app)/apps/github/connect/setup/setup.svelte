@@ -11,42 +11,41 @@
 	export let handleNext;
 </script>
 
-<div class="desktop:w-[800px] laptop:w-[420px] half:w-[300px]">
-	<div class="flex flex-col justify-center items-center gap-4 desktop:gap-2 laptop:gap-2 half:gap-2">
-		<span class="text-2xl half:text-lg font-bold text-primary-600">Set up builds and deployments</span>
-		<div class="flex space-x-3 laptop:space-x-1 justify-center items-center">
-			<span class="text-base text-center desktop:text-base laptop:text-sm half:text-sm apple:text-lg uw:text-lg text-slate-600">
+<div class="w-full">
+	<div class="flex flex-col justify-center items-center gap-3">
+		<span class="text-2xl font-bold text-primary-600">Set up builds and deployments</span>
+		<div class="flex justify-center items-center gap-3">
+			<span class="text-sm lg:text-base text-center text-slate-600">
 				Configure automatic builds and deployments for</span
 			>
-			<img class="mt-0.5" src="/github.svg" alt="github-logo" width="24" />
-			<a
-				class="text-primary-500"
-				target="_blank"
-				rel="noreferrer"
-				href="https://github.com/{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository
-					.name}"
-			>
-				<u>
-					{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository.name}
-				</u>
-			</a>
+			<div class="flex gap-1 items-center">
+				<img class="mt-0.5" src="/github.svg" alt="github-logo" width="24" />
+				<a
+					class="text-primary-500"
+					target="_blank"
+					rel="noreferrer"
+					href="https://github.com/{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository
+						.name}"
+				>
+					<u>
+						{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository.name}
+					</u>
+				</a>
+			</div>
 		</div>
 	</div>
-	<hr class="mt-10 half:mt-5 laptop:mt-5 desktop:mt-5" />
+	<hr class="mt-9" />
 
-	<div class="flex flex-col justify-center my-10 gap-4 desktop:gap-2 laptop:gap-2">
-		<span
-			class="font-semibold text-primary-600 text-base desktop:text-lg apple:text-xl uw:text-xl"
-			>Project name</span
-		>
-		<div class="w-2/5">
+	<div class="flex flex-col justify-center my-10 gap-3">
+		<span class="font-semibold text-primary-600 text-base lg:text-lg">Project name</span>
+		<div class="w-full max-w-[420px]">
 			<Textfield />
 		</div>
-		<span class="text-sm text-slate-700 laptop:text-xs apple:text-base uw:text-base antialiased">
+		<span class="text-sm text-slate-700 antialiased">
 			Your project will be deployed to akash network</span
 		>
 	</div>
-	<div class="flex flex-col my-10 gap-2 laptop:gap-1 half:gap-1">
+	<div class="flex flex-col my-10 gap-3">
 		<ListBox
 			items={$ghStore.selectedRepository.branches.map((b, i) => ({
 				name: b.name,
@@ -57,20 +56,15 @@
 				disabled: false
 			}))}
 		/>
-		<span class="text-sm text-slate-700 desktop:text-sm laptop:text-xs half:text-xs apple:text-base uw:text-base antialiased">
-			Pushes to this branch automatically trigger deployments to the Production environment.
-			 Pushes branches will trigger deployments within the Preview environment
-			to all other
+		<span class="text-sm text-slate-700 antialiased">
+			Pushes to this branch automatically trigger deployments to the Production environment. Pushes
+			branches will trigger deployments within the Preview environment to all other
 		</span>
 	</div>
-	<hr class="my-12 desktop:my-6 laptop:my-4 half:my-3" />
-	<div class="flex flex-col gap-4 desktop:gap-2 laptop:gap-2 half:gap-1">
-		<div class="flex space-x-2">
-			<span
-				class="text-base text-primary-600 desktop:text-lg apple:text-xl uw:text-xl font-semibold"
-			>
-				Build Settings</span
-			>
+	<hr class="my-9" />
+	<div class="flex flex-col gap-3">
+		<div class="flex gap-3">
+			<span class="text-base text-primary-600 lg:text-lg font-semibold"> Build Settings</span>
 			<div
 				class="flex space-x-2 justify-center items-center rounded-sm bg-cyan-200 max-w-fit px-2 pr-3 py-0.5 
 				text-sm text-cyan-900"
@@ -79,45 +73,43 @@
 				<span class="text-xs">Configuring build</span>
 			</div>
 		</div>
-		<span class="text-sm desktop:text-sm laptop:text-xs half:text-xs apple:text-base uw:text-base text-slate-700 antialiased">
+		<span class="text-sm text-slate-700 antialiased">
 			If your project uses a different tool than Docker (like nerdctl), then please set the build
 			instructions for OpenRegistry
 		</span>
 		<div class="flex flex-col">
-			<div class="flex flex-col my-8 desktop:my-4 laptop:my-3 half:my-3 space-y-1 text-sm apple:text-base uw:text-base">
+			<div class="flex flex-col my-6 gap-1 text-sm">
 				<ListBox
 					items={[
 						{ name: 'Docker', id: 0, disabled: false },
 						{ name: 'NerdCtl', disabled: false, id: 1 }
 					]}
 				/>
-				<span class="text-slate-700 laptop:text-xs half:text-sm antialiased">
+				<span class="text-slate-700 text-sm antialiased">
 					select a framework to prefill recommended settings
 				</span>
 			</div>
 
-			<div class="flex flex-col my-10 laptop:my-6 half:my-6 space-y-3">
-				<div class="flex items-center space-x-1 w-2/5 text-primary-500">
-					<span class="font-normal apple:font-semibold uw:font-semibold desktop:text-base">
-						Build command</span
-					>
+			<div class="flex flex-col my-9 gap-3">
+				<div class="flex items-center gap-1 w-2/5 text-primary-500">
+					<span class="font-medium"> Build command</span>
 					<InfoIcon />
 				</div>
-				<div class="w-2/5">
+				<div class="w-full max-w-[420px]">
 					<Textfield type="search" />
 				</div>
-				<span class="text-md text-slate-600 desktop:text-sm laptop:text-sm half:text-xs">
+				<span class="text-slate-600 text-sm antialiased">
 					e.g. docker build -f Dockerfile -t openregistry.dev/test-user/myapp:latest .
 				</span>
 			</div>
 
-			<div class="flex flex-col space-y-8 desktop:space-y-4 laptop:space-y-4 half:space-y-4">
-				<div class="flex items-center justify-start space-x-1">
+			<div class="flex flex-col gap-6">
+				<div class="flex items-center justify-start gap-1">
 					<Disclosure title="Dockerfile directory (advanced)">
-						<Textfield styles="w-1/4 ml-10" type="search" />
+						<Textfield styles=" ml-10" type="search" />
 					</Disclosure>
 				</div>
-				<div class="flex items-center justify-center w-full space-x-1">
+				<div class="flex items-center justify-center w-full gap-1">
 					<Disclosure title="Environment variables (advanced)">
 						<div class="grid grid-flow-col gap-4 place-items-center grid-cols-2 w-full">
 							<div class="w-3/4">
@@ -135,18 +127,16 @@
 				</div>
 			</div>
 
-			<hr class="my-16 desktop:my-8 laptop:my-6 half:my-4" />
+			<hr class="my-9" />
 
 			<div class="flex justify-between items-center mt-10">
 				<div
 					on:click={() => handleNext(0)}
 					on:keypress={() => handleNext(0)}
-					class="flex space-x-1 cursor-pointer"
+					class="flex gap-1 cursor-pointer"
 				>
 					<ArrowLeftIcon styles="text-slate-700" />
-					<span class="text-slate-700 text-base desktop:text-base apple:text-lg uw:text-lg"
-						>Change repository</span
-					>
+					<span class="text-slate-700 text-base lg:text-lg">Change repository</span>
 				</div>
 
 				<ButtonSolid on:click={() => handleNext(2)}>Save and Deploy</ButtonSolid>
