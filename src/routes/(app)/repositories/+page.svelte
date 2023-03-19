@@ -1,12 +1,10 @@
 <script lang="ts">
-	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
 	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
 	import { NewRepository, Repository, Pulse } from '$lib/components';
 	import type { PageData } from './$types';
-
 	import { RegistryBackend } from '$apis/registry';
 	import type { Catalog } from '$apis/registry';
 	import type { User } from '$apis/auth';
@@ -23,7 +21,6 @@
 	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
-	import Sidebar from '$lib/components/sidebar.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
@@ -57,8 +54,6 @@
 		// @ts-ignore
 		const resp = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
 		if (resp.error) {
-			openErrorModal = true;
-			httpError = resp.error.message;
 			return;
 		}
 
@@ -98,8 +93,6 @@
 	$: {
 		pulseStore.setPulseState(!$navigating && !!catalog);
 	}
-	let openErrorModal: boolean = false;
-	let httpError: string;
 </script>
 
 <svelte:head>
@@ -167,4 +160,3 @@
 		</div>
 	</div>
 </Pulse>
-<ErrorModal open={openErrorModal} error={httpError} />

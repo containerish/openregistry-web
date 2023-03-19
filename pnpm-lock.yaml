@@ -13,6 +13,7 @@ specifiers:
   '@tailwindcss/typography': ^0.5.7
   '@tsconfig/svelte': ^3.0.0
   '@types/cookie': 0.5.1
+  '@types/throttle-debounce': ^5.0.0
   '@types/webappsec-credential-management': ^0.6.3
   '@typescript-eslint/eslint-plugin': ^5.52.0
   '@typescript-eslint/parser': ^5.52.0
@@ -70,6 +71,7 @@ devDependencies:
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@tsconfig/svelte': 3.0.0
   '@types/cookie': 0.5.1
+  '@types/throttle-debounce': 5.0.0
   '@types/webappsec-credential-management': 0.6.4
   '@typescript-eslint/eslint-plugin': 5.54.1_4rfaf6mlw2mmutqjcopwvbftpu
   '@typescript-eslint/parser': 5.54.1_vgl77cfdswitgr47lm5swmv43m
@@ -573,6 +575,10 @@ packages:
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/throttle-debounce/5.0.0:
+    resolution: {integrity: sha512-Pb7k35iCGFcGPECoNE4DYp3Oyf2xcTd3FbFQxXUI9hEYKUl6YX+KLf7HrBmgVcD05nl50LIH6i+80js4iYmWbw==}
     dev: true
 
   /@types/webappsec-credential-management/0.6.4:

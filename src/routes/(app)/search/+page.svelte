@@ -245,4 +245,3 @@
 		</div>
 	</div>
 </Pulse>
-<ErrorModal open={openErrorModal} error={httpError} />
