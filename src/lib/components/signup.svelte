@@ -11,7 +11,6 @@
 	import { page } from '$app/stores';
 	import Logo from './logo.svelte';
 	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
-	import User from '$lib/icons/user.svelte';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
 
@@ -46,15 +45,8 @@
 	let isLoading = false;
 	let showSuccessMsg = false;
 	const auth = new Auth();
-
-	const toggleModals = () => {
-		toggleSignInForm();
-		toggleSignUpForm();
-	};
-
 	let usernameErr = '';
 	let emailErr = '';
-	let formErr: string;
 	let successMessage = '';
 
 	const handleSignUpSubmit: SubmitFunction = ({ form }) => {
@@ -255,7 +247,7 @@
 
 					<div class="mt-8 flex w-full justify-center space-x-8">
 						<ButtonSolid type="submit" {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
-						<ButtonOutlined on:click={toggleModals}>Close</ButtonOutlined>
+						<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 					</div>
 				</form>
 			{/if}
@@ -307,8 +299,7 @@
 
 					<div class="mt-8 flex w-full space-x-8">
 						<ButtonSolid {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
-
-						<ButtonOutlined on:click={toggleModals}>Close</ButtonOutlined>
+						<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 					</div>
 				</form>
 			{/if}
@@ -319,8 +310,8 @@
 				</div>
 				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">
-					<ButtonSolid on:click={toggleModals}>Sign In</ButtonSolid>
-					<ButtonOutlined on:click={toggleModals}>Close</ButtonOutlined>
+					<ButtonSolid on:click={toggleSignInForm}>Sign In</ButtonSolid>
+					<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 				</div>
 			</div>
 		{/if}

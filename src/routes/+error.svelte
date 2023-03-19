@@ -18,13 +18,9 @@
 				{JSON.stringify($page.error)}
 			</span>
 			<div class="flex gap-4 justify-center items-center">
-				<ButtonSolid
-					on:click={() => {
-						goto('/');
-					}}>Home</ButtonSolid
-				>
+				<ButtonSolid on:click={() => goto('/?method=signin')}>SignIn</ButtonSolid>
 				<span class="font-bold">Or</span>
-				<ButtonSolid>Sign Up</ButtonSolid>
+				<ButtonSolid on:click={() => goto('/?method=signup')}>Sign Up</ButtonSolid>
 			</div>
 		</div>
 	</div>

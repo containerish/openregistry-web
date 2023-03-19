@@ -10,12 +10,12 @@
 	};
 </script>
 
-<div class="bg-slate-100 w-full items-start space-y-6 px-20 pb-52 pt-20">
+<div class="bg-white w-full p-20">
 	<TabGroup>
 		<TabList class="text-lg flex gap-9 ml-2">
 			<Tab class={handleTabSelect}>Builds</Tab>
 			<Tab class={handleTabSelect}>Settings</Tab>
-			<div class="border-t-2 border-gray-400 -mt-3 w-full" />
+			
 		</TabList>
 
 		<div class="" transition:fade={{ delay: 300, duration: 300 }}>
@@ -28,8 +28,8 @@
 						<picture>
 							<img src="/build.svg" alt="logo" class="apple:w-56 uw:w-56" width="200px" />
 						</picture>
-						<div class="flex flex-col gap-4 laptop:gap-2 justify-center">
-							<span class="text-2xl laptop:text-lg half:text-lg font-semibold text-slate-700">
+						<div class="flex flex-col gap-3 justify-center">
+							<span class="text-lg lg:text-2xl font-semibold text-primary-500">
 								Congratulations on your first Build!</span
 							>
 							<span
@@ -75,6 +75,5 @@
 					<div />
 				</TabPanel>
 			</TabPanels>
-		</div></TabGroup
-	>
+		</div></TabGroup>
 </div>

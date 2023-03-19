@@ -12,7 +12,7 @@
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 
-	import type { WebAuthnFieldErrors, WebAuthnState } from '$lib/types/webauthn';
+	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { env } from '$env/dynamic/public';
 
 	export let toggleSignUpForm: () => void;

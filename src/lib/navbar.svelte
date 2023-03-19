@@ -1,31 +1,20 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { setContext } from 'svelte';
-	export let openSignInModal: boolean;
-
 	import ButtonSolid from './button-solid.svelte';
-	import Modal from './modal.svelte';
 	import { Signin, Signup } from '$lib/components';
 	import Dialog from '$lib/dialog.svelte';
 	import Logo from './components/logo.svelte';
-	let showSignInForm = false;
-	let showSignUpForm = false;
+	export let openSignInModal = false;
+	export let openSignUpModal = false;
 
-	const toggleSignInForm = () => {
-		openSignInModal = false;
-		showSignInForm = !showSignInForm;
+	const toggleSignIn = () => {
+		openSignUpModal = false;
+		openSignInModal = !openSignInModal;
 	};
-
-	const toggleSignUpForm = () => {''
-		console.log('in signup func');
-		showSignInForm = !showSignInForm;
-		showSignUpForm = !showSignUpForm;
+	const toggleSignUp = () => {
 		openSignInModal = false;
+		openSignUpModal = !openSignUpModal;
 	};
-
-	// // @ts-ignore
-	// setContext('toggleSignInForm', toggleSignInForm);
-	// setContext('toggleSignUpForm', toggleSignUpForm);
 </script>
 
 <header class="sticky top-0 z-50 bg-primary-50 md:pt-6">
@@ -77,25 +66,23 @@
 							</a>
 						</div>
 
-						<div
-							class="hidden md:flex items-center"
-						>
-							<ButtonSolid on:click={toggleSignInForm}>Sign In</ButtonSolid>
+						<div class="hidden md:flex items-center">
+							<ButtonSolid on:click={toggleSignIn}>Sign In</ButtonSolid>
 						</div>
 
-						{#if showSignInForm || openSignInModal}
-							<div>
-								<Dialog>
-									<Signin {toggleSignUpForm} {toggleSignInForm} />
-								</Dialog>
-							</div>
-						{/if}
-
-						{#if showSignUpForm}
-							<Dialog styles="top-0">
-								<Signup {toggleSignUpForm} {toggleSignInForm} />
+						<!-- {#if openSignInModal} -->
+						<div>
+							<Dialog isOpen={openSignInModal}>
+								<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 							</Dialog>
-						{/if}
+						</div>
+						<!-- {/if} -->
+
+						<!-- {#if openSignUpModal} -->
+						<Dialog isOpen={openSignUpModal} styles="top-0">
+							<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
+						</Dialog>
+						<!-- {/if} -->
 					</div>
 				</div>
 			</div>

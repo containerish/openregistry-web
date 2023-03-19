@@ -21,6 +21,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return await resolve(event);
 	}
 	if (isProtectedRoute(url.pathname) && !locals.user) {
+		console.log('redirecting 303');
 		throw redirect(303, '/');
 	}
 

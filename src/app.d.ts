@@ -12,6 +12,8 @@ declare global {
 			openSigninModal?: VoidFunction;
 			email?: string;
 			password?: string;
+			isSignin?: boolean;
+			isSignUp?: boolean;
 		}
 		interface Locals {
 			user: User | null;

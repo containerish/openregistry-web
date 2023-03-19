@@ -1,6 +1,6 @@
 <script>
 	import { Dialog, DialogOverlay, Transition, TransitionChild } from '@rgossiaux/svelte-headlessui';
-	let isOpen = true;
+	export let isOpen = true;
 	export let styles = '';
 </script>
 
