@@ -11,7 +11,6 @@
 	import { page } from '$app/stores';
 	import Logo from './logo.svelte';
 	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
-	import User from '$lib/icons/user.svelte';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
 
@@ -46,15 +45,8 @@
 	let isLoading = false;
 	let showSuccessMsg = false;
 	const auth = new Auth();
-
-	const toggleModals = () => {
-		toggleSignInForm();
-		toggleSignUpForm();
-	};
-
 	let usernameErr = '';
 	let emailErr = '';
-	let formErr: string;
 	let successMessage = '';
 
 	const handleSignUpSubmit: SubmitFunction = ({ form }) => {
@@ -170,20 +162,20 @@
 	<title>Sign up | OpenRegistry</title>
 </svelte:head>
 
-<div class="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg lg:max-w-4xl">
-	<div class="flex w-full flex-col px-6 py-8 md:px-8 lg:w-full laptop:w-full laptop:py-4">
-		<div class="mb-8 flex justify-center py-4 laptop:mb-4 laptop:py-1">
+<div class="mx-auto flex w-full max-w-sm overflow-hidden">
+	<div class="flex w-full flex-col px-6 py-4">
+		<div class="pb-8 pt-4 flex justify-center">
 			<Logo type="dark" />
 		</div>
 		{#if !showSuccessMsg}
-			<ButtonOutlined onClick={auth.LoginWithGithub}>
+			<ButtonOutlined on:click={auth.LoginWithGithub}>
 				<GithubIcon styles="text-black mr-2 h-8 w-8" />
 				Sign in with Github
 			</ButtonOutlined>
 			<div class="mt-4" />
 
 			{#if !isWebAuthn}
-				<ButtonOutlined onClick={handleIsWebAuthn}>
+				<ButtonOutlined on:click={handleIsWebAuthn}>
 					<FingerprintIcon styles="text-black mr-2" />
 					Sign up with Security key
 				</ButtonOutlined>
@@ -254,13 +246,13 @@
 					{/if}
 
 					<div class="mt-8 flex w-full justify-center space-x-8">
-						<ButtonSolid type="submit" {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
-						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
+						<ButtonSolid type="submit" {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
+						<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 					</div>
 				</form>
 			{/if}
 			{#if isWebAuthn}
-				<ButtonOutlined onClick={handleIsWebAuthn}>
+				<ButtonOutlined on:click={handleIsWebAuthn}>
 					<EmailIcon styles="text-black mr-2" />
 					Sign up with Email Password
 				</ButtonOutlined>
@@ -306,9 +298,8 @@
 					{/if}
 
 					<div class="mt-8 flex w-full space-x-8">
-						<ButtonSolid {isLoading} onClick={() => {}}>Sign Up</ButtonSolid>
-
-						<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
+						<ButtonSolid {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
+						<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 					</div>
 				</form>
 			{/if}
@@ -319,8 +310,8 @@
 				</div>
 				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">
-					<ButtonSolid onClick={toggleModals}>Sign In</ButtonSolid>
-					<ButtonOutlined onClick={toggleModals}>Close</ButtonOutlined>
+					<ButtonSolid on:click={toggleSignInForm}>Sign In</ButtonSolid>
+					<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 				</div>
 			</div>
 		{/if}

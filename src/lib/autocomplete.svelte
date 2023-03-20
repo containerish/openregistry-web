@@ -70,27 +70,29 @@
 <div class="relative flex w-full flex-wrap items-stretch">
 	<span
 		class="z-10 font-normal text-center absolute bg-transparent 
-		rounded text-base items-center justify-center pl-4 pt-3 desktop:pt-2 laptop:pt-2"
+		rounded text-base items-center justify-center pl-4 pt-3"
 	>
-		<Search styles="desktop:w-5 laptop:w-5 text-primary-400" />
+		<Search styles="text-primary-400" />
 	</span>
 	<input
 		on:input={handleOnChange}
 		type="search"
-		class="placeholder-slate-500 form-control block w-full px-3 py-3 desktop:h-10 laptop:h-10 text-base desktop:text-sm laptop:text-sm
-		font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
-        border rounded-md focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
-      disabled:text-slate-400 pl-12"
+		class="placeholder-slate-500 form-control block w-full px-3 py-3 text-base 
+		font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100 
+		transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-primary-200 
+		focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500 disabled:text-slate-400 pl-12"
 	/>
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}
 		<div class="pt-6 z-50">
 			<div
-				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md max-h-96"
+				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md 
+				max-h-96"
 			>
 				<button disabled class="py-1 m-0 w-full border-none block no-underline ">
 					<div
-						class="2xl:px-4 2xl:py-5 px-4 hover:bg-brown-50 gap-1 py-3 flex flex-row items-center justify-start"
+						class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center 
+						justify-start"
 					>
 						<h3 class=" font-lg text-gray-700 ">No Results Found</h3>
 					</div>
@@ -101,7 +103,8 @@
 	{#if showItems && catalog?.repositories.length > 0}
 		<div class="pt-6 z-50">
 			<div
-				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md max-h-96"
+				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md 
+				max-h-96"
 			>
 				{#each catalog.repositories as item}
 					<button
@@ -110,7 +113,8 @@
 						class="py-1 w-full m-0 border-none block no-underline "
 					>
 						<div
-							class="2xl:px-4 2xl:py-5 px-4 hover:bg-brown-50 gap-1 py-3 flex flex-row items-center justify-start"
+							class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center 
+							justify-start"
 						>
 							<Cube />
 							<h3 class=" font-lg text-gray-700 ">

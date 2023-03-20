@@ -5,6 +5,7 @@
 	import type { LayoutServerData } from './$types';
 	import Footer from '$lib/footer.svelte';
 	import Navbar from '$lib/navbar.svelte';
+	import { page } from '$app/stores';
 	export let data: LayoutServerData;
 
 	onMount(() => {
@@ -12,14 +13,18 @@
 			goto('/repositories');
 		}
 	});
+	$: openSignInModal = new URL($page.url).searchParams.get('method') === 'signin';
+	$: openSignUpModal = new URL($page.url).searchParams.get('method') === 'signup';
 </script>
 
-<!-- uw:max-w-[2000px] apple:max-w-[2000px] -->
 <main
-	class="lg:w-screen uw:min-w-[30vw] flex justify-center flex-col 
-	selection:bg-primary-500 selection:text-white"
+	class="w-screen flex justify-center flex-col selection:bg-primary-500 
+selection:text-white"
 >
-	<Navbar openSignInModal={false} />
-	<slot />
+	<Navbar {openSignInModal} {openSignUpModal} />
+	<div class="tall:min-h-[1545px] bg-primary-50">
+		<slot />
+	</div>
+
 	<Footer />
 </main>

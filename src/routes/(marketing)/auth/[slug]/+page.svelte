@@ -213,12 +213,12 @@
 							<div class="mt-8 flex w-full">
 								<Button
 									disabled={!!passwordErr || !!confirmPasswordErr}
-									onClick={setNewPassword}
+									on:click={setNewPassword}
 									styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
 								>
 									Update Password
 								</Button>
-								<Button onClick={toggleModal} styles="bg-gray-50 text-gray-800 w-2/3 ml-2">
+								<Button on:click={toggleModal} styles="bg-gray-50 text-gray-800 w-2/3 ml-2">
 									Close
 								</Button>
 							</div>

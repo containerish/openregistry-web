@@ -1,5 +1,5 @@
 import { ghStore } from '$lib/stores';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 import type { PageServerLoad } from './$types';
 import { env } from '$env/dynamic/public';

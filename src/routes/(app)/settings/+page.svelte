@@ -10,7 +10,7 @@
 
 	import { form, field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
-	import type { PageData } from '.svelte-kit/types/src/routes/$types';
+	import type { PageData } from './$types';
 	import Textfield from '$lib/textfield.svelte';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
@@ -43,49 +43,37 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="min-h-[1500px] w-full half:min-h-max laptop:min-h-max  desktop:min-h-max">
-		<div class="flex flex-col gap-16 pb-24 half:gap-8 laptop:gap-8 desktop:gap-8">
-			<div
-				class="mt-20 flex min-w-max items-center justify-start gap-5 space-x-10 border-2 border-primary-100 bg-primary-50 py-24 px-8 
-				text-slate-700 half:mt-8 half:gap-2 half:py-10 laptop:mt-8 laptop:py-10 laptop:px-0 desktop:mt-12 desktop:py-16"
-			>
-				<div class="px-4 half:px-0 laptop:px-1" />
-				<div>
-					<ProfileIcon
-						styles="h-24 w-24 desktop:h-12 desktop:w-12 laptop:h-12 laptop:w-12 half:w-12 half:h-12 text-primary-500"
-					/>
+	<div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
+		<div class="flex flex-col gap-9">
+			<div class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-2 border-primary-100">
+				<div class="flex items-center">
+					<ProfileIcon styles="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
 				</div>
-				<div class="flex-initial">
-					<h1
-						class="text-4xl font-medium capitalize half:text-2xl laptop:text-3xl desktop:text-3xl"
-					>
+				<div class="flex flex-col justify-center">
+					<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-700">
 						{data.user.name ? data.user.name : data.user.username}
-					</h1>
-					<div class="mt-3 flex items-center gap-1 half:mt-1 desktop:mt-2">
-						<ProfileIcon
-							styles="h-6 w-6 desktop:h-4 desktop:w-4 laptop:h-4 laptop:w-4 half:w-4 half:h-4"
-						/>
-						<span class="mr-5 text-lg half:text-sm laptop:text-sm desktop:text-base"
-							>Community User</span
-						>
-						<span class="text-lg half:text-xs laptop:text-xs desktop:text-sm">
-							Joined
-							<span class="font-semibold">
-								{new Date(data.user.created_at).toDateString()}
-							</span>
-						</span>
+					</span>
+					<div class="flex mt-2 items-center gap-1">
+						<ProfileIcon styles="h-5 w-5 text-slate-600" />
+						<span class="text-sm text-slate-600">Community User</span>
 					</div>
 				</div>
+
+				<span class="text-xs lg:text-base text-slate-600 self-end">
+					Joined
+					<span>
+						{new Date(data.user.created_at).toDateString()}
+					</span>
+				</span>
 			</div>
 			<Card>
 				<div
-					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded-sm border border-primary-200 
-					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:py-6 half:px-8 laptop:w-full 
-					laptop:px-14 laptop:py-6 desktop:gap-6 desktop:px-14 desktop:py-6"
+					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded border
+					 border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
 				>
 					<div class="flex w-full flex-col gap-1">
 						<span
-							class="mx-1 text-2xl font-medium text-slate-700 half:text-lg laptop:text-lg desktop:text-lg"
+							class="mx-1 text-lg lg:text-xl font-medium text-slate-700"
 							>Email Address</span
 						>
 						<Textfield
@@ -102,14 +90,9 @@
 			</Card>
 
 			<Card>
-				<div
-					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-4 rounded-sm border border-primary-200 
-					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:gap-2 half:px-8 half:py-6 laptop:w-full 
-					laptop:gap-2 laptop:px-14 laptop:py-6 desktop:gap-2 desktop:px-14 desktop:py-6"
-				>
-					<h1
-						class="text-2xl font-medium text-slate-600 half:text-lg laptop:text-lg desktop:text-lg"
-					>
+				<div class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
+					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl">
+					<h1 class="text-lg lg:text-xl font-medium text-slate-600">
 						Change Password
 					</h1>
 					<Textfield
@@ -128,9 +111,9 @@
 					<input
 						type="password"
 						bind:value={$confirmPassword.value}
-						class="form-control m-0 block w-full max-w-[450px] rounded-md border border-solid border-primary-100 bg-white bg-clip-padding px-3
-						py-3 text-base font-normal text-slate-700 placeholder-slate-500 transition ease-in-out
-						focus:text-slate-700 desktop:text-sm 
+						class="form-control m-0 block w-full max-w-[450px] rounded-md border border-solid border-primary-100
+						bg-white bg-clip-padding px-3 py-2 lg:py-3.5 text-sm lg:text-base font-normal text-slate-700 placeholder-slate-500 
+						transition ease-in-out focus:text-slate-700
           				{!$passwordForm.hasError('confirm_password.match_field')
 							? 'focus:border-priamry-200 focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-40'
 							: 'border-red-800 outline-none ring ring-red-700 ring-opacity-40'} "
@@ -153,27 +136,26 @@
 							{formResp.message}
 						</span>
 					{/if}
-					<ButtonSolid styles="mt-6" onClick={resetPassword}>Save</ButtonSolid>
+					<ButtonSolid styles="mt-6" on:click={resetPassword}>Save</ButtonSolid>
 				</div>
 			</Card>
 
 			<Card>
 				<div
-					class="flex w-4/5 max-w-[1200px] flex-col items-start justify-center gap-4 rounded-sm border border-primary-200 
-					bg-white px-20 pb-8 pt-10 shadow-2xl half:w-full half:px-14 half:py-6 laptop:w-full 
-					laptop:gap-1 laptop:px-14 laptop:py-6 desktop:gap-2 desktop:px-14 desktop:py-6"
+					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
+					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
 				>
-					<div class="flex flex-col gap-2 half:gap-0 laptop:gap-0 desktop:gap-1">
+					<div class="flex flex-col gap-1">
 						<span
-							class="text-2xl font-medium text-slate-700 half:text-lg laptop:text-lg desktop:text-lg"
+							class="text-lg lg:text-xl font-medium text-slate-700"
 							>Account Information</span
 						>
-						<span class="text-slate-600 antialiased half:text-xs laptop:text-xs desktop:text-sm">
+						<span class="text-slate-600 antialiased text-sm">
 							This information is public and visible to all users of OpenRegistry
 						</span>
 					</div>
 					<div
-						class="flex w-full flex-col items-start justify-start gap-4 half:gap-2 laptop:gap-2 desktop:gap-2"
+						class="flex w-full flex-col items-start justify-start gap-3"
 					>
 						<Textfield
 							type="text"
@@ -189,7 +171,7 @@
 							styles="max-w-[450px]"
 							bind:value={data.user.html_url}
 						/>
-						<ButtonSolid styles="mt-6">Save</ButtonSolid>
+						<ButtonSolid styles="mt-6" disabled>Save</ButtonSolid>
 					</div>
 				</div>
 			</Card>

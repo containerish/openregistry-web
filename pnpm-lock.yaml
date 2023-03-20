@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@github/webauthn-json': ^2.1.1
   '@lukeed/uuid': ^2.0.0
   '@octokit/types': ^9.0.0
   '@playwright/test': ^1.30.0
@@ -12,6 +13,7 @@ specifiers:
   '@tailwindcss/typography': ^0.5.7
   '@tsconfig/svelte': ^3.0.0
   '@types/cookie': 0.5.1
+  '@types/throttle-debounce': ^5.0.0
   '@types/webappsec-credential-management': ^0.6.3
   '@typescript-eslint/eslint-plugin': ^5.52.0
   '@typescript-eslint/parser': ^5.52.0
@@ -59,6 +61,7 @@ dependencies:
   zod: 3.21.4
 
 devDependencies:
+  '@github/webauthn-json': 2.1.1
   '@playwright/test': 1.31.2
   '@popperjs/core': 2.11.6
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.56.0
@@ -68,6 +71,7 @@ devDependencies:
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@tsconfig/svelte': 3.0.0
   '@types/cookie': 0.5.1
+  '@types/throttle-debounce': 5.0.0
   '@types/webappsec-credential-management': 0.6.4
   '@typescript-eslint/eslint-plugin': 5.54.1_4rfaf6mlw2mmutqjcopwvbftpu
   '@typescript-eslint/parser': 5.54.1_vgl77cfdswitgr47lm5swmv43m
@@ -337,6 +341,11 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@github/webauthn-json/2.1.1:
+    resolution: {integrity: sha512-XrftRn4z75SnaJOmZQbt7Mk+IIjqVHw+glDGOxuHwXkZBZh/MBoRS7MHjSZMDaLhT4RjN2VqiEU7EOYleuJWSQ==}
+    hasBin: true
+    dev: true
+
   /@humanwhocodes/config-array/0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
     engines: {node: '>=10.10.0'}
@@ -566,6 +575,10 @@ packages:
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/throttle-debounce/5.0.0:
+    resolution: {integrity: sha512-Pb7k35iCGFcGPECoNE4DYp3Oyf2xcTd3FbFQxXUI9hEYKUl6YX+KLf7HrBmgVcD05nl50LIH6i+80js4iYmWbw==}
     dev: true
 
   /@types/webappsec-credential-management/0.6.4:

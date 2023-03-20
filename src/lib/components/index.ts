@@ -10,6 +10,7 @@ import Repository from './repository.svelte';
 import Signin from './signin.svelte';
 import Signup from './signup.svelte';
 import Sidebar from './sidebar.svelte';
+import RepoBox from './repo-box.svelte';
 
 export { Hero };
 export { HighLevelArchitecture };
@@ -23,3 +24,4 @@ export { Repository };
 export { Signin };
 export { Signup };
 export { Sidebar };
+export { RepoBox };

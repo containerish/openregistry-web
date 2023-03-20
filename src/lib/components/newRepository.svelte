@@ -9,7 +9,7 @@
 	const toggleModal = getContext('toggleModal');
 </script>
 
-<div class="px-12 py-8">
+<div class="px-5 lg:px-12 py-8">
 	<form class="flex justify-around items-center gap-8 flex-col h-full w-full">
 		<span class="text-2xl font-semibold text-primary-500 pb-4"> Create A New Repository </span>
 		<div class="flex flex-col gap-4 w-full">
@@ -25,7 +25,7 @@
 				<Textfield label="Repository Name" type="email" />
 			</div>
 			<div class="w-full">
-				<label for="textarea" class="block text-sm apple:text-base font-semibold text-gray-600"
+				<label for="textarea" class="block text-sm lg:text-base text-start font-semibold text-gray-600"
 					>Description</label
 				>
 				<textarea
@@ -36,7 +36,7 @@
 			</div>
 			<div class="flex px-16 pt-2 w-full justify-center items-center space-x-5">
 				<ButtonSolid>Create</ButtonSolid>
-				<ButtonOutlined onClick={toggleModal}>Close</ButtonOutlined>
+				<ButtonOutlined on:click={toggleModal}>Close</ButtonOutlined>
 			</div>
 		</div>
 	</form>

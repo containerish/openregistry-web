@@ -1,6 +1,6 @@
 <script>
 	import { Dialog, DialogOverlay, Transition, TransitionChild } from '@rgossiaux/svelte-headlessui';
-	let isOpen = true;
+	export let isOpen = true;
 	export let styles = '';
 </script>
 
@@ -35,8 +35,8 @@
 					leaveTo="opacity-0 scale-95"
 				>
 					<div
-						class="{styles} flex half:py-0 min-h-max w-full transform apple:min-w-[500px] uw:min-w-[500px]
-						py-4 px-6 desktop:py-0 z-50 rounded bg-white transition-all inset-0 border-2 border-primary-500"
+						class="{styles} flex min-h-max w-full transform lg:min-w-[500px] px-6 lg:py-4 z-50 rounded
+						bg-white transition-all inset-0 border-2 border-primary-500"
 					>
 						<slot />
 					</div>

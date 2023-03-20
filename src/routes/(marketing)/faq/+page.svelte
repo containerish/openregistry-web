@@ -67,14 +67,15 @@
 </svelte:head>
 
 <Card styles="bg-white mx-auto">
-	<div class="w-full min-h-[90vh] mx-10 my-20 desktop:my-4 laptop:my-2 half:my-2 max-w-[3000px]">
+	<div class="w-3/4 lg:w-full min-h-[90vh] mx-10 my-4 lg:my-20 max-w-[3000px]">
 		<div
-			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-5 rounded-sm border border-primary-100"
+			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-5 rounded-sm 
+			border border-primary-100"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
 				How do I rename a OpenRegistry repository?
 			</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<span class="text-base lg:text-lg text-slate-600">
 				Currently, you cannot rename an OpenRegistry repository once it's been created. You will
 				need to create a new repository with the name of your choice, move all relevant tags to the
 				new repository created, and delete the existing repository you wish to rename.
@@ -82,12 +83,13 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-6 rounded-sm border border-primary-100"
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			border-primary-100"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
 				Can a repository be transferred to a different account?
 			</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<span class="text-base lg:text-lg text-slate-600">
 				Repositories can not be transferred to a different account. If you would like to transfer a
 				repository to a different account, you will need to download any images You can then
 				recreate the repository on the new account.
@@ -95,12 +97,13 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-6 rounded-sm border border-primary-100"
+			class="bg-slate-50 shadow-inner flex flex-col px-10 py-10 mx-5 my-6 rounded-sm border 
+			border-primary-100 gap-6"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700">
 				I Signed in with GitHub, how can I docker login to pull/push images ?
 			</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<span class="text-base lg:text-lg text-slate-600">
 				You can use a PAT (Personal Access Token) from GitHub for Docker CLI login. To create a PAT,
 				follow the official GitHub guide here:
 				<a
@@ -111,30 +114,32 @@
 				and use the generated Personal Access Token as your password for docker login. <br /> The username
 				will same as your GitHub username
 			</span>
-			<div
-				class="w-full p-8 max-h-fit half:px-0 half:mb-10 laptop:px-10 apple:w-3/5 uw:w-3/6 uw:px-32"
-			>
+			<div class="lg:w-1/2">
 				<FaqTerminal />
 			</div>
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-6 rounded-sm border border-primary-100"
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			border-primary-100"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">How can I change my email address?</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
+				How can I change my email address?
+			</h1>
+			<span class="text-base lg:text-lg text-slate-600">
 				Currently, this functionality is unavailable. However, we're working on integrating it into
 				OpenRegistry with coming releases
 			</span>
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-6 rounded-sm border border-primary-100"
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			border-primary-100"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
 				How can I change my OpenRegistry Password
 			</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<span class="text-base lg:text-lg text-slate-600">
 				To change your OpenRegistry Password, go to your
 				<span class="text-primary-400 font-semibold">Profile -> Settings -> Change Password.</span
 				><br />
@@ -145,20 +150,24 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-6 rounded-sm border border-primary-100"
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			border-primary-100"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">A Humble Note</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">A Humble Note</h1>
+			<span class="text-base lg:text-lg text-slate-600">
 				OpenRegistry is a small team of 2 developers, as we work towards making it the best
 				Container Registry, please make sure to drop any bug reports or improvement advice in the
 				section below. We'd love to hear from you!
 			</span>
 		</div>
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 desktop:py-8 mx-5 my-6 rounded-sm border border-primary-100"
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			border-primary-100"
 		>
-			<h1 class="text-3xl font-semibold text-slate-700 mb-5 desktop:text-2xl">Learn More about OpenRegistry</h1>
-			<span class="text-lg text-slate-600 desktop:text-[16px]">
+			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
+				Learn More about OpenRegistry
+			</h1>
+			<span class="text-base lg:text-lg text-slate-600">
 				If you are completely new to Containers and Container Registries and interested in learning
 				more about it. You can follow our
 				<a href="https://docs.openregistry.dev/" class="text-primary-400">documentation</a> where we
@@ -169,7 +178,7 @@
 		</div>
 
 		<Card>
-			<div class="w-full -ml-10">
+			<div class="w-4/5 lg:w-full mx-5">
 				<span class="mt-1 ml-2 text-2xl font-normal text-left text-slate-700 ">Need More Help?</span
 				>
 				<form

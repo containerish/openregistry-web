@@ -2,7 +2,7 @@
 	export let styles = '';
 </script>
 
-<svg class="{styles} h-7 w-6.5" viewBox="0 0 72 72">
+<svg class="{styles}" viewBox="0 0 72 72">
 	<g
 		style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:5"
 	>

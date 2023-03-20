@@ -12,10 +12,11 @@
 </script>
 
 <div class="flex items-center px-2">
-	<label for={label} class="block font-semibold text-sm apple:text-base -ml-2 text-slate-700">{label}</label>
+	<label for={label} class="block font-semibold text-sm lg:text-base -ml-2 text-slate-700"
+		>{label}</label
+	>
 	{#if subHeading !== ''}
 		<span class="px-2 text-xs text-primary-700">({subHeading})</span>
-
 	{/if}
 </div>
 <input
@@ -25,11 +26,10 @@
 	value={value ?? ''}
 	{placeholder}
 	{disabled}
-	class="{styles} placeholder-slate-500 form-control block w-full px-3 py-3 desktop:h-10 laptop:h-10
-	text-base desktop:text-sm laptop:text-sm font-normal text-slate-700 bg-white 
-	bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
-    border rounded-md focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
-  disabled:text-slate-400
+	class="{styles} placeholder-slate-500 form-control block w-full px-3 py-3 h-11 lg:h-14
+	text-sm lg:text-base font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100 
+	transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-primary-200 
+	focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500 disabled:text-slate-400
      {errors && errors.length > 0 ? 'border-red-600' : ''}"
 />
 {#if errors && errors.length > 0}

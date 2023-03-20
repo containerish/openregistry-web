@@ -1,12 +1,10 @@
 <script lang="ts">
-	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
 	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
 	import { NewRepository, Repository, Pulse } from '$lib/components';
 	import type { PageData } from './$types';
-
 	import { RegistryBackend } from '$apis/registry';
 	import type { Catalog } from '$apis/registry';
 	import type { User } from '$apis/auth';
@@ -23,7 +21,7 @@
 	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
-	import Sidebar from '$lib/components/sidebar.svelte';
+	import Dialog from '$lib/dialog.svelte';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -56,8 +54,6 @@
 		// @ts-ignore
 		const resp = await backend.ListCatalog(backend.DefaultPageSize, 0, u.username);
 		if (resp.error) {
-			openErrorModal = true;
-			httpError = resp.error.message;
 			return;
 		}
 
@@ -66,6 +62,7 @@
 
 	let showModal = false;
 	const toggleModal = () => {
+		console.log('came here');
 		showModal = !showModal;
 	};
 
@@ -96,8 +93,6 @@
 	$: {
 		pulseStore.setPulseState(!$navigating && !!catalog);
 	}
-	let openErrorModal: boolean = false;
-	let httpError: string;
 </script>
 
 <svelte:head>
@@ -105,74 +100,63 @@
 </svelte:head>
 
 <Pulse>
-	<div
-		class="flex justify-center items-start pt-10 w-full 
-	desktop:min-h-[1000px] laptop:min-h-max half:min-h-max min-h-[1710px] h-max laptop:min-w-[500px]"
-	>
-		<div class="flex w-full justify-start">
-			<div
-				class="w-full  flex flex-col my-8 laptop:w-full laptop:px-2 half:w-full half:px-0 max-w-[850px]"
-			>
-				<div class="flex flex-row half:flex-col gap-4 justify-between px-6">
-					<div class="w-2/5 half:w-full">
-						<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
-					</div>
-					{#if showTooltip}
-						<div
-							id="tooltip"
-							class=" bg-cyan-200 rounded py-3 px-4 desktop:min-w-max desktop:py-1 desktop:px-2"
-							use:popperContent={extraOpts}
-						>
-							<span class=" text-slate-700 desktop:text-xs">
-								Coming soon
-								<svg
-									class="absolute text-cyan-200 h-5 w-5 left-0 pb-1 ml-3 top-full"
-									x="0px"
-									y="0px"
-									viewBox="0 0 255 255"
-									xml:space="preserve"
-								>
-									<polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
-								</svg>
-							</span>
-							<div id="arrow" data-popper-arrow />
-						</div>
-					{/if}
-
-					<ButtonOutlined onClick={toggleModal}>Create Respository</ButtonOutlined>
-
-					{#if showModal}
-						<Modal>
-							<NewRepository />
-						</Modal>
-					{/if}
+	<div class="flex justify-start items-start w-full h-full min-w-max min-h-max py-8">
+		<div class="w-full flex flex-col my-8 max-w-[850px] px-9 lg:px-16">
+			<div class="flex flex-col lg:flex-row gap-4 px-2 justify-between ">
+				<div class="w-4/5 lg:w-3/5">
+					<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 				</div>
-
-				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
-					<div class="w-full px-4">
-						{#each catalog.repositories as repo}
-							<Repository data={repo} compact={false} />
-						{/each}
-					</div>
-
-					<div class="flex justify-center py-4">
-						{#if catalog.total > backend.DefaultPageSize}
-							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
-						{/if}
-					</div>
-				{:else}
-					<div class="w-full flex justify-center items-center px-6">
-						<div
-							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 flex justify-center items-center"
-						>
-							<span class="text-primary-600 text-4xl laptop:text-2xl desktop:text-3xl"
-								>No Repositories</span
+				{#if showTooltip}
+					<div id="tooltip" class=" bg-cyan-200 rounded py-1 px-3" use:popperContent={extraOpts}>
+						<span class=" text-slate-700">
+							Coming soon
+							<svg
+								class="absolute text-cyan-200 h-5 w-5 left-0 pb-1 ml-3 top-full"
+								x="0px"
+								y="0px"
+								viewBox="0 0 255 255"
+								xml:space="preserve"
 							>
-						</div>
+								<polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+							</svg>
+						</span>
+						<div id="arrow" data-popper-arrow />
 					</div>
 				{/if}
+
+				<ButtonOutlined styles="max-w-[202px]" on:click={toggleModal}
+					>Create Respository</ButtonOutlined
+				>
+
+				<Dialog isOpen={showModal}>
+					<NewRepository />
+				</Dialog>
 			</div>
+
+			{#if catalog && catalog.repositories && catalog.repositories.length > 0}
+				<div class="w-full">
+					{#each catalog.repositories as repo}
+						<Repository data={repo} compact={false} />
+					{/each}
+				</div>
+
+				<div class="flex justify-center">
+					{#if catalog.total > backend.DefaultPageSize}
+						<Pagination pages={Math.ceil(catalog.total / pageSize)} />
+					{/if}
+				</div>
+			{:else}
+				<div class="w-full flex justify-center items-center">
+					<div
+						class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 
+							flex justify-center items-center"
+					>
+						<span class="text-slate-500 text-2xl md:text-3xl lg:text-4xl">
+							No Repositories Yet
+						</span>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </Pulse>
-<ErrorModal open={openErrorModal} error={httpError} />
