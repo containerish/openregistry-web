@@ -65,24 +65,17 @@
 								FAQ
 							</a>
 						</div>
-
 						<div class="hidden md:flex items-center">
 							<ButtonSolid on:click={toggleSignIn}>Sign In</ButtonSolid>
 						</div>
-
-						<!-- {#if openSignInModal} -->
 						<div>
 							<Dialog isOpen={openSignInModal}>
 								<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 							</Dialog>
 						</div>
-						<!-- {/if} -->
-
-						<!-- {#if openSignUpModal} -->
 						<Dialog isOpen={openSignUpModal} styles="top-0">
 							<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 						</Dialog>
-						<!-- {/if} -->
 					</div>
 				</div>
 			</div>
