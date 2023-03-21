@@ -17,10 +17,7 @@
 	$: openSignUpModal = new URL($page.url).searchParams.get('method') === 'signup';
 </script>
 
-<main
-	class="w-screen flex justify-center flex-col selection:bg-primary-500 
-selection:text-white"
->
+<main class="w-screen flex justify-center flex-col selection:bg-primary-500 selection:text-white">
 	<Navbar {openSignInModal} {openSignUpModal} />
 	<div class="tall:min-h-[1545px] bg-primary-50">
 		<slot />

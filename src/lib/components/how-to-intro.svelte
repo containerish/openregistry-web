@@ -26,19 +26,16 @@
 		py-20 lg:min-w-[1000px] max-w-[2000px] px-16 mx-auto"
 	>
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
-			<div class="flex flex-col gap-12 w-[380px] md:w-4/5 px-6">
+			<div class="flex flex-col gap-12 w-[380px] md:w-3/5 px-6">
 				<div class="flex flex-col justify-center gap-3">
-					<span
-						class="text-3xl lg:text-4xl xl:text-5xl font-black
-						 text-primary-700"
-					>
+					<span class="text-3xl lg:text-5xl font-bold text-primary-600">
 						A truly decentralized container registry
 					</span>
-					<span class="text-lg lg:text-xl xl:font-semibold text-primary-600"
-						>in just a few simple steps, you can get started with OpenRegsitry</span
-					>
+					<span class="text-lg lg:text-xl font-medium text-primary-600">
+						in just a few simple steps, you can get started with OpenRegsitry
+					</span>
 
-					<ul class="text-center font-normal list-disc ml-4 mt-4">
+					<ul class="text-center font-normal list-disc ml-6 mt-4">
 						<li class="text-left text-primary-600 text-base xl:text-xl">
 							Create an account on
 							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-400">
@@ -70,7 +67,7 @@
 		</div>
 
 		<div
-			class="flex flex-col lg:grid lg:grid-cols-2 2xl:grid-cols-4 gap-4 lg:gap-12 py-9 lg:py-20 px-6 items-center"
+			class="flex flex-col lg:grid lg:grid-cols-2 2xl:grid-cols-4 gap-4 lg:gap-12 py-12 px-6 items-center"
 		>
 			<div class="col-span-4 lg:col-span-2 2xl:col-span-4 text-center flex flex-col">
 				<span
