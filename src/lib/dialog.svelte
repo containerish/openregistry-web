@@ -35,7 +35,7 @@
 					leaveTo="opacity-0 scale-95"
 				>
 					<div
-						class="{styles} flex min-h-max w-full transform lg:min-w-[500px] px-6 lg:py-4 z-50 rounded
+						class="{styles} flex min-h-max w-full transform lg:min-w-[480px] px-6 lg:py-4 z-50 rounded
 						bg-white transition-all inset-0 border-2 border-primary-500"
 					>
 						<slot />

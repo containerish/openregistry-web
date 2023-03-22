@@ -2,7 +2,7 @@
 	import Logo from './components/logo.svelte';
 </script>
 
-<footer class="bg-primary-700 p-10">
+<footer class="bg-primary-700 p-10 z-50">
 	<div class="container mx-auto px-0 lg:px-10">
 		<div class="flex items-center justify-between gap-12 lg:gap-0">
 			<div class="mb-0 flex flex-col gap-2 lg:flex-row lg:-mb-16 lg:gap-4">

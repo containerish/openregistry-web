@@ -9,7 +9,7 @@
 	const toggleModal = getContext('toggleModal');
 </script>
 
-<div class="px-5 lg:px-12 py-8">
+<div class="px-6 py-6">
 	<form class="flex justify-around items-center gap-8 flex-col h-full w-full">
 		<span class="text-2xl font-semibold text-primary-500 pb-4"> Create A New Repository </span>
 		<div class="flex flex-col gap-4 w-full">

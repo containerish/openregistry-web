@@ -131,7 +131,7 @@
 					<div class="flex flex-col gap-3.5">
 						<a
 							href="/"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<HomeIcon styles="" />
@@ -140,7 +140,7 @@
 
 						<a
 							href="/search"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<SearchIcon styles="" />
@@ -149,7 +149,7 @@
 
 						<a
 							href="/repositories"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<CubeIcon styles="" />
@@ -158,7 +158,7 @@
 
 						<a
 							href="/apps/github/connect"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg py-2.5
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<GithubOutlinedIcon styles="h-7 w-6.5" />
@@ -172,7 +172,7 @@
 							href="https://docs.openregistry.dev"
 							target="_blank"
 							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<ReportIcon styles="" />
@@ -181,7 +181,7 @@
 
 						<a
 							href="/faq"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<QuestionMarkIcon styles="" />
@@ -191,7 +191,7 @@
 							href="https://blog.openregistry.dev"
 							target="_blank"
 							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<PencilIcon styles="" />
@@ -202,7 +202,7 @@
 					<div class="flex flex-col gap-3.5">
 						<a
 							href="/about"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg py-2.5
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<HeartIcon styles="" />
@@ -212,7 +212,7 @@
 							href="https://github.com/containerish/OpenRegistry"
 							target="_blank"
 							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg  py-2.5
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg  py-2.5
 							 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
 							<StarIcon styles="w-6 h-6 " />
@@ -221,7 +221,7 @@
 						<a
 							href="#"
 							on:click={toggleModal}
-							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-600 
+							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide 
 							text-lg py-2.5 hover:bg-slate-100 hover:shadow-2xl 
 							hover:no-underline"
 						>
@@ -233,15 +233,15 @@
 					<div class="flex flex-col gap-3.5 ">
 						<a
 							href="/u"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<ProfileIcon styles="text-slate-600 h-6 w-6 " />
+							<ProfileIcon styles="text-slate-700 h-6 w-6 " />
 							<span>View Profile</span>
 						</a>
 						<a
 							href="/settings"
-							class="flex flex-row gap-3 justify-start items-center text-slate-600 text-lg
+							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 						>
 							<SettingsIcon styles="" />
@@ -253,7 +253,7 @@
 			</div>
 
 			<div
-				class="flex flex-row justify-start items-center gap-4 text-slate-600 text-lg font-medium"
+				class="flex flex-row justify-start items-center gap-4 text-slate-700 tracking-wide text-lg font-medium"
 			>
 				<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
 					<UserIcon styles="h-6 w-6" />
@@ -265,7 +265,7 @@
 			</div>
 			<button
 				formaction="/?/signout"
-				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-600 text-lg 
+				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg 
 		        py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 			>
 				<SignOutIcon styles="" />

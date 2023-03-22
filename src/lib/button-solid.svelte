@@ -11,7 +11,7 @@
 	class="{isLoading ? 'px-2' : 'px-4'} {styles}
 	flex justify-center space-x-2 items-center border-2 bg-primary-300 border-primary-700 text-primary-800 rounded
 	 font-medium bg-opacity-80 hover:shadow-primary-600 hover:shadow-3xl disabled:bg-slate-300 disabled:shadow-none 
-	 transition-all duration-200 disabled:text-slate-400 gap-1 tracking-wide px-3 min-w-[120px] h-12 text-base"
+	 transition-all duration-200 disabled:text-slate-400 gap-1 px-3 min-w-[120px] h-12 text-base"
 >
 	{#if isLoading}
 		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50" fill="none" viewBox="0 0 24 24">
