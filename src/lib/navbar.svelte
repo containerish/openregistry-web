@@ -4,6 +4,9 @@
 	import { Signin, Signup } from '$lib/components';
 	import Dialog from '$lib/dialog.svelte';
 	import Logo from './components/logo.svelte';
+	import Menu from './burger-menu.svelte';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import IconButton from './icon-button.svelte';
 	export let openSignInModal = false;
 	export let openSignUpModal = false;
 
@@ -27,7 +30,34 @@
 			>
 				<Logo type="dark" />
 			</div>
-			<div class="flex items-center">
+			<div class="md:hidden">
+				<Menu>
+					<div class="flex flex-col">
+						<MenuItem class="hover:bg-primary-100">
+							<IconButton on:click={()=>{window.open("https://blog.openregistry.dev",'_blank')}}> 
+							 Blog
+							</IconButton>
+						</MenuItem>
+						<MenuItem class="hover:bg-primary-100">
+							<IconButton on:click={()=>{window.open("/about",'_self')}}> 
+							 About
+							 </IconButton>
+						</MenuItem>
+						<MenuItem class="hover:bg-primary-100">
+							<IconButton on:click={()=>{window.open("https://github.com/containerish/OpenRegistry.git",'_blank')}}> 
+								Github
+							</IconButton>
+						</MenuItem>
+						<MenuItem class="hover:bg-primary-100">
+							<IconButton on:click={()=>{window.open("/faq",'self')}}> 
+								FAQ
+							</IconButton>
+						</MenuItem>
+					</div>
+				</Menu>
+			</div>
+
+			<div class="hidden md:flex items-center">
 				<div class="flex flex-col md:mx-1 md:flex-row gap-1 md:gap-9">
 					<a
 						rel="noreferrer"

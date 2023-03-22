@@ -17,6 +17,7 @@
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import type { PageData } from './$types';
+	import SortIcon from '$lib/icons/sortIcon.svelte';
 
 	export let data: PageData;
 
@@ -177,7 +178,7 @@
 				</Dialog>
 			{/if}
 			<div class="flex flex-col w-full my-8 items-start max-w-[850px] px-9 lg:px-16">
-				<div class="flex flex-row gap-10 justify-between w-full pb-2">
+				<div class="flex flex-row gap-10 justify-between items-center w-full pb-2">
 					<Menu title="Sort">
 						<MenuItem>
 							<button
