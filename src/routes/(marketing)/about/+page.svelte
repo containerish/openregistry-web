@@ -7,7 +7,7 @@
 </svelte:head>
 
 <div class="flex bg-primary-50 justify-center items-center relative">
-	<div class="absolute z-0 hidden xl:flex top-[40%] justify-between w-full h-3/4 max-w-[1700px] mx-auto">
+	<div class="absolute hidden xl:flex top-[40%] justify-between w-full max-w-[1700px] mx-auto">
 		<div class="">
 			<img src="about-1.svg" alt="about us" width="500px" />
 		</div>
@@ -15,10 +15,10 @@
 			<img src="about-2.svg" alt="about us" width="500px" />
 		</div> 
 	</div>
-	<div class="flex flex-col w-full justify-start items-center my-2 lg:my-20 max-w-[2000px] mx-auto z-50">
+	<div class="flex flex-col w-full justify-start items-center my-2 lg:my-20 max-w-[2000px] mx-auto z-20">
 		<div
 			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center px-10 
-			py-4 lg:py-20 mx-5 my-1 lg:my-10 max-w-[600px] lg:max-w-max"
+			py-6 mx-5 my-3 max-w-[600px] lg:max-w-max"
 		>
 			<div>
 				<h1 class="text-3xl lg:text-5xl font-semibold text-primary-600">

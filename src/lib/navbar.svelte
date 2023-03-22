@@ -17,67 +17,59 @@
 	};
 </script>
 
-<header class="sticky top-0 z-50 bg-primary-50 md:pt-6">
-	<nav class="mx-auto px-16">
-		<div class="container mx-auto px-1 xl:px-12">
-			<div class="flex flex-col items-center w-full">
-				<div class="flex w-full items-center justify-between">
-					<div
-						on:keydown={() => {}}
-						on:click={() => goto('/')}
-						class="flex cursor-pointer items-center sm:ml-5"
+<header class="sticky top-0 z-50 bg-primary-50">
+	<nav class="px-16 pt-3 pb-2 max-w-[2500px] mx-auto">
+		<div class="flex w-full items-center justify-between ">
+			<div
+				on:keydown={() => {}}
+				on:click={() => goto('/')}
+				class="flex cursor-pointer items-center"
+			>
+				<Logo type="dark" />
+			</div>
+			<div class="flex items-center">
+				<div class="flex flex-col md:mx-1 md:flex-row gap-1 md:gap-9">
+					<a
+						rel="noreferrer"
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="https://blog.openregistry.dev"
+						target="_blank"
 					>
-						<Logo type="dark" />
-					</div>
-					<div class="flex items-center justify-center py-2">
-						<div class="flex flex-col md:mx-1 md:mt-0 md:flex-row lg:gap-3">
-							<a
-								rel="noreferrer"
-								class="my-1 transform text-lg leading-5 tracking-wider text-primary-600 duration-500
-			                    hover:scale-125 md:mx-4 lg:text-xl"
-								href="https://blog.openregistry.dev"
-								target="_blank"
-							>
-								Blog
-							</a>
+						Blog
+					</a>
 
-							<a
-								class="my-1 transform text-lg leading-5 tracking-wider text-primary-600 duration-500
-								hover:scale-125 md:mx-4 lg:text-xl"
-								href="/about"
-							>
-								About
-							</a>
-							<a
-								rel="noreferrer"
-								class="my-1 transform text-lg leading-5 tracking-wider text-primary-600 duration-500
-								hover:scale-125 md:mx-4 lg:text-xl"
-								href="https://github.com/containerish/OpenRegistry.git"
-								target="_blank"
-							>
-								Github
-							</a>
-							<a
-								class="my-1 transform text-lg leading-5 tracking-wider text-primary-600 duration-500
-								hover:scale-125 md:mx-4 lg:text-xl"
-								href="/faq"
-							>
-								FAQ
-							</a>
-						</div>
-						<div class="hidden md:flex items-center">
-							<ButtonSolid on:click={toggleSignIn}>Sign In</ButtonSolid>
-						</div>
-						<div>
-							<Dialog isOpen={openSignInModal}>
-								<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
-							</Dialog>
-						</div>
-						<Dialog isOpen={openSignUpModal} styles="top-0">
-							<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
-						</Dialog>
-					</div>
+					<a
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="/about"
+					>
+						About
+					</a>
+					<a
+						rel="noreferrer"
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="https://github.com/containerish/OpenRegistry.git"
+						target="_blank"
+					>
+						Github
+					</a>
+					<a
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="/faq"
+					>
+						FAQ
+					</a>
 				</div>
+				<div class="hidden md:flex ml-5">
+					<ButtonSolid on:click={toggleSignIn}>Sign In</ButtonSolid>
+				</div>
+				<div>
+					<Dialog isOpen={openSignInModal}>
+						<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
+					</Dialog>
+				</div>
+				<Dialog isOpen={openSignUpModal} styles="top-0">
+					<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
+				</Dialog>
 			</div>
 		</div>
 	</nav>

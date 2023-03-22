@@ -117,7 +117,7 @@
 </svelte:head>
 
 <div class="mx-auto flex w-full max-w-sm overflow-hidden">
-	<div class="flex w-full flex-col px-6 py-4">
+	<div class="flex w-full flex-col px-3 py-3">
 		<div class="pb-8 pt-4 flex justify-center">
 			<Logo type="dark" />
 		</div>

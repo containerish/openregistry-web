@@ -38,24 +38,23 @@
 </script>
 
 <Card id="top" styles="w-full flex flex-col px-0 bg-white">
-	<div class="flex flex-col items-center justify-center gap-4 md:w-full md:gap-8 xl:gap-24">
+	<div class="flex flex-col items-center justify-center gap-9 w-full">
 		<picture class="w-full">
-			<source media="(min-width: 2000px)" srcset="./big-hero.svg" />
-			<source media="(min-width: 650px)" srcset="./hero1.svg" />
+			<source media="(min-width: 2000px)" srcset="./big-hero-new.svg" />
+			<source media="(min-width: 650px)" srcset="./hero-101.svg" />
 			<source media="(min-width: 390px)" srcset="./small-hero.svg" />
 			<img alt="hero svg" class="w-full" src="./hero.svg" />
 		</picture>
 
 		<div
-			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-3/5 sm:w-4/5 lg:w-full"
+			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-3/5 sm:w-4/5"
 		>
-			<span class="text-3xl font-semibold md:text-5xl xl:font-bold 2xl:text-6xl">
+			<span class="text-3xl font-semibold md:text-5xl lg:font-bold lg:text-6xl">
 				A Decentralised Container Registry
 			</span>
 
 			<p
-				class="mt-5 break-words text-base text-primary-600 md:text-xl 
-					2xl:text-2xl"
+				class="mt-5 break-words text-base text-primary-600 md:text-xl"
 			>
 				OpenRegistry is an open source container registry developed for people by people. Backed by
 				amazing distributed communities, OpenRegistry offers all the features of a container
@@ -63,7 +62,7 @@
 			</p>
 		</div>
 
-		<div class="h-full pb-8">
+		<div class="h-full py-9">
 			<form
 				on:submit|preventDefault={() => goto(`/search?q=${query}`)}
 				class="flex flex-col items-center justify-center gap-5 md:flex-row"
@@ -88,10 +87,10 @@
 	</div>
 
 	<div
-		class="grid w-2/3 lg:w-full max-w-[1100px] grid-cols-2 place-items-center gap-2 py-10 px-4 md:w-3/5 md:min-w-[600px]
-		md:grid-cols-3 lg:gap-8 lg:py-20 lg:grid-cols-5"
+		class="grid w-2/3 lg:w-full max-w-[1100px] grid-cols-2 place-items-center gap-2 pt-10 pb-20 px-4 md:w-3/5 md:min-w-[600px]
+		md:grid-cols-3 lg:gap-8 lg:grid-cols-5"
 	>
-		<div class="col-span-2 pb-10 md:col-span-3 lg:col-span-5">
+		<div class="col-span-2 pb-9 md:col-span-3 lg:col-span-5">
 			<div
 				class="flex flex-col items-center justify-center text-center 
 				text-base text-primary-600 lg:text-lg"
