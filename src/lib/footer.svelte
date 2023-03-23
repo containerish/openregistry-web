@@ -43,7 +43,7 @@
 			<div class="ml-5">
 				<a
 					href="#top"
-					class="-ml-1 flex cursor-pointer items-center hover:no-underline hover:opacity-80"
+					class="-ml-3 flex cursor-pointer items-center hover:no-underline hover:opacity-80"
 				>
 					<Logo type="light" />
 				</a>

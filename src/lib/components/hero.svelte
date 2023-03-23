@@ -42,12 +42,12 @@
 		<picture class="w-full">
 			<source media="(min-width: 2000px)" srcset="./big-hero-new.svg" />
 			<source media="(min-width: 650px)" srcset="./hero-101.svg" />
-			<source media="(min-width: 390px)" srcset="./small-hero.svg" />
+			<source media="(min-width: 360px)" srcset="./small-hero.svg" />
 			<img alt="hero svg" class="w-full" src="./hero.svg" />
 		</picture>
 
 		<div
-			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-3/5 sm:w-4/5"
+			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-full px-6 md:px-16"
 		>
 			<span class="text-3xl font-semibold md:text-5xl lg:font-bold lg:text-6xl">
 				A Decentralised Container Registry
@@ -84,88 +84,85 @@
 		</div>
 	</div>
 
-	<div
-		class="grid w-3/4 lg:w-full max-w-[1100px] grid-cols-2 place-items-center gap-2 pt-10 pb-20 px-4 md:w-3/5 md:min-w-[600px]
-		md:grid-cols-3 lg:gap-8 lg:grid-cols-5"
-	>
-		<div class="col-span-2 pb-9 md:col-span-3 lg:col-span-5">
-			<div
-				class="flex flex-col items-center justify-center text-center 
-				text-base text-primary-600 lg:text-lg"
-			>
-				<span>
-					Browse, Pull, Push and Share 100s of container images by open source projects, software
-					vendors and communities.</span
-				>
-			</div>
+	<div class="flex flex-col justify-center items-center gap-9 pt-10 pb-20">
+		<div
+			class="flex flex-col items-center justify-center text-center text-base text-primary-600 lg:text-lg px-9"
+		>
+			<span>
+				Browse, Pull, Push and Share 100s of container images by open source projects, software
+				vendors and communities.
+			</span>
 		</div>
-		<RepoBox styles="bg-[#081c45]" href="#">
-			<StorjIcon />
-		</RepoBox>
 
-		<RepoBox>
-			<div class="h-full w-full flex justify-center items-center">
-				<img src="./IPFS_ad.png" alt="" width="150px" />
-			</div>
-		</RepoBox>
+		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl">
+			<RepoBox styles="bg-[#081c45]" href="#">
+				<StorjIcon />
+			</RepoBox>
 
-		<RepoBox href="#" styles="bg-stone-700">
-			<IexecIcon />
-		</RepoBox>
-		<RepoBox href="#" styles="bg-[#ce4748]">
-			<AkashIcon />
-		</RepoBox>
+			<RepoBox>
+				<div class="h-full w-full flex justify-center items-center">
+					<img src="./IPFS_ad.png" alt="" width="150px" />
+				</div>
+			</RepoBox>
 
-		<RepoBox href="#" styles="bg-primary-600">
-			<div><img alt="nodejs" src="./solanaLogo.png" width="120px" /></div>
-		</RepoBox>
+			<RepoBox href="#" styles="bg-stone-700">
+				<IexecIcon />
+			</RepoBox>
+			<RepoBox href="#" styles="bg-[#ce4748]">
+				<AkashIcon />
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nginx" src="./nginx.png" width="100px" /></div>
-		</RepoBox>
+			<RepoBox href="#" styles="bg-primary-600">
+				<div><img alt="nodejs" src="./solanaLogo.png" width="120px" /></div>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nginx" src="./busybox1.png" width="50px" /></div>
-			<span class="text-lg font-semibold">BusyBox</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nginx" src="./nginx.png" width="100px" /></div>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nginx" src="./library-alpine-logo.png" width="50px" /></div>
-			<span class="text-xl font-semibold text-blue-800">Alpine</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nginx" src="./busybox1.png" width="50px" /></div>
+				<span class="text-lg font-semibold">BusyBox</span>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><MongoIcon /></div>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nginx" src="./library-alpine-logo.png" width="50px" /></div>
+				<span class="text-xl font-semibold text-blue-800">Alpine</span>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nodejs" src="./Redis-Logo.png" width="120px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600" />
-		</RepoBox>
+			<RepoBox href="#">
+				<div><MongoIcon /></div>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nodejs" src="./nodejs.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">node</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nodejs" src="./Redis-Logo.png" width="120px" /></div>
+				<span class="text-lg font-semibold tracking-wider text-primary-600" />
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nodejs" src="./ubuntu-logo32.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">ubuntu</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nodejs" src="./nodejs.png" width="30px" /></div>
+				<span class="text-lg font-semibold tracking-wider text-primary-600">node</span>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nodejs" src="./traefik-logo.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">traefik</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nodejs" src="./ubuntu-logo32.png" width="30px" /></div>
+				<span class="text-lg font-semibold tracking-wider text-primary-600">ubuntu</span>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nodejs" src="./python-logo-only.png" width="30px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">python</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nodejs" src="./traefik-logo.png" width="30px" /></div>
+				<span class="text-lg font-semibold tracking-wider text-primary-600">traefik</span>
+			</RepoBox>
 
-		<RepoBox href="#">
-			<div><img alt="nodejs" src="./library-httpd-logo.png" width="50px" /></div>
-			<span class="text-lg font-semibold tracking-wider text-primary-600">httpd</span>
-		</RepoBox>
+			<RepoBox href="#">
+				<div><img alt="nodejs" src="./python-logo-only.png" width="30px" /></div>
+				<span class="text-lg font-semibold tracking-wider text-primary-600">python</span>
+			</RepoBox>
+
+			<RepoBox href="#">
+				<div><img alt="nodejs" src="./library-httpd-logo.png" width="50px" /></div>
+				<span class="text-lg font-semibold tracking-wider text-primary-600">httpd</span>
+			</RepoBox>
+		</div>
 	</div>
 </Card>
