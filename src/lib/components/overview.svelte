@@ -5,13 +5,13 @@
 
 <Card styles="bg-primary-50 py-12">
 	<div class="w-full h-full">
-		<div class="px-6 w-full flex justify-center items-center flex-col xl:flex-row my-3 lg:my-28">
+		<div class="px-6 md:px-9 w-full flex justify-center items-center flex-col xl:flex-row my-3 lg:my-28">
 			<div class="w-80 md:w-fit">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
 				</picture>
 			</div>
-			<div class="w-3/5 mx-8 flex justify-center flex-col lg:max-w-2xl">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-2xl">
 				<span
 					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
 					Overview
@@ -60,7 +60,7 @@
 		<div
 			class="px-6 w-full flex justify-center items-center flex-col-reverse xl:flex-row my-2 lg:my-28"
 		>
-			<div class="w-3/5 mx-8 flex justify-center flex-col lg:max-w-2xl">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-2xl">
 				<span
 					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
 					Collaborations
@@ -115,7 +115,7 @@
 					<img src="man-arrow-up.svg" alt="Storage" width="600px" />
 				</picture>
 			</div>
-			<div class="w-3/5 mx-8 flex justify-center flex-col lg:max-w-2xl">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-2xl">
 				<div class="flex justify-center items-center text-center">
 					<span
 						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">

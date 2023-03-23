@@ -4,7 +4,7 @@
 </script>
 
 <Card styles="bg-primary-100 block py-12 lg:py-20 flex flex-col gap-6">
-	<div class="flex w-1/2 lg:w-full flex-col justify-center lg:max-w-2xl items-center">
+	<div class="flex px-6 w-full flex-col justify-center max-w-2xl items-center">
 		<span
 			class="text-primary-600 text-center whitespace-nowrap font-bold pb-6 text-3xl lg:text-5xl">
 			High Level Architecture
