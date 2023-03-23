@@ -53,6 +53,11 @@
 								FAQ
 							</IconButton>
 						</MenuItem>
+						<MenuItem class="hover:bg-primary-100">
+							<IconButton on:click={toggleSignIn}> 
+								Sign In
+							</IconButton>
+						</MenuItem>
 					</div>
 				</Menu>
 			</div>
