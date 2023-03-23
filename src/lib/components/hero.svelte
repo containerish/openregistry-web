@@ -53,9 +53,7 @@
 				A Decentralised Container Registry
 			</span>
 
-			<p
-				class="mt-5 break-words text-base text-primary-600 md:text-xl"
-			>
+			<p class="mt-5 break-words text-base text-primary-600 md:text-xl">
 				OpenRegistry is an open source container registry developed for people by people. Backed by
 				amazing distributed communities, OpenRegistry offers all the features of a container
 				registry along with awesome additions like automated build system
@@ -87,7 +85,7 @@
 	</div>
 
 	<div
-		class="grid w-2/3 lg:w-full max-w-[1100px] grid-cols-2 place-items-center gap-2 pt-10 pb-20 px-4 md:w-3/5 md:min-w-[600px]
+		class="grid w-3/4 lg:w-full max-w-[1100px] grid-cols-2 place-items-center gap-2 pt-10 pb-20 px-4 md:w-3/5 md:min-w-[600px]
 		md:grid-cols-3 lg:gap-8 lg:grid-cols-5"
 	>
 		<div class="col-span-2 pb-9 md:col-span-3 lg:col-span-5">
