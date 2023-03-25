@@ -99,15 +99,16 @@
 				<StorjIcon />
 			</RepoBox>
 
-			<RepoBox>
-				<div class="h-full w-full flex justify-center items-center">
-					<img src="./IPFS_ad.png" alt="" width="150px" />
-				</div>
-			</RepoBox>
-
 			<RepoBox href="#" styles="bg-stone-700">
 				<IexecIcon />
 			</RepoBox>
+
+			<RepoBox styles="bg-[#062b3f]">
+				<div class="h-full w-full flex justify-center items-center">
+					<img src="./ipfs.svg" alt="" />
+				</div>
+			</RepoBox>
+			
 			<RepoBox href="#" styles="bg-[#ce4748]">
 				<AkashIcon />
 			</RepoBox>
