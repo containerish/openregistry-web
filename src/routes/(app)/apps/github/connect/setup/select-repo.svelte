@@ -12,6 +12,13 @@
 
 	let openDialog = false;
 	let disabled = false;
+	let openErrorModal = false;
+
+	const handleErrorCloseModal = () => {
+		$ghStore.selectedRepository = null;
+		openErrorModal = !openErrorModal;
+		selectedRepo = '';
+	};
 
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
@@ -20,13 +27,24 @@
 	export let handleNext;
 
 	async function handleRepoSelect(repo: AuthorisedRepository) {
+		if (repo.branches.length === 0) {
+			handleErrorCloseModal();
+		}
 		selectedRepo = repo.repository.name;
 		await ghStore.setSelectedRepository(repo);
 		await ghStore.setAllAuthorisedRepositories(data.repoList);
 		await ghStore.setGithubUsername(repo.repository.owner.login);
 	}
 </script>
+
 <div class="w-full">
+	{#if openErrorModal}
+		<Dialog isOpen={openErrorModal}>
+			<div>error error error repository is empty</div>
+			<ButtonSolid on:click={handleErrorCloseModal}>Close</ButtonSolid>
+		</Dialog>
+	{/if}
+
 	<div class="flex flex-col justify-center items-center gap-3">
 		<span class="text-2xl text-center font-bold text-primary-600"
 			>Deploy a site from your account</span
@@ -88,7 +106,7 @@
 			</div>
 		{:else}
 			<div class="grid-flow-row grid grid-cols-2 gap-4 text-lg ">
-				{#each data.repoList as repo}
+				{#each data.repoList as repo (repo.repository.name)}
 					<button
 						on:click={() => handleRepoSelect(repo)}
 						class="bg-white text-slate-700 text-sm lg:text-base rounded border-2 gap-2 border-primary-100 
@@ -106,7 +124,11 @@
 			</div>
 		{/if}
 		<span class="text-slate-700 text-sm lg:text-base">
-			If your repository is not shown, configure repository access for OpenRegistry app on Github.
+			1. If your repository is not shown, configure repository access for OpenRegistry app on
+			Github.
+		</span>
+		<span class="text-slate-700 text-sm lg:text-base">
+			2. If your repository is not shown, this could also mean, there are no branches in the repo.
 		</span>
 	</div>
 	<hr class="mt-10 border-1 border-gray-300" />
@@ -117,17 +139,10 @@
 			class="text-slate-600 underline underline-offset-4 text-base lg:text-lg cursor-pointer"
 			>Cancel</span
 		>
-		{#if !selectedRepo}
-			<ButtonSolid
-				{disabled}
-				on:click={() => {
-					openDialog = true;
-					disabled = true;
-				}}>Begin setup</ButtonSolid
-			>
-		{:else}
-			<ButtonSolid on:click={() => handleNext(1)}>Begin setup</ButtonSolid>
-		{/if}
+		<ButtonSolid
+			disabled={!selectedRepo || data.repoList.length === 0}
+			on:click={() => handleNext(1)}>Begin setup</ButtonSolid
+		>
 	</div>
 
 	{#if openDialog}

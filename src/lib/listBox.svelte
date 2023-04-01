@@ -21,6 +21,7 @@
 		selectedItem = item;
 		item?.handler();
 	}
+	console.log('selected item:', selectedItem);
 </script>
 
 <div class="flex justify-center items-start flex-col">
