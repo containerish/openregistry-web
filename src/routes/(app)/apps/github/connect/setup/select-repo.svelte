@@ -20,18 +20,19 @@
 	export let handleNext;
 
 	async function handleRepoSelect(repo: AuthorisedRepository) {
-		selectedRepo = repo.repository.name;
+		selectedRepo = repo.repository.name as string;
 		await ghStore.setSelectedRepository(repo);
 		await ghStore.setAllAuthorisedRepositories(data.repoList);
 		await ghStore.setGithubUsername(repo.repository.owner.login);
 	}
 </script>
+
 <div class="w-full">
 	<div class="flex flex-col justify-center items-center gap-3">
 		<span class="text-2xl text-center font-bold text-primary-600"
 			>Deploy a site from your account</span
 		>
-		<div class="flex flex-col text-center text-xl text-slate-700">
+		<div class="flex flex-col text-center text-xl text-slate-600">
 			<span class="text-center text-sm lg:text-base"
 				>Select a repository to connect as your project’s source code. New commits will trigger
 				OpenRegistry to automatically build and deploy your changes.
@@ -88,7 +89,7 @@
 			</div>
 		{:else}
 			<div class="grid-flow-row grid grid-cols-2 gap-4 text-lg ">
-				{#each data.repoList as repo}
+				{#each data.repoList as repo (repo.repository.name)}
 					<button
 						on:click={() => handleRepoSelect(repo)}
 						class="bg-white text-slate-700 text-sm lg:text-base rounded border-2 gap-2 border-primary-100 
@@ -106,8 +107,18 @@
 			</div>
 		{/if}
 		<span class="text-slate-700 text-sm lg:text-base">
-			If your repository is not shown, configure repository access for OpenRegistry app on Github.
+			If your repository is not shown, it could be due to one of the following reasons:
 		</span>
+		<ol class="list-decimal text-slate-700 text-sm ml-6">
+			<li>
+				OpenRegistry does not have access to the repository. Please configure repository access for
+				OpenRegistry app on Github.
+			</li>
+			<li>
+				There are no branches in the repo. Please add a branch to the respository or choose a
+				different repo for build project
+			</li>
+		</ol>
 	</div>
 	<hr class="mt-10 border-1 border-gray-300" />
 	<div class="flex justify-between items-center mt-10">
@@ -117,17 +128,10 @@
 			class="text-slate-600 underline underline-offset-4 text-base lg:text-lg cursor-pointer"
 			>Cancel</span
 		>
-		{#if !selectedRepo}
-			<ButtonSolid
-				{disabled}
-				on:click={() => {
-					openDialog = true;
-					disabled = true;
-				}}>Begin setup</ButtonSolid
-			>
-		{:else}
-			<ButtonSolid on:click={() => handleNext(1)}>Begin setup</ButtonSolid>
-		{/if}
+		<ButtonSolid
+			disabled={!selectedRepo || data.repoList.length === 0}
+			on:click={() => handleNext(1)}>Begin setup</ButtonSolid
+		>
 	</div>
 
 	{#if openDialog}

@@ -52,7 +52,7 @@ export const load = (async (event) => {
 		const ghUsername = repository?.owner?.login;
 		ghStore.setGithubUsername(ghUsername!);
 		return {
-			repoList: jsonResp,
+			repoList: jsonResp.filter((item) => item.branches.length > 0),
 			githubUsername: repository?.owner?.login
 		};
 	}
