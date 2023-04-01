@@ -12,13 +12,6 @@
 
 	let openDialog = false;
 	let disabled = false;
-	let openErrorModal = false;
-
-	const handleErrorCloseModal = () => {
-		$ghStore.selectedRepository = null;
-		openErrorModal = !openErrorModal;
-		selectedRepo = '';
-	};
 
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
@@ -27,10 +20,7 @@
 	export let handleNext;
 
 	async function handleRepoSelect(repo: AuthorisedRepository) {
-		if (repo.branches.length === 0) {
-			handleErrorCloseModal();
-		}
-		selectedRepo = repo.repository.name;
+		selectedRepo = repo.repository.name as string;
 		await ghStore.setSelectedRepository(repo);
 		await ghStore.setAllAuthorisedRepositories(data.repoList);
 		await ghStore.setGithubUsername(repo.repository.owner.login);
@@ -38,18 +28,11 @@
 </script>
 
 <div class="w-full">
-	{#if openErrorModal}
-		<Dialog isOpen={openErrorModal}>
-			<div>error error error repository is empty</div>
-			<ButtonSolid on:click={handleErrorCloseModal}>Close</ButtonSolid>
-		</Dialog>
-	{/if}
-
 	<div class="flex flex-col justify-center items-center gap-3">
 		<span class="text-2xl text-center font-bold text-primary-600"
 			>Deploy a site from your account</span
 		>
-		<div class="flex flex-col text-center text-xl text-slate-700">
+		<div class="flex flex-col text-center text-xl text-slate-600">
 			<span class="text-center text-sm lg:text-base"
 				>Select a repository to connect as your project’s source code. New commits will trigger
 				OpenRegistry to automatically build and deploy your changes.
@@ -124,12 +107,18 @@
 			</div>
 		{/if}
 		<span class="text-slate-700 text-sm lg:text-base">
-			1. If your repository is not shown, configure repository access for OpenRegistry app on
-			Github.
+			If your repository is not shown, it could be due to one of the following reasons:
 		</span>
-		<span class="text-slate-700 text-sm lg:text-base">
-			2. If your repository is not shown, this could also mean, there are no branches in the repo.
-		</span>
+		<ol class="list-decimal text-slate-700 text-sm ml-6">
+			<li>
+				OpenRegistry does not have access to the repository. Please configure repository access for
+				OpenRegistry app on Github.
+			</li>
+			<li>
+				There are no branches in the repo. Please add a branch to the respository or choose a
+				different repo for build project
+			</li>
+		</ol>
 	</div>
 	<hr class="mt-10 border-1 border-gray-300" />
 	<div class="flex justify-between items-center mt-10">
