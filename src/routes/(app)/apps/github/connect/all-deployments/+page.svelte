@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { fade, slide, scale } from 'svelte/transition';
-	import { SettingsIcon, PlainCrossIcon, ExternalLinkIcon, RecycleIcon } from '$lib/icons';
+	import { SettingsIcon, PlainCrossIcon, ArrowLeftIcon, ChevronRightIcon } from '$lib/icons';
 	import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
-
+	import BuildTile from './build.svelte';
+	import BuildCompact from './build-compact.svelte';
 	const handleTabSelect = (opts: any) => {
 		return opts.selected
 			? `font-semibold border-0 border-b-4 border-primary-400 text-lg text-slate-700`
@@ -10,12 +11,11 @@
 	};
 </script>
 
-<div class="bg-white w-full p-20">
+<div class="w-full p-20">
 	<TabGroup>
-		<TabList class="text-lg flex gap-9 ml-2">
+		<TabList class="text-lg flex gap-9 ml-2 border-b-2 border-slate-300">
 			<Tab class={handleTabSelect}>Builds</Tab>
 			<Tab class={handleTabSelect}>Settings</Tab>
-			
 		</TabList>
 
 		<div class="" transition:fade={{ delay: 300, duration: 300 }}>
@@ -36,7 +36,7 @@
 								class="text-lg desktop:text-base laptop:text-sm half:text-sm text-slate-600 ml-1"
 							>
 								you can now do more with your site. invite collaborators, protect previews, enable
-								web analytics <br /> and more.</span
+								web analytics and more.</span
 							>
 							<button class="border-0 bg-transparent w-44 rounded-lg">
 								<div class="flex space-x-2">
@@ -49,25 +49,29 @@
 							<PlainCrossIcon styles="w-6 h-6 text-slate-600" />
 						</button>
 					</div>
-					<div
-						class="flex flex-col bg-white rounded-sm px-12 py-12 min-h-max border-2 border-primary-100 mt-10 
-						border-l-4 border-l-green-600 border-opacity-100 shadow-2xl"
-					>
-						<div class="flex justify-between">
-							<span class="text-xl laptop:text-lg half:text-lg font-semibold">Production</span>
-							<button class="flex space-x-1 bg-transparent border-0">
-								<span
-									class="underline underline-offset-4 text-lg desktop:text-base laptop:text-base half:text-sm text-slate-600"
-									>visit site</span
-								>
-								<ExternalLinkIcon styles="h-4 w-4 text-slate-700" />
-							</button>
+					<BuildTile />
+					<div class="border border-primary-200 rounded flex flex-col">
+						<div class="bg-slate-200 grid grid-cols-7 justify-between px-3 py-1 text-slate-800">
+							<span>Environment</span>
+							<span class=" col-span-2">Source</span>
+							<span class=" col-span-2">Deployment</span>
+							<span class=" col-span-2">Status</span>
 						</div>
-						<div class="flex space-x-2">
-							<RecycleIcon styles="w-5 h-5 text-slate-700" />
-							<span class="tracking-wide text-lg laptop:text-base half:text-base">
-								Automatic deployments enabled</span
-							>
+						<div>
+							{#each new Array(10) as item}
+								<BuildCompact />
+								<hr>
+							{/each}
+						</div>
+
+						<div class="bg-white py-2 flex gap-2 px-3 items-center">
+							<button class=" bg-transparent rounded">
+								<ArrowLeftIcon styles="h-4 w-4 text-slate-500" />
+							</button>
+							<button class=" bg-transparent rounded">
+								<ChevronRightIcon styles="h-4 w-4 text-slate-600" />
+							</button>
+							<span class="text-sm text-slate-500">1 to 10 of 100 builds</span>
 						</div>
 					</div>
 				</TabPanel>
@@ -75,5 +79,6 @@
 					<div />
 				</TabPanel>
 			</TabPanels>
-		</div></TabGroup>
+		</div>
+	</TabGroup>
 </div>

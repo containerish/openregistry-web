@@ -2,7 +2,7 @@
     export let styles="";
 </script>
 
-<svg class="{styles} h-6 w-6" 
+<svg class="{styles}" 
     fill="none" 
     viewBox="0 0 24 24" 
     stroke="currentColor" 

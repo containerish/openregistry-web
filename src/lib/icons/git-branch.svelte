@@ -4,8 +4,7 @@
 
 <svg
     class="{styles}"
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
+    viewBox="0 0 24 24"
     height="20" width="20"> 
     <g> <path fill="none" d="M0 0h24v24H0z"/> 
         <path d="M7.105 15.21A3.001 3.001 0 1 1 5 15.17V8.83a3.001 3.001 
