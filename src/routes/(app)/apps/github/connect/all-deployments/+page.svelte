@@ -1,54 +1,65 @@
 <script lang="ts">
-	import { fade, slide, scale } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { SettingsIcon, PlainCrossIcon, ArrowLeftIcon, ChevronRightIcon } from '$lib/icons';
 	import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
 	import BuildTile from './build.svelte';
 	import BuildCompact from './build-compact.svelte';
+	import Settings from './settings.svelte';
 	const handleTabSelect = (opts: any) => {
 		return opts.selected
 			? `font-semibold border-0 border-b-4 border-primary-400 text-lg text-slate-700`
 			: `border-none selection:bg-primary-100 text-lg text-slate-700`;
 	};
+
+	let showFirstBuild = true;
+	const toggleFirstBuild = () => {
+		showFirstBuild = false;
+	};
 </script>
 
 <div class="w-full p-20">
-	<TabGroup>
+	<TabGroup defaultIndex={3}>
 		<TabList class="text-lg flex gap-9 ml-2 border-b-2 border-slate-300">
-			<Tab class={handleTabSelect}>Builds</Tab>
+			<Tab let:selected class={handleTabSelect}>Builds</Tab>
 			<Tab class={handleTabSelect}>Settings</Tab>
 		</TabList>
 
-		<div class="" transition:fade={{ delay: 300, duration: 300 }}>
+		<div transition:fade={{ delay: 300, duration: 300 }}>
 			<TabPanels>
 				<TabPanel>
-					<div
-						class="flex laptop:flex-col space-x-8 relative bg-white rounded-sm px-20 py-12 min-h-max border-2 
+					{#if showFirstBuild}
+						<div
+							class="flex laptop:flex-col space-x-8 relative bg-white rounded-sm px-20 py-12 min-h-max border-2 
 						border-primary-100 shadow-3xl mt-10"
-					>
-						<picture>
-							<img src="/build.svg" alt="logo" class="apple:w-56 uw:w-56" width="200px" />
-						</picture>
-						<div class="flex flex-col gap-3 justify-center">
-							<span class="text-lg lg:text-2xl font-semibold text-primary-500">
-								Congratulations on your first Build!</span
+						>
+							<picture>
+								<img src="/build.svg" alt="logo" class="apple:w-56 uw:w-56" width="200px" />
+							</picture>
+							<div class="flex flex-col gap-3 justify-center">
+								<span class="text-lg lg:text-2xl font-semibold text-primary-500">
+									Congratulations on your first Build!</span
+								>
+								<span
+									class="text-lg desktop:text-base laptop:text-sm half:text-sm text-slate-600 ml-1"
+								>
+									you can now do more with your site. invite collaborators, protect previews, enable
+									web analytics and more.</span
+								>
+								<button class="border-0 bg-transparent w-44 rounded-lg">
+									<div class="flex space-x-2">
+										<SettingsIcon styles="text-primary-400" />
+										<span class="text-primary-400"> Explore Settings</span>
+									</div>
+								</button>
+							</div>
+							<button
+								on:click={toggleFirstBuild}
+								class="absolute right-4 top-4 bg-transparent border-none"
 							>
-							<span
-								class="text-lg desktop:text-base laptop:text-sm half:text-sm text-slate-600 ml-1"
-							>
-								you can now do more with your site. invite collaborators, protect previews, enable
-								web analytics and more.</span
-							>
-							<button class="border-0 bg-transparent w-44 rounded-lg">
-								<div class="flex space-x-2">
-									<SettingsIcon styles="text-primary-400" />
-									<span class="text-primary-400"> Explore Settings</span>
-								</div>
+								<PlainCrossIcon styles="w-6 h-6 text-slate-600" />
 							</button>
 						</div>
-						<button class="absolute right-4 top-4 bg-transparent border-none">
-							<PlainCrossIcon styles="w-6 h-6 text-slate-600" />
-						</button>
-					</div>
+					{/if}
 					<BuildTile />
 					<div class="border border-primary-200 rounded flex flex-col">
 						<div class="bg-slate-200 grid grid-cols-7 justify-between px-3 py-1 text-slate-800">
@@ -60,7 +71,7 @@
 						<div>
 							{#each new Array(10) as item}
 								<BuildCompact />
-								<hr>
+								<hr />
 							{/each}
 						</div>
 
@@ -76,7 +87,7 @@
 					</div>
 				</TabPanel>
 				<TabPanel>
-					<div />
+					<Settings />
 				</TabPanel>
 			</TabPanels>
 		</div>

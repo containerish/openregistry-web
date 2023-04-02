@@ -27,8 +27,7 @@
 	}
 </script>
 
-<div
-	class="bg-slate-100 w-full flex flex-col justify-start items-center py-10">
+<div class="bg-slate-100 w-full flex flex-col justify-start items-center py-10">
 	<div class="w-1/2 lg:w-3/4 text-xs px-2 py-3 lg:text-sm">
 		<Steps
 			{steps}

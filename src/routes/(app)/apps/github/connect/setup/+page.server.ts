@@ -13,7 +13,6 @@ export const load = (async (event) => {
 
 	if (action && (action === 'install' || action === 'update')) {
 		const uri = `${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`;
-		console.log('github api resp: ', uri);
 
 		try {
 			const setupResp = await fetch(uri, {
@@ -24,7 +23,6 @@ export const load = (async (event) => {
 				credentials: 'include'
 			} as RequestInit);
 
-			console.log('uri: ', setupResp);
 			if (setupResp.status !== 202) {
 				const resp = await setupResp.json();
 				console.log('resp in erorr: ', resp);
