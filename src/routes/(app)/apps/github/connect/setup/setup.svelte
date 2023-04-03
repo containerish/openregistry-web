@@ -66,8 +66,8 @@
 		<div class="flex gap-3">
 			<span class="text-base text-primary-600 lg:text-lg font-semibold"> Build Settings</span>
 			<div
-				class="flex space-x-2 justify-center items-center rounded-sm bg-cyan-200 max-w-fit px-2 pr-3 py-0.5 
-				text-sm text-cyan-900"
+				class="flex space-x-2 justify-center items-center rounded-sm bg-emerald-200 max-w-fit px-2 pr-3 py-0.5 
+				text-sm text-emerald-800"
 			>
 				<BookIcon />
 				<span class="text-xs">Configuring build</span>

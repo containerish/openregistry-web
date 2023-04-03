@@ -32,7 +32,6 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 };
 
 export const createProtobufClient: Handle = async ({ event, resolve }) => {
-	console.log('pathname from insode if:', event.url.pathname);
 	if (event.url.pathname.startsWith('/apis/services/github')) {
 		const transport = createConnectTransport({
 			baseUrl: 'http://100.77.248.53:5001'
@@ -40,8 +39,6 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 		const ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
 		event.locals.ghLogsClient = ghLogsClient;
 	}
-
-	console.log('hook ran fine');
 	return await resolve(event);
 };
 

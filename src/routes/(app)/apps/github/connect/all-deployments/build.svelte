@@ -26,7 +26,7 @@
 	<div class="flex justify-between">
 		<div class="flex gap-6 items-center">
 			<div
-				class="rounded-full bg-cyan-200 text-cyan-800 max-w-fit text-sm px-3 py-0.5 antialiased tracking-wide"
+				class="rounded-full bg-emerald-200 text-emerald-800 max-w-fit text-sm px-3 py-0.5 antialiased tracking-wide"
 			>
 				production
 			</div>
