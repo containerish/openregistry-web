@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { ghStore } from '$lib/stores';
+	import type { StreamLogsRequestSchema } from '$lib/schemas/logs-api';
 	import {
 		SpinnerCircle,
 		DownloadIcon,
@@ -14,6 +15,7 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import { onMount } from 'svelte';
+	import type { z } from 'zod';
 
 	export let handleNext;
 
@@ -28,7 +30,15 @@
 
 	let logs: string[] = [];
 	const streamBuildLogs = async () => {
-		const response = await fetch('/apis/services/github/actions/logs');
+		const body = {
+			repoName: 'Adv360-Pro-ZMK',
+			repoOwner: 'jay-dee7',
+			runId: 4521071102
+		};
+		const response = await fetch('/apis/services/github/actions/logs', {
+			method: 'POST',
+			body: JSON.stringify(body)
+		});
 		const reader = response.body?.pipeThrough(new TextDecoderStream()).getReader();
 		if (reader) {
 			while (true) {
@@ -39,7 +49,6 @@
 				logs = [...logs, ...value.split(/\r?\n/)];
 			}
 		}
-		console.log('logs:', logs);
 	};
 </script>
 

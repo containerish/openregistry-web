@@ -5,6 +5,7 @@ import { createConnectTransport } from '@bufbuild/connect-web';
 import { createPromiseClient } from '@bufbuild/connect';
 import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kone/github_actions/v1/build_logs_connect';
 import { sequence } from '@sveltejs/kit/hooks';
+import { env } from '$env/dynamic/public';
 
 export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
@@ -32,13 +33,12 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 };
 
 export const createProtobufClient: Handle = async ({ event, resolve }) => {
-	if (event.url.pathname.startsWith('/apis/services/github')) {
-		const transport = createConnectTransport({
-			baseUrl: 'http://100.77.248.53:5001'
-		});
-		const ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
-		event.locals.ghLogsClient = ghLogsClient;
-	}
+	const transport = createConnectTransport({
+		baseUrl: env.PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL
+	});
+	const ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
+	event.locals.ghLogsClient = ghLogsClient;
+
 	return await resolve(event);
 };
 

@@ -1,37 +1,45 @@
+import { StreamLogsRequestSchema } from '$lib/schemas/logs-api';
 import type { RequestHandler } from './$types';
+import { json } from '@sveltejs/kit';
+import type { ZodError } from 'zod';
 import { createConnectTransport } from '@bufbuild/connect-web';
 import { createPromiseClient } from '@bufbuild/connect';
 import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kone/github_actions/v1/build_logs_connect';
+import { env } from '$env/dynamic/public';
 
-export const GET = (async ({ locals }) => {
-	console.log('locals:', locals);
+export const POST = (async ({ locals, request }) => {
+	console.log('url:', env.PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL);
+	try {
+		const transport = createConnectTransport({
+			baseUrl: env.PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL
+		});
 
-	const transport = createConnectTransport({
-		baseUrl: 'http://100.77.248.53:5001'
-	});
-	const ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
+		const ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
+		const body = StreamLogsRequestSchema.parse(await request.json());
+		const response = ghLogsClient.streamWorkflowRunLogs({ ...body });
 
-	const response = ghLogsClient.streamWorkflowRunLogs({
-		repoName: 'Adv360-Pro-ZMK',
-		repoOwner: 'jay-dee7',
-		runId: BigInt(4521071102)
-	});
-
-	const ac = new AbortController();
-	const stream = new ReadableStream({
-		start: async (controller) => {
-			for await (const { logMessage } of response) {
-				controller.enqueue(logMessage);
+		console.log('response:', response);
+		const ac = new AbortController();
+		const stream = new ReadableStream({
+			start: async (controller) => {
+				for await (const { logMessage } of response) {
+					controller.enqueue(logMessage);
+				}
+			},
+			cancel: () => {
+				ac.abort();
 			}
-		},
-		cancel: () => {
-			ac.abort();
-		}
-	});
+		});
 
-	return new Response(stream, {
-		headers: {
-			'content-type': 'text/event-stream'
-		}
-	});
+		return new Response(stream, {
+			headers: {
+				'content-type': 'text/event-stream'
+			}
+		});
+	} catch (err) {
+		console.log('error in logs:', err);
+		return json((err as ZodError).flatten(), {
+			status: 400
+		});
+	}
 }) satisfies RequestHandler;

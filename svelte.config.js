@@ -10,8 +10,6 @@ const config = {
         alias: {
             '$apis': 'src/apis',
             "$apis/*": "src/apis/*",
-            "$lib": "src/lib",
-            "$lib/*": "src/lib/*",
             "$stores": "src/stores",
             "$stores/*": "src/stores/*",
         },
