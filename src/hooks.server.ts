@@ -1,8 +1,13 @@
 import { session } from './stores/session';
 import { Auth } from '$apis/auth';
 import { redirect, type Handle } from '@sveltejs/kit';
+import { createConnectTransport } from '@bufbuild/connect-web';
+import { createPromiseClient } from '@bufbuild/connect';
+import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kone/github_actions/v1/build_logs_connect';
+import { sequence } from '@sveltejs/kit/hooks';
+import { env } from '$env/dynamic/public';
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
 
 	const sessionId = cookies.get('session_id');
@@ -27,8 +32,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
+export const createProtobufClient: Handle = async ({ event, resolve }) => {
+	const transport = createConnectTransport({
+		baseUrl: env.PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL
+	});
+	const ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
+	event.locals.ghLogsClient = ghLogsClient;
+
+	return await resolve(event);
+};
+
 export const isProtectedRoute = (route: string): boolean => {
 	return (
 		route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps')
 	);
 };
+
+export const handle = sequence(authenticationHandler, createProtobufClient);
