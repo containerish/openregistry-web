@@ -58,7 +58,7 @@
 	</div>
 	<div class="flex flex-col gap-3 mt-9">
 		<div class="flex">
-			<SpinnerCircle styles="invisible" />
+			<SpinnerCircle class="invisible" />
 			<span class="text-slate-600 text-base font-semibold ml-6">
 				Initializing build environment
 			</span>
@@ -67,7 +67,7 @@
 		<hr class="border-t-gray-400" />
 
 		<div class="flex">
-			<SpinnerCircle styles="invisible" />
+			<SpinnerCircle class="invisible" />
 			<span class="text-slate-600 text-base font-normal ml-6 text-gray-600">
 				<i>Cloning git repository</i>
 			</span>
@@ -76,7 +76,7 @@
 		<hr class=" border-t-gray-400" />
 
 		<div class="flex">
-			<SpinnerCircle styles="invisible" />
+			<SpinnerCircle class="invisible" />
 			<span class="text-slate-600 text-base font-normal ml-6 text-gray-600">
 				<i>Building application</i>
 			</span>
@@ -85,7 +85,7 @@
 		<hr class=" border-t-gray-400" />
 
 		<div class="flex">
-			<SpinnerCircle styles="invisible" />
+			<SpinnerCircle class="invisible" />
 			<span class="text-slate-600 text-base font-normal ml-6 text-gray-600">
 				<i>Deploying to Akash network</i>
 			</span>
@@ -94,11 +94,11 @@
 	<div class="border-primary-100 border mt-10 py-4 px-5 shadow-2xl">
 		<div class="flex gap-6 justify-end items-end">
 			<div class="flex gap-2">
-				<DownloadIcon styles="h-6 w-6 text-slate-600" />
+				<DownloadIcon class="h-6 w-6 text-slate-600" />
 				<span class="text-base text-slate-600"> Download log </span>
 			</div>
 			<div class="flex gap-2">
-				<CopyIcon styles="text-slate-600" />
+				<CopyIcon class="text-slate-600" />
 				<span class="text-base text-slate-600"> Copy log </span>
 			</div>
 		</div>
@@ -118,7 +118,7 @@
 	</div>
 
 	{#if showModal}
-		<Dialog styles="shadow-2xl shadow-primary-600">
+		<Dialog class="shadow-2xl shadow-primary-600">
 			<div class="min-h-max px-3 flex flex-col justify-center items-center gap-9 py-6 mx-4">
 				<span class="lg:text-2xl text-lg font-semibold text-primary-500 break-words"
 					>Continue without a sucessful deployment ?</span
@@ -161,7 +161,7 @@
 		<div class="flex gap-6">
 			<span class="text-base text-slate-700 font-semibold">Branch: </span>
 			<div class="flex gap-1">
-				<GitBranchIcon styles="h-6 w-6" />
+				<GitBranchIcon class="h-6 w-6" />
 				<span class="text-base">
 					{$ghStore.activeBranch}
 				</span>
@@ -175,7 +175,7 @@
 		</div>
 
 		<div class=" flex pt-9">
-			<ArrowRightIcon styles="text-slate-700" />
+			<ArrowRightIcon class="text-slate-700" />
 			<span class="text-base antialiased"> Build Settings</span>
 		</div>
 	</div>

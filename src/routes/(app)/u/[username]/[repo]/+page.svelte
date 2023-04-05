@@ -63,16 +63,17 @@
 </script>
 
 <div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
-	<div class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
+	<div
+		class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
 	>
 		<div class="flex items-center">
-			<Globe styles="h-11 w-11 lg:h-16 lg:w-16 text-slate-700" />
+			<Globe class="h-11 w-11 lg:h-16 lg:w-16 text-slate-700" />
 		</div>
 		<div class="w-full text-slate-700">
 			<div class="flex gap-4 items-center">
 				<span class="text-2xl lg:text-4xl">{data.username}/{data.repo}</span>
-				<IconButton styles="mt-3">
-					<Star styles="w-5 h-5 lg:w-8 lg:h-8" />
+				<IconButton class="mt-3">
+					<Star class="w-5 h-5 lg:w-8 lg:h-8" />
 				</IconButton>
 			</div>
 			<span class="text-sm lg:text-base capitalize">by {data.username}</span>
@@ -130,7 +131,7 @@
 						>Quick Docker Commands</span
 					>
 
-					<ButtonOutlined styles="lowercase" on:click={() => handleCopy('pull')}>
+					<ButtonOutlined class="lowercase" on:click={() => handleCopy('pull')}>
 						<span
 							class="{isCopied === 'pull'
 								? 'font-semibold'

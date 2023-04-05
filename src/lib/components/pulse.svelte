@@ -4,7 +4,7 @@
 </script>
 
 {#if $pulseStore.status === 'LOADING'}
-	<Card styles="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-white">
+	<Card class="w-full min-h-[90vh] m-w-[70vw] py-8 h-max bg-white">
 		<div class="animate-pulse grid grid-cols-3 rounded-sm p-4 w-full mx-auto min-h-[80vh] gap-5 ">
 			<div class="rounded-sm col-span-1 min-h-full flex justify-center items-center">
 				<div class="flex-1 space-y-10 p-10">

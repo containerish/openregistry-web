@@ -12,5 +12,5 @@
 </script>
 
 <div id="confetti">
-	<CheckIcon styles="h-32 w-32 text-green-600" />
+	<CheckIcon class="h-32 w-32 text-green-600" />
 </div>

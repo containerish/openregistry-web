@@ -1,10 +1,9 @@
 <script>
-	export let styles ="";
+	import { twMerge } from "tailwind-merge";
 </script>
 
 <svg
-	class="{styles} animate-spin h-8 w-8 text-brown-800"
-	xmlns="http://www.w3.org/2000/svg"
+	class={twMerge("animate-spin h-8 w-8", $$props.class)} 
 	fill="none"
 	viewBox="0 0 24 24"
 >

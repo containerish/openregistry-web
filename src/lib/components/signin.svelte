@@ -126,14 +126,14 @@
 			on:click={() =>
 				window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
 		>
-			<GithubIcon styles="text-black mr-2 h-8 w-8" />
+			<GithubIcon class="text-black mr-2 h-8 w-8" />
 			Sign in with Github
 		</ButtonOutlined>
 		<div class="mt-4" />
 
 		{#if !showForgotPasswordForm && !isWebAuthN}
 			<ButtonOutlined on:click={handleIsWebAuthn}>
-				<FingerprintIcon styles="text-black mr-2" />
+				<FingerprintIcon class="text-black mr-2" />
 				Sign in using Security key
 			</ButtonOutlined>
 
@@ -187,7 +187,7 @@
 
 		{#if isWebAuthN}
 			<ButtonOutlined on:click={handleIsWebAuthn}>
-				<EmailIcon styles="text-black mr-2" />
+				<EmailIcon class="text-black mr-2" />
 				Sign in using Email Password
 			</ButtonOutlined>
 

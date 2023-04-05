@@ -1,9 +1,9 @@
 <script>
-	export let styles = '';
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <svg
-	class="{styles} h-6 w-6"
+	class={twMerge('h-6 w-6', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

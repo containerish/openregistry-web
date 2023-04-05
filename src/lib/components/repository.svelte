@@ -61,9 +61,9 @@
 			</span>
 
 			<div class="flex gap-4">
-				<DownloadIcon styles="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
-				<StarIcon styles="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
-				<LockOpenIcon styles="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
+				<DownloadIcon class="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
+				<StarIcon class="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
+				<LockOpenIcon class="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
 			</div>
 		</div>
 

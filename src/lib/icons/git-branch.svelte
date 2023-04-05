@@ -1,9 +1,9 @@
 <script>
-    export let styles ="";
+	import { twMerge } from "tailwind-merge";
 </script>
 
 <svg
-    class="{styles}"
+    class={twMerge("w-4 h-4", $$props.class)}
     viewBox="0 0 24 24"
     height="20" width="20"> 
     <g> <path fill="none" d="M0 0h24v24H0z"/> 

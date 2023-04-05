@@ -47,14 +47,14 @@
 		<div class="flex flex-col gap-9">
 			<div class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-2 border-primary-100">
 				<div class="flex items-center">
-					<ProfileIcon styles="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
+					<ProfileIcon class="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
 				</div>
 				<div class="flex flex-col justify-center">
 					<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-700">
 						{data.user.name ? data.user.name : data.user.username}
 					</span>
 					<div class="flex mt-2 items-center gap-1">
-						<ProfileIcon styles="h-5 w-5 text-slate-600" />
+						<ProfileIcon class="h-5 w-5 text-slate-600" />
 						<span class="text-sm text-slate-600">Community User</span>
 					</div>
 				</div>
@@ -72,39 +72,36 @@
 					 border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
 				>
 					<div class="flex w-full flex-col gap-1">
-						<span
-							class="mx-1 text-lg lg:text-xl font-medium text-slate-700"
-							>Email Address</span
-						>
+						<span class="mx-1 text-lg lg:text-xl font-medium text-slate-700">Email Address</span>
 						<Textfield
 							type="email"
 							placeholder="email"
-							styles="max-w-[450px]"
+							class="max-w-[450px]"
 							disabled
 							bind:value={data.user.email}
 						/>
 					</div>
 
-					<ButtonSolid styles="-mt-2">Edit</ButtonSolid>
+					<ButtonSolid class="-mt-2">Edit</ButtonSolid>
 				</div>
 			</Card>
 
 			<Card>
-				<div class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
-					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl">
-					<h1 class="text-lg lg:text-xl font-medium text-slate-600">
-						Change Password
-					</h1>
+				<div
+					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
+					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
+				>
+					<h1 class="text-lg lg:text-xl font-medium text-slate-600">Change Password</h1>
 					<Textfield
 						placeholder="current password"
 						type="password"
-						styles="max-w-[450px]"
+						class="max-w-[450px]"
 						bind:value={$currentPassword.value}
 					/>
 					<Textfield
 						placeholder="new password"
 						type="password"
-						styles="max-w-[450px]"
+						class="max-w-[450px]"
 						bind:value={$newPassword.value}
 					/>
 					<div />
@@ -136,7 +133,7 @@
 							{formResp.message}
 						</span>
 					{/if}
-					<ButtonSolid styles="mt-6" on:click={resetPassword}>Save</ButtonSolid>
+					<ButtonSolid class="mt-6" on:click={resetPassword}>Save</ButtonSolid>
 				</div>
 			</Card>
 
@@ -146,32 +143,27 @@
 					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
 				>
 					<div class="flex flex-col gap-1">
-						<span
-							class="text-lg lg:text-xl font-medium text-slate-700"
-							>Account Information</span
-						>
+						<span class="text-lg lg:text-xl font-medium text-slate-700">Account Information</span>
 						<span class="text-slate-600 antialiased text-sm">
 							This information is public and visible to all users of OpenRegistry
 						</span>
 					</div>
-					<div
-						class="flex w-full flex-col items-start justify-start gap-3"
-					>
+					<div class="flex w-full flex-col items-start justify-start gap-3">
 						<Textfield
 							type="text"
 							disabled
 							placeholder="username"
-							styles="max-w-[450px]"
+							class="max-w-[450px]"
 							bind:value={data.user.username}
 						/>
 						<Textfield
 							placeholder="Gihub handle"
 							disabled
 							type="text"
-							styles="max-w-[450px]"
+							class="max-w-[450px]"
 							bind:value={data.user.html_url}
 						/>
-						<ButtonSolid styles="mt-6" disabled>Save</ButtonSolid>
+						<ButtonSolid class="mt-6" disabled>Save</ButtonSolid>
 					</div>
 				</div>
 			</Card>

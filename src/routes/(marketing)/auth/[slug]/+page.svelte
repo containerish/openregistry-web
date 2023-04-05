@@ -214,11 +214,11 @@
 								<Button
 									disabled={!!passwordErr || !!confirmPasswordErr}
 									on:click={setNewPassword}
-									styles="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
+									class="text-gray-50 w-full mr-2 disabled:cursor-not-allowed"
 								>
 									Update Password
 								</Button>
-								<Button on:click={toggleModal} styles="bg-gray-50 text-gray-800 w-2/3 ml-2">
+								<Button on:click={toggleModal} class="bg-gray-50 text-gray-800 w-2/3 ml-2">
 									Close
 								</Button>
 							</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let styles = '';
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <svg
@@ -7,7 +7,7 @@
 	viewBox="0 0 24 24"
 	stroke-width="1.5"
 	stroke="currentColor"
-	class="{styles} w-6 h-6"
+	class={twMerge("w-6 h-6", $$props.class)}
 >
 	<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
 </svg>

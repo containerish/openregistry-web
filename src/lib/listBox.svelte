@@ -59,7 +59,7 @@
 									disabled={item.disabled}
 								>
 									{#if selectedItem.id === item.id}
-										<span><CheckIcon styles="h-5 w-5 text-slate-600" /></span>
+										<span><CheckIcon class="h-5 w-5 text-slate-600" /></span>
 									{/if}
 									<span>{item.name}</span>
 								</ListboxOption>

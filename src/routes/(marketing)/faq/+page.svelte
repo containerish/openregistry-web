@@ -66,7 +66,7 @@
 	<title>FAQ | OpenRegistry</title>
 </svelte:head>
 
-<Card styles="bg-white mx-auto">
+<Card class="bg-white mx-auto">
 	<div class="w-3/4 lg:w-full min-h-[90vh] mx-10 my-4 lg:my-20 max-w-[3000px]">
 		<div
 			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-5 rounded-sm 

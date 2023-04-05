@@ -47,7 +47,7 @@
 								>
 								<button class="border-0 bg-transparent w-44 rounded-lg">
 									<div class="flex space-x-2">
-										<SettingsIcon styles="text-primary-400" />
+										<SettingsIcon class="text-primary-400" />
 										<span class="text-primary-400"> Explore Settings</span>
 									</div>
 								</button>
@@ -56,7 +56,7 @@
 								on:click={toggleFirstBuild}
 								class="absolute right-4 top-4 bg-transparent border-none"
 							>
-								<PlainCrossIcon styles="w-6 h-6 text-slate-600" />
+								<PlainCrossIcon class="w-6 h-6 text-slate-600" />
 							</button>
 						</div>
 					{/if}
@@ -77,10 +77,10 @@
 
 						<div class="bg-white py-2 flex gap-2 px-3 items-center">
 							<button class=" bg-transparent rounded">
-								<ArrowLeftIcon styles="h-4 w-4 text-slate-500" />
+								<ArrowLeftIcon class="h-4 w-4 text-slate-500" />
 							</button>
 							<button class=" bg-transparent rounded">
-								<ChevronRightIcon styles="h-4 w-4 text-slate-600" />
+								<ChevronRightIcon class="h-4 w-4 text-slate-600" />
 							</button>
 							<span class="text-sm text-slate-500">1 to 10 of 100 builds</span>
 						</div>

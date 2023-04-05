@@ -3,13 +3,15 @@
 	export let logo: string;
 	export let link: string;
 	export let body = '';
-	export let styles = '';
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 {#if logo}
 	<div
-		class="{styles} my-4 shadow-2xl group hover:bg-opacity-50 container rounded-sm aspect-square
-			max-w-sm flex justify-center items-center mx-auto border border-primary-100 bg-white"
+		class={twMerge(
+			'my-4 shadow-2xl group hover:bg-opacity-50 container rounded-sm aspect-square max-w-sm flex justify-center items-center mx-auto border border-primary-100 bg-white',
+			$$props.class
+		)}
 	>
 		<div
 			class="px-4 py-4 bg-gray-100 flex flex-col items-center gap-6 justify-center group-hover:opacity-25"

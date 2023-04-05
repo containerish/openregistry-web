@@ -1,17 +1,16 @@
 <script lang="ts">
 	export let isLoading = false;
 	export let disabled = false;
-	export let styles = '';
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <button
 	{disabled}
 	on:click
-	class="{isLoading ? 'px-2' : 'px-4'} 
-	{styles} transition ease-in-out duration-200
-	flex justify-center space-x-2 items-center border-2 rounded font-medium text-primary-400 bg-transparent 
-	border-primary-200 tracking-wide min-w-[120px] h-12 text-base hover:shadow-primary-100 
-	hover:shadow-3xl disabled:bg-slate-200 disabled:hover:rounded-md disabled:shadow-none"
+	class={twMerge(
+		'px-3 transition ease-in-out duration-200 flex justify-center space-x-2 items-center border-2 rounded font-medium text-primary-400 bg-transparent border-primary-200 tracking-wide min-w-[120px] h-12 text-base hover:shadow-primary-100 hover:shadow-3xl disabled:bg-slate-200 disabled:hover:rounded-md disabled:shadow-none',
+		$$props.class
+	)}
 >
 	{#if isLoading}
 		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50" fill="none" viewBox="0 0 24 24">

@@ -54,16 +54,18 @@
 
 {#if data.user}
 	<div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
-		<div class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100">
+		<div
+			class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
+		>
 			<div class="flex items-center">
-				<ProfileIcon styles="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
+				<ProfileIcon class="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
 			</div>
 			<div class="flex flex-col w-64 justify-center">
 				<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-700">
 					{data.user.name ? data.user.name : data.user.username}
 				</span>
 				<div class="flex items-center gap-1">
-					<ProfileIcon styles="h-5 w-5 text-slate-600" />
+					<ProfileIcon class="h-5 w-5 text-slate-600" />
 					<span class="text-sm lg:text-base text-slate-600">Community User</span>
 				</div>
 			</div>
@@ -124,9 +126,11 @@
 							<Repository compact={false} data={repo} />
 						{/each}
 					{:else}
-						<div class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
-							rounded py-8 px-2 flex justify-center items-center flex-col gap-3">
-							<CubeIcon styles="h-8 w-8 text-slate-500" />
+						<div
+							class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
+							rounded py-8 px-2 flex justify-center items-center flex-col gap-3"
+						>
+							<CubeIcon class="h-8 w-8 text-slate-500" />
 							<span class="text-slate-500 text-xl lg:text-2xl">No Repositories Yet</span>
 							<span class="text-slate-600 text-base text-center antialiased">
 								Try pushing some container images, want to find out how? follow the
@@ -144,7 +148,7 @@
 					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
 					rounded py-8 flex justify-center items-center flex-col gap-3"
 				>
-					<StarIcon styles="h-8 w-8 text-slate-500" />
+					<StarIcon class="h-8 w-8 text-slate-500" />
 					<span class="text-slate-500 text-xl lg:text-2xl text-center"
 						>Your starred repositories will show here</span
 					>
@@ -161,7 +165,7 @@
 					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
 					rounded py-8 flex justify-center items-center flex-col gap-3"
 				>
-					<UserGroupIcon styles="h-8 w-8 text-slate-500" />
+					<UserGroupIcon class="h-8 w-8 text-slate-500" />
 					<span class="text-slate-500 text-xl lg:text-2xl text-center"
 						>Your Contributions will show up here</span
 					>
