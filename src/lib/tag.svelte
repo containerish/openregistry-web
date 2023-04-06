@@ -24,8 +24,7 @@
 		<div class="flex py-2 px-6 items-center justify-start gap-9 lg:justify-between">
 			<div>
 				<span class="text-base lg:text-lg text-slate-600">
-					Tag: <span
-						class="font-semibold text-base lg:text-lg text-primary-300"
+					Tag: <span class="font-semibold text-base lg:text-lg text-primary-300"
 						>{tag.reference}</span
 					>
 				</span>
@@ -38,16 +37,15 @@
 				{#if selected === tag.reference}
 					Command copied!!
 				{:else}
-					<CopyIcon
-						styles="w-6 h-6 text-primary-400"
-					/>
+					<CopyIcon class="w-6 h-6 text-primary-400" />
 				{/if}
 			</div>
 		</div>
 
 		<div
 			class="px-6 flex flex-col lg:flex-row gap-9 lg:gap-5 justify-between items-start text-sm lg:text-base
-			 text-slate-600 font-medium">
+			 text-slate-600 font-medium"
+		>
 			<div class="flex flex-col gap-3">
 				<span>Digest (SHA256)</span>
 				<span class=" text-sm text-slate-500 font-normal">{tag.digest.slice(7, 28)}</span>

@@ -15,7 +15,7 @@
 		class="bg-white flex justify-start pl-4 items-center gap-2 w-full py-2 font-medium text-left text-primary-500
 		 border-none rounded focus:outline-none"
 	>
-		<ChevronRight styles="{open ? 'rotate-90' : ''}  h-4 w-4 text-slate-700" />
+		<ChevronRight class="{open ? 'rotate-90' : ''}  h-4 w-4 text-slate-700" />
 		{title}
 	</DisclosureButton>
 	<Transition

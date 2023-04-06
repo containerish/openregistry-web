@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let styles = '';
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <div
-	class="{styles} fixed duration-500 inset-0 overflow-y-auto bg-primary-800 bg-opacity-60"
+	class={twMerge("fixed duration-500 inset-0 overflow-y-auto bg-primary-800 bg-opacity-60",$$props.class)}
 	aria-labelledby="modal-title"
 	role="dialog"
 	aria-modal="true"

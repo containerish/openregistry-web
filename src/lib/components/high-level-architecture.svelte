@@ -3,10 +3,11 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card styles="bg-primary-100 block py-12 lg:py-20 flex flex-col gap-6">
+<Card class="bg-primary-100 block py-12 lg:py-20 flex flex-col gap-6">
 	<div class="flex px-6 w-full flex-col justify-center max-w-2xl items-center">
 		<span
-			class="text-primary-600 text-center whitespace-nowrap font-bold pb-6 text-3xl lg:text-5xl">
+			class="text-primary-600 text-center whitespace-nowrap font-bold pb-6 text-3xl lg:text-5xl"
+		>
 			High Level Architecture
 		</span>
 
@@ -27,14 +28,13 @@
 			>
 			<button
 				class="hover: transform border border-none bg-transparent pb-3 transition 
-				duration-500 ease-in-out hover:translate-x-2 hover:scale-110">
-				<Arrow styles="text-primary-400" />
+				duration-500 ease-in-out hover:translate-x-2 hover:scale-110"
+			>
+				<Arrow class="text-primary-400" />
 			</button>
 		</div>
 	</div>
-	<div
-		class="w-11/12 max-w-[2300px]"
-	>
+	<div class="w-11/12 max-w-[2300px]">
 		<picture>
 			<img
 				class="w-full"

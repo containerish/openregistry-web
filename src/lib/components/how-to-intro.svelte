@@ -22,7 +22,7 @@
 
 <div class=" bg-slate-100 relative">
 	<Card
-		styles="min-h-[800px] flex flex-col items-center py-2 space-y-8 gap-10 
+		class="min-h-[800px] flex flex-col items-center py-2 space-y-8 gap-10 
 		py-20 lg:min-w-[1000px] max-w-[2000px] px-16 mx-auto"
 	>
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
@@ -129,7 +129,7 @@
 	</Card>
 </div>
 {#if showSignUpForm}
-	<Dialog styles="top-0">
+	<Dialog class="top-0">
 		<Signup toggleSignInForm={() => {}} toggleSignUpForm={handleSignupForm} />
 	</Dialog>
 {/if}

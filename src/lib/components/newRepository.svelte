@@ -15,17 +15,19 @@
 		<div class="flex flex-col gap-4 w-full">
 			<div class="flex gap-4 text-slate-600 pb-2">
 				<RadioButton label="Public">
-					<GlobeIcon styles="h-6 w-6" />
+					<GlobeIcon class="h-6 w-6" />
 				</RadioButton>
 				<RadioButton label="Private">
-					<LockClosedIcon styles="h-6 w-6" />
+					<LockClosedIcon class="h-6 w-6" />
 				</RadioButton>
 			</div>
 			<div class="w-full">
 				<Textfield label="Repository Name" type="email" />
 			</div>
 			<div class="w-full">
-				<label for="textarea" class="block text-sm lg:text-base text-start font-semibold text-gray-600"
+				<label
+					for="textarea"
+					class="block text-sm lg:text-base text-start font-semibold text-gray-600"
 					>Description</label
 				>
 				<textarea

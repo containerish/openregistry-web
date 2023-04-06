@@ -3,9 +3,11 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card styles="bg-primary-50 py-12">
+<Card class="bg-primary-50 py-12">
 	<div class="w-full h-full">
-		<div class="px-6 md:px-9 w-full flex justify-center items-center flex-col xl:flex-row my-3 lg:my-28">
+		<div
+			class="px-6 md:px-9 w-full flex justify-center items-center flex-col xl:flex-row my-3 lg:my-28"
+		>
 			<div class="w-80 md:w-fit">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
@@ -13,12 +15,11 @@
 			</div>
 			<div class="w-full mx-8 flex justify-center flex-col max-w-2xl">
 				<span
-					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
+					class=" text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl"
+				>
 					Overview
 				</span>
-				<p
-					class="text-base lg:text-lg text-primary-700 text-center font-normal"
-				>
+				<p class="text-base lg:text-lg text-primary-700 text-center font-normal">
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
 					difference in operations of OpenRegistry than any other popular container registries like
@@ -52,7 +53,7 @@
 						class="transition-all duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
             			hover:scale-110 pb-3 border border-none"
 					>
-						<Arrow styles="text-primary-400" />
+						<Arrow class="text-primary-400" />
 					</button>
 				</div>
 			</div>
@@ -62,7 +63,8 @@
 		>
 			<div class="w-full mx-8 flex justify-center flex-col max-w-2xl">
 				<span
-					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
+					class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl"
+				>
 					Collaborations
 				</span>
 				<p
@@ -98,7 +100,7 @@
 						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
        				hover:scale-110 pb-3 border border-none"
 					>
-						<Arrow styles="text-primary-400" />
+						<Arrow class="text-primary-400" />
 					</button>
 				</div>
 			</div>
@@ -108,8 +110,7 @@
 				</picture>
 			</div>
 		</div>
-		<div
-			class="px-6 w-full flex justify-center items-center flex-col xl:flex-row my-28">
+		<div class="px-6 w-full flex justify-center items-center flex-col xl:flex-row my-28">
 			<div class="w-80 md:w-fit">
 				<picture>
 					<img src="man-arrow-up.svg" alt="Storage" width="600px" />
@@ -118,14 +119,13 @@
 			<div class="w-full mx-8 flex justify-center flex-col max-w-2xl">
 				<div class="flex justify-center items-center text-center">
 					<span
-						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl">
+						class="text-primary-600 text-center whitespace-nowrap font-semibold pb-4 text-3xl lg:text-5xl"
+					>
 						Web 3.0 Infrastructure
 					</span>
 				</div>
 
-				<p
-					class="text-base lg:text-lg text-primary-700 text-center font-normal"
-				>
+				<p class="text-base lg:text-lg text-primary-700 text-center font-normal">
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
 					at OpenRegistry believe in dWorld full of dApps. With our initiative, we want to make
@@ -142,7 +142,7 @@
 						class="transition duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
           				hover:scale-110 lg:pb-3 border border-none"
 					>
-						<Arrow styles="text-primary-400" />
+						<Arrow class="text-primary-400" />
 					</button>
 				</div>
 			</div>

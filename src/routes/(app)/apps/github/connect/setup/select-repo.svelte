@@ -41,7 +41,7 @@
 	</div>
 	<hr class="mt-6 border-1 border-gray-300" />
 	<div class="flex gap-2 items-center mt-10 text-primary-600">
-		<GithubIcon styles="h-6 w-6" />
+		<GithubIcon class="h-6 w-6" />
 		<span class="text-base lg:text-xl font-semibold">Github | </span>
 		<span class="font-light text-sm"> more coming soon</span>
 	</div>
@@ -60,8 +60,8 @@
 				<Textfield type="search" disabled bind:value={data.githubUsername} />
 			</div>
 		</div>
-		<ButtonOutlined styles="px-1 py-2" disabled>
-			<AddAccountIcon styles="h-4 w-4 text-primary-300" />
+		<ButtonOutlined class="px-1 py-2" disabled>
+			<AddAccountIcon class="h-4 w-4 text-primary-300" />
 			<span class="text-sm">Add account</span>
 		</ButtonOutlined>
 	</div>
@@ -100,7 +100,7 @@
 					>
 						{repo.repository.name}
 						{#if repo.repository.name === selectedRepo}
-							<CheckIcon styles="w-6 h-6 text-primary-400" />
+							<CheckIcon class="w-6 h-6 text-primary-400" />
 						{/if}
 					</button>
 				{/each}
@@ -135,7 +135,7 @@
 	</div>
 
 	{#if openDialog}
-		<Dialog styles="shadow-3xl shadow-primary-600">
+		<Dialog class="shadow-3xl shadow-primary-600">
 			<div class="px-5 py-10 flex flex-col justify-center items-center gap-6">
 				<span class="text-slate-700 text-2xl font-bold antialiased">
 					please select a repository!!

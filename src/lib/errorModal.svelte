@@ -25,7 +25,7 @@
 			<span class="w-1/5 border-b lg:w-1/4" />
 		</div>
 		<div class="flex w-full flex-col items-center justify-center gap-2 text-center">
-			<CrossIcon styles="h-16 w-16 text-red-600" />
+			<CrossIcon class="h-16 w-16 text-red-600" />
 			<span class="font-semibold capitalize tracking-wider text-red-600">
 				{error}
 			</span>

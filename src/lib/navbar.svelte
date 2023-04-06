@@ -34,29 +34,43 @@
 				<Menu>
 					<div class="flex flex-col">
 						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={()=>{window.open("https://blog.openregistry.dev",'_blank')}}> 
-							 Blog
+							<IconButton
+								on:click={() => {
+									window.open('https://blog.openregistry.dev', '_blank');
+								}}
+							>
+								Blog
 							</IconButton>
 						</MenuItem>
 						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={()=>{window.open("/about",'_self')}}> 
-							 About
-							 </IconButton>
+							<IconButton
+								on:click={() => {
+									window.open('/about', '_self');
+								}}
+							>
+								About
+							</IconButton>
 						</MenuItem>
 						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={()=>{window.open("https://github.com/containerish/OpenRegistry.git",'_blank')}}> 
+							<IconButton
+								on:click={() => {
+									window.open('https://github.com/containerish/OpenRegistry.git', '_blank');
+								}}
+							>
 								Github
 							</IconButton>
 						</MenuItem>
 						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={()=>{window.open("/faq",'self')}}> 
+							<IconButton
+								on:click={() => {
+									window.open('/faq', 'self');
+								}}
+							>
 								FAQ
 							</IconButton>
 						</MenuItem>
 						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={toggleSignIn}> 
-								Sign In
-							</IconButton>
+							<IconButton on:click={toggleSignIn}>Sign In</IconButton>
 						</MenuItem>
 					</div>
 				</Menu>
@@ -102,7 +116,7 @@
 						<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 					</Dialog>
 				</div>
-				<Dialog isOpen={openSignUpModal} styles="top-0">
+				<Dialog isOpen={openSignUpModal} class="top-0">
 					<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 				</Dialog>
 			</div>

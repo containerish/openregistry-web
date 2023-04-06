@@ -169,14 +169,14 @@
 		</div>
 		{#if !showSuccessMsg}
 			<ButtonOutlined on:click={auth.LoginWithGithub}>
-				<GithubIcon styles="text-black mr-2 h-8 w-8" />
+				<GithubIcon class="text-black mr-2 h-8 w-8" />
 				Sign in with Github
 			</ButtonOutlined>
 			<div class="mt-4" />
 
 			{#if !isWebAuthn}
 				<ButtonOutlined on:click={handleIsWebAuthn}>
-					<FingerprintIcon styles="text-black mr-2" />
+					<FingerprintIcon class="text-black mr-2" />
 					Sign up with Security key
 				</ButtonOutlined>
 
@@ -253,7 +253,7 @@
 			{/if}
 			{#if isWebAuthn}
 				<ButtonOutlined on:click={handleIsWebAuthn}>
-					<EmailIcon styles="text-black mr-2" />
+					<EmailIcon class="text-black mr-2" />
 					Sign up with Email Password
 				</ButtonOutlined>
 
@@ -306,7 +306,7 @@
 		{:else}
 			<div class="flex h-full w-full flex-col items-center justify-start gap-4">
 				<div id="confetti">
-					<CheckIcon styles="h-24 w-24 text-primary-500" />
+					<CheckIcon class="h-24 w-24 text-primary-500" />
 				</div>
 				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
 				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">

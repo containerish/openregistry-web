@@ -106,7 +106,7 @@
 			<div class="flex flex-col gap-6">
 				<div class="flex items-center justify-start gap-1">
 					<Disclosure title="Dockerfile directory (advanced)">
-						<Textfield styles=" ml-10" type="search" />
+						<Textfield class=" ml-10" type="search" />
 					</Disclosure>
 				</div>
 				<div class="flex items-center justify-center w-full gap-1">
@@ -119,8 +119,8 @@
 								<Textfield placeholder="value" type="search" />
 							</div>
 						</div>
-						<ButtonOutlined styles="ml-10 mt-5 px-2 py-1 text-sm">
-							<AddAccountIcon styles="text-primary-300" />
+						<ButtonOutlined class="ml-10 mt-5 px-2 py-1 text-sm">
+							<AddAccountIcon class="text-primary-300" />
 							<span>add more</span>
 						</ButtonOutlined>
 					</Disclosure>
@@ -135,7 +135,7 @@
 					on:keypress={() => handleNext(0)}
 					class="flex gap-1 cursor-pointer"
 				>
-					<ArrowLeftIcon styles="text-slate-700" />
+					<ArrowLeftIcon class="text-slate-700" />
 					<span class="text-slate-700 text-base lg:text-lg">Change repository</span>
 				</div>
 

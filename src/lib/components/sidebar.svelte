@@ -78,42 +78,42 @@
 				</picture>
 			</a>
 
-			<a href="/"><HomeIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/"><HomeIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
-			<a href="/search"><SearchIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/search"><SearchIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
-			<a href="/repositories"><CubeIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/repositories"><CubeIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
 			<a href="/apps/github/connect"
-				><GithubOutlinedIcon styles="w-6 h-6 lg:h-9 lg:w-9 text-primary-400" /></a
+				><GithubOutlinedIcon class="w-6 h-6 lg:h-9 lg:w-9 text-primary-400" /></a
 			>
 
 			<a href="https://docs.openregistry.dev/" target="_blank" rel="noreferrer">
-				<ReportIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
+				<ReportIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</a>
 
-			<a href="/?/faq"><QuestionMarkIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/?/faq"><QuestionMarkIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
 			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer">
-				<PencilIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a
+				<PencilIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a
 			>
 
-			<a href="/about"><HeartIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/about"><HeartIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
 			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer">
-				<StarIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a
+				<StarIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a
 			>
 
 			<a href="#" class="bg-transparent border-0" on:click={toggleModal}>
-				<UserPlusIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
+				<UserPlusIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</a>
 
-			<a href="/u"><ProfileIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/u"><ProfileIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
-			<a href="/settings"><SettingsIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
+			<a href="/settings"><SettingsIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
 			<button class="border-none bg-transparent" formaction="/?/signout">
-				<SignOutIcon styles="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
+				<SignOutIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</button>
 		</form>
 	{:else}
@@ -134,7 +134,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<HomeIcon styles="" />
+							<HomeIcon class="" />
 							<span>Home</span>
 						</a>
 
@@ -143,7 +143,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<SearchIcon styles="" />
+							<SearchIcon class="" />
 							<span>Explore</span>
 						</a>
 
@@ -152,7 +152,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<CubeIcon styles="" />
+							<CubeIcon class="" />
 							<span>Your Repositories</span>
 						</a>
 
@@ -161,7 +161,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<GithubOutlinedIcon styles="h-7 w-6.5" />
+							<GithubOutlinedIcon class="h-7 w-6.5" />
 							<span>Connect Gihub</span>
 						</a>
 					</div>
@@ -175,7 +175,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<ReportIcon styles="" />
+							<ReportIcon class="" />
 							<span>Docs</span>
 						</a>
 
@@ -184,7 +184,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<QuestionMarkIcon styles="" />
+							<QuestionMarkIcon class="" />
 							<span>Help</span>
 						</a>
 						<a
@@ -194,7 +194,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<PencilIcon styles="" />
+							<PencilIcon class="" />
 							<span>Blog</span>
 						</a>
 					</div>
@@ -205,7 +205,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<HeartIcon styles="" />
+							<HeartIcon class="" />
 							<span>About us</span>
 						</a>
 						<a
@@ -215,7 +215,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg  py-2.5
 							 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<StarIcon styles="w-6 h-6 " />
+							<StarIcon class="w-6 h-6 " />
 							<span>Star us on Github</span>
 						</a>
 						<a
@@ -225,7 +225,7 @@
 							text-lg py-2.5 hover:bg-slate-100 hover:shadow-2xl 
 							hover:no-underline"
 						>
-							<UserPlusIcon styles="" />
+							<UserPlusIcon class="" />
 							<span>Invite People</span>
 						</a>
 					</div>
@@ -236,7 +236,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 						>
-							<ProfileIcon styles="text-slate-700 h-6 w-6 " />
+							<ProfileIcon class="text-slate-700 h-6 w-6 " />
 							<span>View Profile</span>
 						</a>
 						<a
@@ -244,7 +244,7 @@
 							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 						>
-							<SettingsIcon styles="" />
+							<SettingsIcon class="" />
 							<span>Settings</span>
 						</a>
 					</div>
@@ -256,7 +256,7 @@
 				class="flex flex-row justify-start items-center gap-4 text-slate-700 tracking-wide text-lg font-medium"
 			>
 				<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
-					<UserIcon styles="h-6 w-6" />
+					<UserIcon class="h-6 w-6" />
 				</div>
 				<div class="flex flex-col">
 					<span>{user.username}</span>
@@ -268,21 +268,21 @@
 				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg 
 		        py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 			>
-				<SignOutIcon styles="" />
+				<SignOutIcon class="" />
 				<span>Sign out</span>
 			</button>
 			<div class="bg-slate-100 px-4 shadow-inner opacity-90 mt-10">
 				<Carousel>
 					<Advert
 						link="https://akash.network"
-						styles="hover:bg-red-600"
+						class="hover:bg-red-600"
 						logo="/akash-logo.svg"
 						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
 								peer-to-peer marketplace for cloud compute"
 					/>
 					<Advert
 						link="https://ipfs.io"
-						styles="hover:bg-[#65c3ca]"
+						class="hover:bg-[#65c3ca]"
 						logo="/IPFS_ad.png"
 						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by 
 						making the web upgradeable, resilient, and more open."

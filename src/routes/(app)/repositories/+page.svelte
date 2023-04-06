@@ -124,7 +124,7 @@
 					</div>
 				{/if}
 
-				<ButtonOutlined styles="max-w-[202px]" on:click={toggleModal}
+				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal}
 					>Create Respository</ButtonOutlined
 				>
 

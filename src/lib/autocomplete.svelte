@@ -72,7 +72,7 @@
 		class="z-10 font-normal text-center absolute bg-transparent 
 		rounded text-base items-center justify-center pl-4 pt-3"
 	>
-		<Search styles="text-primary-400" />
+		<Search class="text-primary-400" />
 	</span>
 	<input
 		on:input={handleOnChange}

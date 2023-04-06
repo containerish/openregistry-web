@@ -11,7 +11,7 @@
 		<span class="text-lg text-slate-700">Production</span>
 		<button class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0">
 			<span class="underline underline-offset-4 text-slate-600">visit site</span>
-			<ExternalLinkIcon styles="h-4 w-4 text-slate-700" />
+			<ExternalLinkIcon class="h-4 w-4 text-slate-700" />
 		</button>
 	</div>
 	<div class="flex gap-3 justify-start items-center">
@@ -31,14 +31,14 @@
 				production
 			</div>
 			<div class="flex gap-1 items-center antialiased">
-				<GitBranchIcon styles="h-4 w-4" />
+				<GitBranchIcon class="h-4 w-4" />
 				<span class="text-sm font-semibold text-slate-800">release-main</span>
 			</div>
 			<a href="#" class="underline">2345678</a>
 			<div class="flex gap-2 items-center">
 				<a href="#" class="text-slate-600 text-sm antialiased">123458.openregistry-is-awesome.dev</a
 				>
-				<ExternalLinkIcon styles="h-4 w-4 text-primary-500" />
+				<ExternalLinkIcon class="h-4 w-4 text-primary-500" />
 			</div>
 		</div>
 		<div class="flex gap-2 items-center">

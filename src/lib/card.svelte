@@ -1,9 +1,9 @@
 <script>
 	let defaultStyles = ' w-full flex justify-center items-center';
-	export let styles = '';
+	import { twMerge } from 'tailwind-merge';
 	export let id = '';
 </script>
 
-<section {id} class={styles + defaultStyles}>
+<section {id} class={twMerge(defaultStyles, $$props.class)}>
 	<slot />
 </section>

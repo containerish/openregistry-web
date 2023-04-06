@@ -130,7 +130,7 @@
 					<div class="flex flex-col gap-5 items-center p-8 overflow-auto">
 						<div class="flex justify-center items-center gap-4">
 							<span class="text-xl lg:2xl text-primary-500 font-bold">Advance Filters</span>
-							<FilterIcon styles="text-primary-500" />
+							<FilterIcon class="text-primary-500" />
 						</div>
 
 						<div class="flex gap-3 lg:gap-8 justify-center items-start px-6 py-3">
@@ -171,7 +171,7 @@
 							<ButtonOutlined on:click={toggleFilter}>Cancel</ButtonOutlined>
 							<ButtonSolid
 								>Apply
-								<ArrowRIcon styles="mt-0.5" />
+								<ArrowRIcon class="mt-0.5" />
 							</ButtonSolid>
 						</div>
 					</div>
@@ -190,7 +190,7 @@
                 				w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none
 								rounded gap-2 m-0 hover:bg-slate-100 text-sm"
 							>
-								<ClockIcon styles="h-5 w-5" />
+								<ClockIcon class="h-5 w-5" />
 								Last Updated
 							</button>
 						</MenuItem>
@@ -215,7 +215,7 @@
 						</MenuItem>
 					</Menu>
 
-					<ButtonOutlined styles="gap-2" on:click={toggleFilter}
+					<ButtonOutlined class="gap-2" on:click={toggleFilter}
 						>Advance Filter
 						<FilterIcon />
 					</ButtonOutlined>

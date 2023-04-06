@@ -72,7 +72,7 @@
 							environment variables and Access Policies
 						</span>
 					</div>
-					<ButtonOutlined styles="text-rose-700 border-rose-600">Delete Project</ButtonOutlined>
+					<ButtonOutlined class="text-rose-700 border-rose-600">Delete Project</ButtonOutlined>
 				</div>
 			</div>
 		</TabPanel>

@@ -37,7 +37,7 @@
 	setContext('onClickRegister', onClickRegister);
 </script>
 
-<Card id="top" styles="w-full flex flex-col px-0 bg-white">
+<Card id="top" class="w-full flex flex-col px-0 bg-white">
 	<div class="flex flex-col items-center justify-center gap-9 w-full">
 		<picture class="w-full">
 			<source media="(min-width: 2000px)" srcset="./big-hero-new.svg" />
@@ -95,25 +95,25 @@
 		</div>
 
 		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl">
-			<RepoBox styles="bg-[#081c45]" href="#">
+			<RepoBox class="bg-[#081c45]" href="#">
 				<StorjIcon />
 			</RepoBox>
 
-			<RepoBox href="#" styles="bg-stone-700">
+			<RepoBox href="#" class="bg-stone-700">
 				<IexecIcon />
 			</RepoBox>
 
-			<RepoBox styles="bg-[#062b3f]">
+			<RepoBox class="bg-[#062b3f]">
 				<div class="h-full w-full flex justify-center items-center">
 					<img src="./ipfs.svg" alt="" />
 				</div>
 			</RepoBox>
-			
-			<RepoBox href="#" styles="bg-[#ce4748]">
+
+			<RepoBox href="#" class="bg-[#ce4748]">
 				<AkashIcon />
 			</RepoBox>
 
-			<RepoBox href="#" styles="bg-primary-600">
+			<RepoBox href="#" class="bg-primary-600">
 				<div><img alt="nodejs" src="./solanaLogo.png" width="120px" /></div>
 			</RepoBox>
 
