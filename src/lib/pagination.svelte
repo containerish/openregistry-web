@@ -35,6 +35,7 @@
 	</IconButton>
 	{#each new Array(pages).fill(0) as i, page}
 		<button
+			aria-label="active pagination"
 			id={i}
 			on:click={() => setActivePage(page)}
 			class=" {activePage === page ? 'bg-primary-200' : 'bg-primary-50'} px-4 py-2 mx-1 text-gray-700

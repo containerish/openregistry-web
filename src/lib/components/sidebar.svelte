@@ -112,7 +112,11 @@
 
 			<a href="/settings"><SettingsIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" /></a>
 
-			<button class="border-none bg-transparent" formaction="/?/signout">
+			<button
+				aria-label="signout button"
+				class="border-none bg-transparent"
+				formaction="/?/signout"
+			>
 				<SignOutIcon class="w-6 h-6 lg:w-8 lg:h-8 text-primary-400" />
 			</button>
 		</form>
@@ -262,6 +266,7 @@
 					</div>
 				</div>
 				<button
+					aria-label="signout button"
 					formaction="/?/signout"
 					class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
 		        py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"

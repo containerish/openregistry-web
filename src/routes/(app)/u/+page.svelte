@@ -88,6 +88,7 @@
 			px-3 lg:px-16 mb-10 border-t-0 border-2 border-primary-100 mx-3"
 		>
 			<button
+				aria-label="tab for repositories"
 				on:click={toggleRepo}
 				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
 				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
@@ -98,6 +99,7 @@
 			</button>
 
 			<button
+				aria-label="tab for starred repositories"
 				on:click={toggleStarred}
 				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
 				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
@@ -108,6 +110,7 @@
 			</button>
 
 			<button
+				aria-label="tab for contributed repositories"
 				on:click={toggleisContrib}
 				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
 				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
@@ -127,7 +130,7 @@
 						{/each}
 					{:else}
 						<div
-							class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
+							class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl
 							rounded py-8 px-2 flex justify-center items-center flex-col gap-3"
 						>
 							<CubeIcon class="h-8 w-8 text-slate-500" />
@@ -145,7 +148,7 @@
 		{#if isStarred}
 			<div class="w-full px-8 py-8">
 				<div
-					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
+					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl
 					rounded py-8 flex justify-center items-center flex-col gap-3"
 				>
 					<StarIcon class="h-8 w-8 text-slate-500" />
@@ -162,7 +165,7 @@
 		{#if isContrib}
 			<div class=" w-full px-8 py-8">
 				<div
-					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl 
+					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl
 					rounded py-8 flex justify-center items-center flex-col gap-3"
 				>
 					<UserGroupIcon class="h-8 w-8 text-slate-500" />

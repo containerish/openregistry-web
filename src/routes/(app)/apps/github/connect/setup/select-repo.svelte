@@ -96,6 +96,7 @@
 			<div class="grid-flow-row grid grid-cols-2 gap-4 text-lg">
 				{#each data.repoList as repo (repo.repository.name)}
 					<button
+					aria-label="repository"
 						on:click={() => handleRepoSelect(repo)}
 						class="bg-white text-slate-700 text-sm lg:text-base rounded border-2 gap-2 border-primary-100
 						flex justify-center items-center py-2 lg:py-3 hover:shadow-2xl {repo.repository.name ===

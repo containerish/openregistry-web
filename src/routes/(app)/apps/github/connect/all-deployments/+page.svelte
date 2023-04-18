@@ -50,7 +50,7 @@
 									you can now do more with your site. invite collaborators, protect previews, enable
 									web analytics and more.</span
 								>
-								<button class="border-0 bg-transparent w-44 rounded-lg">
+								<button aria-label="explore button" class="border-0 bg-transparent w-44 rounded-lg">
 									<div class="flex space-x-2">
 										<SettingsIcon class="text-primary-400" />
 										<span class="text-primary-400"> Explore Settings</span>

@@ -146,7 +146,7 @@
 	</div>
 	<span class="text-lg font-semibold text-primary-600 ml-2"> Building and deployment settings</span>
 	<div
-		class="rounded-sm border shadow-inner bg-slate-50 mt-9 px-5 py-9 
+		class="rounded-sm border shadow-inner bg-slate-50 mt-9 px-5 py-9
 	flex flex-col gap-3"
 	>
 		<div class="flex gap-6">
@@ -183,8 +183,9 @@
 	<hr class=" border-t-gray-400 my-9" />
 	<div class="flex justify-between items-center lg:px-9">
 		<button
+			aria-label="tab button"
 			on:click={() => handleNext(1)}
-			class="flex border-none bg-transparent text-lg lg:gap-2  text-primary-800 mt-3"
+			class="flex border-none bg-transparent text-lg lg:gap-2 text-primary-800 mt-3"
 		>
 			<ArrowLeftIcon />
 			<span class="text-base lg:text-lg text-slate-700">Change settings</span>

@@ -182,6 +182,7 @@
 					<Menu title="Sort">
 						<MenuItem>
 							<button
+							aria-label="sort by last updated"
 								on:click={() => {
 									sortBy = 'last_updated';
 									fetchPageData(0);
@@ -196,6 +197,7 @@
 						</MenuItem>
 						<MenuItem class="bg-gray-100">
 							<button
+							aria-label="sort by image name"
 								on:click={() => {
 									sortBy = 'namespace';
 									fetchPageData(0);

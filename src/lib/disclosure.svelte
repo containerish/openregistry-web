@@ -12,6 +12,7 @@
 
 <Disclosure let:open class="w-full">
 	<DisclosureButton
+		aria-label="disclosure button"
 		class="bg-white flex justify-start pl-4 items-center gap-2 w-full py-2 font-medium text-left text-primary-500
 		 border-none rounded focus:outline-none"
 	>
