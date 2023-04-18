@@ -117,178 +117,177 @@
 			</button>
 		</form>
 	{:else}
-		<form
-			method="POST"
-			class="flex flex-col justify-between gap-10 border-2 border-primary-50 shadow-2xl py-6 px-6 lg:px-9"
-		>
-			<a href="/" class="flex flex-row justify-between items-center gap-4 hover:no-underline">
-				<Logo type="dark" />
-			</a>
+		<form method="POST" class="border-2 border-primary-50 shadow-2xl py-6 px-6 lg:px-9">
+			<label for="sidebar" class="flex flex-col gap-9">
+				<a href="/" class="flex flex-row justify-between items-center gap-4 hover:no-underline">
+					<Logo type="dark" />
+				</a>
 
-			<div class="flex flex-col justify-center gap-10">
-				<Autocomplete onAutoComplete={handleAutoComplete} />
-				<div class="flex flex-col gap-10">
-					<div class="flex flex-col gap-3.5">
-						<a
-							href="/"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+				<div class="flex flex-col justify-center gap-10">
+					<Autocomplete onAutoComplete={handleAutoComplete} />
+					<div class="flex flex-col gap-10">
+						<div class="flex flex-col gap-3.5">
+							<a
+								href="/"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<HomeIcon class="" />
-							<span>Home</span>
-						</a>
+							>
+								<HomeIcon class="" />
+								<span>Home</span>
+							</a>
 
-						<a
-							href="/search"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							<a
+								href="/search"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<SearchIcon class="" />
-							<span>Explore</span>
-						</a>
+							>
+								<SearchIcon class="" />
+								<span>Explore</span>
+							</a>
 
-						<a
-							href="/repositories"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							<a
+								href="/repositories"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<CubeIcon class="" />
-							<span>Your Repositories</span>
-						</a>
+							>
+								<CubeIcon class="" />
+								<span>Your Repositories</span>
+							</a>
 
-						<a
-							href="/apps/github/connect"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
+							<a
+								href="/apps/github/connect"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<GithubOutlinedIcon class="h-7 w-6.5" />
-							<span>Connect Gihub</span>
-						</a>
-					</div>
-					<hr />
+							>
+								<GithubOutlinedIcon class="h-7 w-6.5" />
+								<span>Connect Gihub</span>
+							</a>
+						</div>
+						<hr />
 
-					<div class="flex flex-col gap-3.5">
-						<a
-							href="https://docs.openregistry.dev"
-							target="_blank"
-							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+						<div class="flex flex-col gap-3.5">
+							<a
+								href="https://docs.openregistry.dev"
+								target="_blank"
+								rel="noreferrer"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<ReportIcon class="" />
-							<span>Docs</span>
-						</a>
+							>
+								<ReportIcon class="" />
+								<span>Docs</span>
+							</a>
 
-						<a
-							href="/faq"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							<a
+								href="/faq"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<QuestionMarkIcon class="" />
-							<span>Help</span>
-						</a>
-						<a
-							href="https://blog.openregistry.dev"
-							target="_blank"
-							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							>
+								<QuestionMarkIcon class="" />
+								<span>Help</span>
+							</a>
+							<a
+								href="https://blog.openregistry.dev"
+								target="_blank"
+								rel="noreferrer"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<PencilIcon class="" />
-							<span>Blog</span>
-						</a>
-					</div>
-					<hr />
-					<div class="flex flex-col gap-3.5">
-						<a
-							href="/about"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
+							>
+								<PencilIcon class="" />
+								<span>Blog</span>
+							</a>
+						</div>
+						<hr />
+						<div class="flex flex-col gap-3.5">
+							<a
+								href="/about"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<HeartIcon class="" />
-							<span>About us</span>
-						</a>
-						<a
-							href="https://github.com/containerish/OpenRegistry"
-							target="_blank"
-							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg  py-2.5
+							>
+								<HeartIcon class="" />
+								<span>About us</span>
+							</a>
+							<a
+								href="https://github.com/containerish/OpenRegistry"
+								target="_blank"
+								rel="noreferrer"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<StarIcon class="w-6 h-6 " />
-							<span>Star us on Github</span>
-						</a>
-						<a
-							href="#"
-							on:click={toggleModal}
-							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide 
-							text-lg py-2.5 hover:bg-slate-100 hover:shadow-2xl 
+							>
+								<StarIcon class="w-6 h-6 " />
+								<span>Star us on Github</span>
+							</a>
+							<a
+								href="#"
+								on:click={toggleModal}
+								class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide
+							text-lg py-2.5 hover:bg-slate-100 hover:shadow-2xl
 							hover:no-underline"
-						>
-							<UserPlusIcon class="" />
-							<span>Invite People</span>
-						</a>
-					</div>
-					<hr />
-					<div class="flex flex-col gap-3.5 ">
-						<a
-							href="/u"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							>
+								<UserPlusIcon class="" />
+								<span>Invite People</span>
+							</a>
+						</div>
+						<hr />
+						<div class="flex flex-col gap-3.5">
+							<a
+								href="/u"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<ProfileIcon class="text-slate-700 h-6 w-6 " />
-							<span>View Profile</span>
-						</a>
-						<a
-							href="/settings"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							>
+								<ProfileIcon class="text-slate-700 h-6 w-6 " />
+								<span>View Profile</span>
+							</a>
+							<a
+								href="/settings"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      		py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
-						>
-							<SettingsIcon class="" />
-							<span>Settings</span>
-						</a>
+							>
+								<SettingsIcon class="" />
+								<span>Settings</span>
+							</a>
+						</div>
+						<hr />
 					</div>
-					<hr />
 				</div>
-			</div>
 
-			<div
-				class="flex flex-row justify-start items-center gap-4 text-slate-700 tracking-wide text-lg font-medium"
-			>
-				<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
-					<UserIcon class="h-6 w-6" />
+				<div
+					class="flex flex-row justify-start items-center gap-4 text-slate-700 tracking-wide text-lg font-medium"
+				>
+					<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
+						<UserIcon class="h-6 w-6" />
+					</div>
+					<div class="flex flex-col">
+						<span>{user.username}</span>
+						<span>{user.email}</span>
+					</div>
 				</div>
-				<div class="flex flex-col">
-					<span>{user.username}</span>
-					<span>{user.email}</span>
-				</div>
-			</div>
-			<button
-				formaction="/?/signout"
-				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg 
+				<button
+					formaction="/?/signout"
+					class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
 		        py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
-			>
-				<SignOutIcon class="" />
-				<span>Sign out</span>
-			</button>
-			<div class="bg-slate-100 px-4 shadow-inner opacity-90 mt-10">
-				<Carousel>
-					<Advert
-						link="https://akash.network"
-						class="hover:bg-red-600"
-						logo="/akash-logo.svg"
-						body="Infrastructure that powers web3 for cloud compute akash network is a distributed
+				>
+					<SignOutIcon class="" />
+					<span>Sign out</span>
+				</button>
+				<div class="bg-slate-100 px-4 shadow-inner opacity-90 mt-10">
+					<Carousel>
+						<Advert
+							link="https://akash.network"
+							class="hover:bg-red-600"
+							logo="/akash-logo.svg"
+							body="Infrastructure that powers web3 for cloud compute akash network is a distributed
 								peer-to-peer marketplace for cloud compute"
-					/>
-					<Advert
-						link="https://ipfs.io"
-						class="hover:bg-[#65c3ca]"
-						logo="/IPFS_ad.png"
-						body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by 
+						/>
+						<Advert
+							link="https://ipfs.io"
+							class="hover:bg-[#65c3ca]"
+							logo="/IPFS_ad.png"
+							body="A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by 
 						making the web upgradeable, resilient, and more open."
-					/>
-				</Carousel>
-			</div>
+						/>
+					</Carousel>
+				</div>
+			</label>
 		</form>
 		{#if showModal}
 			<Modal>

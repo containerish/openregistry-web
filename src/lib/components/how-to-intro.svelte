@@ -22,7 +22,7 @@
 
 <div class=" bg-slate-100 relative">
 	<Card
-		class="min-h-[800px] flex flex-col items-center py-2 space-y-8 gap-10 
+		class="min-h-[800px] flex flex-col items-center space-y-8 gap-10 
 		py-20 lg:min-w-[1000px] max-w-[2000px] px-16 mx-auto"
 	>
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
@@ -38,7 +38,7 @@
 					<ul class="text-center font-normal list-disc ml-6 mt-4">
 						<li class="text-left text-primary-600 text-base xl:text-xl">
 							Create an account on
-							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-400">
+							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-600">
 								OpenRegistry.dev
 							</a>
 						</li>

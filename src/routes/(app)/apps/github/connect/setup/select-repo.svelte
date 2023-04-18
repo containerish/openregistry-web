@@ -57,7 +57,12 @@
 		<div class="flex relative w-2/5">
 			<div class="w-full">
 				<div class="flex items-center px-2" />
-				<Textfield type="search" disabled bind:value={data.githubUsername} />
+				<Textfield 
+				name="github account" 
+				type="search" 
+				disabled
+				placeholder="github username"
+				bind:value={data.githubUsername} />
 			</div>
 		</div>
 		<ButtonOutlined class="px-1 py-2" disabled>
@@ -88,11 +93,11 @@
 				<span class="font-semibold text-slate-600">Loading...</span>``
 			</div>
 		{:else}
-			<div class="grid-flow-row grid grid-cols-2 gap-4 text-lg ">
+			<div class="grid-flow-row grid grid-cols-2 gap-4 text-lg">
 				{#each data.repoList as repo (repo.repository.name)}
 					<button
 						on:click={() => handleRepoSelect(repo)}
-						class="bg-white text-slate-700 text-sm lg:text-base rounded border-2 gap-2 border-primary-100 
+						class="bg-white text-slate-700 text-sm lg:text-base rounded border-2 gap-2 border-primary-100
 						flex justify-center items-center py-2 lg:py-3 hover:shadow-2xl {repo.repository.name ===
 						selectedRepo
 							? 'bg-primary-100 shadow-2xl shadow-primary-300'

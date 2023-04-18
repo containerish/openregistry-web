@@ -13,8 +13,7 @@
 
 <div class="flex items-center px-2">
 	<label for={label} class="block font-semibold text-sm lg:text-base -ml-2 text-slate-700"
-		>{label}</label
-	>
+		>{label}</label>
 	{#if subHeading !== ''}
 		<span class="px-2 text-xs text-primary-700">({subHeading})</span>
 	{/if}

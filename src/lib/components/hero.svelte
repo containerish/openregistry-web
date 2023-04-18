@@ -123,7 +123,7 @@
 
 			<RepoBox href="#">
 				<div><img alt="nginx" src="./busybox1.png" width="50px" /></div>
-				<span class="text-lg font-semibold">BusyBox</span>
+				<span class="text-lg font-semibold text-primary-700">BusyBox</span>
 			</RepoBox>
 
 			<RepoBox href="#">

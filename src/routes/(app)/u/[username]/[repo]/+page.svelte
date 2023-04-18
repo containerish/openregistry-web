@@ -72,7 +72,7 @@
 		<div class="w-full text-slate-700">
 			<div class="flex gap-4 items-center">
 				<span class="text-2xl lg:text-4xl">{data.username}/{data.repo}</span>
-				<IconButton class="mt-3">
+				<IconButton class="mt-3 w-2">
 					<Star class="w-5 h-5 lg:w-8 lg:h-8" />
 				</IconButton>
 			</div>
