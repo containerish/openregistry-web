@@ -75,7 +75,6 @@
 		<Search class="text-primary-400" />
 	</span>
 	<input
-		aria-hidden="true"
 		aria-label="autocomplete"
 		on:input={handleOnChange}
 		type="search"

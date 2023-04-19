@@ -21,7 +21,6 @@
 </div>
 <input
 	aria-label="text input"
-	aria-hidden="true"
 	on:input={onInput}
 	{name}
 	{type}

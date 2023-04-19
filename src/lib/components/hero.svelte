@@ -68,7 +68,6 @@
 				<div>
 					<input
 						aria-label="search repositories"
-						aria-hidden="true"
 						bind:value={query}
 						name="search"
 						type="text"
