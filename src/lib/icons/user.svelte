@@ -3,6 +3,7 @@
 </script>
 
 <svg
+	aria-label="user icon"
 	class={twMerge('h-6 w-6 text-slate-600', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"

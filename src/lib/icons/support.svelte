@@ -4,6 +4,7 @@
 	viewBox="0 0 24 24"
 	stroke="currentColor"
 	stroke-width="2"
+	aria-label="support"
 >
 	<path
 		stroke-linecap="round"

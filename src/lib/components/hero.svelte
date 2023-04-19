@@ -4,7 +4,7 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { RepoBox } from '$lib/components';
 	import { goto } from '$app/navigation';
-	import { MongoIcon, StorjIcon, IexecIcon, AkashIcon } from '$lib/icons';
+	import { MongoIcon } from '$lib/icons';
 
 	let showRegisterForm = false;
 	let isLoading = false;
@@ -67,13 +67,15 @@
 			>
 				<div>
 					<input
+						aria-label="search repositories"
+						aria-hidden="true"
 						bind:value={query}
 						name="search"
 						type="text"
 						placeholder="Search container images"
-						class="form-control focus:ring-priamry-400 ease-in-outfocus:border-primary-500 m-0 block w-80 
-						rounded-md border-2 bg-white bg-clip-padding px-3 py-2 text-base font-normal text-gray-700 
-						placeholder-gray-500 transition focus:text-gray-700 focus:outline-none focus:ring 
+						class="form-control focus:ring-priamry-400 ease-in-outfocus:border-primary-500 m-0 block w-80
+						rounded-md border-2 bg-white bg-clip-padding px-3 py-2 text-base font-normal text-gray-700
+						placeholder-gray-500 transition focus:text-gray-700 focus:outline-none focus:ring
 						focus:ring-opacity-40 md:w-96 lg:py-4"
 					/>
 				</div>
@@ -94,23 +96,26 @@
 			</span>
 		</div>
 
-		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl">
+		<div
+			class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl"
+			aria-label="popular repositories"
+		>
 			<RepoBox class="bg-[#081c45]" href="#">
-				<StorjIcon />
+				<img src="./storj.svg" alt="storj" />
 			</RepoBox>
 
 			<RepoBox href="#" class="bg-stone-700">
-				<IexecIcon />
+				<img src="./iexec.svg" alt="iexec" />
 			</RepoBox>
 
 			<RepoBox class="bg-[#062b3f]">
 				<div class="h-full w-full flex justify-center items-center">
-					<img src="./ipfs.svg" alt="" />
+					<img src="./ipfs.svg" alt="ipfs" />
 				</div>
 			</RepoBox>
 
 			<RepoBox href="#" class="bg-[#ce4748]">
-				<AkashIcon />
+				<img src="akash-logo.svg" alt="akash" />
 			</RepoBox>
 
 			<RepoBox href="#" class="bg-primary-600">
@@ -132,7 +137,7 @@
 			</RepoBox>
 
 			<RepoBox href="#">
-				<div><MongoIcon /></div>
+				<MongoIcon />
 			</RepoBox>
 
 			<RepoBox href="#">

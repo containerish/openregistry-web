@@ -1,4 +1,11 @@
-<svg width="150" height="150" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+	width="150"
+	height="150"
+	viewBox="0 0 300 300"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+	aria-label="confirm image"
+>
 	<path
 		d="M150 289.186C226.87 289.186 289.186 226.87 289.186 150C289.186 73.1297 226.87 10.814 150 10.814C73.1297 10.814 10.814 73.1297 10.814 150C10.814 226.87 73.1297 289.186 150 289.186Z"
 		fill="#AAC8F9"

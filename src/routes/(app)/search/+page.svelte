@@ -182,7 +182,7 @@
 					<Menu title="Sort">
 						<MenuItem>
 							<button
-							aria-label="sort by last updated"
+								aria-label="sort by last updated"
 								on:click={() => {
 									sortBy = 'last_updated';
 									fetchPageData(0);

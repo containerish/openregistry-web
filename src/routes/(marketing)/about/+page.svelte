@@ -19,14 +19,14 @@
 		class="flex flex-col w-full justify-start items-center my-2 lg:my-20 max-w-[2000px] mx-auto z-20"
 	>
 		<div
-			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center px-10 
+			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center px-10
 			py-6 mx-5 my-3 max-w-[600px] lg:max-w-max"
 		>
 			<div>
 				<h1 class="text-3xl lg:text-5xl font-semibold text-primary-600">
 					Decentralisation is the Future!
 				</h1>
-				<h1 class="text-3xl lg:text-5xl font-semibold text-primary-600 mb-8 ">
+				<h1 class="text-3xl lg:text-5xl font-semibold text-primary-600 mb-8">
 					and we want to play a role in making it better
 				</h1>
 				<span class="text-base lg:text-lg text-slate-700">
@@ -67,6 +67,7 @@
 
 						<div class="flex justify-center">
 							<a
+								aria-label="twitter link"
 								href="https://twitter.com/_jsdp"
 								rel="noreferrer"
 								class="mx-2 text-primary-300 hover:text-primary-400"
@@ -102,6 +103,7 @@
 
 						<div class="flex justify-center">
 							<a
+								aria-label="twitter link"
 								href="https://twitter.com/guacaemole"
 								rel="noreferrer"
 								class="mx-2 text-primary-300 hover:text-primary-400"

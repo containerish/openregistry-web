@@ -75,6 +75,8 @@
 		<Search class="text-primary-400" />
 	</span>
 	<input
+		aria-hidden="true"
+		aria-label="autocomplete"
 		on:input={handleOnChange}
 		type="search"
 		class="placeholder-slate-500 form-control block w-full px-3 py-3 text-base

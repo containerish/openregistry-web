@@ -3,6 +3,7 @@
 </script>
 
 <svg
+	aria-label="open lock icon"
 	class={twMerge('w-4 h-4', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"

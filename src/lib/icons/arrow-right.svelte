@@ -3,6 +3,7 @@
 </script>
 
 <svg
+	aria-label="right chevron"
 	class={twMerge('h-6 w-6', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"

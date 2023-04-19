@@ -3,6 +3,7 @@
 </script>
 
 <svg
+	aria-label="community icon"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke-width="2"

@@ -42,12 +42,13 @@
 		<div class="mt-2" />
 	</div>
 {:else}
-	<div
+	<button
+		aria-label="repository button"
 		id={data.uuid + data.namespace}
 		on:click={handleRepoDetail}
 		on:keypress={handleRepoDetail}
 		class="hover:shadow-primary-100 z-0 cursor-pointer hover:shadow-2xl w-full px-8 py-2 my-2 mx-2 bg-white
-		border-2 border-primary-100 rounded-sm max-w-[850px]"
+		border-2 border-primary-100 rounded-sm max-w-[850px] flex flex-col items-start"
 	>
 		<div class="pt-2 text-base lg:text-lg text-slate-700">
 			<span>
@@ -56,7 +57,7 @@
 			</span>
 		</div>
 
-		<div class="flex items-center justify-between">
+		<div class="flex items-end justify-between w-full">
 			<span class="text-xs font-light text-gray-400">
 				{new Date(data.created_at).toDateString()}
 			</span>
@@ -69,5 +70,6 @@
 		</div>
 
 		<div class="mt-2" />
-	</div>
+	</button>
+	
 {/if}
