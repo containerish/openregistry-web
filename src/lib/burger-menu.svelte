@@ -4,9 +4,10 @@
 	import { MenuIcon } from './icons';
 </script>
 
-<Menu let:open class= { twMerge('relative z-10 inline-block text-left', $$props.class)}>
+<Menu let:open class={twMerge('relative z-10 inline-block text-left', $$props.class)}>
 	<div class="max-w-2xl">
 		<MenuButton
+			aria-label="menu button"
 			class="px-2 transition ease-in-out duration-200 flex justify-center space-x-2 items-center border-0 
 			aspect-square bg-transparent h-12 hover:bg-primary-100"
 		>

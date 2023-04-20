@@ -3,11 +3,12 @@
 </script>
 
 <svg
+	aria-label="search icon"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke-width="2"
 	stroke="currentColor"
-	class={twMerge("w-6 h-6", $$props.class)}
+	class={twMerge('w-6 h-6', $$props.class)}
 >
 	<path
 		stroke-linecap="round"

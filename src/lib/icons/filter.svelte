@@ -3,6 +3,7 @@
 </script>
 
 <svg
+	aria-label="filters"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke-width="1.5"

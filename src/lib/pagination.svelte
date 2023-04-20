@@ -2,6 +2,7 @@
 	import { ArrowRightIcon, ArrowLeftIcon } from '$lib/icons';
 	import { getContext } from 'svelte';
 	import * as animateScroll from 'svelte-scrollto';
+	import IconButton from './icon-button.svelte';
 
 	let activePage = 0;
 	const fetchPageData = getContext<Function>('fetchPageData');
@@ -23,17 +24,18 @@
 </script>
 
 <div class="flex">
-	<button
+	<IconButton
 		on:click={() => setActivePage(activePage - 1)}
 		class="{activePage === 0
-			? 'disabled cursor-not-allowed bg-slate-100'
-			: 'bg-slate-100 hover:bg-gray-200 hover:text-gray-700'}
-			flex items-center justify-center px-4 mx-1 text-gray-500 capitalize rounded-md border-primary-100"
+			? 'disabled cursor-not-allowed bg-slate-200'
+			: 'bg-slate-100 hover:bg-slate-300 hover:text-gray-700'}
+			px-3 mx-1 text-gray-500 rounded "
 	>
 		<ArrowLeftIcon />
-	</button>
+	</IconButton>
 	{#each new Array(pages).fill(0) as i, page}
 		<button
+			aria-label="active pagination"
 			id={i}
 			on:click={() => setActivePage(page)}
 			class=" {activePage === page ? 'bg-primary-200' : 'bg-primary-50'} px-4 py-2 mx-1 text-gray-700
@@ -42,13 +44,13 @@
 			{page + 1}
 		</button>
 	{/each}
-	<button
+	<IconButton
 		on:click={() => setActivePage(activePage + 1)}
-		class="{activePage === pages - 1
-			? 'disabled cursor-not-allowed bg-slate-100 border-1 focus:border-1'
-			: 'bg-slate-100 hover:bg-gray-200 hover:text-gray-700'}
-		px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform rounded-md sm:inline border-primary-100"
+		class="{activePage === 0
+			? 'disabled cursor-not-allowed bg-slate-200'
+			: 'bg-slate-100 hover:bg-slate-300 hover:text-gray-700'}
+			px-3 mx-1 text-gray-500 rounded"
 	>
 		<ArrowRightIcon />
-	</button>
+	</IconButton>
 </div>

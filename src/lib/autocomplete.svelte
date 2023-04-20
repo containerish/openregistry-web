@@ -69,32 +69,37 @@
 
 <div class="relative flex w-full flex-wrap items-stretch">
 	<span
-		class="z-10 font-normal text-center absolute bg-transparent 
+		class="z-10 font-normal text-center absolute bg-transparent
 		rounded text-base items-center justify-center pl-4 pt-3"
 	>
 		<Search class="text-primary-400" />
 	</span>
 	<input
+		aria-label="autocomplete"
 		on:input={handleOnChange}
 		type="search"
-		class="placeholder-slate-500 form-control block w-full px-3 py-3 text-base 
-		font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100 
-		transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-primary-200 
+		class="placeholder-slate-500 form-control block w-full px-3 py-3 text-base
+		font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100
+		transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-primary-200
 		focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500 disabled:text-slate-400 pl-12"
 	/>
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}
 		<div class="pt-6 z-50">
 			<div
-				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md 
+				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md
 				max-h-96"
 			>
-				<button disabled class="py-1 m-0 w-full border-none block no-underline ">
+				<button
+					aria-label="no results found"
+					disabled
+					class="py-1 m-0 w-full border-none block no-underline"
+				>
 					<div
-						class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center 
+						class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center
 						justify-start"
 					>
-						<h3 class=" font-lg text-gray-700 ">No Results Found</h3>
+						<h3 class=" font-lg text-gray-700">No Results Found</h3>
 					</div>
 				</button>
 			</div>
@@ -103,21 +108,21 @@
 	{#if showItems && catalog?.repositories.length > 0}
 		<div class="pt-6 z-50">
 			<div
-				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md 
+				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md
 				max-h-96"
 			>
 				{#each catalog.repositories as item}
 					<button
-						href="#"
+						aria-label="namespaces"
 						on:click={() => getHref(item.namespace)}
-						class="py-1 w-full m-0 border-none block no-underline "
+						class="py-1 w-full m-0 border-none block no-underline"
 					>
 						<div
-							class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center 
+							class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center
 							justify-start"
 						>
 							<Cube />
-							<h3 class=" font-lg text-gray-700 ">
+							<h3 class=" font-lg text-gray-700">
 								{item.namespace}
 							</h3>
 						</div>

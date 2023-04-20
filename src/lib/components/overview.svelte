@@ -1,5 +1,6 @@
 <script>
 	import Card from '$lib/card.svelte';
+	import IconButton from '$lib/icon-button.svelte';
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
@@ -49,12 +50,12 @@
 						target="_blank"
 						rel="noreferrer">More</a
 					>
-					<button
-						class="transition-all duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
-            			hover:scale-110 pb-3 border border-none"
+					<IconButton
+						class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
+            			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 					>
 						<Arrow class="text-primary-400" />
-					</button>
+					</IconButton>
 				</div>
 			</div>
 		</div>
@@ -68,8 +69,8 @@
 					Collaborations
 				</span>
 				<p
-					class="text-base lg:text-lg text-primary-700 text-center font-normal 
-					leading-6 tracking-wide "
+					class="text-base lg:text-lg text-primary-700 text-center font-normal
+					leading-6 tracking-wide"
 				>
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
@@ -96,12 +97,12 @@
 						target="_blank"
 						rel="noreferrer">More</a
 					>
-					<button
-						class="transition duration-500 ease-in-out bg-transparent hover: transform hover:translate-x-2
-       				hover:scale-110 pb-3 border border-none"
+					<IconButton
+						class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
+            			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 					>
 						<Arrow class="text-primary-400" />
-					</button>
+					</IconButton>
 				</div>
 			</div>
 			<div class="w-80 md:w-fit">
@@ -138,12 +139,12 @@
 						target="_blank"
 						rel="noreferrer">More</a
 					>
-					<button
-						class="transition duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
-          				hover:scale-110 lg:pb-3 border border-none"
+					<IconButton
+						class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
+            			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 					>
 						<Arrow class="text-primary-400" />
-					</button>
+					</IconButton>
 				</div>
 			</div>
 		</div>

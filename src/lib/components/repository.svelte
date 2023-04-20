@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { DownloadIcon, LockOpenIcon, StarIcon } from '$lib/icons';
 	import type { Repository } from '$apis/registry';
+	import IconButton from '$lib/icon-button.svelte';
 
 	export let data: Repository;
 	export let compact = true;
@@ -32,21 +33,22 @@
 			</span>
 
 			<div class="flex gap-4">
-				<button class="border-none p-0"><DownloadIcon /></button>
-				<button class="border-none p-0"><StarIcon /></button>
-				<button class="border-none p-0"><LockOpenIcon /></button>
+				<IconButton class="w-3"><DownloadIcon /></IconButton>
+				<IconButton class="w-3"><StarIcon /></IconButton>
+				<IconButton class="w-3"><LockOpenIcon /></IconButton>
 			</div>
 		</div>
 
 		<div class="mt-2" />
 	</div>
 {:else}
-	<div
+	<button
+		aria-label="repository button"
 		id={data.uuid + data.namespace}
 		on:click={handleRepoDetail}
 		on:keypress={handleRepoDetail}
-		class="hover:shadow-primary-100 z-0 cursor-pointer hover:shadow-2xl w-full px-8 py-2 my-2 mx-2 bg-white 
-		border-2 border-primary-100 rounded-sm max-w-[850px]"
+		class="hover:shadow-primary-100 z-0 cursor-pointer hover:shadow-2xl w-full px-8 py-2 my-2 mx-2 bg-white
+		border-2 border-primary-100 rounded-sm max-w-[850px] flex flex-col items-start"
 	>
 		<div class="pt-2 text-base lg:text-lg text-slate-700">
 			<span>
@@ -55,7 +57,7 @@
 			</span>
 		</div>
 
-		<div class="flex items-center justify-between">
+		<div class="flex items-end justify-between w-full">
 			<span class="text-xs font-light text-gray-400">
 				{new Date(data.created_at).toDateString()}
 			</span>
@@ -68,5 +70,6 @@
 		</div>
 
 		<div class="mt-2" />
-	</div>
+	</button>
+	
 {/if}

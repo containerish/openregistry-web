@@ -3,6 +3,7 @@
 </script>
 
 <svg
+	aria-label="clock icon"
 	class={twMerge('h-4 w-4', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"

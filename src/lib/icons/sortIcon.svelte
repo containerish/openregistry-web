@@ -3,7 +3,8 @@
 </script>
 
 <svg
-	class={twMerge("h-4 w-4", $$props.class)}
+	aria-label="sort icon"
+	class={twMerge('h-4 w-4', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

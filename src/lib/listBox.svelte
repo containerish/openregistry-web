@@ -29,6 +29,7 @@
 			<div class="relative mt-1">
 				<Listbox value={selectedItem} on:change={(e) => setSelectItem(e.detail)}>
 					<ListboxButton
+						aria-label="list button"
 						class="flex w-full px-4 py-3 justify-between items-center border border-primary-100 rounded-md
 						placeholder-slate-700 focus:bg-slate-50
 						 focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500

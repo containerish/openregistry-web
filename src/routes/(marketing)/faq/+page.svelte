@@ -69,7 +69,7 @@
 <Card class="bg-white mx-auto">
 	<div class="w-3/4 lg:w-full min-h-[90vh] mx-10 my-4 lg:my-20 max-w-[3000px]">
 		<div
-			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-5 rounded-sm 
+			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-5 rounded-sm
 			border border-primary-100"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
@@ -83,7 +83,7 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
 			border-primary-100"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
@@ -97,7 +97,7 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner flex flex-col px-10 py-10 mx-5 my-6 rounded-sm border 
+			class="bg-slate-50 shadow-inner flex flex-col px-10 py-10 mx-5 my-6 rounded-sm border
 			border-primary-100 gap-6"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700">
@@ -120,7 +120,7 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
 			border-primary-100"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
@@ -133,7 +133,7 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
 			border-primary-100"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
@@ -150,7 +150,7 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
 			border-primary-100"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">A Humble Note</h1>
@@ -161,7 +161,7 @@
 			</span>
 		</div>
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border 
+			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
 			border-primary-100"
 		>
 			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
@@ -179,8 +179,7 @@
 
 		<Card>
 			<div class="w-4/5 lg:w-full mx-5">
-				<span class="mt-1 ml-2 text-2xl font-normal text-left text-slate-700 ">Need More Help?</span
-				>
+				<span class="mt-1 ml-2 text-2xl font-normal text-left text-slate-700">Need More Help?</span>
 				<form
 					on:submit|preventDefault={(e) => handleFormSubmit(e)}
 					class="w-full lg:w-2/5 py-4 flex flex-col justify-start items-start gap-3"

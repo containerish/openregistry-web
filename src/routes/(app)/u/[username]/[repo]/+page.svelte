@@ -72,7 +72,7 @@
 		<div class="w-full text-slate-700">
 			<div class="flex gap-4 items-center">
 				<span class="text-2xl lg:text-4xl">{data.username}/{data.repo}</span>
-				<IconButton class="mt-3">
+				<IconButton class="mt-3 w-2">
 					<Star class="w-5 h-5 lg:w-8 lg:h-8" />
 				</IconButton>
 			</div>
@@ -81,10 +81,11 @@
 	</div>
 
 	<div
-		class="flex gap-5 items-start justify-items-center mx-3 bg-primary-50 px-16 mb-8 border-t-0 border-2 
+		class="flex gap-5 items-start justify-items-center mx-3 bg-primary-50 px-16 mb-8 border-t-0 border-2
 		border-primary-100"
 	>
 		<button
+			aria-label="tab for overview"
 			on:click={toggleOverview}
 			class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
 			border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
@@ -94,6 +95,7 @@
 		</button>
 
 		<button
+			aria-label="tab for Tags"
 			on:click={toggleTags}
 			class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
 				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
@@ -106,7 +108,7 @@
 	<div class="w-full h-full py-4 flex px-3 justify-center">
 		{#if isTags}
 			<div
-				class="bg-white w-full  mx-3 flex-col gap-4 rounded-sm px-8 py-8 flex justify-center 
+				class="bg-white w-full mx-3 flex-col gap-4 rounded-sm px-8 py-8 flex justify-center
 				items-center border border-primary-200 shadow-2xl"
 			>
 				{#each repository.tags as tag}
@@ -118,7 +120,7 @@
 		{#if isOverview}
 			<div class="flex flex-col lg:flex-row justify-center items-center gap-10 w-full">
 				<div
-					class="min-w-max w-full bg-white border border-primary-200 shadow-2xl mx-3 h-full rounded-sm 
+					class="min-w-max w-full bg-white border border-primary-200 shadow-2xl mx-3 h-full rounded-sm
 					px-8 py-8 flex justify-center items-center min-h-[200px]"
 				>
 					<span class="text-slate-500 text-xl lg:text-2xl"> No Overview Available </span>
@@ -135,7 +137,7 @@
 						<span
 							class="{isCopied === 'pull'
 								? 'font-semibold'
-								: ''} select-all text-sm lg:text-base text-primary-400 
+								: ''} select-all text-sm lg:text-base text-primary-400
 								py-2 px-2 lowercase tracking-wide"
 						>
 							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
@@ -146,7 +148,7 @@
 						<span
 							class="{isCopied === 'push'
 								? 'font-semibold'
-								: ''} select-all text-sm lg:text-base text-primary-400 
+								: ''} select-all text-sm lg:text-base text-primary-400
 								px-2 py-2 lowercase tracking-wide"
 						>
 							{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}

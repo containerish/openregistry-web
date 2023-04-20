@@ -5,6 +5,7 @@
 </script>
 
 <button
+	aria-label="secondary button"
 	{disabled}
 	on:click
 	class={twMerge(

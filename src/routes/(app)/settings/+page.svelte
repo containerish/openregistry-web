@@ -58,7 +58,6 @@
 						<span class="text-sm text-slate-600">Community User</span>
 					</div>
 				</div>
-
 				<span class="text-xs lg:text-base text-slate-600 self-end">
 					Joined
 					<span>

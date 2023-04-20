@@ -15,8 +15,12 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Github Integration | OpenRegistry</title>
+</svelte:head>
+
 <div class="flex flex-col items-center space-y-6 w-full min-w-min lg:min-w-max sm:my-10 lg:my-20">
-	<div class="min-w-min bg-white p-6 lg:p-16 rounded-sm border border-primary-200 shadow-2xl ">
+	<div class="min-w-min bg-white p-6 lg:p-16 rounded-sm border border-primary-200 shadow-2xl">
 		<div class="w-full lg:max-w-max">
 			<div class="flex flex-col justify-center items-center space-x-5 space-y-5">
 				<span class="text-2xl font-bold text-primary-600 text-center"

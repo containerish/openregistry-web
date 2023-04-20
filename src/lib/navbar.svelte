@@ -23,13 +23,13 @@
 <header class="sticky top-0 z-50 bg-primary-50">
 	<nav class="px-16 pt-3 pb-2 max-w-[2500px] mx-auto">
 		<div class="flex w-full items-center justify-between ">
-			<div
-				on:keydown={() => {}}
+			<IconButton
+				on:keyup={() => goto('/')}
 				on:click={() => goto('/')}
-				class="flex cursor-pointer items-center"
+				class="flex cursor-pointer items-center w-11 h-11"
 			>
 				<Logo type="dark" />
-			</div>
+			</IconButton>
 			<div class="md:hidden">
 				<Menu>
 					<div class="flex flex-col">

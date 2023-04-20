@@ -2,7 +2,12 @@
 	import { twMerge } from 'tailwind-merge';
 </script>
 
-<svg class={twMerge("w-8 h-8 fill-current", $$props.class)}  viewBox="0 0 24 24" fill="none">
+<svg
+	class={twMerge('w-8 h-8 fill-current', $$props.class)}
+	viewBox="0 0 24 24"
+	fill="none"
+	aria-label="github icon"
+>
 	<path
 		d="M12.026 2C7.13295 1.99937 2.96183 5.54799 2.17842 10.3779C1.395 15.2079 
 	4.23061 19.893 8.87302 21.439C9.37302 21.529 9.55202 21.222 9.55202 20.958C9.55202 

@@ -27,6 +27,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>SetupBuild | OpenRegistry</title>
+</svelte:head>
+
 <div class="bg-slate-100 w-full flex flex-col justify-start items-center py-10">
 	<div class="w-1/2 lg:w-3/4 text-xs px-2 py-3 lg:text-sm">
 		<Steps
@@ -41,7 +45,7 @@
 	</div>
 
 	<div
-		class="bg-white rounded-sm shadow-2xl border border-primary-100 space-y-6 my-10 min-h-max 
+		class="bg-white rounded-sm shadow-2xl border border-primary-100 space-y-6 my-10 min-h-max
 		overflow-y-auto p-20 mx-3 min-w-min w-4/5"
 	>
 		{#if selectedTab === 0}

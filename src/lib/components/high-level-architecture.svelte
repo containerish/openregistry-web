@@ -1,5 +1,6 @@
 <script>
 	import Card from '$lib/card.svelte';
+	import IconButton from '$lib/icon-button.svelte';
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
@@ -26,12 +27,12 @@
 				target="_blank"
 				rel="noreferrer">More</a
 			>
-			<button
-				class="hover: transform border border-none bg-transparent pb-3 transition 
-				duration-500 ease-in-out hover:translate-x-2 hover:scale-110"
+			<IconButton
+				class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
+            			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 			>
 				<Arrow class="text-primary-400" />
-			</button>
+			</IconButton>
 		</div>
 	</div>
 	<div class="w-11/12 max-w-[2300px]">

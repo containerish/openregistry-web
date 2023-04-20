@@ -1,4 +1,11 @@
-<svg width="150" height="150" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+	width="150"
+	height="150"
+	viewBox="0 0 300 300"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+	aria-label="cloud image"
+>
 	<path
 		d="M54.7559 137.24C54.274 138.383 53.8274 139.543 53.4249 140.722L54.1359 140.648C54.3103 139.502 54.5169 138.366 54.7559 137.24Z"
 		fill="#AAC8F9"
