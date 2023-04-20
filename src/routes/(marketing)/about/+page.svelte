@@ -22,14 +22,14 @@
 			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center px-10
 			py-6 mx-5 my-3 max-w-[600px] lg:max-w-max"
 		>
-			<div>
+			<div class="max-w-5xl">
 				<h1 class="text-3xl lg:text-5xl font-semibold text-primary-600">
 					Decentralisation is the Future!
 				</h1>
 				<h1 class="text-3xl lg:text-5xl font-semibold text-primary-600 mb-8">
 					and we want to play a role in making it better
 				</h1>
-				<span class="text-base lg:text-lg text-slate-700">
+				<span class="text-base lg:text-lg text-slate-800">
 					Our Vision is derived and powered by the principals of Web 3.0 and Dworld of Dapps. With
 					increasing awareness and adaption of distributed network, the worlds are moving towards a
 					better future for everyone. OpenRegistry is an effort to bring a change with community's
@@ -37,8 +37,8 @@
 					promise of scalability, reliability and transparency.
 				</span>
 			</div>
-			<div>
-				<span class="text-base lg:text-lg text-slate-700">
+			<div class="max-w-5xl">
+				<span class="text-base lg:text-lg text-slate-800">
 					We started off as a fun project which eventually opened many doors for us. Although we are
 					a small team, we are Passionate about what we do. We have learned, built and evolved our
 					careers with help of OpenSource projects. With OpenRegistry, we want to built yet another
@@ -46,14 +46,14 @@
 				</span>
 			</div>
 
-			<span class="text-3xl lg:text-4xl font-semibold text-primary-500 mt-14">
+			<span class="text-3xl lg:text-4xl font-semibold text-primary-600 mt-14">
 				Get to know our Team
 			</span>
 			<div class="flex flex-col gap-20 mt-8 w-full">
 				<div class="flex justify-center">
 					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white rounded-sm shadow-3xl">
 						<div class="flex flex-col">
-							<span class="text-xl font-semibold text-slate-700 capitalize"> Jasdeep Singh </span>
+							<span class="text-xl font-semibold text-primary-500 capitalize"> Jasdeep Singh </span>
 
 							<p class=" text-slate-700 capitalize">Engineer</p>
 						</div>
@@ -92,7 +92,7 @@
 				<div class="flex justify-center">
 					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white rounded-sm shadow-3xl">
 						<div class="flex flex-col">
-							<span class="text-xl font-semibold text-slate-700 capitalize"> Gunjan Valecha </span>
+							<span class="text-xl font-semibold text-primary-500 capitalize"> Gunjan Valecha </span>
 							<p class="text-slate-700 capitalize">Engineer</p>
 						</div>
 

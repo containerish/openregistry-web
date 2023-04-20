@@ -9,7 +9,7 @@
 	};
 </script>
 
-<TabGroup defaultIndex={2} class="grid grid-cols-4 gap-9 px-3 py-9">
+<TabGroup defaultIndex={0} class="grid grid-cols-4 gap-9 px-3 py-9">
 	<TabList class="col-span-1 flex flex-col w-full">
 		<Tab class={handleSettingsTab}>General</Tab>
 		<Tab class={handleSettingsTab}>Builds and Deployments</Tab>
