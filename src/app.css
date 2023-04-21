@@ -25,7 +25,7 @@ body {
 }
 
 a {
-	color: rgb(115, 115, 255);
+	color: rgb(72, 72, 188);
 	text-decoration: none;
 }
 
@@ -34,7 +34,7 @@ a:hover {
 }
 
 a:visited {
-	color: rgb(47, 47, 125);
+	color: rgb(25, 25, 92);
 }
 
 label {

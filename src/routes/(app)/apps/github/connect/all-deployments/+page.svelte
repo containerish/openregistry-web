@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div class="w-full p-20">
-	<TabGroup defaultIndex={1}>
+	<TabGroup defaultIndex={0}>
 		<TabList class="text-lg flex gap-9 ml-2 border-b-2 border-slate-300">
 			<Tab let:selected class={handleTabSelect}>Builds</Tab>
 			<Tab class={handleTabSelect}>Settings</Tab>

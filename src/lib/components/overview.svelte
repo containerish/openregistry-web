@@ -20,7 +20,7 @@
 				>
 					Overview
 				</span>
-				<p class="text-base lg:text-lg text-primary-700 text-center font-normal">
+				<p class="text-base lg:text-lg text-slate-800 text-center font-normal">
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
 					difference in operations of OpenRegistry than any other popular container registries like
@@ -45,7 +45,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 font-medium text-lg mt-1"
+						class="text-primary-500 font-medium text-lg mt-1 hover:no-underline"
 						href="https://conformance.opencontainers.org/"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -54,7 +54,7 @@
 						class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
             			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 					>
-						<Arrow class="text-primary-400" />
+						<Arrow class="text-primary-500" />
 					</IconButton>
 				</div>
 			</div>
@@ -69,8 +69,8 @@
 					Collaborations
 				</span>
 				<p
-					class="text-base lg:text-lg text-primary-700 text-center font-normal
-					leading-6 tracking-wide"
+					class="text-base lg:text-lg text-slate-800 text-center font-normal 
+					leading-6 tracking-wide "
 				>
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
@@ -92,7 +92,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-lg mt-1 font-medium"
+						class="text-primary-500 text-lg mt-1 font-medium hover:no-underline"
 						href="https://blog.openregistry.dev/posts/collaborations"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -101,7 +101,7 @@
 						class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
             			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 					>
-						<Arrow class="text-primary-400" />
+						<Arrow class="text-primary-500" />
 					</IconButton>
 				</div>
 			</div>
@@ -126,7 +126,7 @@
 					</span>
 				</div>
 
-				<p class="text-base lg:text-lg text-primary-700 text-center font-normal">
+				<p class="text-base lg:text-lg text-slate-800 text-center font-normal">
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
 					at OpenRegistry believe in dWorld full of dApps. With our initiative, we want to make
@@ -134,7 +134,7 @@
 				</p>
 				<div class="flex justify-center pt-2 cursor-pointer">
 					<a
-						class="text-primary-400 text-lg mt-1 font-medium"
+						class="text-primary-500 text-lg mt-1 font-medium hover:no-underline"
 						href="https://blog.openregistry.dev/posts/web3-infrastructure"
 						target="_blank"
 						rel="noreferrer">More</a
@@ -143,7 +143,7 @@
 						class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
             			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 					>
-						<Arrow class="text-primary-400" />
+						<Arrow class="text-primary-500" />
 					</IconButton>
 				</div>
 			</div>

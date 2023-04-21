@@ -31,21 +31,21 @@
 					<span class="text-3xl lg:text-5xl font-bold text-primary-600">
 						A truly decentralized container registry
 					</span>
-					<span class="text-lg lg:text-xl font-medium text-primary-600">
+					<span class="text-lg lg:text-xl font-medium text-slate-600">
 						in just a few simple steps, you can get started with OpenRegsitry
 					</span>
 
 					<ul class="text-center font-normal list-disc ml-6 mt-4">
-						<li class="text-left text-primary-600 text-base xl:text-xl">
+						<li class="text-left text-slate-600 text-base xl:text-xl">
 							Create an account on
 							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-600">
 								OpenRegistry.dev
 							</a>
 						</li>
-						<li class="text-left text-primary-600 text-base xl:text-xl">
+						<li class="text-left text-slate-600 text-base xl:text-xl">
 							Install Docker/Nerdctl/Podman
 						</li>
-						<li class="text-left text-primary-600 text-base xl:text-xl">
+						<li class="text-left text-slate-600 text-base xl:text-xl">
 							Login into OpenRegistry using Docker CLI
 						</li>
 					</ul>
@@ -86,7 +86,7 @@
 				bg-slate-100 p-4 aspect-square max-w-[420px]"
 			>
 				<LaboratoryIcon />
-				<span class="text-center text-primary-600 text-base lg:text-lg"
+				<span class="text-center text-slate-700 text-base lg:text-lg"
 					>The container image subitted by user is divided into 1 or more layers depending on a few
 					factors like size.</span
 				>
@@ -97,7 +97,7 @@
 				bg-slate-100 p-4 aspect-square max-w-[420px]"
 			>
 				<LayersIcon />
-				<span class="text-center text-primary-600 text-base lg:text-lg"
+				<span class="text-center text-slate-700 text-base lg:text-lg"
 					>The layers are further divided into blobs and sequentially uploaded to the storage
 					backend of user's preference like IPFS or Storj</span
 				>
@@ -108,7 +108,7 @@
 				bg-slate-100 p-4 aspect-square max-w-[420px]"
 			>
 				<CloudIcon />
-				<span class="text-center text-primary-600 text-base lg:text-lg"
+				<span class="text-center text-slate-700 text-base lg:text-lg"
 					>A resolver component uploads the blobs to IPFS/Stoj and brings back the content hash
 					which is mapped to the container image</span
 				>
@@ -119,7 +119,7 @@
 				bg-slate-100 p-4 aspect-square max-w-[420px]"
 			>
 				<ConfirmIcon />
-				<span class="text-center text-primary-600 text-base lg:text-lg"
+				<span class="text-center text-slate-700 text-base lg:text-lg"
 					>Once all the blobs for a layer are recieved,a digest is calculated which is used with
 					content hash while retrival of the layer</span
 				>

@@ -33,10 +33,10 @@
 	};
 </script>
 
-<div class="px-10 py-10 z-50">
+<div class="flex justify-center items-center w-full px-3 py-3">
 	<form
 		on:submit|preventDefault={() => sendInvites()}
-		class="flex justify-around items-center gap-8 flex-col h-full w-full"
+		class="flex justify-center items-center gap-8 flex-col h-full w-full"
 	>
 		<span class="text-2xl capitalize font-semibold text-primary-500">Invite Your Colleauges</span>
 		<div class="w-full">

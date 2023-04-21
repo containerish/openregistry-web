@@ -4,7 +4,7 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card class="bg-primary-100 block py-12 lg:py-20 flex flex-col gap-6">
+<Card class="bg-primary-100 py-12 lg:py-20 flex flex-col gap-6">
 	<div class="flex px-6 w-full flex-col justify-center max-w-2xl items-center">
 		<span
 			class="text-primary-600 text-center whitespace-nowrap font-bold pb-6 text-3xl lg:text-5xl"
@@ -12,7 +12,7 @@
 			High Level Architecture
 		</span>
 
-		<p class="text-center text-base lg:text-lg font-normal leading-normal text-primary-600">
+		<p class="text-center text-base lg:text-lg font-normal leading-normal text-slate-800">
 			The following diagram tries to depict the high level architecture of OpenRegistry. We are
 			hosted on Akash dCloud and the container images are stored on decentralised storage systems
 			like IPFS. OpenRegistry is designed as a pluggable platform to adapt to any modern
@@ -22,7 +22,7 @@
 
 		<div class="flex cursor-pointer justify-center pt-2">
 			<a
-				class="mt-1 text-lg font-semibold text-primary-400"
+				class="mt-1 text-lg font-semibold text-primary-500"
 				href="https://blog.openregistry.dev/posts/overview"
 				target="_blank"
 				rel="noreferrer">More</a
@@ -31,7 +31,7 @@
 				class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
             			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 			>
-				<Arrow class="text-primary-400" />
+				<Arrow class="text-primary-500" />
 			</IconButton>
 		</div>
 	</div>

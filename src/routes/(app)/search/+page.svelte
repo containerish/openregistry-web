@@ -109,7 +109,7 @@
 				: 'justify-center'} flex items-center w-full h-full max-w-[3000px]"
 		>
 			{#if showTooltip}
-				<div id="tooltip" class="z-50 bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
+				<div id="tooltip" class=" bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
 					<span class=" text-slate-800">
 						Coming soon
 						<svg
