@@ -75,6 +75,9 @@ devDependencies:
   '@types/cookie':
     specifier: 0.5.1
     version: 0.5.1
+  '@types/set-cookie-parser':
+    specifier: ^2.4.2
+    version: 2.4.2
   '@types/throttle-debounce':
     specifier: ^5.0.0
     version: 5.0.0
@@ -120,6 +123,9 @@ devDependencies:
   prettier-plugin-tailwindcss:
     specifier: ^0.2.3
     version: 0.2.4(prettier-plugin-svelte@2.9.0)(prettier@2.8.4)
+  set-cookie-parser:
+    specifier: ^2.6.0
+    version: 2.6.0
   svelte:
     specifier: ^3.55.0
     version: 3.56.0
@@ -166,7 +172,7 @@ devDependencies:
 packages:
 
   /@buf/containerish_openregistry.bufbuild_connect-es@0.8.4-20230402150944-827c654c9df4.1(@bufbuild/connect@0.8.4)(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-es/-/containerish_openregistry.bufbuild_connect-es-0.8.4-20230402150944-827c654c9df4.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-es/-/containerish_openregistry.bufbuild_connect-es-0.8.4-20230402150944-827c654c9df4.1.tgz}
     peerDependencies:
       '@bufbuild/connect': ^0.8.4
     dependencies:
@@ -179,7 +185,7 @@ packages:
     dev: false
 
   /@buf/containerish_openregistry.bufbuild_connect-web@0.8.4-20230402150944-827c654c9df4.1(@bufbuild/connect-web@0.8.4)(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-web/-/containerish_openregistry.bufbuild_connect-web-0.8.4-20230402150944-827c654c9df4.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-web/-/containerish_openregistry.bufbuild_connect-web-0.8.4-20230402150944-827c654c9df4.1.tgz}
     peerDependencies:
       '@bufbuild/connect-web': ^0.8.4
     dependencies:
@@ -192,7 +198,7 @@ packages:
     dev: false
 
   /@buf/containerish_openregistry.bufbuild_es@1.1.1-20230402150944-827c654c9df4.1(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_es/-/containerish_openregistry.bufbuild_es-1.1.1-20230402150944-827c654c9df4.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_es/-/containerish_openregistry.bufbuild_es-1.1.1-20230402150944-827c654c9df4.1.tgz}
     peerDependencies:
       '@bufbuild/protobuf': ^1.1.1
     dependencies:
@@ -202,7 +208,7 @@ packages:
     dev: false
 
   /@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-es@0.8.4-20221025150516-6607b10f00ed.1(@bufbuild/connect@0.8.4)(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-es/-/envoyproxy_protoc-gen-validate.bufbuild_connect-es-0.8.4-20221025150516-6607b10f00ed.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-es/-/envoyproxy_protoc-gen-validate.bufbuild_connect-es-0.8.4-20221025150516-6607b10f00ed.1.tgz}
     peerDependencies:
       '@bufbuild/connect': ^0.8.4
     dependencies:
@@ -213,7 +219,7 @@ packages:
     dev: false
 
   /@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web@0.8.4-20221025150516-6607b10f00ed.1(@bufbuild/connect-web@0.8.4)(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web/-/envoyproxy_protoc-gen-validate.bufbuild_connect-web-0.8.4-20221025150516-6607b10f00ed.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web/-/envoyproxy_protoc-gen-validate.bufbuild_connect-web-0.8.4-20221025150516-6607b10f00ed.1.tgz}
     peerDependencies:
       '@bufbuild/connect-web': ^0.8.4
     dependencies:
@@ -224,7 +230,7 @@ packages:
     dev: false
 
   /@buf/envoyproxy_protoc-gen-validate.bufbuild_es@1.1.1-20221025150516-6607b10f00ed.1(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_es/-/envoyproxy_protoc-gen-validate.bufbuild_es-1.1.1-20221025150516-6607b10f00ed.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_es/-/envoyproxy_protoc-gen-validate.bufbuild_es-1.1.1-20221025150516-6607b10f00ed.1.tgz}
     peerDependencies:
       '@bufbuild/protobuf': ^1.1.1
     dependencies:
@@ -232,7 +238,7 @@ packages:
     dev: false
 
   /@buf/googleapis_googleapis.bufbuild_connect-es@0.8.4-20230329151039-5ae7f88519b0.1(@bufbuild/connect@0.8.4)(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_connect-es/-/googleapis_googleapis.bufbuild_connect-es-0.8.4-20230329151039-5ae7f88519b0.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_connect-es/-/googleapis_googleapis.bufbuild_connect-es-0.8.4-20230329151039-5ae7f88519b0.1.tgz}
     peerDependencies:
       '@bufbuild/connect': ^0.8.4
     dependencies:
@@ -243,7 +249,7 @@ packages:
     dev: false
 
   /@buf/googleapis_googleapis.bufbuild_connect-web@0.8.4-20230329151039-5ae7f88519b0.1(@bufbuild/connect-web@0.8.4)(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_connect-web/-/googleapis_googleapis.bufbuild_connect-web-0.8.4-20230329151039-5ae7f88519b0.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_connect-web/-/googleapis_googleapis.bufbuild_connect-web-0.8.4-20230329151039-5ae7f88519b0.1.tgz}
     peerDependencies:
       '@bufbuild/connect-web': ^0.8.4
     dependencies:
@@ -254,7 +260,7 @@ packages:
     dev: false
 
   /@buf/googleapis_googleapis.bufbuild_es@1.1.1-20230329151039-5ae7f88519b0.1(@bufbuild/protobuf@1.2.0):
-    resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_es/-/googleapis_googleapis.bufbuild_es-1.1.1-20230329151039-5ae7f88519b0.1.tgz}
+    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_es/-/googleapis_googleapis.bufbuild_es-1.1.1-20230329151039-5ae7f88519b0.1.tgz}
     peerDependencies:
       '@bufbuild/protobuf': ^1.1.1
     dependencies:
@@ -670,7 +676,7 @@ packages:
       magic-string: 0.30.0
       mime: 3.0.0
       sade: 1.8.1
-      set-cookie-parser: 2.5.1
+      set-cookie-parser: 2.6.0
       sirv: 2.0.2
       svelte: 3.56.0
       tiny-glob: 0.2.9
@@ -755,6 +761,12 @@ packages:
 
   /@types/semver@7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/set-cookie-parser@2.4.2:
+    resolution: {integrity: sha512-fBZgytwhYAUkj/jC/FAV4RQ5EerRup1YQsXQCh8rZfiHkc4UahC192oH0smGwsXol3cL3A5oETuAHeQHmhXM4w==}
+    dependencies:
+      '@types/node': 18.15.0
     dev: true
 
   /@types/throttle-debounce@5.0.0:
@@ -2969,8 +2981,8 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
-  /set-cookie-parser@2.5.1:
-    resolution: {integrity: sha512-1jeBGaKNGdEq4FgIrORu/N570dwoPYio8lSoYLWmX7sQ//0JY08Xh9o5pBcgmHQ/MbsYp/aZnOe1s1lIsbLprQ==}
+  /set-cookie-parser@2.6.0:
+    resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
     dev: true
 
   /shebang-command@2.0.0:
