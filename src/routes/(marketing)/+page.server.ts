@@ -50,18 +50,14 @@ export const actions: Actions = {
 		const { cookies, locals, fetch } = event;
 
 		try {
-			const resp = await fetch(`${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/auth/signout`, {
-				method: 'DELETE',
-				credentials: 'include',
-				headers: {
-					cookie: `session_id=${cookies.get('session_id')}`
-				}
+			const response = await fetch(`/apis/auth/signout`, {
+				method: 'DELETE'
 			});
-			if (resp.status === 202) {
-				const data = await resp.json();
+			if (response.status === 202) {
+				const data = await response.json();
 				cookies.delete('session_id');
-				cookies.delete('access_token');
-				cookies.delete('refresh_token');
+				cookies.delete('access');
+				cookies.delete('refresh');
 				locals.user = null;
 				locals.sessionId = '';
 				locals.authenticated = false;
