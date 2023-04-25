@@ -1,4 +1,4 @@
-import { error, fail, redirect } from '@sveltejs/kit';
+import { error, fail, json, redirect } from '@sveltejs/kit';
 import type { AxiosResponseHeaders } from 'axios';
 import * as c from 'cookie';
 import type { Actions } from './$types';
@@ -7,6 +7,7 @@ import type { RequestEvent } from './$types';
 import { ZodError } from 'zod';
 import { SignInSchema, SignUpSchema } from '$lib/formSchemas';
 import { env } from '$env/dynamic/public';
+import { dataset_dev } from 'svelte/internal';
 
 const auth = new Auth();
 
@@ -17,29 +18,19 @@ export const actions: Actions = {
 
 		try {
 			const user = SignInSchema.parse(formData);
-			const { data, error: err, status, headers } = await auth.Login(user.email, user.password);
-			if (status === 200) {
-				const cookieList = (headers as AxiosResponseHeaders)['set-cookie'];
-				cookieList!.forEach((cookie, i) => {
-					const cookieParts = cookie.split('=');
-					const cookieValue = cookieParts.splice(1).join('=').split(';')[0];
-					const cookieOptions = c.parse(cookie.split('=').splice(1).join('='));
-					cookies.set(cookieParts[0], cookieValue, {
-						domain: cookieOptions.Domain,
-						httpOnly: true,
-						sameSite: 'lax',
-						secure: false,
-						path: '/',
-						expires: new Date(cookieOptions.Expires)
-					});
-				});
+			const response = await fetch('/apis/auth/signin', {
+				method: 'POST',
+				body: JSON.stringify(user)
+			});
+			const data = await response.json();
+			if (response.status === 200) {
 				throw redirect(303, '/repositories');
 			} else {
-				return fail(status, {
-					error: err,
-					message: 'Error logging in',
+				return fail(response.status, {
+					error: data,
+					message: data.message,
 					data: user,
-					formErrors: [err.message]
+					formErrors: [data.message]
 				});
 			}
 		} catch (err) {
@@ -59,18 +50,14 @@ export const actions: Actions = {
 		const { cookies, locals, fetch } = event;
 
 		try {
-			const resp = await fetch(`${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/auth/signout`, {
-				method: 'DELETE',
-				credentials: 'include',
-				headers: {
-					cookie: `session_id=${cookies.get('session_id')}`
-				}
+			const response = await fetch(`/apis/auth/signout`, {
+				method: 'DELETE'
 			});
-			if (resp.status === 202) {
-				const data = await resp.json();
+			if (response.status === 202) {
+				const data = await response.json();
 				cookies.delete('session_id');
-				cookies.delete('access_token');
-				cookies.delete('refresh_token');
+				cookies.delete('access');
+				cookies.delete('refresh');
 				locals.user = null;
 				locals.sessionId = '';
 				locals.authenticated = false;
@@ -90,22 +77,21 @@ export const actions: Actions = {
 		}
 	},
 	signup: async (event: RequestEvent) => {
-		const { request } = event;
-
+		const { fetch, request } = event;
 		const formData = Object.fromEntries(await request.formData());
 
 		try {
 			const body = SignUpSchema.parse(formData);
-			const {
-				error: err,
-				status,
-				data
-			} = await auth.Signup(body.username, body.email, body.password);
-			if (err || status !== 201) {
-				return fail(status, {
+			const response = await fetch('/apis/auth/signup', {
+				method: 'POST',
+				body: JSON.stringify(body)
+			});
+			const data = await response.json();
+			if (response.status !== 201) {
+				return fail(response.status, {
 					data: body,
-					error: err,
-					formErrors: [err.message],
+					error: data,
+					formErrors: [data.message],
 					message: 'Error signing up'
 				});
 			}
