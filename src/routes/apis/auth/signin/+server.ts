@@ -12,10 +12,9 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
 	} catch (err) {
 		return json({ error: err }, { status: 400 });
 	}
-	const { confirmPassword: _, ...rest } = body;
 	const url = new URL('/auth/signin', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 	const response = await fetch(url, {
-		body: JSON.stringify(rest),
+		body: JSON.stringify(body),
 		method: 'POST'
 	});
 
@@ -28,7 +27,7 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
 		decodeValues: true
 	});
 
-	cookieList.forEach((cookie, i) => {
+	cookieList.forEach((cookie) => {
 		cookies.set(cookie.name, cookie.value, {
 			domain: cookie.domain,
 			httpOnly: cookie.httpOnly,
