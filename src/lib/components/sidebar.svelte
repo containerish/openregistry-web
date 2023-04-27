@@ -19,20 +19,26 @@
 	import type { User } from '$apis/auth';
 	import Advert from '../advert.svelte';
 	import Carousel from './carousel.svelte';
-	import Modal from '$lib/modal.svelte';
 	import Invite from './invite.svelte';
 	import Autocomplete from '../autocomplete.svelte';
-	import { RegistryBackend } from '$apis/registry';
 	import { onMount } from 'svelte';
 	import Dialog from '$lib/dialog.svelte';
+	import { page } from '$app/stores';
 
 	export let authorised = false;
-	const registry = new RegistryBackend();
 
 	const handleAutoComplete = async (query: string) => {
-		let result = await registry.SearchRepositories(query);
-		console.log('here:', result);
-		return result;
+		//  for some reason this is signing user out, do we even need the search in sidebar to search
+		//  repositories?
+		// let result = await registry.SearchRepositories(query);
+
+		const url = new URL('/apis/registry/list/repositories', $page.url.origin);
+		url.searchParams.set('query', query);
+		const response = await fetch(url);
+		if (response.status !== 200) {
+			return;
+		}
+		return await response.json();
 	};
 
 	let extended: Boolean = true;
@@ -206,36 +212,36 @@
 								href="/about"
 								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<HeartIcon class="" />
-							<span>About us</span>
-						</a>
-						<a
-							href="https://github.com/containerish/OpenRegistry"
-							target="_blank"
-							rel="noreferrer"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
+							>
+								<HeartIcon class="" />
+								<span>About us</span>
+							</a>
+							<a
+								href="https://github.com/containerish/OpenRegistry"
+								target="_blank"
+								rel="noreferrer"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg py-2.5
 							 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
-						>
-							<StarIcon class="w-6 h-6 " />
-							<span>Star us on Github</span>
-						</a>
-						<a
-							href="#"
-							on:click={toggleModal}
-							class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide
+							>
+								<StarIcon class="w-6 h-6 " />
+								<span>Star us on Github</span>
+							</a>
+							<a
+								href="#"
+								on:click={toggleModal}
+								class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide
 							text-lg py-2.5 hover:bg-slate-100 hover:shadow-2xl
 							hover:no-underline"
-						>
-							<UserPlusIcon class="" />
-							<span>Invite People</span>
-						</a>
-					</div>
-					<hr />
-					<div class="flex flex-col gap-3.5">
-						<a
-							href="/u"
-							class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+							>
+								<UserPlusIcon class="" />
+								<span>Invite People</span>
+							</a>
+						</div>
+						<hr />
+						<div class="flex flex-col gap-3.5">
+							<a
+								href="/u"
+								class="flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
                      py-2.5 hover:bg-slate-100 hover:shadow-2xl hover:no-underline"
 							>
 								<ProfileIcon class="text-slate-700 h-6 w-6 " />
@@ -254,20 +260,20 @@
 					</div>
 				</div>
 
-			<div
-				class="flex flex-row justify-start items-center gap-4 text-slate-700 tracking-wide text-lg font-medium"
-			>
-				<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
-					<UserIcon class="h-6 w-6" />
+				<div
+					class="flex flex-row justify-start items-center gap-4 text-slate-700 tracking-wide text-lg font-medium"
+				>
+					<div class="w-fit border-2 border-primary-300 p-2 rounded-full">
+						<UserIcon class="h-6 w-6" />
+					</div>
+					<div class="flex flex-col">
+						<span>{user.username}</span>
+						<span>{user.email}</span>
+					</div>
 				</div>
-				<div class="flex flex-col">
-					<span>{user.username}</span>
-					<span>{user.email}</span>
-				</div>
-			</div>
-			<button
-				formaction="/?/signout"
-				class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
+				<button
+					formaction="/?/signout"
+					class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 tracking-wide text-lg
 		        py-3 hover:bg-slate-50 hover:shadow-2xl hover:no-underline"
 				>
 					<SignOutIcon class="" />

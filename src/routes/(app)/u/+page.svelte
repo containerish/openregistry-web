@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { Repository } from '$lib/components';
-	import { RegistryBackend, type Catalog } from '$apis/registry';
+	import type { Catalog } from '$apis/registry';
 	import { CubeIcon, ProfileIcon, StarIcon, UserGroupIcon } from '$lib/icons';
-
 	import type { PageData } from './$types';
+	import { DefaultPageSize } from '$lib/constants';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	export let data: PageData;
 
 	let isRepo = true;
@@ -28,24 +30,28 @@
 		isContrib = true;
 	};
 
-	const backend = new RegistryBackend();
-
 	let catalog: Catalog;
 
 	const fetchPageData = async (offset?: number) => {
-		const resp = await backend.ListCatalog(
-			backend.DefaultPageSize,
-			backend.DefaultPageSize * offset,
-			data.user.username
-		);
+		if (!offset) {
+			offset = 0;
+		}
+		const url = new URL('/apis/registry/list/catalog', $page.url.origin);
+		url.searchParams.set('namespace', data.user?.username!);
+		url.searchParams.set('page_size', DefaultPageSize.toString());
+		url.searchParams.set('offset', (DefaultPageSize * offset).toString());
+		const response = await fetch(url);
 
-		if (resp.error) {
-			console.error('error in repo/index: fetchPageData: ', resp.error);
+		if (response.status !== 200) {
 			return;
 		}
 
-		catalog = resp.data;
+		catalog = await response.json();
 	};
+
+	onMount(async () => {
+		await fetchPageData();
+	});
 </script>
 
 <svelte:head>

@@ -68,7 +68,7 @@ export class RegistryBackend extends HttpClient {
 			return Promise.reject('Query cannot be empty');
 		}
 
-		let url = `/v2/ext/catalog/search?search_query=${query}`;
+		const url = `/v2/ext/catalog/search?search_query=${query}`;
 		return await this.http.get(url);
 	};
 
@@ -117,5 +117,5 @@ export class RegistryBackend extends HttpClient {
 		return resp;
 	};
 
-	public DefaultPageSize: number = 10;
+	DefaultPageSize = 10;
 }

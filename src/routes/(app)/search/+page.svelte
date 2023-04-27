@@ -2,11 +2,11 @@
 	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
-	import { RegistryBackend } from '$apis/registry';
+
 	import Checkbox from '$lib/checkbox.svelte';
 	import type { Catalog } from '$apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
-	import { navigating } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import Menu from '$lib/headless/menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { ClockIcon, ArrowRIcon, FilterIcon } from '$lib/icons';
@@ -18,11 +18,11 @@
 	import Dialog from '$lib/dialog.svelte';
 	import type { PageData } from './$types';
 	import SortIcon from '$lib/icons/sortIcon.svelte';
+	import { DefaultPageSize } from '$lib/constants';
 
 	export let data: PageData;
 
 	let sortBy = 'namespace';
-	let httpError: string;
 	let openErrorModal: boolean = false;
 
 	const [popperRef, popperContent] = createPopperActions({
@@ -34,21 +34,18 @@
 		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
 	};
 
-	const backend = new RegistryBackend();
-
 	const fetchPageData = async (offset: number) => {
-		const { error, data } = await backend.ListCatalog(
-			backend.DefaultPageSize,
-			backend.DefaultPageSize * offset,
-			undefined,
-			sortBy
-		);
-		if (error) {
-			console.error('eroror in fetchPageData: ', error);
+		const url = new URL('/apis/registry/list/catalog', $page.url.origin);
+		url.searchParams.set('page_size', DefaultPageSize.toString());
+		url.searchParams.set('offset', (DefaultPageSize * offset).toString());
+		url.searchParams.set('sort_by', sortBy);
+		const response = await fetch(url);
+
+		if (response.status !== 200) {
 			return;
 		}
 
-		catalog = data;
+		catalog = await response.json();
 		return offset;
 	};
 
@@ -57,26 +54,30 @@
 
 	onMount(async () => {
 		if (data.query && data.query !== '') {
-			const { error, data: repositories } = await backend.SearchRepositories(data.query);
-			if (error) {
-				console.error('error in search/ListCatalog: ', error);
-				httpError = error.message;
+			const url = new URL('/api/registry/list/repositories', $page.url.origin);
+			url.searchParams.set('query', data.query);
+			const response = await fetch(url);
+			if (response.status !== 200) {
 				openErrorModal = true;
+				catalog.repositories = [];
 				return;
 			}
 
-			catalog = repositories;
-			return;
+			catalog = await response.json();
 		}
 
-		let { data: repoCatalog, error } = await backend.ListCatalog(backend.DefaultPageSize);
-		if (error) {
-			console.error('error in search/ListCatalog: ', error);
-			httpError = error.message;
+		const url = new URL('/apis/registry/list/catalog', $page.url.origin);
+		url.searchParams.set('page_size', DefaultPageSize.toString());
+
+		const response = await fetch(url);
+
+		if (response.status !== 200) {
 			openErrorModal = true;
 			return;
 		}
-		catalog = repoCatalog;
+
+		catalog = await response.json();
+
 	});
 
 	let showFilter = false;
@@ -197,17 +198,17 @@
 						</MenuItem>
 						<MenuItem class="bg-gray-100">
 							<button
-							aria-label="sort by image name"
+								aria-label="sort by image name"
 								on:click={() => {
 									sortBy = 'namespace';
 									fetchPageData(0);
 								}}
 								class="{sortBy === 'namespace' ? 'font-normal bg-white' : ''} 
-         						inline-flex py-3 justify-center gap-2 items-center w-full m-0 border-none rounded-t-none 
+         						inline-flex py-3 justify-center gap-2 items-center w-full m-0 border-none rounded-t-none
 								rounded-md hover:bg-slate-100 text-sm"
 							>
 								<div
-									class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4 
+									class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4
 									inline-flex justify-center items-center w-4"
 								>
 									A
@@ -231,12 +232,12 @@
 						</div>
 
 						<div class="flex py-4">
-							<Pagination pages={Math.ceil(catalog.total / backend.DefaultPageSize)} />
+							<Pagination pages={Math.ceil(catalog.total / DefaultPageSize)} />
 						</div>
 					{:else}
 						<div class="flex w-full justify-center items-center">
 							<div
-								class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5 
+								class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
 								flex justify-center items-center"
 							>
 								<span class="text-primary-600 text-4xl">No Repositories</span>

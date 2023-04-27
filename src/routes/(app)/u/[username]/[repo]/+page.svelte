@@ -1,12 +1,14 @@
 <script lang="ts">
 	import Star from '$lib/icons/star.svelte';
 	import Globe from '$lib/icons/globe.svelte';
-	import { RegistryBackend, type Repo } from '$apis/registry';
 	import { onDestroy, onMount } from 'svelte';
 	import Tag from '$lib/tag.svelte';
 	import type { PageData } from './$types';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import IconButton from '$lib/icon-button.svelte';
+	import { page } from '$app/stores';
+	import { env } from '$env/dynamic/public';
+	import type { Repo } from '$apis/registry';
 
 	let isOverview = true;
 	let isTags = false;
@@ -27,16 +29,17 @@
 
 	export let data: PageData;
 	const ns = data.username + '/' + data.repo;
-	const registryBackend = new RegistryBackend();
 
 	onMount(async () => {
-		const resp = await registryBackend.GetRepositoryDetails(ns);
-		if (resp.error) {
-			console.error('error taglist: ', resp.error);
+		const url = new URL('/apis/registry/repository-detail', $page.url.origin);
+		url.searchParams.set('namespace', ns);
+
+		const response = await fetch(url);
+		if (response.status !== 200) {
+			console.log('error retrieaving tags', await response.json());
 			return;
 		}
-
-		repository = resp.data;
+		repository = await response.json();
 	});
 
 	let isCopied = '';
