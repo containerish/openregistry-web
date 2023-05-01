@@ -28,22 +28,31 @@
 	let password = $page.form?.data?.password as string;
 	let showForgotPasswordForm = false;
 	let formMsg: string;
-	const handleForgotPassword = async (e: any) => {
-		// dont know why, but this is the way
-		if (!email || email === '') {
-			emailErr = 'email is a required field';
-			return;
-		}
+	let forgotPwdMessage = '';
+	const handleForgotPassword: SubmitFunction = () => {
+		isLoading = true;
 
-		const { error, data } = await auth.ForgotPassword(email);
-		if (error) {
-			formErr = error.message;
-			return;
-		}
-
-		formMsg = data.message;
-		email = '';
-		formErr = '';
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					forgotPwdMessage = 'email sent to reset password';
+					isLoading = false;
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+				default:
+					await update();
+			}
+			isLoading = false;
+		};
 	};
 
 	const handleSignInSubmit: SubmitFunction = () => {
@@ -219,52 +228,37 @@
 		{/if}
 
 		{#if showForgotPasswordForm}
-			<form method="POST" id="reset_password">
+			<form method="POST" action="?/forgot_password" use:enhance={handleForgotPassword}>
 				<div class="mt-4">
 					{#if !formMsg}
-						<div class="flex items-center px-2">
-							<label for="reset_password" class="block text-sm font-semibold text-gray-800">
+						<div class="flex flex-col items-start px-2">
+							<label for="reset_password" class="block text-base font-semibold text-slate-700">
 								Email
 							</label>
+							<span class="text-xs text-slate-500">we will send you an email to reset your password</span>
 						</div>
 
 						<Textfield
-							onInput={(e) => validateEmail(e)}
-							name="reset_password"
+							errors={$page.form?.errors?.email}
+							name="email"
 							bind:value={email}
-							placeholder="Email"
 						/>
-						{#if emailErr}
-							<div class="w-full pt-1 text-center capitalize">
-								<span class="text-center text-xs font-semibold uppercase text-red-600">
-									{emailErr}
-								</span>
-							</div>
-						{/if}
 					{/if}
 				</div>
-
-				{#if formErr}
-					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-red-600">
-							{formErr}
+				{#if $page.form?.formErrors && $page.form?.formErrors.length}
+					<div class="w-full pt-1 text-center">
+						<span class="text-center text-xs font-semibold capitalize text-red-600">
+							{$page.form?.formErrors[0]}
 						</span>
 					</div>
 				{/if}
 
-				{#if formMsg}
-					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-green-600">
-							{formMsg}
-						</span>
+				<div class="mt-4 flex flex-col w-full justify-center gap-3">
+					<div class="flex w-full justify-center items-center gap-5">
+						<ButtonSolid disabled={!!emailErr} {isLoading}>Submit</ButtonSolid>
+						<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
 					</div>
-				{/if}
-
-				<div class="mt-4 flex w-full justify-center space-x-5">
-					<ButtonSolid disabled={!!emailErr} on:click={handleForgotPassword} {isLoading}>
-						Submit
-					</ButtonSolid>
-					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
+					<span class=" text-emerald-700">{forgotPwdMessage}</span>
 				</div>
 			</form>
 		{/if}
@@ -272,7 +266,7 @@
 			<span
 				on:click={toggleSignUpForm}
 				on:keypress={toggleSignUpForm}
-				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase 
+				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase
 				text-slate-700 no-underline antialiased hover:underline"
 			>
 				sign up
@@ -281,7 +275,7 @@
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
-				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700 
+				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700
 				antialiased hover:underline"
 			>
 				Forgot password?

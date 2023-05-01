@@ -146,7 +146,7 @@
 									<label for="password" class="block text-sm font-semibold text-gray-800">
 										Password
 									</label>
-									<span class="px-2 text-xs text-brown-800">
+									<span class="px-2 text-xs text-slate-800">
 										(min. 8 alphanumeric special characters)
 									</span>
 								</div>

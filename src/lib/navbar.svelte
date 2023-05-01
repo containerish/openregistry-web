@@ -14,15 +14,17 @@
 		openSignUpModal = false;
 		openSignInModal = !openSignInModal;
 	};
+
 	const toggleSignUp = () => {
 		openSignInModal = false;
 		openSignUpModal = !openSignUpModal;
 	};
+	console.log('signin', openSignInModal);
 </script>
 
 <header class="sticky top-0 z-50 bg-primary-50">
 	<nav class="px-16 pt-3 pb-2 max-w-[2500px] mx-auto">
-		<div class="flex w-full items-center justify-between ">
+		<div class="flex w-full items-center justify-between">
 			<IconButton
 				on:keyup={() => goto('/')}
 				on:click={() => goto('/')}
@@ -70,7 +72,7 @@
 							</IconButton>
 						</MenuItem>
 						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={toggleSignIn}>Sign In</IconButton>
+							<IconButton on:click={closeSignIn}>Sign In</IconButton>
 						</MenuItem>
 					</div>
 				</Menu>

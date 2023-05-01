@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
-	import UserIcon from '$lib/icons/user.svelte';
 	import { ProfileIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import ButtonSolid from '$lib/button-solid.svelte';
@@ -12,6 +10,8 @@
 	import { required, max, min, matchField } from 'svelte-forms/validators';
 	import type { PageData } from './$types';
 	import Textfield from '$lib/textfield.svelte';
+	import { page } from '$app/stores';
+	import { applyAction, type SubmitFunction, enhance } from '$app/forms';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
@@ -24,17 +24,34 @@
 		type: undefined
 	};
 
-	const resetPassword = async () => {
-		const { error, data } = await auth.ResetPassword($currentPassword.value, $newPassword.value);
-		if (error) {
-			formResp.message = error.message;
-			formResp.type = 'error';
-			return;
-		}
+	let isResetPasswordLoading = false;
+	let resetPwdResponse = '';
+	const resetPasswordSubmit: SubmitFunction = async () => {
+		isResetPasswordLoading = true;
 
-		formResp.type = undefined;
-		formResp.message = data.message;
-		passwordForm.reset();
+		return async ({ result, update }) => {
+			console.log('page data in reset', $page.form);
+			console.log('result in reset', result);
+			switch (result.type) {
+				case 'success':
+					await update();
+					resetPwdResponse = result.data?.message;
+					isResetPasswordLoading = false;
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+				default:
+					await update();
+			}
+			isResetPasswordLoading = false;
+		};
 	};
 </script>
 
@@ -86,54 +103,63 @@
 			</Card>
 
 			<Card>
-				<div
-					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
-					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
+				<form
+					action="?/reset_password"
+					method="POST"
+					class="w-full flex justify-center"
+					use:enhance={resetPasswordSubmit}
 				>
-					<h1 class="text-lg lg:text-xl font-medium text-slate-600">Change Password</h1>
-					<Textfield
-						placeholder="current password"
-						type="password"
-						class="max-w-[450px]"
-						bind:value={$currentPassword.value}
-					/>
-					<Textfield
-						placeholder="new password"
-						type="password"
-						class="max-w-[450px]"
-						bind:value={$newPassword.value}
-					/>
-					<div />
-					<input
-						type="password"
-						bind:value={$confirmPassword.value}
-						class="form-control m-0 block w-full max-w-[450px] rounded-md border border-solid border-primary-100
-						bg-white bg-clip-padding px-3 py-2 lg:py-3.5 text-sm lg:text-base font-normal text-slate-700 placeholder-slate-500 
-						transition ease-in-out focus:text-slate-700
-          				{!$passwordForm.hasError('confirm_password.match_field')
-							? 'focus:border-priamry-200 focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-40'
-							: 'border-red-800 outline-none ring ring-red-700 ring-opacity-40'} "
-						placeholder="confirm password"
-					/>
-					{#if $passwordForm.hasError('current_password.required')}
-						<span class="text-red-700">Error - Current Password is a required field</span>
-					{/if}
-					{#if $passwordForm.hasError('new_password.required')}
-						<span class="text-red-700">Error - New Password is a required field</span>
-					{/if}
-					{#if $passwordForm.hasError('new_password.min')}
-						<span class="text-red-700">Error - New Password can not be shorter than 8 chars</span>
-					{/if}
-					{#if $passwordForm.hasError('confirm_password.match_field')}
-						<span class="text-red-700">Error - passwords don't match</span>
-					{/if}
-					{#if formResp.message}
-						<span class={!formResp.type ? 'text-green-600' : 'text-red-600'}>
-							{formResp.message}
-						</span>
-					{/if}
-					<ButtonSolid class="mt-6" on:click={resetPassword}>Save</ButtonSolid>
-				</div>
+					<div
+						class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
+					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
+					>
+						<h1 class="text-lg lg:text-xl font-medium text-slate-600 mb-3">Change Password</h1>
+						<div class="w-full">
+							<Textfield
+								errors={$page.form?.errors?.currentPassword}
+								name="currentPassword"
+								type="password"
+								class="max-w-[450px]"
+								bind:value={$currentPassword.value}
+								label="Current password"
+							/>
+						</div>
+
+						<div class="w-full">
+							<Textfield
+								errors={$page.form?.errors?.newPassword}
+								name="newPassword"
+								type="password"
+								class="max-w-[450px]"
+								bind:value={$newPassword.value}
+								label="New password"
+							/>
+						</div>
+						<div class="w-full">
+							<Textfield
+								errors={$page.form?.errors?.confirmPassword}
+								name="confirmPassword"
+								type="password"
+								class="max-w-[450px]"
+								bind:value={$confirmPassword.value}
+								label="Confirm password"
+							/>
+						</div>
+
+						<div />
+						{#if $page.form?.formErrors && $page.form?.formErrors.length}
+							<div class="w-full">
+								<span class="text-xs font-semibold capitalize text-red-600">
+									{$page.form?.formErrors[0]}
+								</span>
+							</div>
+						{/if}
+						<div class="flex justify-start items-center gap-3 w-full">
+							<ButtonSolid class="mt-6" isLoading={isResetPasswordLoading}>Save</ButtonSolid>
+							<span class="pt-3 text-emerald-600">{resetPwdResponse}</span>
+						</div>
+					</div>
+				</form>
 			</Card>
 
 			<Card>
