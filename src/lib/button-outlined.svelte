@@ -1,10 +1,12 @@
 <script lang="ts">
 	export let isLoading = false;
 	export let disabled = false;
+	export let buttonType = 'button'
 	import { twMerge } from 'tailwind-merge';
 </script>
 
 <button
+	type={buttonType}
 	aria-label="secondary button"
 	{disabled}
 	on:click|preventDefault

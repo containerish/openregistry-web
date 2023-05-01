@@ -1,5 +1,5 @@
 import { SignInSchema } from '$lib/formSchemas';
-import type { SigninRequestType } from '$lib/types';
+import type { SigninRequestType } from '$lib/types/user';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/public';

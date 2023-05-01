@@ -15,6 +15,7 @@
 		openSignUpModal = false;
 		openSignInModal = !openSignInModal;
 	};
+
 	const toggleSignUp = () => {
 		openSignInModal = false;
 		openSignUpModal = !openSignUpModal;

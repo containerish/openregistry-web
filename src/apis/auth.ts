@@ -207,43 +207,6 @@ export class Auth extends HttpClient {
 		return resp;
 	};
 
-	public Login = async (email: string, password: string): Promise<AxiosResponse> => {
-		const path = '/signin';
-
-		if (!email || !password) {
-			return Promise.reject('email/password cannot be empty');
-		}
-		const body = { email, password };
-		const resp = await this.http.post(path, body);
-
-		return resp;
-	};
-
-	public Signup = async (
-		username: string,
-		email: string,
-		password: string
-	): Promise<AxiosResponse> => {
-		const path = '/signup';
-		if (!email || !password) {
-			return Promise.reject('email/password cannot be empty');
-		}
-		const body = {
-			username: username,
-			email: email,
-			password: password
-		};
-		const resp = await this.http.post(path, body);
-		return resp;
-	};
-
-	public Signout = async (): Promise<AxiosResponse> => {
-		const path = `/signout`;
-
-		const resp = await this.http.delete(path);
-		return resp;
-	};
-
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	public GetUserWithSession = async (sessionId: string) => {
 		if (!sessionId) throw new Error('session is empty');

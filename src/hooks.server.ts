@@ -6,6 +6,7 @@ import { createPromiseClient } from '@bufbuild/connect';
 import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kon/github_actions/v1/build_logs_connect';
 import { sequence } from '@sveltejs/kit/hooks';
 import { env } from '$env/dynamic/public';
+import { OpenRegistryClient } from '$lib/client/openregistry';
 
 export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
@@ -48,4 +49,15 @@ export const isProtectedRoute = (route: string): boolean => {
 	);
 };
 
-export const handle = sequence(authenticationHandler, createProtobufClient);
+export const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) => {
+	const client = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, event.fetch);
+	event.locals.openRegistry = client;
+	// these are throwing POJO errors
+	return await resolve(event);
+};
+
+export const handle = sequence(
+	authenticationHandler,
+	createProtobufClient,
+	setOpenRegistryClientHandler
+);
