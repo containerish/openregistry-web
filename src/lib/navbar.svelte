@@ -19,7 +19,6 @@
 		openSignInModal = false;
 		openSignUpModal = !openSignUpModal;
 	};
-	console.log('signin', openSignInModal);
 </script>
 
 <header class="sticky top-0 z-50 bg-primary-50">

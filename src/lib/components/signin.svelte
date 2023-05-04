@@ -14,6 +14,7 @@
 
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { env } from '$env/dynamic/public';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
@@ -90,34 +91,48 @@
 	};
 
 	const webAuthnSignIn = async (e: SubmitEvent) => {
-		const formdata = Object.fromEntries(new FormData(e.target as HTMLFormElement));
-
 		isLoading = true;
 
-		try {
-			const body = WebAuthnSignInSchema.parse(formdata);
-			const username = body.username;
-			const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
-			if (error) {
-				isLoading = false;
-				webAuthnForm.formErrors = [error.message];
-				return;
-			}
+		const openRegistry = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, fetch);
+		const { message, error } = await openRegistry.webAuthnLogin(
+			new FormData(e.target as HTMLFormElement)
+		);
+		console.log('response:', error, message);
 
+		if (error) {
 			isLoading = false;
-
-			if (status === 200) {
-				goto('/repositories', { invalidateAll: true });
-				return;
-			}
-		} catch (err) {
-			if (err instanceof ZodError) {
-				isLoading = false;
-				const zError = err.flatten();
-				webAuthnForm.fieldErrors = zError.fieldErrors;
-				webAuthnForm.formErrors = [...zError.formErrors];
-			}
+			webAuthnForm.formErrors = [error.message];
+			return;
 		}
+
+		isLoading = false;
+
+		goto('/repositories', { invalidateAll: true });
+		return;
+		// try {
+		// 	const body = WebAuthnSignInSchema.parse(formdata);
+		// 	const username = body.username;
+		// 	const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
+		// 	if (error) {
+		// 		isLoading = false;
+		// 		webAuthnForm.formErrors = [error.message];
+		// 		return;
+		// 	}
+
+		// 	isLoading = false;
+
+		// 	if (status === 200) {
+		// 		goto('/repositories', { invalidateAll: true });
+		// 		return;
+		// 	}
+		// } catch (err) {
+		// 	if (err instanceof ZodError) {
+		// 		isLoading = false;
+		// 		const zError = err.flatten();
+		// 		webAuthnForm.fieldErrors = zError.fieldErrors;
+		// 		webAuthnForm.formErrors = [...zError.formErrors];
+		// 	}
+		// }
 	};
 </script>
 
@@ -235,14 +250,12 @@
 							<label for="reset_password" class="block text-base font-semibold text-slate-700">
 								Email
 							</label>
-							<span class="text-xs text-slate-500">we will send you an email to reset your password</span>
+							<span class="text-xs text-slate-500"
+								>we will send you an email to reset your password</span
+							>
 						</div>
 
-						<Textfield
-							errors={$page.form?.errors?.email}
-							name="email"
-							bind:value={email}
-						/>
+						<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
 					{/if}
 				</div>
 				{#if $page.form?.formErrors && $page.form?.formErrors.length}
