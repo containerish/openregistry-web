@@ -60,7 +60,6 @@
 
 	let showModal = false;
 	const toggleModal = () => {
-		console.log('came here');
 		showModal = !showModal;
 	};
 

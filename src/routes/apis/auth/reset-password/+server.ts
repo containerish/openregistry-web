@@ -8,7 +8,6 @@ export const POST: RequestHandler = async ({ fetch, cookies, request }) => {
 	let body: ResetPasswordType;
 	try {
 		body = ResetPasswordSchema.parse(await request.json());
-		console.log('body from reser pwd', body);
 		const url = new URL('/auth/reset-password', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		const response = await fetch(url, {
 			method: 'POST',

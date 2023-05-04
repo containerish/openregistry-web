@@ -25,13 +25,11 @@ export const load = (async (event) => {
 
 			if (setupResp.status !== 202) {
 				const resp = await setupResp.json();
-				console.log('resp in erorr: ', resp);
 				throw error(400, {
 					message: resp.error
 				});
 			}
 		} catch (err) {
-			console.log('error in gijtihb api: ', err);
 			throw error(err?.status, {
 				message: err?.body.message as string
 			});

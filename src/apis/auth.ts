@@ -103,6 +103,7 @@ export class Auth extends HttpClient {
 	}
 
 	public WebAuthNBeginRegister = async (username: string, email: string) => {
+		console.log('username - %s email - %s', username, email);
 		if (!supported()) {
 			return {
 				error: 'Browser does not support WebAuthN'
@@ -152,28 +153,6 @@ export class Auth extends HttpClient {
 
 	public VerifyEmail = async (token: string): Promise<AxiosResponse> => {
 		const path = `/signup/verify?token=${token}`;
-
-		const resp = this.http.get(path);
-		return resp;
-	};
-
-	public ResetPassword = async (
-		oldPassword: string,
-		newPassword: string
-	): Promise<AxiosResponse> => {
-		const path = `/reset-password`;
-
-		const body = {
-			old_password: oldPassword,
-			new_password: newPassword
-		};
-
-		const resp = this.http.post(path, body);
-		return resp;
-	};
-
-	public ForgotPassword = async (email: string): Promise<AxiosResponse> => {
-		const path = `/forgot-password?email=${email}`;
 
 		const resp = this.http.get(path);
 		return resp;

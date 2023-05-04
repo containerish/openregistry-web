@@ -32,8 +32,6 @@
 		isResetPasswordLoading = true;
 
 		return async ({ result, update }) => {
-			console.log('page data in reset', $page.form);
-			console.log('result in reset', result);
 			switch (result.type) {
 				case 'success':
 					await update();
