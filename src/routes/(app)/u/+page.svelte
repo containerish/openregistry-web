@@ -59,46 +59,49 @@
 </svelte:head>
 
 {#if data.user}
-	<div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
+	<div class="w-full max-w-[2000px] flex flex-col">
 		<div
-			class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
+			class="flex flex-col items-center lg:flex-row lg:items-end py-20 px-9 lg:px-20 gap-8 bg-primary-50"
 		>
-			<div class="flex items-center">
-				<ProfileIcon class="h-11 w-11 lg:h-16 lg:w-16 text-slate-600" />
+			<div class="flex">
+				<img src="/user.png" alt="Profile" width="90px" />
 			</div>
-			<div class="flex flex-col w-64 justify-center">
-				<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-700">
-					{data.user.name ? data.user.name : data.user.username}
-				</span>
-				<div class="flex items-center gap-1">
-					<ProfileIcon class="h-5 w-5 text-slate-600" />
-					<span class="text-sm lg:text-base text-slate-600">Community User</span>
-				</div>
-			</div>
-			<div class="flex flex-col">
-				<a
-					class="text-base lg:text-lg font-medium text-primary-500 underline-offset-4"
-					href="/settings"><u>Edit Profile</u></a
-				>
-				<span class="mt-3 text-xs lg:text-base text-slate-600">
-					Joined
-					<span>
-						{new Date(data.user.created_at).toDateString()}
+			<div class="flex flex-col gap-3 items-center lg:items-start">
+				<div class="flex items-center gap-9">
+					<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-600">
+						{data.user.name ? data.user.name : data.user.username}
 					</span>
-				</span>
+					<a class="text-base text-primary-400 underline-offset-4 lg:mt-2" href="/settings"
+						><u>Edit Profile</u></a
+					>
+				</div>
+				<div class="flex items-center gap-9">
+					<div class="flex items-center">
+						<ProfileIcon class="h-4 w-4 text-slate-500 fill-current" />
+						<span class="text-sm lg:text-base text-slate-500">Community User</span>
+					</div>
+					<span class=" text-sm text-slate-600">
+						Joined
+						<span>
+							{new Date(data.user.created_at).toDateString()}
+						</span>
+					</span>
+				</div>
 			</div>
 		</div>
 
 		<div
 			class="flex gap-5 min-w-max items-start justify-items-center bg-primary-50
-			px-3 lg:px-16 mb-10 border-t-0 border-2 border-primary-100 mx-3"
+			px-3 lg:px-16 mb-10 border-b-2 border-primary-100"
 		>
 			<button
 				aria-label="tab for repositories"
 				on:click={toggleRepo}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
-				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
-          {isRepo ? 'border-b-primary-500' : 'border-b-transparent'}
+				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-4
+				border-transparent text-base lg:text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+          {isRepo
+					? 'border-b-primary-400 text-primary-500 font-medium'
+					: 'border-b-transparent text-slate-600'}
           "
 			>
 				Repositories
@@ -107,9 +110,11 @@
 			<button
 				aria-label="tab for starred repositories"
 				on:click={toggleStarred}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
-				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
-          {isStarred ? 'border-b-primary-500' : 'border-b-transparent'}
+				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-4
+				border-transparent text-base lg:text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+          {isStarred
+					? 'border-b-primary-400 text-primary-500 font-medium'
+					: 'border-b-transparent text-slate-600'}
           "
 			>
 				Starred
@@ -118,9 +123,11 @@
 			<button
 				aria-label="tab for contributed repositories"
 				on:click={toggleisContrib}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
-				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
-          {isContrib ? 'border-b-primary-500' : 'border-b-transparent'}
+				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-4
+				border-transparent text-base lg:text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+          {isContrib
+					? 'border-b-primary-400 text-primary-500 font-medium'
+					: 'border-b-transparent text-slate-600'}
           "
 			>
 				Contributed

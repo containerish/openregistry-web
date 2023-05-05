@@ -53,12 +53,12 @@
 		const { error } = await support.CreateNewTicket(body, subject, email);
 		isLoading = false;
 		if (error) {
-			ticketResponse = `<span class="text-red-700 font-semibold">${error}</span>`;
+			ticketResponse = `<span class="text-rose-700 font-semibold">${error}</span>`;
 			console.error('error: ', error);
 			return;
 		}
 
-		ticketResponse = `<span class="text-green-700 font-semibold">Ticket Created Successfully</span>`;
+		ticketResponse = `<span class="text-emerald-700 font-semibold">Ticket Created Successfully</span>`;
 	};
 </script>
 

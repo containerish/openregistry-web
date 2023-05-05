@@ -239,7 +239,7 @@
 
 					{#if $page.form?.formErrors && $page.form?.formErrors.length}
 						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-red-600">
+							<span class="text-center text-xs font-semibold uppercase text-rose-600">
 								{$page.form?.formErrors[0]}
 							</span>
 						</div>
@@ -291,7 +291,7 @@
 					</div>
 					{#if $page.form?.formErrors && $page.form?.formErrors.length}
 						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-red-600">
+							<span class="text-center text-xs font-semibold uppercase text-rose-600">
 								{$page.form?.formErrors[0]}
 							</span>
 						</div>
@@ -306,10 +306,13 @@
 		{:else}
 			<div class="flex h-full w-full flex-col items-center justify-start gap-4">
 				<div id="confetti">
-					<CheckIcon class="h-24 w-24 text-primary-500" />
+					<CheckIcon class="h-24 w-24 text-emerald-600" />
 				</div>
-				<span class="text-lg capitalize text-primary-500">{successMessage}</span>
-				<div class="flex w-full flex-row items-center justify-center gap-2 px-4 text-center">
+				<span class="text-lg capitalize text-slate-700">{successMessage}</span>
+				<span class="text-sm text-slate-700 antialiased"
+					>Please check you inbox and verify your email before signing in</span
+				>
+				<div class="flex w-full flex-row items-center justify-center gap-3 px-4 text-center">
 					<ButtonSolid on:click={toggleSignInForm}>Sign In</ButtonSolid>
 					<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
 				</div>

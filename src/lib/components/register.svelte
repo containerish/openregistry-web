@@ -7,7 +7,7 @@
 	export let isLoading = false;
 </script>
 
-<div class="bg-red-900 z-[10000000] p-8 h-full w-full">
+<div class="bg-rose-900 z-[10000000] p-8 h-full w-full">
 	<form class="my-8 w-full">
 		<Textfield />
 		<Button />

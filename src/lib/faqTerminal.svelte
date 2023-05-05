@@ -45,9 +45,9 @@
 		subpixel-antialiased bg-primary-50 pb-6 pt-4 rounded-sm leading-normal overflow-hidden border border-primary-100"
 	>
 		<div class="top mb-2 flex">
-			<div class="h-3 w-3 bg-red-500 rounded-full" />
+			<div class="h-3 w-3 bg-rose-500 rounded-full" />
 			<div class="ml-2 h-3 w-3 bg-orange-300 rounded-full" />
-			<div class="ml-2 h-3 w-3 bg-green-500 rounded-full" />
+			<div class="ml-2 h-3 w-3 bg-emerald-500 rounded-full" />
 		</div>
 		<div class="mt-4 flex" />
 		<span id="typewriter" class="font-jetbrains-mono" />

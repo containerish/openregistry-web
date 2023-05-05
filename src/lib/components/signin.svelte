@@ -172,7 +172,7 @@
 
 				{#if $page.form?.formErrors && $page.form?.formErrors.length}
 					<div class="w-full pt-1 text-center">
-						<span class="text-center text-xs font-semibold capitalize text-red-600">
+						<span class="text-center text-xs font-semibold capitalize text-rose-600">
 							{$page.form?.formErrors[0]}
 						</span>
 					</div>
@@ -204,7 +204,7 @@
 
 				{#if webAuthnForm?.formErrors && webAuthnForm?.formErrors.length > 0}
 					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-red-600">
+						<span class="text-center text-xs font-semibold uppercase text-rose-600">
 							{webAuthnForm.formErrors[0]}
 						</span>
 					</div>
@@ -236,7 +236,7 @@
 						/>
 						{#if emailErr}
 							<div class="w-full pt-1 text-center capitalize">
-								<span class="text-center text-xs font-semibold uppercase text-red-600">
+								<span class="text-center text-xs font-semibold uppercase text-rose-600">
 									{emailErr}
 								</span>
 							</div>
@@ -246,7 +246,7 @@
 
 				{#if formErr}
 					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-red-600">
+						<span class="text-center text-xs font-semibold uppercase text-rose-600">
 							{formErr}
 						</span>
 					</div>
@@ -254,7 +254,7 @@
 
 				{#if formMsg}
 					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-green-600">
+						<span class="text-center text-xs font-semibold uppercase text-emerald-600">
 							{formMsg}
 						</span>
 					</div>
