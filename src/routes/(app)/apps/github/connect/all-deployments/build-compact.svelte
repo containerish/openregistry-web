@@ -21,7 +21,7 @@
 		<ExternalLinkIcon class="h-4 w-4 text-primary-400" />
 	</div>
 	<div class="flex gap-2 items-center">
-		<Check class="h-4 w-4 text-green-600" />
+		<Check class="h-4 w-4 text-emerald-600" />
 		<span class="text-sm text-slate-600">just now</span>
 	</div>
 	<a href="#" class=" underline text-sm">view details</a>

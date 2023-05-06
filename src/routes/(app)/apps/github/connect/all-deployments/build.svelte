@@ -4,8 +4,8 @@
 
 <!-- the values are added just for design purposes, must cahnge them with dynamic values once APIs are in place -->
 <div
-	class="flex flex-col bg-white rounded-sm  min-h-max border-2 border-primary-100 my-6 
-	border-l-4 border-l-green-600 border-opacity-100 shadow-2xl gap-3 px-6 py-6"
+	class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100 my-6
+	border-l-4 border-l-emerald-600 border-opacity-100 shadow-2xl gap-3 px-6 py-6"
 >
 	<div class="flex justify-between">
 		<span class="text-lg text-slate-700">Production</span>
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="flex gap-2 items-center">
-			<Check class="h-5 w-5 text-green-600" />
+			<Check class="h-5 w-5 text-emerald-600" />
 			<span class="text-sm text-slate-600">Just now</span>
 			<a href="#" class="underline text-sm">view details</a>
 		</div>

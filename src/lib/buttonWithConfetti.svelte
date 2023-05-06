@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import CheckIcon from './icons/checkIcon.svelte';
 	import confetti from 'canvas-confetti';
 
@@ -12,5 +12,5 @@
 </script>
 
 <div id="confetti">
-	<CheckIcon class="h-32 w-32 text-green-600" />
+	<CheckIcon class="h-32 w-32 text-emrald-600" />
 </div>

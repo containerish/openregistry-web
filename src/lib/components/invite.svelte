@@ -57,7 +57,7 @@
 			</div>
 			{#if respMsg}
 				<div class="w-full text-center pt-1">
-					<span class={statusCode > 299 ? 'text-red-600' : 'text-brown-800'}>{respMsg}</span>
+					<span class={statusCode > 299 ? 'text-rose-600' : 'text-slate-700'}>{respMsg}</span>
 				</div>
 			{/if}
 			<div class="flex pt-4 w-full space-x-5 justify-center">

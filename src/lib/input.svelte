@@ -14,7 +14,7 @@
 	 border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-500"
 />
 <div class="w-full pt-1 capitalize text-center">
-	<span class="text-xs font-semibold text-center text-red-600 uppercase">
+	<span class="text-xs font-semibold text-center text-rose-600 uppercase">
 		{error}
 	</span>
 </div>

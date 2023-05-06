@@ -26,7 +26,7 @@
 					difference in operations of OpenRegistry than any other popular container registries like
 					GHCR or Dockerhub. The best part is, OpenRegistry is decentralised since it uses
 					<a
-						class="text-red-700 text-lg font-semibold"
+						class="text-rose-700 text-lg font-semibold"
 						href="https://akash.network/"
 						target="_blank"
 						rel="noreferrer"

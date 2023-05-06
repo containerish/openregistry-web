@@ -159,7 +159,7 @@
 								/>
 								{#if passwordErr}
 									<div class="w-full pt-1 text-center capitalize">
-										<span class="text-center text-xs font-semibold uppercase text-red-600">
+										<span class="text-center text-xs font-semibold uppercase text-rose-600">
 											{passwordErr}
 										</span>
 									</div>
@@ -180,7 +180,7 @@
 								/>
 								{#if confirmPasswordErr}
 									<div class="w-full pt-1 text-center capitalize">
-										<span class="text-center text-xs font-semibold uppercase text-red-600">
+										<span class="text-center text-xs font-semibold uppercase text-rose-600">
 											{confirmPasswordErr}
 										</span>
 									</div>
@@ -189,7 +189,7 @@
 
 							{#if formErr}
 								<div class="w-full pt-1 text-center capitalize">
-									<span class="text-center text-xs font-semibold uppercase text-red-600">
+									<span class="text-center text-xs font-semibold uppercase text-rose-600">
 										{formErr}
 									</span>
 								</div>
@@ -197,13 +197,13 @@
 
 							{#if formMsg}
 								<div class="w-full pt-1 text-center capitalize">
-									<span class="text-center text-xs font-semibold uppercase text-green-600">
+									<span class="text-center text-xs font-semibold uppercase text-emerald-600">
 										{formMsg}
 									</span>
 								</div>
 								<div class="w-full pt-1 text-center capitalize">
 									<span
-										class="animate-pulse text-center text-xs font-semibold uppercase text-green-600"
+										class="animate-pulse text-center text-xs font-semibold uppercase text-emerald-600"
 									>
 										Redirecting you back to Sign In Page
 									</span>

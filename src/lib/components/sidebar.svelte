@@ -283,7 +283,7 @@
 					<Carousel>
 						<Advert
 							link="https://akash.network"
-							class="hover:bg-red-600"
+							class="hover:bg-rose-600"
 							logo="/akash-logo.svg"
 							body="Infrastructure that powers web3 for cloud compute akash network is a distributed
 								peer-to-peer marketplace for cloud compute"
