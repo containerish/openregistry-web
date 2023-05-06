@@ -7,7 +7,14 @@ import {
 	WebAuthnSignInSchema,
 	WebAuthnSignUpSchema
 } from '$lib/formSchemas';
-import type { WebAuthnSignUpType } from '$lib/types/webauthn';
+import type {
+	WebAuthnBeginLoginResponseType,
+	WebAuthnBeginRegisterResponseType,
+	WebAuthnError,
+	WebAuthnFinishLoginResponseType,
+	WebAuthnFinishRegisterResponseType,
+	WebAuthnSignUpType
+} from '$lib/types/webauthn';
 import {
 	supported,
 	get,
@@ -15,7 +22,8 @@ import {
 	parseCreationOptionsFromJSON,
 	type CredentialCreationOptionsJSON,
 	type CredentialRequestOptionsJSON,
-	parseRequestOptionsFromJSON
+	parseRequestOptionsFromJSON,
+	type RegistrationPublicKeyCredential
 } from '@github/webauthn-json/browser-ponyfill';
 import { fail, type Cookies, error, json } from '@sveltejs/kit';
 import { ZodError } from 'zod';
@@ -24,31 +32,6 @@ import { parse, splitCookiesString } from 'set-cookie-parser';
 type OpenRegistryGenericError = {
 	message: string;
 	error: string;
-};
-
-type WebAuthnError = {
-	code: number;
-	error: Error;
-	message: string;
-};
-
-type WebAuthnRegisterResponse = {
-	options: CredentialCreationOptionsJSON;
-	error?: WebAuthnError;
-};
-
-type WebAuthnBeginLoginResponse = {
-	options: CredentialRequestOptionsJSON;
-	error?: WebAuthnError;
-};
-
-type WebAuthnLoginResponse = {
-	message: string;
-	error?: WebAuthnError;
-};
-
-type OpenRegistryAuthError = OpenRegistryGenericError & {
-	code: number;
 };
 
 export class OpenRegistryClient {
@@ -255,10 +238,12 @@ export class OpenRegistryClient {
 		}
 	}
 
-	async webAuthnBeginRegister(body: WebAuthnSignUpType): Promise<WebAuthnRegisterResponse> {
+	async webAuthnBeginRegister(
+		body: WebAuthnSignUpType
+	): Promise<WebAuthnBeginRegisterResponseType> {
 		try {
 			const url = new URL(
-				'/auth/webaauthn/registration/begin',
+				'/auth/webauthn/registration/begin',
 				env.PUBLIC_OPEN_REGISTRY_BACKEND_URL
 			);
 			const response = await this.fetcher(url, {
@@ -266,77 +251,62 @@ export class OpenRegistryClient {
 				body: JSON.stringify(body)
 			});
 
-			if (response.status !== 200) {
+			if (!response.ok) {
 				const data = (await response.json()) as OpenRegistryGenericError;
 				return {
-					error: {
-						code: response.status,
-						error: new Error(data.error),
-						message: data.message
-					}
-				} as WebAuthnRegisterResponse;
+					error: { code: response.status, message: data.message }
+				};
 			}
-			const data = (await response.json()) as WebAuthnRegisterResponse;
-			const options = data.options;
-			return {
-				options
-			} as WebAuthnRegisterResponse;
+			return (await response.json()) as WebAuthnBeginRegisterResponseType;
 		} catch (err) {
 			return {
-				error: {
-					code: 500,
-					error: err as Error,
-					message: (err as Error).message
-				}
-			} as WebAuthnRegisterResponse;
+				error: { code: 500, message: (err as Error).message }
+			};
 		}
 	}
 
 	async webAuthnFinishRegister(
 		username: string,
 		credentialCreationOpts: CredentialCreationOptionsJSON
-	) {
+	): Promise<WebAuthnFinishRegisterResponseType> {
 		const options = parseCreationOptionsFromJSON(credentialCreationOpts);
 		const url = new URL('/auth/webauthn/registration/finish', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		url.searchParams.set('username', username);
+		let body: RegistrationPublicKeyCredential;
+		try {
+			body = await create(options);
+		} catch (err) {
+			return {
+				error: { code: 400, message: (err as Error).message }
+			};
+		}
 
-		const body = await create(options);
 		const response = await this.fetcher(url, {
 			method: 'POST',
 			body: JSON.stringify(body)
 		});
-		const data = await response.json();
-		console.log('data in finishregister: ', data);
-		return response;
+
+		const data = (await response.json()) as { message: string };
+		if (!response.ok) {
+			return {
+				error: { code: response.status, message: data.message }
+			};
+		}
+		return {
+			message: data.message
+		};
 	}
 
-	async webAuthnRegister(fd: FormData) {
-		const formData = Object.fromEntries(fd);
-		const body = WebAuthnSignUpSchema.parse(formData);
+	async webAuthnRegister(body: WebAuthnSignUpType): Promise<WebAuthnFinishRegisterResponseType> {
 		const { error, options } = await this.webAuthnBeginRegister(body);
 		if (error) {
-			if (error.error instanceof ZodError) {
-				const { fieldErrors, formErrors } = error.error.flatten();
-				return fail(400, {
-					errors: fieldErrors,
-					fieldErrors: fieldErrors,
-					formErrors: formErrors,
-					data: body
-				});
-			}
-
-			return fail(500, {
-				errors: [error.error],
-				formErrors: error.message,
-				data: body
-			});
+			return { error };
 		}
-
-		const finishResponse = await this.webAuthnFinishRegister(body.username, options);
+		const finishResponse = await this.webAuthnFinishRegister(body.username, options!);
 		return finishResponse;
 	}
 
-	async webAuthBeginLogin(username: string) {
+	async webAuthBeginLogin(username: string): Promise<WebAuthnBeginLoginResponseType> {
 		try {
 			const url = new URL('/auth/webauthn/login/begin', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 			url.searchParams.set('username', username);
@@ -346,29 +316,25 @@ export class OpenRegistryClient {
 				return {
 					error: {
 						code: response.status,
-						error: new Error(data.error),
 						message: data.message
 					}
-				} as WebAuthnBeginLoginResponse;
+				};
 			}
-			const data = (await response.json()) as WebAuthnBeginLoginResponse;
-			const options = data.options;
-			return { options } as WebAuthnBeginLoginResponse;
+			return (await response.json()) as WebAuthnBeginLoginResponseType;
 		} catch (err) {
 			return {
 				error: {
 					code: 500,
-					error: err as Error,
 					message: (err as Error).message
 				}
-			} as WebAuthnBeginLoginResponse;
+			};
 		}
 	}
 
-	async webAauthFinishLogin(
+	async webAuthFinishLogin(
 		username: string,
 		credentialRequestOptions: CredentialRequestOptionsJSON
-	) {
+	): Promise<WebAuthnFinishLoginResponseType> {
 		const options = parseRequestOptionsFromJSON(credentialRequestOptions);
 		const credentials = await get(options);
 		const url = new URL('/auth/webauthn/login/finish', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
@@ -381,57 +347,31 @@ export class OpenRegistryClient {
 		if (!response.ok) {
 			const data = (await response.json()) as OpenRegistryGenericError;
 			return {
-				code: response.status,
-				error: new Error(data.error),
-				message: data.message
-			} as WebAuthnError;
+				error: {
+					code: response.status,
+					message: data.message
+				}
+			};
 		}
-		const cookieList = parse(splitCookiesString(response.headers.get('set-cookie')!), {
-			silent: true,
-			decodeValues: true
-		});
-		console.log('respionse headers', cookieList, response.headers.get('set-cookie'));
-		const data = (await response.json()) as { message: string };
-		return data;
+
+		return (await response.json()) as { message: string };
 	}
 
-	async webAuthnLogin(fd: FormData): Promise<WebAuthnLoginResponse> {
+	async webAuthnLogin(username: string): Promise<WebAuthnFinishLoginResponseType> {
 		if (!supported()) {
 			return {
 				error: {
-					error: new Error('Browser does not support WebAuthN')
+					code: 400,
+					message: 'Browser does not support WebAuthN'
 				}
-			} as WebAuthnLoginResponse;
+			};
 		}
-		const formdata = Object.fromEntries(fd);
-		try {
-			const user = WebAuthnSignInSchema.parse(formdata);
-			const { error, options } = await this.webAuthBeginLogin(user.username);
-			if (error) {
-				throw error;
-			}
-			const finishResponse = await this.webAauthFinishLogin(user.username, options);
-			return finishResponse;
-		} catch (err) {
-			const werror = err as WebAuthnError;
-			// if (werror.error instanceof ZodError) {
-			// const { fieldErrors, formErrors } = werror.error.flatten();
-			return {
-				error: {
-					error: err as Error,
-					message: (err as Error).message
-				}
-				// errors: fieldErrors,
-				// fieldErrors: fieldErrors,
-				// formErrors: formErrors,
-				// data: formdata
-			} as WebAuthnLoginResponse;
-			// }
-			// return {
-			// 	errors: [werror.error],
-			// 	formErrors: werror.message,
-			// 	data: formdata
-			// };
+
+		const { error, options } = await this.webAuthBeginLogin(username);
+		if (error) {
+			return error;
 		}
+		const finishResponse = await this.webAuthFinishLogin(username, options!);
+		return finishResponse;
 	}
 }

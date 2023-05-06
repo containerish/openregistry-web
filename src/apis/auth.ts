@@ -102,54 +102,54 @@ export class Auth extends HttpClient {
 		super(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth');
 	}
 
-	public WebAuthNBeginRegister = async (username: string, email: string) => {
-		console.log('username - %s email - %s', username, email);
-		if (!supported()) {
-			return {
-				error: 'Browser does not support WebAuthN'
-			};
-		}
+	// public WebAuthNBeginRegister = async (username: string, email: string) => {
+	// 	console.log('username - %s email - %s', username, email);
+	// 	if (!supported()) {
+	// 		return {
+	// 			error: 'Browser does not support WebAuthN'
+	// 		};
+	// 	}
 
-		const body = { username, email };
-		const path = 'webauthn/registration/begin';
-		const { error, data, status } = await this.http.post(path, body);
-		if (status !== 200) {
-			return { error, data, status };
-		}
+	// 	const body = { username, email };
+	// 	const path = 'webauthn/registration/begin';
+	// 	const { error, data, status } = await this.http.post(path, body);
+	// 	if (status !== 200) {
+	// 		return { error, data, status };
+	// 	}
 
-		const options = (data as { options: CredentialCreationOptionsJSON }).options;
-		const finishResponse = await this.WebAuthNFinishRegister(username, options);
-		return finishResponse;
-	};
+	// 	const options = (data as { options: CredentialCreationOptionsJSON }).options;
+	// 	const finishResponse = await this.WebAuthNFinishRegister(username, options);
+	// 	return finishResponse;
+	// };
 
-	public WebAuthNFinishRegister = async (
-		username: string,
-		credentialCreationOptions: CredentialCreationOptionsJSON
-	) => {
-		const options = parseCreationOptionsFromJSON(credentialCreationOptions);
-		const path = `/webauthn/registration/finish?username=${username}`;
-		const response = await create(options);
-		return await this.http.post(path, response);
-	};
+	// public WebAuthNFinishRegister = async (
+	// 	username: string,
+	// 	credentialCreationOptions: CredentialCreationOptionsJSON
+	// ) => {
+	// 	const options = parseCreationOptionsFromJSON(credentialCreationOptions);
+	// 	const path = `/webauthn/registration/finish?username=${username}`;
+	// 	const response = await create(options);
+	// 	return await this.http.post(path, response);
+	// };
 
-	public WebAuthNBeginLogin = async (username: string) => {
-		if (!supported()) {
-			return {
-				error: 'Browser does not support WebAuthN'
-			};
-		}
-		const path = `/webauthn/login/begin?username=${username}`;
-		const { error, data, status } = await this.http.get(path);
-		if (status !== 200) {
-			return { error, data, status };
-		}
-		const options = (data as { options: CredentialRequestOptionsJSON }).options;
-		const requestOptions = parseRequestOptionsFromJSON(options);
-		const credential = await get(requestOptions);
-		const finishLoginPath = `/webauthn/login/finish?username=${username}`;
-		const finishLoginResp = await this.http.post(finishLoginPath, credential);
-		return finishLoginResp;
-	};
+	// public WebAuthNBeginLogin = async (username: string) => {
+	// 	if (!supported()) {
+	// 		return {
+	// 			error: 'Browser does not support WebAuthN'
+	// 		};
+	// 	}
+	// 	const path = `/webauthn/login/begin?username=${username}`;
+	// 	const { error, data, status } = await this.http.get(path);
+	// 	if (status !== 200) {
+	// 		return { error, data, status };
+	// 	}
+	// 	const options = (data as { options: CredentialRequestOptionsJSON }).options;
+	// 	const requestOptions = parseRequestOptionsFromJSON(options);
+	// 	const credential = await get(requestOptions);
+	// 	const finishLoginPath = `/webauthn/login/finish?username=${username}`;
+	// 	const finishLoginResp = await this.http.post(finishLoginPath, credential);
+	// 	return finishLoginResp;
+	// };
 
 	public VerifyEmail = async (token: string): Promise<AxiosResponse> => {
 		const path = `/signup/verify?token=${token}`;

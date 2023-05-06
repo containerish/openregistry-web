@@ -89,3 +89,4 @@ export const WebAuthnSignUpSchema = z.object({
 export const WebAuthnSignInSchema = z.object({
 	username: UsernameSchema
 });
+
