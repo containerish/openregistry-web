@@ -92,47 +92,30 @@
 
 	const webAuthnSignIn = async (e: SubmitEvent) => {
 		isLoading = true;
+		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
-		const openRegistry = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, fetch);
-		const { message, error } = await openRegistry.webAuthnLogin(
-			new FormData(e.target as HTMLFormElement)
-		);
-		console.log('response:', error, message);
-
-		if (error) {
+		try {
+			const body = WebAuthnSignInSchema.parse(formData);
+			const username = body.username;
+			const openRegistry = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, fetch);
+			const { message, error } = await openRegistry.webAuthnLogin(username);
+			if (error) {
+				webAuthnForm.formErrors = [error.message];
+				isLoading = false;
+				return;
+			}
 			isLoading = false;
-			webAuthnForm.formErrors = [error.message];
+			goto('/repositories', { invalidateAll: true });
 			return;
+		} catch (err) {
+			if (err instanceof ZodError) {
+				isLoading = false;
+				const zError = err.flatten();
+				webAuthnForm.fieldErrors = zError.fieldErrors;
+				webAuthnForm.formErrors = [...zError.formErrors];
+				return;
+			}
 		}
-
-		isLoading = false;
-
-		goto('/repositories', { invalidateAll: true });
-		return;
-		// try {
-		// 	const body = WebAuthnSignInSchema.parse(formdata);
-		// 	const username = body.username;
-		// 	const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
-		// 	if (error) {
-		// 		isLoading = false;
-		// 		webAuthnForm.formErrors = [error.message];
-		// 		return;
-		// 	}
-
-		// 	isLoading = false;
-
-		// 	if (status === 200) {
-		// 		goto('/repositories', { invalidateAll: true });
-		// 		return;
-		// 	}
-		// } catch (err) {
-		// 	if (err instanceof ZodError) {
-		// 		isLoading = false;
-		// 		const zError = err.flatten();
-		// 		webAuthnForm.fieldErrors = zError.fieldErrors;
-		// 		webAuthnForm.formErrors = [...zError.formErrors];
-		// 	}
-		// }
 	};
 </script>
 

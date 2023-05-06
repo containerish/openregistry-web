@@ -13,6 +13,8 @@
 	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import { env } from '$env/dynamic/public';
 
 	var count = 200;
 	var defaults = {
@@ -93,36 +95,30 @@
 
 	const webAuthNSignup = async (e: SubmitEvent) => {
 		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
-
 		isLoading = true;
 		try {
 			const body = WebAuthnSignUpSchema.parse(formData);
-			const username = body.username;
-			const email = body.email;
-
-			setTimeout(async () => {
-				const { error, status, data } = await auth.WebAuthNBeginRegister(username, email);
-				if (error || status !== 200) {
-					console.error('error signup: ', status, error);
-					webAuthnForm.formErrors = [error.message];
-					isLoading = false;
-					return;
-				}
-
+			const client = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, fetch);
+			const { message, error } = await client.webAuthnRegister(body);
+			if (error) {
+				webAuthnForm.formErrors = [error.message];
 				isLoading = false;
-				showSuccessMsg = true;
-				successMessage = data.message;
-				throwSomeConfetti();
-				throwSomeConfetti();
-			}, 1000);
+				return;
+			}
+			successMessage = message!;
 		} catch (err) {
 			if (err instanceof ZodError) {
 				isLoading = false;
 				const zError = err.flatten();
 				webAuthnForm.fieldErrors = zError.fieldErrors;
 				webAuthnForm.formErrors = [...zError.formErrors];
+				return;
 			}
 		}
+		isLoading = false;
+		showSuccessMsg = true;
+		throwSomeConfetti();
+		throwSomeConfetti();
 	};
 
 	const validateUsername = (e: any) => {
@@ -289,10 +285,10 @@
 							name="email"
 						/>
 					</div>
-					{#if $page.form?.formErrors && $page.form?.formErrors.length}
-						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-red-600">
-								{$page.form?.formErrors[0]}
+					{#if webAuthnForm.formErrors && webAuthnForm.formErrors.length > 0}
+						<div class="w-full pt-1 text-center">
+							<span class="text-center text-rose-600">
+								{webAuthnForm.formErrors[0]}
 							</span>
 						</div>
 					{/if}
