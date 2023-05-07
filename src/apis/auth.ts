@@ -50,19 +50,6 @@ export interface UserPayload {
 	id: number;
 }
 
-export interface User {
-	created_at: Date;
-	updated_at: Date;
-	uuid: string;
-	name: string;
-	username: string;
-	email: string;
-	is_active: boolean;
-	sessionId: string;
-	hireable: boolean;
-	html_url: string;
-}
-
 const regexp = new RegExp(
 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
@@ -126,26 +113,6 @@ export class Auth extends HttpClient {
 		};
 		const resp = await this.http.post(path, body);
 		return resp;
-	};
-
-	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-	public GetUserWithSession = async (sessionId: string) => {
-		if (!sessionId) throw new Error('session is empty');
-		try {
-			const path = `/sessions/me`;
-			const resp = await this.http.get(path, {
-				headers: {
-					cookie: `session_id=${sessionId}`
-				}
-			});
-			return resp;
-		} catch (err) {
-			return {
-				error: err,
-				status: 400,
-				data: undefined
-			};
-		}
 	};
 
 	public LoginWithGithub = () => {

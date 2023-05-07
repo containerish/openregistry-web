@@ -1,11 +1,11 @@
-import type { User } from '$apis/auth';
+import type { OpenRegistryUserType } from '$lib/types/user';
 import { OpenRegistryClient } from '$lib/client/openregistry';
 
 declare global {
 	/// <refrence types="@sveltejs/kit">
 	declare namespace App {
 		interface PageData {
-			user: User;
+			user: OpenRegistryUserType | null;
 			authenticated: boolean;
 			error?: Error;
 			showMenu?: boolean;
@@ -16,7 +16,7 @@ declare global {
 		}
 		interface Locals {
 			openRegistry: OpenRegistryClient;
-			user: User | null;
+			user: OpenRegistryUserType | null;
 			authenticated: boolean;
 			isRouteProtected: boolean;
 			sessionId: string | null;

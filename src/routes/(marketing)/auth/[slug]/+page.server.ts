@@ -1,12 +1,4 @@
-import { Auth } from '$apis/auth';
-import type { PageServerLoadEvent } from './$types';
-import * as cookie from 'cookie';
-
-/** @type {import('./$types').PageServerLoad} */
-export async function load(loadEvent: PageServerLoadEvent) {
-	const auth = new Auth();
-	const { request, params, url } = loadEvent;
-
+export async function load({ params, locals, cookies, url }) {
 	let serverErr = url.searchParams.get('error');
 	const serverErrStatus = url.searchParams.get('status');
 
@@ -29,20 +21,18 @@ export async function load(loadEvent: PageServerLoadEvent) {
 		};
 	}
 
-	const cookies = cookie.parse(request.headers.get('cookie') || '');
-	const { data, error, status } = await auth.GetUserWithSession(cookies['session_id']);
-
-	if (error) {
+	const user = await locals.openRegistry.getUserBySession(cookies.get('session_id') ?? '');
+	if (!user) {
 		return {
 			slug: params.slug,
-			status: status,
-			error: JSON.stringify(error.message),
+			status: 401,
+			error: 'user not authenticated',
 			authenticated: false
 		};
 	}
 
 	return {
-		user: data,
+		user: user,
 		authenticated: true,
 		slug: params.slug
 	};

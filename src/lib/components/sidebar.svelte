@@ -13,7 +13,7 @@
 		ToolsIcon
 	} from '$lib/icons';
 	import Logo from './logo.svelte';
-	import type { User } from '$apis/auth';
+	import type { OpenRegistryUserType } from '$lib/types/user';
 	import Advert from '../advert.svelte';
 	import Carousel from './carousel.svelte';
 	import Invite from './invite.svelte';
@@ -50,7 +50,7 @@
 		let timer = 0;
 	};
 
-	export let user: User;
+	export let user: OpenRegistryUserType;
 
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
