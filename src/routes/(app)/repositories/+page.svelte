@@ -6,17 +6,18 @@
 	import { NewRepository, Repository, Pulse } from '$lib/components';
 	import type { PageData } from './$types';
 	import type { Catalog } from '$apis/registry';
-	import type { User } from '$apis/auth';
+	import type { OpenRegistryUserType } from '$lib/types/user';
 	import { navigating } from '$app/stores';
 	import { pulseStore } from '$lib/components/pulse';
 	import { page } from '$app/stores';
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
-	const u: User = data.user;
+	export let catalog: Catalog;
+	// catalog = data.repositories;
+	const u: OpenRegistryUserType | null = data.user;
 
 	const pageSize = 10;
-	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
@@ -51,7 +52,6 @@
 	let showTooltip = false;
 
 	setContext('fetchPageData', fetchPageData);
-
 	onMount(async () => {
 		await fetchPageData();
 	});

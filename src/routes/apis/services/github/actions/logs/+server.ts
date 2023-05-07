@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit';
 import type { ZodError } from 'zod';
 import { createConnectTransport } from '@bufbuild/connect-web';
 import { createPromiseClient } from '@bufbuild/connect';
-import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kone/github_actions/v1/build_logs_connect';
+import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kon/github_actions/v1/build_logs_connect';
 import { env } from '$env/dynamic/public';
 
 export const POST = (async ({ locals, request }) => {

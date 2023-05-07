@@ -98,7 +98,7 @@
 		isLoading = true;
 		try {
 			const body = WebAuthnSignUpSchema.parse(formData);
-			const client = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, fetch);
+			const client = new OpenRegistryClient(fetch);
 			const { message, error } = await client.webAuthnRegister(body);
 			if (error) {
 				webAuthnForm.formErrors = [error.message];

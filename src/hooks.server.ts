@@ -1,9 +1,8 @@
 import { session } from './stores/session';
-import { Auth } from '$apis/auth';
 import { redirect, type Handle } from '@sveltejs/kit';
 import { createConnectTransport } from '@bufbuild/connect-web';
 import { createPromiseClient } from '@bufbuild/connect';
-import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kone/github_actions/v1/build_logs_connect';
+import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kon/github_actions/v1/build_logs_connect';
 import { sequence } from '@sveltejs/kit/hooks';
 import { env } from '$env/dynamic/public';
 import { OpenRegistryClient } from '$lib/client/openregistry';
@@ -13,12 +12,11 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 
 	const sessionId = cookies.get('session_id');
 	if (sessionId && (!locals.user || !locals.authenticated)) {
-		const auth = new Auth();
-		const { data, error, status } = await auth.GetUserWithSession(sessionId);
-		if (data) {
-			session.setUser(data);
+		const user = await locals.openRegistry.getUserBySession(sessionId);
+		if (user) {
+			session.setUser(user);
 			session.setIsAuthenticated(true);
-			locals.user = data;
+			locals.user = user;
 			locals.authenticated = true;
 			locals.sessionId = sessionId;
 		}
@@ -50,14 +48,14 @@ export const isProtectedRoute = (route: string): boolean => {
 };
 
 export const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) => {
-	const client = new OpenRegistryClient(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL, event.fetch);
+	const client = new OpenRegistryClient(event.fetch);
 	event.locals.openRegistry = client;
 	// these are throwing POJO errors
 	return await resolve(event);
 };
 
 export const handle = sequence(
+	setOpenRegistryClientHandler,
 	authenticationHandler,
-	createProtobufClient,
-	setOpenRegistryClientHandler
+	createProtobufClient
 );

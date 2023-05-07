@@ -1,16 +1,14 @@
 import { env } from '$env/dynamic/public';
 import {
 	ForgotPasswordSchema,
+	OpenRegistryUserSchema,
 	ResetPasswordSchema,
 	SignInSchema,
 	SignUpSchema,
-	WebAuthnSignInSchema,
-	WebAuthnSignUpSchema
 } from '$lib/formSchemas';
 import type {
 	WebAuthnBeginLoginResponseType,
 	WebAuthnBeginRegisterResponseType,
-	WebAuthnError,
 	WebAuthnFinishLoginResponseType,
 	WebAuthnFinishRegisterResponseType,
 	WebAuthnSignUpType
@@ -25,9 +23,9 @@ import {
 	parseRequestOptionsFromJSON,
 	type RegistrationPublicKeyCredential
 } from '@github/webauthn-json/browser-ponyfill';
-import { fail, type Cookies, error, json } from '@sveltejs/kit';
+import { fail, type Cookies, error } from '@sveltejs/kit';
 import { ZodError } from 'zod';
-import { parse, splitCookiesString } from 'set-cookie-parser';
+import type { OpenRegistryUserType } from '$lib/types/user';
 
 type OpenRegistryGenericError = {
 	message: string;
@@ -35,11 +33,9 @@ type OpenRegistryGenericError = {
 };
 
 export class OpenRegistryClient {
-	private readonly apiEndpoint: string;
 	private fetcher: typeof fetch;
 
-	constructor(apiEndpoint: string, fetcher: typeof fetch) {
-		this.apiEndpoint = apiEndpoint;
+	constructor(fetcher: typeof fetch) {
 		this.fetcher = fetcher;
 	}
 
@@ -235,6 +231,21 @@ export class OpenRegistryClient {
 				formErrors: fetchError.message,
 				data: formData
 			});
+		}
+	}
+
+	async getUserBySession(sessionId: string): Promise<OpenRegistryUserType | null> {
+		try {
+			const uri = new URL('/auth/sessions/me', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+			const response = await this.fetcher(uri, {
+				headers: {
+					'cookie': `session_id=${sessionId}`,
+				},
+			});
+			return OpenRegistryUserSchema.parse(await response.json());
+		} catch (err) {
+			console.warn('error getting user from session: ', err);
+			return null
 		}
 	}
 
