@@ -4,8 +4,8 @@
 
 <svg
 	aria-label="mongo db"
-	width="140"
-	height="50"
+	width="120"
+	height="40"
 	viewBox="0 0 1102 278"
 	fill="none"
 	class={twMerge('', $$props.class)}

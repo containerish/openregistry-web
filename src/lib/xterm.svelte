@@ -78,9 +78,9 @@
 
 <div class="w-full h-full px-4">
 	<div
-		class="coding min-h-[700px] inverse-toggle px-5 text-gray-100 text-sm font-mono
-		subpixel-antialiased pb-6 pt-4 rounded-sm leading-normal overflow-hidden
-		bg-primary-700 shadow-4xl shadow-blue-200"
+		class="coding min-h-[700px] w-[400px] md:w-[700px] inverse-toggle px-6 text-gray-100 text-sm font-mono
+		subpixel-antialiased pb-6 pt-4 rounded-sm leading-normal overflow-hidden 
+		bg-primary-700 shadow-4xl shadow-indigo-200"
 	>
 		<div class="top mb-2 flex">
 			<div class="h-3 w-3 bg-rose-500 rounded-full" />
@@ -88,6 +88,6 @@
 			<div class="ml-2 h-3 w-3 bg-emerald-500 rounded-full" />
 		</div>
 		<div class="mt-4 flex" />
-		<span id="typewriter" class="font-jetbrains-mono text-white text-lg" />
+		<span id="typewriter" class="font-jetbrains-mono text-white text-base break-words" />
 	</div>
 </div>
