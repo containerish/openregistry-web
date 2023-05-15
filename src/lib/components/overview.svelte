@@ -6,17 +6,19 @@
 
 <Card class="bg-primary-50 py-12">
 	<div class="w-full h-full flex flex-col gap-20 max-w-[1500px]">
-		<div class="px-6 md:px-9 w-full flex justify-start gap-6 items-center flex-col md:flex-row my-3">
-			<div class="w-80 md:w-fit max-w-lg">
+		<div
+			class="px-6 md:px-9 w-full flex justify-between gap-6 items-center flex-col md:flex-row my-3"
+		>
+			<div class="w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
 				</picture>
 			</div>
-			<div class="w-full mx-8 flex justify-center flex-col max-w-md">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
 				<span class=" text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Overview
 				</span>
-				<p class="text-sm lg:text-base text-slate-700">
+				<p class="lg:text-lg text-slate-700">
 					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
 					Specification and has received an official certification from OCI. This means there is no
 					difference in operations of OpenRegistry than any other popular container registries like
@@ -56,11 +58,11 @@
 			</div>
 		</div>
 		<div class="px-6 w-full flex justify-between items-center flex-col-reverse md:flex-row my-2">
-			<div class="w-full mx-8 flex justify-center flex-col max-w-md">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
 				<span class="text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Collaborations
 				</span>
-				<p class="text-sm lg:text-base text-slate-700">
+				<p class="lg:text-lg text-slate-700">
 					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
 					use. We are open to collaborations with projects that share similar vision and can be
 					integrated together to serve larger audience. Simply contribute to OpenRegistry by helping
@@ -94,7 +96,7 @@
 					</IconButton>
 				</div>
 			</div>
-			<div class="w-80 md:w-fit max-w-lg">
+			<div class="w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="/collaboration.svg" alt="Collaborations" width="600px" />
 				</picture>
@@ -102,17 +104,17 @@
 		</div>
 		<!-- <div class="px-6 w-full flex justify-between items-center flex-col-reverse md:flex-row my-2"> -->
 		<div class="px-6 w-full flex justify-between gap-6 items-center flex-col md:flex-row">
-			<div class="w-80 md:w-fit max-w-lg">
+			<div class="w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="man-arrow-up.svg" alt="Storage" width="600px" />
 				</picture>
 			</div>
-			<div class="w-full mx-8 flex justify-center flex-col max-w-md">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
 				<span class="text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Web 3.0 Infrastructure
 				</span>
 
-				<p class="text-sm lg:text-base text-slate-700">
+				<p class="lg:text-lg text-slate-700">
 					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
 					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
 					at OpenRegistry believe in dWorld full of dApps. With our initiative, we want to make

@@ -10,5 +10,4 @@
 <Hero />
 <HowToIntro />
 <Overview />
-<Steps/>
 <HighLevelArchitecture />
