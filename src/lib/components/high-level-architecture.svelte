@@ -12,7 +12,7 @@
 			High Level Architecture
 		</span>
 
-		<p class="text-center text-base lg:text-lg font-normal leading-normal text-slate-800">
+		<p class="text-center lg:text-lg font-normal leading-normal text-slate-800">
 			The following diagram tries to depict the high level architecture of OpenRegistry. We are
 			hosted on Akash dCloud and the container images are stored on decentralised storage systems
 			like IPFS. OpenRegistry is designed as a pluggable platform to adapt to any modern
@@ -35,7 +35,7 @@
 			</IconButton>
 		</div>
 	</div>
-	<div class="w-11/12 max-w-[2300px]">
+	<div class=" w-11/12 max-w-[1000px]">
 		<picture>
 			<img
 				class="w-full"

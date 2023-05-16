@@ -3,7 +3,7 @@ import { Auth } from '$apis/auth';
 import { redirect, type Handle } from '@sveltejs/kit';
 import { createConnectTransport } from '@bufbuild/connect-web';
 import { createPromiseClient } from '@bufbuild/connect';
-import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kone/github_actions/v1/build_logs_connect';
+import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kon/github_actions/v1/build_logs_connect';
 import { sequence } from '@sveltejs/kit/hooks';
 import { env } from '$env/dynamic/public';
 
