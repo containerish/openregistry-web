@@ -71,10 +71,10 @@
 		"vitest": "^0.29.2"
 	},
 	"dependencies": {
-		"@buf/containerish_openregistry.bufbuild_connect-es": "0.8.4-20230402150944-827c654c9df4.1",
-		"@buf/containerish_openregistry.bufbuild_connect-web": "0.8.4-20230402150944-827c654c9df4.1",
-		"@bufbuild/connect": "^0.8.4",
-		"@bufbuild/connect-web": "^0.8.4",
+		"@buf/containerish_openregistry.bufbuild_connect-es": "0.8.6-20230508153720-e2b8153918c9.1",
+		"@buf/containerish_openregistry.bufbuild_connect-web": "0.8.6-20230508153720-e2b8153918c9.1",
+		"@bufbuild/connect": "^0.8.6",
+		"@bufbuild/connect-web": "^0.8.6",
 		"@bufbuild/protobuf": "^1.2.0",
 		"@lukeed/uuid": "^2.0.0",
 		"@octokit/types": "^9.0.0",
