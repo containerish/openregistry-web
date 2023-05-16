@@ -11,8 +11,11 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
 
 	const sessionId = cookies.get('session_id');
+	console.log('session id in hooks: ', sessionId);
+	console.log('cookies id in hooks: ', cookies.getAll());
 	if (sessionId && (!locals.user || !locals.authenticated)) {
 		const user = await locals.openRegistry.getUserBySession(sessionId);
+		console.log('user id in hooks: ', user);
 		if (user) {
 			session.setUser(user);
 			session.setIsAuthenticated(true);
@@ -43,7 +46,9 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 
 export const isProtectedRoute = (route: string): boolean => {
 	return (
-		route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps')
+		route.startsWith('/settings') ||
+		route.startsWith('/repositories') ||
+		route.startsWith('/apps')
 	);
 };
 

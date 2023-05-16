@@ -242,7 +242,10 @@ export class OpenRegistryClient {
 					cookie: `session_id=${sessionId}`
 				}
 			});
-			return OpenRegistryUserSchema.parse(await response.json());
+			const data = await response.json();
+			console.log('status in getUserBySession: ', response.status);
+			console.log('data in getUserBySession: ', data);
+			return OpenRegistryUserSchema.parse(data);
 		} catch (err) {
 			console.warn('error getting user from session: ', err);
 			return null;
@@ -281,7 +284,10 @@ export class OpenRegistryClient {
 		credentialCreationOpts: CredentialCreationOptionsJSON
 	): Promise<WebAuthnFinishRegisterResponseType> {
 		const options = parseCreationOptionsFromJSON(credentialCreationOpts);
-		const url = new URL('/auth/webauthn/registration/finish', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const url = new URL(
+			'/auth/webauthn/registration/finish',
+			env.PUBLIC_OPEN_REGISTRY_BACKEND_URL
+		);
 		url.searchParams.set('username', username);
 		let body: RegistrationPublicKeyCredential;
 		try {
