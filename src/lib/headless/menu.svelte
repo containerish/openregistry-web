@@ -9,13 +9,13 @@
 		<MenuButton
 			aria-label="menu button"
 			class="px-2 transition ease-in-out duration-200
-		flex justify-center space-x-2 items-center border-2 rounded font-medium text-primary-400 bg-transparent 
-		border-primary-200 tracking-wide min-w-[120px] h-12 text-base hover:shadow-primary-100 
+		flex justify-center space-x-2 items-center border-2 rounded font-medium text-primary-400 bg-slate-50 
+		border-primary-200 tracking-wide min-w-[120px] h-11 text-base hover:shadow-primary-100 
 		hover:shadow-3xl"
 		>
-			<div class="flex font-semibold text-primary-400 gap-2">
+			<div class="flex font-semibold text-primary-400 gap-2 items-center">
 				{title}
-				<SortIcon class="h-6 w-6 text-primary-400" />
+				<SortIcon class="h-5 w-5 text-primary-400" />
 			</div>
 		</MenuButton>
 	</div>
