@@ -80,12 +80,13 @@ export class Auth extends HttpClient {
 		super(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth');
 	}
 
-	public VerifyEmail = async (token: string): Promise<AxiosResponse> => {
-		const path = `/signup/verify?token=${token}`;
+	// public VerifyEmail = async (token: string): Promise<AxiosResponse> => {
+	// 	const path = `/signup/verify?token=${token}`;
 
-		const resp = this.http.get(path);
-		return resp;
-	};
+	// 	const resp = this.http.get(path);
+	// 	return resp;
+
+	// };
 
 	public ForgotPasswordCallback = async (
 		newPassword: string,

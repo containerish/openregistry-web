@@ -1,3 +1,6 @@
+import { redirect } from '@sveltejs/kit';
+
+/* eslint-disable no-case-declarations */
 export async function load({ params, locals, cookies, url }) {
 	let serverErr = url.searchParams.get('error');
 	const serverErrStatus = url.searchParams.get('status');
@@ -19,6 +22,24 @@ export async function load({ params, locals, cookies, url }) {
 			},
 			authenticated: false
 		};
+	}
+
+	switch (params.slug) {
+		case 'verify':
+			// const { error } = await auth.VerifyEmail(token);
+			// if (error) {
+			// 	console.error('error in verifyEmail: ', error);
+			// 	showErrorModal = true;
+			// 	formErr = error.message;
+			// 	return;
+			// }
+
+			const response = await locals.openRegistry.verifyEmail(url.searchParams.get('token') ?? '');
+			if (response.status !== 200) {
+				console.log('verify email response');
+				return;
+			}
+			throw redirect(307, '/repositories');
 	}
 
 	const user = await locals.openRegistry.getUserBySession(cookies.get('session_id') ?? '');
