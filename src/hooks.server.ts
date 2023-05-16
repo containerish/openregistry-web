@@ -11,9 +11,14 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
 
 	const sessionId = cookies.get('session_id');
+	console.log('cookies in hook: ', cookies);
+	console.log('session id cookie in hook: ', sessionId);
 	if (sessionId && (!locals.user || !locals.authenticated)) {
 		const auth = new Auth();
 		const { data, error, status } = await auth.GetUserWithSession(sessionId);
+		console.log('user from session: ', data);
+		console.log('error from session: ', error);
+		console.log('status from session: ', status);
 		if (data) {
 			session.setUser(data);
 			session.setIsAuthenticated(true);
@@ -44,7 +49,9 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 
 export const isProtectedRoute = (route: string): boolean => {
 	return (
-		route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps')
+		route.startsWith('/settings') ||
+		route.startsWith('/repositories') ||
+		route.startsWith('/apps')
 	);
 };
 

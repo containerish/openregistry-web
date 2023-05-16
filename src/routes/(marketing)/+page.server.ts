@@ -20,10 +20,12 @@ export const actions: Actions = {
 			const user = SignInSchema.parse(formData);
 			const response = await fetch('/apis/auth/signin', {
 				method: 'POST',
-				body: JSON.stringify(user)
+				body: JSON.stringify(user),
+				credentials: 'include'
 			});
 			const data = await response.json();
 			if (response.status === 200) {
+				console.log('response: ', data);
 				throw redirect(303, '/repositories');
 			} else {
 				return fail(response.status, {
@@ -68,7 +70,7 @@ export const actions: Actions = {
 			}
 
 			throw error(400, {
-				message: JSON.stringify(await resp.json())
+				message: JSON.stringify(await response.json())
 			});
 		} catch (err) {
 			return fail(400, {
