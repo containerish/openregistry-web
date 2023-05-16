@@ -72,16 +72,16 @@
 		class="z-10 font-normal text-center absolute bg-transparent
 		rounded text-base items-center justify-center pl-4 pt-3"
 	>
-		<Search class="text-primary-400" />
+		<Search class="text-primary-400 w-5 h-5" />
 	</span>
 	<input
 		aria-label="autocomplete"
 		on:input={handleOnChange}
 		type="search"
-		class="placeholder-slate-500 form-control block w-full px-3 py-3 text-base
+		class="placeholder-slate-500 form-control block w-full px-3 py-2 text-base
 		font-normal text-slate-700 bg-white bg-clip-padding border-solid border-primary-100
-		transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-primary-200
-		focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500 disabled:text-slate-400 pl-12"
+		transition ease-in-out m-0 focus:text-gray-700 focus:bg-slate-50 border rounded-md focus:border-primary-200
+		focus:ring-opacity-50 focus:outline-none focus:ring focus:ring-primary-50 disabled:text-slate-400 pl-12"
 	/>
 
 	{#if !showItems && catalog.repositories === null && searchQuery !== ''}
