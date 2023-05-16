@@ -1,5 +1,5 @@
 import { SignInSchema } from '$lib/formSchemas';
-import type { SigninRequestType } from '$lib/types';
+import type { SigninRequestType } from '$lib/types/user';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/public';
@@ -15,7 +15,8 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
 	const url = new URL('/auth/signin', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 	const response = await fetch(url, {
 		body: JSON.stringify(body),
-		method: 'POST'
+		method: 'POST',
+		credentials: 'include'
 	});
 
 	if (response.status !== 200) {
@@ -37,6 +38,9 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
 			expires: cookie.expires
 		});
 	});
+
+	console.log('header cookies: ', cookieList);
+	console.log('all cookies: ', cookies.getAll());
 	return json(await response.json(), { status: 200 });
 };
 
