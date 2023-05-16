@@ -4,7 +4,7 @@ import {
 	OpenRegistryUserSchema,
 	ResetPasswordSchema,
 	SignInSchema,
-	SignUpSchema,
+	SignUpSchema
 } from '$lib/formSchemas';
 import type {
 	WebAuthnBeginLoginResponseType,
@@ -239,13 +239,13 @@ export class OpenRegistryClient {
 			const uri = new URL('/auth/sessions/me', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 			const response = await this.fetcher(uri, {
 				headers: {
-					'cookie': `session_id=${sessionId}`,
-				},
+					cookie: `session_id=${sessionId}`
+				}
 			});
 			return OpenRegistryUserSchema.parse(await response.json());
 		} catch (err) {
 			console.warn('error getting user from session: ', err);
-			return null
+			return null;
 		}
 	}
 
@@ -384,5 +384,48 @@ export class OpenRegistryClient {
 		}
 		const finishResponse = await this.webAuthFinishLogin(username, options!);
 		return finishResponse;
+	}
+
+	async verifyEmail(token: string) {
+		const url = new URL('/auth/signup/verify', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		url.searchParams.set('token', token);
+
+		const response = await this.fetcher(url);
+		const data = await response.json();
+		console.log('response from verify email', data);
+		return data;
+	}
+
+	async sendInvites(emails: string) {
+		const url = new URL('/auth/send-email/welcome', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const body = {
+			emails: emails
+		};
+		const response = await this.fetcher(url, {
+			body: JSON.stringify(body),
+			method: 'POST'
+		});
+		const data = await response.json();
+		console.log('response from send invites', data);
+		return data;
+	}
+
+	async forgotPasswordCallback(newPassword: string, token: string) {
+		const url = new URL('/auth/reset-forgotten-password', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const body = {
+			new_password: newPassword
+		};
+
+		const response = await this.fetcher(url, {
+			method: 'POST',
+			body: JSON.stringify(body),
+			headers: {
+				Authorization: 'Bearer' + token
+			}
+		});
+
+		const data = await response.json();
+		console.log('response from reset forgotten password api', data);
+		return data;
 	}
 }
