@@ -68,7 +68,8 @@
 		"tslib": "^2.5.2",
 		"typescript": "^5.0.4",
 		"vite": "^4.3.8",
-		"vitest": "^0.31.1"
+		"vitest": "^0.31.1",
+		"typescript-svelte-plugin": "^0.3.25"
 	},
 	"dependencies": {
 		"@buf/containerish_openregistry.bufbuild_connect-es": "0.9.0-20230508153720-e2b8153918c9.1",

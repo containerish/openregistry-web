@@ -40,7 +40,7 @@
 		return await response.json();
 	};
 
-	let extended: Boolean = true;
+	let extended = true;
 
 	const handleSidebar = () => {
 		extended = !extended;
