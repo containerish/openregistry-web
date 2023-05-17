@@ -14,6 +14,9 @@
 
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { env } from '$env/dynamic/public';
+	import IconButton from '$lib/icon-button.svelte';
+	import PlainCross from '$lib/icons/plain-cross.svelte';
+	import ArrowL from '$lib/icons/arrow-l.svelte';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
@@ -116,35 +119,44 @@
 	<title>Sign in | OpenRegistry</title>
 </svelte:head>
 
-<div class="mx-auto flex w-full max-w-sm overflow-hidden">
-	<div class="flex w-full flex-col px-3 py-3">
-		<div class="pb-8 pt-4 flex justify-center">
+<div class="mx-auto flex w-full max-w-[320px] overflow-hidden">
+	<div class="flex w-full flex-col px-2 py-4 gap-6">
+		<!-- <div class="pb-8 pt-4 flex justify-center">
 			<Logo type="dark" />
-		</div>
+		</div> -->
 
-		<ButtonOutlined
+		<!-- <ButtonOutlined
 			on:click={() =>
 				window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
 		>
-			<GithubIcon class="text-black mr-2 h-8 w-8" />
+			<GithubIcon class="text-slate-800 mr-2 h-8 w-8" />
 			Sign in with Github
-		</ButtonOutlined>
-		<div class="mt-4" />
+		</ButtonOutlined> -->
 
 		{#if !showForgotPasswordForm && !isWebAuthN}
-			<ButtonOutlined on:click={handleIsWebAuthn}>
-				<FingerprintIcon class="text-black mr-2" />
+			<!-- <ButtonOutlined on:click={handleIsWebAuthn}>
+				<FingerprintIcon class="text-slate-800 mr-2" />
 				Sign in using Security key
-			</ButtonOutlined>
+			</ButtonOutlined> -->
 
-			<div class="mt-4 flex items-center justify-between">
+			<!-- <div class="mt-4 flex items-center justify-between">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
 				<span class="text-center text-xs lg:text-sm capitalize text-slate-600">
 					or sign in with email
 				</span>
 				<span class="w-1/5 border-b lg:w-1/4" />
+			</div> -->
+			<div class="flex justify-start items-center gap-3">
+				<img src="/logo-new.png" alt="logo" width="40px" />
+				<div class="flex flex-col">
+					<span class="text-start text-primary-500 text-3xl font-semibold"> Log in to your account </span>
+					<IconButton class="m-0 p-0" on:click={toggleSignInForm}>
+						<PlainCross class="w-6 h-6 absolute top-0 right-0 m-2 text-primary-400" />
+					</IconButton>
+				</div>
 			</div>
+
 			<form
 				class="mt-2 flex flex-col gap-4"
 				method="POST"
@@ -179,18 +191,46 @@
 				{/if}
 
 				<div class="mt-4 flex w-full justify-center space-x-5">
-					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
-					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
+					<ButtonSolid class="w-full" {isLoading}>Sign In</ButtonSolid>
+					<!-- <ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined> -->
 				</div>
+
+				<ButtonOutlined on:click={handleIsWebAuthn}>
+					<FingerprintIcon class="text-slate-800 mr-2" />
+					Sign in using Security key
+				</ButtonOutlined>
+				<ButtonOutlined
+					on:click={() =>
+						window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
+				>
+					<GithubIcon class="text-slate-800 mr-2 h-7 w-7" />
+					Sign in with Github
+				</ButtonOutlined>
+
+				<div class="flex justify-start items-center gap-1">
+					<span class="text-xs text-gray-500">Don't have an account?</span>
+					<IconButton
+						class="m-0 p-0 w-5 text-sm text-primary-500 underline"
+						on:click={toggleSignUpForm}
+						on:keypress={toggleSignUpForm}>Sign Up</IconButton
+					>
+				</div>
+				<IconButton
+					on:click={() => (showForgotPasswordForm = true)}
+					on:keypress={() => (showForgotPasswordForm = true)}
+					class="text-sm w-1 flex p-0 m-0 text-primary-500 underline self-start"
+					>Forgot Password?</IconButton
+				>
 			</form>
 		{/if}
 
 		{#if isWebAuthN}
-			<ButtonOutlined on:click={handleIsWebAuthn}>
-				<EmailIcon class="text-black mr-2" />
-				Sign in using Email Password
-			</ButtonOutlined>
-
+			<div class="flex flex-col justify-start items-start text-start mt-2">
+				<span class="text-3xl text-primary-500 font-semibold">Login with WebAuthn</span>
+				<IconButton on:click={toggleSignInForm} class="m-0 p-0 absolute top-0 right-0 w-1">
+					<PlainCross class="w-6 h-6 m-2 text-primary-400" />
+				</IconButton>
+			</div>
 			<form on:submit|preventDefault={webAuthnSignIn}>
 				<div class="mt-4">
 					<Textfield
@@ -210,21 +250,32 @@
 					</div>
 				{/if}
 
-				<div class="mt-4 flex w-full justify-center space-x-5">
-					<ButtonSolid {isLoading}>Sign In</ButtonSolid>
-
-					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
+				<div class="mt-4 flex flex-col w-full items-center justify-center space-x-5">
+					<ButtonSolid class="w-full" {isLoading}>Sign In</ButtonSolid>
+					<!-- <ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined> -->
 				</div>
 			</form>
+			<!-- <ButtonOutlined on:click={handleIsWebAuthn}>
+				<EmailIcon class="text-black mr-2" />
+				back to Sign in with Email
+			</ButtonOutlined> -->
 		{/if}
 
 		{#if showForgotPasswordForm}
 			<form method="POST" id="reset_password">
-				<div class="mt-4">
+				<div class="">
 					{#if !formMsg}
-						<div class="flex items-center px-2">
-							<label for="reset_password" class="block text-sm font-semibold text-gray-800">
-								Email
+						<div class="flex flex-col items-start gap-6 px-1">
+							<div class="flex flex-col items-start gap-3">
+								<span class="text-3xl text-primary-500 font-semibold">Forgot Password?</span>
+								<span class="text-sm text-slate-600 text-start">
+									Enter the email address associated with your account and we will send you a link
+									to reset your password.
+								</span>
+							</div>
+
+							<label for="reset_password" class="block text-sm font-semibold text-slate-600">
+								Email*
 							</label>
 						</div>
 
@@ -232,7 +283,7 @@
 							onInput={(e) => validateEmail(e)}
 							name="reset_password"
 							bind:value={email}
-							placeholder="Email"
+							placeholder="Enter your email address"
 						/>
 						{#if emailErr}
 							<div class="w-full pt-1 text-center capitalize">
@@ -260,7 +311,7 @@
 					</div>
 				{/if}
 
-				<div class="mt-4 flex w-full justify-center space-x-5">
+				<div class="mt-9 flex w-full justify-center space-x-5">
 					<ButtonSolid disabled={!!emailErr} on:click={handleForgotPassword} {isLoading}>
 						Submit
 					</ButtonSolid>
@@ -268,11 +319,11 @@
 				</div>
 			</form>
 		{/if}
-		<div class="mt-4 flex w-full items-center justify-center gap-4">
+		<!-- <div class="mt-4 flex w-full items-center justify-center gap-4">
 			<span
 				on:click={toggleSignUpForm}
 				on:keypress={toggleSignUpForm}
-				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase 
+				class="m-0 cursor-pointer border-none text-xs font-semibold uppercase 
 				text-slate-700 no-underline antialiased hover:underline"
 			>
 				sign up
@@ -281,11 +332,11 @@
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
-				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700 
+				class="m-0 cursor-pointer border-none text-xs font-semibold uppercase text-slate-700 
 				antialiased hover:underline"
 			>
 				Forgot password?
 			</span>
-		</div>
+		</div> -->
 	</div>
 </div>

@@ -13,6 +13,8 @@
 	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
+	import IconButton from '$lib/icon-button.svelte';
+	import PlainCross from '$lib/icons/plain-cross.svelte';
 
 	var count = 200;
 	var defaults = {
@@ -83,13 +85,26 @@
 
 	let isWebAuthn: boolean = false;
 	const handleIsWebAuthn = () => {
+		activeForm = 'signup-with-security-key';
 		isWebAuthn = !isWebAuthn;
+	};
+
+	let isEmail: boolean = false;
+	const handleIsEmail = () => {
+		activeForm = 'signup-with-email';
+		isEmail = !isEmail;
+	};
+
+	const handleBackToMain = () => {
+		activeForm = null;
 	};
 
 	let webAuthnForm: WebAuthnState = {
 		fieldErrors: {},
 		formErrors: []
 	};
+
+	let activeForm: 'signup-with-email' | 'signup-with-security-key' | null = null;
 
 	const webAuthNSignup = async (e: SubmitEvent) => {
 		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
@@ -162,148 +177,137 @@
 	<title>Sign up | OpenRegistry</title>
 </svelte:head>
 
-<div class="mx-auto flex w-full max-w-sm overflow-hidden">
-	<div class="flex w-full flex-col px-3 py-3">
-		<div class="pb-8 pt-4 flex justify-center">
-			<Logo type="dark" />
+<div class="mx-auto max-w-[320px] flex w-full overflow-hidden">
+	<div class="flex w-full flex-col px-2 py-4 gap-3">
+		<div class="flex justify-start items-start gap-3 py-4">
+			<img src="/logo-new.png" alt="logo" width="40px" />
+			<div class="flex flex-col gap-1 mx-1 text-start">
+				<span class=" text-3xl text-primary-500 font-semibold">Create account</span>
+				<span class="text-sm text-slate-700"
+					>Become part of a Fully open source and decentralised Initiative</span
+				>
+
+				<IconButton class="m-0 p-0" on:click={toggleSignUpForm}>
+					<PlainCross class="w-6 h-6 absolute top-0 right-0 m-2 text-primary-400" />
+				</IconButton>
+			</div>
 		</div>
-		{#if !showSuccessMsg}
+
+		{#if activeForm === null}
 			<ButtonOutlined on:click={auth.LoginWithGithub}>
-				<GithubIcon class="text-black mr-2 h-8 w-8" />
+				<GithubIcon class="text-slate-800 mr-2 h-8 w-8" />
 				Sign in with Github
 			</ButtonOutlined>
-			<div class="mt-4" />
 
-			{#if !isWebAuthn}
-				<ButtonOutlined on:click={handleIsWebAuthn}>
-					<FingerprintIcon class="text-black mr-2" />
-					Sign up with Security key
-				</ButtonOutlined>
-
-				<div class="mt-4 flex items-center justify-between">
-					<span class="w-1/5 border-b lg:w-1/4" />
-
-					<span
-						href="#"
-						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
-					>
-						or sign up with email
-					</span>
-
-					<span class="w-1/5 border-b lg:w-1/4" />
+			<ButtonOutlined on:click={handleIsWebAuthn}>
+				<FingerprintIcon class="text-slate-800 mr-2" />
+				Sign Up with Security key
+			</ButtonOutlined>
+			<ButtonSolid on:click={handleIsEmail}>Sign Up with Email</ButtonSolid>
+		{/if}
+		{#if activeForm === 'signup-with-email'}
+			<form id="signup" method="POST" action="?/signup" use:enhance={handleSignUpSubmit}>
+				<div class="mt-4">
+					<Textfield
+						onInput={validateUsername}
+						errors={$page.form?.fieldErrors?.username}
+						label="Username"
+						type="text"
+						name="username"
+						value={$page.form?.data?.username ?? ''}
+					/>
 				</div>
 
-				<form id="signup" method="POST" action="?/signup" use:enhance={handleSignUpSubmit}>
-					<div class="mt-4">
-						<Textfield
-							onInput={validateUsername}
-							errors={$page.form?.fieldErrors?.username}
-							label="Username"
-							type="text"
-							name="username"
-							value={$page.form?.data?.username ?? ''}
-						/>
-					</div>
-
-					<div class="mt-4">
-						<Textfield
-							onInput={validateEmail}
-							errors={$page.form?.fieldErrors?.email}
-							label="Email Address"
-							type="email"
-							name="email"
-							value={$page.form?.data?.email}
-						/>
-					</div>
-
-					<div class="mt-4">
-						<Textfield
-							errors={$page.form?.fieldErrors?.password}
-							subHeading="alphanumeric and min 8 chars"
-							label="Password"
-							type="password"
-							name="password"
-							value={$page.form?.data?.password}
-						/>
-					</div>
-
-					<div class="mt-4">
-						<Textfield
-							errors={$page.form?.fieldErrors?.confirmPassword}
-							label="Confirm Password"
-							type="password"
-							name="confirmPassword"
-							value={$page.form?.data?.confirmPassword}
-						/>
-					</div>
-
-					{#if $page.form?.formErrors && $page.form?.formErrors.length}
-						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-rose-600">
-								{$page.form?.formErrors[0]}
-							</span>
-						</div>
-					{/if}
-
-					<div class="mt-8 flex w-full justify-center space-x-8">
-						<ButtonSolid type="submit" {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
-						<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
-					</div>
-				</form>
-			{/if}
-			{#if isWebAuthn}
-				<ButtonOutlined on:click={handleIsWebAuthn}>
-					<EmailIcon class="text-black mr-2" />
-					Sign up with Email Password
-				</ButtonOutlined>
-
-				<div class="mt-4 flex items-center justify-between">
-					<span class="w-1/5 border-b lg:w-1/4" />
-
-					<span
-						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
-					>
-						or sign up with email
-					</span>
-
-					<span class="w-1/5 border-b lg:w-1/4" />
+				<div class="mt-4">
+					<Textfield
+						onInput={validateEmail}
+						errors={$page.form?.fieldErrors?.email}
+						label="Email Address"
+						type="email"
+						name="email"
+						value={$page.form?.data?.email}
+					/>
 				</div>
 
-				<form id="webauthn" on:submit|preventDefault={(e) => webAuthNSignup(e)}>
-					<div class="mt-4">
-						<Textfield
-							onInput={validateUsername}
-							errors={webAuthnForm?.fieldErrors?.username}
-							label="Username"
-							type="text"
-							name="username"
-						/>
-					</div>
+				<div class="mt-4">
+					<Textfield
+						errors={$page.form?.fieldErrors?.password}
+						subHeading="alphanumeric and min 8 chars"
+						label="Password"
+						type="password"
+						name="password"
+						value={$page.form?.data?.password}
+					/>
+				</div>
 
-					<div class="mt-4">
-						<Textfield
-							onInput={validateEmail}
-							errors={webAuthnForm?.fieldErrors?.email}
-							label="Email Address"
-							type="email"
-							name="email"
-						/>
-					</div>
-					{#if $page.form?.formErrors && $page.form?.formErrors.length}
-						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-rose-600">
-								{$page.form?.formErrors[0]}
-							</span>
-						</div>
-					{/if}
+				<div class="mt-4">
+					<Textfield
+						errors={$page.form?.fieldErrors?.confirmPassword}
+						label="Confirm Password"
+						type="password"
+						name="confirmPassword"
+						value={$page.form?.data?.confirmPassword}
+					/>
+				</div>
 
-					<div class="mt-8 flex w-full space-x-8">
-						<ButtonSolid {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
-						<ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined>
+				{#if $page.form?.formErrors && $page.form?.formErrors.length}
+					<div class="w-full pt-1 text-center capitalize">
+						<span class="text-center text-xs font-semibold uppercase text-rose-600">
+							{$page.form?.formErrors[0]}
+						</span>
 					</div>
-				</form>
-			{/if}
-		{:else}
+				{/if}
+
+				<div class="mt-8 flex w-full justify-center space-x-8">
+					<ButtonSolid class="w-full" type="submit" {isLoading} on:click={() => {}}
+						>Sign Up</ButtonSolid
+					>
+					<!-- <ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined> -->
+				</div>
+			</form>
+		{/if}
+
+		{#if activeForm === 'signup-with-security-key'}
+			<form id="webauthn" on:submit|preventDefault={(e) => webAuthNSignup(e)}>
+				<div class="mt-4">
+					<Textfield
+						onInput={validateUsername}
+						errors={webAuthnForm?.fieldErrors?.username}
+						label="Username"
+						type="text"
+						name="username"
+					/>
+				</div>
+
+				<div class="mt-4">
+					<Textfield
+						onInput={validateEmail}
+						errors={webAuthnForm?.fieldErrors?.email}
+						label="Email Address"
+						type="email"
+						name="email"
+					/>
+				</div>
+				{#if $page.form?.formErrors && $page.form?.formErrors.length}
+					<div class="w-full pt-1 text-center capitalize">
+						<span class="text-center text-xs font-semibold uppercase text-rose-600">
+							{$page.form?.formErrors[0]}
+						</span>
+					</div>
+				{/if}
+
+				<div class="mt-8 flex w-full space-x-8">
+					<ButtonSolid class="w-full" {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
+					<!-- <ButtonOutlined on:click={toggleSignUpForm}>Close</ButtonOutlined> -->
+				</div>
+			</form>
+			<ButtonOutlined on:click={handleBackToMain}>
+				<EmailIcon class="text-slate-800 mr-2" />
+				back to Sign up with Email
+			</ButtonOutlined>
+		{/if}
+		
+		{#if showSuccessMsg && activeForm === null}
 			<div class="flex h-full w-full flex-col items-center justify-start gap-4">
 				<div id="confetti">
 					<CheckIcon class="h-24 w-24 text-emerald-600" />

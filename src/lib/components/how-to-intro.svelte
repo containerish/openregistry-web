@@ -26,19 +26,19 @@
 			<div class="flex flex-col gap-12 lg:w-3/5 px-6 items-start">
 				<div class="flex flex-col justify-center gap-3">
 					<span class="text-4xl font-bold text-primary-600"> Get started with OpenRegistry </span>
-					<span class="text-base font-medium text-slate-600">
+					<span class="text-base font-medium text-slate-700">
 						in just a few simple steps, you can get started
 					</span>
 
 					<ul class="text-center font-normal list-disc ml-3 mt-4">
-						<li class="text-left text-slate-600 text-sm">
+						<li class="text-left text-slate-700 text-sm">
 							Create an account on
 							<a href="https://OpenRegistry.dev/?signup=true" class="underline text-primary-600">
 								OpenRegistry.dev
 							</a>
 						</li>
-						<li class="text-left text-slate-600 text-sm">Install Docker/Nerdctl/Podman</li>
-						<li class="text-left text-slate-600 text-sm">
+						<li class="text-left text-slate-700 text-sm">Install Docker/Nerdctl/Podman</li>
+						<li class="text-left text-slate-700 text-sm">
 							Login into OpenRegistry using Docker CLI
 						</li>
 					</ul>
