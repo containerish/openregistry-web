@@ -80,7 +80,7 @@
 	<div
 		class="coding min-h-[700px] w-[400px] md:w-[700px] inverse-toggle px-6 text-gray-100 text-sm font-mono
 		subpixel-antialiased pb-6 pt-4 rounded-sm leading-normal overflow-hidden 
-		bg-primary-700 shadow-4xl shadow-indigo-200"
+		bg-primary-700 shadow-4xl shadow-slate-400/40"
 	>
 		<div class="top mb-2 flex">
 			<div class="h-3 w-3 bg-rose-500 rounded-full" />

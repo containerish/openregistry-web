@@ -4,7 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
 	scroll-behavior: smooth;
 	scroll-snap-type: block;
 	position: relative;
@@ -14,14 +15,23 @@ html, body {
 }
 
 body {
-	@apply bg-gray-100;
+	/* @apply bg-gray-100; */
+	background-image: radial-gradient(at 0% 0%, rgba(140, 139, 255, 30%) 2px, transparent 50%),
+		radial-gradient(at 100% 0%, rgba(140, 139, 255, 30%) 0px, transparent 50%),
+		/* cyan */ /* radial-gradient(at 0% 70%, rgba(103, 232, 249, 30%) 0px, transparent 50%), */
+		/* purple */ radial-gradient(at 20% 90%, rgba(139, 92, 246, 30%) 0px, transparent 50%),
+		/* pink */ radial-gradient(at 10% 70%, rgba(248, 113, 113, 20%) 0px, transparent 50%),
+		/* yellow */ radial-gradient(at 70% 60%, rgba(251, 191, 36, 20%) 0px, transparent 50%),
+		/* blue */ radial-gradient(at 80% 80%, rgba(2, 132, 199, 20%) 0px, transparent 50%);
+
 	color: #191b24;
 	margin: 0;
 	padding: 0px;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+		'Helvetica Neue', sans-serif;
 }
 
 a {
@@ -41,7 +51,10 @@ label {
 	display: block;
 }
 
-input, button, select, textarea {
+input,
+button,
+select,
+textarea {
 	font-family: inherit;
 	font-size: inherit;
 	-webkit-padding: 0.4em 0;
@@ -57,7 +70,7 @@ input:disabled {
 }
 
 button {
-	color: #241D19;
+	color: #241d19;
 	background-color: #f4f4f4;
 	outline: none;
 }
@@ -75,9 +88,9 @@ button:focus {
 }
 
 .tooltip {
-  @apply invisible absolute;
+	@apply invisible absolute;
 }
 
 .has-tooltip:hover .tooltip {
-  @apply visible z-50;
+	@apply visible z-50;
 }
