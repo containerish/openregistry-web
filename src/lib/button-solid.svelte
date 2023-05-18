@@ -12,7 +12,7 @@
 		`flex justify-center space-x-2 items-center border-2 bg-primary-300 border-primary-700 
 		text-primary-800 rounded font-medium bg-opacity-80 hover:shadow-primary-600 hover:shadow-3xl 
 		disabled:bg-slate-300 disabled:shadow-none transition-all duration-200 disabled:text-slate-400 
-		gap-1 px-3 min-w-[120px] h-11 lg:text-base`,
+		gap-1 px-3 min-w-[120px] h-10 text-sm antialiased`,
 		$$props.class
 	)}
 >

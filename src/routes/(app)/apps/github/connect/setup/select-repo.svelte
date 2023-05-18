@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { ghStore } from '$lib/stores';
-	import { CheckIcon, AddAccountIcon, GithubIcon, GithubOutlinedIcon } from '$lib/icons';
+	import { CheckIcon, AddAccountIcon, GithubIcon, GithubOutlinedIcon, Check } from '$lib/icons';
 	import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 	import Dialog from '$lib/dialog.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
@@ -27,54 +27,58 @@
 	}
 </script>
 
-<div class="w-full">
-	<div class="flex flex-col justify-center items-center gap-3">
+<div class="w-full flex flex-col gap-6">
+	<div class="flex flex-col justify-center items-center gap-2">
 		<span class="text-2xl text-center font-bold text-primary-600"
 			>Deploy a site from your account</span
 		>
-		<div class="flex flex-col text-center text-xl text-slate-600">
-			<span class="text-center text-sm lg:text-base"
+		<div class="flex flex-col text-center text-slate-600">
+			<span class="text-center text-sm"
 				>Select a repository to connect as your project’s source code. New commits will trigger
 				OpenRegistry to automatically build and deploy your changes.
 			</span>
 		</div>
 	</div>
-	<hr class="mt-6 border-1 border-gray-300" />
-	<div class="flex gap-2 items-center mt-10 text-primary-600">
-		<GithubIcon class="h-6 w-6" />
-		<span class="text-base lg:text-xl font-semibold">Github | </span>
-		<span class="font-light text-sm"> more coming soon</span>
+	<hr class="border-1 border-gray-300" />
+	<div class="flex flex-col gap-2 items-start text-primary-600">
+		<div class="flex gap-1 items-center">
+			<GithubIcon class="h-6 w-6" />
+			<span class="text-lg font-semibold">Github | </span>
+			<span class="font-light text-sm"> more coming soon</span>
+		</div>
+		
+		<div class="flex flex-col ml-1">
+			<div class="w-[92px] bg-emerald-400 h-[2px] rounded-md" />
+		</div>
 	</div>
-	<div class="flex flex-col relative my-3">
-		<div class="w-24 bg-primary-200 h-1 rounded-md" />
-		<div class="bg-gray-300 h-[1px] mt-0.5 ml-24" />
-	</div>
+	
 
-	<div class="flex flex-col gap-2 justify-center items-start space-y-1 mt-9">
-		<div class="flex items-center space-x-1 ml-2 text-slate-600">
+	<div class="flex flex-col gap-2 justify-center items-start">
+		<div class="flex items-center ml-2 text-slate-600">
 			<span class="text-base lg:text-lg font-semibold text-slate-600"> Github account</span>
 		</div>
 		<div class="flex relative w-2/5">
 			<div class="w-full">
 				<div class="flex items-center px-2" />
-				<Textfield 
-				name="github account" 
-				type="search" 
-				disabled
-				placeholder="github username"
-				bind:value={data.githubUsername} />
+				<Textfield
+					name="github account"
+					type="search"
+					disabled
+					placeholder="github username"
+					bind:value={data.githubUsername}
+				/>
 			</div>
 		</div>
-		<ButtonOutlined class="px-1 py-2" disabled>
-			<AddAccountIcon class="h-4 w-4 text-primary-300" />
-			<span class="text-sm">Add account</span>
-		</ButtonOutlined>
 	</div>
-	<div class="flex flex-col mt-12 gap-3">
+	<div class="flex flex-col gap-2">
 		<span class="ml-2 text-base lg:text-lg font-semibold text-slate-600">Select a repository</span>
 		{#if installationId && !data.repoList}
 			<div class="flex justify-center items-center py-4 w-full">
-				<svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-brown-600" fill="none" viewBox="0 0 24 24">
+				<svg
+					class="animate-spin -ml-1 mr-3 h-8 w-8 text-primary-400"
+					fill="none"
+					viewBox="0 0 24 24"
+				>
 					<circle
 						class="opacity-25"
 						cx="12"
@@ -93,29 +97,29 @@
 				<span class="font-semibold text-slate-600">Loading...</span>``
 			</div>
 		{:else}
-			<div class="grid-flow-row grid grid-cols-2 gap-4 text-lg">
+			<div class="grid-flow-row grid md:grid-cols-2 gap-3 text-lg">
 				{#each data.repoList as repo (repo.repository.name)}
 					<button
-					aria-label="repository"
+						aria-label="repository"
 						on:click={() => handleRepoSelect(repo)}
-						class="text-slate-700 text-sm lg:text-base rounded border-2 gap-2 border-primary-100 
-						flex justify-center items-center py-2 lg:py-3 hover:shadow-2xl {repo.repository.name ===
-						selectedRepo
-							? 'shadow-2xl shadow-primary-200 bg-primary-50'
+						class="text-slate-700 text-sm xl:text-base rounded border-2 border-primary-100 w-full
+						flex justify-center max-w-[330px] lg:max-w-full items-center py-2.5 lg:py-3 px-5 hover:shadow-2xl relative {repo
+							.repository.name === selectedRepo
+							? 'shadow-2xl shadow-slate-200 bg-white'
 							: 'bg-white'}"
 					>
 						{repo.repository.name}
 						{#if repo.repository.name === selectedRepo}
-							<CheckIcon class="w-6 h-6 text-primary-400" />
+							<Check class="w-5 h-5 text-emerald-500 absolute top-0 right-0 m-2" />
 						{/if}
 					</button>
 				{/each}
 			</div>
 		{/if}
-		<span class="text-slate-700 text-sm lg:text-base">
+		<span class="text-slate-700 text-sm lg:text-base my-3">
 			If your repository is not shown, it could be due to one of the following reasons:
 		</span>
-		<ol class="list-decimal text-slate-700 text-sm ml-6">
+		<ol class="list-decimal text-slate-600 text-xs xl:text-sm ml-4 antialiased">
 			<li>
 				OpenRegistry does not have access to the repository. Please configure repository access for
 				OpenRegistry app on Github.
@@ -126,12 +130,12 @@
 			</li>
 		</ol>
 	</div>
-	<hr class="mt-10 border-1 border-gray-300" />
-	<div class="flex justify-between items-center mt-10">
+	<hr class=" border-1 border-gray-300" />
+	<div class="flex justify-between items-baseline">
 		<span
 			on:click={() => goto('/apps/github/connect')}
 			on:keypress={() => goto('/apps/github/connect')}
-			class="text-slate-600 underline underline-offset-4 text-base lg:text-lg cursor-pointer"
+			class="text-slate-600 underline underline-offset-4 text-base cursor-pointer antialiased"
 			>Cancel</span
 		>
 		<ButtonSolid

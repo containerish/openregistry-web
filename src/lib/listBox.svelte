@@ -6,7 +6,7 @@
 		ListboxOption,
 		Transition
 	} from '@rgossiaux/svelte-headlessui';
-	import { CheckIcon, ChevronIcon } from './icons/';
+	import { Check, CheckIcon, ChevronIcon } from './icons/';
 	type ListItem = {
 		name: string;
 		id: number;
@@ -30,7 +30,7 @@
 				<Listbox value={selectedItem} on:change={(e) => setSelectItem(e.detail)}>
 					<ListboxButton
 						aria-label="list button"
-						class="flex w-full px-4 py-3 justify-between items-center border border-primary-100 rounded-md
+						class="flex w-full px-4 py-3 h-10 lg:h-11 justify-between items-center border border-primary-100 rounded-md
 						placeholder-slate-700 focus:bg-slate-50
 						 focus:border-primary-200 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500
 						disabled:text-slate-400"
@@ -52,15 +52,15 @@
 						>
 							{#each items as item (item.id)}
 								<ListboxOption
-									class="hover:bg-slate-50 cursor-pointer flex gap-2 select-none relative py-2 pr-4 text-slate-600 {selectedItem.id ===
+									class="hover:bg-primary-50 cursor-pointer flex items-center gap-2 select-none relative py-2 pr-4 text-slate-600 {selectedItem.id ===
 									item.id
-										? 'bg-primary-50 text-slate-600 font-semibold pl-4'
+										? 'bg-emerald-100/40 text-slate-600 font-semibold pl-4'
 										: 'pl-10'}"
 									value={item}
 									disabled={item.disabled}
 								>
 									{#if selectedItem.id === item.id}
-										<span><CheckIcon class="h-5 w-5 text-slate-600" /></span>
+										<span><Check class="h-4 w-4 text-emerald-600" /></span>
 									{/if}
 									<span>{item.name}</span>
 								</ListboxOption>

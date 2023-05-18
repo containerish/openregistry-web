@@ -52,11 +52,11 @@
 	};
 </script>
 
-<div class="">
+<div class="flex flex-col gap-6">
 	<div class="justify-center flex items-center">
 		<span class="text-2xl font-bold text-primary-600"> Building and deploying</span>
 	</div>
-	<div class="flex flex-col gap-3 mt-9">
+	<div class="flex flex-col gap-2">
 		<div class="flex">
 			<SpinnerCircle class="invisible" />
 			<span class="text-slate-600 text-base font-semibold ml-6">
@@ -64,7 +64,7 @@
 			</span>
 		</div>
 
-		<hr class="border-t-gray-400" />
+		<hr />
 
 		<div class="flex">
 			<SpinnerCircle class="invisible" />
@@ -73,7 +73,7 @@
 			</span>
 		</div>
 
-		<hr class=" border-t-gray-400" />
+		<hr />
 
 		<div class="flex">
 			<SpinnerCircle class="invisible" />
@@ -82,7 +82,7 @@
 			</span>
 		</div>
 
-		<hr class=" border-t-gray-400" />
+		<hr />
 
 		<div class="flex">
 			<SpinnerCircle class="invisible" />
@@ -91,8 +91,8 @@
 			</span>
 		</div>
 	</div>
-	<div class="border-primary-100 border mt-10 py-4 px-5 shadow-2xl">
-		<div class="flex gap-6 justify-end items-end">
+	<div class="border-primary-100 border bg-slate-100 rounded">
+		<div class="flex gap-6 justify-end items-end bg-primary-100/70 py-2 px-5">
 			<div class="flex gap-2">
 				<DownloadIcon class="h-6 w-6 text-slate-600" />
 				<span class="text-base text-slate-600"> Download log </span>
@@ -102,7 +102,7 @@
 				<span class="text-base text-slate-600"> Copy log </span>
 			</div>
 		</div>
-		<hr class="border-t-2 border-primary-50 -mx-5 mt-4" />
+
 		<table class="table-auto min-h-[500px]">
 			<tbody>
 				<div class="max-h-[500px] overflow-x-auto">
@@ -141,12 +141,12 @@
 			</div>
 		</Dialog>
 	{/if}
-	<div class="flex justify-end items-end my-10">
-		<ButtonOutlined on:click={handleShowModal}>Cancel deployment</ButtonOutlined>
+	<div class="flex justify-end items-end">
+		<ButtonOutlined class="border-rose-300 text-rose-400" on:click={handleShowModal}>Cancel deployment</ButtonOutlined>
 	</div>
-	<span class="text-lg font-semibold text-primary-600 ml-2"> Building and deployment settings</span>
+	<span class="text-lg font-semibold text-primary-500 ml-2"> Building and deployment settings</span>
 	<div
-		class="rounded-sm border shadow-inner bg-slate-50 mt-9 px-5 py-9
+		class="rounded-sm border shadow-inner bg-slate-50 px-5 py-6
 	flex flex-col gap-3"
 	>
 		<div class="flex gap-6">
@@ -158,7 +158,7 @@
 				>
 			</div>
 		</div>
-		<div class="flex gap-6">
+		<div class="flex gap-5">
 			<span class="text-base text-slate-700 font-semibold">Branch: </span>
 			<div class="flex gap-1">
 				<GitBranchIcon class="h-6 w-6" />
@@ -174,13 +174,13 @@
 			<span class="text-base font-semibold text-brown-900">Duration: </span>
 		</div>
 
-		<div class=" flex pt-9">
+		<div class="flex">
 			<ArrowRightIcon class="text-slate-700" />
 			<span class="text-base antialiased"> Build Settings</span>
 		</div>
 	</div>
 
-	<hr class=" border-t-gray-400 my-9" />
+	
 	<div class="flex justify-between items-center lg:px-9">
 		<button
 			aria-label="tab button"
