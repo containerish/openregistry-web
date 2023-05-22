@@ -41,7 +41,7 @@
 
 <div class="w-full h-full ">
 	<div
-		class="coding min-h-[250px] min-w-[400px] px-5 shadow-2xl text-gray-100 text-sm font-mono 
+		class="coding min-h-[250px] min-w-[290px] md:min-w-[400px] px-5 shadow-2xl text-gray-100 text-sm font-mono 
 		subpixel-antialiased bg-primary-50 pb-6 pt-4 rounded-sm leading-normal overflow-hidden border border-primary-100"
 	>
 		<div class="top mb-2 flex">
