@@ -26,7 +26,7 @@
 
 <main class="w-screen flex justify-center flex-col selection:bg-primary-500 selection:text-white">
 	<Navbar {openSignInModal} {openSignUpModal} />
-	<div class="tall:min-h-[1650px] bg-primary-50">
+	<div class="tall:min-h-[1650px]">
 		<slot />
 	</div>
 

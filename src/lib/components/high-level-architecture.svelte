@@ -4,7 +4,7 @@
 	import Arrow from '$lib/icons/arrow-r.svelte';
 </script>
 
-<Card class="bg-primary-100 py-12 lg:py-20 flex flex-col gap-6">
+<Card class="bg-primary-100/60 py-12 lg:py-20 flex flex-col gap-6">
 	<div class="flex px-6 w-full flex-col justify-center max-w-2xl items-center">
 		<span
 			class="text-primary-600 text-center whitespace-nowrap font-bold pb-6 text-3xl lg:text-5xl"

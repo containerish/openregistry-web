@@ -4,21 +4,21 @@
 </script>
 
 <div
-	class="flex flex-col bg-slate-50 shadow-2xl items-center md:items-end gap-12 md:grid md:grid-cols-4 w-full md:gap-6
+	class="flex flex-col bg-slate-50/70 shadow-2xl items-center md:items-end gap-12 md:grid md:grid-cols-4 w-full md:gap-6
 		rounded-lg px-12 py-16"
 >
-	<div class="col-span-4 md:pb-16 text-center flex flex-col gap-3">
+	<div class="col-span-4 md:pb-9 text-center flex flex-col gap-3">
 		<span
 			class="text-primary-500 text-center whitespace-nowrap text-3xl
 					font-semibold"
 		>
 			How does it work?
 		</span>
-		<span class="text-base self-center text-slate-600 w-96 md:w-full px-3"
+		<span class="text-sm self-center text-slate-600 w-96 md:w-full px-3"
 			>A step by step description on how a layer is pushed to OpenRegistry</span
 		>
+	<hr class=" border-b border-primary-100/50">
 	</div>
-
 	<span class="hidden md:flex text-3xl font-medium text-primary-500 ml-3">Step 1</span>
 	<span class="hidden md:flex text-3xl font-medium text-primary-500 ml-3">Step 2</span>
 	<span class="hidden md:flex text-3xl font-medium text-primary-500 ml-3">Step 3</span>

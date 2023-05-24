@@ -11,6 +11,7 @@ import Signin from './signin.svelte';
 import Signup from './signup.svelte';
 import Sidebar from './sidebar.svelte';
 import RepoBox from './repo-box.svelte';
+import RepoButton from './repo-button.svelte';
 
 export { Hero };
 export { HighLevelArchitecture };
@@ -25,3 +26,4 @@ export { Signin };
 export { Signup };
 export { Sidebar };
 export { RepoBox };
+export { RepoButton}

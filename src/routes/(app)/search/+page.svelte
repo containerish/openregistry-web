@@ -179,7 +179,7 @@
 				</Dialog>
 			{/if}
 			<div class="flex flex-col w-full my-8 items-start max-w-[850px] px-9 lg:px-16">
-				<div class="flex flex-row gap-10 justify-between items-center w-full pb-2">
+				<div class="flex flex-row gap-10 justify-between items-center w-full pb-2 m-2">
 					<Menu title="Sort">
 						<MenuItem>
 							<button
@@ -190,7 +190,7 @@
 								}}
 								class="{sortBy === 'last_updated' ? 'font-normal bg-white' : ''} 
                 				w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none
-								rounded gap-2 m-0 hover:bg-slate-100 text-sm"
+								rounded gap-2 m-0 hover:bg-primary-100 text-sm"
 							>
 								<ClockIcon class="h-5 w-5" />
 								Last Updated
@@ -205,7 +205,7 @@
 								}}
 								class="{sortBy === 'namespace' ? 'font-normal bg-white' : ''} 
          						inline-flex py-3 justify-center gap-2 items-center w-full m-0 border-none rounded-t-none
-								rounded-md hover:bg-slate-100 text-sm"
+								rounded-md hover:bg-primary-100 text-sm"
 							>
 								<div
 									class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4

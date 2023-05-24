@@ -69,10 +69,10 @@
 <Card class="bg-white mx-auto">
 	<div class="w-3/4 lg:w-full min-h-[90vh] mx-10 my-4 lg:my-20 max-w-[3000px]">
 		<div
-			class=" bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-5 rounded-sm
+			class=" bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-5 rounded-sm
 			border border-primary-100"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
+			<h1 class="text-2xl font-semibold text-slate-700 mb-5">
 				How do I rename a OpenRegistry repository?
 			</h1>
 			<span class="text-base lg:text-lg text-slate-600">
@@ -83,10 +83,10 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
+			class="bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-6 rounded-sm border
 			border-primary-100"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
+			<h1 class="text-2xl font-semibold text-slate-700 mb-5">
 				Can a repository be transferred to a different account?
 			</h1>
 			<span class="text-base lg:text-lg text-slate-600">
@@ -97,10 +97,10 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner flex flex-col px-10 py-10 mx-5 my-6 rounded-sm border
+			class="bg-slate-50 shadow-inner flex flex-col p-5 lg:p-10 my-6 rounded-sm border
 			border-primary-100 gap-6"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700">
+			<h1 class="text-2xl font-semibold text-slate-700">
 				I Signed in with GitHub, how can I docker login to pull/push images ?
 			</h1>
 			<span class="text-base lg:text-lg text-slate-600">
@@ -120,12 +120,10 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
+			class="bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-6 rounded-sm border
 			border-primary-100"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
-				How can I change my email address?
-			</h1>
+			<h1 class="text-2xl font-semibold text-slate-700 mb-5">How can I change my email address?</h1>
 			<span class="text-base lg:text-lg text-slate-600">
 				Currently, this functionality is unavailable. However, we're working on integrating it into
 				OpenRegistry with coming releases
@@ -133,10 +131,10 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
+			class="bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-6 rounded-sm border
 			border-primary-100"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
+			<h1 class="text-2xl font-semibold text-slate-700 mb-5">
 				How can I change my OpenRegistry Password
 			</h1>
 			<span class="text-base lg:text-lg text-slate-600">
@@ -150,10 +148,10 @@
 		</div>
 
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
+			class="bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-6 rounded-sm border
 			border-primary-100"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">A Humble Note</h1>
+			<h1 class="text-2xl font-semibold text-slate-700 mb-5">A Humble Note</h1>
 			<span class="text-base lg:text-lg text-slate-600">
 				OpenRegistry is a small team of 2 developers, as we work towards making it the best
 				Container Registry, please make sure to drop any bug reports or improvement advice in the
@@ -161,12 +159,10 @@
 			</span>
 		</div>
 		<div
-			class="bg-slate-50 shadow-inner justify-start items-center px-10 py-10 mx-5 my-6 rounded-sm border
+			class="bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-6 rounded-sm border
 			border-primary-100"
 		>
-			<h1 class="text-2xl lg:text-3xl font-semibold text-slate-700 mb-5">
-				Learn More about OpenRegistry
-			</h1>
+			<h1 class="text-2xl font-semibold text-slate-700 mb-5">Learn More about OpenRegistry</h1>
 			<span class="text-base lg:text-lg text-slate-600">
 				If you are completely new to Containers and Container Registries and interested in learning
 				more about it. You can follow our
@@ -178,7 +174,7 @@
 		</div>
 
 		<Card>
-			<div class="w-4/5 lg:w-full mx-5">
+			<div class="w-4/5 lg:w-full">
 				<span class="mt-1 ml-2 text-2xl font-normal text-left text-slate-700">Need More Help?</span>
 				<form
 					on:submit|preventDefault={(e) => handleFormSubmit(e)}

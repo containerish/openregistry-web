@@ -47,29 +47,32 @@
 		id={data.uuid + data.namespace}
 		on:click={handleRepoDetail}
 		on:keypress={handleRepoDetail}
-		class="hover:shadow-primary-100 z-0 cursor-pointer hover:shadow-2xl w-full px-8 py-2 my-2 mx-2 bg-white
-		border-2 border-primary-100 rounded-sm max-w-[850px] flex flex-col items-start"
+		class="hover:shadow-primary-100 z-0 cursor-pointer hover:shadow-2xl w-full px-6 py-2 m-2
+	    bg-slate-50 border-[1.5px] border-primary-100 rounded max-w-[850px] flex items-center gap-3"
 	>
-		<div class="pt-2 text-base lg:text-lg text-slate-700">
-			<span>
-				{data.namespace.split('/')[0]} /
-				<span class="text-primary-500 font-medium">{data.namespace.split('/')[1]}</span>
-			</span>
-		</div>
+		<img src="/cube-light.png" alt="" width="33px" />
+		<div class="flex flex-col w-full justify-between">
+			<div class="pt-2 text-base text-slate-700 flex justify-start items-center gap-3">
+				<span>
+					{data.namespace.split('/')[0]} /
+					<span class="text-primary-500 font-medium">{data.namespace.split('/')[1]}</span>
+				</span>
+				<div class="rounded-lg bg-emerald-200 text-emerald-900 text-xs px-1">verified image</div>
+			</div>
 
-		<div class="flex items-end justify-between w-full">
-			<span class="text-xs font-light text-gray-400">
-				{new Date(data.created_at).toDateString()}
-			</span>
+			<div class="flex items-end justify-between w-full">
+				<span class="text-xs font-light text-gray-400">
+					{new Date(data.created_at).toDateString()}
+				</span>
 
-			<div class="flex gap-4">
-				<DownloadIcon class="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
-				<StarIcon class="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
-				<LockOpenIcon class="text-primary-500 h-5 lg:h-6 w-5 lg:w-6" />
+				<div class="flex gap-4">
+					<DownloadIcon class="hidden md:flex text-primary-500 h-5 w-5" />
+					<StarIcon class="hidden md:flex text-primary-500 h-5 w-5" />
+					<LockOpenIcon class="hidden md:flex text-primary-500 h-5 w-5" />
+				</div>
 			</div>
 		</div>
 
 		<div class="mt-2" />
 	</button>
-	
 {/if}

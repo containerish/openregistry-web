@@ -37,13 +37,13 @@
 	setContext('onClickRegister', onClickRegister);
 </script>
 
-<Card id="top" class="w-full flex flex-col px-0 bg-white">
-	<div class="flex flex-col items-center justify-center gap-9 w-full">
+<Card id="top" class="w-full flex flex-col px-0">
+	 <div class="flex flex-col items-center justify-center gap-9 w-full">
 		<picture class="w-full">
-			<source media="(min-width: 2000px)" srcset="./big-hero-new.svg" />
-			<source media="(min-width: 650px)" srcset="./hero-101.svg" />
-			<source media="(min-width: 360px)" srcset="./small-hero.svg" />
-			<img alt="hero svg" class="w-full" src="./hero.svg" />
+			<source media="(min-width: 2000px)" srcset="./hero-big.png" />
+			<source media="(min-width: 650px)" srcset="./hero-clear.png" />
+			<source media="(min-width: 360px)" srcset="./hero-small.png" />
+			<img alt="hero svg" class="w-full" src="./hero-big.png" />
 		</picture>
 
 		<div

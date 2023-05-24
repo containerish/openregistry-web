@@ -19,52 +19,55 @@
 	<title>Github Integration | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex flex-col items-center space-y-6 w-full min-w-min lg:min-w-max sm:my-10 lg:my-20">
-	<div class="min-w-min bg-white p-6 lg:p-16 rounded-sm border border-primary-200 shadow-2xl">
-		<div class="w-full lg:max-w-max">
-			<div class="flex flex-col justify-center items-center space-x-5 space-y-5">
+<div class="flex flex-col items-center w-full min-w-min my-12">
+	<div class="bg-slate-50 rounded-sm border border-primary-200 shadow-2xl p-9 lg:px-20 lg:py-16">
+		<div class="w-full max-w-xl lg:max-w-2xl">
+			<div class="flex flex-col justify-center items-center gap-3">
 				<span class="text-2xl font-bold text-primary-600 text-center"
 					>Automated builds with Github Integration</span
 				>
-				<span class="text-center text-sm lg:text-base text-slate-600"
+				<span class="text-center text-sm text-slate-700 antialiased"
 					>With three simple steps, you can set up automated builds with OpenRegistry.
-					<br /> With every consequtive trigger (push/commit), OpenRegistry will bundle a build for
-					you.
-					<!-- </span> -->
+					<br /> With every consequtive trigger (push/commit), OpenRegistry will bundle a build for you.
 				</span>
 			</div>
 			<hr class="mx-0 my-10 lg:mx-10" />
-			<div class="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-10 py-10">
+			<div class="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-10">
 				<!-- svelte-ignore a11y-img-redundant-alt -->
-				<img src="/connect-github.png" alt="upload-file-image" class="w-40 lg:w-80" />
-				<div class="flex flex-col items-center lg:items-start space-y-3 lg:space-y-9">
-					<span class="text-sm text-slate-600 lg:text-base text-center lg:text-start"
-						>To deploy a site, first select it from your personal or team GitHub account.</span
-					>
-
+				<img src="/catainer/catainer-hi.png" alt="upload-file-image" class="w-40" />
+				<div class="flex flex-col items-center lg:items-start gap-6">
+					<span class="text-slate-700 text-center lg:text-start antialiased max-w-md"
+						>Hi, I'm Catainer! <br /> I will help you with your first ever build. <br />
+						To deploy a site, first select it from your personal or team GitHub account
+					</span>
 					<ButtonSolid class="max-w-[208px]" on:click={installGithubApp}>
 						<GihubIcon />
 						Connect Github
 					</ButtonSolid>
 				</div>
 			</div>
-			<hr class="m-10 laptop:mx-0" />
-			<div class="flex flex-col items-start space-y-8 pl-0 lg:pl-24 text-slate-600">
-				<span class="text-left text-sm lg:text-base"
-					><b class="text-primary-500">1. Select repository</b> <br />
-					Select your site developed using any of the supported frameworks or no framework at all.
-				</span>
-				<span class="text-left text-sm lg:text-base"
-					><b class="text-primary-500">2. Set up builds and deployments</b><br />
-					Specify how OpenRegistry automatically builds and deploys your repository's commits.
-				</span>
-				<p class="text-left text-sm lg:text-base">
-					<b class="text-primary-500">3. Deploy site</b><br />
-					<span>
-						Your site will be deployed to a free SSL-enabled hostname. Configure custom domains,
-						restrict access,<br /> invite collaborators, and more.
-					</span>
-				</p>
+			<hr class="my-6 border-b border-primary-50" />
+			<div class="flex flex-col justify-center gap-6 text-slate-600">
+				<div class="flex flex-col w-full gap-1">
+					<span class="text-primary-500 font-semibold">1. Select repository</span>
+					<span class="text-sm"
+						>Select your site developed using any of the supported frameworks or no framework at
+						all.</span
+					>
+				</div>
+				<div class="flex flex-col w-full gap-1">
+					<span class="text-primary-500 font-semibold">2. Set up builds and deployments</span>
+					<span class="text-sm"
+						>Specify how OpenRegistry automatically builds and deploys your repository's commits.</span
+					>
+				</div>
+				<div class="flex flex-col w-full gap-1">
+					<span class="text-primary-500 font-semibold">3. Deploy site</span>
+					<span class="text-sm"
+						>Your site will be deployed to a free SSL-enabled hostname. Configure custom domains,
+						restrict access, invite collaborators, and more.</span
+					>
+				</div>
 			</div>
 		</div>
 	</div>

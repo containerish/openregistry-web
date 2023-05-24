@@ -4,7 +4,7 @@
 </script>
 
 {#if browser}
-	<div class="max-w-[17rem]">
+	<div class="max-w-[230px]">
 		<Carousel arrows={false} dots={false} autoplay autoplayDuration={5000}>
 			<slot/>
 		</Carousel>

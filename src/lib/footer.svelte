@@ -10,7 +10,7 @@
 					href="https://docs.openregistry.dev"
 					target="_blank"
 					rel="noreferrer"
-					class="text-3xl lg:text-5xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
 				>
 					Docs,
 				</a>
@@ -18,7 +18,7 @@
 					href="https://github.com/containerish/openregistry"
 					target="_blank"
 					rel="noreferrer"
-					class="text-3xl lg:text-5xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
 				>
 					Github,
 				</a>
@@ -26,7 +26,7 @@
 					href="https://twitter.com/containerish"
 					target="_blank"
 					rel="noreferrer"
-					class="text-3xl lg:text-5xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
 				>
 					Twitter,
 				</a>
@@ -34,7 +34,7 @@
 					href="https://discord.gg/Mx8HAazrHc"
 					target="_blank"
 					rel="noreferrer"
-					class="text-3xl lg:text-5xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
 				>
 					Discord
 				</a>

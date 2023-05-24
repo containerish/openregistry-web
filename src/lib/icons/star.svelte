@@ -4,7 +4,7 @@
 
 <svg
 	aria-label="star icon"
-	class={twMerge('h-4 w-4', $$props.class)}
+	class={twMerge('h-5 w-5', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

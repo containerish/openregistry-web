@@ -14,16 +14,16 @@
 	};
 </script>
 
-<div class="bg-slate-100 relative bg-contain" style="background-image:url('/mesh.png');">
+<!-- <div class="bg-slate-100 relative bg-contain" style="background-image:url('/mesh.png');"> -->
 	<Card
 		class="min-h-[800px] flex flex-col items-center space-y-8 gap-10 py-20 
-	lg:min-w-[1000px] max-w-[1500px] px-3 md:px-16 mx-auto"
+	lg:min-w-[1000px] max-w-[1500px] px-3 md:px-16 mx-auto relative"
 	>
 		<div
 			class="flex flex-col justify-center items-start lg:flex-row lg:justify-between lg:items-center gap-12 w-full md:gap-6
 			py-12"
 		>
-			<div class="flex flex-col gap-12 lg:w-3/5 px-6 items-start bg-slate-100/50">
+			<div class="flex flex-col gap-12 lg:w-3/5 px-6 items-start">
 				<div class="flex flex-col justify-center gap-3">
 					<span class="text-4xl font-bold text-primary-600"> Get started with OpenRegistry </span>
 					<span class="text-base font-medium text-slate-600">
@@ -46,7 +46,7 @@
 
 				<div class="flex justify-center md:justify-start items-center gap-5">
 					<ButtonSolid on:click={handleSignupForm}>Sign up now</ButtonSolid>
-					<ButtonOutlined
+					<ButtonOutlined class="text-primary-500 border-primary-500/50 hover:shadow-primary-400/50"
 						on:click={() => {
 							goto('https://docs.openregistry.dev');
 						}}>Learn more</ButtonOutlined
@@ -74,10 +74,9 @@
 				>
 			</div>
 		</div> -->
-
 		<Steps/>
 	</Card>
-</div>
+<!-- </div> -->
 {#if showSignUpForm}
 	<Dialog class="top-0">
 		<Signup toggleSignInForm={() => {}} toggleSignUpForm={handleSignupForm} />
