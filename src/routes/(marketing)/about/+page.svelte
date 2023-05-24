@@ -6,7 +6,7 @@
 	<title>About|Open Registry</title>
 </svelte:head>
 
-<div class="flex flex-col xl:flex-row bg-primary-50/30 justify-center items-center relative">
+<div class="flex flex-col xl:flex-row bg-primary-50/30 justify-center items-center">
 	<!-- <div class="flex xl:absolute xl:flex top-[40%] justify-between w-full max-w-[1700px] mx-auto">
 		<div class="">
 			<img src="about-1.svg" alt="about us" width="500px" />
@@ -16,7 +16,7 @@
 		</div>
 	</div> -->
 	<div
-		class="flex flex-col w-full justify-start items-center my-2 lg:my-9 max-w-[2000px] mx-auto z-20"
+		class="flex flex-col w-full justify-start items-center my-2 lg:my-9 max-w-[1600px] mx-auto z-20 relative"
 	>
 		<div
 			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center px-10
@@ -51,13 +51,13 @@
 			</span>
 			<div class="flex flex-col gap-20 mt-8 w-full">
 				<div class="flex justify-center items-center">
-					<div class="flex xl:absolute xl:flex top-[40%] justify-between w-full max-w-[1700px] mx-auto">
+					<div class="flex xl:absolute xl:flex top-[40%] left-0 -z-50">
 						<div class="">
 							<img src="about-1.svg" alt="about us" width="500px" />
 						</div>
 					</div>
 
-					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white/80 rounded-sm shadow-3xl">
+					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white/90 rounded-sm shadow-3xl">
 						<div class="flex flex-col">
 							<span class="text-xl font-semibold text-primary-500 capitalize"> Jasdeep Singh </span>
 
@@ -96,7 +96,7 @@
 				</div>
 
 				<div class="flex justify-center items-center">
-					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white/80 rounded-sm shadow-3xl">
+					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white/90 rounded-sm shadow-3xl">
 						<div class="flex flex-col">
 							<span class="text-xl font-semibold text-primary-500 capitalize"> Gunjan Valecha </span>
 							<p class="text-slate-700 capitalize">Engineer</p>
@@ -129,7 +129,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="flex xl:absolute xl:flex top-[40%] justify-end w-full max-w-[1700px] mx-auto">
+					<div class="flex xl:absolute xl:flex top-[41%] right-0 justify-end items-center -z-50">
 						<div class="xl:mt-52 justify-self-end">
 							<img src="about-2.svg" alt="about us" width="500px" />
 						</div>
