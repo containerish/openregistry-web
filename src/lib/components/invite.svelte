@@ -33,14 +33,14 @@
 	};
 </script>
 
-<div class="flex justify-center items-center w-full px-3 py-3">
+<div class="flex justify-center items-center w-full py-3 px-6">
 	<form
 		on:submit|preventDefault={() => sendInvites()}
-		class="flex justify-center items-center gap-8 flex-col h-full w-full"
+		class="flex justify-center items-center gap-9 flex-col h-full w-full"
 	>
 		<span class="text-2xl capitalize font-semibold text-primary-500">Invite Your Colleauges</span>
-		<div class="w-full">
-			<div class="flex flex-col gap-1 w-full">
+		<div class="w-full flex flex-col gap-5">
+			<div class="flex flex-col  w-full">
 				<div class="flex items-center px-2">
 					<label for="invite_email_input" class="block font-semibold text-sm text-slate-800">
 						Email
@@ -60,7 +60,7 @@
 					<span class={statusCode > 299 ? 'text-rose-600' : 'text-slate-700'}>{respMsg}</span>
 				</div>
 			{/if}
-			<div class="flex pt-4 w-full space-x-5 justify-center">
+			<div class="flex w-full gap-6 justify-center">
 				<ButtonSolid {isLoading} on:click={sendInvites}>Send Invites</ButtonSolid>
 				<ButtonOutlined on:click={handleModal}>Cancel</ButtonOutlined>
 			</div>

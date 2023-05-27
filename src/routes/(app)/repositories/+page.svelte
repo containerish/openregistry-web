@@ -105,7 +105,7 @@
 				<div class="w-4/5 lg:w-3/5">
 					<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 				</div>
-				{#if showTooltip}
+				<!-- {#if showTooltip}
 					<div id="tooltip" class=" bg-cyan-200 rounded py-1 px-3" use:popperContent={extraOpts}>
 						<span class=" text-slate-700">
 							Coming soon
@@ -121,7 +121,7 @@
 						</span>
 						<div id="arrow" data-popper-arrow />
 					</div>
-				{/if}
+				{/if} -->
 
 				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal}
 					>Create Respository</ButtonOutlined

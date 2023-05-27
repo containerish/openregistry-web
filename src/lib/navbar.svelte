@@ -21,8 +21,8 @@
 </script>
 
 <header class="sticky top-0 z-50 bg-primary-50">
-	<nav class="px-16 pt-3 pb-2 max-w-[2500px] mx-auto">
-		<div class="flex w-full items-center justify-between ">
+	<nav class="px-1 md:px-16 pt-3 pb-2 max-w-[2500px] mx-auto">
+		<div class="flex w-full items-center justify-between">
 			<IconButton
 				on:keyup={() => goto('/')}
 				on:click={() => goto('/')}
@@ -32,9 +32,10 @@
 			</IconButton>
 			<div class="md:hidden">
 				<Menu>
-					<div class="flex flex-col">
-						<MenuItem class="hover:bg-primary-100">
+					<div class="flex flex-col items-start">
+						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
 							<IconButton
+								class="pr-16 pl-6 py-2 m-0 text-sm"
 								on:click={() => {
 									window.open('https://blog.openregistry.dev', '_blank');
 								}}
@@ -42,8 +43,9 @@
 								Blog
 							</IconButton>
 						</MenuItem>
-						<MenuItem class="hover:bg-primary-100">
+						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
 							<IconButton
+								class="pr-16 pl-6 py-2 m-0 text-sm"
 								on:click={() => {
 									window.open('/about', '_self');
 								}}
@@ -51,8 +53,9 @@
 								About
 							</IconButton>
 						</MenuItem>
-						<MenuItem class="hover:bg-primary-100">
+						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
 							<IconButton
+								class="pr-16 pl-6 py-2 m-0 text-sm"
 								on:click={() => {
 									window.open('https://github.com/containerish/OpenRegistry.git', '_blank');
 								}}
@@ -60,8 +63,9 @@
 								Github
 							</IconButton>
 						</MenuItem>
-						<MenuItem class="hover:bg-primary-100">
+						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
 							<IconButton
+								class="pr-16 pl-6 py-2 m-0 text-sm"
 								on:click={() => {
 									window.open('/faq', 'self');
 								}}
@@ -69,8 +73,10 @@
 								FAQ
 							</IconButton>
 						</MenuItem>
-						<MenuItem class="hover:bg-primary-100">
-							<IconButton on:click={toggleSignIn}>Sign In</IconButton>
+						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
+							<IconButton class="pr-16 pl-6 py-2 m-0 text-sm" on:click={() => goto('/auth/signin')}
+								>Sign In</IconButton
+							>
 						</MenuItem>
 					</div>
 				</Menu>
@@ -109,7 +115,11 @@
 					</a>
 				</div>
 				<div class="hidden md:flex ml-5">
-					<ButtonSolid on:click={toggleSignIn}>Sign In</ButtonSolid>
+					<ButtonSolid
+						on:click={() => {
+							goto('/auth/signin');
+						}}>Sign In</ButtonSolid
+					>
 				</div>
 				<div>
 					<Dialog isOpen={openSignInModal}>
