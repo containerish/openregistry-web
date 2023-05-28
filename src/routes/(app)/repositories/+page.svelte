@@ -127,7 +127,7 @@
 					>Create Respository</ButtonOutlined
 				>
 
-				<Dialog isOpen={showModal}>
+				<Dialog class="" isOpen={showModal}>
 					<NewRepository />
 				</Dialog>
 			</div>
@@ -150,7 +150,7 @@
 						class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
 							flex justify-center items-center"
 					>
-						<span class="text-slate-500 text-2xl md:text-3xl lg:text-4xl">
+						<span class="text-slate-500 text-2xl">
 							No Repositories Yet
 						</span>
 					</div>

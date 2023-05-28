@@ -34,18 +34,18 @@
 				<TabPanel>
 					{#if showFirstBuild}
 						<div
-							class="flex laptop:flex-col space-x-8 relative bg-white rounded-sm px-20 py-12 min-h-max border-2 
-						border-primary-100 shadow-3xl mt-10"
+							class="flex flex-col md:flex-row relative bg-white rounded-sm px-9 items-center py-3 md:py-0 min-h-max border-2 
+						border-primary-100 shadow-3xl mt-10 gap-6"
 						>
-							<picture>
-								<img src="/build.svg" alt="logo" class="apple:w-56 uw:w-56" width="200px" />
-							</picture>
+							<div>
+								<img src="/catainer/catainer-hearts.png" alt="logo" class="pb-12 max-w-[250px]" />
+							</div>
 							<div class="flex flex-col gap-3 justify-center">
-								<span class="text-lg lg:text-2xl font-semibold text-primary-500">
+								<span class="text-2xl font-semibold text-primary-500">
 									Congratulations on your first Build!</span
 								>
 								<span
-									class="text-lg desktop:text-base laptop:text-sm half:text-sm text-slate-600 ml-1"
+									class="text-sm lg:text-base text-slate-600 ml-1"
 								>
 									you can now do more with your site. invite collaborators, protect previews, enable
 									web analytics and more.</span

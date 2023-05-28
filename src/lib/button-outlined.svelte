@@ -12,7 +12,7 @@
 		`px-3 transition ease-in-out duration-200 flex justify-center gap-1 items-center border-2 rounded 
 		font-medium text-primary-400 bg-transparent border-primary-200 tracking-wide min-w-[120px] h-10 lg:h-11
 		 hover:shadow-primary-100 hover:shadow-3xl disabled:bg-slate-200 disabled:shadow-none disabled:text-slate-500
-		  disabled:border-slate-300 lg:text-lg antialiased`,
+		  disabled:border-slate-300 text-sm lg:text-base antialiased`,
 		$$props.class
 	)}
 >

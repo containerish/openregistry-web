@@ -33,23 +33,16 @@
 	};
 </script>
 
-<div class="flex justify-center items-center w-full py-3 px-6">
+<div class="flex justify-center items-center w-full py-1 px-6">
 	<form
 		on:submit|preventDefault={() => sendInvites()}
-		class="flex justify-center items-center gap-9 flex-col h-full w-full"
+		class="flex justify-center items-center gap-6 flex-col h-full w-full"
 	>
 		<span class="text-2xl capitalize font-semibold text-primary-500">Invite Your Colleauges</span>
-		<div class="w-full flex flex-col gap-5">
-			<div class="flex flex-col  w-full">
-				<div class="flex items-center px-2">
-					<label for="invite_email_input" class="block font-semibold text-sm text-slate-800">
-						Email
-					</label>
-					<span class="px-2 text-xs text-slate-600 antialiased"
-						>(comma separated list of emails)</span
-					>
-				</div>
+		<div class="w-full flex flex-col gap-6">
+			<div class="flex flex-col w-full">
 				<Textfield
+					label="Emails"
 					onInput={readEmails}
 					bind:value={emails}
 					placeholder="jane@openregistry.dev, john@..."

@@ -16,6 +16,7 @@
 	import Dialog from '$lib/dialog.svelte';
 	import { onMount } from 'svelte';
 	import type { z } from 'zod';
+	import IconButton from '$lib/icon-button.svelte';
 
 	export let handleNext;
 
@@ -93,14 +94,14 @@
 	</div>
 	<div class="border-primary-100 border bg-slate-100 rounded">
 		<div class="flex gap-6 justify-end items-end bg-primary-100/70 py-2 px-5">
-			<div class="flex gap-2">
+			<IconButton class="w-1 p-0 m-0">
 				<DownloadIcon class="h-6 w-6 text-slate-600" />
 				<span class="text-base text-slate-600"> Download log </span>
-			</div>
-			<div class="flex gap-2">
+			</IconButton>
+			<IconButton class="w-1 p-0 m-0">
 				<CopyIcon class="text-slate-600" />
 				<span class="text-base text-slate-600"> Copy log </span>
-			</div>
+			</IconButton>
 		</div>
 
 		<table class="table-auto min-h-[500px]">
@@ -119,7 +120,7 @@
 
 	{#if showModal}
 		<Dialog class="shadow-2xl shadow-primary-600">
-			<div class="min-h-max px-3 flex flex-col justify-center items-center gap-9 py-6 mx-4">
+			<div class="min-h-max flex flex-col justify-center items-center gap-9 py-3 mx-4">
 				<span class="lg:text-2xl text-lg font-semibold text-primary-500 break-words"
 					>Continue without a sucessful deployment ?</span
 				>

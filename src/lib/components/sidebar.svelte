@@ -74,7 +74,7 @@
 
 <div
 	class="bg-primary-700 rounded-sm flex flex-col justify-start items-center border-2 border-slate-300
-	 shadow-2xl tall:min-h-[1700px"
+	 shadow-2xl tall:min-h-[1700px]"
 >
 	{#if !extended}
 		<form method="POST" class="flex flex-col justify-start px-3 items-center gap-9 py-6">
