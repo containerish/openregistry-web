@@ -105,7 +105,7 @@
 						class="text-slate-700 text-sm xl:text-base rounded border-2 border-primary-100 w-full
 						flex justify-center max-w-[330px] lg:max-w-full items-center py-2.5 lg:py-3 px-5 hover:shadow-2xl relative {repo
 							.repository.name === selectedRepo
-							? 'shadow-2xl shadow-slate-200 bg-white'
+							? 'shadow-2xl shadow-slate-200 bg-emerald-100/60'
 							: 'bg-white'}"
 					>
 						{repo.repository.name}

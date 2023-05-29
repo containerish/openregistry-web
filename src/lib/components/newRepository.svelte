@@ -9,10 +9,10 @@
 	const toggleModal = getContext('toggleModal');
 </script>
 
-<div class="px-6 py-6">
-	<form class="flex justify-around items-center gap-8 flex-col h-full w-full">
+<div class="p-5 max-w-[400px]">
+	<form class="flex justify-around items-center gap-6 flex-col h-full w-full">
 		<span class="text-2xl font-semibold text-primary-500 pb-4"> Create A New Repository </span>
-		<div class="flex flex-col gap-4 w-full">
+		<div class="flex flex-col gap-3 w-full">
 			<div class="flex gap-4 text-slate-600 pb-2">
 				<RadioButton label="Public">
 					<GlobeIcon class="h-6 w-6" />
@@ -36,7 +36,7 @@
 					focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500"
 				/>
 			</div>
-			<div class="flex px-16 pt-2 w-full justify-center items-center space-x-5">
+			<div class="flex px-16 pt-2 w-full justify-center items-center gap-6">
 				<ButtonSolid>Create</ButtonSolid>
 				<ButtonOutlined on:click={toggleModal}>Close</ButtonOutlined>
 			</div>

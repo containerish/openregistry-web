@@ -105,7 +105,7 @@
 				<div class="w-4/5 lg:w-3/5">
 					<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
 				</div>
-				{#if showTooltip}
+				<!-- {#if showTooltip}
 					<div id="tooltip" class=" bg-cyan-200 rounded py-1 px-3" use:popperContent={extraOpts}>
 						<span class=" text-slate-700">
 							Coming soon
@@ -121,13 +121,13 @@
 						</span>
 						<div id="arrow" data-popper-arrow />
 					</div>
-				{/if}
+				{/if} -->
 
 				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal}
 					>Create Respository</ButtonOutlined
 				>
 
-				<Dialog isOpen={showModal}>
+				<Dialog class="" isOpen={showModal}>
 					<NewRepository />
 				</Dialog>
 			</div>
@@ -150,7 +150,7 @@
 						class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
 							flex justify-center items-center"
 					>
-						<span class="text-slate-500 text-2xl md:text-3xl lg:text-4xl">
+						<span class="text-slate-500 text-2xl">
 							No Repositories Yet
 						</span>
 					</div>

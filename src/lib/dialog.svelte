@@ -24,7 +24,7 @@
 			<DialogOverlay />
 		</TransitionChild>
 
-		<div class="fixed inset-0 overflow-y-auto ">
+		<div class="fixed inset-0 overflow-y-auto">
 			<div class="flex min-h-full items-center justify-center text-center">
 				<TransitionChild
 					enter="ease-out duration-300"
@@ -36,7 +36,8 @@
 				>
 					<div
 						class={twMerge(
-							'flex min-h-max w-full transform lg:min-w-[480px] px-6 lg:py-4 z-50 rounded bg-white transition-all inset-0 border-2 border-primary-500',
+							`flex min-h-max w-full transform px-6 lg:py-4 z-50 rounded-lg bg-white 
+							transition-all inset-0 border-2 border-primary-500`,
 							$$props.class
 						)}
 					>
