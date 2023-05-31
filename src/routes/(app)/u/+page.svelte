@@ -61,24 +61,24 @@
 {#if data.user}
 	<div class="w-full max-w-[2000px] flex flex-col">
 		<div
-			class="flex flex-col items-center lg:flex-row lg:items-end py-20 px-9 lg:px-20 gap-8 bg-primary-50"
+			class="flex flex-col items-center md:flex-row md:items-end py-20 px-9 lg:px-20 gap-8 bg-primary-50"
 		>
 			<div class="flex">
 				<img src="/user.png" alt="Profile" width="90px" />
 			</div>
-			<div class="flex flex-col gap-3 items-center lg:items-start">
+			<div class="flex flex-col gap-3 items-center md:items-start">
 				<div class="flex items-center gap-9">
-					<span class="text-2xl lg:text-4xl font-medium capitalize text-slate-600">
+					<span class="text-3xl font-medium capitalize text-slate-600">
 						{data.user.name ? data.user.name : data.user.username}
 					</span>
-					<a class="text-base text-primary-400 underline-offset-4 lg:mt-2" href="/settings"
+					<a class="text-sm text-primary-400 underline-offset-4 md:mt-2" href="/settings"
 						><u>Edit Profile</u></a
 					>
 				</div>
-				<div class="flex items-center gap-9">
+				<div class="flex items-center gap-7">
 					<div class="flex items-center">
 						<ProfileIcon class="h-4 w-4 text-slate-500 fill-current" />
-						<span class="text-sm lg:text-base text-slate-500">Community User</span>
+						<span class="text-sm text-slate-500">Community User</span>
 					</div>
 					<span class=" text-sm text-slate-600">
 						Joined
@@ -92,13 +92,13 @@
 
 		<div
 			class="flex gap-5 min-w-max items-start justify-items-center bg-primary-50
-			px-3 lg:px-16 mb-10 border-b-2 border-primary-100"
+			px-3 lg:px-16 mb-10 shadow-2xl"
 		>
 			<button
 				aria-label="tab for repositories"
 				on:click={toggleRepo}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-4
-				border-transparent text-base lg:text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+				class="ease-in duration-300 h-10 px-4 pb-6 text-center bg-transparent border-b-4
+				border-transparent text-base whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
           {isRepo
 					? 'border-b-primary-400 text-primary-500 font-medium'
 					: 'border-b-transparent text-slate-600'}
@@ -110,8 +110,8 @@
 			<button
 				aria-label="tab for starred repositories"
 				on:click={toggleStarred}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-4
-				border-transparent text-base lg:text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+				class="ease-in duration-300 h-10 px-4 pb-6 text-center bg-transparent border-b-4
+				border-transparent text-base whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
           {isStarred
 					? 'border-b-primary-400 text-primary-500 font-medium'
 					: 'border-b-transparent text-slate-600'}
@@ -123,8 +123,8 @@
 			<button
 				aria-label="tab for contributed repositories"
 				on:click={toggleisContrib}
-				class="ease-in duration-300 h-10 px-4 pb-9 text-center bg-transparent border-b-4
-				border-transparent text-base lg:text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+				class="ease-in duration-300 h-10 px-4 pb-6 text-center bg-transparent border-b-4
+				border-transparent text-base whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
           {isContrib
 					? 'border-b-primary-400 text-primary-500 font-medium'
 					: 'border-b-transparent text-slate-600'}
@@ -143,11 +143,11 @@
 						{/each}
 					{:else}
 						<div
-							class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl
+							class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
 							rounded py-8 px-2 flex justify-center items-center flex-col gap-3"
 						>
-							<CubeIcon class="h-8 w-8 text-slate-500" />
-							<span class="text-slate-500 text-xl lg:text-2xl">No Repositories Yet</span>
+							<CubeIcon class="h-8 w-8 text-primary-500/80" />
+							<span class="text-slate-500 text-2xl">No Repositories Yet</span>
 							<span class="text-slate-600 text-base text-center antialiased">
 								Try pushing some container images, want to find out how? follow the
 								<a class="text-primary-400" href="https://docs.openregistry.dev">Docs</a>
@@ -161,11 +161,11 @@
 		{#if isStarred}
 			<div class="w-full px-8 py-8">
 				<div
-					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl
+					class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
 					rounded py-8 flex justify-center items-center flex-col gap-3"
 				>
-					<StarIcon class="h-8 w-8 text-slate-500" />
-					<span class="text-slate-500 text-xl lg:text-2xl text-center"
+					<StarIcon class="h-8 w-8 text-primary-500/80" />
+					<span class="text-slate-500 text-2xl text-center"
 						>Your starred repositories will show here</span
 					>
 					<span class="text-slate-600 text-base text-center antialiased">
@@ -178,11 +178,11 @@
 		{#if isContrib}
 			<div class=" w-full px-8 py-8">
 				<div
-					class="h-full min-h-[200px] border border-primary-200 bg-white w-full shadow-2xl
+					class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
 					rounded py-8 flex justify-center items-center flex-col gap-3"
 				>
-					<UserGroupIcon class="h-8 w-8 text-slate-500" />
-					<span class="text-slate-500 text-xl lg:text-2xl text-center"
+					<UserGroupIcon class="h-8 w-8 text-primary-500/80" />
+					<span class="text-slate-500 text-2xl text-center"
 						>Your Contributions will show up here</span
 					>
 					<span class="text-slate-500 text-base text-center">
