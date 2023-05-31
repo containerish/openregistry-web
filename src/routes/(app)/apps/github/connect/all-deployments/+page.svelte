@@ -8,8 +8,8 @@
 	import IconButton from '$lib/icon-button.svelte';
 	const handleTabSelect = (opts: any) => {
 		return opts.selected
-			? `font-semibold border-0 border-b-4 border-primary-400 text-lg text-slate-700`
-			: `border-none selection:bg-primary-100 text-lg text-slate-700`;
+			? `font-semibold border-0 border-b-4 border-primary-400 text-lg text-slate-700 -mb-0.5`
+			: `border-none selection:bg-primary-100 text-lg text-slate-700 -mb-0.5`;
 	};
 
 	let showFirstBuild = true;
@@ -22,7 +22,7 @@
 	<title>Builds | OpenRegistry</title>
 </svelte:head>
 
-<div class="w-full p-20">
+<div class="w-full p-6 md:p-12">
 	<TabGroup defaultIndex={0}>
 		<TabList class="text-lg flex gap-9 ml-2 border-b-2 border-slate-300">
 			<Tab let:selected class={handleTabSelect}>Builds</Tab>
@@ -34,11 +34,11 @@
 				<TabPanel>
 					{#if showFirstBuild}
 						<div
-							class="flex flex-col md:flex-row relative bg-white rounded-sm px-9 items-center py-3 md:py-0 min-h-max border-2 
-						border-primary-100 shadow-3xl mt-10 gap-6"
+							class="flex flex-col md:flex-row relative bg-white rounded-sm px-9 md:items-center py-3 md:py-0 
+							min-h-max border-2 border-primary-100/50 shadow-3xl mt-10 gap-6"
 						>
 							<div>
-								<img src="/catainer/catainer-hearts.png" alt="logo" class="pb-12 max-w-[250px]" />
+								<img src="/catainer/catainer-hearts.png" alt="logo" class="md:pb-12 max-w-[200px] md:max-w-[250px]" />
 							</div>
 							<div class="flex flex-col gap-3 justify-center">
 								<span class="text-2xl font-semibold text-primary-500">
@@ -66,15 +66,15 @@
 						</div>
 					{/if}
 					<BuildTile />
-					<div class="border border-primary-200 rounded flex flex-col">
-						<div class="bg-slate-200 grid grid-cols-7 justify-between px-3 py-1 text-slate-800">
+					<div class="border border-primary-100/50 rounded flex flex-col overflow-y-auto min-w-[700px]">
+						<div class="bg-primary-200/50 grid grid-cols-7 justify-between px-3 py-1 text-slate-800">
 							<span>Environment</span>
 							<span class=" col-span-2">Source</span>
 							<span class=" col-span-2">Deployment</span>
 							<span class=" col-span-2">Status</span>
 						</div>
-						<div>
-							{#each new Array(10) as item}
+						<div class="">
+							{#each new Array(2) as item}
 								<BuildCompact />
 								<hr />
 							{/each}

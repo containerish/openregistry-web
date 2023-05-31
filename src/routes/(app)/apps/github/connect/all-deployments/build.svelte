@@ -4,7 +4,7 @@
 
 <!-- the values are added just for design purposes, must cahnge them with dynamic values once APIs are in place -->
 <div
-	class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100 my-6
+	class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100/50 my-6
 	border-l-4 border-l-emerald-600 border-opacity-100 shadow-2xl gap-3 px-6 py-6"
 >
 	<div class="flex justify-between">
@@ -23,8 +23,8 @@
 		<a href="#">opneregistry.dev, somethingelse.dev</a>
 	</div>
 	<hr class="-mx-6 border-b-1 border-slate-300" />
-	<div class="flex justify-between">
-		<div class="flex gap-6 items-center">
+	<div class="flex flex-col lg:flex-row gap-6 justify-between">
+		<div class="flex flex-col md:flex-row items-start gap-6 md:items-center">
 			<div
 				class="rounded-full bg-emerald-200 text-emerald-800 max-w-fit text-sm px-3 py-0.5 antialiased tracking-wide"
 			>

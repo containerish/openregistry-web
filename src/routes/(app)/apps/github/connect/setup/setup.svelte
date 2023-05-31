@@ -129,7 +129,7 @@
 
 			<hr class="m" />
 
-			<div class="flex justify-between items-baseline">
+			<div class=" mx-auto flex flex-col w-full items-center gap-6 md:flex-row justify-between md:items-baseline">
 				<div
 					on:click={() => handleNext(0)}
 					on:keypress={() => handleNext(0)}
@@ -139,7 +139,7 @@
 					<span class="text-slate-700 text-base antialiased">Change repository</span>
 				</div>
 
-				<ButtonSolid on:click={() => handleNext(2)}>Save and Deploy</ButtonSolid>
+				<ButtonSolid class="" on:click={() => handleNext(2)}>Save and Deploy</ButtonSolid>
 			</div>
 		</div>
 	</div>

@@ -4,12 +4,12 @@
 
 	const handleSettingsTab = (opts: any) => {
 		return opts.selected
-			? `font-semibold border-0 border-l-2 bg-slate-200 border-primary-400 text-start text-slate-700`
-			: `border-none text-start text-slate-700`;
+			? `font-semibold border-0 border-l-2 bg-slate-200 border-primary-400 text-start text-slate-700 text-sm md:text-base`
+			: `border-none text-start text-slate-700 text-sm md:text-base`;
 	};
 </script>
 
-<TabGroup defaultIndex={0} class="grid grid-cols-4 gap-9 px-3 py-9">
+<TabGroup defaultIndex={1} class="grid grid-cols-4 gap-9 px-3 py-9 overflow-y-auto min-w-[500px]">
 	<TabList class="col-span-1 flex flex-col w-full">
 		<Tab class={handleSettingsTab}>General</Tab>
 		<Tab class={handleSettingsTab}>Builds and Deployments</Tab>
@@ -20,51 +20,54 @@
 			<div class="flex flex-col gap-9 text-slate-700">
 				<div class="flex flex-col gap-3">
 					<div
-						class="flex justify-between items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+						class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300 
+						rounded p-7 bg-slate-50"
 					>
 						<div class="flex flex-col gap-3">
 							<span class="font-semibold text-primary-500 lg:text-lg">Build details</span>
 							<span class="text-sm"><b>Project name:</b> openregistry-test</span>
 							<span class="text-sm"><b>Date Created:</b> Thu, March 12, 2023</span>
 						</div>
-						<ButtonOutlined>Rename Project</ButtonOutlined>
+						<ButtonOutlined class="md:w-1/3">Rename Project</ButtonOutlined>
 					</div>
 				</div>
 
 				<div
-					class="flex justify-between items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+					class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300 rounded p-7 bg-slate-50"
 				>
 					<div class="flex flex-col gap-3">
 						<div class="flex flex-col">
 							<class class="font-semibold text-primary-500 text-lg">Members</class>
-							<class class=" text-sm">Invite members to collaborate</class>
+							<class class=" text-xs">Invite members to collaborate</class>
 						</div>
 						<span class="text-sm"
 							>invite people to share the build project and collabotare with
 						</span>
 					</div>
-					<ButtonOutlined>Manage Members</ButtonOutlined>
+					<ButtonOutlined class="md:w-1/3">Manage Members</ButtonOutlined>
 				</div>
 
 				<div
-					class="flex justify-between items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+					class="flex flex-col md:flex-row justify-between items-start gap-6 md:items-center border-2 border-slate-300 
+					rounded p-7 bg-slate-50"
 				>
 					<div class="flex flex-col gap-3">
 						<div class="flex flex-col">
 							<class class="font-semibold text-primary-500 text-lg">Access Policy</class>
-							<class class=" text-sm">Control Access to your project's preview </class>
+							<class class=" text-xs">Control Access to your project's preview </class>
 						</div>
 						<span class="text-sm"
 							>invite people to share the build project and collabotare with
 						</span>
 					</div>
-					<ButtonOutlined>Manage Policies</ButtonOutlined>
+					<ButtonOutlined class="md:w-1/3">Manage Policies</ButtonOutlined>
 				</div>
 
 				<div
-					class="flex justify-between items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+					class="flex flex-col md:flex-row justify-between items-start gap-6 md:items-center border-2 
+					border-slate-300 rounded p-7 bg-slate-50"
 				>
-					<div class="flex flex-col gap-3 max-w-lg">
+					<div class="flex flex-col gap-3 md:w-2/3">
 						<span class="font-semibold text-lg text-rose-700">Delete Project</span>
 						<span class="text-sm"
 							>Deleting this project will permanently delete the project from openregistry and our
@@ -72,11 +75,11 @@
 							environment variables and Access Policies
 						</span>
 					</div>
-					<ButtonOutlined class="text-rose-700 border-rose-600">Delete Project</ButtonOutlined>
+					<ButtonOutlined class="text-rose-700 border-rose-600 md:w-1/3">Delete Project</ButtonOutlined>
 				</div>
 			</div>
 		</TabPanel>
-		<TabPanel class="flex flex-col gap-9 text-slate-700">
+		<TabPanel class="flex flex-col text-slate-700">
 			<div class="flex flex-col gap-9">
 				<div class="flex flex-col gap-4">
 					<div class="flex flex-col">
@@ -89,9 +92,9 @@
 						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9 
 						bg-slate-50"
 					>
-						<div class="flex flex-col gap-6 items-start">
-							<div class="rounded-full bg-emerald-200 text-emerald-800 text-xs px-2 py-1">
-								Production branch
+						<div class="flex flex-col gap-6 items-start col-span-2 md:col-span-1">
+							<div class="rounded-full bg-emerald-100 text-emerald-900 text-xs px-2 py-0.5">
+								Production
 							</div>
 							<span class="text-sm font-semibold">Production Branch:</span>
 							<span class="text-sm font-semibold">Automatic Builds:</span>
@@ -100,7 +103,7 @@
 							<span class=" row-start-2 text-sm">release-main</span>
 							<span class="row-start-3 text-sm">Enabled</span>
 						</div>
-						<div class="col-span-3 flex w-full self-start justify-end">
+						<div class="col-span-4 md:col-span-3 flex w-full md:self-start md:justify-end">
 							<ButtonOutlined>Confirgure Production Builds</ButtonOutlined>
 						</div>
 					</div>
@@ -109,9 +112,9 @@
 						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9 
 					bg-slate-50"
 					>
-						<div class="flex flex-col gap-6 items-start">
-							<div class="rounded-full bg-slate-200 text-slate-800 text-xs px-2 py-1">
-								Preview branch
+						<div class="flex flex-col gap-6 items-start col-span-2 md:col-span-1">
+							<div class="rounded-full bg-slate-200 text-slate-800 text-xs px-2 py-0.5">
+								Preview
 							</div>
 							<span class="text-sm font-semibold">Branches Included:</span>
 							<span class="text-sm font-semibold">Automatic Builds:</span>
@@ -120,7 +123,7 @@
 							<span class=" row-start-2 text-sm">All non production branches</span>
 							<span class="row-start-3 text-sm">Enabled</span>
 						</div>
-						<div class="col-span-2 flex w-full self-start justify-end">
+						<div class="col-span-4 md:col-span-2 flex w-full self-start md:justify-end">
 							<ButtonOutlined>Confirgure Preview Builds</ButtonOutlined>
 						</div>
 					</div>
@@ -149,7 +152,7 @@
 							<span class="row-start-3 text-sm">/</span>
 							<span class="row-start-3 text-sm">Enabled</span>
 						</div>
-						<div class="col-span-2 flex w-full self-start justify-end">
+						<div class="col-span-3 md:col-span-2 flex w-full self-start md:justify-end pt-6">
 							<ButtonOutlined>Edit Configuration</ButtonOutlined>
 						</div>
 					</div>
@@ -164,7 +167,7 @@
 					</div>
 
 					<div
-						class="flex justify-between items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+						class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
 					>
 						<span class="text-sm"
 							>Add a deploy hook by creating a name and selecting a desired branch</span
@@ -181,7 +184,7 @@
 						<span class="text-primary-500 font-semibold text-lg">Production</span>
 						<span class="text-sm">Define variables for production environment</span>
 					</div>
-					<ButtonOutlined>Edit Variables</ButtonOutlined>
+					<ButtonOutlined class="w-1/2">Edit Variables</ButtonOutlined>
 				</div>
 
 				<div class="border-2 border-slate-300 rounded">
@@ -199,7 +202,7 @@
 						<span class="text-primary-500 font-semibold text-lg">Preview</span>
 						<span class="text-sm">Define variables for treview environment</span>
 					</div>
-					<ButtonOutlined>Edit Variables</ButtonOutlined>
+					<ButtonOutlined class="w-1/2">Edit Variables</ButtonOutlined>
 				</div>
 
 				<div class="border-2 border-slate-300 rounded">
