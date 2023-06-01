@@ -182,14 +182,14 @@
 	</div>
 
 	
-	<div class="flex justify-between items-center lg:px-9">
+	<div class="flex flex-col md:flex-row justify-between items-center lg:px-9">
 		<button
 			aria-label="tab button"
 			on:click={() => handleNext(1)}
-			class="flex border-none bg-transparent text-lg lg:gap-2 text-primary-800 mt-3"
+			class="flex border-none bg-transparent lg:gap-2 text-primary-800 mt-3"
 		>
 			<ArrowLeftIcon />
-			<span class="text-base lg:text-lg text-slate-700">Change settings</span>
+			<span class="text-base text-slate-700">Change settings</span>
 		</button>
 
 		<ButtonSolid on:click={() => goto('/apps/github/connect/all-deployments')}>
