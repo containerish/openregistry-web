@@ -72,10 +72,7 @@
 	});
 </script>
 
-<div
-	class="bg-primary-700 rounded-sm flex flex-col justify-start items-center border-2 border-slate-300
-	 shadow-2xl tall:min-h-[1700px]"
->
+<div class="flex flex-col">
 	{#if !extended}
 		<form method="POST" class="flex flex-col justify-start px-3 items-center gap-9 py-6">
 			<a href="/">
@@ -127,9 +124,9 @@
 			</button>
 		</form>
 	{:else}
-		<form method="POST" class="py-6 px-3">
-			<label for="sidebar">
-				<div class="flex flex-col justify-between gap-24 h-full tall:min-h-[1700px]">
+		<form method="POST" class="py-6 px-3 h-full">
+			<label for="sidebar" class="h-full">
+				<div class="flex flex-col justify-between gap-24">
 					<div class="flex flex-col gap-9">
 						<a
 							href="/"
@@ -145,7 +142,7 @@
 									<a
 										href="/"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<HomeIcon />
 										<span>Home</span>
@@ -154,7 +151,7 @@
 									<a
 										href="/search"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<SearchIcon />
 										<span>Explore</span>
@@ -163,7 +160,7 @@
 									<a
 										href="/repositories"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<CubeIcon />
 										<span>Your Repositories</span>
@@ -172,7 +169,7 @@
 									<a
 										href="/apps/github/connect"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+										 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<GithubOutlinedIcon class="h-6 w-5" />
 										<span>Connect Gihub</span>
@@ -186,7 +183,7 @@
 										target="_blank"
 										rel="noreferrer"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<ReportIcon />
 										<span>Docs</span>
@@ -195,7 +192,7 @@
 									<a
 										href="/faq"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<QuestionMarkIcon />
 										<span>Help</span>
@@ -205,7 +202,7 @@
 										target="_blank"
 										rel="noreferrer"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<PencilIcon />
 										<span>Blog</span>
@@ -216,7 +213,7 @@
 									<a
 										href="/about"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<HeartIcon />
 										<span>About us</span>
@@ -226,7 +223,7 @@
 										target="_blank"
 										rel="noreferrer"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<StarIcon />
 										<span>Star us on Github</span>
@@ -235,7 +232,7 @@
 										href="#"
 										on:click={toggleModal}
 										class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-								 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<UserPlusIcon />
 										<span>Invite People</span>
@@ -246,7 +243,7 @@
 									<a
 										href="/u"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-									hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+										hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<ProfileIcon class="text-slate-100 antialiased h-5 w-5 " />
 										<span>View Profile</span>
@@ -254,7 +251,7 @@
 									<a
 										href="/settings"
 										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+										 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<SettingsIcon />
 										<span>Settings</span>
@@ -266,15 +263,19 @@
 					<div class="flex flex-col gap-3">
 						<div
 							class="flex flex-col justify-start items-start gap-4 text-slate-100 antialiased
-							tracking-wide font-medium rounded-lg bg-primary-600/50 p-2"
+								tracking-wide font-medium rounded-lg bg-primary-600/50 p-2"
 						>
 							<div class="flex justify-start items-center gap-3">
 								<div class="w-fit border-2 border-primary-50 p-1 lg:p-2 rounded-full">
 									<UserIcon class="h-4 w-4 text-primary-50 fill-current" />
 								</div>
-								<div class="rounded-full text-xs px-2 text-emerald-900 bg-gradient-to-b from-emerald-200 to-emerald-300">active</div>
+								<div
+									class="rounded-full text-xs px-2 text-emerald-900 bg-gradient-to-b from-emerald-200 to-emerald-300"
+								>
+									active
+								</div>
 							</div>
-							
+
 							<div class="flex flex-col text-sm">
 								<span>{user.username}</span>
 								<span>{user.email}</span>
@@ -284,7 +285,7 @@
 						<button
 							formaction="/?/signout"
 							class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-					  hover:bg-primary-600/60 py-2 px-3 hover:no-underline text-sm xl:text-base"
+						  hover:bg-primary-600/60 py-2 px-3 hover:no-underline text-sm xl:text-base"
 						>
 							<SignOutIcon />
 							<span>Sign out</span>
@@ -299,19 +300,20 @@
 									class="hover:bg-rose-500"
 									logo="/akash.png"
 									body="Infrastructure that powers web3 for cloud compute akash network is a distributed
-								peer-to-peer marketplace for cloud compute"
+									peer-to-peer marketplace for cloud compute"
 								/>
 								<Advert
 									link="https://ipfs.io"
 									class="hover:bg-[#65c3ca]"
 									logo="/IPFS_ad.png"
 									body="A peer-to-peer protocol designed to preserve and grow humanity's knowledge by 
-						making the web upgradeable, resilient, and more open."
+							making the web upgradeable, resilient, and more open."
 								/>
 							</Carousel>
 						</div>
 					</div>
 				</div>
+				<div />
 			</label>
 		</form>
 		{#if showModal}
