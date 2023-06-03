@@ -81,46 +81,46 @@
 				</picture>
 			</a>
 
-			<a href="/"><HomeIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/"><HomeIcon class="w-5 h-5 text-slate-700" /></a>
 
-			<a href="/search"><SearchIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/search"><SearchIcon class="w-5 h-5 text-slate-700" /></a>
 
-			<a href="/repositories"><CubeIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/repositories"><CubeIcon class="w-5 h-5 text-slate-700" /></a>
 
 			<a href="/apps/github/connect"
-				><GithubOutlinedIcon class="w-6 h-6 lg:h-9 lg:w-9 text-primary-50" /></a
+				><GithubOutlinedIcon class="w-6 h-6 lg:h-9 lg:w-9 text-slate-700" /></a
 			>
 
 			<a href="https://docs.openregistry.dev/" target="_blank" rel="noreferrer">
-				<ReportIcon class="w-5 h-5 text-primary-50" />
+				<ReportIcon class="w-5 h-5 text-slate-700" />
 			</a>
 
-			<a href="/?/faq"><QuestionMarkIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/?/faq"><QuestionMarkIcon class="w-5 h-5 text-slate-700" /></a>
 
 			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer">
-				<PencilIcon class="w-5 h-5 text-primary-50" /></a
+				<PencilIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
-			<a href="/about"><HeartIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/about"><HeartIcon class="w-5 h-5 text-slate-700" /></a>
 
 			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer">
-				<StarIcon class="w-5 h-5 text-primary-50" /></a
+				<StarIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
 			<a href="#" class="bg-transparent border-0" on:click={toggleModal}>
-				<UserPlusIcon class="w-5 h-5 text-primary-50" />
+				<UserPlusIcon class="w-5 h-5 text-slate-700" />
 			</a>
 
-			<a href="/u"><ProfileIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/u"><ProfileIcon class="w-5 h-5 text-slate-700" /></a>
 
-			<a href="/settings"><SettingsIcon class="w-5 h-5 text-primary-50" /></a>
+			<a href="/settings"><SettingsIcon class="w-5 h-5 text-slate-700" /></a>
 
 			<button
 				aria-label="signout button"
 				class="border-none bg-transparent"
 				formaction="/?/signout"
 			>
-				<SignOutIcon class="w-5 h-5 text-primary-50" />
+				<SignOutIcon class="w-5 h-5 text-slate-700" />
 			</button>
 		</form>
 	{:else}
@@ -132,7 +132,7 @@
 							href="/"
 							class="flex flex-row justify-between items-center gap-4 hover:no-underline px-2"
 						>
-							<Logo type="light" />
+							<Logo type="dark" />
 						</a>
 
 						<div class="flex flex-col justify-center gap-6">
@@ -140,8 +140,8 @@
 							<div class="flex flex-col gap-6">
 								<div class="flex flex-col">
 									<a
-										href="/"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										href="/repositories"
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<HomeIcon />
@@ -150,69 +150,37 @@
 
 									<a
 										href="/search"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<SearchIcon />
 										<span>Explore</span>
 									</a>
 
-									<a
+									<!-- <a
 										href="/repositories"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<CubeIcon />
 										<span>Your Repositories</span>
-									</a>
+									</a> -->
 
 									<a
 										href="/apps/github/connect"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 										 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<GithubOutlinedIcon class="h-6 w-5" />
-										<span>Connect Gihub</span>
+										<span>Automated Builds</span>
 									</a>
 								</div>
 								<hr />
 
-								<div class="flex flex-col">
-									<a
-										href="https://docs.openregistry.dev"
-										target="_blank"
-										rel="noreferrer"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<ReportIcon />
-										<span>Docs</span>
-									</a>
-
-									<a
-										href="/faq"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<QuestionMarkIcon />
-										<span>Help</span>
-									</a>
-									<a
-										href="https://blog.openregistry.dev"
-										target="_blank"
-										rel="noreferrer"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<PencilIcon />
-										<span>Blog</span>
-									</a>
-								</div>
-								<hr />
 								<div class="flex flex-col">
 									<a
 										href="/about"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 									hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<HeartIcon />
@@ -222,7 +190,7 @@
 										href="https://github.com/containerish/OpenRegistry"
 										target="_blank"
 										rel="noreferrer"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<StarIcon />
@@ -231,7 +199,7 @@
 									<a
 										href="#"
 										on:click={toggleModal}
-										class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<UserPlusIcon />
@@ -239,18 +207,52 @@
 									</a>
 								</div>
 								<hr />
+
+								<!-- <div class="flex flex-col"> -->
+								<!-- <a
+										href="https://docs.openregistry.dev"
+										target="_blank"
+										rel="noreferrer"
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									>
+										<ReportIcon />
+										<span>Documentation</span>
+									</a> -->
+
+								<!-- <a
+										href="/faq"
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									>
+										<QuestionMarkIcon />
+										<span>FAQs</span>
+									</a> -->
+								<!-- <a
+										href="https://blog.openregistry.dev"
+										target="_blank"
+										rel="noreferrer"
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
+									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									>
+										<PencilIcon />
+										<span>Blog</span>
+									</a> -->
+								<!-- </div>
+								<hr /> -->
+
 								<div class="flex flex-col">
 									<a
 										href="/u"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 										hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
-										<ProfileIcon class="text-slate-100 antialiased h-5 w-5 " />
+										<ProfileIcon class="text-slate-700 antialiased h-5 w-5 " />
 										<span>View Profile</span>
 									</a>
 									<a
 										href="/settings"
-										class="flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 										 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<SettingsIcon />
@@ -258,16 +260,17 @@
 									</a>
 								</div>
 							</div>
+							<!-- <div class="py-20" /> -->
 						</div>
 					</div>
 					<div class="flex flex-col gap-3">
 						<div
-							class="flex flex-col justify-start items-start gap-4 text-slate-100 antialiased
-								tracking-wide font-medium rounded-lg bg-primary-600/50 p-2"
+							class="flex flex-col justify-start items-start gap-4 text-slate-700 antialiased
+								tracking-wide font-medium rounded-lg bg-primary-100/50 p-2"
 						>
 							<div class="flex justify-start items-center gap-3">
-								<div class="w-fit border-2 border-primary-50 p-1 lg:p-2 rounded-full">
-									<UserIcon class="h-4 w-4 text-primary-50 fill-current" />
+								<div class="w-fit border-2 border-slate-700 p-1 lg:p-2 rounded-full">
+									<UserIcon class="h-4 w-4 text-slate-700 fill-current" />
 								</div>
 								<div
 									class="rounded-full text-xs px-2 text-emerald-900 bg-gradient-to-b from-emerald-200 to-emerald-300"
@@ -284,7 +287,7 @@
 						<hr />
 						<button
 							formaction="/?/signout"
-							class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-100 antialiased tracking-wide
+							class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 						  hover:bg-primary-600/60 py-2 px-3 hover:no-underline text-sm xl:text-base"
 						>
 							<SignOutIcon />

@@ -15,6 +15,14 @@
 					Docs,
 				</a>
 				<a
+					href="https://blog.openregistry.dev"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					Blog,
+				</a>
+				<a
 					href="https://github.com/containerish/openregistry"
 					target="_blank"
 					rel="noreferrer"
