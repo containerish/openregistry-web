@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
-	import { GithubIcon, FingerprintIcon, EmailIcon } from '$lib/icons';
-	import { createEventDispatcher, getContext } from 'svelte';
+	import { GithubIcon, FingerprintIcon, EmailIcon, ArrowLIcon, ArrowLeftIcon } from '$lib/icons';
+	import { createEventDispatcher, getContext, onMount } from 'svelte';
 	import { Auth } from '$apis/auth';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
@@ -24,7 +24,6 @@
 	const auth = new Auth();
 	const dispatch = createEventDispatcher();
 	let emailErr: string;
-	let passwordErr: string;
 	let formErr: string | undefined;
 	let email = $page.form?.data?.email as string;
 	let password = $page.form?.data?.password as string;
@@ -112,13 +111,21 @@
 			}
 		}
 	};
+
+	const handleBackToMain = () => {
+		showForgotPasswordForm = false;
+		isWebAuthN = false;
+	};
+	onMount(() => {
+		isWebAuthN = $page.url.searchParams.get('method') === 'webauthn';
+	});
 </script>
 
 <svelte:head>
 	<title>Sign in | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex flex-col md:flex-row w-full tall:my-20 my-6 md:my-0 ">
+<div class="flex flex-col md:flex-row w-full tall:my-20 my-6 md:my-0">
 	<div class="hidden md:flex justify-center items-center md:w-1/2">
 		<img src="/signin.png" alt="signInImage" class="py-20 px-9" />
 	</div>
@@ -130,12 +137,7 @@
 				<span class="text-start text-primary-500 text-3xl font-semibold">
 					Log in to your account</span
 				>
-				<form
-					class="mt-2 flex flex-col gap-4"
-					method="POST"
-					action="?/signin"
-					use:enhance={handleSignInSubmit}
-				>
+				<form class="mt-2 flex flex-col gap-4" method="POST" use:enhance={handleSignInSubmit}>
 					<div class="">
 						<Textfield
 							errors={$page.form?.errors?.email}
@@ -164,7 +166,7 @@
 					{/if}
 
 					<div class="mt-4 flex w-full justify-center space-x-5">
-						<ButtonSolid class="w-full" {isLoading}>Sign In</ButtonSolid>
+						<ButtonSolid disabled={$page.form?.formErrors} class="w-full" {isLoading}>Sign In</ButtonSolid>
 					</div>
 
 					<ButtonOutlined on:click={handleIsWebAuthn} class="gap-0">
@@ -223,8 +225,15 @@
 						</div>
 					{/if}
 
-					<div class="mt-4 flex flex-col w-full items-center justify-center space-x-5">
+					<div class="mt-4 flex flex-col w-full items-center justify-center gap-3">
 						<ButtonSolid class="w-full" {isLoading}>Sign In</ButtonSolid>
+						<IconButton
+							on:click={handleBackToMain}
+							class="text-primary-400 text-sm w-full p-0 flex justify-center"
+						>
+							<ArrowLeftIcon class="h-4 w-4 text-primary-400" />
+							Back to main
+						</IconButton>
 					</div>
 				</form>
 			{/if}
@@ -279,11 +288,17 @@
 						</div>
 					{/if}
 
-					<div class="mt-9 flex w-full justify-center space-x-5">
+					<div class="mt-9 flex w-full justify-center flex-col gap-3">
 						<ButtonSolid disabled={!!emailErr} on:click={handleForgotPassword} {isLoading}>
 							Submit
 						</ButtonSolid>
-						<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
+						<IconButton
+							on:click={handleBackToMain}
+							class="text-primary-400 text-sm w-full p-0 flex justify-center"
+						>
+							<ArrowLeftIcon class="h-4 w-4 text-primary-400" />
+							Back to main
+						</IconButton>
 					</div>
 				</form>
 			{/if}
