@@ -18,6 +18,8 @@
 		openSignInModal = false;
 		openSignUpModal = !openSignUpModal;
 	};
+
+	export let pathname = '/auth/signin';
 </script>
 
 <header class="sticky top-0 z-50 bg-primary-50">
@@ -114,13 +116,23 @@
 						FAQ
 					</a>
 				</div>
-				<div class="hidden md:flex ml-5">
-					<ButtonSolid
-						on:click={() => {
-							goto('/auth/signin');
-						}}>Sign In</ButtonSolid
-					>
-				</div>
+				{#if pathname === '/' || pathname === '/auth/signup'}
+					<div class="hidden md:flex ml-5">
+						<ButtonSolid
+							on:click={() => {
+								goto('/auth/signin');
+							}}>Sign In</ButtonSolid
+						>
+					</div>
+				{:else if pathname === '/auth/signin'}
+					<div class="hidden md:flex ml-5">
+						<ButtonSolid
+							on:click={() => {
+								goto('/auth/signup');
+							}}>Sign Up</ButtonSolid
+						>
+					</div>
+				{/if}
 				<div>
 					<Dialog isOpen={openSignInModal}>
 						<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
