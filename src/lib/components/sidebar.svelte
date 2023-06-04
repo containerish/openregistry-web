@@ -13,7 +13,8 @@
 		UserPlusIcon,
 		UserIcon,
 		SignOutIcon,
-		StarIcon
+		StarIcon,
+		ToolsIcon
 	} from '$lib/icons';
 	import Logo from './logo.svelte';
 	import type { User } from '$apis/auth';
@@ -24,6 +25,7 @@
 	import { onMount } from 'svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import { page } from '$app/stores';
+	import IconButton from '$lib/icon-button.svelte';
 
 	export let authorised = false;
 
@@ -74,50 +76,71 @@
 
 <div class="flex flex-col">
 	{#if !extended}
-		<form method="POST" class="flex flex-col justify-start px-3 items-center gap-9 py-6">
+		<form method="POST" class="flex flex-col justify-start lg:px-3 items-center gap-3 py-6">
 			<a href="/">
 				<picture>
-					<img src="/logo-light.png" alt="logo" width="40px" />
+					<img src="/logo-new.png" alt="logo" width="40px" />
 				</picture>
 			</a>
 
-			<a href="/"><HomeIcon class="w-5 h-5 text-slate-700" /></a>
-
-			<a href="/search"><SearchIcon class="w-5 h-5 text-slate-700" /></a>
-
-			<a href="/repositories"><CubeIcon class="w-5 h-5 text-slate-700" /></a>
-
-			<a href="/apps/github/connect"
-				><GithubOutlinedIcon class="w-6 h-6 lg:h-9 lg:w-9 text-slate-700" /></a
+			<a href="/repositories" class="rounded-full hover:bg-primary-100/50 p-3 mt-6"
+				><HomeIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
-			<a href="https://docs.openregistry.dev/" target="_blank" rel="noreferrer">
+			<a href="/search" class="rounded-full hover:bg-primary-100/50 p-3"
+				><SearchIcon class="w-5 h-5 text-slate-700" /></a
+			>
+
+			<a href="/apps/github/connect" class="rounded-full hover:bg-primary-100/50 p-3"
+				><ToolsIcon class="w-5 h-5 text-slate-700" /></a
+			>
+
+			<a
+				href="https://docs.openregistry.dev/"
+				class="rounded-full hover:bg-primary-100/50 p-3"
+				target="_blank"
+				rel="noreferrer"
+			>
 				<ReportIcon class="w-5 h-5 text-slate-700" />
 			</a>
 
-			<a href="/?/faq"><QuestionMarkIcon class="w-5 h-5 text-slate-700" /></a>
+			<!-- <a href="/?/faq"><QuestionMarkIcon class="w-5 h-5 text-slate-700" /></a> -->
 
-			<a href="https://blog.openregistry.dev/" target="_blank" rel="noreferrer">
+			<a
+				href="https://blog.openregistry.dev/"
+				class="rounded-full hover:bg-primary-100/50 p-3"
+				target="_blank"
+				rel="noreferrer"
+			>
 				<PencilIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
-			<a href="/about"><HeartIcon class="w-5 h-5 text-slate-700" /></a>
+			<!-- <a href="/about" class="rounded-full hover:bg-primary-100/50 p-3"><HeartIcon class="w-5 h-5 text-slate-700" /></a> -->
 
-			<a href="https://github.com/containerish/OpenRegistry" target="_blank" rel="noreferrer">
+			<a
+				href="https://github.com/containerish/OpenRegistry"
+				class="rounded-full hover:bg-primary-100/50 p-3"
+				target="_blank"
+				rel="noreferrer"
+			>
 				<StarIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
-			<a href="#" class="bg-transparent border-0" on:click={toggleModal}>
+			<IconButton class="m-0 rounded-full hover:bg-primary-100/50 p-3" on:click={toggleModal}>
 				<UserPlusIcon class="w-5 h-5 text-slate-700" />
-			</a>
+			</IconButton>
 
-			<a href="/u"><ProfileIcon class="w-5 h-5 text-slate-700" /></a>
+			<a href="/u" class="rounded-full hover:bg-primary-100/50 p-3"
+				><ProfileIcon class="w-5 h-5 text-slate-700" /></a
+			>
 
-			<a href="/settings"><SettingsIcon class="w-5 h-5 text-slate-700" /></a>
+			<a href="/settings" class="rounded-full hover:bg-primary-100/50 p-3"
+				><SettingsIcon class="w-5 h-5 text-slate-700" /></a
+			>
 
 			<button
 				aria-label="signout button"
-				class="border-none bg-transparent"
+				class="border-none bg-transparent rounded-full hover:bg-pink-200 p-3"
 				formaction="/?/signout"
 			>
 				<SignOutIcon class="w-5 h-5 text-slate-700" />
@@ -136,13 +159,13 @@
 						</a>
 
 						<div class="flex flex-col justify-center gap-6">
-							<Autocomplete onAutoComplete={handleAutoComplete} />
+							<!-- <Autocomplete onAutoComplete={handleAutoComplete} /> -->
 							<div class="flex flex-col gap-6">
 								<div class="flex flex-col">
 									<a
 										href="/repositories"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<HomeIcon />
 										<span>Home</span>
@@ -151,47 +174,61 @@
 									<a
 										href="/search"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<SearchIcon />
 										<span>Explore</span>
 									</a>
 
-									<!-- <a
-										href="/repositories"
-										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<CubeIcon />
-										<span>Your Repositories</span>
-									</a> -->
-
 									<a
 										href="/apps/github/connect"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-										 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+										 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
-										<GithubOutlinedIcon class="h-6 w-5" />
+										<ToolsIcon class="h-6 w-5 text-slate-600" />
 										<span>Automated Builds</span>
 									</a>
 								</div>
 								<hr />
 
 								<div class="flex flex-col">
-									<a
+									<!-- <a
 										href="/about"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<HeartIcon />
 										<span>About us</span>
+									</a> -->
+
+									<a
+										href="https://docs.openregistry.dev"
+										target="_blank"
+										rel="noreferrer"
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
+									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
+									>
+										<ReportIcon />
+										<span>Docs</span>
 									</a>
+
+									<a
+										href="https://blog.openregistry.dev"
+										target="_blank"
+										rel="noreferrer"
+										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
+								  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
+									>
+										<PencilIcon />
+										<span>Blog</span>
+									</a>
+
 									<a
 										href="https://github.com/containerish/OpenRegistry"
 										target="_blank"
 										rel="noreferrer"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<StarIcon />
 										<span>Star us on Github</span>
@@ -200,7 +237,7 @@
 										href="#"
 										on:click={toggleModal}
 										class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<UserPlusIcon />
 										<span>Invite People</span>
@@ -214,7 +251,7 @@
 										target="_blank"
 										rel="noreferrer"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<ReportIcon />
 										<span>Documentation</span>
@@ -223,7 +260,7 @@
 								<!-- <a
 										href="/faq"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<QuestionMarkIcon />
 										<span>FAQs</span>
@@ -233,7 +270,7 @@
 										target="_blank"
 										rel="noreferrer"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<PencilIcon />
 										<span>Blog</span>
@@ -245,7 +282,7 @@
 									<a
 										href="/u"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-										hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+										hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<ProfileIcon class="text-slate-700 antialiased h-5 w-5 " />
 										<span>View Profile</span>
@@ -253,7 +290,7 @@
 									<a
 										href="/settings"
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-										 hover:bg-primary-600/60 py-2 px-3 text-sm xl:text-base hover:no-underline"
+										 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
 										<SettingsIcon />
 										<span>Settings</span>
@@ -288,7 +325,7 @@
 						<button
 							formaction="/?/signout"
 							class=" border-0 bg-transparent flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-						  hover:bg-primary-600/60 py-2 px-3 hover:no-underline text-sm xl:text-base"
+						  hover:bg-rose-200/50 rounded py-2 px-3 hover:no-underline text-sm xl:text-base"
 						>
 							<SignOutIcon />
 							<span>Sign out</span>

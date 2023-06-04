@@ -27,8 +27,10 @@
 		class="flex flex-row selection:bg-primary-500 selection:text-white w-screen max-w-[2000px]
 	bg-slate-50/50 {height}"
 	>
-		<div class="bg-primary-50/60 sticky top-0 left-0 h-full border border-primary-100/50 rounded 
-		mb-3 mr-6 p-3 ">
+		<div
+			class="bg-primary-50/60 sticky top-0 left-0 h-full border border-primary-100/50 rounded
+		mb-3 mr-6 p-3"
+		>
 			<Sidebar user={data.user} />
 		</div>
 		<div class="flex overflow-y-auto w-full mb-9">
@@ -37,4 +39,3 @@
 	</main>
 	<Footer />
 {/if}
-
