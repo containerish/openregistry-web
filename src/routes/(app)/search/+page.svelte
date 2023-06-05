@@ -107,7 +107,7 @@
 		<div
 			class="{data.authenticated
 				? 'justify-start'
-				: 'justify-center'} flex items-center w-full h-full max-w-[3000px]"
+				: 'justify-center'} flex items-start w-full h-full max-w-[3000px]"
 		>
 			{#if showTooltip}
 				<div id="tooltip" class=" bg-cyan-200 rounded py-3 px-4" use:popperContent={extraOpts}>
@@ -240,7 +240,7 @@
 								class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
 								flex justify-center items-center"
 							>
-								<span class="text-primary-600 text-4xl">No Repositories</span>
+								<span class="text-slate-500 text-2xl">No Repositories</span>
 							</div>
 						</div>
 					{/if}

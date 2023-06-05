@@ -7,12 +7,20 @@
 		<div class="flex items-center justify-between gap-12 lg:gap-0">
 			<div class="mb-0 flex flex-col gap-2 lg:flex-row lg:-mb-16 lg:gap-4">
 				<a
-					href="https://docs.openregistry.dev"
+					href="/about"
 					target="_blank"
 					rel="noreferrer"
 					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
 				>
-					Docs,
+					About,
+				</a>
+				<a
+					href="/faq"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					FAQs,
 				</a>
 				<a
 					href="https://github.com/containerish/openregistry"

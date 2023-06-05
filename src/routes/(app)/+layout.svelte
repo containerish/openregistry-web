@@ -5,7 +5,14 @@
 	import Footer from '$lib/footer.svelte';
 	import { Sidebar } from '$lib/components';
 	import type { LayoutData } from './$types';
+	import { browser } from '$app/environment';
 	export let data: LayoutData;
+
+	let height = '';
+	if (browser) {
+		height = 'min-h-[' + window.screen.height + 'px]';
+		// height = 'min-h-['+ window.innerHeight + 'px]';
+	}
 
 	afterNavigate(() => {
 		const main = window.document.getElementById('svelte');
@@ -16,12 +23,19 @@
 </script>
 
 {#if data.user}
-	<main class="flex flex-col selection:bg-primary-500 selection:text-white w-screen max-w-[2000px]">
-		<div class="bg-slate-50/50 flex flex-row gap-1 items-start overflow-y-auto">
+	<main
+		class="flex flex-row selection:bg-primary-500 selection:text-white w-screen max-w-[2000px]
+	bg-slate-50/50 {height}"
+	>
+		<div
+			class="bg-primary-50/60 sticky top-0 left-0 h-full border border-primary-100/50 rounded
+		mb-3 mr-6 p-3"
+		>
 			<Sidebar user={data.user} />
+		</div>
+		<div class="flex overflow-y-auto w-full mb-9">
 			<slot />
 		</div>
-		<Footer />
 	</main>
+	<Footer />
 {/if}
-<!--  -->
