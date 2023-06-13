@@ -1,11 +1,13 @@
 <script>
 	import { Check, ExternalLinkIcon, GitBranchIcon, RecycleIcon } from '$lib/icons';
+	import { fly } from 'svelte/transition';
 </script>
 
 <!-- the values are added just for design purposes, must cahnge them with dynamic values once APIs are in place -->
 <div
 	class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100/50 my-6
 	border-l-4 border-l-emerald-600 border-opacity-100 shadow-2xl gap-3 px-6 py-6"
+	in:fly={{ y: 200, duration: 300, delay: 200 }}
 >
 	<div class="flex justify-between">
 		<span class="text-lg text-slate-700">Production</span>

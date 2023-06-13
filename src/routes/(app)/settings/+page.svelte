@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Card from '$lib/card.svelte';
-	import UserIcon from '$lib/icons/user.svelte';
 	import { ProfileIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
+	import { fly } from 'svelte/transition';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	export let data: PageData;
 	const auth = new Auth();
@@ -12,6 +11,7 @@
 	import { required, max, min, matchField } from 'svelte-forms/validators';
 	import type { PageData } from './$types';
 	import Textfield from '$lib/textfield.svelte';
+	import ButtonOutlined from '$lib/button-outlined.svelte';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
@@ -73,7 +73,8 @@
 			<Card>
 				<div
 					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded border
-					 border-primary-100/50 bg-white px-9 lg:px-20 py-6 shadow-2xl"
+					 border-primary-100/50 bg-white px-9 lg:px-16 py-6 shadow-2xl"
+					in:fly={{ y: 200, duration: 300 }}
 				>
 					<div class="flex w-full flex-col gap-1">
 						<span class="mx-1 text-lg font-medium text-slate-700">Email Address</span>
@@ -92,8 +93,9 @@
 
 			<Card>
 				<div
-					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded 
+					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded
 					bg-white px-9 lg:px-16 py-6 shadow-2xl border border-primary-100/50"
+					in:fly={{ y: 200, duration: 300, delay: 50 }}
 				>
 					<h1 class="text-lg font-medium text-slate-600">Change Password</h1>
 					<Textfield
@@ -145,6 +147,7 @@
 				<div
 					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
 					border-primary-100/50 bg-white px-9 lg:px-16 py-6 shadow-2xl"
+					in:fly={{ y: 200, duration: 300, delay: 100 }}
 				>
 					<div class="flex flex-col gap-1">
 						<span class="text-lg font-medium text-slate-700">Account Information</span>
@@ -176,12 +179,13 @@
 				<div
 					class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
 					border-primary-100/50 bg-white px-9 lg:px-16 py-6 shadow-2xl"
+					in:fly={{ y: 200, duration: 300, delay: 150 }}
 				>
 					<div class="flex flex-col gap-1">
 						<span class="text-lg font-medium text-rose-700">Delete Account</span>
 						<span class="text-slate-700 antialiased text-sm">
-							Please note, if you choose to delete your account your repositories will also deleted and 
-							will no longer be available to you or anyone else
+							Please note, if you choose to delete your account your repositories will also deleted
+							and will no longer be available to you or anyone else
 						</span>
 					</div>
 					<div class="flex w-full flex-col items-start justify-start gap-3">
@@ -192,7 +196,9 @@
 							class="max-w-[450px]"
 							bind:value={data.user.username}
 						/>
-						<ButtonSolid class="mt-6 border-rose-600 bg-transparent text-rose-700">Delete</ButtonSolid>
+						<ButtonOutlined class="mt-6 border-rose-600 bg-transparent text-rose-700"
+							>Delete</ButtonOutlined
+						>
 					</div>
 				</div>
 			</Card>

@@ -3,11 +3,7 @@
 		HomeIcon,
 		ReportIcon,
 		SearchIcon,
-		CubeIcon,
 		PencilIcon,
-		HeartIcon,
-		QuestionMarkIcon,
-		GithubOutlinedIcon,
 		ProfileIcon,
 		SettingsIcon,
 		UserPlusIcon,
@@ -21,11 +17,12 @@
 	import Advert from '../advert.svelte';
 	import Carousel from './carousel.svelte';
 	import Invite from './invite.svelte';
-	import Autocomplete from '../autocomplete.svelte';
 	import { onMount } from 'svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import { page } from '$app/stores';
 	import IconButton from '$lib/icon-button.svelte';
+	import { slide, fade } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
 
 	export let authorised = false;
 
@@ -74,9 +71,9 @@
 	});
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col" in:slide={{ delay: 250, duration: 100, easing: quintOut, axis: 'x' }}>
 	{#if !extended}
-		<form method="POST" class="flex flex-col justify-start lg:px-3 items-center gap-3 py-6">
+		<form method="POST" class="flex flex-col justify-start lg:px-3 items-center gap-3 py-6" in:fade>
 			<a href="/">
 				<picture>
 					<img src="/logo-new.png" alt="logo" width="40px" />
@@ -104,18 +101,12 @@
 				<ReportIcon class="w-5 h-5 text-slate-700" />
 			</a>
 
-			<!-- <a href="/?/faq"><QuestionMarkIcon class="w-5 h-5 text-slate-700" /></a> -->
-
 			<a
 				href="https://blog.openregistry.dev/"
 				class="rounded-full hover:bg-primary-100/50 p-3"
 				target="_blank"
-				rel="noreferrer"
+				rel="noreferrer"><PencilIcon class="w-5 h-5 text-slate-700" /></a
 			>
-				<PencilIcon class="w-5 h-5 text-slate-700" /></a
-			>
-
-			<!-- <a href="/about" class="rounded-full hover:bg-primary-100/50 p-3"><HeartIcon class="w-5 h-5 text-slate-700" /></a> -->
 
 			<a
 				href="https://github.com/containerish/OpenRegistry"
@@ -147,7 +138,7 @@
 			</button>
 		</form>
 	{:else}
-		<form method="POST" class="py-6 px-3 h-full">
+		<form method="POST" class="py-6 px-3 h-full min-w-[270px]" in:fade>
 			<label for="sidebar" class="h-full">
 				<div class="flex flex-col justify-between gap-24">
 					<div class="flex flex-col gap-9">
@@ -192,15 +183,6 @@
 								<hr />
 
 								<div class="flex flex-col">
-									<!-- <a
-										href="/about"
-										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<HeartIcon />
-										<span>About us</span>
-									</a> -->
-
 									<a
 										href="https://docs.openregistry.dev"
 										target="_blank"
@@ -244,40 +226,6 @@
 									</a>
 								</div>
 								<hr />
-
-								<!-- <div class="flex flex-col"> -->
-								<!-- <a
-										href="https://docs.openregistry.dev"
-										target="_blank"
-										rel="noreferrer"
-										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<ReportIcon />
-										<span>Documentation</span>
-									</a> -->
-
-								<!-- <a
-										href="/faq"
-										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<QuestionMarkIcon />
-										<span>FAQs</span>
-									</a> -->
-								<!-- <a
-										href="https://blog.openregistry.dev"
-										target="_blank"
-										rel="noreferrer"
-										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									  hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<PencilIcon />
-										<span>Blog</span>
-									</a> -->
-								<!-- </div>
-								<hr /> -->
-
 								<div class="flex flex-col">
 									<a
 										href="/u"
@@ -297,7 +245,6 @@
 									</a>
 								</div>
 							</div>
-							<!-- <div class="py-20" /> -->
 						</div>
 					</div>
 					<div class="flex flex-col gap-3">

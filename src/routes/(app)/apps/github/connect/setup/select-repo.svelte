@@ -2,16 +2,13 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { ghStore } from '$lib/stores';
-	import { CheckIcon, AddAccountIcon, GithubIcon, GithubOutlinedIcon, Check } from '$lib/icons';
+	import { GithubIcon, Check } from '$lib/icons';
 	import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 	import Dialog from '$lib/dialog.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import type { PageData } from './$types';
 	import Textfield from '$lib/textfield.svelte';
-	import ButtonOutlined from '$lib/button-outlined.svelte';
-
 	let openDialog = false;
-	let disabled = false;
 
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
@@ -46,12 +43,11 @@
 			<span class="text-lg font-semibold">Github | </span>
 			<span class="font-light text-sm"> more coming soon</span>
 		</div>
-		
+
 		<div class="flex flex-col ml-1">
 			<div class="w-[92px] bg-emerald-400 h-[2px] rounded-md" />
 		</div>
 	</div>
-	
 
 	<div class="flex flex-col gap-2 justify-center items-start">
 		<div class="flex items-center ml-2 text-slate-600">

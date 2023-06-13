@@ -2,19 +2,20 @@
 	import Card from '$lib/card.svelte';
 	import IconButton from '$lib/icon-button.svelte';
 	import Arrow from '$lib/icons/arrow-r.svelte';
+	import { fly } from 'svelte/transition';
 </script>
 
 <Card class="bg-primary-50/50 py-12">
 	<div class="w-full h-full flex flex-col gap-20 max-w-[1500px]">
 		<div
 			class="px-6 md:px-9 w-full flex justify-between gap-6 items-center flex-col md:flex-row my-3"
-		>
+			>
 			<div class="w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
 				</picture>
 			</div>
-			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
+			<div class="w-full mx-8 flex justify-center flex-col max-w-xl" >
 				<span class=" text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Overview
 				</span>

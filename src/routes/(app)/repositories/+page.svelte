@@ -10,6 +10,7 @@
 	import { navigating } from '$app/stores';
 	import { pulseStore } from '$lib/components/pulse';
 	import { page } from '$app/stores';
+	import { fly } from 'svelte/transition';
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
@@ -123,39 +124,37 @@
 					</div>
 				{/if} -->
 
-				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal}
-					>Create Respository</ButtonOutlined
-				>
-
-				<Dialog class="" isOpen={showModal}>
-					<NewRepository />
-				</Dialog>
+				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal}>
+					Create Respository
+				</ButtonOutlined>
 			</div>
-
-			{#if catalog && catalog.repositories && catalog.repositories.length > 0}
-				<div class="w-full">
-					{#each catalog.repositories as repo}
-						<Repository data={repo} compact={false} />
-					{/each}
-				</div>
-
-				<div class="flex justify-center">
-					{#if catalog.total > DefaultPageSize}
-						<Pagination pages={Math.ceil(catalog.total / pageSize)} />
-					{/if}
-				</div>
-			{:else}
-				<div class="w-full flex justify-center items-center">
-					<div
-						class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
-							flex justify-center items-center"
-					>
-						<span class="text-slate-500 text-2xl">
-							No Repositories Yet
-						</span>
+			<Dialog isOpen={showModal}>
+				<NewRepository />
+			</Dialog>
+			<div in:fly={{ y: 200, duration: 300 }}>
+				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
+					<div class="w-full">
+						{#each catalog.repositories as repo}
+							<Repository data={repo} compact={false} />
+						{/each}
 					</div>
-				</div>
-			{/if}
+
+					<div class="flex justify-center">
+						{#if catalog.total > DefaultPageSize}
+							<Pagination pages={Math.ceil(catalog.total / pageSize)} />
+						{/if}
+					</div>
+				{:else}
+					<div class="w-full flex justify-center items-center">
+						<div
+							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
+							flex justify-center items-center"
+						>
+							<span class="text-slate-500 text-2xl"> No Repositories Yet </span>
+						</div>
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 </Pulse>

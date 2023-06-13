@@ -38,7 +38,7 @@
 </script>
 
 <Card id="top" class="w-full flex flex-col px-0">
-	 <div class="flex flex-col items-center justify-center gap-9 w-full">
+	<div class="flex flex-col items-center justify-center gap-9 w-full">
 		<picture class="w-full">
 			<source media="(min-width: 2000px)" srcset="./hero-big.png" />
 			<source media="(min-width: 650px)" srcset="./hero-clear.png" />
@@ -94,7 +94,7 @@
 				</span>
 			</div>
 
-			<div
+			<div 
 				class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl"
 				aria-label="popular repositories"
 			>

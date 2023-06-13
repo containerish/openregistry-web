@@ -9,7 +9,8 @@
 	import Setup from './setup.svelte';
 	import BuildProject from './build-project.svelte';
 	import type { PageData } from './$types';
-
+	import { fly } from 'svelte/transition';
+	
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
 	let selectedRepo: string;
@@ -47,7 +48,7 @@
 	<div
 		class="bg-white/80 rounded-sm shadow-2xl border border-primary-100 my-10 min-h-max
 		overflow-y-auto p-9 md:p-16 mx-3 min-w-[300px] w-full max-w-[1000px]"
-	>
+		in:fly={{ y: 200, duration: 300 }}>
 		{#if selectedTab === 0}
 			<SelectRepo {data} {handleNext} />
 		{/if}

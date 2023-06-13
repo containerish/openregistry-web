@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { SettingsIcon, PlainCrossIcon, ArrowLeftIcon, ChevronRightIcon } from '$lib/icons';
 	import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
 	import BuildTile from './build.svelte';
@@ -29,24 +29,27 @@
 			<Tab class={handleTabSelect}>Settings</Tab>
 		</TabList>
 
-		<div transition:fade={{ delay: 300, duration: 300 }}>
+		<div in:fade={{ duration: 300 }}>
 			<TabPanels>
 				<TabPanel>
 					{#if showFirstBuild}
 						<div
-							class="flex flex-col md:flex-row relative bg-white rounded-sm px-9 md:items-center py-3 md:py-0 
+							class="flex flex-col md:flex-row relative bg-white rounded-sm px-9 md:items-center py-3 md:py-0
 							min-h-max border-2 border-primary-100/50 shadow-3xl mt-10 gap-6"
+							in:fly={{ x: 200, duration: 300, delay: 100 }}
 						>
 							<div>
-								<img src="/catainer/catainer-hearts.png" alt="logo" class="md:pb-12 max-w-[200px] md:max-w-[250px]" />
+								<img
+									src="/catainer/catainer-hearts.png"
+									alt="logo"
+									class="md:pb-12 max-w-[200px] md:max-w-[250px]"
+								/>
 							</div>
 							<div class="flex flex-col gap-3 justify-center">
 								<span class="text-2xl font-semibold text-primary-500">
 									Congratulations on your first Build!</span
 								>
-								<span
-									class="text-sm lg:text-base text-slate-600 ml-1"
-								>
+								<span class="text-sm lg:text-base text-slate-600 ml-1">
 									you can now do more with your site. invite collaborators, protect previews, enable
 									web analytics and more.</span
 								>
@@ -66,8 +69,12 @@
 						</div>
 					{/if}
 					<BuildTile />
-					<div class="border border-primary-100/50 rounded flex flex-col overflow-y-auto min-w-[700px]">
-						<div class="bg-primary-200/50 grid grid-cols-7 justify-between px-3 py-1 text-slate-800">
+					<div
+						class="border border-primary-100/50 rounded flex flex-col overflow-y-auto min-w-[700px]"
+						in:fly={{ y: 200, duration: 300, delay: 300 }}>
+						<div
+							class="bg-primary-200/50 grid grid-cols-7 justify-between px-3 py-1 text-slate-800"
+						>
 							<span>Environment</span>
 							<span class=" col-span-2">Source</span>
 							<span class=" col-span-2">Deployment</span>

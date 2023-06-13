@@ -3,7 +3,7 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import GihubIcon from '$lib/github.svelte';
 	import { env } from '$env/dynamic/public';
-
+	import { fly } from 'svelte/transition';
 	let toggleSteps = false;
 	const handleToggleSteps = () => {
 		toggleSteps = !toggleSteps;
@@ -19,9 +19,11 @@
 	<title>Github Integration | OpenRegistry</title>
 </svelte:head>
 
-<div class="flex flex-col items-center w-full min-w-min my-12">
-	<div class="bg-slate-50 rounded-sm border border-primary-200 shadow-2xl p-9 lg:px-20 lg:py-16">
-		<div class="w-full max-w-xl lg:max-w-2xl">
+<div class="flex flex-col items-center w-full min-w-min my-20" in:fly={{ y: 200, duration: 300 }}>
+	<div
+		class="bg-slate-50/50 rounded-sm border border-primary-100/50 shadow-2xl p-9 lg:px-20 lg:py-16"
+	>
+		<div class="w-full max-w-xl lg:max-w-4xl">
 			<div class="flex flex-col justify-center items-center gap-3">
 				<span class="text-2xl font-bold text-primary-600 text-center"
 					>Automated builds with Github Integration</span
@@ -34,9 +36,11 @@
 			<hr class="mx-0 my-10 lg:mx-10" />
 			<div class="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-10">
 				<!-- svelte-ignore a11y-img-redundant-alt -->
-				<img src="/catainer/catainer-hi.png" alt="upload-file-image" class="w-40" />
+				<div in:fly={{ x: -100, duration: 400, delay: 300 }}>
+					<img src="/catainer/catainer-hi.png" alt="upload-file-image" class="w-40" />
+				</div>
 				<div class="flex flex-col items-center lg:items-start gap-6">
-					<span class="text-slate-700 text-center lg:text-start antialiased max-w-md"
+					<span class="text-slate-700 text-center lg:text-start antialiased max-w-lg"
 						>Hi, I'm Catainer! <br /> I will help you with your first ever build. <br />
 						To deploy a site, first select it from your personal or team GitHub account
 					</span>
