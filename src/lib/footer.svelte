@@ -48,9 +48,9 @@
 				</a>
 			</div>
 
-			<div class="ml-5">
+			<div class="md:ml-5">
 				<Logo type="light" />
-				<p class="mt-2 max-w-md text-slate-200 antialiased lg:text-lg">
+				<p class="mt-2 max-w-md text-slate-200 antialiased lg:text-lg ml-5 md:ml-0">
 					Join us and become a part of <br />the decentralised future of internet
 				</p>
 			</div>

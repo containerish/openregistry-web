@@ -7,7 +7,6 @@
 	import Dialog from '$lib/dialog.svelte';
 	import Signup from './signup.svelte';
 	import Steps from './steps.svelte';
-	import { fly } from 'svelte/transition';
 
 	let showSignUpForm = false;
 	const handleSignupForm = () => {
@@ -15,8 +14,8 @@
 	};
 </script>
 
-<!-- <div class="bg-slate-100 relative bg-contain" style="background-image:url('/mesh.png');"> -->
 <Card
+	id="how-to-intro"
 	class="min-h-[800px] flex flex-col items-center space-y-8 gap-10 py-20 
 	lg:min-w-[1000px] max-w-[1500px] px-3 md:px-16 mx-auto relative"
 >

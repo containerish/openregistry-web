@@ -7,6 +7,7 @@
 	import Menu from './burger-menu.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import IconButton from './icon-button.svelte';
+
 	export let openSignInModal = false;
 	export let openSignUpModal = false;
 

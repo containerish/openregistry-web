@@ -4,6 +4,6 @@
 	export let id = '';
 </script>
 
-<section {id} class={twMerge(defaultStyles, $$props.class)}>
+<section on:mouseenter {id} class={twMerge(defaultStyles, $$props.class)}>
 	<slot />
 </section>
