@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/modal.svelte';
 	import Button from '$lib/button-solid.svelte';
-	import { Pulse } from '$lib/components';
+	import { Loader } from '$lib/components';
 	import ErrorModal from '$lib/errorModal.svelte';
 	import type { PageData } from './$types';
 	import Logo from '$lib/components/logo.svelte';
@@ -125,7 +125,7 @@
 	};
 </script>
 
-<Pulse>
+<Loader>
 	<div>
 		{#if showModal}
 			<Modal>
@@ -228,5 +228,5 @@
 			</Modal>
 		{/if}
 	</div>
-</Pulse>
+</Loader>
 <ErrorModal open={showErrorModal} error={formErr} />

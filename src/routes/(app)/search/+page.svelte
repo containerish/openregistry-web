@@ -10,7 +10,7 @@
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { ClockIcon, ArrowRIcon, FilterIcon } from '$lib/icons';
 	import { pulseStore } from '$lib/components/pulse';
-	import { Repository, Pulse } from '$lib/components';
+	import { Repository, Loader } from '$lib/components';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
@@ -99,7 +99,7 @@
 </svelte:head>
 
 <!-- transition:fly={{ y: 200, duration: 2000 }} -->
-<Pulse>
+<Loader>
 	<div class="flex justify-center items-start w-full h-full min-w-max min-h-max py-8">
 		<div
 			class="{data.authenticated
@@ -248,4 +248,4 @@
 			</div>
 		</div>
 	</div>
-</Pulse>
+</Loader>

@@ -10,7 +10,6 @@
 	let height = '';
 	if (browser) {
 		height = 'min-h-[' + window.screen.height + 'px]';
-		console.log('height:', height);
 		// height = 'min-h-['+ window.innerHeight + 'px]';
 	}
 

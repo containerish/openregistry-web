@@ -3,7 +3,7 @@
 	import Textfield from '$lib/textfield.svelte';
 	import { throttle } from 'throttle-debounce';
 	import { onMount, setContext } from 'svelte';
-	import { NewRepository, Repository, Pulse } from '$lib/components';
+	import { NewRepository, Repository, Loader } from '$lib/components';
 	import type { PageData } from './$types';
 	import type { Catalog } from '$apis/registry';
 	import type { User } from '$apis/auth';
@@ -22,6 +22,7 @@
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import { DefaultPageSize } from '$lib/constants';
+
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed'
@@ -99,7 +100,7 @@
 	<title>Repositories | OpenRegistry</title>
 </svelte:head>
 
-<Pulse>
+<Loader>
 	<div class="flex justify-start items-start w-full h-full min-w-max min-h-max py-8">
 		<div class="w-full flex flex-col my-8 max-w-[850px] px-9 lg:px-16">
 			<div class="flex flex-col lg:flex-row gap-4 px-2 justify-between">
@@ -157,4 +158,4 @@
 			</div>
 		</div>
 	</div>
-</Pulse>
+</Loader>
