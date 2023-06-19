@@ -91,12 +91,12 @@ export const WebAuthnSignInSchema = z.object({
 });
 
 export const OpenRegistryUserSchema = z.object({
-	updated_at: z.string().transform(dateStr => new Date(dateStr)),
-	created_at: z.string().transform(dateStr => new Date(dateStr)),
+	updated_at: z.string().transform((dateStr) => new Date(dateStr)),
+	created_at: z.string().transform((dateStr) => new Date(dateStr)),
 	uuid: z.string(),
 	username: z.string(),
 	email: z.string(),
-	is_active: z.boolean(),
+	is_active: z.boolean().default(false),
 	webauthn_connected: z.boolean(),
-	github_connected: z.boolean(),
+	github_connected: z.boolean()
 });

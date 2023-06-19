@@ -67,9 +67,9 @@
 		"tailwindcss": "^3.3.2",
 		"tslib": "^2.5.2",
 		"typescript": "^5.0.4",
+		"typescript-svelte-plugin": "^0.3.25",
 		"vite": "^4.3.8",
-		"vitest": "^0.31.1",
-		"typescript-svelte-plugin": "^0.3.25"
+		"vitest": "^0.31.1"
 	},
 	"dependencies": {
 		"@buf/containerish_openregistry.bufbuild_connect-es": "0.9.0-20230508153720-e2b8153918c9.1",
@@ -79,6 +79,7 @@
 		"@bufbuild/protobuf": "^1.2.0",
 		"@lukeed/uuid": "^2.0.1",
 		"@octokit/types": "^9.2.3",
+		"@types/canvas-confetti": "^1.6.0",
 		"axios": "^1.4.0",
 		"cookie": "0.5.0",
 		"js-cookie": "^3.0.5",

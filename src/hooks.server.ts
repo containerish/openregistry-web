@@ -43,7 +43,9 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 
 export const isProtectedRoute = (route: string): boolean => {
 	return (
-		route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps')
+		route.startsWith('/settings') ||
+		route.startsWith('/repositories') ||
+		route.startsWith('/apps')
 	);
 };
 

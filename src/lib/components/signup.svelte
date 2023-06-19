@@ -192,7 +192,7 @@
 				<form id="signup" method="POST" action="?/signup" use:enhance={handleSignUpSubmit}>
 					<div class="mt-4">
 						<Textfield
-							onInput={validateUsername}
+							on:input={validateUsername}
 							errors={$page.form?.fieldErrors?.username}
 							label="Username"
 							type="text"
@@ -203,7 +203,7 @@
 
 					<div class="mt-4">
 						<Textfield
-							onInput={validateEmail}
+							on:input={validateEmail}
 							errors={$page.form?.fieldErrors?.email}
 							label="Email Address"
 							type="email"
@@ -268,7 +268,7 @@
 				<form id="webauthn" on:submit|preventDefault={(e) => webAuthNSignup(e)}>
 					<div class="mt-4">
 						<Textfield
-							onInput={validateUsername}
+							on:input={validateUsername}
 							errors={webAuthnForm?.fieldErrors?.username}
 							label="Username"
 							type="text"
@@ -278,7 +278,7 @@
 
 					<div class="mt-4">
 						<Textfield
-							onInput={validateEmail}
+							on:input={validateEmail}
 							errors={webAuthnForm?.fieldErrors?.email}
 							label="Email Address"
 							type="email"

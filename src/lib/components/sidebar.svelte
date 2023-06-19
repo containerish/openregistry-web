@@ -19,37 +19,11 @@
 	import Invite from './invite.svelte';
 	import { onMount } from 'svelte';
 	import Dialog from '$lib/dialog.svelte';
-	import { page } from '$app/stores';
 	import IconButton from '$lib/icon-button.svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
-	export let authorised = false;
-
-	const handleAutoComplete = async (query: string) => {
-		//  for some reason this is signing user out, do we even need the search in sidebar to search
-		//  repositories?
-		// let result = await registry.SearchRepositories(query);
-
-		const url = new URL('/apis/registry/list/repositories', $page.url.origin);
-		url.searchParams.set('query', query);
-		const response = await fetch(url);
-		if (response.status !== 200) {
-			return;
-		}
-		return await response.json();
-	};
-
 	let extended = true;
-
-	const handleSidebar = () => {
-		extended = !extended;
-	};
-
-	const showAdvert = () => {
-		let timer = 0;
-	};
-
 	export let user: OpenRegistryUserType;
 
 	let showModal = false;

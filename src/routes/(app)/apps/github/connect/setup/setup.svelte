@@ -3,7 +3,6 @@
 	import ListBox from '$lib/listBox.svelte';
 	import Disclosure from '$lib/disclosure.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import Input from '$lib/input.svelte';
 	import { ArrowLeftIcon, InfoIcon, BookIcon, AddAccountIcon } from '$lib/icons';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';

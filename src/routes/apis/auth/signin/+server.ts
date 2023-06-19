@@ -22,6 +22,7 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
 		return json(await response.json(), { status: response.status });
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const cookieList = parse(splitCookiesString(response.headers.get('set-cookie')!), {
 		silent: true,
 		decodeValues: true

@@ -104,7 +104,7 @@
 		<div class="w-full flex flex-col my-8 max-w-[850px] px-9 lg:px-16">
 			<div class="flex flex-col lg:flex-row gap-4 px-2 justify-between">
 				<div class="w-4/5 lg:w-3/5">
-					<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
+					<Textfield on:input={handleOnChange} placeholder="Search Repositories" />
 				</div>
 				<!-- {#if showTooltip}
 					<div id="tooltip" class=" bg-cyan-200 rounded py-1 px-3" use:popperContent={extraOpts}>

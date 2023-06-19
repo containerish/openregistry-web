@@ -121,18 +121,11 @@
 				{#if pathname === '/' || pathname === '/auth/signup'}
 					<div class="hidden md:flex ml-5">
 						<ButtonSolid
-							on:click={() => {
-								goto('/auth/signin');
-							}}>Sign In</ButtonSolid
-						>
+							on:click={() => { goto('/auth/signin'); }}>Sign In</ButtonSolid>
 					</div>
 				{:else if pathname === '/auth/signin'}
 					<div class="hidden md:flex ml-5">
-						<ButtonSolid
-							on:click={() => {
-								goto('/auth/signup');
-							}}>Sign Up</ButtonSolid
-						>
+						<ButtonSolid on:click={() => { goto('/auth/signup'); }}>Sign Up</ButtonSolid>
 					</div>
 				{/if}
 				<div>

@@ -11,10 +11,9 @@ export const POST: RequestHandler = async ({ fetch, cookies, request }) => {
 		const url = new URL('/auth/reset-password', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		const response = await fetch(url, {
 			method: 'POST',
-			credentials: 'include',
 			headers: {
 				cookie: `session_id=${cookies.get('session_id')}`,
-				Authorization: 'Bearer ' + cookies.get('access')
+				Authorization: 'Bearer ' + cookies.get('access_token')
 			},
 			body: JSON.stringify({
 				old_password: body.currentPassword,

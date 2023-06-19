@@ -43,7 +43,7 @@
 			<div class="flex flex-col w-full">
 				<Textfield
 					label="Emails"
-					onInput={readEmails}
+					on:input={readEmails}
 					bind:value={emails}
 					placeholder="jane@openregistry.dev, john@..."
 				/>

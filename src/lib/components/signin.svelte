@@ -2,8 +2,6 @@
 	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { GithubIcon, FingerprintIcon, EmailIcon } from '$lib/icons';
-	import { createEventDispatcher, getContext } from 'svelte';
-	import { Auth } from '$apis/auth';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -20,11 +18,7 @@
 	export let toggleSignInForm: () => void;
 	let isLoading = false;
 
-	const auth = new Auth();
-	const dispatch = createEventDispatcher();
 	let emailErr: string;
-	let passwordErr: string;
-	let formErr: string | undefined;
 	let email = $page.form?.data?.email as string;
 	let password = $page.form?.data?.password as string;
 	let showForgotPasswordForm = false;
@@ -49,6 +43,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
+                    break;
 				default:
 					await update();
 			}
@@ -74,13 +69,14 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
+                    break;
 				default:
 					await update();
 			}
 			isLoading = false;
 		};
 	};
-	let isWebAuthN: boolean = false;
+	let isWebAuthN = false;
 	const handleIsWebAuthn = () => {
 		isWebAuthN = !isWebAuthN;
 	};

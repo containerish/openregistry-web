@@ -70,7 +70,7 @@ export class OpenRegistryClient {
 				return fail(400, {
 					errors: fieldErrors,
 					formErrors: formErrors,
-					data: formData
+					data: rawUser
 				});
 			}
 			const fetchError = err as OpenRegistryGenericError;
@@ -85,13 +85,17 @@ export class OpenRegistryClient {
 	async signOut(cookies: Cookies, locals: App.Locals) {
 		try {
 			const response = await this.fetcher(`/apis/auth/signout`, {
-				method: 'DELETE'
+				method: 'DELETE',
+                headers: {
+                    cookie: `session_id=${cookies.get('session_id')}`
+                }
 			});
+
+            const data = await response.json();
 			if (response.status === 202) {
-				const data = await response.json();
 				cookies.delete('session_id');
-				cookies.delete('access');
-				cookies.delete('refresh');
+				cookies.delete('access_token');
+				cookies.delete('refresh_token');
 				locals.user = null;
 				locals.sessionId = '';
 				locals.authenticated = false;
@@ -240,9 +244,10 @@ export class OpenRegistryClient {
 			const response = await this.fetcher(uri, {
 				headers: {
 					cookie: `session_id=${sessionId}`
-				}
+				},
 			});
-			return OpenRegistryUserSchema.parse(await response.json());
+			const data = await response.json();
+			return OpenRegistryUserSchema.parse(data);
 		} catch (err) {
 			console.warn('error getting user from session: ', err);
 			return null;
@@ -281,7 +286,10 @@ export class OpenRegistryClient {
 		credentialCreationOpts: CredentialCreationOptionsJSON
 	): Promise<WebAuthnFinishRegisterResponseType> {
 		const options = parseCreationOptionsFromJSON(credentialCreationOpts);
-		const url = new URL('/auth/webauthn/registration/finish', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const url = new URL(
+			'/auth/webauthn/registration/finish',
+			env.PUBLIC_OPEN_REGISTRY_BACKEND_URL
+		);
 		url.searchParams.set('username', username);
 		let body: RegistrationPublicKeyCredential;
 		try {
@@ -322,7 +330,7 @@ export class OpenRegistryClient {
 			const url = new URL('/auth/webauthn/login/begin', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 			url.searchParams.set('username', username);
 			const response = await this.fetcher(url);
-			if (response.status !== 200) {
+			if (!response.ok) {
 				const data = (await response.json()) as OpenRegistryGenericError;
 				return {
 					error: {
@@ -378,10 +386,12 @@ export class OpenRegistryClient {
 			};
 		}
 
-		const { error, options } = await this.webAuthBeginLogin(username);
-		if (error) {
-			return error;
+		const { error: err, options } = await this.webAuthBeginLogin(username);
+		if (err) {
+			console.log('sdk webAuthnLogin err: ', err);
+			return { error: err };
 		}
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const finishResponse = await this.webAuthFinishLogin(username, options!);
 		return finishResponse;
 	}
