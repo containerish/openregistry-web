@@ -13,6 +13,7 @@
 	import { goto } from '$app/navigation';
 	import IconButton from '$lib/icon-button.svelte';
 	import { browser } from '$app/environment';
+	import { fly } from 'svelte/transition';
 
 	let canvas: HTMLElement;
 	let conf: any;
@@ -201,6 +202,7 @@
 >
 	<div
 		class="flex w-full flex-col px-9 md:px-11 py-6 md:py-9 rounded-lg shadow-3xl gap-3 max-w-[500px] bg-white"
+		in:fly={{ y: 200, duration: 300 }}
 	>
 		{#if activeForm === null}
 			<div class="flex justify-start items-start gap-3 py-4">

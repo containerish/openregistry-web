@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Modal from '$lib/modal.svelte';
 	import Pagination from '$lib/pagination.svelte';
 	import { onMount, setContext } from 'svelte';
-
+	import { fly } from 'svelte/transition';
 	import Checkbox from '$lib/checkbox.svelte';
 	import type { Catalog } from '$apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
@@ -11,13 +10,11 @@
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { ClockIcon, ArrowRIcon, FilterIcon } from '$lib/icons';
 	import { pulseStore } from '$lib/components/pulse';
-	import { NewRepository, Repository, Pulse } from '$lib/components';
-	import ErrorModal from '$lib/errorModal.svelte';
+	import { Repository, Loader } from '$lib/components';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import type { PageData } from './$types';
-	import SortIcon from '$lib/icons/sortIcon.svelte';
 	import { DefaultPageSize } from '$lib/constants';
 
 	export let data: PageData;
@@ -77,7 +74,6 @@
 		}
 
 		catalog = await response.json();
-
 	});
 
 	let showFilter = false;
@@ -102,7 +98,8 @@
 	<title>Explore | OpenRegistry</title>
 </svelte:head>
 
-<Pulse>
+<!-- transition:fly={{ y: 200, duration: 2000 }} -->
+<Loader>
 	<div class="flex justify-center items-start w-full h-full min-w-max min-h-max py-8">
 		<div
 			class="{data.authenticated
@@ -223,7 +220,10 @@
 						<FilterIcon />
 					</ButtonOutlined>
 				</div>
-				<div class="w-full flex flex-col justify-center items-center">
+				<div
+					class="w-full flex flex-col justify-center items-center"
+					in:fly={{ y: 200, duration: 300 }}
+				>
 					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 						<div class="w-full">
 							{#each catalog.repositories as repo}
@@ -248,4 +248,4 @@
 			</div>
 		</div>
 	</div>
-</Pulse>
+</Loader>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-
 	import '../../app.css';
 	import Footer from '$lib/footer.svelte';
 	import { Sidebar } from '$lib/components';
@@ -24,8 +23,8 @@
 
 {#if data.user}
 	<main
-		class="flex flex-row selection:bg-primary-500 selection:text-white w-screen max-w-[2000px]
-	bg-slate-50/50 {height}"
+		class="{height} min-h-[1700px] flex flex-row selection:bg-primary-500 selection:text-white w-screen max-w-[2000px]
+	bg-slate-50/50"
 	>
 		<div
 			class="bg-primary-50/60 sticky top-0 left-0 h-full border border-primary-100/50 rounded

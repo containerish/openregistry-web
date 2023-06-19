@@ -6,6 +6,7 @@
 	import { DefaultPageSize } from '$lib/constants';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 	export let data: PageData;
 
 	let isRepo = true;
@@ -134,8 +135,8 @@
 			</button>
 		</div>
 
-		{#if isRepo}
-			<div>
+		<div in:fly={{ y: 200, duration: 300 }}>
+			{#if isRepo}
 				<div class="w-full px-8 py-8">
 					{#if catalog?.repositories}
 						{#each catalog.repositories as repo}
@@ -155,41 +156,41 @@
 						</div>
 					{/if}
 				</div>
-			</div>
-		{/if}
+			{/if}
 
-		{#if isStarred}
-			<div class="w-full px-8 py-8">
-				<div
-					class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
+			{#if isStarred}
+				<div class="w-full px-8 py-8">
+					<div
+						class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
 					rounded py-8 flex justify-center items-center flex-col gap-3"
-				>
-					<StarIcon class="h-8 w-8 text-primary-500/80" />
-					<span class="text-slate-500 text-2xl text-center"
-						>Your starred repositories will show here</span
 					>
-					<span class="text-slate-600 text-base text-center antialiased">
-						We're working on bringing this feature as we build more analytics
-					</span>
+						<StarIcon class="h-8 w-8 text-primary-500/80" />
+						<span class="text-slate-500 text-2xl text-center"
+							>Your starred repositories will show here</span
+						>
+						<span class="text-slate-600 text-base text-center antialiased">
+							We're working on bringing this feature as we build more analytics
+						</span>
+					</div>
 				</div>
-			</div>
-		{/if}
+			{/if}
 
-		{#if isContrib}
-			<div class=" w-full px-8 py-8">
-				<div
-					class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
+			{#if isContrib}
+				<div class=" w-full px-8 py-8">
+					<div
+						class="h-full min-h-[200px] border border-primary-100/50 bg-white w-full shadow-2xl
 					rounded py-8 flex justify-center items-center flex-col gap-3"
-				>
-					<UserGroupIcon class="h-8 w-8 text-primary-500/80" />
-					<span class="text-slate-500 text-2xl text-center"
-						>Your Contributions will show up here</span
 					>
-					<span class="text-slate-500 text-base text-center">
-						We're working on bringing this feature as we build more analytics
-					</span>
+						<UserGroupIcon class="h-8 w-8 text-primary-500/80" />
+						<span class="text-slate-500 text-2xl text-center"
+							>Your Contributions will show up here</span
+						>
+						<span class="text-slate-500 text-base text-center">
+							We're working on bringing this feature as we build more analytics
+						</span>
+					</div>
 				</div>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 {/if}

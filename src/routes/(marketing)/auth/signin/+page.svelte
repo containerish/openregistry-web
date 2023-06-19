@@ -8,7 +8,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
-
+	import { fly } from 'svelte/transition';
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 
@@ -129,9 +129,12 @@
 	<div class="hidden md:flex justify-center items-center md:w-1/2">
 		<img src="/signin.png" alt="signInImage" class="py-20 px-9" />
 	</div>
-	<div class="md:w-1/2 flex items-center justify-center p-3 md:p-6">
+	<div
+		class="md:w-1/2 flex items-center justify-center p-3 md:p-6"
+		in:fly={{ y: 200, duration: 300 }}
+	>
 		<div
-			class="flex w-full flex-col rounded-lg bg-white shadow-3xl px-9 md:px-11 py-6 md:py-9 max-w-[500px]"
+			class="flex w-full flex-col rounded-lg bg-white shadow-3xl px-9 md:px-11 py-6 max-w-[500px]"
 		>
 			{#if !showForgotPasswordForm && !isWebAuthN}
 				<span class="text-start text-primary-500 text-3xl font-semibold">
@@ -166,7 +169,9 @@
 					{/if}
 
 					<div class="mt-4 flex w-full justify-center space-x-5">
-						<ButtonSolid disabled={$page.form?.formErrors} class="w-full" {isLoading}>Sign In</ButtonSolid>
+						<ButtonSolid disabled={$page.form?.formErrors} class="w-full" {isLoading}
+							>Sign In</ButtonSolid
+						>
 					</div>
 
 					<ButtonOutlined on:click={handleIsWebAuthn} class="gap-0">

@@ -14,21 +14,24 @@
 			main.scrollIntoView();
 		}
 	});
-
+	let animate = false;
 	onMount(() => {
+		animate = true;
 		if (data.isAuthenticated && data.user && data.pathname === '/') {
 			goto('/repositories');
 		}
 	});
+
 	$: openSignInModal = new URL($page.url).searchParams.get('method') === 'signin';
 	$: openSignUpModal = new URL($page.url).searchParams.get('method') === 'signup';
 </script>
 
 <main class="w-screen flex justify-center flex-col selection:bg-primary-500 selection:text-white">
-	<Navbar {openSignInModal} {openSignUpModal} pathname={$page.url.pathname} />
-	<div class="tall:min-h-[1650px]">
-		<slot />
-	</div>
-
-	<Footer />
+	{#if animate}
+		<Navbar {openSignInModal} {openSignUpModal} pathname={$page.url.pathname} />
+		<div class="tall:min-h-[1650px]">
+			<slot />
+		</div>
+		<Footer />
+	{/if}
 </main>

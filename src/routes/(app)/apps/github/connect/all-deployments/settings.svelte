@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
-
+	import { fly } from 'svelte/transition';
 	const handleSettingsTab = (opts: any) => {
 		return opts.selected
 			? `font-semibold border-0 border-l-2 bg-slate-200 border-primary-400 text-start text-slate-700 text-sm md:text-base`
@@ -9,18 +9,20 @@
 	};
 </script>
 
-<TabGroup defaultIndex={1} class="grid grid-cols-4 gap-9 px-3 py-9 overflow-y-auto min-w-[500px]">
-	<TabList class="col-span-1 flex flex-col w-full">
-		<Tab class={handleSettingsTab}>General</Tab>
-		<Tab class={handleSettingsTab}>Builds and Deployments</Tab>
-		<Tab let:selected class={handleSettingsTab}>Environment Variables</Tab>
+<TabGroup defaultIndex={2} class="grid grid-cols-4 gap-9 px-3 py-9 min-w-[500px]">
+	<TabList>
+		<div class="col-span-1 flex flex-col w-full" in:fly={{ duration: 300, x: -100 }}>
+			<Tab class={handleSettingsTab}>General</Tab>
+			<Tab class={handleSettingsTab}>Builds and Deployments</Tab>
+			<Tab let:selected class={handleSettingsTab}>Environment Variables</Tab>
+		</div>
 	</TabList>
 	<TabPanels class="col-span-3">
 		<TabPanel>
-			<div class="flex flex-col gap-9 text-slate-700">
+			<div class="flex flex-col gap-9 text-slate-700" in:fly={{ y: 200, duration: 300 }}>
 				<div class="flex flex-col gap-3">
 					<div
-						class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300 
+						class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300
 						rounded p-7 bg-slate-50"
 					>
 						<div class="flex flex-col gap-3">
@@ -34,6 +36,7 @@
 
 				<div
 					class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300 rounded p-7 bg-slate-50"
+					in:fly={{ y: 200, duration: 300, delay: 50 }}
 				>
 					<div class="flex flex-col gap-3">
 						<div class="flex flex-col">
@@ -48,8 +51,9 @@
 				</div>
 
 				<div
-					class="flex flex-col md:flex-row justify-between items-start gap-6 md:items-center border-2 border-slate-300 
+					class="flex flex-col md:flex-row justify-between items-start gap-6 md:items-center border-2 border-slate-300
 					rounded p-7 bg-slate-50"
+					in:fly={{ y: 200, duration: 300, delay: 100 }}
 				>
 					<div class="flex flex-col gap-3">
 						<div class="flex flex-col">
@@ -64,8 +68,9 @@
 				</div>
 
 				<div
-					class="flex flex-col md:flex-row justify-between items-start gap-6 md:items-center border-2 
+					class="flex flex-col md:flex-row justify-between items-start gap-6 md:items-center border-2
 					border-slate-300 rounded p-7 bg-slate-50"
+					in:fly={{ y: 200, duration: 300, delay: 150 }}
 				>
 					<div class="flex flex-col gap-3 md:w-2/3">
 						<span class="font-semibold text-lg text-rose-700">Delete Project</span>
@@ -75,7 +80,9 @@
 							environment variables and Access Policies
 						</span>
 					</div>
-					<ButtonOutlined class="text-rose-700 border-rose-600 md:w-1/3">Delete Project</ButtonOutlined>
+					<ButtonOutlined class="text-rose-700 border-rose-600 md:w-1/3"
+						>Delete Project</ButtonOutlined
+					>
 				</div>
 			</div>
 		</TabPanel>
@@ -89,8 +96,9 @@
 						>
 					</div>
 					<div
-						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9 
+						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9
 						bg-slate-50"
+						in:fly={{ y: 200, duration: 300 }}
 					>
 						<div class="flex flex-col gap-6 items-start col-span-2 md:col-span-1">
 							<div class="rounded-full bg-emerald-100 text-emerald-900 text-xs px-2 py-0.5">
@@ -109,8 +117,9 @@
 					</div>
 
 					<div
-						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9 
+						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9
 					bg-slate-50"
+						in:fly={{ y: 200, duration: 300, delay: 50 }}
 					>
 						<div class="flex flex-col gap-6 items-start col-span-2 md:col-span-1">
 							<div class="rounded-full bg-slate-200 text-slate-800 text-xs px-2 py-0.5">
@@ -130,7 +139,7 @@
 				</div>
 
 				<div class="flex flex-col gap-4">
-					<div class="flex flex-col">
+					<div class="flex flex-col" in:fly={{ y: 200, duration: 300 }}>
 						<span class="font-semibold text-lg text-primary-500">Build Configuration</span>
 						<span class=" text-sm"
 							>specify the brach that triggers the build for each environment</span
@@ -139,6 +148,7 @@
 
 					<div
 						class="grid grid-cols-5 items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+						in:fly={{ y: 200, duration: 300, delay: 100 }}
 					>
 						<div class=" col-span-2 flex flex-col gap-6 items-start">
 							<span class="text-sm font-semibold">Build command:</span>
@@ -159,7 +169,7 @@
 				</div>
 
 				<div class="flex flex-col gap-4">
-					<div class="flex flex-col">
+					<div class="flex flex-col" in:fly={{ y: 200, duration: 300, delay: 100 }}>
 						<span class="font-semibold text-lg text-primary-500">Hooks</span>
 						<span class="text-sm"
 							>specify the brach that triggers the build for each environment</span
@@ -168,6 +178,7 @@
 
 					<div
 						class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-2 border-slate-300 rounded px-7 py-9 bg-slate-50"
+						in:fly={{ y: 200, duration: 300, delay: 150 }}
 					>
 						<span class="text-sm"
 							>Add a deploy hook by creating a name and selecting a desired branch</span
@@ -187,7 +198,7 @@
 					<ButtonOutlined class="w-1/2">Edit Variables</ButtonOutlined>
 				</div>
 
-				<div class="border-2 border-slate-300 rounded">
+				<div class="border-2 border-slate-300 rounded" in:fly={{ y: 100, duration: 300 }}>
 					<div class="bg-slate-200 grid grid-cols-3 py-2 px-3">
 						<span class="col-span-1 font-semibold">Variable name</span>
 						<span class="col-span-2 font-semibold">Value</span>
@@ -197,7 +208,7 @@
 			</div>
 
 			<div class="flex flex-col gap-4">
-				<div class="flex justify-between items-center">
+				<div class="flex justify-between items-center" in:fly={{ y: 50, duration: 300, delay: 50 }}>
 					<div class="flex flex-col gap-1">
 						<span class="text-primary-500 font-semibold text-lg">Preview</span>
 						<span class="text-sm">Define variables for treview environment</span>
@@ -205,7 +216,10 @@
 					<ButtonOutlined class="w-1/2">Edit Variables</ButtonOutlined>
 				</div>
 
-				<div class="border-2 border-slate-300 rounded">
+				<div
+					class="border-2 border-slate-300 rounded"
+					in:fly={{ y: 100, duration: 300, delay: 100 }}
+				>
 					<div class="bg-slate-200 grid grid-cols-3 py-2 px-3">
 						<span class="col-span-1 font-semibold">Variable name</span>
 						<span class="col-span-2 font-semibold">Value</span>
