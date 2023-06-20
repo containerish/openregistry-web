@@ -20,8 +20,8 @@
 </script>
 
 {#if tag}
-	<div class="flex flex-col gap-5 w-full p-4">
-		<div class="flex py-2 px-6 items-center justify-start gap-9 lg:justify-between">
+	<div class="flex flex-col gap-5 w-full p-4 border-b border-primary-100/40">
+		<div class="flex px-6 items-center justify-start gap-9 lg:justify-between">
 			<div>
 				<span class="text-base lg:text-lg text-slate-600">
 					Tag: <span class="font-semibold text-base lg:text-lg text-primary-300"

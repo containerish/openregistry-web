@@ -117,7 +117,8 @@
 				>
 					<div
 						class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
-					border-primary-200 bg-white px-9 lg:px-20 py-6 shadow-2xl"
+					border-primary-100/50 bg-white px-9 lg:px-20 py-6 shadow-2xl"
+						in:fly={{ y: 200, duration: 300, delay: 50 }}
 					>
 						<h1 class="text-lg lg:text-xl font-medium text-slate-600 mb-3">Change Password</h1>
 						<div class="w-full">

@@ -1,11 +1,8 @@
 <script lang="ts">
-	import Star from '$lib/icons/star.svelte';
-	import Globe from '$lib/icons/globe.svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import Tag from '$lib/tag.svelte';
 	import type { PageData } from './$types';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
-	import IconButton from '$lib/icon-button.svelte';
 	import { page } from '$app/stores';
 	import { env } from '$env/dynamic/public';
 	import type { Repo } from '$apis/registry';
@@ -67,18 +64,18 @@
 
 <div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
 	<div
-		class="flex py-10 lg:py-16 px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
+		class="flex py-10 lg:py-16 px-9 md:px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
 	>
 		<div class="flex items-center">
-			<Globe class="h-11 w-11 lg:h-16 lg:w-16 text-slate-700" />
+			<img src="/cube-dark.png" alt="container" width="80px" class="" />
 		</div>
-		<div class="w-full text-slate-700">
-			<div class="flex gap-4 items-center">
-				<span class="text-2xl lg:text-4xl">{data.username}/{data.repo}</span>
-				<IconButton class="mt-3 w-3">
+		<div class="w-full text-slate-700 flex flex-col gap-3">
+			<!-- <div class="flex gap-4 items-center"> -->
+			<!-- <IconButton class="mt-3 w-3">
 					<Star class="w-5 h-5 lg:w-8 lg:h-8" />
-				</IconButton>
-			</div>
+				</IconButton> -->
+			<!-- </div> -->
+			<span class="text-2xl lg:text-4xl">{data.username}/{data.repo}</span>
 			<span class="text-sm lg:text-base capitalize">by {data.username}</span>
 		</div>
 	</div>
@@ -108,11 +105,11 @@
 		</button>
 	</div>
 
-	<div class="w-full h-full py-4 flex px-3 justify-center">
+	<div class="w-full py-4 flex px-3 justify-center">
 		{#if isTags}
 			<div
-				class="bg-white w-full mx-3 flex-col gap-4 rounded-sm px-8 py-8 flex justify-center
-				items-center border border-primary-200 shadow-2xl"
+				class="bg-white w-full mx-3 flex-col gap-4 rounded-sm px-3 py-6 flex justify-center
+				items-center border border-primary-100/50 shadow-2xl"
 			>
 				{#each repository.tags as tag}
 					<Tag {tag} namespace={repository.namespace} />
@@ -121,16 +118,16 @@
 		{/if}
 
 		{#if isOverview}
-			<div class="flex flex-col lg:flex-row justify-center items-center gap-10 w-full">
+			<div class="flex flex-col xl:flex-row justify-center items-center gap-10 w-full px-9 xl:px-3">
 				<div
-					class="min-w-max w-full bg-white border border-primary-200 shadow-2xl mx-3 h-full rounded-sm
-					px-8 py-8 flex justify-center items-center min-h-[200px]"
+					class="w-full bg-white border border-primary-100/50 shadow-2xl mx-3 h-full rounded-sm
+					px-8 py-8 flex justify-center items-center min-h-[200px] min-w-[500px]"
 				>
 					<span class="text-slate-500 text-xl lg:text-2xl"> No Overview Available </span>
 				</div>
 				<div
 					class="min-w-max flex flex-col justify-center items-center gap-5 py-6
-					bg-white border border-primary-200 rounded-sm mx-4 px-4 shadow-2xl"
+					bg-white border border-primary-100/50 rounded-sm mx-4 px-6 shadow-2xl"
 				>
 					<span class="text-lg lg:text-xl text-slate-700 font-medium mb-4"
 						>Quick Docker Commands</span
