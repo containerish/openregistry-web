@@ -2,14 +2,26 @@
 	import { twMerge } from 'tailwind-merge';
 	export let href = '';
 	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 	import { onMount } from 'svelte';
 	import { backInOut } from 'svelte/easing';
 
 	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
 		gsap.fromTo(
 			'.repobox',
 			{ duration: 0.5, opacity: 0, y: -30 },
-			{ duration: 1, opacity: 1, y: 30, stagger: 0.15, ease: backInOut }
+			{
+				duration: 1,
+				opacity: 1,
+				y: 30,
+				stagger: 0.1,
+				ease: backInOut,
+				scrollTrigger: {
+					trigger: '.browse',
+					start: 'top center'
+				}
+			}
 		);
 	});
 </script>

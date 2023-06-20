@@ -5,17 +5,11 @@
 	import { RepoBox } from '$lib/components';
 	import { goto } from '$app/navigation';
 	import { MongoIcon } from '$lib/icons';
-	import { gsap } from 'gsap/dist/gsap';
-	import { browser } from '$app/environment';
 
 	let showRegisterForm = false;
 	let isLoading = false;
 	function toggleRegisterForm() {
 		showRegisterForm = !showRegisterForm;
-	}
-
-	if (browser) {
-		gsap.to('.circles', { duration: 5, opacity: 0, x: 150 });
 	}
 
 	const onClickRegister = () => {
@@ -90,7 +84,7 @@
 			</form>
 		</div>
 
-		<div class="browse flex flex-col justify-center items-center gap-9 py-10">
+		<div class="flex flex-col justify-center items-center gap-9 py-10">
 			<div
 				class="flex flex-col items-center justify-center text-center text-base text-slate-600 px-9"
 			>
@@ -101,7 +95,7 @@
 			</div>
 
 			<div
-				class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl"
+				class=" browse grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl"
 				aria-label="popular repositories"
 			>
 				<RepoBox class="bg-[#081c45]" href="#">
