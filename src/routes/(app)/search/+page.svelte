@@ -50,17 +50,18 @@
 	let catalog: Catalog;
 
 	onMount(async () => {
-		if (data.query && data.query !== '') {
-			const url = new URL('/api/registry/list/repositories', $page.url.origin);
-			url.searchParams.set('query', data.query);
+		const query = $page.url.searchParams.get('q');
+		if (query) {
+			const url = new URL('/apis/registry/list/repositories', $page.url.origin);
+			url.searchParams.set('query', query);
 			const response = await fetch(url);
 			if (response.status !== 200) {
 				openErrorModal = true;
 				catalog.repositories = [];
 				return;
 			}
-
 			catalog = await response.json();
+			return;
 		}
 
 		const url = new URL('/apis/registry/list/catalog', $page.url.origin);
@@ -216,7 +217,7 @@
 					</Menu>
 
 					<ButtonOutlined class="gap-2" on:click={toggleFilter}>
-                        Advance Filter
+						Advance Filter
 						<FilterIcon />
 					</ButtonOutlined>
 				</div>
@@ -231,9 +232,11 @@
 							{/each}
 						</div>
 
-						<div class="flex py-4">
-							<Pagination pages={Math.ceil(catalog.total / DefaultPageSize)} />
-						</div>
+						{#if catalog.repositories.length > DefaultPageSize}
+							<div class="flex py-4">
+								<Pagination pages={Math.ceil(catalog.total / DefaultPageSize)} />
+							</div>
+						{/if}
 					{:else}
 						<div class="flex w-full justify-center items-center">
 							<div
