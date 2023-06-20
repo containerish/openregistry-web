@@ -2,9 +2,9 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import { ArrowLeftIcon, CheckIcon, EmailIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
+	import { ArrowLeftIcon, CheckIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
-	import * as confetti from 'canvas-confetti';
+	import {type CreateTypes, type Options, create as createConfetti} from 'canvas-confetti';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
 	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
@@ -14,19 +14,21 @@
 	import IconButton from '$lib/icon-button.svelte';
 	import { browser } from '$app/environment';
 	import { fly } from 'svelte/transition';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
-	let canvas: HTMLElement;
-	let conf: any;
+	let canvas: HTMLCanvasElement;
+	let conf: CreateTypes;
 	if (browser) {
-		canvas = document.getElementById('confetti')!;
-		conf = confetti.create(canvas, { resize: true });
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		canvas = document.getElementById('confetti') as HTMLCanvasElement;
+		conf = createConfetti(canvas, { resize: true });
 	}
 	var count = 200;
 	var defaults = {
 		origin: { y: 0.7 }
 	};
 
-	const fire = (particleRatio: number, opts: Object) => {
+	const fire = (particleRatio: number, opts: Options) => {
 		conf(
 			Object.assign({}, defaults, opts, {
 				particleCount: Math.floor(count * particleRatio)
@@ -47,8 +49,6 @@
 		fire(0.1, { spread: 120, startVelocity: 45 });
 	};
 
-	export let toggleSignUpForm: () => void;
-	export let toggleSignInForm: () => void;
 	let isLoading = false;
 	let showSuccessMsg = false;
 	const auth = new Auth();
@@ -91,6 +91,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
+                break;
 				default:
 					await update();
 			}
@@ -98,13 +99,13 @@
 		};
 	};
 
-	let isWebAuthn: boolean = false;
+	let isWebAuthn = false;
 	const handleIsWebAuthn = () => {
 		activeForm = 'signup-with-security-key';
 		isWebAuthn = !isWebAuthn;
 	};
 
-	let isEmail: boolean = false;
+	let isEmail = false;
 	const handleIsEmail = () => {
 		activeForm = 'signup-with-email';
 		isEmail = !isEmail;
@@ -121,38 +122,33 @@
 
 	const webAuthNSignup = async (e: SubmitEvent) => {
 		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
-
 		isLoading = true;
 		try {
 			const body = WebAuthnSignUpSchema.parse(formData);
-			const username = body.username;
-			const email = body.email;
-
-			setTimeout(async () => {
-				const { error, status, data } = await auth.WebAuthNBeginRegister(username, email);
-				if (error || status !== 200) {
-					console.error('error signup: ', status, error);
-					webAuthnForm.formErrors = [error.message];
-					isLoading = false;
-					return;
-				}
-
+			const client = new OpenRegistryClient(fetch);
+			const { message, error: err } = await client.webAuthnRegister(body);
+			if (err) {
+				webAuthnForm.formErrors = [err.message];
 				isLoading = false;
-				showSuccessMsg = true;
-				activeForm = 'success-webauthn';
-				successMessage = data.message;
-				succccessDetail = 'Awesome! now you can sign in superfast with just your username';
-				throwSomeConfetti();
-				throwSomeConfetti();
-			}, 1000);
+				return;
+			}
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			successMessage = message!;
 		} catch (err) {
+            console.log('error webauthn signup:', err)
 			if (err instanceof ZodError) {
 				isLoading = false;
 				const zError = err.flatten();
 				webAuthnForm.fieldErrors = zError.fieldErrors;
 				webAuthnForm.formErrors = [...zError.formErrors];
+				return;
 			}
 		}
+		isLoading = false;
+		showSuccessMsg = true;
+		throwSomeConfetti();
+		throwSomeConfetti();
+        goto('/auth/signin?method=webauthn')
 	};
 
 	const validateUsername = (e: any) => {
@@ -236,7 +232,7 @@
 			<form id="signup" method="POST" use:enhance={handleSignUpSubmit}>
 				<div class="mt-4">
 					<Textfield
-						onInput={validateUsername}
+						on:input={validateUsername}
 						errors={$page.form?.fieldErrors?.username}
 						label="Username"
 						type="text"
@@ -247,7 +243,7 @@
 
 				<div class="mt-4">
 					<Textfield
-						onInput={validateEmail}
+						on:input={validateEmail}
 						errors={$page.form?.fieldErrors?.email}
 						label="Email Address"
 						type="email"
@@ -286,9 +282,7 @@
 				{/if}
 
 				<div class="mt-8 flex flex-col gap-3 w-full justify-center items-center">
-					<ButtonSolid class="w-full" type="submit" {isLoading} on:click={() => {}}
-						>Sign Up</ButtonSolid
-					>
+					<ButtonSolid class="w-full" type="submit" {isLoading}>Sign Up</ButtonSolid>
 					<IconButton on:click={handleBackToMain} class="p-0 m-0 text-primary-300 text-sm w-full">
 						<ArrowLeftIcon class="h-4 w-4 text-primary-400" />
 						Back to main
@@ -314,7 +308,7 @@
 			<form id="webauthn" on:submit|preventDefault={(e) => webAuthNSignup(e)}>
 				<div class="mt-4">
 					<Textfield
-						onInput={validateUsername}
+						on:input={validateUsername}
 						errors={webAuthnForm?.fieldErrors?.username}
 						label="Username"
 						type="text"
@@ -324,23 +318,23 @@
 
 				<div class="mt-4">
 					<Textfield
-						onInput={validateEmail}
+						on:input={validateEmail}
 						errors={webAuthnForm?.fieldErrors?.email}
 						label="Email Address"
 						type="email"
 						name="email"
 					/>
 				</div>
-				{#if $page.form?.formErrors && $page.form?.formErrors.length}
+				{#if webAuthnForm.formErrors && webAuthnForm.formErrors.length > 0}
 					<div class="w-full pt-1 text-center capitalize">
 						<span class="text-center text-xs font-semibold uppercase text-rose-600">
-							{$page.form?.formErrors[0]}
+							{webAuthnForm.formErrors[0]}
 						</span>
 					</div>
 				{/if}
 
 				<div class="mt-8 flex w-full space-x-8">
-					<ButtonSolid class="w-full" {isLoading} on:click={() => {}}>Sign Up</ButtonSolid>
+					<ButtonSolid class="w-full" {isLoading}>Sign Up</ButtonSolid>
 				</div>
 			</form>
 			<IconButton on:click={handleBackToMain} class="p-0 m-0 text-primary-300 text-sm w-full">

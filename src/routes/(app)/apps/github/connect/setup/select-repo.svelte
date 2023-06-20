@@ -27,12 +27,12 @@
 <div class="w-full flex flex-col gap-6">
 	<div class="flex flex-col justify-center items-center gap-2">
 		<span class="text-2xl text-center font-bold text-primary-600"
-			>Deploy a site from your account</span
+			>Build your application with Github Actions</span
 		>
 		<div class="flex flex-col text-center text-slate-600">
 			<span class="text-center text-sm"
 				>Select a repository to connect as your project’s source code. New commits will trigger
-				OpenRegistry to automatically build and deploy your changes.
+				OpenRegistry to automatically build your application into a docker container ready to deploy.
 			</span>
 		</div>
 	</div>

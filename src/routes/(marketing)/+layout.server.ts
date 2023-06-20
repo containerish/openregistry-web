@@ -1,7 +1,6 @@
-import type { LayoutServerLoad } from './$types';
-import type { User } from '$apis/auth';
+import type { OpenRegistryUserType } from '$lib/types/user';
 
-export const load = (async ({ url, locals }) => {
+export const load = async ({ url, locals }) => {
 	if (locals.authenticated && locals.user) {
 		return {
 			user: locals.user,
@@ -12,7 +11,7 @@ export const load = (async ({ url, locals }) => {
 	return {
 		pathname: url.pathname
 	};
-}) satisfies LayoutServerLoad;
+};
 
 export type AuthorisedRepository = {
 	branches: Branch[];
@@ -229,7 +228,7 @@ export type Branch = {
 };
 
 export type LayoutResponse = {
-	user?: User;
+	user?: OpenRegistryUserType;
 	username?: string;
 	repo?: string;
 	authenticated: boolean;

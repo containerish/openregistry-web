@@ -2,8 +2,6 @@
 	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { GithubIcon, FingerprintIcon, EmailIcon } from '$lib/icons';
-	import { createEventDispatcher, getContext } from 'svelte';
-	import { Auth } from '$apis/auth';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -14,36 +12,43 @@
 
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { env } from '$env/dynamic/public';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
 	let isLoading = false;
 
-	const auth = new Auth();
-	const dispatch = createEventDispatcher();
 	let emailErr: string;
-	let passwordErr: string;
-	let formErr: string | undefined;
 	let email = $page.form?.data?.email as string;
 	let password = $page.form?.data?.password as string;
 	let showForgotPasswordForm = false;
 	let formMsg: string;
-	const handleForgotPassword = async (e: any) => {
-		// dont know why, but this is the way
-		if (!email || email === '') {
-			emailErr = 'email is a required field';
-			return;
-		}
+	let forgotPwdMessage = '';
+	const handleForgotPassword: SubmitFunction = () => {
+		isLoading = true;
 
-		const { error, data } = await auth.ForgotPassword(email);
-		if (error) {
-			formErr = error.message;
-			return;
-		}
-
-		formMsg = data.message;
-		email = '';
-		formErr = '';
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					forgotPwdMessage = 'email sent to reset password';
+					isLoading = false;
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+                    break;
+				default:
+					await update();
+			}
+			isLoading = false;
+		};
 	};
 
 	const handleSignInSubmit: SubmitFunction = () => {
@@ -64,13 +69,14 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
+                    break;
 				default:
 					await update();
 			}
 			isLoading = false;
 		};
 	};
-	let isWebAuthN: boolean = false;
+	let isWebAuthN = false;
 	const handleIsWebAuthn = () => {
 		isWebAuthN = !isWebAuthN;
 	};
@@ -81,32 +87,29 @@
 	};
 
 	const webAuthnSignIn = async (e: SubmitEvent) => {
-		const formdata = Object.fromEntries(new FormData(e.target as HTMLFormElement));
-
 		isLoading = true;
+		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
 		try {
-			const body = WebAuthnSignInSchema.parse(formdata);
+			const body = WebAuthnSignInSchema.parse(formData);
 			const username = body.username;
-			const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
+			const openRegistry = new OpenRegistryClient(fetch);
+			const { message, error } = await openRegistry.webAuthnLogin(username);
 			if (error) {
-				isLoading = false;
 				webAuthnForm.formErrors = [error.message];
+				isLoading = false;
 				return;
 			}
-
 			isLoading = false;
-
-			if (status === 200) {
-				goto('/repositories', { invalidateAll: true });
-				return;
-			}
+			goto('/repositories', { invalidateAll: true });
+			return;
 		} catch (err) {
 			if (err instanceof ZodError) {
 				isLoading = false;
 				const zError = err.flatten();
 				webAuthnForm.fieldErrors = zError.fieldErrors;
 				webAuthnForm.formErrors = [...zError.formErrors];
+				return;
 			}
 		}
 	};
@@ -219,52 +222,35 @@
 		{/if}
 
 		{#if showForgotPasswordForm}
-			<form method="POST" id="reset_password">
+			<form method="POST" action="?/forgot_password" use:enhance={handleForgotPassword}>
 				<div class="mt-4">
 					{#if !formMsg}
-						<div class="flex items-center px-2">
-							<label for="reset_password" class="block text-sm font-semibold text-gray-800">
+						<div class="flex flex-col items-start px-2">
+							<label for="reset_password" class="block text-base font-semibold text-slate-700">
 								Email
 							</label>
+							<span class="text-xs text-slate-500"
+								>we will send you an email to reset your password</span
+							>
 						</div>
 
-						<Textfield
-							onInput={(e) => validateEmail(e)}
-							name="reset_password"
-							bind:value={email}
-							placeholder="Email"
-						/>
-						{#if emailErr}
-							<div class="w-full pt-1 text-center capitalize">
-								<span class="text-center text-xs font-semibold uppercase text-rose-600">
-									{emailErr}
-								</span>
-							</div>
-						{/if}
+						<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
 					{/if}
 				</div>
-
-				{#if formErr}
-					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-rose-600">
-							{formErr}
+				{#if $page.form?.formErrors && $page.form?.formErrors.length}
+					<div class="w-full pt-1 text-center">
+						<span class="text-center text-xs font-semibold capitalize text-red-600">
+							{$page.form?.formErrors[0]}
 						</span>
 					</div>
 				{/if}
 
-				{#if formMsg}
-					<div class="w-full pt-1 text-center capitalize">
-						<span class="text-center text-xs font-semibold uppercase text-emerald-600">
-							{formMsg}
-						</span>
+				<div class="mt-4 flex flex-col w-full justify-center gap-3">
+					<div class="flex w-full justify-center items-center gap-5">
+						<ButtonSolid disabled={!!emailErr} {isLoading}>Submit</ButtonSolid>
+						<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
 					</div>
-				{/if}
-
-				<div class="mt-4 flex w-full justify-center space-x-5">
-					<ButtonSolid disabled={!!emailErr} on:click={handleForgotPassword} {isLoading}>
-						Submit
-					</ButtonSolid>
-					<ButtonOutlined on:click={toggleSignInForm}>Close</ButtonOutlined>
+					<span class=" text-emerald-700">{forgotPwdMessage}</span>
 				</div>
 			</form>
 		{/if}
@@ -272,7 +258,7 @@
 			<span
 				on:click={toggleSignUpForm}
 				on:keypress={toggleSignUpForm}
-				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase 
+				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase
 				text-slate-700 no-underline antialiased hover:underline"
 			>
 				sign up
@@ -281,7 +267,7 @@
 			<span
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
-				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700 
+				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700
 				antialiased hover:underline"
 			>
 				Forgot password?

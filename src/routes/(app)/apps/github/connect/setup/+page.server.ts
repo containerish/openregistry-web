@@ -4,9 +4,7 @@ import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.se
 import type { PageServerLoad } from './$types';
 import { env } from '$env/dynamic/public';
 
-export const load = (async (event) => {
-	const { cookies, url, fetch } = event;
-
+export const load = (async ({ cookies, url, fetch }) => {
 	const sessionId = cookies.get('session_id');
 	const installationId = url.searchParams.get('installation_id');
 	const action = url.searchParams.get('setup_action');
@@ -14,26 +12,17 @@ export const load = (async (event) => {
 	if (action && (action === 'install' || action === 'update')) {
 		const uri = `${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`;
 
-		try {
-			const setupResp = await fetch(uri, {
-				method: 'POST',
-				headers: {
-					cookie: `session_id=${sessionId}`
-				},
-				credentials: 'include'
-			} as RequestInit);
-
-			if (setupResp.status !== 202) {
-				const resp = await setupResp.json();
-				console.log('resp in erorr: ', resp);
-				throw error(400, {
-					message: resp.error
-				});
+		const setupResp = await fetch(uri, {
+			method: 'POST',
+			headers: {
+				cookie: `session_id=${sessionId}`
 			}
-		} catch (err) {
-			console.log('error in gijtihb api: ', err);
-			throw error(err?.status, {
-				message: err?.body.message as string
+		});
+
+		if (setupResp.status !== 202) {
+			const resp = await setupResp.json();
+			throw error(400, {
+				message: resp.error
 			});
 		}
 	}

@@ -1,9 +1,8 @@
 <script lang="ts">
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
-	import { GithubIcon, FingerprintIcon, EmailIcon, ArrowLIcon, ArrowLeftIcon } from '$lib/icons';
-	import { createEventDispatcher, getContext, onMount } from 'svelte';
-	import { Auth } from '$apis/auth';
+	import { GithubIcon, FingerprintIcon, ArrowLeftIcon } from '$lib/icons';
+	import { onMount } from 'svelte';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -11,42 +10,47 @@
 	import { fly } from 'svelte/transition';
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
-
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { env } from '$env/dynamic/public';
 	import IconButton from '$lib/icon-button.svelte';
-	import PlainCross from '$lib/icons/plain-cross.svelte';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
-	export let toggleSignUpForm: () => void;
-	export let toggleSignInForm: () => void;
 	let isLoading = false;
-
-	const auth = new Auth();
-	const dispatch = createEventDispatcher();
 	let emailErr: string;
-	let formErr: string | undefined;
 	let email = $page.form?.data?.email as string;
 	let password = $page.form?.data?.password as string;
 	let showForgotPasswordForm = false;
 	let formMsg: string;
-	const handleForgotPassword = async (e: any) => {
-		// dont know why, but this is the way
-		if (!email || email === '') {
-			emailErr = 'email is a required field';
-			return;
-		}
+    let forgotPwdMessage = ''
 
-		const { error, data } = await auth.ForgotPassword(email);
-		if (error) {
-			formErr = error.message;
-			return;
-		}
+	const handleForgotPassword: SubmitFunction = () => {
+		isLoading = true;
 
-		formMsg = data.message;
-		email = '';
-		formErr = '';
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					forgotPwdMessage = result.data?.message ?? 'Please check your inbox'
+					isLoading = false;
+					break;
+				case 'failure':
+					// handle error here
+					await applyAction(result);
+					await update();
+					break;
+				case 'error':
+					// handle server side error here
+					await update();
+					await applyAction(result);
+                    break;
+				default:
+					await update();
+			}
+			isLoading = false;
+		};
 	};
 
+    let isSigninDisabled = false;
 	const handleSignInSubmit: SubmitFunction = () => {
 		isLoading = true;
 
@@ -60,18 +64,21 @@
 					// handle error here
 					await applyAction(result);
 					await update();
+                    isSigninDisabled = true
 					break;
 				case 'error':
 					// handle server side error here
 					await update();
 					await applyAction(result);
+                    isSigninDisabled = true
+                    break;
 				default:
 					await update();
 			}
 			isLoading = false;
 		};
 	};
-	let isWebAuthN: boolean = false;
+	let isWebAuthN = false;
 	const handleIsWebAuthn = () => {
 		isWebAuthN = !isWebAuthN;
 	};
@@ -82,32 +89,29 @@
 	};
 
 	const webAuthnSignIn = async (e: SubmitEvent) => {
-		const formdata = Object.fromEntries(new FormData(e.target as HTMLFormElement));
-
 		isLoading = true;
+		const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
 		try {
-			const body = WebAuthnSignInSchema.parse(formdata);
+			const body = WebAuthnSignInSchema.parse(formData);
 			const username = body.username;
-			const { error, data, status, headers } = await auth.WebAuthNBeginLogin(username);
-			if (error) {
+			const openRegistry = new OpenRegistryClient(fetch);
+			const resp = await openRegistry.webAuthnLogin(username);
+			if (resp.error) {
+				webAuthnForm.formErrors = [resp.error.message];
 				isLoading = false;
-				webAuthnForm.formErrors = [error.message];
 				return;
 			}
-
 			isLoading = false;
-
-			if (status === 200) {
-				goto('/repositories', { invalidateAll: true });
-				return;
-			}
+			goto('/repositories', { invalidateAll: true });
+			return;
 		} catch (err) {
 			if (err instanceof ZodError) {
 				isLoading = false;
 				const zError = err.flatten();
 				webAuthnForm.fieldErrors = zError.fieldErrors;
 				webAuthnForm.formErrors = [...zError.formErrors];
+				return;
 			}
 		}
 	};
@@ -140,13 +144,19 @@
 				<span class="text-start text-primary-500 text-3xl font-semibold">
 					Log in to your account</span
 				>
-				<form class="mt-2 flex flex-col gap-4" method="POST" use:enhance={handleSignInSubmit}>
+                <form 
+                class="mt-2 flex flex-col gap-4" 
+                method="POST" 
+                action="/auth/signin?/signin" 
+                use:enhance={handleSignInSubmit}
+                >
 					<div class="">
 						<Textfield
 							errors={$page.form?.errors?.email}
 							name="email"
 							label="Email"
 							type="text"
+                            on:input={() => {isSigninDisabled = false}}
 							value={$page.form?.data?.email || ''}
 						/>
 					</div>
@@ -156,6 +166,7 @@
 							name="password"
 							label="Password"
 							type="password"
+                            on:input={() => {isSigninDisabled = false}}
 							value={password}
 						/>
 					</div>
@@ -169,9 +180,9 @@
 					{/if}
 
 					<div class="mt-4 flex w-full justify-center space-x-5">
-						<ButtonSolid disabled={$page.form?.formErrors} class="w-full" {isLoading}
-							>Sign In</ButtonSolid
-						>
+						<ButtonSolid disabled={isSigninDisabled} class="w-full" {isLoading}>
+                            Sign In
+                        </ButtonSolid>
 					</div>
 
 					<ButtonOutlined on:click={handleIsWebAuthn} class="gap-0">
@@ -207,9 +218,6 @@
 			{#if isWebAuthN}
 				<div class="flex flex-col justify-start items-start text-start mt-2">
 					<span class="text-3xl text-primary-500 font-semibold">Login with WebAuthn</span>
-					<IconButton on:click={toggleSignInForm} class="m-0 p-0 absolute top-0 right-0 w-1">
-						<PlainCross class="w-6 h-6 m-2 text-primary-400" />
-					</IconButton>
 				</div>
 				<form on:submit|preventDefault={webAuthnSignIn}>
 					<div class="mt-4">
@@ -244,7 +252,12 @@
 			{/if}
 
 			{#if showForgotPasswordForm}
-				<form method="POST" id="reset_password">
+				<form 
+                method="POST" 
+                action="/auth/signin?/forgotPassword" 
+                id="reset_password" 
+                use:enhance={handleForgotPassword}
+                >
 					<div class="">
 						{#if !formMsg}
 							<div class="flex flex-col items-start gap-6 px-1">
@@ -261,40 +274,22 @@
 								</label>
 							</div>
 
-							<Textfield
-								onInput={(e) => validateEmail(e)}
-								name="reset_password"
-								bind:value={email}
-								placeholder="Enter your email address"
-							/>
-							{#if emailErr}
-								<div class="w-full pt-1 text-center capitalize">
-									<span class="text-center text-xs font-semibold uppercase text-rose-600">
-										{emailErr}
-									</span>
-								</div>
-							{/if}
+						<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
 						{/if}
 					</div>
 
-					{#if formErr}
-						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-rose-600">
-								{formErr}
-							</span>
-						</div>
-					{/if}
-
-					{#if formMsg}
-						<div class="w-full pt-1 text-center capitalize">
-							<span class="text-center text-xs font-semibold uppercase text-emerald-600">
-								{formMsg}
-							</span>
-						</div>
-					{/if}
-
+				{#if $page.form?.formErrors && $page.form?.formErrors.length}
+					<div class="w-full pt-1 text-center">
+						<span class="text-center text-xs font-semibold capitalize text-red-600">
+							{$page.form?.formErrors[0]}
+						</span>
+					</div>
+				{/if}
 					<div class="mt-9 flex w-full justify-center flex-col gap-3">
-						<ButtonSolid disabled={!!emailErr} on:click={handleForgotPassword} {isLoading}>
+                        {#if forgotPwdMessage}
+                            <span class=" text-emerald-700">{forgotPwdMessage.charAt(0).toUpperCase() + forgotPwdMessage.slice(1)}</span>
+                        {/if}
+						<ButtonSolid disabled={!!emailErr} {isLoading}>
 							Submit
 						</ButtonSolid>
 						<IconButton
