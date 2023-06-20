@@ -20,7 +20,7 @@
 	export let data: PageData;
 
 	let sortBy = 'namespace';
-	let openErrorModal: boolean = false;
+	let openErrorModal = false;
 
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'top-start',
@@ -215,8 +215,8 @@
 						</MenuItem>
 					</Menu>
 
-					<ButtonOutlined class="gap-2" on:click={toggleFilter}
-						>Advance Filter
+					<ButtonOutlined class="gap-2" on:click={toggleFilter}>
+                        Advance Filter
 						<FilterIcon />
 					</ButtonOutlined>
 				</div>
