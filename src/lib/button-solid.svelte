@@ -2,12 +2,14 @@
 	export let isLoading = false;
 	export let disabled = false;
 	import { twMerge } from 'tailwind-merge';
+    export let type: "submit" | "button" | "reset" = "submit"
 </script>
 
 <button
 	aria-label="primary button"
 	{disabled}
 	on:click
+    type={type}
 	class={twMerge(
 		`flex justify-center space-x-2 items-center border-2 bg-primary-300 border-primary-700 
 		text-primary-800 rounded font-medium lg:text-base tracking-wide bg-opacity-80 hover:shadow-primary-600 hover:shadow-3xl 
