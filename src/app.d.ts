@@ -19,7 +19,6 @@ declare global {
 			isRouteProtected: boolean;
 			sessionId: string | null;
 			ghLogsClient: import('@buf/containerish_openregistry.bufbuild_connect-es/services/kon/github_actions/v1/build_logs_connect').GitHubActionsLogsService;
-			
 		}
 		// interface Platform { }
 	}
