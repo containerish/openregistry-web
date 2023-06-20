@@ -60,6 +60,16 @@
 	};
 
 	onDestroy(() => clearTimeout(timeout));
+
+	const getImageCommand = (ns: string, subcommand: 'pull' | 'push' = 'pull') => {
+		const u = new URL(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		switch (subcommand) {
+			case 'pull':
+				return `docker pull ${u.host}/${ns}`;
+			case 'push':
+				return `docker push ${u.host}/${ns}`;
+		}
+	};
 </script>
 
 <div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
@@ -132,7 +142,6 @@
 					<span class="text-lg lg:text-xl text-slate-700 font-medium mb-4"
 						>Quick Docker Commands</span
 					>
-
 					<ButtonOutlined class="lowercase" on:click={() => handleCopy('pull')}>
 						<span
 							class="{isCopied === 'pull'
@@ -140,7 +149,7 @@
 								: ''} select-all text-sm lg:text-base text-primary-400
 								py-2 px-2 lowercase tracking-wide"
 						>
-							{isCopied === 'pull' ? 'Copied!!' : `docker pull openregistry.dev/${ns}`}
+							{isCopied === 'pull' ? 'Copied!!' : getImageCommand(ns, 'pull')}
 						</span>
 					</ButtonOutlined>
 
@@ -151,7 +160,7 @@
 								: ''} select-all text-sm lg:text-base text-primary-400
 								px-2 py-2 lowercase tracking-wide"
 						>
-							{isCopied === 'push' ? 'Copied!!' : `docker push openregistry.dev/${ns}`}
+							{isCopied === 'push' ? 'Copied!!' : getImageCommand(ns, 'push')}
 						</span>
 					</ButtonOutlined>
 				</div>
