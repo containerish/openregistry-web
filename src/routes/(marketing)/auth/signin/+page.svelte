@@ -21,7 +21,7 @@
 	let password = $page.form?.data?.password as string;
 	let showForgotPasswordForm = false;
 	let formMsg: string;
-    let forgotPwdMessage = ''
+	let forgotPwdMessage = '';
 
 	const handleForgotPassword: SubmitFunction = () => {
 		isLoading = true;
@@ -30,7 +30,7 @@
 			switch (result.type) {
 				case 'success':
 					await update();
-					forgotPwdMessage = result.data?.message ?? 'Please check your inbox'
+					forgotPwdMessage = result.data?.message ?? 'Please check your inbox';
 					isLoading = false;
 					break;
 				case 'failure':
@@ -42,7 +42,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
-                    break;
+					break;
 				default:
 					await update();
 			}
@@ -50,7 +50,7 @@
 		};
 	};
 
-    let isSigninDisabled = false;
+	let isSigninDisabled = false;
 	const handleSignInSubmit: SubmitFunction = () => {
 		isLoading = true;
 
@@ -64,14 +64,14 @@
 					// handle error here
 					await applyAction(result);
 					await update();
-                    isSigninDisabled = true
+					isSigninDisabled = true;
 					break;
 				case 'error':
 					// handle server side error here
 					await update();
 					await applyAction(result);
-                    isSigninDisabled = true
-                    break;
+					isSigninDisabled = true;
+					break;
 				default:
 					await update();
 			}
@@ -106,6 +106,7 @@
 			goto('/repositories', { invalidateAll: true });
 			return;
 		} catch (err) {
+			console.log('error in webauthn login: ', err);
 			if (err instanceof ZodError) {
 				isLoading = false;
 				const zError = err.flatten();
@@ -113,6 +114,8 @@
 				webAuthnForm.formErrors = [...zError.formErrors];
 				return;
 			}
+            webAuthnForm.formErrors = [(err as Error).message]
+			isLoading = false;
 		}
 	};
 
@@ -144,19 +147,21 @@
 				<span class="text-start text-primary-500 text-3xl font-semibold">
 					Log in to your account</span
 				>
-                <form 
-                class="mt-2 flex flex-col gap-4" 
-                method="POST" 
-                action="/auth/signin?/signin" 
-                use:enhance={handleSignInSubmit}
-                >
+				<form
+					class="mt-2 flex flex-col gap-4"
+					method="POST"
+					action="/auth/signin?/signin"
+					use:enhance={handleSignInSubmit}
+				>
 					<div class="">
 						<Textfield
 							errors={$page.form?.errors?.email}
 							name="email"
 							label="Email"
 							type="text"
-                            on:input={() => {isSigninDisabled = false}}
+							on:input={() => {
+								isSigninDisabled = false;
+							}}
 							value={$page.form?.data?.email || ''}
 						/>
 					</div>
@@ -166,7 +171,9 @@
 							name="password"
 							label="Password"
 							type="password"
-                            on:input={() => {isSigninDisabled = false}}
+							on:input={() => {
+								isSigninDisabled = false;
+							}}
 							value={password}
 						/>
 					</div>
@@ -181,8 +188,8 @@
 
 					<div class="mt-4 flex w-full justify-center space-x-5">
 						<ButtonSolid disabled={isSigninDisabled} class="w-full" {isLoading}>
-                            Sign In
-                        </ButtonSolid>
+							Sign In
+						</ButtonSolid>
 					</div>
 
 					<ButtonOutlined on:click={handleIsWebAuthn} class="gap-0">
@@ -252,12 +259,12 @@
 			{/if}
 
 			{#if showForgotPasswordForm}
-				<form 
-                method="POST" 
-                action="/auth/signin?/forgotPassword" 
-                id="reset_password" 
-                use:enhance={handleForgotPassword}
-                >
+				<form
+					method="POST"
+					action="/auth/signin?/forgotPassword"
+					id="reset_password"
+					use:enhance={handleForgotPassword}
+				>
 					<div class="">
 						{#if !formMsg}
 							<div class="flex flex-col items-start gap-6 px-1">
@@ -274,24 +281,24 @@
 								</label>
 							</div>
 
-						<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
+							<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
 						{/if}
 					</div>
 
-				{#if $page.form?.formErrors && $page.form?.formErrors.length}
-					<div class="w-full pt-1 text-center">
-						<span class="text-center text-xs font-semibold capitalize text-red-600">
-							{$page.form?.formErrors[0]}
-						</span>
-					</div>
-				{/if}
+					{#if $page.form?.formErrors && $page.form?.formErrors.length}
+						<div class="w-full pt-1 text-center">
+							<span class="text-center text-xs font-semibold capitalize text-red-600">
+								{$page.form?.formErrors[0]}
+							</span>
+						</div>
+					{/if}
 					<div class="mt-9 flex w-full justify-center flex-col gap-3">
-                        {#if forgotPwdMessage}
-                            <span class=" text-emerald-700">{forgotPwdMessage.charAt(0).toUpperCase() + forgotPwdMessage.slice(1)}</span>
-                        {/if}
-						<ButtonSolid disabled={!!emailErr} {isLoading}>
-							Submit
-						</ButtonSolid>
+						{#if forgotPwdMessage}
+							<span class=" text-emerald-700"
+								>{forgotPwdMessage.charAt(0).toUpperCase() + forgotPwdMessage.slice(1)}</span
+							>
+						{/if}
+						<ButtonSolid disabled={!!emailErr} {isLoading}>Submit</ButtonSolid>
 						<IconButton
 							on:click={handleBackToMain}
 							class="text-primary-400 text-sm w-full p-0 flex justify-center"

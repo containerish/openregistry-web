@@ -11,19 +11,24 @@ import type {
 	WebAuthnBeginRegisterResponseType,
 	WebAuthnFinishLoginResponseType,
 	WebAuthnFinishRegisterResponseType,
-	WebAuthnSignUpType
+	WebAuthnSignUpType,
+	WebAuthnFinishLoginRequestType
 } from '$lib/types/webauthn';
 import {
 	supported,
 	get,
 	create,
 	parseCreationOptionsFromJSON,
-	type CredentialCreationOptionsJSON,
-	type CredentialRequestOptionsJSON,
-	parseRequestOptionsFromJSON,
-	type RegistrationPublicKeyCredential
+	parseRequestOptionsFromJSON
 } from '@github/webauthn-json/browser-ponyfill';
-import { fail, type Cookies, error } from '@sveltejs/kit';
+import type {
+	CredentialCreationOptionsJSON,
+	CredentialRequestOptionsJSON,
+	RegistrationPublicKeyCredential,
+	AuthenticationPublicKeyCredential
+} from '@github/webauthn-json/browser-ponyfill';
+import { fail, error } from '@sveltejs/kit';
+import type { Cookies } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import type { OpenRegistryUserType } from '$lib/types/user';
 
@@ -86,12 +91,12 @@ export class OpenRegistryClient {
 		try {
 			const response = await this.fetcher(`/apis/auth/signout`, {
 				method: 'DELETE',
-                headers: {
-                    cookie: `session_id=${cookies.get('session_id')}`
-                }
+				headers: {
+					cookie: `session_id=${cookies.get('session_id')}`
+				}
 			});
 
-            const data = await response.json();
+			const data = await response.json();
 			if (response.status === 202) {
 				cookies.delete('session_id');
 				cookies.delete('access_token');
@@ -244,7 +249,7 @@ export class OpenRegistryClient {
 			const response = await this.fetcher(uri, {
 				headers: {
 					cookie: `session_id=${sessionId}`
-				},
+				}
 			});
 			const data = await response.json();
 			return OpenRegistryUserSchema.parse(data);
@@ -354,26 +359,50 @@ export class OpenRegistryClient {
 		username: string,
 		credentialRequestOptions: CredentialRequestOptionsJSON
 	): Promise<WebAuthnFinishLoginResponseType> {
-		const options = parseRequestOptionsFromJSON(credentialRequestOptions);
-		const credentials = await get(options);
-		const url = new URL('/auth/webauthn/login/finish', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
-		url.searchParams.set('username', username);
-		const response = await this.fetcher(url, {
-			method: 'POST',
-			body: JSON.stringify(credentials),
-			credentials: 'include'
-		});
-		if (!response.ok) {
-			const data = (await response.json()) as OpenRegistryGenericError;
+		let credentials = {} as AuthenticationPublicKeyCredential;
+		try {
+			const options = parseRequestOptionsFromJSON(credentialRequestOptions);
+			credentials = await get(options);
+		} catch (err) {
 			return {
 				error: {
-					code: response.status,
-					message: data.message
+					code: 400,
+					message: (err as Error).message
 				}
 			};
 		}
 
-		return (await response.json()) as { message: string };
+		const body: WebAuthnFinishLoginRequestType = {
+			username,
+			credentials
+		};
+
+		const url = `/apis/webauthn/finish-login?username=${username}`;
+		try {
+			const response = await this.fetcher(url, {
+				method: 'POST',
+				body: JSON.stringify(body)
+			});
+
+			if (!response.ok) {
+				const data = (await response.json()) as OpenRegistryGenericError;
+				return {
+					error: {
+						code: response.status,
+						message: data.message
+					}
+				};
+			}
+
+			return (await response.json()) as { message: string };
+		} catch (err) {
+			return {
+				error: {
+					code: 500,
+					message: (err as Error).message
+				}
+			};
+		}
 	}
 
 	async webAuthnLogin(username: string): Promise<WebAuthnFinishLoginResponseType> {
@@ -402,7 +431,6 @@ export class OpenRegistryClient {
 
 		const response = await this.fetcher(url);
 		const data = await response.json();
-		console.log('response from verify email', data);
 		return data;
 	}
 
@@ -416,7 +444,6 @@ export class OpenRegistryClient {
 			method: 'POST'
 		});
 		const data = await response.json();
-		console.log('response from send invites', data);
 		return data;
 	}
 
@@ -435,7 +462,6 @@ export class OpenRegistryClient {
 		});
 
 		const data = await response.json();
-		console.log('response from reset forgotten password api', data);
 		return data;
 	}
 }
