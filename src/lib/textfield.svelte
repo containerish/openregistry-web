@@ -6,13 +6,12 @@
 	export let subHeading = '';
 	export let name = '';
 	export let errors: string[] = [];
-	export let value: any = undefined;
-	export let onInput = (e: any) => {};
-	export let disabled: boolean = false;
+	export let value: string | undefined = undefined;
+	export let disabled =  false;
 </script>
 
 <div class="flex items-center px-2">
-	<label for={label} class="block font-semibold text-sm lg:text-base -ml-2 text-slate-700"
+	<label for={label} class="block font-semibold text-sm lg:text-base -ml-1 text-slate-500"
 		>{label}</label
 	>
 	{#if subHeading !== ''}
@@ -21,7 +20,7 @@
 </div>
 <input
 	aria-label="text input"
-	on:input={onInput}
+	on:input
 	{name}
 	{type}
 	value={value ?? ''}

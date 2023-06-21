@@ -6,7 +6,7 @@
 	import { NewRepository, Repository, Loader } from '$lib/components';
 	import type { PageData } from './$types';
 	import type { Catalog } from '$apis/registry';
-	import type { User } from '$apis/auth';
+	import type { OpenRegistryUserType } from '$lib/types/user';
 	import { navigating } from '$app/stores';
 	import { pulseStore } from '$lib/components/pulse';
 	import { page } from '$app/stores';
@@ -14,10 +14,11 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData;
-	const u: User = data.user;
+	export let catalog: Catalog;
+	// catalog = data.repositories;
+	const u: OpenRegistryUserType | null = data.user;
 
 	const pageSize = 10;
-	export let catalog: Catalog;
 	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
@@ -53,14 +54,12 @@
 	let showTooltip = false;
 
 	setContext('fetchPageData', fetchPageData);
-
 	onMount(async () => {
 		await fetchPageData();
 	});
 
 	let showModal = false;
 	const toggleModal = () => {
-		console.log('came here');
 		showModal = !showModal;
 	};
 
@@ -105,7 +104,7 @@
 		<div class="w-full flex flex-col my-8 max-w-[850px] px-9 lg:px-16">
 			<div class="flex flex-col lg:flex-row gap-4 px-2 justify-between">
 				<div class="w-4/5 lg:w-3/5">
-					<Textfield onInput={handleOnChange} placeholder="Search Repositories" />
+					<Textfield on:input={handleOnChange} placeholder="Search Repositories" />
 				</div>
 				<!-- {#if showTooltip}
 					<div id="tooltip" class=" bg-cyan-200 rounded py-1 px-3" use:popperContent={extraOpts}>

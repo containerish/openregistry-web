@@ -55,7 +55,7 @@
 
 <div class="flex flex-col gap-6">
 	<div class="justify-center flex items-center">
-		<span class="text-2xl font-bold text-primary-600"> Building and deploying</span>
+		<span class="text-2xl font-bold text-primary-600"> Building your project</span>
 	</div>
 	<div class="flex flex-col gap-2">
 		<div class="flex">
@@ -85,12 +85,12 @@
 
 		<hr />
 
-		<div class="flex">
+		<!-- <div class="flex">
 			<SpinnerCircle class="invisible" />
 			<span class="text-slate-600 text-base font-normal ml-6 text-gray-600">
 				<i>Deploying to Akash network</i>
 			</span>
-		</div>
+		</div> -->
 	</div>
 	<div class="border-primary-100 border bg-slate-100 rounded">
 		<div class="flex gap-6 justify-end items-end bg-primary-100/70 py-2 px-5">
@@ -145,7 +145,7 @@
 	<div class="flex justify-end items-end">
 		<ButtonOutlined class="border-rose-300 text-rose-400" on:click={handleShowModal}>Cancel deployment</ButtonOutlined>
 	</div>
-	<span class="text-lg font-semibold text-primary-500 ml-2"> Building and deployment settings</span>
+	<span class="text-lg font-semibold text-primary-500 ml-2"> Build Settings</span>
 	<div
 		class="rounded-sm border shadow-inner bg-slate-50 px-5 py-6
 	flex flex-col gap-3"
@@ -154,7 +154,7 @@
 			<span class="text-base font-semibold text-slate-700">Repository: </span>
 			<div class="flex items-center gap-2">
 				<img src="/github.svg" alt="github-logo" width="24" />
-				<span class="text-slate-700 capitalize text-base"
+				<span class="text-slate-700 text-base"
 					>{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository.name}</span
 				>
 			</div>

@@ -43,7 +43,6 @@
 			formErr = error.message;
 			return;
 		}
-
 		formMsg = response.message;
 		password = '';
 		confirmPassword = '';
@@ -53,7 +52,6 @@
 		}, 3000);
 	};
 
-	const verifyEmail = 'verify';
 	const forgotPassword = 'forgot-password';
 	const unhandled = 'unhandled';
 	const githubCallback = 'github-login-callback';
@@ -61,17 +59,6 @@
 	let showErrorModal = false;
 	const handleCallback = async () => {
 		switch (data.slug) {
-			case verifyEmail:
-				const { error } = await auth.VerifyEmail(token);
-				if (error) {
-					console.error('error in verifyEmail: ', error);
-					showErrorModal = true;
-					formErr = error.message;
-					return;
-				}
-
-				goto('/repositories');
-				break;
 			case forgotPassword:
 				showModal = true;
 				break;
@@ -146,7 +133,7 @@
 									<label for="password" class="block text-sm font-semibold text-gray-800">
 										Password
 									</label>
-									<span class="px-2 text-xs text-brown-800">
+									<span class="px-2 text-xs text-slate-800">
 										(min. 8 alphanumeric special characters)
 									</span>
 								</div>

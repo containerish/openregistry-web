@@ -11,6 +11,9 @@
 		"checkJs": true,
 		"types": [
 			"@types/webappsec-credential-management"
-		]
+		],
+        "plugins": [{
+            "name": "typescript-svelte-plugin"
+        }]
 	}
 }

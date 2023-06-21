@@ -180,9 +180,9 @@
 					on:submit|preventDefault={(e) => handleFormSubmit(e)}
 					class="w-full lg:w-2/5 py-4 flex flex-col justify-start items-start gap-3"
 				>
-					<Textfield name="email" type="email" onInput={validateEmail} placeholder="Email" />
-					<Textfield name="subject" type="text" onInput={validateSubject} placeholder="Subject" />
-					<Textarea name="body" onInput={validateBody} placeholder="Write to us" />
+					<Textfield name="email" type="email" on:input={validateEmail} placeholder="Email" />
+					<Textfield name="subject" type="text" on:input={validateSubject} placeholder="Subject" />
+					<Textarea name="body" on:input={validateBody} placeholder="Write to us" />
 					<div>
 						{@html ticketResponse}
 					</div>

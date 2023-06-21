@@ -36,7 +36,7 @@
 				<GitBranchIcon class="h-4 w-4" />
 				<span class="text-sm font-semibold text-slate-800">release-main</span>
 			</div>
-			<a href="#" class="underline">2345678</a>
+			<a href="" class="underline">2345678</a>
 			<div class="flex gap-2 items-center">
 				<a href="#" class="text-slate-600 text-sm antialiased">123458.openregistry-is-awesome.dev</a
 				>

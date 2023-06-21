@@ -3,7 +3,6 @@
 	import ListBox from '$lib/listBox.svelte';
 	import Disclosure from '$lib/disclosure.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import Input from '$lib/input.svelte';
 	import { ArrowLeftIcon, InfoIcon, BookIcon, AddAccountIcon } from '$lib/icons';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
@@ -13,10 +12,10 @@
 
 <div class="w-full flex flex-col gap-6">
 	<div class="flex flex-col justify-center items-center gap-2">
-		<span class="text-2xl font-bold text-primary-600">Set up builds and deployments</span>
+		<span class="text-2xl font-bold text-primary-600">Set up Automated Builds for your project</span>
 		<div class="flex flex-col lg:flex-row justify-center items-center gap-3">
 			<span class="text-sm lg:text-base text-center text-slate-600">
-				Configure automatic builds and deployments for</span
+				Configure automatic builds for</span
 			>
 			<div class="flex gap-1 items-center">
 				<img class="mt-0.5" src="/github.svg" alt="github-logo" width="24" />

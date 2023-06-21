@@ -3,7 +3,6 @@
 	export let placeholder = '';
 	export let name = '';
 	export let rows = 3;
-	export let onInput = (e: any, key: string) => {};
 </script>
 
 <div class={twMerge('my-2 xl:w-full', $$props.class)}>
@@ -16,7 +15,7 @@
 		id="FormControlTextarea"
 		{rows}
 		maxlength="300"
-		on:input={(e) => onInput(e, name)}
+		on:input
 		{name}
 		{placeholder}
 	/>
