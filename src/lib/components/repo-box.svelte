@@ -18,8 +18,9 @@
 				stagger: 0.1,
 				ease: backInOut,
 				scrollTrigger: {
-					trigger: '.browse',
-					start: 'top center'
+					trigger: '.repobox',
+					start: 'top center',
+					id: 'tile'
 				}
 			}
 		);
