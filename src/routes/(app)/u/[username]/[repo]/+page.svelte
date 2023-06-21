@@ -74,19 +74,19 @@
 
 <div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
 	<div
-		class="flex py-10 lg:py-16 px-9 md:px-20 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
+		class="flex py-10 lg:py-16 px-16 mx-3 gap-8 bg-primary-50 border-b-0 border-2 border-primary-100"
 	>
 		<div class="flex items-center">
 			<img src="/cube-dark.png" alt="container" width="80px" class="" />
 		</div>
-		<div class="w-full text-slate-700 flex flex-col gap-3">
+		<div class="w-full text-slate-700 flex flex-col gap-2 justify-center">
 			<!-- <div class="flex gap-4 items-center"> -->
 			<!-- <IconButton class="mt-3 w-3">
 					<Star class="w-5 h-5 lg:w-8 lg:h-8" />
 				</IconButton> -->
 			<!-- </div> -->
-			<span class="text-2xl lg:text-4xl">{data.username}/{data.repo}</span>
-			<span class="text-sm lg:text-base capitalize">by {data.username}</span>
+			<span class="text-3xl">{data.username}/{data.repo}</span>
+			<span class="text-base capitalize">by {data.username}</span>
 		</div>
 	</div>
 
@@ -97,8 +97,8 @@
 		<button
 			aria-label="tab for overview"
 			on:click={toggleOverview}
-			class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
-			border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+			class="ease-in duration-300 h-10 px-4 pb-6 text-center text-primary-500 bg-transparent border-b-2
+			border-transparent text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
           {isOverview ? 'border-b-primary-500' : 'border-transparent'}"
 		>
 			Overview
@@ -107,8 +107,8 @@
 		<button
 			aria-label="tab for Tags"
 			on:click={toggleTags}
-			class="ease-in duration-300 h-10 px-4 pb-9 text-center text-primary-500 bg-transparent border-b-2
-				border-transparent text-base lg:text-xl whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
+			class="ease-in duration-300 h-10 px-4 pb-6 text-center text-primary-500 bg-transparent border-b-2
+				border-transparent text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
           {isTags ? 'border-b-primary-500' : 'border-transparent'}"
 		>
 			Tags
@@ -128,18 +128,18 @@
 		{/if}
 
 		{#if isOverview}
-			<div class="flex flex-col xl:flex-row justify-center items-center gap-10 w-full px-9 xl:px-3">
+			<div class="flex flex-col xl:flex-row justify-start items-center gap-3 w-full px-9 xl:px-3">
 				<div
 					class="w-full bg-white border border-primary-100/50 shadow-2xl mx-3 h-full rounded-sm
 					px-8 py-8 flex justify-center items-center min-h-[200px] min-w-[500px]"
 				>
-					<span class="text-slate-500 text-xl lg:text-2xl"> No Overview Available </span>
+					<span class="text-slate-500 text-xl"> No Overview Available </span>
 				</div>
 				<div
-					class="min-w-max flex flex-col justify-center items-center gap-5 py-6
+					class="min-w-max flex flex-col justify-center items-center gap-3 py-6
 					bg-white border border-primary-100/50 rounded-sm mx-4 px-6 shadow-2xl"
 				>
-					<span class="text-lg lg:text-xl text-slate-700 font-medium mb-4"
+					<span class="text-lg text-slate-700 font-medium mb-3"
 						>Quick Docker Commands</span
 					>
 					<ButtonOutlined class="lowercase" on:click={() => handleCopy('pull')}>
