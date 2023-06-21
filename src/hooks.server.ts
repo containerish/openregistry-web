@@ -1,5 +1,6 @@
 import { session } from './stores/session';
-import { redirect, type Handle } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { createConnectTransport } from '@bufbuild/connect-web';
 import { createPromiseClient } from '@bufbuild/connect';
 import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_connect-es/services/kon/github_actions/v1/build_logs_connect';
@@ -61,3 +62,10 @@ export const handle = sequence(
 	authenticationHandler,
 	createProtobufClient
 );
+
+export const handleError: HandleServerError = async ({ error, event }) => {
+	console.log('unhandled server exception - route: %s - error: %s', event.route.id, error);
+	return {
+		message: typeof error === 'string' ? error : JSON.stringify(error)
+	};
+};

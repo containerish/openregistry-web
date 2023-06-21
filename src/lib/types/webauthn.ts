@@ -1,5 +1,6 @@
 import type { WebAuthnSignInSchema, WebAuthnSignUpSchema } from '$lib/formSchemas';
 import type {
+	AuthenticationPublicKeyCredential,
 	CredentialCreationOptionsJSON,
 	CredentialRequestOptionsJSON
 } from '@github/webauthn-json/browser-ponyfill';
@@ -34,4 +35,9 @@ export type WebAuthnBeginLoginResponseType = WebAuthnError & {
 };
 export type WebAuthnFinishLoginResponseType = WebAuthnError & {
 	message?: string;
+};
+
+export type WebAuthnFinishLoginRequestType = {
+	credentials: AuthenticationPublicKeyCredential;
+	username: string;
 };
