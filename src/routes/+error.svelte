@@ -5,7 +5,7 @@
 	import '../app.css';
 </script>
 
-<div class="bg-white text-center min-h-max flex-col w-full h-full flex justify-center items-center">
+<div class="text-center min-h-max flex-col w-full h-full flex justify-center items-center">
 	<div class="flex flex-col justify-center items-center w-2/3">
 		{#if $page.status === 400 || $page.status === 401}
 			<img class="w-1/2" src="/unauth.svg" alt="unauthorised" />
@@ -18,9 +18,9 @@
 				{JSON.stringify($page.error)}
 			</span>
 			<div class="flex gap-4 justify-center items-center">
-				<ButtonSolid on:click={() => goto('/?method=signin')}>SignIn</ButtonSolid>
-				<span class="font-bold">Or</span>
-				<ButtonSolid on:click={() => goto('/?method=signup')}>Sign Up</ButtonSolid>
+				<ButtonSolid on:click={() => goto('/auth/signin')}>SignIn</ButtonSolid>
+				<span class="font-bold">or</span>
+				<ButtonSolid on:click={() => goto('/auth/signup')}>Sign Up</ButtonSolid>
 			</div>
 		</div>
 	</div>
