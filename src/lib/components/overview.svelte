@@ -1,7 +1,63 @@
-<script>
+<script lang="ts">
+	import { browser } from '$app/environment';
 	import Card from '$lib/card.svelte';
 	import IconButton from '$lib/icon-button.svelte';
 	import Arrow from '$lib/icons/arrow-r.svelte';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+	import { onMount } from 'svelte';
+	import { backInOut } from 'svelte/easing';
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.fromTo(
+			'.paragraph1',
+			{ duration: 0.5, opacity: 0, x: -30 },
+			{
+				duration: 1,
+				opacity: 1,
+				x: 30,
+
+				ease: backInOut,
+				scrollTrigger: {
+					trigger: '.pic1',
+					start: 'top center'
+				}
+			}
+		);
+
+		gsap.fromTo(
+			'.paragraph2',
+			{ duration: 0.5, opacity: 0, x: 30 },
+			{
+				duration: 1,
+				opacity: 1,
+				x: -30,
+
+				ease: backInOut,
+				scrollTrigger: {
+					trigger: '.pic2',
+					start: 'top center'
+				}
+			}
+		);
+
+		gsap.fromTo(
+			'.paragraph3',
+			{ duration: 0.5, opacity: 0, x: -30 },
+			{
+				duration: 1,
+				opacity: 1,
+				x: 30,
+
+				ease: backInOut,
+				scrollTrigger: {
+					trigger: '.pic3',
+					start: 'top center'
+				}
+			}
+		);
+	});
 </script>
 
 <Card id="overview" class="bg-primary-50/50 py-12">
@@ -9,12 +65,12 @@
 		<div
 			class="px-6 md:px-9 w-full flex justify-between gap-6 items-center flex-col md:flex-row my-3"
 		>
-			<div class="w-80 md:w-fit max-w-xl">
+			<div class="pic1 w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
 				</picture>
 			</div>
-			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
+			<div class="paragraph1 w-full mx-8 flex justify-center flex-col max-w-xl">
 				<span class=" text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Overview
 				</span>
@@ -58,7 +114,7 @@
 			</div>
 		</div>
 		<div class="px-6 w-full flex justify-between items-center flex-col-reverse md:flex-row my-2">
-			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
+			<div class="paragraph2 w-full mx-8 flex justify-center flex-col max-w-xl">
 				<span class="text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Collaborations
 				</span>
@@ -96,20 +152,19 @@
 					</IconButton>
 				</div>
 			</div>
-			<div class="w-80 md:w-fit max-w-xl">
+			<div class="pic2 w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="/collaboration.svg" alt="Collaborations" width="600px" />
 				</picture>
 			</div>
 		</div>
-		<!-- <div class="px-6 w-full flex justify-between items-center flex-col-reverse md:flex-row my-2"> -->
 		<div class="px-6 w-full flex justify-between gap-6 items-center flex-col md:flex-row">
-			<div class="w-80 md:w-fit max-w-xl">
+			<div class="pic3 w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="man-arrow-up.svg" alt="Storage" width="600px" />
 				</picture>
 			</div>
-			<div class="w-full mx-8 flex justify-center flex-col max-w-xl">
+			<div class="paragraph3 w-full mx-8 flex justify-center flex-col max-w-xl">
 				<span class="text-primary-600 whitespace-nowrap font-semibold pb-4 text-2xl lg:text-4xl">
 					Web 3.0 Infrastructure
 				</span>

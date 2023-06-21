@@ -13,9 +13,10 @@
 			afterComplete: (t: any) => {
 				t.destroy();
 			}
-		})
+		})	
 			.options({ speed: 0 })
-			.type(header(), { instant: true })
+			.type(header(), { instant: true})
+			.pause(2000)
 			.options({ speed: 50 })
 			.type('echo Qwerty@123')
 			.move(-10)

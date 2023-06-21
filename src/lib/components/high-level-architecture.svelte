@@ -2,6 +2,24 @@
 	import Card from '$lib/card.svelte';
 	import IconButton from '$lib/icon-button.svelte';
 	import Arrow from '$lib/icons/arrow-r.svelte';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+	import { onMount } from 'svelte';
+	import { backIn, backInOut, backOut, elasticIn, elasticInOut } from 'svelte/easing';
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.from('.diagram', {
+			duration: 1.5,
+			opacity: 0,
+			ease: backInOut,
+			scale: 0.3,
+			scrollTrigger: {
+				trigger: '.trigger',
+				start: 'top center'
+			}
+		});
+	});
 </script>
 
 <Card id="high-level-architecture" class="bg-primary-100/40 py-12 lg:py-20 flex flex-col gap-6">
@@ -20,7 +38,7 @@
 			Storj
 		</p>
 
-		<div class="flex cursor-pointer justify-center pt-2">
+		<div class="trigger flex cursor-pointer justify-center pt-2">
 			<a
 				class="mt-1 text-lg font-semibold text-primary-500"
 				href="https://blog.openregistry.dev/posts/overview"
@@ -35,7 +53,7 @@
 			</IconButton>
 		</div>
 	</div>
-	<div class=" w-11/12 max-w-[1000px]">
+	<div class="diagram w-11/12 max-w-[1000px]">
 		<picture>
 			<img
 				class="w-full"

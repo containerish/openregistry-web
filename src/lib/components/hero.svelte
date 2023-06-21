@@ -95,7 +95,7 @@
 			</div>
 
 			<div
-				class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl"
+				class=" browse grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 lg:gap-9 max-w-6xl"
 				aria-label="popular repositories"
 			>
 				<RepoBox class="bg-[#081c45]" href="#">
@@ -124,7 +124,7 @@
 					<div><img alt="nginx" src="./nginx.png" width="90px" /></div>
 				</RepoBox>
 
-				<RepoBox href="#">
+				<RepoBox href="#" class="repobox">
 					<div><img alt="nginx" src="./busybox1.png" width="40px" /></div>
 					<span class="text-lg font-semibold text-primary-600 ml-1">BusyBox</span>
 				</RepoBox>
