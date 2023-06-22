@@ -15,9 +15,16 @@
 			ease: backInOut,
 			scale: 0.3,
 			scrollTrigger: {
-				trigger: '.trigger',
-				start: 'top center'
+				trigger: '.trigger'
 			}
+		});
+
+		let mm = gsap.matchMedia();
+		mm.add('(max-width: 500px)', () => {
+			gsap.to('.diagram', {
+				opacity: 1,
+				scale: 1
+			});
 		});
 	});
 </script>
@@ -38,7 +45,7 @@
 			Storj
 		</p>
 
-		<div class="trigger flex cursor-pointer justify-center pt-2">
+		<div class="flex cursor-pointer justify-center pt-2">
 			<a
 				class="mt-1 text-lg font-semibold text-primary-500"
 				href="https://blog.openregistry.dev/posts/overview"
@@ -46,7 +53,7 @@
 				rel="noreferrer">More</a
 			>
 			<IconButton
-				class="transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
+				class="trigger transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
             			hover:scale-110 border border-none w-5 p-1 mt-0.5"
 			>
 				<Arrow class="text-primary-500" />
