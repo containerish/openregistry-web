@@ -5,7 +5,7 @@
 
 <div
 	class="flex flex-col bg-slate-50/70 shadow-2xl items-center md:items-end gap-12 md:grid md:grid-cols-4 w-full md:gap-6
-		rounded-lg px-12 py-16"
+		rounded-lg px-6 md:px-12 py-16"
 >
 	<div class="col-span-4 md:pb-9 text-center flex flex-col gap-3">
 		<span
@@ -14,7 +14,7 @@
 		>
 			How does it work?
 		</span>
-		<span class="text-sm self-center text-slate-600 w-96 md:w-full px-3"
+		<span class="text-sm self-center text-slate-600 md:w-full px-3"
 			>A step by step description on how a layer is pushed to OpenRegistry</span
 		>
 	<hr class=" border-b border-primary-100/50">

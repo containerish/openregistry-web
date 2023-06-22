@@ -16,7 +16,7 @@
 
 <Card
 	id="how-to-intro"
-	class="min-h-[800px] flex flex-col items-center space-y-8 gap-10 py-20 
+	class="min-h-[800px] flex flex-col items-center  space-y-8 gap-10 py-20 
 	lg:min-w-[1000px] max-w-[1500px] px-3 md:px-16 mx-auto relative"
 >
 	<div

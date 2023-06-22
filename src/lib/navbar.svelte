@@ -30,7 +30,7 @@
 			<IconButton
 				on:keyup={() => goto('/')}
 				on:click={() => goto('/')}
-				class="flex cursor-pointer items-center w-11 h-11"
+				class="flex cursor-pointer items-center w-11 h-11 m-0 p-1"
 			>
 				<Logo type="dark" />
 			</IconButton>

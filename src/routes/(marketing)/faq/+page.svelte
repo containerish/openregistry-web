@@ -67,7 +67,7 @@
 </svelte:head>
 
 <Card class=" bg-slate-50/50 mx-auto">
-	<div class="w-3/4 lg:w-full min-h-[90vh] mx-10 my-4 lg:my-20 max-w-[3000px]">
+	<div class="w-full min-h-[90vh] mx-10 my-4 lg:my-20 max-w-[3000px]">
 		<div
 			class=" bg-slate-50 shadow-inner justify-start items-center p-5 lg:p-10 my-5 rounded-sm
 			border border-primary-100"
