@@ -18,6 +18,14 @@
 				trigger: '.trigger'
 			}
 		});
+
+		let mm = gsap.matchMedia();
+		mm.add('(max-width: 500px)', () => {
+			gsap.to('.diagram', {
+				opacity: 1,
+				scale: 1
+			});
+		});
 	});
 </script>
 

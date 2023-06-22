@@ -86,7 +86,7 @@
 
 		<div class="flex flex-col justify-center items-center gap-9 py-10">
 			<div
-				class="flex flex-col items-center justify-center text-center text-base text-slate-600 px-9"
+				class="browse flex flex-col items-center justify-center text-center text-base text-slate-600 px-9"
 			>
 				<span>
 					Browse, Pull, Push and Share 100s of container images by open source projects, software

@@ -16,7 +16,7 @@
 			{
 				duration: 1,
 				opacity: 1,
-				x: 30,
+				x: 0,
 				delay: 1,
 				ease: backInOut,
 				scrollTrigger: {
@@ -31,7 +31,7 @@
 			{
 				duration: 1,
 				opacity: 1,
-				x: -30,
+				x: 0,
 				delay: 1,
 				ease: backInOut,
 				scrollTrigger: {
@@ -46,14 +46,23 @@
 			{
 				duration: 1,
 				opacity: 1,
-				x: 30,
+				x: 0,
 				delay: 1,
 				ease: backInOut,
 				scrollTrigger: {
-					trigger: '.webthree'
+					trigger: '.webthree',
 				}
 			}
 		);
+
+		let mm = gsap.matchMedia()
+		mm.add('(max-width: 500px)', () => {
+			gsap.fromTo(
+				'.overview, .collab, .webthree',
+				{duration: 0.5, opacity: 0, x: -3},
+				{duration: 0.5, opacity: 1, x: 0}
+			)
+		})
 	});
 </script>
 

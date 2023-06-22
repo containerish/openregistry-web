@@ -24,6 +24,15 @@
 				}
 			}
 		);
+
+		let mm = gsap.matchMedia();
+		mm.add('(max-width: 500px)', () => {
+			gsap.fromTo(
+				'.repobox',
+				{ duration: 0.5, opacity: 0, y: -30 },
+				{ duration: 0.3, opacity: 1, y: 30, delay: 2, stagger:0.1 }
+			);
+		});
 	});
 </script>
 
