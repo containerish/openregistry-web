@@ -19,7 +19,7 @@
 		class="flex flex-col w-full justify-start items-center my-2 lg:my-9 max-w-[1600px] mx-auto z-20 relative"
 	>
 		<div
-			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center px-10
+			class="flex flex-col gap-1 lg:gap-8 justify-start min-h-[1000px] items-center text-center md:px-9
 			py-6 mx-5 my-3 max-w-[600px] lg:max-w-max"
 		>
 			<div class="max-w-5xl">
@@ -50,10 +50,10 @@
 				Get to know our Team
 			</span>
 			<div class="flex flex-col gap-20 mt-8 w-full">
-				<div class="flex justify-center items-center">
+				<div class="flex flex-col md:flex-row justify-center items-center">
 					<div class="flex xl:absolute xl:flex top-[40%] left-0 -z-50">
 						<div class="">
-							<img src="about-1.svg" alt="about us" width="500px" />
+							<img src="about-1.svg" alt="about us" class="w-[300px] md:w-[500px]" />
 						</div>
 					</div>
 
@@ -95,7 +95,7 @@
 					</div>
 				</div>
 
-				<div class="flex justify-center items-center">
+				<div class="flex flex-col-reverse lg:flex-row justify-center items-center">
 					<div class="flex flex-col gap-4 px-4 lg:px-12 py-8 bg-white/90 rounded-sm shadow-3xl">
 						<div class="flex flex-col">
 							<span class="text-xl font-semibold text-primary-500 capitalize"> Gunjan Valecha </span>
@@ -131,7 +131,7 @@
 					</div>
 					<div class="flex xl:absolute xl:flex top-[41%] right-0 justify-end items-center -z-50">
 						<div class="xl:mt-52 justify-self-end">
-							<img src="about-2.svg" alt="about us" width="500px" />
+							<img src="about-2.svg" alt="about us" class="w-[300px] md:w-[500px]" />
 						</div>
 					</div>
 				</div>
