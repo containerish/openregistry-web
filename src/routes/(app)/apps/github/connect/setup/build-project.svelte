@@ -8,14 +8,12 @@
 		CopyIcon,
 		GitBranchIcon,
 		ArrowRightIcon,
-		ArrowLeftIcon,
-		CrossIcon
+		ArrowLeftIcon
 	} from '$lib/icons/';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import { onMount } from 'svelte';
-	import type { z } from 'zod';
 	import IconButton from '$lib/icon-button.svelte';
 
 	export let handleNext;
@@ -119,9 +117,9 @@
 	</div>
 
 	{#if showModal}
-		<Dialog class="shadow-2xl shadow-primary-600">
-			<div class="min-h-max flex flex-col justify-center items-center gap-9 py-3 mx-4">
-				<span class="lg:text-2xl text-lg font-semibold text-primary-500 break-words"
+		<Dialog class="shadow-2xl shadow-slate-500">
+			<div class="min-h-max flex flex-col justify-center items-center gap-9 p-6 max-w-[450px]">
+				<span class="lg:text-2xl text-lg font-semibold text-rose-700 break-words"
 					>Continue without a sucessful deployment ?</span
 				>
 				<div class="flex flex-col text-slate-700 items-center">
@@ -135,15 +133,19 @@
 						<b class="text-primary-500">main.</b>
 					</span>
 				</div>
-				<div class="flex justify-center items-center gap-6 px-8 min-h-max">
-					<ButtonSolid on:click={handleShowModal}>continue</ButtonSolid>
-					<ButtonOutlined on:click={handleShowModal}>Cancel</ButtonOutlined>
+				<div class="flex justify-center items-center gap-6 w-full">
+					<ButtonOutlined class="w-full text-rose-700 border-rose-700/70" on:click={handleShowModal}
+						>Continue</ButtonOutlined
+					>
+					<ButtonOutlined class="w-full" on:click={handleShowModal}>Cancel</ButtonOutlined>
 				</div>
 			</div>
 		</Dialog>
 	{/if}
 	<div class="flex justify-end items-end">
-		<ButtonOutlined class="border-rose-300 text-rose-400" on:click={handleShowModal}>Cancel deployment</ButtonOutlined>
+		<ButtonOutlined class="border-rose-300 text-rose-400" on:click={handleShowModal}
+			>Cancel deployment</ButtonOutlined
+		>
 	</div>
 	<span class="text-lg font-semibold text-primary-500 ml-2"> Build Settings</span>
 	<div
@@ -181,7 +183,6 @@
 		</div>
 	</div>
 
-	
 	<div class="flex flex-col md:flex-row justify-between items-center lg:px-9">
 		<button
 			aria-label="tab button"

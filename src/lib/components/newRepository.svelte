@@ -5,13 +5,17 @@
 	import { getContext } from 'svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
+	import Textarea from '$lib/textarea.svelte';
 
 	const toggleModal = getContext('toggleModal');
 </script>
 
-<div class="p-5 max-w-[400px]">
-	<form class="flex justify-around items-center gap-6 flex-col h-full w-full">
-		<span class="text-2xl font-semibold text-primary-500 pb-4"> Create A New Repository </span>
+<div class="flex flex-col md:flex-row">
+	<div class="bg-primary-100/50 flex flex-col items-center justify-start gap-9 p-6 md:p-9">
+		<span class="text-2xl font-semibold text-primary-500"> Create A New Repository </span>
+		<img src="/cube-dark.png" alt="cube" width="120px" class="md:py-4">
+	</div>
+	<form class="flex justify-around items-center gap-6 flex-col h-full w-full px-9 py-6">
 		<div class="flex flex-col gap-3 w-full">
 			<div class="flex gap-4 text-slate-600 pb-2">
 				<RadioButton label="Public">
@@ -27,19 +31,15 @@
 			<div class="w-full">
 				<label
 					for="textarea"
-					class="block text-sm lg:text-base text-start font-semibold text-gray-600"
+					class="block text-sm lg:text-base text-start font-semibold text-slate-500 ml-1"
 					>Description</label
 				>
-				<textarea
-					rows="3"
-					class="w-full resize-none border-primary-100 rounded-md focus:border-primary-200 
-					focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500"
-				/>
+				<Textarea class="p-0 m-0" />
 			</div>
-			<div class="flex px-16 pt-2 w-full justify-center items-center gap-6">
-				<ButtonSolid>Create</ButtonSolid>
-				<ButtonOutlined on:click={toggleModal}>Close</ButtonOutlined>
-			</div>
+		</div>
+		<div class="flex pt-2 w-full justify-center items-center gap-6">
+			<ButtonOutlined class="w-full" on:click={toggleModal}>Close</ButtonOutlined>
+			<ButtonSolid class="w-full">Create</ButtonSolid>
 		</div>
 	</form>
 </div>
