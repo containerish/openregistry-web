@@ -20,8 +20,7 @@
 			leaveFrom="opacity-100"
 			leaveTo="opacity-0"
 		>
-			<div class="fixed inset-0 bg-gray-900 bg-opacity-60" />
-			<DialogOverlay />
+			<DialogOverlay class="fixed inset-0 bg-slate-800/50" />
 		</TransitionChild>
 
 		<div class="fixed inset-0 overflow-y-auto">
@@ -36,8 +35,8 @@
 				>
 					<div
 						class={twMerge(
-							`flex min-h-max w-full transform px-6 lg:py-4 z-50 rounded-lg bg-white 
-							transition-all inset-0 border-2 border-primary-500`,
+							`flex min-h-max w-full transform justify-center items-center rounded-lg bg-slate-50 
+							transition-all inset-0 border-2 border-primary-100 shadow-3xl shadow-slate-500`,
 							$$props.class
 						)}
 					>

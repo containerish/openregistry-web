@@ -128,9 +128,6 @@
 					Create Respository
 				</ButtonOutlined>
 			</div>
-			<Dialog isOpen={showModal}>
-				<NewRepository />
-			</Dialog>
 			<div in:fly={{ y: 200, duration: 300 }}>
 				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 					<div class="w-full">
@@ -156,5 +153,8 @@
 				{/if}
 			</div>
 		</div>
+		<Dialog isOpen={showModal}>
+			<NewRepository />
+		</Dialog>
 	</div>
 </Loader>
