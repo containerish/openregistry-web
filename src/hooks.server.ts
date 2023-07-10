@@ -9,7 +9,9 @@ import { env } from '$env/dynamic/public';
 import { OpenRegistryClient } from '$lib/client/openregistry';
 
 export const authenticationHandler: Handle = async ({ event, resolve }) => {
-	const { cookies, locals, url } = event;
+	const { cookies, locals, url, request } = event;
+	console.log('cookies in hook:', cookies);
+	console.log('request in hook:', request);
 
 	const sessionId = cookies.get('session_id');
 	if (sessionId && (!locals.user || !locals.authenticated)) {
