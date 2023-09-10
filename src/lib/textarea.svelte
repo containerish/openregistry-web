@@ -16,6 +16,7 @@
 		{rows}
 		maxlength="300"
 		on:input
+        on:change
 		{name}
 		{placeholder}
 	/>

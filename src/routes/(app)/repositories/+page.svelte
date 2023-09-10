@@ -5,53 +5,30 @@
 	import { onMount, setContext } from 'svelte';
 	import { NewRepository, Repository, Loader } from '$lib/components';
 	import type { PageData } from './$types';
-	import type { Catalog } from '$apis/registry';
-	import type { OpenRegistryUserType } from '$lib/types/user';
 	import { navigating } from '$app/stores';
 	import { pulseStore } from '$lib/components/pulse';
 	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
-
-	/** @type {import('./$types').PageData} */
-	export let data: PageData;
-	export let catalog: Catalog;
-	// catalog = data.repositories;
-	const u: OpenRegistryUserType | null = data.user;
-
-	const pageSize = 10;
-	import { createPopperActions } from 'svelte-popperjs';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import Dialog from '$lib/dialog.svelte';
 	import { DefaultPageSize } from '$lib/constants';
+	import type { RepositoryCatalog } from '$lib/types/registry';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
-	const [popperRef, popperContent] = createPopperActions({
-		placement: 'top-start',
-		strategy: 'fixed'
-	});
-	const extraOpts = {
-		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
-	};
+	export let data: PageData;
+	let catalog: RepositoryCatalog;
+    const client = new OpenRegistryClient(fetch)
 
-	// @ts-ignore
-
+	const pageSize = 10;
 	const fetchPageData = async (offset?: number) => {
-		if (!offset) {
-			offset = 0;
-		}
+        const response = await client.getUserRepositoryCatalog()
+        if (response.error) {
+            console.log('error in get user catalog: ', response)
+                return
+        }
 
-		const url = new URL('/apis/registry/list/catalog', $page.url.origin);
-		url.searchParams.set('namespace', data.user?.username!);
-		url.searchParams.set('page_size', DefaultPageSize.toString());
-		url.searchParams.set('offset', (DefaultPageSize * offset).toString());
-		const response = await fetch(url);
-
-		if (response.status !== 200) {
-			return;
-		}
-
-		catalog = await response.json();
+        catalog = response
 	};
-	let showTooltip = false;
 
 	setContext('fetchPageData', fetchPageData);
 	onMount(async () => {
@@ -65,12 +42,13 @@
 
 	setContext('toggleModal', toggleModal);
 
-	const handleOnChange = async (e: any) => {
-		autoCompleteThrottled(e.target.value);
+	const handleOnChange = async (e: Event) => {
+        const value = (e.target as HTMLInputElement).value
+		autoCompleteThrottled(value);
 	};
 
 	const autoComplete = async (q: string) => {
-		let query = u.username;
+		let query = data.user.username;
 
 		if (q !== '') {
 			query += '/' + q;
@@ -132,7 +110,7 @@
 				{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 					<div class="w-full">
 						{#each catalog.repositories as repo}
-							<Repository data={repo} compact={false} />
+							<Repository username={data.user.username} repository={repo} compact={false} />
 						{/each}
 					</div>
 
@@ -147,7 +125,7 @@
 							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
 							flex justify-center items-center"
 						>
-							<span class="text-slate-500 text-2xl"> No Repositories Yet </span>
+							<span class="text-slate-500 text-2xl">No Repositories Yet</span>
 						</div>
 					</div>
 				{/if}

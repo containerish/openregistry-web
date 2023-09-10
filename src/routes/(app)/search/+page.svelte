@@ -3,7 +3,6 @@
 	import { onMount, setContext } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import Checkbox from '$lib/checkbox.svelte';
-	import type { Catalog } from '$apis/registry';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { navigating, page } from '$app/stores';
 	import Menu from '$lib/headless/menu.svelte';
@@ -16,6 +15,7 @@
 	import Dialog from '$lib/dialog.svelte';
 	import type { PageData } from './$types';
 	import { DefaultPageSize } from '$lib/constants';
+	import { RepositoryCatalog } from '$lib/types/registry';
 
 	export let data: PageData;
 
@@ -42,12 +42,16 @@
 			return;
 		}
 
-		catalog = await response.json();
+		const repoCatalog = await response.json();
+        const parsed = RepositoryCatalog.safeParse(repoCatalog)
+        if (parsed.success) {
+            catalog = parsed.data
+        }
 		return offset;
 	};
 
 	setContext('fetchPageData', fetchPageData);
-	let catalog: Catalog;
+	let catalog: RepositoryCatalog
 
 	onMount(async () => {
 		const query = $page.url.searchParams.get('q');
@@ -228,7 +232,7 @@
 					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 						<div class="w-full">
 							{#each catalog.repositories as repo}
-								<Repository data={repo} compact={false} />
+								<Repository username={data.user.username} repository={repo} compact={false} />
 							{/each}
 						</div>
 

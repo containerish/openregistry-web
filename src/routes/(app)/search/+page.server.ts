@@ -1,8 +1,17 @@
-import type { PageServerLoad } from "./$types";
+import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-export const load = (async ({url, locals}) => {
-    return {
-        query: url.searchParams.get('q'),
-        authenticated: locals.authenticated
-    }
-}) satisfies PageServerLoad
+export const load: PageServerLoad = async ({ url, locals, cookies }) => {
+	if (!locals.user) {
+		cookies.getAll().forEach((c) => {
+			cookies.delete(c.name);
+		});
+		throw redirect(303, '/');
+	}
+
+	return {
+		user: locals.user,
+		query: url.searchParams.get('q'),
+		authenticated: locals.authenticated
+	};
+};

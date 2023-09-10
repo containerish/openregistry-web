@@ -1,6 +1,8 @@
-<script>
+<script lang="ts">
 	export let label = '';
 	export let value = '';
+
+    const id = crypto.randomUUID()
 </script>
 
 <div class="form-check cursor-pointer form-check-inline">
@@ -9,9 +11,10 @@
 		 bg-white checked:bg-primary-500 checked:border-slate-600 focus:outline-none transition duration-200 
 		 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
 		type="radio"
-		name="inlineRadioOptions"
-		id="inlineRadio1"
-		{value}
+		name="inlineRadioOptions-{label}"
+		id="radio-{id}"
+        {value}
+        on:change
 	/>
 	<label
 		class="text-lg form-check-label flex gap-1 text-gray-800"

@@ -21,6 +21,7 @@
 <input
 	aria-label="text input"
 	on:input
+    on:change
 	{name}
 	{type}
 	value={value ?? ''}

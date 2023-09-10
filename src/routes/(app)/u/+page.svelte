@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { Repository } from '$lib/components';
-	import type { Catalog } from '$apis/registry';
 	import { CubeIcon, ProfileIcon, StarIcon, UserGroupIcon } from '$lib/icons';
 	import type { PageData } from './$types';
-	import { DefaultPageSize } from '$lib/constants';
-	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
+	import type { RepositoryCatalog } from '$lib/types/registry';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 	export let data: PageData;
 
 	let isRepo = true;
@@ -31,27 +30,25 @@
 		isContrib = true;
 	};
 
-	let catalog: Catalog;
+	let catalog: RepositoryCatalog = {
+        repositories: [],
+        total: 0,
+    };
 
-	const fetchPageData = async (offset?: number) => {
-		if (!offset) {
-			offset = 0;
-		}
-		const url = new URL('/apis/registry/list/catalog', $page.url.origin);
-		url.searchParams.set('namespace', data.user?.username!);
-		url.searchParams.set('page_size', DefaultPageSize.toString());
-		url.searchParams.set('offset', (DefaultPageSize * offset).toString());
-		const response = await fetch(url);
+    const client = new OpenRegistryClient(fetch)
 
-		if (response.status !== 200) {
-			return;
-		}
+    const listUserCatalog = async (visibility?: "Public" | "Private") => {
+        const response = await client.getUserRepositoryCatalog(visibility)
+        if (response.error) {
+            console.log('error listing user catalog: ', response.error)
+            return
+        }
 
-		catalog = await response.json();
-	};
+        catalog = response
+    }
 
 	onMount(async () => {
-		await fetchPageData();
+        await listUserCatalog()
 	});
 </script>
 
@@ -70,11 +67,11 @@
 			<div class="flex flex-col gap-3 items-center md:items-start">
 				<div class="flex items-center gap-9">
 					<span class="text-3xl font-medium capitalize text-slate-600">
-						{data.user.name ? data.user.name : data.user.username}
+						{data.user.username}
 					</span>
-					<a class="text-sm text-primary-400 underline-offset-4 md:mt-2" href="/settings"
-						><u>Edit Profile</u></a
-					>
+					<a class="text-sm text-primary-400 underline-offset-4 md:mt-2" href="/settings">
+                    <u>Edit Profile</u>
+                    </a >
 				</div>
 				<div class="flex items-center gap-7">
 					<div class="flex items-center">
@@ -138,9 +135,9 @@
 		<div in:fly={{ y: 200, duration: 300 }}>
 			{#if isRepo}
 				<div class="w-full px-8 py-8">
-					{#if catalog?.repositories}
+					{#if catalog.repositories && catalog.repositories.length > 0}
 						{#each catalog.repositories as repo}
-							<Repository compact={false} data={repo} />
+							<Repository username={data.user.username} compact={false} repository={repo} />
 						{/each}
 					{:else}
 						<div
