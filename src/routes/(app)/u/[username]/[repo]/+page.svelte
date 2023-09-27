@@ -5,14 +5,11 @@
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import { page } from '$app/stores';
 	import { env } from '$env/dynamic/public';
-	import type { Repo } from '$apis/registry';
+	import type { Repository } from '$lib/types/registry';
 
 	let isOverview = true;
 	let isTags = false;
-	let repository: Repo = {
-		namespace: '',
-		tags: []
-	};
+	let repository: Repository
 
 	const toggleOverview = () => {
 		isOverview = true;
@@ -40,7 +37,7 @@
 	});
 
 	let isCopied = '';
-	let timeout: any;
+	let timeout: ReturnType<typeof setTimeout>;
 
 	const handleCopy = (cmd: string) => {
 		const u = new URL(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
@@ -121,9 +118,16 @@
 				class="bg-white w-full mx-3 flex-col gap-4 rounded-sm px-3 py-6 flex justify-center
 				items-center border border-primary-100/50 shadow-2xl"
 			>
-				{#each repository.tags as tag}
-					<Tag {tag} namespace={repository.namespace} />
+                {#if repository.image_manifests}
+				{#each repository.image_manifests as manifest}
+					<Tag namespace={`${data.username}/${data.repo}`} manifest={manifest} />
 				{/each}
+                {:else}
+                <div class="px-8 py-8 flex h-full w-full justify-center items-center flex-col gap-4">
+					<span class="text-slate-500 text-xl">No tags found.</span>
+					<code class="text-slate-500 rounded-sm bg-primary-50 py-2 px-4">Try pushing an image?</code>
+                    </div>
+                {/if}
 			</div>
 		{/if}
 
@@ -133,15 +137,15 @@
 					class="w-full bg-white border border-primary-100/50 shadow-2xl mx-3 h-full rounded-sm
 					px-8 py-8 flex justify-center items-center min-h-[200px] min-w-[500px]"
 				>
-					<span class="text-slate-500 text-xl"> No Overview Available </span>
+					<span class="text-slate-500 rounded-sm bg-primary-50 py-2 px-4 text-xl">
+                        No Overview Available.
+                    </span>
 				</div>
 				<div
 					class="min-w-max flex flex-col justify-center items-center gap-3 py-6
 					bg-white border border-primary-100/50 rounded-sm mx-4 px-6 shadow-2xl"
 				>
-					<span class="text-lg text-slate-700 font-medium mb-3"
-						>Quick Docker Commands</span
-					>
+					<span class="text-lg text-slate-700 font-medium mb-3">Quick Docker Commands</span>
 					<ButtonOutlined class="lowercase" on:click={() => handleCopy('pull')}>
 						<span
 							class="{isCopied === 'pull'

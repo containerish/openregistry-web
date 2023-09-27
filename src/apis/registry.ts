@@ -1,5 +1,4 @@
 import HttpClient from './httpClient';
-import { debounce, throttle } from 'throttle-debounce';
 import { env } from '$env/dynamic/public';
 
 export type Repository = {
@@ -81,12 +80,7 @@ export class RegistryBackend extends HttpClient {
 		return await this.http.get(url);
 	};
 
-	public ListCatalog = async (
-		pageSize: number = 10,
-		offset: number = 0,
-		namespace?: string,
-		sortBy?: string
-	) => {
+	public ListCatalog = async (pageSize = 10, offset = 0, namespace?: string, sortBy?: string) => {
 		let url = '/v2/ext/catalog/detail';
 
 		if (pageSize) {

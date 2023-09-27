@@ -1,16 +1,16 @@
 <script lang="ts">
 	import CopyIcon from './icons/copy.svelte';
-	import type { Tag } from '$apis/registry';
 	import { onDestroy } from 'svelte';
-	// @ts-ignore
-	export let tag: Tag;
+	import type { ImageManifest } from './types/registry';
+
+	export let manifest: ImageManifest;
 	export let namespace: string;
 
 	let selected = '';
-	let timeout: any;
+	let timeout: ReturnType<typeof setTimeout>;
 	const copyCommandToClipboard = () => {
-		selected = tag.reference;
-		navigator.clipboard.writeText(`docker pull openregistry.dev/${namespace}:${tag.reference}`);
+		selected = manifest.reference;
+		navigator.clipboard.writeText(`docker pull openregistry.dev/${namespace}:${manifest.reference}`);
 		setTimeout(() => {
 			selected = '';
 		}, 2000);
@@ -19,14 +19,14 @@
 	onDestroy(() => clearTimeout(timeout));
 </script>
 
-{#if tag}
+{#if manifest}
 	<div class="flex flex-col gap-5 w-full p-4 border-b border-primary-100/40">
 		<div class="flex px-6 items-center justify-start gap-9 lg:justify-between">
 			<div>
 				<span class="text-base lg:text-lg text-slate-600">
-					Tag: <span class="font-semibold text-base lg:text-lg text-primary-300"
-						>{tag.reference}</span
-					>
+					Tag: <span class="font-semibold text-base lg:text-lg text-primary-300">
+                    {manifest.reference}
+                    </span>
 				</span>
 			</div>
 			<div
@@ -34,7 +34,7 @@
 				on:keypress={copyCommandToClipboard}
 				class="flex justify-center items-center text-md px-2 py-1 rounded-sm cursor-pointer"
 			>
-				{#if selected === tag.reference}
+				{#if selected === manifest.reference}
 					Command copied!!
 				{:else}
 					<CopyIcon class="w-6 h-6 text-primary-400" />
@@ -48,24 +48,24 @@
 		>
 			<div class="flex flex-col gap-3">
 				<span>Digest (SHA256)</span>
-				<span class=" text-sm text-slate-500 font-normal">{tag.digest.slice(7, 28)}</span>
+				<span class=" text-sm text-slate-500 font-normal">{manifest.digest.slice(7, 28)}</span>
 			</div>
 
 			<div class="flex flex-col gap-3">
 				<span>Updated At</span>
 				<span class=" text-sm text-slate-500 font-normal"
-					>{new Date(tag.updated_at).toDateString()}</span
+					>{new Date(manifest.updated_at).toDateString()}</span
 				>
 			</div>
 
 			<div class="flex flex-col gap-3">
 				<span>Content Link</span>
-				<span class="break-all text-sm text-slate-500 font-normal">{tag.sky_link}</span>
+				<span class="break-all text-sm text-slate-500 font-normal">{manifest.dfs_link}</span>
 			</div>
 
 			<div class="flex flex-col gap-3">
 				<span>Size (compressed)</span>
-				<span class=" text-sm text-slate-500 font-normal">{(tag.size / 1000000).toFixed(2)} MB</span
+				<span class=" text-sm text-slate-500 font-normal">{(manifest.size / 1000000).toFixed(2)} MB</span
 				>
 			</div>
 		</div>

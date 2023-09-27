@@ -90,13 +90,29 @@ export const WebAuthnSignInSchema = z.object({
 	username: UsernameSchema
 });
 
-export const OpenRegistryUserSchema = z.object({
-	updated_at: z.string().transform((dateStr) => new Date(dateStr)),
-	created_at: z.string().transform((dateStr) => new Date(dateStr)),
-	uuid: z.string(),
+export const UserIdentitySchema = z.object({
+	id: z.string(),
+	name: z.string(),
 	username: z.string(),
 	email: z.string(),
-	is_active: z.boolean().default(false),
+	avatar: z.string(),
+	installation_id: z.number()
+});
+
+export const IdentitiesSchema = z.object({
+	webauthn: UserIdentitySchema.optional(),
+	github: UserIdentitySchema.optional()
+});
+export type UserIdentities = z.infer<typeof IdentitiesSchema>;
+
+export const OpenRegistryUserSchema = z.object({
+	updated_at: z.coerce.date(),
+	created_at: z.coerce.date(),
+	identities: IdentitiesSchema.nullish(),
+	username: z.string(),
+	email: z.string(),
+	id: z.string(),
+	is_active: z.boolean(),
 	webauthn_connected: z.boolean(),
 	github_connected: z.boolean()
 });

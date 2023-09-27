@@ -31,6 +31,11 @@ import { fail, error } from '@sveltejs/kit';
 import type { Cookies } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import type { OpenRegistryUserType } from '$lib/types/user';
+import {
+	CreateRepositoryResponse,
+	RepositoryCatalog,
+	type RepositoryCatalogResponse
+} from '$lib/types/registry';
 
 type OpenRegistryGenericError = {
 	message: string;
@@ -70,7 +75,6 @@ export class OpenRegistryClient {
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const { formErrors, fieldErrors } = err.flatten();
-				const { password, ...rest } = rawUser;
 
 				return fail(400, {
 					errors: fieldErrors,
@@ -272,13 +276,14 @@ export class OpenRegistryClient {
 				body: JSON.stringify(body)
 			});
 
+			const parsed = await response.json();
 			if (!response.ok) {
-				const data = (await response.json()) as OpenRegistryGenericError;
+				const data = parsed as OpenRegistryGenericError;
 				return {
 					error: { code: response.status, message: data.message }
 				};
 			}
-			return (await response.json()) as WebAuthnBeginRegisterResponseType;
+			return parsed as WebAuthnBeginRegisterResponseType;
 		} catch (err) {
 			return {
 				error: { code: 500, message: (err as Error).message }
@@ -326,6 +331,8 @@ export class OpenRegistryClient {
 		if (error) {
 			return { error };
 		}
+
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const finishResponse = await this.webAuthnFinishRegister(body.username, options!);
 		return finishResponse;
 	}
@@ -417,7 +424,6 @@ export class OpenRegistryClient {
 
 		const { error: err, options } = await this.webAuthBeginLogin(username);
 		if (err) {
-			console.log('sdk webAuthnLogin err: ', err);
 			return { error: err };
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -463,5 +469,58 @@ export class OpenRegistryClient {
 
 		const data = await response.json();
 		return data;
+	}
+
+	async createRepository(
+		name: string,
+		visibility: 'Public' | 'Private' = 'Private',
+		description = ''
+	) {
+		const url = new URL('/v2/ext/repository/create', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const body = {
+			name,
+			visibility,
+			description
+		};
+
+		const response = await this.fetcher(url, {
+			method: 'POST',
+			body: JSON.stringify(body),
+			credentials: 'include'
+		});
+
+		const parsed = CreateRepositoryResponse.safeParse(await response.json());
+		if (parsed.success) {
+			return parsed.data;
+		}
+		return {
+			error: 'error creating repository'
+		};
+	}
+
+	async getUserRepositoryCatalog(
+		visibility?: 'Public' | 'Private'
+	): Promise<RepositoryCatalogResponse> {
+		const url = new URL('/v2/ext/catalog/user', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		if (visibility) {
+			url.searchParams.set('visibility', visibility);
+		}
+
+		const response = await this.fetcher(url, { credentials: 'include' });
+		const data = await response.json();
+
+		if (response.status === 200) {
+			const parsed = RepositoryCatalog.safeParse(data);
+			if (parsed.success) {
+				return parsed.data as RepositoryCatalogResponse;
+			}
+
+			return {
+				error: 'Error listing user repository catalog'
+			} as RepositoryCatalogResponse;
+		}
+		return {
+			error: 'Failed to list user catalog'
+		} as RepositoryCatalogResponse;
 	}
 }

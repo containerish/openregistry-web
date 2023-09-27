@@ -7,7 +7,7 @@
 	import {type CreateTypes, type Options, create as createConfetti} from 'canvas-confetti';
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { page } from '$app/stores';
-	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
+	import { UserEmailSchema, WebAuthnSignUpSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { goto } from '$app/navigation';
@@ -62,9 +62,9 @@
 		| 'signup-with-security-key'
 		| 'success-email'
 		| 'success-webauthn'
-		| null = null;
+		| null = 'signup-with-security-key';
 
-	const handleSignUpSubmit: SubmitFunction = ({ form }) => {
+	const handleSignUpSubmit: SubmitFunction = ({ formElement }) => {
 		isLoading = true;
 
 		return async ({ result, update }) => {
@@ -72,7 +72,7 @@
 				case 'success':
 					// await update();
 					activeForm = 'success-email';
-					form.reset();
+					formElement.reset();
 					await update();
 					successMessage = result.data?.message;
 					showSuccessMsg = true;
@@ -128,6 +128,7 @@
 			const client = new OpenRegistryClient(fetch);
 			const { message, error: err } = await client.webAuthnRegister(body);
 			if (err) {
+                console.log('webAuthnRegister error: ', err)
 				webAuthnForm.formErrors = [err.message];
 				isLoading = false;
 				return;
@@ -151,8 +152,8 @@
         goto('/auth/signin?method=webauthn')
 	};
 
-	const validateUsername = (e: any) => {
-		const username: string = e.target.value;
+	const validateUsername = (e: Event) => {
+		const username: string = (e.target as HTMLInputElement).value;
 
 		if (!username) {
 			usernameErr = 'username is invalid';
@@ -167,18 +168,14 @@
 		usernameErr = '';
 	};
 
-	const validateEmail = (e: any) => {
-		const email: string = e.target.value;
-		const regexp = new RegExp(
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		);
+	const validateEmail = (e:  Event) => {
+		const email: string = (e.target as HTMLInputElement).value
 
-		const regexFailed = regexp.test(email);
-		// minimum length for email is 3 chars
-		if (!email || email.length < 3 || !regexFailed) {
-			emailErr = 'email is invalid';
-			return;
-		}
+        const userEmail = UserEmailSchema.safeParse(email)
+        if (!userEmail.success) {
+			emailErr = 'invalid email format';
+            return
+        }
 
 		emailErr = '';
 	};

@@ -1,6 +1,4 @@
-import type { PageLoad } from './$types';
-
-export async function load<PageLoad>({ params }) {
+export async function load({ params }) {
 	return {
 		repo: params.repo,
 		username: params.username
