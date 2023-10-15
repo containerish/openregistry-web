@@ -1,9 +1,9 @@
-<script>
-	import { twMerge } from 'tailwind-merge';
+<script lang="ts">
+	import { twMerge } from "tailwind-merge";
 </script>
 
 <svg
-	class={twMerge('h-6 w-6 transition-transform', $$props.class)}
+	class={twMerge("h-6 w-6 transition-transform", $$props.class)}
 	viewBox="0 0 24 24"
 	stroke="currentColor"
 	aria-label="arrow"

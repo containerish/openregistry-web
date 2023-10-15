@@ -3,7 +3,7 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { GithubIcon, FingerprintIcon, ArrowLeftIcon } from '$lib/icons';
 	import { onMount } from 'svelte';
-	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
@@ -14,6 +14,7 @@
 	import { env } from '$env/dynamic/public';
 	import IconButton from '$lib/icon-button.svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	let isLoading = false;
 	let emailErr: string;
@@ -85,7 +86,7 @@
 
 	let webAuthnForm: WebAuthnState = {
 		fieldErrors: {},
-		formErrors: []
+		formErrors: [],
 	};
 
 	const webAuthnSignIn = async (e: SubmitEvent) => {
@@ -114,7 +115,7 @@
 				webAuthnForm.formErrors = [...zError.formErrors];
 				return;
 			}
-            webAuthnForm.formErrors = [(err as Error).message]
+			webAuthnForm.formErrors = [(err as Error).message];
 			isLoading = false;
 		}
 	};
@@ -136,17 +137,10 @@
 	<div class="hidden md:flex justify-center items-center md:w-1/2">
 		<img src="/signin.png" alt="signInImage" class="py-20 px-9" />
 	</div>
-	<div
-		class="md:w-1/2 flex items-center justify-center p-3 md:p-6"
-		in:fly={{ y: 200, duration: 300 }}
-	>
-		<div
-			class="flex w-full flex-col rounded-lg bg-white shadow-3xl px-9 md:px-11 py-6 max-w-[500px]"
-		>
+	<div class="md:w-1/2 flex items-center justify-center p-3 md:p-6" in:fly={{ y: 200, duration: 300 }}>
+		<div class="flex w-full flex-col rounded-lg bg-white shadow-3xl px-9 md:px-11 py-6 max-w-[500px]">
 			{#if !showForgotPasswordForm && !isWebAuthN}
-				<span class="text-start text-primary-500 text-3xl font-semibold">
-					Log in to your account</span
-				>
+				<span class="text-start text-primary-500 text-3xl font-semibold">Log in to your account</span>
 				<form
 					class="mt-2 flex flex-col gap-4"
 					method="POST"
@@ -187,9 +181,7 @@
 					{/if}
 
 					<div class="mt-4 flex w-full justify-center space-x-5">
-						<ButtonSolid disabled={isSigninDisabled} class="w-full" {isLoading}>
-							Sign In
-						</ButtonSolid>
+						<ButtonSolid disabled={isSigninDisabled} class="w-full" {isLoading}>Sign In</ButtonSolid>
 					</div>
 
 					<ButtonOutlined on:click={handleIsWebAuthn} class="gap-0">
@@ -210,15 +202,18 @@
 						<IconButton
 							class="m-0 p-0 w-5 text-sm text-primary-500 underline"
 							on:click={() => goto('/auth/signup')}
-							on:keypress={() => goto('/auth/signup')}>Sign Up</IconButton
+							on:keypress={() => goto('/auth/signup')}
 						>
+							Sign Up
+						</IconButton>
 					</div>
 					<IconButton
 						on:click={() => (showForgotPasswordForm = true)}
 						on:keypress={() => (showForgotPasswordForm = true)}
 						class="text-sm w-1 flex p-0 m-0 text-primary-500 underline self-start"
-						>Forgot Password?</IconButton
 					>
+						Forgot Password?
+					</IconButton>
 				</form>
 			{/if}
 
@@ -294,9 +289,9 @@
 					{/if}
 					<div class="mt-9 flex w-full justify-center flex-col gap-3">
 						{#if forgotPwdMessage}
-							<span class=" text-emerald-700"
-								>{forgotPwdMessage.charAt(0).toUpperCase() + forgotPwdMessage.slice(1)}</span
-							>
+							<span class=" text-emerald-700">
+								{forgotPwdMessage.charAt(0).toUpperCase() + forgotPwdMessage.slice(1)}
+							</span>
 						{/if}
 						<ButtonSolid disabled={!!emailErr} {isLoading}>Submit</ButtonSolid>
 						<IconButton

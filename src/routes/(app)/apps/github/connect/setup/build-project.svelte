@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { ghStore } from '$lib/stores';
-	import type { StreamLogsRequestSchema } from '$lib/schemas/logs-api';
 	import {
 		SpinnerCircle,
 		DownloadIcon,
@@ -16,7 +15,8 @@
 	import { onMount } from 'svelte';
 	import IconButton from '$lib/icon-button.svelte';
 
-	export let handleNext;
+	export let handleNext: (index: number) => void;
+	export let doesGithubActionAlreadyExist = false;
 
 	let showModal = false;
 	const handleShowModal = () => {
@@ -29,21 +29,34 @@
 
 	let logs: string[] = [];
 	const streamBuildLogs = async () => {
+		const selectedRepository = $ghStore.selectedRepository;
+		if (!selectedRepository) {
+			alert('no repo selected');
+			return;
+		}
+
+		console.log('doesGithubActionAlreadyExist: ', doesGithubActionAlreadyExist);
+
 		const body = {
-			repoName: 'Adv360-Pro-ZMK',
-			repoOwner: 'jay-dee7',
-			runId: 4521071102
+			repoName: selectedRepository.repository.name,
+			repoOwner: selectedRepository.repository.owner?.login,
+			runId: 0,
+			skipToPreviousRun: doesGithubActionAlreadyExist
 		};
+		console.log('starting the logs stream request ');
 		const response = await fetch('/apis/services/github/actions/logs', {
 			method: 'POST',
 			body: JSON.stringify(body)
 		});
+		// eslint-disable-next-line no-undef
 		const reader = response.body?.pipeThrough(new TextDecoderStream()).getReader();
 		if (reader) {
-			while (true) {
+			let streamEnded = false;
+			while (!streamEnded) {
 				const { value, done } = await reader.read();
 				if (done) {
-					break;
+					streamEnded = done;
+					return;
 				}
 				logs = [...logs, ...value.split(/\r?\n/)];
 			}
@@ -105,7 +118,7 @@
 		<table class="table-auto min-h-[500px]">
 			<tbody>
 				<div class="max-h-[500px] overflow-x-auto">
-					{#each logs as log, i}
+					{#each logs as log, i (i)}
 						<tr class="break-all whitespace-pre-line">
 							<td class="text-base whitespace-pre-line font-jetbrains-mono text-slate-600">{log}</td
 							>
@@ -156,8 +169,8 @@
 			<span class="text-base font-semibold text-slate-700">Repository: </span>
 			<div class="flex items-center gap-2">
 				<img src="/github.svg" alt="github-logo" width="24" />
-				<span class="text-slate-700 text-base"
-					>{$ghStore.githubUsername}/{$ghStore.selectedRepository.repository.name}</span
+				<span class="text-slate-700 capitalize text-base"
+					>{$ghStore.githubUsername}/{$ghStore.selectedRepository?.repository.name}</span
 				>
 			</div>
 		</div>

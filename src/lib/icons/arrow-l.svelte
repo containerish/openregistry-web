@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
 	import { twMerge } from "tailwind-merge";
 </script>
 
 <svg
-	class={twMerge("h-6 w-6 text-primary-400 mt-[1.5px] transition-transform rotate-180", $$props.class)}
+	class={twMerge(
+		"h-6 w-6 text-primary-400 mt-[1.5px] transition-transform rotate-180",
+		$$props.class
+	)}
 	viewBox="0 0 24 24"
 	stroke="currentColor"
 >

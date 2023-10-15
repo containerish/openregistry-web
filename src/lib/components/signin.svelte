@@ -9,7 +9,6 @@
 	import Logo from './logo.svelte';
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
-
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { env } from '$env/dynamic/public';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
@@ -43,7 +42,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
-                    break;
+					break;
 				default:
 					await update();
 			}
@@ -69,7 +68,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
-                    break;
+					break;
 				default:
 					await update();
 			}
@@ -233,7 +232,6 @@
 								>we will send you an email to reset your password</span
 							>
 						</div>
-
 						<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
 					{/if}
 				</div>
@@ -256,6 +254,8 @@
 		{/if}
 		<div class="mt-4 flex w-full items-center justify-center gap-4">
 			<span
+				role="button"
+				tabindex={1}
 				on:click={toggleSignUpForm}
 				on:keypress={toggleSignUpForm}
 				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase
@@ -265,6 +265,8 @@
 			</span>
 			<span class="">|</span>
 			<span
+				role="button"
+				tabindex={1}
 				on:click={() => (showForgotPasswordForm = true)}
 				on:keypress={() => (showForgotPasswordForm = true)}
 				class="m-0 cursor-pointer border-none text-xs lg:text-sm font-semibold uppercase text-slate-700
@@ -275,5 +277,3 @@
 		</div>
 	</div>
 </div>
-
-

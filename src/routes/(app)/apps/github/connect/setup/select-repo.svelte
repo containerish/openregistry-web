@@ -2,26 +2,51 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { ghStore } from '$lib/stores';
-	import { GithubIcon, Check } from '$lib/icons';
+	import { CheckIcon, GithubIcon } from '$lib/icons';
 	import type { AuthorisedRepository } from '../../../../../(marketing)/+layout.server';
 	import Dialog from '$lib/dialog.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import type { PageData } from './$types';
 	import Textfield from '$lib/textfield.svelte';
+	import type { CreateProjectState } from '$lib/types/index';
+	import { Timestamp } from '@bufbuild/protobuf';
+	import { createEventDispatcher } from 'svelte';
+	import { v4 as UuidV4 } from '@lukeed/uuid';
+
 	let openDialog = false;
 
 	export let data: PageData;
 	const installationId = $page.url.searchParams.get('installation_id');
 
 	let selectedRepo: string;
-	export let handleNext;
+	export let handleNext: (index: number) => void;
+
+	/*
+	export let updateBuildProject: (
+		opts: Partial<CreateProjectState>,
+		prop: 'buildSettings' | 'environmentVariables' | 'all'
+	) => void;
+    */
 
 	async function handleRepoSelect(repo: AuthorisedRepository) {
 		selectedRepo = repo.repository.name as string;
-		await ghStore.setSelectedRepository(repo);
-		await ghStore.setAllAuthorisedRepositories(data.repoList);
-		await ghStore.setGithubUsername(repo.repository.owner.login);
+		ghStore.setSelectedRepository(repo);
+		ghStore.setAllAuthorisedRepositories(data.repoList);
+		ghStore.setGithubUsername(repo.repository?.owner?.login ?? '');
+		updateBuildProject(repo.repository.owner?.login ?? '');
 	}
+
+	const dispatch = createEventDispatcher();
+
+	const updateBuildProject = (username: string) => {
+		const project = {
+			createdAt: Timestamp.fromDate(new Date()),
+			id: UuidV4(),
+			owner: username
+		} as CreateProjectState;
+
+		dispatch('select_repo', project);
+	};
 </script>
 
 <div class="w-full flex flex-col gap-6">
@@ -29,24 +54,22 @@
 		<span class="text-2xl text-center font-bold text-primary-600"
 			>Build your application with Github Actions</span
 		>
-		<div class="flex flex-col text-center text-slate-600">
-			<span class="text-center text-sm"
-				>Select a repository to connect as your project’s source code. New commits will trigger
-				OpenRegistry to automatically build your application into a docker container ready to deploy.
+		<div class="flex flex-col text-center text-xl text-slate-600">
+			<span class="text-center text-sm lg:text-base">
+				Select a repository to connect as your project’s source code. New commits will trigger
+				OpenRegistry to automatically build and deploy your changes.
 			</span>
 		</div>
 	</div>
-	<hr class="border-1 border-gray-300" />
-	<div class="flex flex-col gap-2 items-start text-primary-600">
-		<div class="flex gap-1 items-center">
-			<GithubIcon class="h-6 w-6" />
-			<span class="text-lg font-semibold">Github | </span>
-			<span class="font-light text-sm"> more coming soon</span>
-		</div>
-
-		<div class="flex flex-col ml-1">
-			<div class="w-[92px] bg-emerald-400 h-[2px] rounded-md" />
-		</div>
+	<hr class="mt-6 border-1 border-gray-300" />
+	<div class="flex gap-2 items-center mt-10 text-primary-600">
+		<GithubIcon class="h-6 w-6" />
+		<span class="text-base lg:text-xl font-semibold">Github | </span>
+		<span class="font-light text-sm">more coming soon</span>
+	</div>
+	<div class="flex flex-col relative my-3">
+		<div class="w-24 bg-primary-200 h-1 rounded-md" />
+		<div class="bg-gray-300 h-[1px] mt-0.5 ml-24" />
 	</div>
 
 	<div class="flex flex-col gap-2 justify-center items-start">
@@ -106,7 +129,7 @@
 					>
 						{repo.repository.name}
 						{#if repo.repository.name === selectedRepo}
-							<Check class="w-5 h-5 text-emerald-500 absolute top-0 right-0 m-2" />
+							<CheckIcon class="w-5 h-5 text-emerald-500 absolute top-0 right-0 m-2" />
 						{/if}
 					</button>
 				{/each}
@@ -129,11 +152,14 @@
 	<hr class=" border-1 border-gray-300" />
 	<div class="flex justify-between items-baseline">
 		<span
+			role="button"
+			tabindex={1}
 			on:click={() => goto('/apps/github/connect')}
 			on:keypress={() => goto('/apps/github/connect')}
 			class="text-slate-600 underline underline-offset-4 text-base cursor-pointer antialiased"
-			>Cancel</span
 		>
+			Cancel
+		</span>
 		<ButtonSolid
 			disabled={!selectedRepo || data.repoList.length === 0}
 			on:click={() => handleNext(1)}>Begin setup</ButtonSolid

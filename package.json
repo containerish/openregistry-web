@@ -28,6 +28,9 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@buf/containerish_openregistry.connectrpc_es": "1.1.2-20231015100817-c91fff96b58a.1",
+		"@connectrpc/connect": "^1.1.2",
+		"@connectrpc/connect-web": "^1.1.2",
 		"@github/webauthn-json": "^2.1.1",
 		"@playwright/test": "^1.39.0",
 		"@popperjs/core": "^2.11.7",

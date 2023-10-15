@@ -1,5 +1,5 @@
-<script>
-	import { twMerge } from 'tailwind-merge';
+<script lang="ts">
+	import { twMerge } from "tailwind-merge";
 </script>
 
 <svg
