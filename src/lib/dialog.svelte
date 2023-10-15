@@ -1,7 +1,12 @@
-<script>
-	import { Dialog, DialogOverlay, Transition, TransitionChild } from '@rgossiaux/svelte-headlessui';
+<script lang="ts">
+	import {
+		Dialog,
+		DialogOverlay,
+		Transition,
+		TransitionChild,
+	} from "@rgossiaux/svelte-headlessui";
 	export let isOpen = true;
-	import { twMerge } from 'tailwind-merge';
+	import { twMerge } from "tailwind-merge";
 </script>
 
 <Transition show={isOpen}>
@@ -24,7 +29,9 @@
 		</TransitionChild>
 
 		<div class="fixed inset-0 overflow-y-auto">
-			<div class="flex min-h-full items-center justify-center text-center">
+			<div
+				class="flex min-h-full items-center justify-center text-center"
+			>
 				<TransitionChild
 					enter="ease-out duration-300"
 					enterFrom="opacity-0 scale-95"

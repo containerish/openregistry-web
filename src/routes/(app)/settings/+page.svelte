@@ -5,15 +5,14 @@
 	import { fly } from 'svelte/transition';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	export let data: PageData;
-	const auth = new Auth();
 
 	import { form, field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
-	import type { PageData } from './$types';
+	import type { PageData, SubmitFunction } from './$types';
 	import Textfield from '$lib/textfield.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import { page } from '$app/stores';
-	import { applyAction, type SubmitFunction, enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
@@ -23,7 +22,7 @@
 
 	let formResp = {
 		message: undefined,
-		type: undefined
+		type: undefined,
 	};
 
 	let isResetPasswordLoading = false;
@@ -210,8 +209,8 @@
 					<div class="flex flex-col gap-1">
 						<span class="text-lg font-medium text-rose-700">Delete Account</span>
 						<span class="text-slate-700 antialiased text-sm">
-							Please note, if you choose to delete your account your repositories will also deleted
-							and will no longer be available to you or anyone else
+							Please note, if you choose to delete your account your repositories will also deleted and
+							will no longer be available to you or anyone else
 						</span>
 					</div>
 					<div class="flex w-full flex-col items-start justify-start gap-3">
@@ -222,9 +221,9 @@
 							class="max-w-[450px]"
 							bind:value={data.user.username}
 						/>
-						<ButtonOutlined class="mt-6 border-rose-600 bg-transparent text-rose-700"
-							>Delete</ButtonOutlined
-						>
+						<ButtonOutlined class="mt-6 border-rose-600 bg-transparent text-rose-700">
+							Delete
+						</ButtonOutlined>
 					</div>
 				</div>
 			</Card>

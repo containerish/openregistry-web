@@ -6,20 +6,25 @@
 		ListboxOption,
 		Transition
 	} from '@rgossiaux/svelte-headlessui';
-	import { Check, CheckIcon, ChevronIcon } from './icons/';
+	import { Check, ChevronIcon } from './icons/';
 	type ListItem = {
 		name: string;
 		id: number;
 		disabled: boolean;
-		handler?: VoidFunction;
+		handler?: (val: unknown) => void;
 	};
 
 	export let items: ListItem[];
 
+	$: items_render = new Map(Object.entries(items));
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	let selectedItem: ListItem = items[0];
-	function setSelectItem(item: ListItem) {
-		selectedItem = item;
-		item?.handler();
+	function setSelectItem(e: CustomEvent<string>) {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		selectedItem = items_render.get(e.detail)!;
+		if (selectedItem?.handler) {
+			selectedItem.handler(selectedItem.name);
+		}
 	}
 </script>
 
@@ -27,7 +32,7 @@
 	<div class="w-72">
 		<div>
 			<div class="relative mt-1">
-				<Listbox value={selectedItem} on:change={(e) => setSelectItem(e.detail)}>
+				<Listbox value={selectedItem} on:change={setSelectItem}>
 					<ListboxButton
 						aria-label="list button"
 						class="flex w-full px-4 py-3 h-10 lg:h-11 justify-between items-center border border-primary-100 rounded-md
@@ -56,7 +61,7 @@
 									item.id
 										? 'bg-emerald-100/40 text-slate-600 font-semibold pl-4'
 										: 'pl-10'}"
-									value={item}
+									value={item.name}
 									disabled={item.disabled}
 								>
 									{#if selectedItem.id === item.id}

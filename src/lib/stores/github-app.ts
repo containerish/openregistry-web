@@ -1,5 +1,5 @@
-import type { AuthorisedRepository } from 'src/routes/(app)/+layout.server';
 import { writable } from 'svelte/store';
+import type { AuthorisedRepository } from '../../routes/(marketing)/+layout.server';
 
 export type Branch = {
 	name: string;
@@ -18,24 +18,24 @@ const github = () => {
 		githubUsername: ''
 	});
 
-	async function setAllAuthorisedRepositories(repos: AuthorisedRepository[]) {
-		await update((state) => ({ ...state, repositories: repos }));
+	function setAllAuthorisedRepositories(repos: AuthorisedRepository[]) {
+		update((state) => ({ ...state, repositories: repos }));
 	}
 
-	async function setSelectedRepository(repo: AuthorisedRepository) {
-		await update((state) => ({ ...state, selectedRepository: repo }));
+	function setSelectedRepository(repo: AuthorisedRepository) {
+		update((state) => ({ ...state, selectedRepository: repo }));
 	}
 
-	async function setGithubUsername(ghUsername: string) {
-		await update((state) => ({ ...state, githubUsername: ghUsername }));
+	function setGithubUsername(ghUsername: string) {
+		update((state) => ({ ...state, githubUsername: ghUsername }));
 	}
 
-	async function setTabIndex(index: number) {
-		await update((state) => ({ ...state, tabIndex: index }));
+	function setTabIndex(index: number) {
+		update((state) => ({ ...state, tabIndex: index }));
 	}
 
-	async function setActiveBranch(branch: string) {
-		await update((state) => ({ ...state, activeBranch: branch }));
+	function setActiveBranch(branch: string) {
+		update((state) => ({ ...state, activeBranch: branch }));
 	}
 
 	return {

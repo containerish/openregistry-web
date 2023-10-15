@@ -1,9 +1,11 @@
-<script>
-	import { Check, ExternalLinkIcon, RecycleIcon, GitBranchIcon } from '$lib/icons';
+<script lang="ts">
+	import { Check, ExternalLinkIcon, GitBranchIcon } from "$lib/icons";
 </script>
 
 <div class="bg-white py-6 px-4 grid grid-cols-7 items-center">
-	<div class="rounded-full bg-slate-300 text-sm max-w-fit px-3 py-0.5 text-slate-600 items-start">
+	<div
+		class="rounded-full bg-slate-300 text-sm max-w-fit px-3 py-0.5 text-slate-600 items-start"
+	>
 		preview
 	</div>
 	<div class="flex flex-col col-span-2 mr-6">

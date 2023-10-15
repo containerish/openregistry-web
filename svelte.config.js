@@ -11,7 +11,7 @@ const config = {
             '$apis': 'src/apis',
             "$apis/*": "src/apis/*",
             "$stores": "src/stores",
-            "$stores/*": "src/stores/*",
+            "$stores/*": "src/stores/*"
         },
     }
 };
