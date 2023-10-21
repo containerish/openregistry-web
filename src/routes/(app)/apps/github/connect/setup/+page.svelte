@@ -72,8 +72,6 @@
 		/>
 	</div>
 
-	<!-- <ButtonSolid on:click={pullBuilds}>List Builds</ButtonSolid> -->
-
 	<div
 		class="bg-white/80 rounded-sm shadow-2xl border border-primary-100 my-10 min-h-max
 		overflow-y-auto p-9 md:p-16 mx-3 min-w-[300px] w-full max-w-[1000px]"

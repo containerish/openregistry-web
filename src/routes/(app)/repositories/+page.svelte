@@ -12,15 +12,18 @@
 	import ButtonOutlined from "$lib/button-outlined.svelte";
 	import Dialog from "$lib/dialog.svelte";
 	import { DefaultPageSize } from "$lib/constants";
+	import { OpenRegistryClient } from "$lib/client/openregistry";
 
 	export let data: PageData;
 	$: catalog = data.repositories;
 
+	const registryClient = new OpenRegistryClient(fetch);
+
 	const pageSize = 10;
 
-	let showModal = false;
+	let showCreateRepositoryModal = false;
 	const toggleModal = () => {
-		showModal = !showModal;
+		showCreateRepositoryModal = !showCreateRepositoryModal;
 	};
 
 	setContext("toggleModal", toggleModal);
@@ -52,6 +55,13 @@
 	$: {
 		pulseStore.setPulseState(!$navigating && !!catalog);
 	}
+
+	const handleCreateRepositorySuccess = async () => {
+		const response = await registryClient.getUserRepositoryCatalog();
+		if (!response.error) {
+			catalog = response.repositories;
+		}
+	};
 </script>
 
 <svelte:head>
@@ -115,16 +125,19 @@
 							class="bg-slate-50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
 							flex justify-center items-center"
 						>
-							<span class="text-slate-500 text-2xl"
-								>No Repositories Yet</span
-							>
+							<span class="text-slate-500 text-2xl">
+								No Repositories Yet
+							</span>
 						</div>
 					</div>
 				{/if}
 			</div>
 		</div>
-		<Dialog isOpen={showModal}>
-			<NewRepository />
+		<Dialog isOpen={showCreateRepositoryModal}>
+			<NewRepository
+				handleSuccess={handleCreateRepositorySuccess}
+				handleClose={() => (showCreateRepositoryModal = false)}
+			/>
 		</Dialog>
 	</div>
 </Loader>

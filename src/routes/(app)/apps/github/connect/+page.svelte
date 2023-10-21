@@ -66,32 +66,32 @@
 			<hr class="my-6 border-b border-primary-50" />
 			<div class="flex flex-col justify-center gap-6 text-slate-600">
 				<div class="flex flex-col w-full gap-1">
-					<span class="text-primary-500 font-semibold"
-						>1. Select repository</span
-					>
-					<span class="text-sm"
-						>Select your site developed using any of the supported
-						frameworks or no framework at all.</span
-					>
+					<span class="text-primary-500 font-semibold">
+						1. Select repository
+					</span>
+					<span class="text-sm">
+						Select your site developed using any of the supported
+						frameworks or no framework at all.
+					</span>
 				</div>
 				<div class="flex flex-col w-full gap-1">
-					<span class="text-primary-500 font-semibold"
-						>2. Set up builds and deployments</span
-					>
-					<span class="text-sm"
-						>Specify how OpenRegistry automatically builds and
-						deploys your repository's commits.</span
-					>
+					<span class="text-primary-500 font-semibold">
+						2. Set up builds
+					</span>
+					<span class="text-sm">
+						Specify how OpenRegistry automatically builds and
+						deploys your repository's commits.
+					</span>
 				</div>
 				<div class="flex flex-col w-full gap-1">
-					<span class="text-primary-500 font-semibold"
-						>3. Deploy site</span
-					>
-					<span class="text-sm"
-						>Your site will be deployed to a free SSL-enabled
+					<span class="text-primary-500 font-semibold">
+						3. Deploy site
+					</span>
+					<span class="text-sm">
+						Your site will be deployed to a free SSL-enabled
 						hostname. Configure custom domains, restrict access,
-						invite collaborators, and more.</span
-					>
+						invite collaborators, and more.
+					</span>
 				</div>
 			</div>
 		</div>
