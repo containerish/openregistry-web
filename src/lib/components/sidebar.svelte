@@ -22,6 +22,7 @@
 	import IconButton from "$lib/icon-button.svelte";
 	import { slide, fade } from "svelte/transition";
 	import { quintOut } from "svelte/easing";
+	import posthog from "posthog-js";
 
 	let extended = true;
 	export let user: OpenRegistryUserType;
@@ -158,16 +159,18 @@
 										<span>Explore</span>
 									</a>
 
-									<a
-										href="/projects"
-										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
+									{#if posthog.isFeatureEnabled("automated_builds")}
+										<a
+											href="/projects"
+											class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 										 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<ToolsIcon
-											class="h-6 w-5 text-slate-600"
-										/>
-										<span>Automated Builds</span>
-									</a>
+										>
+											<ToolsIcon
+												class="h-6 w-5 text-slate-600"
+											/>
+											<span>Automated Builds</span>
+										</a>
+									{/if}
 								</div>
 								<hr />
 

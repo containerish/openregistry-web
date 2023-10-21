@@ -1,7 +1,7 @@
 import { session } from "./stores/session";
 import type { Handle, HandleServerError } from "@sveltejs/kit";
 import { OpenRegistryClient } from "$lib/client/openregistry";
-import { redirect } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { createPromiseClient } from "@connectrpc/connect";
 import { GitHubActionsLogsService } from "@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_logs_connect";
@@ -11,6 +11,7 @@ import { sequence } from "@sveltejs/kit/hooks";
 import { env as privEnv } from "$env/dynamic/private";
 import { setCookies } from "$lib/protobuf/interceptors";
 import { OpenRegistryAutomationClient } from "$lib/server/automation/automation";
+import posthog from "posthog-js";
 
 export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
@@ -82,7 +83,30 @@ export const setOpenRegistryClientHandler: Handle = async ({
 	return await resolve(event);
 };
 
+const applyFeatureFlags: Handle = async ({ event, resolve }) => {
+	posthog.onFeatureFlags(function () {
+		// feature flags should be available at this point
+		const payload = posthog.getFeatureFlagPayload("automated_builds");
+		console.log("feature payload: ", payload);
+	});
+
+	const { pathname } = event.url;
+	const pathMatched =
+		pathname === "/apps/github/connect" ||
+		pathname === "/apps/github/connect/setup" ||
+		pathname.startsWith("/projects");
+
+	if (!posthog.isFeatureEnabled("automated-builds") && pathMatched) {
+		throw error(404, {
+			message: "Route not found",
+		});
+	}
+
+	return await resolve(event);
+};
+
 export const handle = sequence(
+	// applyFeatureFlags,
 	setOpenRegistryClientHandler,
 	authenticationHandler,
 	createProtobufClient
