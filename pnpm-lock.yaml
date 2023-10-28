@@ -92,8 +92,8 @@ devDependencies:
     specifier: ^5.0.0
     version: 5.0.0
   '@types/webappsec-credential-management':
-    specifier: ^0.6.4
-    version: 0.6.4
+    specifier: ^0.6.6
+    version: 0.6.6
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.62.0
     version: 5.62.0(@typescript-eslint/parser@5.59.7)(eslint@8.51.0)(typescript@5.0.4)
@@ -1028,8 +1028,8 @@ packages:
     resolution: {integrity: sha512-Pb7k35iCGFcGPECoNE4DYp3Oyf2xcTd3FbFQxXUI9hEYKUl6YX+KLf7HrBmgVcD05nl50LIH6i+80js4iYmWbw==}
     dev: true
 
-  /@types/webappsec-credential-management@0.6.4:
-    resolution: {integrity: sha512-9ZLG4/avKS74jxhwjk6f8jUMfERFQKfBfdH+CL/1pxYsJtF8IM1lwwZhKZeV2eae6pNQGj8QcxJjsKBRno/Frg==}
+  /@types/webappsec-credential-management@0.6.6:
+    resolution: {integrity: sha512-I0KFmuE64NYZSoumlmUFlIFOnY6gTIeAYQs9TcnT0sh+XSBzNsIdaCI/DLHKZ3zLCC2LfMVCDtFNSkeLEpr/1Q==}
     dev: true
 
   /@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.59.7)(eslint@8.51.0)(typescript@5.0.4):
