@@ -1,56 +1,97 @@
 <script lang="ts">
-	import {
-		Dialog,
-		DialogOverlay,
-		Transition,
-		TransitionChild,
-	} from "@rgossiaux/svelte-headlessui";
-	export let isOpen = true;
-	import { twMerge } from "tailwind-merge";
+  import { twMerge } from "tailwind-merge";
+
+  import { createDialog, melt } from "@melt-ui/svelte";
+  /** Internal helpers */
+  import { fade } from "svelte/transition";
+  import CrossIcon from "./icons/crossIcon.svelte";
+
+  const {
+    elements: {
+      trigger,
+      overlay,
+      content,
+      title,
+      description,
+      close,
+      portalled,
+    },
+    states: { open },
+  } = createDialog({
+    forceVisible: false,
+  });
 </script>
 
-<Transition show={isOpen}>
-	<Dialog
-		as="div"
-		class="relative z-50"
-		on:close={() => {
-			isOpen = false;
-		}}
-	>
-		<TransitionChild
-			enter="ease-out duration-50"
-			enterFrom="opacity-0"
-			enterTo="opacity-80"
-			leave="ease-in duration-100"
-			leaveFrom="opacity-100"
-			leaveTo="opacity-0"
-		>
-			<DialogOverlay class="fixed inset-0 bg-slate-800/50" />
-		</TransitionChild>
+<button
+  use:melt={$trigger}
+  class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-3
+  font-medium leading-none text-magnum-700 shadow hover:opacity-75"
+>
+  Open Dialog
+</button>
 
-		<div class="fixed inset-0 overflow-y-auto">
-			<div
-				class="flex min-h-full items-center justify-center text-center"
-			>
-				<TransitionChild
-					enter="ease-out duration-300"
-					enterFrom="opacity-0 scale-95"
-					enterTo="opacity-100 scale-100"
-					leave="ease-in duration-200"
-					leaveFrom="opacity-100 scale-100"
-					leaveTo="opacity-0 scale-95"
-				>
-					<div
-						class={twMerge(
-							`flex min-h-max w-full transform justify-center items-center rounded-lg bg-slate-50 
-							transition-all inset-0 border-2 border-primary-100 shadow-3xl shadow-slate-500`,
-							$$props.class
-						)}
-					>
-						<slot />
-					</div>
-				</TransitionChild>
-			</div>
-		</div>
-	</Dialog>
-</Transition>
+<div use:melt={$portalled}>
+  {#if $open}
+    <div
+      use:melt={$overlay}
+      class="fixed inset-0 z-50 bg-black/50"
+      transition:fade={{ duration: 150 }}
+    />
+    <div
+      class="fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-[90vw]
+            max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white
+            p-6 shadow-lg"
+      use:melt={$content}
+    >
+      <h2 use:melt={$title} class="m-0 text-lg font-medium text-black">
+        Edit profile
+      </h2>
+      <p use:melt={$description} class="mb-5 mt-2 leading-normal text-zinc-600">
+        Make changes to your profile here. Click save when you're done.
+      </p>
+
+      <slot />
+      <div class="mt-6 flex justify-end gap-4">
+        <button
+          use:melt={$close}
+          class="inline-flex h-8 items-center justify-center rounded-sm
+                    bg-zinc-100 px-4 font-medium leading-none text-zinc-600"
+        >
+          Cancel
+        </button>
+        <button
+          use:melt={$close}
+          class="inline-flex h-8 items-center justify-center rounded-sm
+                    bg-magnum-100 px-4 font-medium leading-none text-magnum-900"
+        >
+          Save changes
+        </button>
+      </div>
+      <button
+        use:melt={$close}
+        aria-label="close"
+        class="absolute right-4 top-4 inline-flex h-6 w-6 appearance-none
+                items-center justify-center rounded-full p-1 text-magnum-800
+                hover:bg-magnum-100 focus:shadow-magnum-400"
+      >
+        <CrossIcon class="square-4" />
+      </button>
+    </div>
+  {/if}
+</div>
+
+<!-- <dialog open={isOpen} class="inset-0 h-full w-full bg-primary-800/50">
+  <div
+    class="flex min-h-full items-center justify-center text-center"
+  >
+    <div
+      class={twMerge(
+        `flex h-max justify-center items-center rounded-lg bg-slate-50 
+		border-2 border-primary-100 shadow-3xl shadow-slate-500`,
+        $$props.class
+      )}
+    >
+      <slot />
+    </div>
+  </div>
+</dialog> -->

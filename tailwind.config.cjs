@@ -1,4 +1,5 @@
 // const colors = require('tailwindcss/colors');
+import plugin from 'tailwindcss/plugin';
 
 const config = {
 	important: true,
@@ -94,7 +95,21 @@ const config = {
 			},
 		},
 	},
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		plugin(function ({ addVariant, matchUtilities, theme }) {
+		addVariant('hocus', ['&:hover', '&:focus']);
+		// Square utility
+		matchUtilities(
+		  {
+			square: (value) => ({
+			  width: value,
+			  height: value,
+			}),
+		  },
+		  { values: theme('spacing') }
+		);
+	  }),],
 };
 
 module.exports = config;

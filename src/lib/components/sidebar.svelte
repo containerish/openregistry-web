@@ -23,6 +23,7 @@
 	import { slide, fade } from "svelte/transition";
 	import { quintOut } from "svelte/easing";
 	import posthog from "posthog-js";
+  import { browser } from "$app/environment";
 
 	let extended = true;
 	export let user: OpenRegistryUserType;
@@ -159,7 +160,7 @@
 										<span>Explore</span>
 									</a>
 
-									{#if posthog.isFeatureEnabled("automated_builds")}
+									{#if browser && posthog.isFeatureEnabled("automated_builds")}
 										<a
 											href="/projects"
 											class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide

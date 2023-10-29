@@ -14,8 +14,10 @@
 	import { DefaultPageSize } from "$lib/constants";
 	import { OpenRegistryClient } from "$lib/client/openregistry";
 
+	import { createDialog, melt } from "@melt-ui/svelte";
 	export let data: PageData;
 	$: catalog = data.repositories;
+
 
 	const registryClient = new OpenRegistryClient(fetch);
 
@@ -97,7 +99,7 @@
 						<div id="arrow" data-popper-arrow />
 					</div>
 				{/if} -->
-				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal}>
+				<ButtonOutlined class="max-w-[202px]" on:click={toggleModal} >
 					Create Respository
 				</ButtonOutlined>
 			</div>
@@ -133,7 +135,8 @@
 				{/if}
 			</div>
 		</div>
-		<Dialog isOpen={showCreateRepositoryModal}>
+		<Dialog
+		>
 			<NewRepository
 				handleSuccess={handleCreateRepositorySuccess}
 				handleClose={() => (showCreateRepositoryModal = false)}
