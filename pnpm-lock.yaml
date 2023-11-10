@@ -98,8 +98,8 @@ devDependencies:
     specifier: ^2.4.2
     version: 2.4.2
   '@types/throttle-debounce':
-    specifier: ^5.0.0
-    version: 5.0.0
+    specifier: ^5.0.2
+    version: 5.0.2
   '@types/webappsec-credential-management':
     specifier: ^0.6.6
     version: 0.6.6
@@ -1121,8 +1121,8 @@ packages:
       '@types/node': 20.1.0
     dev: true
 
-  /@types/throttle-debounce@5.0.0:
-    resolution: {integrity: sha512-Pb7k35iCGFcGPECoNE4DYp3Oyf2xcTd3FbFQxXUI9hEYKUl6YX+KLf7HrBmgVcD05nl50LIH6i+80js4iYmWbw==}
+  /@types/throttle-debounce@5.0.2:
+    resolution: {integrity: sha512-pDzSNulqooSKvSNcksnV72nk8p7gRqN8As71Sp28nov1IgmPKWbOEIwAWvBME5pPTtaXJAvG3O4oc76HlQ4kqQ==}
     dev: true
 
   /@types/webappsec-credential-management@0.6.6:
