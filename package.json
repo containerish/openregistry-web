@@ -69,7 +69,7 @@
 		"svelte-scrollto": "^0.2.0",
 		"tailwind-merge": "^2.0.0",
 		"tailwindcss": "^3.3.3",
-		"tslib": "^2.5.2",
+		"tslib": "^2.6.2",
 		"typescript": "^5.2.2",
 		"typescript-svelte-plugin": "^0.3.34",
 		"vite": "^4.5.0",
