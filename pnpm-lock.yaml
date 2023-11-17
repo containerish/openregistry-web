@@ -95,8 +95,8 @@ devDependencies:
     specifier: 0.5.2
     version: 0.5.2
   '@types/set-cookie-parser':
-    specifier: ^2.4.2
-    version: 2.4.2
+    specifier: ^2.4.6
+    version: 2.4.6
   '@types/throttle-debounce':
     specifier: ^5.0.2
     version: 5.0.2
@@ -1115,8 +1115,8 @@ packages:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
     dev: true
 
-  /@types/set-cookie-parser@2.4.2:
-    resolution: {integrity: sha512-fBZgytwhYAUkj/jC/FAV4RQ5EerRup1YQsXQCh8rZfiHkc4UahC192oH0smGwsXol3cL3A5oETuAHeQHmhXM4w==}
+  /@types/set-cookie-parser@2.4.6:
+    resolution: {integrity: sha512-tjIRMxGztGfIbW2/d20MdJmAPZbabtdW051cKfU+nvZXUnKKifHbY2CyL/C0EGabUB8ahIRjanYzTqJUQR8TAQ==}
     dependencies:
       '@types/node': 20.1.0
     dev: true
