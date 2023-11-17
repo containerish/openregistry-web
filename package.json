@@ -54,7 +54,7 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.31",
 		"postcss-cli": "^10.1.0",
-		"posthog-js": "^1.83.0",
+		"posthog-js": "^1.91.1",
 		"prettier": "^2.8.8",
 		"prettier-plugin-svelte": "^2.10.0",
 		"prettier-plugin-tailwindcss": "^0.3.0",
