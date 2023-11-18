@@ -128,14 +128,14 @@
 						<ButtonSolid on:click={() => { goto('/auth/signup'); }}>Sign Up</ButtonSolid>
 					</div>
 				{/if}
-				<div>
+				<!-- <div>
 					<Dialog isOpen={openSignInModal}>
 						<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 					</Dialog>
 				</div>
 				<Dialog isOpen={openSignUpModal} class="top-0">
 					<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
-				</Dialog>
+				</Dialog> -->
 			</div>
 		</div>
 	</nav>
