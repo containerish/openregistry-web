@@ -1,37 +1,64 @@
 <script lang="ts">
-	import { Menu, MenuButton, MenuItems, Transition } from '@rgossiaux/svelte-headlessui';
-	import { twMerge } from 'tailwind-merge';
-	import { MenuIcon } from './icons';
+  import { createDropdownMenu, melt } from "@melt-ui/svelte";
+  import IconButton from "./icon-button.svelte";
+  import { MenuIcon } from "./icons";
+  import { fly } from "svelte/transition";
+  const {
+    elements: { menu, item, trigger, arrow },
+  } = createDropdownMenu();
 </script>
 
-<Menu let:open class={twMerge('relative z-10 inline-block text-left', $$props.class)}>
-	<div class="max-w-sm">
-		<MenuButton
-			aria-label="menu button"
-			class="px-2 transition ease-in-out duration-200 flex justify-center items-center border-0 
-			aspect-square hover:bg-primary-100"
-		>
-			<MenuIcon class="h-6 w-6 text-primary-400" />
-		</MenuButton>
-	</div>
-	{#if open}
-		<Transition
-			enter="transition duration-100 ease-out"
-			enterFrom="transform scale-95 opacity-0"
-			enterTo="transform scale-100 opacity-100"
-			leave="transition duration-75 ease-out"
-			leaveFrom="transform scale-100 opacity-100"
-			leaveTo="transform scale-95 opacity-0"
-		>
-			<div>
-				<MenuItems
-					static
-					class="absolute right-0 origin-top-right bg-slate-50 rounded-sm shadow-2xl shadow-primary-100
-					 "
-				>
-					<slot />
-				</MenuItems>
-			</div>
-		</Transition>
-	{/if}
-</Menu>
+<button use:melt={$trigger}>
+  <MenuIcon class="w-6 h-6 text-primary-500" />
+</button>
+<div
+  use:melt={$menu}
+  class="bg-white rounded shadow-2xl z-50
+shadow-primary-800/30 pt-2"
+>
+  <div use:melt={$item}>
+    <IconButton
+      class="pr-16 pl-6 py-2 m-0 text-sm"
+      on:click={() => {
+        window.open("https://blog.openregistry.dev", "_blank");
+      }}
+    >
+      Blog
+    </IconButton>
+  </div>
+  <div use:melt={$item}>
+    <IconButton
+      class="pr-16 pl-6 py-2 m-0 text-sm"
+      on:click={() => {
+        window.open("/about", "_self");
+      }}
+    >
+      About
+    </IconButton>
+  </div>
+  <div use:melt={$item}>
+    <IconButton
+      class="pr-16 pl-6 py-2 m-0 text-sm"
+      on:click={() => {
+        window.open(
+          "https://github.com/containerish/OpenRegistry.git",
+          "_blank"
+        );
+      }}
+    >
+      Github
+    </IconButton>
+  </div>
+  <div use:melt={$item}>
+    <IconButton
+      class="pr-16 pl-6 py-2 m-0 text-sm"
+      on:click={() => {
+        window.open("/faq", "self");
+      }}
+    >
+      FAQ
+    </IconButton>
+  </div>
+
+  <div use:melt={$arrow} />
+</div>

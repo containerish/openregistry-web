@@ -18,7 +18,6 @@
   import Carousel from "./carousel.svelte";
   import Invite from "./invite.svelte";
   import { onMount } from "svelte";
-  import Dialog from "$lib/dialog.svelte";
   import IconButton from "$lib/icon-button.svelte";
   import { slide, fade } from "svelte/transition";
   import { quintOut } from "svelte/easing";
@@ -205,7 +204,7 @@
                     <StarIcon />
                     <span>Star us on Github</span>
                   </a>
-				  <Invite handleModal={toggleModal} />
+                  <Invite handleModal={toggleModal} />
                   <!-- <a
                     href="#"
                     on:click={toggleModal}

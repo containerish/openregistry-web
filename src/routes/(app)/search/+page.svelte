@@ -1,23 +1,18 @@
 <script lang="ts">
   import Pagination from "$lib/pagination.svelte";
   import { onMount, setContext } from "svelte";
-  import { fly, slide } from "svelte/transition";
-  import Checkbox from "$lib/checkbox.svelte";
+  import { fly } from "svelte/transition";
   import { createPopperActions } from "svelte-popperjs";
   import { navigating, page } from "$app/stores";
-  import Menu from "$lib/headless/menu.svelte";
-  import { MenuItem } from "@rgossiaux/svelte-headlessui";
-  import { ClockIcon, ArrowRIcon, FilterIcon, PencilIcon } from "$lib/icons";
+  import { FilterIcon, PencilIcon } from "$lib/icons";
   import { pulseStore } from "$lib/components/pulse";
   import { Repository, Loader } from "$lib/components";
-  import ButtonSolid from "$lib/button-solid.svelte";
   import ButtonOutlined from "$lib/button-outlined.svelte";
-  import Dialog from "$lib/dialog.svelte";
   import type { PageData } from "./$types";
   import { DefaultPageSize } from "$lib/constants";
   import { RepositoryCatalog } from "$lib/types/registry";
   import AdvanceFilters from "$lib/components/advanceFilters.svelte";
-  import AddAccount from "$lib/icons/add-account.svelte";
+  import Menu from "$lib/components/menu.svelte";
 
   export let data: PageData;
 
@@ -119,7 +114,8 @@
         <div
           class="flex flex-row gap-10 justify-between items-center w-full pb-2 m-2"
         >
-          <Menu title="Sort">
+          <Menu />
+          <!-- <Menu title="Sort">
             <MenuItem>
               <button
                 aria-label="sort by last updated"
@@ -149,16 +145,10 @@
 								rounded-md hover:bg-primary-100 text-sm"
               >
                 <PencilIcon class="h-5 w-5" />
-                <!-- <div -->
-                <!-- 	class="rounded-full border-2 border-slate-600 text-slate-600 text-sm h-4 -->
-                <!-- 	inline-flex justify-center items-center w-4" -->
-                <!-- > -->
-                <!-- 	A -->
-                <!-- </div> -->
                 Image Name
               </button>
             </MenuItem>
-          </Menu>
+          </Menu> -->
 
           <!-- advance filters -->
           <ButtonOutlined class="gap-2" on:click={toggleFilter}>

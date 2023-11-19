@@ -1,34 +1,62 @@
 <script lang="ts">
-	import {
-		Disclosure,
-		DisclosureButton,
-		DisclosurePanel,
-		Transition
-	} from '@rgossiaux/svelte-headlessui';
-	import ChevronRight from './icons/chevron-right.svelte';
+  import { createCollapsible, melt } from "@melt-ui/svelte";
+  import { slide } from "svelte/transition";
+  import ArrowDown from "./icons/arrow-down.svelte";
+  import PlainCross from "./icons/plain-cross.svelte";
 
-	export let title: string;
+  const {
+    elements: { root, content, trigger },
+    states: { open },
+  } = createCollapsible();
+  export let title: string;
 </script>
 
-<Disclosure let:open class="w-full">
-	<DisclosureButton
-		aria-label="disclosure button"
-		class="flex justify-start pl-4 items-center gap-2 w-full py-2 font-medium text-left text-primary-500
-		 border-none rounded focus:outline-none focus:bg-primary-100/30 my-2 max-w-[400px]"
-	>
-		<ChevronRight class="{open ? 'rotate-90' : ''}  h-4 w-4 text-slate-700" />
-		{title}
-	</DisclosureButton>
-	<Transition
-		enter="transition duration-100 ease-out"
-		enterFrom="transform scale-95 opacity-0"
-		enterTo="transform scale-100 opacity-100"
-		leave="transition duration-75 ease-out"
-		leaveFrom="transform scale-100 opacity-100"
-		leaveTo="transform scale-95 opacity-0"
-	>
-		<DisclosurePanel>
-			<slot />
-		</DisclosurePanel>
-	</Transition>
-</Disclosure>
+<div
+  use:melt={$root}
+  class="relative mx-auto mb-28 w-[18rem] max-w-full sm:w-[25rem]"
+>
+  <div class="flex items-center justify-between">
+    <span class="text-sm font-semibold text-magnum-900">
+      {title}
+    </span>
+    <button
+      use:melt={$trigger}
+      class="relative h-6 w-6 place-items-center rounded-md bg-white text-sm
+        text-magnum-800 shadow hover:opacity-75 data-[disabled]:cursor-not-allowed
+        data-[disabled]:opacity-75"
+      aria-label="Toggle"
+    >
+      <div class="abs-center">
+        {#if $open}
+          <PlainCross class="square-4" />
+        {:else}
+          <ArrowDown class="square-4" />
+        {/if}
+      </div>
+    </button>
+  </div>
+
+  <div
+    style:position="absolute"
+    style:top="calc(100% + 10px)"
+    style:right="0"
+    style:left="0"
+  >
+    {#if $open}
+      <div use:melt={$content} transition:slide>
+        <div class="flex flex-col gap-2">
+          <slot />
+        </div>
+      </div>
+    {/if}
+  </div>
+</div>
+
+<style lang="postcss">
+  .abs-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
