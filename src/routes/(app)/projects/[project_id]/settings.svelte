@@ -534,7 +534,7 @@
 	</TabPanels>
 </TabGroup> -->
 
-<style lang="postcss">
+<!-- <style lang="postcss">
   .trigger {
     display: flex;
     align-items: center;
@@ -606,4 +606,4 @@
       @apply !ring-green-600;
     }
   }
-</style>
+</style> -->

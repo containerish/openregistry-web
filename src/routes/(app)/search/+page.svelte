@@ -1,10 +1,10 @@
 <script lang="ts">
   import Pagination from "$lib/pagination.svelte";
   import { onMount, setContext } from "svelte";
-  import { fly } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import { createPopperActions } from "svelte-popperjs";
   import { navigating, page } from "$app/stores";
-  import { FilterIcon, PencilIcon } from "$lib/icons";
+  import { ClockIcon, FilterIcon, PencilIcon, SortIcon } from "$lib/icons";
   import { pulseStore } from "$lib/components/pulse";
   import { Repository, Loader } from "$lib/components";
   import ButtonOutlined from "$lib/button-outlined.svelte";
@@ -13,6 +13,8 @@
   import { RepositoryCatalog } from "$lib/types/registry";
   import AdvanceFilters from "$lib/components/advanceFilters.svelte";
   import Menu from "$lib/components/menu.svelte";
+  import PlainCross from "$lib/icons/plain-cross.svelte";
+  import { createPopover, melt } from "@melt-ui/svelte";
 
   export let data: PageData;
 
@@ -94,6 +96,13 @@
   $: {
     pulseStore.setPulseState(!$navigating && !!catalog);
   }
+
+  const {
+    elements: { trigger, content, arrow, close },
+    states: { open },
+  } = createPopover({
+    forceVisible: true,
+  });
 </script>
 
 <svelte:head>
@@ -114,42 +123,61 @@
         <div
           class="flex flex-row gap-10 justify-between items-center w-full pb-2 m-2"
         >
-          <Menu />
-          <!-- <Menu title="Sort">
-            <MenuItem>
-              <button
-                aria-label="sort by last updated"
-                on:click={() => {
-                  sortBy = "last_updated";
-                  fetchPageData(0);
-                }}
-                class="{sortBy === 'last_updated'
-                  ? 'font-normal bg-white'
-                  : ''} 
-                				w-full py-3 border-none inline-flex items-center bg-white justify-center rounded-b-none
-								rounded gap-2 m-0 hover:bg-primary-100 text-sm"
-              >
-                <ClockIcon class="h-5 w-5" />
-                Last Updated
-              </button>
-            </MenuItem>
-            <MenuItem class="bg-gray-100">
-              <button
-                aria-label="sort by image name"
-                on:click={() => {
-                  sortBy = "namespace";
-                  fetchPageData(0);
-                }}
-                class="{sortBy === 'namespace' ? 'font-normal bg-white' : ''} 
-         						inline-flex py-3 justify-center gap-2 items-center w-full m-0 border-none rounded-t-none
-								rounded-md hover:bg-primary-100 text-sm"
-              >
-                <PencilIcon class="h-5 w-5" />
-                Image Name
-              </button>
-            </MenuItem>
-          </Menu> -->
+          <button
+            type="button"
+            class="trigger flex gap-2 items-center text-primary-500 bg-primary-100/50 py-1 px-3 rounded"
+            use:melt={$trigger}
+            aria-label="Update dimensions"
+          >
+            <SortIcon class="square-4" />
+            <span class="">Sort</span>
+          </button>
 
+          {#if $open}
+            <div
+              use:melt={$content}
+              transition:fade={{ duration: 100 }}
+              class="content"
+            >
+              <div use:melt={$arrow} />
+              <div class="flex flex-col gap-2.5 bg-white rounded shadow-2xl">
+                <fieldset>
+                  <button
+                    aria-label="sort by image name"
+                    on:click={() => {
+                      sortBy = "namespace";
+                      fetchPageData(0);
+                    }}
+                    class="{sortBy === 'namespace'
+                      ? 'font-normal bg-white'
+                      : ''} 
+                      inline-flex py-3 px-2 justify-center gap-2 items-center w-full m-0 hover:bg-primary-100 text-sm
+                       text-slate-600 rounded-t"
+                  >
+                    <PencilIcon class="square-4" />
+                    Image Name
+                  </button>
+                </fieldset>
+                <fieldset>
+                  <button
+                    aria-label="sort by last updated"
+                    on:click={() => {
+                      sortBy = "last_updated";
+                      fetchPageData(0);
+                    }}
+                    class="{sortBy === 'last_updated'
+                      ? 'font-normal bg-white'
+                      : ''} 
+                				w-full py-3 px-2 inline-flex items-center justify-center gap-2 m-0
+                        hover:bg-primary-100 text-sm rounded-b text-slate-600"
+                  >
+                    <ClockIcon class=" square-4" />
+                    Last Updated
+                  </button>
+                </fieldset>
+              </div>
+            </div>
+          {/if}
           <!-- advance filters -->
           <ButtonOutlined class="gap-2" on:click={toggleFilter}>
             Advance Filter

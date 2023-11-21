@@ -3,17 +3,31 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 
 const config = {
-	plugins: [
-		tailwindcss(),
-		autoprefixer,
-        cssnano({
+	// plugins: [
+        
+	// 	tailwindcss(),
+	// 	autoprefixer,
+    //     cssnano({
+    //         preset: ['default', {
+    //             discardComments: {
+    //                 removeAll: true,
+    //             }
+    //         }],
+    //     }),
+	// ]
+    plugins: {
+        'postcss-import': {},
+        'tailwindcss/nesting': {},
+        tailwindcss: {},
+        autoprefixer: {},
+        cssnano: {
             preset: ['default', {
                 discardComments: {
                     removeAll: true,
                 }
             }],
-        }),
-	]
+        },
+      }
 };
 
 module.exports = config;

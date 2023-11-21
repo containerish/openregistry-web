@@ -59,8 +59,6 @@
       catalog = response.repositories;
     }
   };
-
-
 </script>
 
 <svelte:head>
