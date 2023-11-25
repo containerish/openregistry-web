@@ -5,27 +5,33 @@ import { redirect } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ parent, locals, cookies }) => {
 	const { user } = await parent();
-	const response = await createPromiseClient(
-		GitHubActionsProjectService,
-		locals.transport
-	).listProjects({
-		ownerId: {
-			value: cookies.get("session_id")?.split(":")[0],
-		},
-	});
+	let projects: any[] = [];
 
-	const projects = response.projects.map((p) => {
-		return {
-			projectName: p.projectName,
-			ownerId: p.ownerId?.value,
-			environmentVariables: p.environmentVariables?.environmentVariables,
-			buildSettings: {
-				...p.buildSettings,
+	try {
+		const response = await createPromiseClient(
+			GitHubActionsProjectService,
+			locals.transport,
+		).listProjects({
+			ownerId: {
+				value: cookies.get("session_id")?.split(":")[0],
 			},
-			id: p.id?.value,
-			createdAt: p.createdAt?.toDate(),
-		};
-	});
+		});
+		projects = response.projects.map((p) => {
+			return {
+				projectName: p.projectName,
+				ownerId: p.ownerId?.value,
+				environmentVariables:
+					p.environmentVariables?.environmentVariables,
+				buildSettings: {
+					...p.buildSettings,
+				},
+				id: p.id?.value,
+				createdAt: p.createdAt?.toDate(),
+			};
+		});
+	} catch (err) {
+		projects = [];
+	}
 
 	if (!projects || projects.length === 0) {
 		throw redirect(303, "/apps/github/connect");
