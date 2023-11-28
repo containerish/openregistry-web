@@ -12,8 +12,6 @@
   import { DefaultPageSize } from "$lib/constants";
   import { RepositoryCatalog } from "$lib/types/registry";
   import AdvanceFilters from "$lib/components/advanceFilters.svelte";
-  import Menu from "$lib/components/menu.svelte";
-  import PlainCross from "$lib/icons/plain-cross.svelte";
   import { createPopover, melt } from "@melt-ui/svelte";
 
   export let data: PageData;
