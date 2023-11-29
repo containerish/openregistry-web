@@ -15,6 +15,7 @@
   import posthog from "posthog-js";
   import { browser } from "$app/environment";
   import { cubicInOut } from "svelte/easing";
+  import Info from "$lib/icons/info.svelte";
 
   let currentPassword = field("current_password", "", [
     required(),
@@ -87,18 +88,15 @@
     { id: "tab-3", title: "Automated Builds" },
   ];
 
-
   const [send, receive] = crossfade({
     duration: 450,
     easing: cubicInOut,
   });
-
 </script>
 
 <svelte:head>
   <title>User|Open Registry</title>
 </svelte:head>
-
 
 {#if data.user}
   <div class="w-full max-w-[2000px] flex flex-col">
@@ -129,238 +127,267 @@
         </div>
       </div>
 
-
       <div
-  use:melt={$root}
-  class='flex h-full flex-col overflow-hidden rounded-xl w-11/12  data-[orientation=vertical]:flex-row'
->
-
-  <div
-    use:melt={$list}
-    class="flex shrink-0 overflow-x-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r"
-    aria-label="settings"
-  >
-    {#each triggers as triggerItem}
-      <button use:melt={$trigger(triggerItem.id)} class="trigger flex justify-center items-center relative">
-        {triggerItem.title}
-        {#if $value === triggerItem.id}
-          <div
-            in:send={{ key: 'trigger' }}
-            out:receive={{ key: 'trigger' }}
-            class="absolute bottom-1 left-1/2 h-1 w-1/2 -translate-x-1/2 rounded-full bg-primary-300"
-          />
-        {/if}
-      </button>
-    {/each}
-  </div>
-  <div use:melt={$content('tab-1')} class="grow bg-white p-5">
-    <Card>
-      <div
-        class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-10 rounded border
-         border-primary-100/50 bg-white px-9 lg:px-16 py-6 shadow-2xl"
-        in:fly={{ y: 200, duration: 300 }}
-      >
-        <div class="flex w-full flex-col gap-1">
-          <span class="mx-1 text-lg font-medium text-slate-700"
-            >Email Address</span
-          >
-          <Textfield
-            type="email"
-            placeholder="email"
-            class="max-w-[450px]"
-            disabled
-            bind:value={data.user.email}
-          />
-        </div>
-
-        <ButtonSolid class="-mt-2">Edit</ButtonSolid>
-      </div>
-    </Card>
-
-    <Card>
-      <form
-        action="?/reset_password"
-        method="POST"
-        class="w-full flex justify-center"
-        use:enhance={resetPasswordSubmit}
+        use:melt={$root}
+        class="flex min-h-max flex-col overflow-hidden rounded w-11/12 data-[orientation=vertical]:flex-row"
       >
         <div
-          class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
-        border-primary-100/50 px-9 lg:px-20 py-6 shadow-2xl"
-          in:fly={{ y: 200, duration: 300, delay: 50 }}
+          use:melt={$list}
+          class="flex shrink-0 overflow-x-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r"
+          aria-label="settings"
         >
-          <h1 class="text-lg lg:text-xl font-medium text-slate-600 mb-3">
-            Change Password
-          </h1>
-          <div class="w-full">
-            <Textfield
-              errors={$page.form?.errors?.currentPassword}
-              name="currentPassword"
-              type="password"
-              class="max-w-[450px]"
-              bind:value={$currentPassword.value}
-              label="Current password"
-            />
+          {#each triggers as triggerItem}
+            <button
+              use:melt={$trigger(triggerItem.id)}
+              class="trigger flex justify-center items-center relative"
+            >
+              {triggerItem.title}
+              {#if $value === triggerItem.id}
+                <div
+                  in:send={{ key: "trigger" }}
+                  out:receive={{ key: "trigger" }}
+                  class="absolute bottom-1 left-1/2 h-1 w-1/2 -translate-x-1/2 rounded-full bg-primary-300"
+                />
+              {/if}
+            </button>
+          {/each}
+        </div>
+        <div use:melt={$content("tab-1")} class="grow bg-white p-5">
+          <div
+            class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-start gap-10 p-9"
+            in:fly={{ y: 200, duration: 300 }}
+          >
+            <div class="flex w-full flex-col gap-1">
+              <span class="mx-1 text-lg font-medium text-slate-700"
+                >Email Address</span
+              >
+              <p class=" max-w-md text-xs text-slate-500">
+                This will require for you to re-verify your Email
+              </p>
+              <Textfield
+                type="email"
+                placeholder="email"
+                class="max-w-[450px]"
+                disabled
+                bind:value={data.user.email}
+              />
+            </div>
+
+            <ButtonSolid class="-mt-2">Edit</ButtonSolid>
           </div>
 
-          <div class="w-full">
-            <Textfield
-              errors={$page.form?.errors?.newPassword}
-              name="newPassword"
-              type="password"
-              class="max-w-[450px]"
-              bind:value={$newPassword.value}
-              label="New password"
-            />
-          </div>
-          <div class="w-full">
-            <Textfield
-              errors={$page.form?.errors?.confirmPassword}
-              name="confirmPassword"
-              type="password"
-              class="max-w-[450px]"
-              bind:value={$confirmPassword.value}
-              label="Confirm password"
-            />
-          </div>
+          <div class="h-px w-full bg-slate-200 rounded"></div>
+          <form
+            action="?/reset_password"
+            method="POST"
+            class="w-4/5 flex justify-center p-9"
+            use:enhance={resetPasswordSubmit}
+          >
+            <div
+              class="flex w-full flex-col items-start justify-start gap-3"
+              in:fly={{ y: 200, duration: 300, delay: 50 }}
+            >
+              <div class="flex flex-col gap-1">
+                <h1 class="text-lg font-medium text-slate-600">
+                  Change Password
+                </h1>
+                <p class=" max-w-md text-xs text-slate-500">
+                  Make sure that your password is longer than 8 characters and
+                  contains uppercase, lowercase, numbers and special charcters
+                </p>
+              </div>
 
-          <div />
-          {#if $page.form?.formErrors && $page.form?.formErrors.length}
-            <div class="w-full">
-              <span class="text-xs font-semibold capitalize text-red-600">
-                {$page.form?.formErrors[0]}
+              <div class="w-full">
+                <Textfield
+                  errors={$page.form?.errors?.currentPassword}
+                  name="currentPassword"
+                  type="password"
+                  class="max-w-[450px]"
+                  bind:value={$currentPassword.value}
+                  label="Current password"
+                />
+              </div>
+
+              <div class="w-full">
+                <Textfield
+                  errors={$page.form?.errors?.newPassword}
+                  name="newPassword"
+                  type="password"
+                  class="max-w-[450px]"
+                  bind:value={$newPassword.value}
+                  label="New password"
+                />
+              </div>
+              <div class="w-full">
+                <Textfield
+                  errors={$page.form?.errors?.confirmPassword}
+                  name="confirmPassword"
+                  type="password"
+                  class="max-w-[450px]"
+                  bind:value={$confirmPassword.value}
+                  label="Confirm password"
+                />
+              </div>
+
+              <div />
+              {#if $page.form?.formErrors && $page.form?.formErrors.length}
+                <div class="w-full">
+                  <span class="text-xs font-semibold capitalize text-red-600">
+                    {$page.form?.formErrors[0]}
+                  </span>
+                </div>
+              {/if}
+              <div class="flex justify-start items-center gap-3 w-full">
+                <ButtonSolid class="mt-6" isLoading={isResetPasswordLoading}
+                  >Save</ButtonSolid
+                >
+                <span class="pt-3 text-emerald-600">{resetPwdResponse}</span>
+              </div>
+            </div>
+          </form>
+          <div class="h-px w-full bg-slate-200 rounded"></div>
+
+          <div
+            class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 p-9"
+            in:fly={{ y: 200, duration: 300, delay: 100 }}
+          >
+            <div class="flex flex-col gap-1">
+              <span class="text-lg font-medium text-slate-700"
+                >Account Information</span
+              >
+              <span class="text-slate-600 antialiased text-sm">
+                This information is public and visible to all users of
+                OpenRegistry
               </span>
             </div>
+            <div class="flex w-full flex-col items-start justify-start gap-3">
+              <Textfield
+                type="text"
+                disabled
+                placeholder="username"
+                class="max-w-[450px]"
+                bind:value={data.user.username}
+              />
+              <Textfield
+                placeholder="Gihub handle"
+                disabled
+                type="text"
+                class="max-w-[450px]"
+                bind:value={data.user.html_url}
+              />
+              <ButtonSolid class="mt-6" disabled>Save</ButtonSolid>
+            </div>
+          </div>
+
+          {#if dynamic_features.feature_delete_account}
+            <div class="h-px w-full bg-slate-200 rounded"></div>
+
+            <div
+              class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3"
+              in:fly={{ y: 200, duration: 300, delay: 150 }}
+            >
+              <div class="flex flex-col gap-1">
+                <span class="text-lg font-medium text-rose-700"
+                  >Delete Account</span
+                >
+                <span class="text-slate-700 antialiased text-sm">
+                  Please note, if you choose to delete your account your
+                  repositories will also deleted and will no longer be available
+                  to you or anyone else
+                </span>
+              </div>
+              <div class="flex w-full flex-col items-start justify-start gap-3">
+                <Textfield
+                  type="text"
+                  disabled
+                  placeholder="username"
+                  class="max-w-[450px]"
+                  bind:value={data.user.username}
+                />
+                <ButtonOutlined
+                  class="mt-6 border-rose-600 bg-transparent text-rose-700"
+                >
+                  Delete
+                </ButtonOutlined>
+              </div>
+            </div>
           {/if}
-          <div class="flex justify-start items-center gap-3 w-full">
-            <ButtonSolid class="mt-6" isLoading={isResetPasswordLoading}
-              >Save</ButtonSolid
+        </div>
+
+        <div use:melt={$content("tab-2")} class="grow bg-white p-5">
+          <div class="w-full h-full min-h-[1000px] flex justify-center items-center">
+            <div
+              class="flex flex-col justify-center items-center gap-3 bg-primary-100/30 p-9 rounded border border-primary-200/50"
             >
-            <span class="pt-3 text-emerald-600">{resetPwdResponse}</span>
+              <div class="flex gap-2 items-center mb-3">
+                <span class="text-primary-500 text-2xl font-semibold">Note</span
+                >
+                <Info class="w-5 h-5 text-primary-500" />
+              </div>
+              <p class=" max-w-lg text-slate-700 antialiased">
+                Converting your Profile to an Organisation opens up
+                possibilities like being able to add user to your organisation
+                and managing their permissions.
+              </p>
+              <p class=" max-w-lg text-slate-600 antialiased">
+                Please note that once you have converted into an Org, you cannot
+                revert the change to become a user again
+              </p>
+              <ButtonSolid class="mt-6">Convert into Org</ButtonSolid>
+            </div>
           </div>
         </div>
-      </form>
-    </Card>
-
-    <Card>
-      <div
-        class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
-        border-primary-100/50 bg-white px-9 lg:px-16 py-6 shadow-2xl"
-        in:fly={{ y: 200, duration: 300, delay: 100 }}
-      >
-        <div class="flex flex-col gap-1">
-          <span class="text-lg font-medium text-slate-700"
-            >Account Information</span
-          >
-          <span class="text-slate-600 antialiased text-sm">
-            This information is public and visible to all users of
-            OpenRegistry
-          </span>
-        </div>
-        <div class="flex w-full flex-col items-start justify-start gap-3">
-          <Textfield
-            type="text"
-            disabled
-            placeholder="username"
-            class="max-w-[450px]"
-            bind:value={data.user.username}
-          />
-          <Textfield
-            placeholder="Gihub handle"
-            disabled
-            type="text"
-            class="max-w-[450px]"
-            bind:value={data.user.html_url}
-          />
-          <ButtonSolid class="mt-6" disabled>Save</ButtonSolid>
-        </div>
-      </div>
-    </Card>
-
-    {#if dynamic_features.feature_delete_account}
-      <Card>
         <div
-          class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 rounded border
-        border-primary-100/50 bg-white px-9 lg:px-16 py-6 shadow-2xl"
-          in:fly={{ y: 200, duration: 300, delay: 150 }}
-        >
-          <div class="flex flex-col gap-1">
-            <span class="text-lg font-medium text-rose-700"
-              >Delete Account</span
-            >
-            <span class="text-slate-700 antialiased text-sm">
-              Please note, if you choose to delete your account your
-              repositories will also deleted and will no longer be available
-              to you or anyone else
-            </span>
-          </div>
-          <div class="flex w-full flex-col items-start justify-start gap-3">
-            <Textfield
-              type="text"
-              disabled
-              placeholder="username"
-              class="max-w-[450px]"
-              bind:value={data.user.username}
-            />
-            <ButtonOutlined
-              class="mt-6 border-rose-600 bg-transparent text-rose-700"
-            >
-              Delete
-            </ButtonOutlined>
-          </div>
-        </div>
-      </Card>
-    {/if}
-  </div>
-  <div use:melt={$content('tab-2')} class="grow bg-white p-5">
-    
-  </div>
-  <div use:melt={$content('tab-3')} class="grow bg-white p-5">
-
-  </div>
-</div>
-
-      
+          use:melt={$content("tab-3")}
+          class="grow bg-white p-5 text-slate-700"
+        ></div>
+      </div>
     </div>
   </div>
 {/if}
 
-
- 
 <style lang="postcss">
- 
- .trigger {
+  .trigger {
     display: flex;
     align-items: center;
     justify-content: center;
- 
+
     cursor: default;
     user-select: none;
- 
-    border-radius: 0;
-    background-color: theme(colors.neutral.100);
- 
-    color: theme(colors.neutral.900);
+
+    border-radius: 5px;
+
+    color: rgb(51 65 85);
     font-weight: 500;
     line-height: 1;
- 
+
     flex: 1;
     height: theme(spacing.12);
     padding-inline: theme(spacing.2);
- 
+
     &:focus {
       position: relative;
     }
- 
+
     &:focus-visible {
       @apply z-10 ring-2;
     }
- 
-    &[data-state='active'] {
+
+    &[data-state="active"] {
       @apply focus:relative;
       background-color: white;
-      color: '#000';
+      color: theme(colors.primary-500);
     }
   }
- 
+
+  &:focus {
+    @apply !ring-green-600;
+  }
+
+  &[data-state="active"] {
+    @apply focus:relative;
+    background-color: white;
+    border-radius: 5px;
+    color: "#000";
+  }
 </style>
