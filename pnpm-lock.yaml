@@ -48,8 +48,8 @@ dependencies:
     specifier: ^5.0.0
     version: 5.0.0
   typeit:
-    specifier: ^8.7.1
-    version: 8.7.1
+    specifier: ^8.8.0
+    version: 8.8.0
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -947,6 +947,10 @@ packages:
   /@types/throttle-debounce@5.0.2:
     resolution: {integrity: sha512-pDzSNulqooSKvSNcksnV72nk8p7gRqN8As71Sp28nov1IgmPKWbOEIwAWvBME5pPTtaXJAvG3O4oc76HlQ4kqQ==}
     dev: true
+
+  /@types/web-animations-js@2.2.16:
+    resolution: {integrity: sha512-ATELeWMFwj8eQiH0KmvsCl1V2lu/qx/CjOBmv4ADSZS5u8r4reMyjCXtxG7khqyiwH3IOMNdrON/Ugn94OUcRA==}
+    dev: false
 
   /@types/webappsec-credential-management@0.6.8:
     resolution: {integrity: sha512-DES/SkK54U7AG8hmMkGCJkOSlywM3R+TzaWT+rBnX3lQTJ3K57jWr+UccWY8ImkuKekC9BjB+AH4zLJB4JKpvQ==}
@@ -3574,9 +3578,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /typeit@8.7.1:
-    resolution: {integrity: sha512-Bx/O4NMz10NWh9FWYtVwV4XwGHF9UDJfpCZPJRtw2/oUcahFAStU8J0t19aroPfTV6s1UlS5ICoqilOqmEnh2Q==}
+  /typeit@8.8.0:
+    resolution: {integrity: sha512-GQp6OW7vxro1HN3F7UPL0C2KzkGs8bFtUgmJSeK+xNhdofI40mkWxrBT2AXQwtS5Txkg7ttwplxvWCQxnUXyrw==}
     requiresBuild: true
+    dependencies:
+      '@types/web-animations-js': 2.2.16
     dev: false
 
   /typescript-svelte-plugin@0.3.34(svelte@3.59.1)(typescript@5.2.2):
