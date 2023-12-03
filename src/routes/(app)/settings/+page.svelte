@@ -16,6 +16,8 @@
   import { browser } from "$app/environment";
   import { cubicInOut } from "svelte/easing";
   import Info from "$lib/icons/info.svelte";
+  import Settings from "../projects/[project_id]/settings.svelte";
+  import OrgMode from "$lib/components/orgMode.svelte";
 
   let currentPassword = field("current_password", "", [
     required(),
@@ -79,7 +81,7 @@
     elements: { root, list, content, trigger },
     states: { value },
   } = createTabs({
-    defaultValue: "tab-1",
+    defaultValue: "tab-2",
   });
 
   const triggers = [
@@ -280,17 +282,17 @@
           </div>
 
           {#if dynamic_features.feature_delete_account}
-            <div class="h-px w-full bg-slate-200 rounded"></div>
+          <div class="h-px w-full bg-slate-200 rounded"></div>
 
-            <div
-              class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3"
+          <div
+              class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-center gap-3 p-9"
               in:fly={{ y: 200, duration: 300, delay: 150 }}
             >
               <div class="flex flex-col gap-1">
-                <span class="text-lg font-medium text-rose-700"
+                <span class="text-lg font-medium text-rose-700/80"
                   >Delete Account</span
                 >
-                <span class="text-slate-700 antialiased text-sm">
+                <span class="text-slate-600 antialiased text-sm max-w-md">
                   Please note, if you choose to delete your account your
                   repositories will also deleted and will no longer be available
                   to you or anyone else
@@ -305,7 +307,7 @@
                   bind:value={data.user.username}
                 />
                 <ButtonOutlined
-                  class="mt-6 border-rose-600 bg-transparent text-rose-700"
+                  class="mt-6 border-rose-600/50 bg-transparent text-rose-600"
                 >
                   Delete
                 </ButtonOutlined>
@@ -315,32 +317,14 @@
         </div>
 
         <div use:melt={$content("tab-2")} class="grow bg-white p-5">
-          <div class="w-full h-full min-h-[1000px] flex justify-center items-center">
-            <div
-              class="flex flex-col justify-center items-center gap-3 bg-primary-100/30 p-9 rounded border border-primary-200/50"
-            >
-              <div class="flex gap-2 items-center mb-3">
-                <span class="text-primary-500 text-2xl font-semibold">Note</span
-                >
-                <Info class="w-5 h-5 text-primary-500" />
-              </div>
-              <p class=" max-w-lg text-slate-700 antialiased">
-                Converting your Profile to an Organisation opens up
-                possibilities like being able to add user to your organisation
-                and managing their permissions.
-              </p>
-              <p class=" max-w-lg text-slate-600 antialiased">
-                Please note that once you have converted into an Org, you cannot
-                revert the change to become a user again
-              </p>
-              <ButtonSolid class="mt-6">Convert into Org</ButtonSolid>
-            </div>
-          </div>
+          <OrgMode/>
         </div>
         <div
           use:melt={$content("tab-3")}
           class="grow bg-white p-5 text-slate-700"
-        ></div>
+        >
+        <Settings />
+      </div>
       </div>
     </div>
   </div>

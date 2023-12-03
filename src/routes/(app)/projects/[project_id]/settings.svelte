@@ -36,14 +36,14 @@
 <div
   use:melt={$root}
   class={twMerge(
-    "flex max-w-[25rem] flex-col overflow-hidden rounded-xl shadow-lg  data-[orientation=vertical]:flex-row",
+    "flex flex-col overflow-hidden rounded-xl shadow-lg  data-[orientation=horizontal]:flex-row",
     className
   )}
 >
   <div
     use:melt={$list}
     class="flex shrink-0 overflow-x-auto bg-neutral-100
-    data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r"
+    data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:border-r min-h-max"
     aria-label="Manage your builds"
   >
     {#each triggers as triggerItem}
@@ -534,7 +534,7 @@
 	</TabPanels>
 </TabGroup> -->
 
-<!-- <style lang="postcss">
+<style lang="postcss">
   .trigger {
     display: flex;
     align-items: center;
@@ -569,41 +569,4 @@
     }
   }
 
-  input {
-    height: theme(spacing.8);
-    flex-shrink: 0;
-    flex-grow: 1;
-    border-radius: theme(borderRadius.md);
-    border: 1px solid theme(colors.neutral.200);
-    padding-inline: theme(spacing[2.5]);
-    line-height: 1;
-    color: theme(colors.neutral.900);
-
-    &:focus {
-      border-color: "#000";
-    }
-  }
-
-  .save {
-    display: inline-flex;
-    height: theme(spacing.8);
-    cursor: default;
-    align-items: center;
-    justify-content: center;
-    border-radius: theme(borderRadius.md);
-    background-color: "#000";
-    padding-inline: theme(spacing.4);
-    line-height: 1;
-    font-weight: theme(fontWeight.semibold);
-    color: "#000";
-    @apply transition;
-
-    &:hover {
-      opacity: 0.75;
-    }
-
-    &:focus {
-      @apply !ring-green-600;
-    }
-  }
-</style> -->
+</style>
