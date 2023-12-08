@@ -155,8 +155,8 @@ devDependencies:
     specifier: ^1.0.25
     version: 1.0.25
   svelte-check:
-    specifier: ^3.3.2
-    version: 3.3.2(postcss@8.4.31)(svelte@3.59.1)
+    specifier: ^3.6.2
+    version: 3.6.2(postcss@8.4.31)(svelte@3.59.1)
   svelte-click-outside:
     specifier: ^1.0.0
     version: 1.0.0
@@ -3299,11 +3299,11 @@ packages:
       easy-reactive: 1.0.4
     dev: true
 
-  /svelte-check@3.3.2(postcss@8.4.31)(svelte@3.59.1):
-    resolution: {integrity: sha512-67j3rI0LDc2DvL0ON/2pvCasVVD3nHDrTkZNr4eITNfo2oFXdw7SIyMOiFj4swu+pjmFQAigytBK1IWyik8dBw==}
+  /svelte-check@3.6.2(postcss@8.4.31)(svelte@3.59.1):
+    resolution: {integrity: sha512-E6iFh4aUCGJLRz6QZXH3gcN/VFfkzwtruWSRmlKrLWQTiO6VzLsivR6q02WYLGNAGecV3EocqZuCDrC2uttZ0g==}
     hasBin: true
     peerDependencies:
-      svelte: ^3.55.0
+      svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
     dependencies:
       '@jridgewell/trace-mapping': 0.3.18
       chokidar: 3.5.3
