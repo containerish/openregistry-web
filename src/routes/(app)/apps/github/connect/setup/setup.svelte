@@ -13,6 +13,8 @@
   import ButtonOutlined from "$lib/button-outlined.svelte";
   import { createEventDispatcher, onMount } from "svelte";
   import type { CreateProjectState } from "$lib/types/index";
+  import Select from "$lib/components/select.svelte";
+
   import { env } from "$env/dynamic/public";
 
   export let handleNext: (index: number) => void;
@@ -29,7 +31,7 @@
     try {
       await storeBuildProject();
       const err = await createPullRequest(
-        selectedRepository.repository.name ?? ""
+        selectedRepository.repository.name ?? "",
       );
       if (!err) {
         console.log("selectedRepository: ", selectedRepository);
@@ -65,7 +67,7 @@
   };
 
   const createPullRequest = async (
-    repositoryName: string
+    repositoryName: string,
   ): Promise<APIError | undefined> => {
     dispatchBuildSettings();
 
@@ -97,7 +99,7 @@
 
   onMount(() => {
     ghStore.setActiveBranch(
-      $ghStore.selectedRepository?.repository.default_branch ?? ""
+      $ghStore.selectedRepository?.repository.default_branch ?? "",
     );
   });
 
@@ -111,7 +113,7 @@
     console.log("buildtool: ", buildTool);
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     selectedBuildToool = buildTools.find(
-      (tool) => tool.name === (buildTool as string)
+      (tool) => tool.name === (buildTool as string),
     )!;
     console.log("projectSettings: ", projectSettings);
     projectSettings.buildSettings = {
@@ -168,13 +170,29 @@
   const readDockerfilePath = (e: Event) => {
     dockerFilePath = (e.target as HTMLInputElement).value;
     selectedBuildToool.buildCommand = getBuildCommand(
-      selectedBuildToool.name === "Docker" ? "Docker" : "NerdCtl"
+      selectedBuildToool.name === "Docker" ? "Docker" : "NerdCtl",
     );
   };
 
   const readProjectName = (e: Event) => {
     projectName = (e.target as HTMLInputElement).value;
   };
+
+  // let repoOptions = $ghStore?.selectedRepository?.branches.map((b, i) => ({
+  //       name: b.name,
+  //       id: i,
+  //       handler: () => {
+  //         ghStore.setActiveBranch(b.name);
+  //         selectedBranch = b.name;
+  //         selectedBuildToool.buildCommand = getBuildCommand(
+  //         selectedBuildToool.name === "Docker" ? "Docker" : "NerdCtl"
+  //         );
+  //       },
+  //     })) ?? []
+
+  let repoOptions = { filterBy: ["Namespace", "Username", "References"] };
+  let buildOptions = { filterBy: ["Docker", "NerdCtl"] };
+  console.log("repoOptions", repoOptions);
 </script>
 
 <div class="w-full flex flex-col gap-6">
@@ -216,7 +234,7 @@
     >
   </div>
   <div class="flex flex-col gap-2">
-    <ListBox
+    <!-- <ListBox
       items={$ghStore?.selectedRepository?.branches.map((b, i) => ({
         name: b.name,
         id: i,
@@ -229,7 +247,10 @@
         },
         disabled: false,
       })) ?? []}
-    />
+    /> -->
+    <div class="max-w-min">
+      <Select title="Branch" options={repoOptions} placeholder="master" />
+    </div>
     <span class="text-xs lg:text-sm text-slate-700 antialiased">
       Pushes to this branch automatically trigger deployments to the Production
       environment. Pushes branches will trigger deployments within the Preview
@@ -256,7 +277,10 @@
     </span>
     <div class="flex flex-col gap-6">
       <div class="flex flex-col my-6 gap-1 text-sm">
-        <ListBox items={buildTools} />
+        <div class="max-w-min">
+          <Select title="" options={buildOptions} placeholder="master" />
+        </div>
+        <!-- <ListBox items={buildTools} /> -->
         <span class="text-slate-700 text-sm antialiased">
           select a framework to prefill recommended settings
         </span>
@@ -277,7 +301,7 @@
       </div>
 
       <div class="flex flex-col">
-        <div class="flex items-center justify-start gap-1">
+        <div class="flex items-center justify-start max-w-min max-h-min">
           <Disclosure title="Dockerfile directory (advanced)">
             <Textfield
               class="ml-10"
@@ -287,7 +311,7 @@
             />
           </Disclosure>
         </div>
-        <div class="flex items-center justify-center w-full gap-1">
+        <div class="flex items-start justify-start w-full max-w-min max-h-min">
           <Disclosure title="Environment variables (advanced)">
             <div class="w-3/4">
               <Textfield placeholder="key" type="search" />
@@ -295,7 +319,7 @@
             <div class="w-3/4">
               <Textfield placeholder="value" type="search" />
             </div>
-            <ButtonOutlined class="ml-10 mt-5 px-2 py-1 text-sm">
+            <ButtonOutlined class="ml-10 mt-5 px-2 py-1 text-sm bg-white w-32 self-start">
               <AddAccountIcon class="text-primary-300" />
               <span>add more</span>
             </ButtonOutlined>

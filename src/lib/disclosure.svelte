@@ -44,7 +44,7 @@
   >
     {#if $open}
       <div use:melt={$content} transition:slide>
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col justify-start items-start gap-2">
           <slot />
         </div>
       </div>
@@ -52,11 +52,11 @@
   </div>
 </div>
 
-<!-- <style lang="postcss">
+<style lang="postcss">
   .abs-center {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
   }
-</style> -->
+</style>

@@ -34,7 +34,7 @@
 <div class="flex flex-col gap-1">
   <!-- svelte-ignore a11y-label-has-associated-control - $label contains the 'for' attribute -->
   <label use:melt={$label}>
-    <span class="text-sm font-medium text-primary-900">*****</span>
+    <span class="text-sm font-medium text-slate-300">*****</span>
   </label>
 
   <div class="relative">
@@ -42,7 +42,7 @@
       use:melt={$input}
       class="flex h-10 items-center justify-between rounded-lg bg-white
 			px-3 pr-12 text-black"
-      placeholder="Best book ever"
+      placeholder=""
     />
     <div
       class="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-primary-900"
