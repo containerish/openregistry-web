@@ -42,20 +42,20 @@
 >
   <div
     use:melt={$list}
-    class="flex shrink-0 overflow-x-auto bg-neutral-100
+    class="flex shrink-0 overflow-x-auto bg-primary-100
     data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:border-r min-h-max"
     aria-label="Manage your builds"
   >
     {#each triggers as triggerItem}
-      <button use:melt={$trigger(triggerItem.id)} class="trigger relative">
+      <button use:melt={$trigger(triggerItem.id)} class="trigger h-2">
         {triggerItem.title}
-        {#if $value === triggerItem.id}
+        <!-- {#if $value === triggerItem.id}
           <div
             in:send={{ key: "trigger" }}
             out:receive={{ key: "trigger" }}
-            class="absolute bottom-1 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-magnum-400"
+            class="absolute bottom-1 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-primary-100"
           />
-        {/if}
+        {/if} -->
       </button>
     {/each}
   </div>
@@ -282,11 +282,11 @@
           <span class="col-span-1 font-semibold">Variable name</span>
           <span class="col-span-2 font-semibold">Value</span>
         </div>
-        <div class="bg-slate-50 min-h-[500px]" />
+        <div class="bg-slate-50 min-h-[200px]" />
       </div>
     </div>
 
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-6">
       <div
         class="flex justify-between items-center"
         in:fly={{ y: 50, duration: 300, delay: 50 }}
@@ -306,7 +306,7 @@
           <span class="col-span-1 font-semibold">Variable name</span>
           <span class="col-span-2 font-semibold">Value</span>
         </div>
-        <div class="bg-slate-50 min-h-[500px]" />
+        <div class="bg-slate-50 min-h-[200px]" />
       </div>
     </div>
   </div>
@@ -546,7 +546,7 @@
     border-radius: 0;
     background-color: theme(colors.neutral.100);
 
-    color: theme(colors.neutral.900);
+    color: theme(colors.slate.600);
     font-weight: 500;
     line-height: 1;
 
@@ -565,7 +565,7 @@
     &[data-state="active"] {
       @apply focus:relative;
       background-color: white;
-      color: #000;
+      color: theme(colors.primary-400);
     }
   }
 

@@ -278,7 +278,7 @@
     <div class="flex flex-col gap-6">
       <div class="flex flex-col my-6 gap-1 text-sm">
         <div class="max-w-min">
-          <Select title="" options={buildOptions} placeholder="master" />
+          <Select title="" options={buildOptions} placeholder="Docker" />
         </div>
         <!-- <ListBox items={buildTools} /> -->
         <span class="text-slate-700 text-sm antialiased">

@@ -81,7 +81,7 @@
     elements: { root, list, content, trigger },
     states: { value },
   } = createTabs({
-    defaultValue: "tab-2",
+    defaultValue: "tab-3",
   });
 
   const triggers = [

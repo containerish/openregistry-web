@@ -8,9 +8,9 @@
   import ExternalLink from "$lib/icons/external-link.svelte";
   import Github from "$lib/icons/github.svelte";
 
-  let isOrg = true;
+  let isOrg = false;
   let isUser = false;
-  let getStarted = false;
+  let getStarted = true;
 
   let filterOptions = { filterBy: ["Namespace", "Username", "References"] };
   let sortOptions = { sortBy: ["Date Created", "Date Modified", "Name"] };
