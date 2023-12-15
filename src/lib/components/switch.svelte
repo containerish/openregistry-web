@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createSwitch, melt } from "@melt-ui/svelte";
-
   export let label = " ";
   const {
     elements: { root, input },
