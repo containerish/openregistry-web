@@ -651,4 +651,28 @@ export class OpenRegistryClient {
 			data: data as OpenRegistryUserType[],
 		};
 	}
+	async addUsersToOrg(
+		q: string,
+	): Promise<OpenRegistryResponse<OpenRegistryUserType[]>> {
+		const uri = new URL("/api/users/search", this.apiEndpoint);
+		uri.searchParams.set("query", q);
+
+		const response = await this.fetcher(uri, { credentials: "include" });
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			const err = data as RegistryAPIError;
+			return {
+				success: false,
+				message: err?.message ?? "",
+				error: err?.error ?? "",
+			};
+		}
+
+		return {
+			success: true,
+			data: data as OpenRegistryUserType[],
+		};
+	}
 }
+

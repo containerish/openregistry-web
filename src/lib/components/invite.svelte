@@ -2,7 +2,6 @@
   import ButtonSolid from "$lib/button-solid.svelte";
   import ButtonOutlined from "$lib/button-outlined.svelte";
   import { Auth } from "$apis/auth";
-  import Textfield from "$lib/textfield.svelte";
   import { createDialog, melt } from "@melt-ui/svelte";
   import { fade } from "svelte/transition";
   import { UserPlusIcon } from "$lib/icons";
