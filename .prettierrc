@@ -1,4 +1,4 @@
-const config =  {
+{
 	"useTabs": true,
 	"singleQuote": true,
 	"trailingComma": "es5",
@@ -11,5 +11,3 @@ const config =  {
 	"arrowParens": "always",
 	"htmlWhitespaceSensitivity": "strict"
 }
-
-module.exports = config;

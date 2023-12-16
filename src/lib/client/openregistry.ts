@@ -42,6 +42,12 @@ import type {
 	CreateReposioryRequest,
 	RegistryAPIError,
 } from "$lib/types/registry";
+import type {
+	SubmitManifestToScanRequest,
+	SubmitManifestToScanResponse,
+	GetVulnerabilityReportRequest,
+	GetVulnerabilityReportResponse,
+} from "@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb";
 
 type OpenRegistryGenericError = {
 	message: string;
@@ -120,9 +126,15 @@ export class OpenRegistryClient {
 
 			const data = await response.json();
 			if (response.status === 202) {
-				cookies.delete("session_id");
-				cookies.delete("access_token");
-				cookies.delete("refresh_token");
+				cookies.delete("session_id", {
+					path: "/",
+				});
+				cookies.delete("access_token", {
+					path: "/",
+				});
+				cookies.delete("refresh_token", {
+					path: "/",
+				});
 				locals.user = null;
 				locals.sessionId = "";
 				locals.authenticated = false;
@@ -674,5 +686,92 @@ export class OpenRegistryClient {
 			data: data as OpenRegistryUserType[],
 		};
 	}
-}
 
+	async changeRepositoryVisibility(
+		visibility_mode: "Public" | "Private",
+		repository_id: string,
+	): Promise<OpenRegistryResponse<{ message: string }>> {
+		const uri = new URL("/v2/ext/repository/visibility", this.apiEndpoint);
+		const response = await this.fetcher(uri, {
+			method: "POST",
+			credentials: "include",
+			body: JSON.stringify({
+				visibility_mode,
+				repository_id,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			const err = data as RegistryAPIError;
+			return {
+				success: false,
+				message: err?.message ?? "",
+				error: err?.error ?? "",
+			};
+		}
+
+		return {
+			success: true,
+			data: data as { message: string },
+		};
+	}
+
+	async submitManifestForVulnScan(
+		manifestHash: string,
+	): Promise<OpenRegistryResponse<SubmitManifestToScanResponse>> {
+		const response = await this.fetcher("/apis/services/clair", {
+			method: "POST",
+			credentials: "include",
+			body: JSON.stringify({
+				hash: manifestHash,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			const err = data as RegistryAPIError;
+			return {
+				success: false,
+				message: err?.message ?? "",
+				error: err?.error ?? "",
+			};
+		}
+
+		return {
+			success: true,
+			data: data as SubmitManifestToScanResponse,
+		};
+	}
+
+	async getVulnReport(
+		manifestHash: string,
+	): Promise<OpenRegistryResponse<GetVulnerabilityReportResponse>> {
+		const uri = `/apis/services/clair?hash=${manifestHash}`;
+
+		const response = await this.fetcher(uri, {
+			credentials: "include",
+		});
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			const err = data as RegistryAPIError;
+			return {
+				success: false,
+				message: err?.message ?? "",
+				error: err?.error ?? "",
+			};
+		}
+
+		return {
+			success: true,
+			data: data as GetVulnerabilityReportResponse,
+		};
+	}
+}

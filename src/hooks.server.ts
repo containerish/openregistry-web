@@ -7,6 +7,7 @@ import { createPromiseClient } from "@connectrpc/connect";
 import { GitHubActionsLogsService } from "@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_logs_connect";
 import { GitHubActionsProjectService } from "@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_project_connect";
 import { GithubActionsBuildService } from "@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_job_connect";
+import { ClairService } from "@buf/containerish_openregistry.connectrpc_es/services/yor/clair/v1/clair_connect";
 import { sequence } from "@sveltejs/kit/hooks";
 import { env as privEnv } from "$env/dynamic/private";
 import { setCookies } from "$lib/protobuf/interceptors";
@@ -43,23 +44,35 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 		interceptors: [setCookies(event.cookies)],
 	});
 
+	const clairTransport = createConnectTransport({
+		baseUrl: privEnv.OPEN_REGISTRY_BACKEND_CLAIR_URL,
+		interceptors: [setCookies(event.cookies)],
+	});
+
 	event.locals.transport = transport;
+	event.locals.clairTransport = clairTransport;
 
 	event.locals.ghBuildClient = createPromiseClient(
 		GithubActionsBuildService,
-		transport
+		transport,
 	);
 	event.locals.ghLogsClient = createPromiseClient(
 		GitHubActionsLogsService,
-		transport
+		transport,
 	);
 	event.locals.ghProjectsClient = createPromiseClient(
 		GitHubActionsProjectService,
-		transport
+		transport,
 	);
+
+	event.locals.vulnScanningClient = createPromiseClient(
+		ClairService,
+		clairTransport,
+	);
+
 	event.locals.automationClient = new OpenRegistryAutomationClient(
 		event.locals,
-		event.fetch
+		event.fetch,
 	);
 
 	return await resolve(event);
@@ -109,14 +122,14 @@ export const handle = sequence(
 	// applyFeatureFlags,
 	setOpenRegistryClientHandler,
 	authenticationHandler,
-	createProtobufClient
+	createProtobufClient,
 );
 
 export const handleError: HandleServerError = async ({ error, event }) => {
 	console.log(
 		"unhandled server exception - route: %s - error: %s",
 		event.route.id,
-		error
+		error,
 	);
 	return {
 		message: typeof error === "string" ? error : JSON.stringify(error),

@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 
 	export let isLoading = false;
 	export let disabled = false;
-	export let type: "submit" | "button" | "reset" | null | undefined =
-		"submit";
+	export let type: 'submit' | 'button' | 'reset' | null | undefined = 'submit';
 </script>
 
 <button
@@ -21,19 +20,8 @@
 	)}
 >
 	{#if isLoading}
-		<svg
-			class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50"
-			fill="none"
-			viewBox="0 0 24 24"
-		>
-			<circle
-				class="opacity-25"
-				cx="12"
-				cy="12"
-				r="10"
-				stroke="currentColor"
-				stroke-width="4"
-			/>
+		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-50" fill="none" viewBox="0 0 24 24">
+			<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
 			<path
 				class="opacity-75"
 				fill="currentColor"
