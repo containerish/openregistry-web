@@ -47,7 +47,7 @@
 				<ButtonOutlined
 					class="text-primary-500 border-primary-500/50 hover:shadow-primary-400/50"
 					on:click={() => {
-						goto('https://docs.openregistry.dev');
+						window.open('https://docs.openregistry.dev', '_blank');
 					}}>Learn more</ButtonOutlined
 				>
 			</div>

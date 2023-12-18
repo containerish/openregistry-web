@@ -4,8 +4,8 @@
 	import Textfield from '$lib/textfield.svelte';
 	import { ArrowLeftIcon, CheckIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
-	import {type CreateTypes, type Options, create as createConfetti} from 'canvas-confetti';
-	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { type CreateTypes, type Options, create as createConfetti } from 'canvas-confetti';
+	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { UserEmailSchema, WebAuthnSignUpSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
@@ -15,6 +15,7 @@
 	import { browser } from '$app/environment';
 	import { fly } from 'svelte/transition';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import type { SubmitFunction } from './$types';
 
 	let canvas: HTMLCanvasElement;
 	let conf: CreateTypes;
@@ -25,13 +26,13 @@
 	}
 	var count = 200;
 	var defaults = {
-		origin: { y: 0.7 }
+		origin: { y: 0.7 },
 	};
 
 	const fire = (particleRatio: number, opts: Options) => {
 		conf(
 			Object.assign({}, defaults, opts, {
-				particleCount: Math.floor(count * particleRatio)
+				particleCount: Math.floor(count * particleRatio),
 			})
 		);
 	};
@@ -57,12 +58,8 @@
 	let successMessage = '';
 	let succccessDetail = '';
 
-	let activeForm:
-		| 'signup-with-email'
-		| 'signup-with-security-key'
-		| 'success-email'
-		| 'success-webauthn'
-		| null = 'signup-with-security-key';
+	let activeForm: 'signup-with-email' | 'signup-with-security-key' | 'success-email' | 'success-webauthn' | null =
+		'signup-with-security-key';
 
 	const handleSignUpSubmit: SubmitFunction = ({ formElement }) => {
 		isLoading = true;
@@ -91,7 +88,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
-                break;
+					break;
 				default:
 					await update();
 			}
@@ -117,7 +114,7 @@
 
 	let webAuthnForm: WebAuthnState = {
 		fieldErrors: {},
-		formErrors: []
+		formErrors: [],
 	};
 
 	const webAuthNSignup = async (e: SubmitEvent) => {
@@ -128,7 +125,7 @@
 			const client = new OpenRegistryClient(fetch);
 			const { message, error: err } = await client.webAuthnRegister(body);
 			if (err) {
-                console.log('webAuthnRegister error: ', err)
+				console.log('webAuthnRegister error: ', err);
 				webAuthnForm.formErrors = [err.message];
 				isLoading = false;
 				return;
@@ -136,7 +133,7 @@
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			successMessage = message!;
 		} catch (err) {
-            console.log('error webauthn signup:', err)
+			console.log('error webauthn signup:', err);
 			if (err instanceof ZodError) {
 				isLoading = false;
 				const zError = err.flatten();
@@ -149,7 +146,7 @@
 		showSuccessMsg = true;
 		throwSomeConfetti();
 		throwSomeConfetti();
-        goto('/auth/signin?method=webauthn')
+		goto('/auth/signin?method=webauthn');
 	};
 
 	const validateUsername = (e: Event) => {
@@ -168,14 +165,14 @@
 		usernameErr = '';
 	};
 
-	const validateEmail = (e:  Event) => {
-		const email: string = (e.target as HTMLInputElement).value
+	const validateEmail = (e: Event) => {
+		const email: string = (e.target as HTMLInputElement).value;
 
-        const userEmail = UserEmailSchema.safeParse(email)
-        if (!userEmail.success) {
+		const userEmail = UserEmailSchema.safeParse(email);
+		if (!userEmail.success) {
 			emailErr = 'invalid email format';
-            return
-        }
+			return;
+		}
 
 		emailErr = '';
 	};
@@ -190,9 +187,7 @@
 	<title>Sign up | OpenRegistry</title>
 </svelte:head>
 
-<div
-	class="mx-auto p-3 md:p-6 mt-9 flex flex-col items-center tall:h-screen justify-between w-full overflow-hidden"
->
+<div class="mx-auto p-3 md:p-6 mt-9 flex flex-col items-center tall:h-screen justify-between w-full overflow-hidden">
 	<div
 		class="flex w-full flex-col px-9 md:px-11 py-6 md:py-9 rounded-lg shadow-3xl gap-3 max-w-[500px] bg-white"
 		in:fly={{ y: 200, duration: 300 }}
@@ -294,9 +289,9 @@
 					<span class=" text-3xl text-primary-500 font-semibold">Register with WebAuthn</span>
 					<div>
 						<span class="text-sm text-slate-700">
-							WebAuthn is a smart way of authentication which eliminates the need of passwords and
-							allows us to integrate with strong authenticators built into the devices like Windows
-							Hello or Apple's Touch ID. Read more about
+							WebAuthn is a smart way of authentication which eliminates the need of passwords and allows
+							us to integrate with strong authenticators built into the devices like Windows Hello or
+							Apple's Touch ID. Read more about
 						</span>
 						<a href="https://webauthn.io/" class="text-primary-400 text-sm underline">WebAuthn</a>
 					</div>

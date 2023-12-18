@@ -15,7 +15,7 @@ export const DELETE: RequestHandler = async ({ fetch, cookies }) => {
 		const data = await response.json();
 		if (response.status !== 202) {
 			cookies.getAll().forEach((cookie) => {
-				cookies.delete(cookie.name);
+				/* @migration task: add path argument */ cookies.delete(cookie.name);
 			});
 			return json(data, { status: 400 });
 		}

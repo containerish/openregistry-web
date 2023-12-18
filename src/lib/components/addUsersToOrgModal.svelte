@@ -3,46 +3,122 @@
 	import PlainCross from '$lib/icons/plain-cross.svelte';
 	import UserPlus from '$lib/icons/user-plus.svelte';
 	import ListBox from '$lib/listBox.svelte';
-	import { createDialog, melt } from '@melt-ui/svelte';
+	import { createDialog, melt, type ComboboxOption } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import Switch from './switch.svelte';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import type { OpenRegistryClient } from '$lib/client/openregistry';
-	import { writable } from 'svelte/store';
+	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
+	import type { ListItem } from '$lib/types/components';
+	import type { AddUserToOrgRequest, OpenRegistryUserType } from '$lib/types';
 
 	export let openRegistryClient: OpenRegistryClient;
+	export let orgOwner: OpenRegistryUserType;
+	export let onSelectedChange: ChangeFn<ComboboxOption<ListItem<OpenRegistryUserType>>[] | undefined> = function (
+		opt
+	) {
+		if (opt.next) {
+			selectedUsers = opt.next.map((o) => o.value.item);
+		}
+
+		return opt.next;
+	};
 
 	const {
 		elements: { trigger, overlay, content, title, close, portalled },
 		states: { open },
 	} = createDialog({
 		forceVisible: false,
-		defaultOpen: true,
+		defaultOpen: false,
 	});
 
-	type ListItem = {
-		name: string;
-		id: number;
-		disabled: boolean;
-		handler?: (val: unknown) => void;
+	let listBoxItems: ListItem<OpenRegistryUserType>[] = [];
+
+	const searchUser = async (query: string, selected: ComboboxOption<ListItem>[]) => {
+		// clear selections
+		if (selectedUsers.length === 0) {
+			selected = [];
+		}
+		const response = await openRegistryClient.searchUsers(query);
+		if (response.success) {
+			listBoxItems = response.data.map((u, i) => {
+				return {
+					item: u,
+					label: u.username,
+					id: i + 1,
+					disabled: false,
+				} satisfies ListItem<OpenRegistryUserType>;
+			});
+			return;
+		}
+
+		console.log('search user error: ', response);
 	};
 
-	let listBoxItems: ListItem[] = [{ name: 'user1', disabled: false, id: 1 }];
+	let selectedUsers: OpenRegistryUserType[] = [];
 
-	const listBoxOptions = writable({
-		items: [] as ListItem[],
-		placeholder: '',
-	});
+	const removeUserFromList = (username: string) => {
+		const userIndex = selectedUsers.findIndex((u) => u.username === username);
+		selectedUsers.splice(userIndex, 1);
+		selectedUsers = [...selectedUsers];
 
-	const searchUser = async (e: Event) => {
-		const target = e.target as HTMLInputElement;
+		onSelectedChange({
+			curr: undefined,
+			next: selectedUsers.map((u, i) => {
+				return {
+					label: u.username,
+					value: {
+						label: u.username,
+						item: u,
+						id: i,
+						disabled: false,
+					},
+				};
+			}),
+		});
+	};
 
-		openRegistryClient.searchUsers(target.value);
+	$: addUsersToOrgRequest = {
+		organization_id: orgOwner.id,
+		users: selectedUsers.map((u) => {
+			return {
+				id: u.id,
+				pull: false,
+				push: false,
+				is_admin: false,
+			};
+		}),
+	} as AddUserToOrgRequest;
+
+	const updateUserPerms = (userId: string, perm: 'Push' | 'Pull') => {
+		const userIndex = addUsersToOrgRequest.users.findIndex((u) => u.id === userId);
+		const userPerm = addUsersToOrgRequest.users[userIndex];
+		if (perm === 'Pull') {
+			userPerm.pull = true;
+		}
+
+		if (perm === 'Push') {
+			userPerm.push = true;
+		}
+
+		if (userPerm.pull && userPerm.push) {
+			userPerm.is_admin = true;
+		}
+
+		addUsersToOrgRequest.users[userIndex] = userPerm;
+	};
+
+	let isAddUsersLoading = false;
+	const confirmAddUsersToOrg = async () => {
+		isAddUsersLoading = true;
+		const response = await openRegistryClient.addUsersToOrg(addUsersToOrgRequest);
+		console.log('response:', response);
+		isAddUsersLoading = false;
 	};
 </script>
 
-<ButtonSolid class="max-w-[150px] w-full flex justify-center items-center">
-	<button class="flex gap-3" use:melt={$trigger}>
+<ButtonSolid class="max-w-[150px] p-0 m-0 w-full flex justify-center items-center">
+	<button class="flex gap-3 h-full w-full justify-center items-center" use:melt={$trigger}>
 		Add Users
 		<UserPlus />
 	</button>
@@ -69,31 +145,47 @@
 						toggles
 					</p>
 				</div>
-				<ListBox placeholder="Search users - eg: Johndoe" items={listBoxItems} />
+				<ListBox
+					{onSelectedChange}
+					onChangeHandler={searchUser}
+					placeholder="Search users - eg: Johndoe"
+					items={listBoxItems}
+				/>
 
 				<!-- {#each users as user} -->
-				<div class="flex justify-between w-full items-center pr-3">
-					<div class="flex justify-between w-11/12 border border-primary-100 rounded p-3">
-						<span class=" text-lg font-medium text-primary-400">{'<Username>'}</span>
-						<div class="flex gap-6">
-							<div class="flex justify-center items-center">
-								<Switch label="Pull" />
+				<div class="flex justify-between flex-col gap-3 w-full items-center">
+					{#if selectedUsers.length > 0}
+						{#each selectedUsers as u}
+							<div class="flex justify-between w-full border border-primary-100 rounded p-3">
+								<span class=" text-lg font-medium text-primary-400">{u.username}</span>
+								<div class="flex gap-6">
+									<div class="flex justify-center items-center">
+										<Switch on:change={() => updateUserPerms(u.id, 'Pull')} label="Pull" />
+									</div>
+									<div class="flex justify-center items-center">
+										<Switch on:change={() => updateUserPerms(u.id, 'Push')} label="Push" />
+									</div>
+									<button on:click={() => removeUserFromList(u.username)}>
+										<PlainCross class="w-4 h-4 text-slate-500" />
+									</button>
+								</div>
 							</div>
-							<div class="flex justify-center items-center">
-								<Switch label="Push" />
-							</div>
+						{/each}
+					{:else}
+						<div
+							class="flex flex-col gap-3 justify-center items-center h-full w-full bg-primary-100/50 py-3"
+						>
+							<span class="text-lg font-semibold">No users selected</span>
+							<span>Please search for users using the search box above</span>
 						</div>
-					</div>
-					<button>
-						<PlainCross class="w-4 h-4 text-slate-500" />
-					</button>
+					{/if}
 				</div>
 				<!-- {/each} -->
 				<div class="flex justify-center gap-6 items-center w-full pt-6 -mb-3">
 					<ButtonOutlined class="m-0 p-0">
 						<button use:melt={$close}> Cancel </button></ButtonOutlined
 					>
-					<ButtonSolid>Confirm</ButtonSolid>
+					<ButtonSolid isLoading={isAddUsersLoading} on:click={confirmAddUsersToOrg}>Confirm</ButtonSolid>
 				</div>
 			</div>
 		</div>

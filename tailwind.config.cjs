@@ -1,4 +1,3 @@
-// const colors = require('tailwindcss/colors');
 import plugin from 'tailwindcss/plugin';
 
 const config = {
@@ -109,7 +108,8 @@ const config = {
 		  },
 		  { values: theme('spacing') }
 		);
-	  }),],
+	  }),
+	],
 };
 
 module.exports = config;

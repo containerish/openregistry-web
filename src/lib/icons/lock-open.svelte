@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <svg
 	aria-label="open lock icon"
-	class={twMerge("w-4 h-4", $$props.class)}
+	class={twMerge('w-6 h-6', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"
