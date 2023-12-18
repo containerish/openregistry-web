@@ -1,21 +1,29 @@
 <script lang="ts">
-	import { Steps } from "svelte-steps";
-	let steps = [
-		{ text: "Select repository" },
-		{ text: "Set up build" },
-		{ text: "Build project" },
-	];
+	import { Steps } from 'svelte-steps';
+	let steps = [{ text: 'Select repository' }, { text: 'Set up build' }, { text: 'Build project' }];
 	let clickable = false;
-	import { ghStore } from "$lib/stores";
-	import SelectRepo from "./select-repo.svelte";
-	import Setup from "./setup.svelte";
-	import BuildProject from "./build-project.svelte";
-	import type { PageData } from "./$types";
-	import { fly } from "svelte/transition";
-	import type { CreateProjectState } from "$lib/types/index";
+	import { ghStore } from '$lib/stores';
+	import SelectRepo from './select-repo.svelte';
+	import Setup from './setup.svelte';
+	import BuildProject from './build-project.svelte';
+	import type { PageData } from './$types';
+	import { fly } from 'svelte/transition';
+	import {
+		CreateProjectRequest,
+		ProjectBuildSettingsMessage,
+	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+	import { writable } from 'svelte/store';
+	import EmptyListMessage from '$lib/components/EmptyListMessage.svelte';
+	import { Timestamp } from '@bufbuild/protobuf';
+	import { v4 as UuidV4 } from '@lukeed/uuid';
+	import { UUID } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
+	import { onMount } from 'svelte';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import type { Repository } from '$lib/types';
 	export let data: PageData;
 	let selectedTab = 0;
 
+	const openRegistryClient = new OpenRegistryClient(fetch);
 	async function handleNext(index: number) {
 		ghStore.setTabIndex(index);
 		selectedTab = index;
@@ -23,36 +31,44 @@
 
 	let doesGithubActionAlreadyExist = false;
 
-	const handleOnPRCreate = async (
-		event: CustomEvent<{ pullRequestExists: boolean }>
-	) => {
+	const handleOnPRCreate = async (event: CustomEvent<{ pullRequestExists: boolean }>) => {
 		doesGithubActionAlreadyExist = event.detail.pullRequestExists;
-		console.log("event ran: ", event.detail.pullRequestExists);
+		console.log('event ran: ', event.detail.pullRequestExists);
 	};
 
-	let createProjectState = {} as CreateProjectState;
-	const updateRespository = (e: CustomEvent<CreateProjectState>) => {
-		createProjectState = e.detail;
-	};
-
-	const updateBuildSettings = (e: CustomEvent<CreateProjectState>) => {
-		createProjectState.projectName = e.detail.projectName;
-		createProjectState.buildSettings = e.detail.buildSettings;
-	};
-
-	const pullBuilds = async () => {
-		const response = await fetch("/apis/services/github/actions/builds", {
-			method: "POST",
-			body: JSON.stringify({
-				repo: "Adv360-Pro-ZMK",
-				id: "C99FD726-95E6-422C-894C-A630122AF1AD",
+	const createProjectRequestStore = writable<CreateProjectRequest>(
+		new CreateProjectRequest({
+			createdAt: Timestamp.fromDate(new Date()),
+			id: new UUID({ value: UuidV4() }),
+			ownerId: new UUID({ value: data.user?.id }),
+			buildSettings: new ProjectBuildSettingsMessage({
+				worfklowFile: './Dockerfile',
+				buildTool: 'Docker',
 			}),
-		});
-		const data = await response.json();
-		console.log("response: ", data);
+		})
+	);
+
+	onMount(async () => {
+		await fetchUserCatalog();
+	});
+
+	let containerRepos: Repository[] = [];
+	const fetchUserCatalog = async () => {
+		const { repositories, error } = await openRegistryClient.getUserRepositoryCatalog();
+		if (!error) {
+			containerRepos = repositories;
+		}
 	};
 
-	$: console.log("createProjectState: ", createProjectState);
+	const updateBuildSettings = (e: CustomEvent<CreateProjectRequest>) => {
+		$createProjectRequestStore.projectName = e.detail.projectName;
+		$createProjectRequestStore.buildSettings = e.detail.buildSettings;
+	};
+
+	$: console.log('$createProjectRequestStore: ', $createProjectRequestStore);
+	$: console.log('setup page data: ', data);
+
+	$: ghAppLink = `https://github.com/settings/installations/${data.user?.identities?.github?.installation_id}`;
 </script>
 
 <svelte:head>
@@ -72,28 +88,39 @@
 		/>
 	</div>
 
-	<div
-		class="bg-white/80 rounded-sm shadow-2xl border border-primary-100 my-10 min-h-max
+	{#if data.user && data.githubUsername}
+		<div
+			class="bg-white/80 rounded-sm shadow-2xl border border-primary-100 my-10 min-h-max
 		overflow-y-auto p-9 md:p-16 mx-3 min-w-[300px] w-full max-w-[1000px]"
-		in:fly={{ y: 200, duration: 300 }}
-	>
-		{#if selectedTab === 0}
-			<SelectRepo
-				{data}
-				{handleNext}
-				on:select_repo={updateRespository}
-			/>
-		{/if}
-		{#if selectedTab === 1}
-			<Setup
-				on:gha_pull_request={handleOnPRCreate}
-				{handleNext}
-				on:build_settings={updateBuildSettings}
-				{createProjectState}
-			/>
-		{/if}
-		{#if selectedTab === 2}
-			<BuildProject {doesGithubActionAlreadyExist} {handleNext} />
-		{/if}
-	</div>
+			in:fly={{ y: 200, duration: 300 }}
+		>
+			{#if selectedTab === 0}
+				{#if data.repoList.length > 0}
+					<SelectRepo
+						refreshRepositoryList={fetchUserCatalog}
+						openRegistryRepos={containerRepos}
+						{ghAppLink}
+						githubUsername={data.githubUsername}
+						repoList={data.repoList}
+						{handleNext}
+						store={createProjectRequestStore}
+					/>
+				{:else}
+					<EmptyListMessage
+						title="No repositories found"
+						description="Looks like we could not list any repositores from your <a href={`https://github.com/settings/installations/${data.user.identities?.github?.installation_id}`} class='underline underline-offset-2' target='_blank'>GitHub account</a>. If you have allowed OpenRegistry GitHub App to access your repositories, please refresh this page or try again later"
+					/>
+				{/if}
+			{:else if selectedTab === 1}
+				<Setup
+					on:gha_pull_request={handleOnPRCreate}
+					{handleNext}
+					on:build_settings={updateBuildSettings}
+					store={createProjectRequestStore}
+				/>
+			{:else if selectedTab === 2}
+				<BuildProject {doesGithubActionAlreadyExist} {handleNext} />
+			{/if}
+		</div>
+	{/if}
 </div>

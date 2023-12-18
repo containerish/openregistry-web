@@ -1,6 +1,7 @@
-export async function load({ params }) {
-	return {
-		repo: params.repo,
-		username: params.username
-	};
-}
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = async ({ params }) => {
+    return {
+        ...params,
+    };
+};

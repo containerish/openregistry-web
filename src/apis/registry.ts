@@ -49,7 +49,7 @@ export type Tag = {
 };
 
 export class RegistryBackend extends HttpClient {
-	public constructor() {
+	constructor() {
 		super(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 	}
 

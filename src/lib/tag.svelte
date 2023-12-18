@@ -17,6 +17,8 @@
 	};
 
 	onDestroy(() => clearTimeout(timeout));
+
+	$: console.log('manifest to render: ', manifest);
 </script>
 
 {#if manifest}
@@ -25,8 +27,8 @@
 			<div>
 				<span class="text-base lg:text-lg text-slate-600">
 					Tag: <span class="font-semibold text-base lg:text-lg text-primary-300">
-                    {manifest.reference}
-                    </span>
+						{manifest.reference}
+					</span>
 				</span>
 			</div>
 			<div
@@ -53,20 +55,27 @@
 
 			<div class="flex flex-col gap-3">
 				<span>Updated At</span>
-				<span class=" text-sm text-slate-500 font-normal"
-					>{new Date(manifest.updated_at).toDateString()}</span
-				>
+				<span class="text-sm text-slate-500 font-normal">
+					{#if new Date(manifest.updatedAt).toDateString().toLowerCase().endsWith('0001')}
+						{new Date(manifest.createdAt).toDateString()}
+					{:else}
+						{new Date(manifest.updatedAt).toDateString()}
+					{/if}
+				</span>
+			</div>
+			<div class="flex flex-col gap-3">
+				<span>Schema Version</span>
+				<span class="break-all text-sm text-slate-500 font-normal">{manifest.schemaVersion}</span>
 			</div>
 
-			<div class="flex flex-col gap-3">
-				<span>Content Link</span>
-				<span class="break-all text-sm text-slate-500 font-normal">{manifest.dfs_link}</span>
-			</div>
+			<!-- <div class="flex flex-col gap-3"> -->
+			<!-- 	<span>Content Link</span> -->
+			<!-- 	<span class="break-all text-sm text-slate-500 font-normal">{manifest.dfs_link}</span> -->
+			<!-- </div> -->
 
 			<div class="flex flex-col gap-3">
 				<span>Size (compressed)</span>
-				<span class=" text-sm text-slate-500 font-normal">{(manifest.size / 1000000).toFixed(2)} MB</span
-				>
+				<span class=" text-sm text-slate-500 font-normal">{(manifest.size / 1000000).toFixed(2)} MB</span>
 			</div>
 		</div>
 	</div>

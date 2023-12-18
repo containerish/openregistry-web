@@ -31,6 +31,7 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	if (url.pathname === '/search' && !locals.user) {
 		return await resolve(event);
 	}
+
 	if (isProtectedRoute(url.pathname) && !locals.user) {
 		redirect(303, '/');
 	}
@@ -49,28 +50,32 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 		interceptors: [setCookies(event.cookies)],
 	});
 
+	// set transports
 	event.locals.transport = transport;
 	event.locals.clairTransport = clairTransport;
 
+	// set clients
 	event.locals.ghBuildClient = createPromiseClient(GithubActionsBuildService, transport);
 	event.locals.ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
 	event.locals.ghProjectsClient = createPromiseClient(GitHubActionsProjectService, transport);
-
 	event.locals.vulnScanningClient = createPromiseClient(ClairService, clairTransport);
-
 	event.locals.automationClient = new OpenRegistryAutomationClient(event.locals, event.fetch);
 
 	return await resolve(event);
 };
 
 export const isProtectedRoute = (route: string): boolean => {
-	return route.startsWith('/settings') || route.startsWith('/repositories') || route.startsWith('/apps');
+	return (
+		route.startsWith('/settings') ||
+		route.startsWith('/repositories') ||
+		route.startsWith('/apps') ||
+		route.startsWith('/project')
+	);
 };
 
 export const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) => {
 	const client = new OpenRegistryClient(event.fetch);
 	event.locals.openRegistry = client;
-	// these are throwing POJO errors
 	return await resolve(event);
 };
 

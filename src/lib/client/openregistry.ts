@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/public';
+import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 import {
 	ForgotPasswordSchema,
 	OpenRegistryUserSchema,
@@ -33,7 +33,7 @@ import { ZodError } from 'zod';
 import type { OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
 import { RepositoryCatalog, type RepositoryCatalogResponse } from '$lib/types/registry';
 import type { CreateReposioryRequest, RegistryAPIError } from '$lib/types/registry';
-import type {
+import {
 	SubmitManifestToScanResponse,
 	GetVulnerabilityReportResponse,
 } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
@@ -58,7 +58,7 @@ export class OpenRegistryClient {
 
 	constructor(fetcher: typeof fetch) {
 		this.fetcher = fetcher;
-		this.apiEndpoint = env.PUBLIC_OPEN_REGISTRY_BACKEND_URL;
+		this.apiEndpoint = PUBLIC_OPEN_REGISTRY_BACKEND_URL;
 	}
 
 	set withFetch(fetcher: typeof fetch) {
@@ -276,7 +276,7 @@ export class OpenRegistryClient {
 	}
 
 	async getUserBySession(sessionId: string): Promise<OpenRegistryUserType | null> {
-		const uri = new URL('/auth/sessions/me', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const uri = new URL('/auth/sessions/me', this.apiEndpoint);
 		const response = await this.fetcher(uri, {
 			headers: {
 				cookie: `session_id=${sessionId}`,
@@ -293,7 +293,7 @@ export class OpenRegistryClient {
 	}
 
 	async getUserRepositoryCatalog(visibility?: 'Public' | 'Private'): Promise<RepositoryCatalogResponse> {
-		const url = new URL('/v2/ext/catalog/user', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const url = new URL('/v2/ext/catalog/user', this.apiEndpoint);
 		if (visibility) {
 			url.searchParams.set('visibility', visibility);
 		}
@@ -720,7 +720,7 @@ export class OpenRegistryClient {
 
 		return {
 			success: true,
-			data: data as SubmitManifestToScanResponse,
+			data: new SubmitManifestToScanResponse().fromJson(data),
 		};
 	}
 
@@ -743,7 +743,7 @@ export class OpenRegistryClient {
 
 		return {
 			success: true,
-			data: data as GetVulnerabilityReportResponse,
+			data: new GetVulnerabilityReportResponse().fromJson(data),
 		};
 	}
 
