@@ -1,11 +1,11 @@
-import { env } from "$env/dynamic/public";
+import { env } from '$env/dynamic/public';
 import {
 	ForgotPasswordSchema,
 	OpenRegistryUserSchema,
 	ResetPasswordSchema,
 	SignInSchema,
 	SignUpSchema,
-} from "$lib/formSchemas";
+} from '$lib/formSchemas';
 import type {
 	WebAuthnBeginLoginResponseType,
 	WebAuthnBeginRegisterResponseType,
@@ -13,41 +13,31 @@ import type {
 	WebAuthnFinishRegisterResponseType,
 	WebAuthnSignUpType,
 	WebAuthnFinishLoginRequestType,
-} from "$lib/types/webauthn";
+} from '$lib/types/webauthn';
 import {
 	supported,
 	get,
 	create,
 	parseCreationOptionsFromJSON,
 	parseRequestOptionsFromJSON,
-} from "@github/webauthn-json/browser-ponyfill";
+} from '@github/webauthn-json/browser-ponyfill';
 import type {
 	CredentialCreationOptionsJSON,
 	CredentialRequestOptionsJSON,
 	RegistrationPublicKeyCredential,
 	AuthenticationPublicKeyCredential,
-} from "@github/webauthn-json/browser-ponyfill";
-import { fail, error } from "@sveltejs/kit";
-import type { Cookies } from "@sveltejs/kit";
-import { ZodError } from "zod";
+} from '@github/webauthn-json/browser-ponyfill';
+import { fail, error } from '@sveltejs/kit';
+import type { Cookies } from '@sveltejs/kit';
+import { ZodError } from 'zod';
+import type { OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
+import { RepositoryCatalog, type RepositoryCatalogResponse } from '$lib/types/registry';
+import type { CreateReposioryRequest, RegistryAPIError } from '$lib/types/registry';
 import type {
-	OpenRegistryOrgMember,
-	OpenRegistryUserType,
-} from "$lib/types/user";
-import {
-	RepositoryCatalog,
-	type RepositoryCatalogResponse,
-} from "$lib/types/registry";
-import type {
-	CreateReposioryRequest,
-	RegistryAPIError,
-} from "$lib/types/registry";
-import type {
-	SubmitManifestToScanRequest,
 	SubmitManifestToScanResponse,
-	GetVulnerabilityReportRequest,
 	GetVulnerabilityReportResponse,
-} from "@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb";
+} from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
+import type { AddUserToOrgRequest, UpdateUserPermissionsRequest } from '$lib/types/permissions';
 
 type OpenRegistryGenericError = {
 	message: string;
@@ -55,9 +45,7 @@ type OpenRegistryGenericError = {
 	success: false;
 };
 
-type OpenRegistryResponse<Output> =
-	| OpenRegistrySuccessResponse<Output>
-	| OpenRegistryGenericError;
+type OpenRegistryResponse<Output> = OpenRegistrySuccessResponse<Output> | OpenRegistryGenericError;
 
 type OpenRegistrySuccessResponse<T> = {
 	success: true;
@@ -81,9 +69,12 @@ export class OpenRegistryClient {
 		const rawUser = Object.fromEntries(formData);
 		try {
 			const user = SignInSchema.parse(rawUser);
-			const response = await this.fetcher("/apis/auth/signin", {
-				method: "POST",
+			const response = await this.fetcher('/apis/auth/signin', {
+				method: 'POST',
 				body: JSON.stringify(user),
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			});
 
 			if (response.status === 200) {
@@ -118,25 +109,25 @@ export class OpenRegistryClient {
 	async signOut(cookies: Cookies, locals: App.Locals) {
 		try {
 			const response = await this.fetcher(`/apis/auth/signout`, {
-				method: "DELETE",
+				method: 'DELETE',
 				headers: {
-					cookie: `session_id=${cookies.get("session_id")}`,
+					cookie: `session_id=${cookies.get('session_id')}`,
 				},
 			});
 
 			const data = await response.json();
 			if (response.status === 202) {
-				cookies.delete("session_id", {
-					path: "/",
+				cookies.delete('session_id', {
+					path: '/',
 				});
-				cookies.delete("access_token", {
-					path: "/",
+				cookies.delete('access_token', {
+					path: '/',
 				});
-				cookies.delete("refresh_token", {
-					path: "/",
+				cookies.delete('refresh_token', {
+					path: '/',
 				});
 				locals.user = null;
-				locals.sessionId = "";
+				locals.sessionId = '';
 				locals.authenticated = false;
 
 				return {
@@ -144,7 +135,7 @@ export class OpenRegistryClient {
 				};
 			}
 
-			throw error(400, {
+			error(400, {
 				message: JSON.stringify(await response.json()),
 			});
 		} catch (err) {
@@ -159,9 +150,12 @@ export class OpenRegistryClient {
 
 		try {
 			const body = SignUpSchema.parse(rawUser);
-			const response = await this.fetcher("/apis/auth/signup", {
-				method: "POST",
+			const response = await this.fetcher('/apis/auth/signup', {
+				method: 'POST',
 				body: JSON.stringify(body),
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			});
 			const data = (await response.json()) as OpenRegistryGenericError;
 			if (response.status !== 201) {
@@ -198,14 +192,17 @@ export class OpenRegistryClient {
 		const formData = Object.fromEntries(fd);
 		try {
 			const body = ResetPasswordSchema.parse(formData);
-			const response = await this.fetcher("/apis/auth/reset-password", {
-				method: "POST",
+			const response = await this.fetcher('/apis/auth/reset-password', {
+				method: 'POST',
 				body: JSON.stringify(body),
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			});
 
 			if (response.status !== 202) {
-				const data =
-					(await response.json()) as OpenRegistryGenericError;
+				const data = (await response.json()) as OpenRegistryGenericError;
 				return fail(response.status, {
 					data: body,
 					error: data.message,
@@ -245,8 +242,7 @@ export class OpenRegistryClient {
 			const url = `/apis/auth/forgot-password?email=${email}`;
 			const response = await this.fetcher(url);
 			if (response.status !== 202) {
-				const data =
-					(await response.json()) as OpenRegistryGenericError;
+				const data = (await response.json()) as OpenRegistryGenericError;
 				return fail(response.status, {
 					data: { email },
 					error: data.message,
@@ -279,39 +275,30 @@ export class OpenRegistryClient {
 		}
 	}
 
-	async getUserBySession(
-		sessionId: string,
-	): Promise<OpenRegistryUserType | null> {
-		try {
-			const uri = new URL(
-				"/auth/sessions/me",
-				env.PUBLIC_OPEN_REGISTRY_BACKEND_URL,
-			);
-			const response = await this.fetcher(uri, {
-				headers: {
-					cookie: `session_id=${sessionId}`,
-				},
-			});
-			const data = await response.json();
-			return OpenRegistryUserSchema.parse(data);
-		} catch (err) {
-			console.warn("error getting user from session: ", err);
-			return null;
+	async getUserBySession(sessionId: string): Promise<OpenRegistryUserType | null> {
+		const uri = new URL('/auth/sessions/me', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const response = await this.fetcher(uri, {
+			headers: {
+				cookie: `session_id=${sessionId}`,
+			},
+		});
+		const data = await response.json();
+		const parsed = OpenRegistryUserSchema.safeParse(data);
+		if (parsed.success) {
+			return parsed.data;
 		}
+		console.warn('error parsing user object:', parsed);
+
+		return null;
 	}
 
-	async getUserRepositoryCatalog(
-		visibility?: "Public" | "Private",
-	): Promise<RepositoryCatalogResponse> {
-		const url = new URL(
-			"/v2/ext/catalog/user",
-			env.PUBLIC_OPEN_REGISTRY_BACKEND_URL,
-		);
+	async getUserRepositoryCatalog(visibility?: 'Public' | 'Private'): Promise<RepositoryCatalogResponse> {
+		const url = new URL('/v2/ext/catalog/user', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		if (visibility) {
-			url.searchParams.set("visibility", visibility);
+			url.searchParams.set('visibility', visibility);
 		}
 
-		const response = await this.fetcher(url, { credentials: "include" });
+		const response = await this.fetcher(url, { credentials: 'include' });
 		const data = await response.json();
 
 		if (response.status === 200) {
@@ -321,30 +308,27 @@ export class OpenRegistryClient {
 			}
 
 			return {
-				error: "Error listing user repository catalog",
+				error: 'Error listing user repository catalog',
 			} as RepositoryCatalogResponse;
 		}
 		return {
-			error: "Failed to list user catalog",
+			error: 'Failed to list user catalog',
 		} as RepositoryCatalogResponse;
 	}
 
-	async webAuthnBeginRegister(
-		body: WebAuthnSignUpType,
-	): Promise<WebAuthnBeginRegisterResponseType> {
+	async webAuthnBeginRegister(body: WebAuthnSignUpType): Promise<WebAuthnBeginRegisterResponseType> {
 		try {
-			const url = new URL(
-				"/auth/webauthn/registration/begin",
-				this.apiEndpoint,
-			);
+			const url = new URL('/auth/webauthn/registration/begin', this.apiEndpoint);
 			const response = await this.fetcher(url, {
-				method: "POST",
+				method: 'POST',
 				body: JSON.stringify(body),
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			});
 
 			if (!response.ok) {
-				const data =
-					(await response.json()) as OpenRegistryGenericError;
+				const data = (await response.json()) as OpenRegistryGenericError;
 				return {
 					error: { code: response.status, message: data.message },
 				};
@@ -359,14 +343,11 @@ export class OpenRegistryClient {
 
 	async webAuthnFinishRegister(
 		username: string,
-		credentialCreationOpts: CredentialCreationOptionsJSON,
+		credentialCreationOpts: CredentialCreationOptionsJSON
 	): Promise<WebAuthnFinishRegisterResponseType> {
 		const options = parseCreationOptionsFromJSON(credentialCreationOpts);
-		const url = new URL(
-			"/auth/webauthn/registration/finish",
-			this.apiEndpoint,
-		);
-		url.searchParams.set("username", username);
+		const url = new URL('/auth/webauthn/registration/finish', this.apiEndpoint);
+		url.searchParams.set('username', username);
 		let body: RegistrationPublicKeyCredential;
 		try {
 			body = await create(options);
@@ -377,8 +358,11 @@ export class OpenRegistryClient {
 		}
 
 		const response = await this.fetcher(url, {
-			method: "POST",
+			method: 'POST',
 			body: JSON.stringify(body),
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 
 		const data = (await response.json()) as { message: string };
@@ -392,30 +376,22 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async webAuthnRegister(
-		body: WebAuthnSignUpType,
-	): Promise<WebAuthnFinishRegisterResponseType> {
+	async webAuthnRegister(body: WebAuthnSignUpType): Promise<WebAuthnFinishRegisterResponseType> {
 		const { error, options } = await this.webAuthnBeginRegister(body);
 		if (error) {
 			return { error };
 		}
-		const finishResponse = await this.webAuthnFinishRegister(
-			body.username,
-			options!,
-		);
+		const finishResponse = await this.webAuthnFinishRegister(body.username, options!);
 		return finishResponse;
 	}
 
-	async webAuthBeginLogin(
-		username: string,
-	): Promise<WebAuthnBeginLoginResponseType> {
+	async webAuthBeginLogin(username: string): Promise<WebAuthnBeginLoginResponseType> {
 		try {
-			const url = new URL("/auth/webauthn/login/begin", this.apiEndpoint);
-			url.searchParams.set("username", username);
+			const url = new URL('/auth/webauthn/login/begin', this.apiEndpoint);
+			url.searchParams.set('username', username);
 			const response = await this.fetcher(url);
 			if (!response.ok) {
-				const data =
-					(await response.json()) as OpenRegistryGenericError;
+				const data = (await response.json()) as OpenRegistryGenericError;
 				return {
 					error: {
 						code: response.status,
@@ -436,13 +412,11 @@ export class OpenRegistryClient {
 
 	async webAuthFinishLogin(
 		username: string,
-		credentialRequestOptions: CredentialRequestOptionsJSON,
+		credentialRequestOptions: CredentialRequestOptionsJSON
 	): Promise<WebAuthnFinishLoginResponseType> {
 		let credentials = {} as AuthenticationPublicKeyCredential;
 		try {
-			const options = parseRequestOptionsFromJSON(
-				credentialRequestOptions,
-			);
+			const options = parseRequestOptionsFromJSON(credentialRequestOptions);
 			credentials = await get(options);
 		} catch (err) {
 			return {
@@ -461,13 +435,15 @@ export class OpenRegistryClient {
 		const url = `/apis/webauthn/finish-login?username=${username}`;
 		try {
 			const response = await this.fetcher(url, {
-				method: "POST",
+				method: 'POST',
 				body: JSON.stringify(body),
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			});
 
 			if (!response.ok) {
-				const data =
-					(await response.json()) as OpenRegistryGenericError;
+				const data = (await response.json()) as OpenRegistryGenericError;
 				return {
 					error: {
 						code: response.status,
@@ -487,34 +463,29 @@ export class OpenRegistryClient {
 		}
 	}
 
-	async webAuthnLogin(
-		username: string,
-	): Promise<WebAuthnFinishLoginResponseType> {
+	async webAuthnLogin(username: string): Promise<WebAuthnFinishLoginResponseType> {
 		if (!supported()) {
 			return {
 				error: {
 					code: 400,
-					message: "Browser does not support WebAuthN",
+					message: 'Browser does not support WebAuthN',
 				},
 			};
 		}
 
 		const { error: err, options } = await this.webAuthBeginLogin(username);
 		if (err) {
-			console.log("sdk webAuthnLogin err: ", err);
+			console.log('sdk webAuthnLogin err: ', err);
 			return { error: err };
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const finishResponse = await this.webAuthFinishLogin(
-			username,
-			options!,
-		);
+		const finishResponse = await this.webAuthFinishLogin(username, options!);
 		return finishResponse;
 	}
 
 	async verifyEmail(token: string) {
-		const url = new URL("/auth/signup/verify", this.apiEndpoint);
-		url.searchParams.set("token", token);
+		const url = new URL('/auth/signup/verify', this.apiEndpoint);
+		url.searchParams.set('token', token);
 
 		const response = await this.fetcher(url);
 		const data = await response.json();
@@ -522,29 +493,33 @@ export class OpenRegistryClient {
 	}
 
 	async sendInvites(emails: string) {
-		const url = new URL("/auth/send-email/welcome", this.apiEndpoint);
+		const url = new URL('/auth/send-email/welcome', this.apiEndpoint);
 		const body = {
 			emails: emails,
 		};
 		const response = await this.fetcher(url, {
 			body: JSON.stringify(body),
-			method: "POST",
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 		const data = await response.json();
 		return data;
 	}
 
 	async forgotPasswordCallback(newPassword: string, token: string) {
-		const url = new URL("/auth/reset-forgotten-password", this.apiEndpoint);
+		const url = new URL('/auth/reset-forgotten-password', this.apiEndpoint);
 		const body = {
 			new_password: newPassword,
 		};
 
 		const response = await this.fetcher(url, {
-			method: "POST",
+			method: 'POST',
 			body: JSON.stringify(body),
 			headers: {
-				Authorization: "Bearer" + token,
+				'Authorization': 'Bearer' + token,
+				'Content-Type': 'application/json',
 			},
 		});
 
@@ -552,25 +527,25 @@ export class OpenRegistryClient {
 		return data;
 	}
 
-	async createRepository(
-		input: CreateReposioryRequest,
-	): Promise<OpenRegistryResponse<string>> {
-		const uri = new URL("/v2/ext/repository/create", this.apiEndpoint);
-		console.log("request uri: ", uri.toString());
+	async createRepository(input: CreateReposioryRequest): Promise<OpenRegistryResponse<string>> {
+		const uri = new URL('/v2/ext/repository/create', this.apiEndpoint);
+		console.log('request uri: ', uri.toString());
 		const response = await this.fetcher(uri, {
-			method: "POST",
+			method: 'POST',
 			body: JSON.stringify(input),
-			credentials: "include",
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 
 		const data = await response.json();
 		if (response.status !== 201) {
 			const err = data as OpenRegistryGenericError;
-			if (err.error.includes("duplicate key value")) {
+			if (err.error.includes('duplicate key value')) {
 				return {
 					...err,
-					message:
-						"You already have a repository with that name, please try a different repository name",
+					message: 'You already have a repository with that name, please try a different repository name',
 					success: false,
 				};
 			}
@@ -586,17 +561,18 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async convertAccountToOrg(
-		userId: string,
-	): Promise<OpenRegistryResponse<string>> {
-		const uri = new URL("/api/org/migrate", this.apiEndpoint);
+	async convertAccountToOrg(userId: string): Promise<OpenRegistryResponse<string>> {
+		const uri = new URL('/api/org/migrate', this.apiEndpoint);
 
 		const response = await this.fetcher(uri, {
-			method: "POST",
+			method: 'POST',
 			body: JSON.stringify({
 				user_id: userId,
 			}),
-			credentials: "include",
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 
 		const data = await response.json();
@@ -604,8 +580,8 @@ export class OpenRegistryClient {
 			const err = data as RegistryAPIError;
 			return {
 				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
+				message: err?.message ?? '',
+				error: err?.error ?? '',
 			};
 		}
 
@@ -616,21 +592,19 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async listOrgUsers(
-		orgId: string,
-	): Promise<OpenRegistryResponse<OpenRegistryOrgMember[]>> {
-		const uri = new URL("/api/org/users", this.apiEndpoint);
-		uri.searchParams.set("org_id", orgId);
+	async listOrgUsers(orgId: string): Promise<OpenRegistryResponse<OpenRegistryOrgMember[]>> {
+		const uri = new URL('/api/org/users', this.apiEndpoint);
+		uri.searchParams.set('org_id', orgId);
 
-		const response = await this.fetcher(uri, { credentials: "include" });
+		const response = await this.fetcher(uri, { credentials: 'include' });
 
 		const data = await response.json();
 		if (response.status !== 200) {
 			const err = data as RegistryAPIError;
 			return {
 				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
+				message: err?.message ?? '',
+				error: err?.error ?? '',
 			};
 		}
 
@@ -640,21 +614,19 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async searchUsers(
-		q: string,
-	): Promise<OpenRegistryResponse<OpenRegistryUserType[]>> {
-		const uri = new URL("/api/users/search", this.apiEndpoint);
-		uri.searchParams.set("query", q);
+	async searchUsers(q: string): Promise<OpenRegistryResponse<OpenRegistryUserType[]>> {
+		const uri = new URL('/api/users/search', this.apiEndpoint);
+		uri.searchParams.set('query', q);
 
-		const response = await this.fetcher(uri, { credentials: "include" });
+		const response = await this.fetcher(uri, { credentials: 'include' });
 
 		const data = await response.json();
 		if (response.status !== 200) {
 			const err = data as RegistryAPIError;
 			return {
 				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
+				message: err?.message ?? '',
+				error: err?.error ?? '',
 			};
 		}
 
@@ -663,44 +635,15 @@ export class OpenRegistryClient {
 			data: data as OpenRegistryUserType[],
 		};
 	}
-	async addUsersToOrg(
-		q: string,
-	): Promise<OpenRegistryResponse<OpenRegistryUserType[]>> {
-		const uri = new URL("/api/users/search", this.apiEndpoint);
-		uri.searchParams.set("query", q);
+	async addUsersToOrg(body: AddUserToOrgRequest): Promise<OpenRegistryResponse<{ message: string }>> {
+		const uri = new URL('/api/org/users', this.apiEndpoint);
 
-		const response = await this.fetcher(uri, { credentials: "include" });
-
-		const data = await response.json();
-		if (response.status !== 200) {
-			const err = data as RegistryAPIError;
-			return {
-				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
-			};
-		}
-
-		return {
-			success: true,
-			data: data as OpenRegistryUserType[],
-		};
-	}
-
-	async changeRepositoryVisibility(
-		visibility_mode: "Public" | "Private",
-		repository_id: string,
-	): Promise<OpenRegistryResponse<{ message: string }>> {
-		const uri = new URL("/v2/ext/repository/visibility", this.apiEndpoint);
 		const response = await this.fetcher(uri, {
-			method: "POST",
-			credentials: "include",
-			body: JSON.stringify({
-				visibility_mode,
-				repository_id,
-			}),
+			method: 'POST',
+			body: JSON.stringify(body),
+			credentials: 'include',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 		});
 
@@ -709,8 +652,41 @@ export class OpenRegistryClient {
 			const err = data as RegistryAPIError;
 			return {
 				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
+				message: err?.message ?? '',
+				error: err?.error ?? '',
+			};
+		}
+
+		return {
+			success: true,
+			data,
+		};
+	}
+
+	async changeRepositoryVisibility(
+		visibility_mode: 'Public' | 'Private',
+		repository_id: string
+	): Promise<OpenRegistryResponse<{ message: string }>> {
+		const uri = new URL('/v2/ext/repository/visibility', this.apiEndpoint);
+		const response = await this.fetcher(uri, {
+			method: 'POST',
+			credentials: 'include',
+			body: JSON.stringify({
+				visibility_mode,
+				repository_id,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			const err = data as RegistryAPIError;
+			return {
+				success: false,
+				message: err?.message ?? '',
+				error: err?.error ?? '',
 			};
 		}
 
@@ -720,17 +696,15 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async submitManifestForVulnScan(
-		manifestHash: string,
-	): Promise<OpenRegistryResponse<SubmitManifestToScanResponse>> {
-		const response = await this.fetcher("/apis/services/clair", {
-			method: "POST",
-			credentials: "include",
+	async submitManifestForVulnScan(manifestHash: string): Promise<OpenRegistryResponse<SubmitManifestToScanResponse>> {
+		const response = await this.fetcher('/apis/services/clair', {
+			method: 'POST',
+			credentials: 'include',
 			body: JSON.stringify({
 				hash: manifestHash,
 			}),
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 		});
 
@@ -739,8 +713,8 @@ export class OpenRegistryClient {
 			const err = data as RegistryAPIError;
 			return {
 				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
+				message: err?.message ?? '',
+				error: err?.error ?? '',
 			};
 		}
 
@@ -750,13 +724,11 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async getVulnReport(
-		manifestHash: string,
-	): Promise<OpenRegistryResponse<GetVulnerabilityReportResponse>> {
+	async getVulnReport(manifestHash: string): Promise<OpenRegistryResponse<GetVulnerabilityReportResponse>> {
 		const uri = `/apis/services/clair?hash=${manifestHash}`;
 
 		const response = await this.fetcher(uri, {
-			credentials: "include",
+			credentials: 'include',
 		});
 
 		const data = await response.json();
@@ -764,14 +736,41 @@ export class OpenRegistryClient {
 			const err = data as RegistryAPIError;
 			return {
 				success: false,
-				message: err?.message ?? "",
-				error: err?.error ?? "",
+				message: err?.message ?? '',
+				error: err?.error ?? '',
 			};
 		}
 
 		return {
 			success: true,
 			data: data as GetVulnerabilityReportResponse,
+		};
+	}
+
+	async updateUserPermissions(
+		body: UpdateUserPermissionsRequest
+	): Promise<OpenRegistryResponse<{ message: string }>> {
+		const uri = new URL('/api/org/permissions/users', this.apiEndpoint);
+
+		const response = await this.fetcher(uri, {
+			method: 'PATCH',
+			body: JSON.stringify(body),
+			credentials: 'include',
+		});
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			const err = data as RegistryAPIError;
+			return {
+				success: false,
+				message: err?.message ?? '',
+				error: err?.error ?? '',
+			};
+		}
+
+		return {
+			success: true,
+			data,
 		};
 	}
 }

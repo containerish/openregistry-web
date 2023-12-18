@@ -10,16 +10,10 @@ import { Transport, createPromiseClient } from '@connectrpc/connect';
 
 declare global {
 	declare namespace App {
-		interface PageData {
-			user: OpenRegistryUserType | null;
-			authenticated: boolean;
-			error?: Error;
-			showMenu?: boolean;
-			closeMenu?: VoidFunction;
-			openSigninModal?: VoidFunction;
-			email?: string;
-			password?: string;
-		}
+		// interface PageData {}
+		// interface Platform {}
+		// interface Error {}
+
 		interface Locals {
 			openRegistry: OpenRegistryClient;
 			user: OpenRegistryUserType | null;
@@ -35,5 +29,4 @@ declare global {
 			clairTransport: Transport;
 		}
 	}
-	declare function fetch(input: Request | string, init?: RequestInit | CMRequestInit): Promise<Response>;
 }

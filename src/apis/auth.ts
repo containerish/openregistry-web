@@ -88,20 +88,17 @@ export class Auth extends HttpClient {
 
 	// };
 
-	public ForgotPasswordCallback = async (
-		newPassword: string,
-		token: string
-	): Promise<AxiosResponse> => {
+	public ForgotPasswordCallback = async (newPassword: string, token: string): Promise<AxiosResponse> => {
 		const path = `/reset-forgotten-password`;
 
 		const body = {
-			new_password: newPassword
+			new_password: newPassword,
 		};
 
 		const resp = this.http.post(path, body, {
 			headers: {
-				Authorization: 'Bearer ' + token
-			}
+				Authorization: 'Bearer ' + token,
+			},
 		});
 
 		return resp;
@@ -110,14 +107,14 @@ export class Auth extends HttpClient {
 	public SendInvites = async (emails: string): Promise<AxiosResponse> => {
 		const path = 'send-email/welcome';
 		const body = {
-			emails: emails
+			emails: emails,
 		};
 		const resp = await this.http.post(path, body);
 		return resp;
 	};
 
 	public LoginWithGithub = () => {
-		goto(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login');
+		window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_blank');
 	};
 
 	public static publicPaths = new Map([
@@ -128,6 +125,6 @@ export class Auth extends HttpClient {
 		['/auth/verify', 'authVerify'],
 		['/auth/unhandled', 'unhandled'],
 		['/auth/forgot-password', 'forgot-password'],
-		['/auth/github-login-callback', 'github-callback']
+		['/auth/github-login-callback', 'github-callback'],
 	]);
 }
