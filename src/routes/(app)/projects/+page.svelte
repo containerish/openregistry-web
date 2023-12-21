@@ -2,7 +2,7 @@
 	import { navigating } from '$app/stores';
 	import { Loader } from '$lib/components';
 	import { pulseStore } from '$lib/components/pulse';
-	import { Check, ExternalLinkIcon, GitBranchIcon, RecycleIcon } from '$lib/icons';
+	import { Check, ExternalLinkIcon, RecycleIcon, ToolsIcon } from '$lib/icons';
 	import { fly } from 'svelte/transition';
 	import type { PageData } from './$types';
 	import {
@@ -11,6 +11,9 @@
 	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import Textfield from '$lib/textfield.svelte';
+	import { formatDistanceToNow } from 'date-fns';
+	import ButtonSolid from '$lib/button-solid.svelte';
 
 	export let data: PageData;
 
@@ -32,16 +35,41 @@
 		}
 	});
 
+	function filterProjectList(e: Event) {
+		const target = e.target as HTMLInputElement;
+
+		if (target.value === '') {
+			projects = getProjects();
+			return;
+		}
+
+		projects = projects.filter((p) => {
+			return p.projectName.toLowerCase().includes(target.value.toLowerCase());
+		});
+	}
+
 	$: {
 		pulseStore.setPulseState(!$navigating && !!data.projects);
 	}
+
+	const handleCreateProject = async () => {
+		await goto('/apps/github/connect/setup');
+	};
 </script>
 
 <Loader>
-	<div class="flex justify-center items-start w-full h-full min-w-max min-h-max py-8">
+	<div class="flex justify-center flex-col gap-4 items-start w-full h-full min-w-max min-h-max px-9 py-8">
+		<div class="flex flex-col lg:flex-row gap-4 items-center justify-between w-11/12">
+			<div class="w-4/5 lg:w-3/5">
+				<Textfield on:input={filterProjectList} placeholder="Search projects" />
+			</div>
+			<ButtonSolid on:click={handleCreateProject}>
+				Create a new project
+				<ToolsIcon />
+			</ButtonSolid>
+		</div>
 		<div class="justify-start flex flex-col gap-2 items-start w-full h-full max-w-[3000px]">
-			{#each getProjects() as project}
-				<!-- the values are added just for design purposes, must cahnge them with dynamic values once APIs are in place -->
+			{#each projects as project}
 				<div
 					class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100/50
 	border-l-4 border-l-emerald-600 border-opacity-100 w-11/12 shadow-2xl gap-3 px-6 py-6"
@@ -62,17 +90,23 @@
 					<div class="flex flex-col lg:flex-row gap-6 justify-between">
 						<div class="flex flex-col md:flex-row items-start gap-6 md:items-center">
 							<div class="flex gap-2 items-center">
-								<a href="#" class="text-slate-600 text-sm antialiased">
+								<a
+									href="/u/{data.user?.username}/{project.repositoryName}"
+									class="text-slate-600 underline underline-offset-2 text-sm antialiased"
+								>
 									{data.user?.username}/{project.repositoryName}
 								</a>
 								<ExternalLinkIcon class="h-4 w-4 text-primary-500" />
 							</div>
 						</div>
-						<div class="flex gap-2 items-center">
-							<Check class="h-5 w-5 text-emerald-600" />
-							<span class="text-sm text-slate-600">Just now</span>
-							<a href="#" class="underline text-sm">view details</a>
-						</div>
+						{#if project.createdAt}
+							<div class="flex gap-2 items-center">
+								<Check class="h-5 w-5 text-emerald-600" />
+								<span class="text-sm text-slate-600"
+									>{formatDistanceToNow(project.createdAt.toDate())} Ago
+								</span>
+							</div>
+						{/if}
 					</div>
 				</div>
 			{/each}

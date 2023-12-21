@@ -74,7 +74,7 @@
 		const response = await fetch('/apis/services/github/pull-request', {
 			method: 'POST',
 			body: JSON.stringify({
-				dockerfile_path: 'Dockerfile',
+				dockerfile_path: $store.buildSettings?.worfklowFile,
 				repository_name: repositoryName,
 			}),
 		});
@@ -132,12 +132,16 @@
 		filterBy: $ghStore.selectedRepository!.branches.map((b) => {
 			return {
 				value: b.name,
-			};
+				label: b.name,
+			} as SelectOption;
 		}),
 	};
 
 	const buildToolSelectionOptions: SelectOptions = {
-		filterBy: [{ value: 'Docker' }, { value: 'NerdCtl' }],
+		filterBy: [
+			{ value: 'Docker', label: 'Docker' },
+			{ value: 'NerdCtl', label: 'NerdCtl' },
+		],
 	};
 	const handleBranchSelection = (e: CustomEvent<SelectOption<string>>) => {
 		$store.productionBranch = e.detail.value;
@@ -166,6 +170,8 @@
 		invalidExecCommand = false;
 		$store.buildSettings!.execCommand = target.value;
 	};
+
+	$: isNextDisabled = invalidExecCommand || !$store.buildSettings?.buildTool || !$store.productionBranch;
 </script>
 
 <div class="w-full flex flex-col gap-6">
@@ -197,14 +203,14 @@
 			Your project will be deployed to akash network</span
 		>
 	</div>
-	<div class="flex flex-col gap-2">
-		<div class="max-w-min">
+	<div class="flex flex-col gap-2 w-full">
+		<div class="lg:w-1/3 w-full">
 			<Select
 				titleStyles="text-primary-500"
 				on:change={handleBranchSelection}
 				title="Branch"
 				options={branchSelectionOptions}
-				placeholder={branchSelectionOptions.filterBy[0].value}
+				placeholder="Select a branch"
 			/>
 		</div>
 		<span class="text-xs lg:text-sm text-slate-700 antialiased">
@@ -226,12 +232,13 @@
 		</span>
 		<div class="flex flex-col gap-6">
 			<div class="flex flex-col my-6 gap-1 text-sm">
-				<div class="max-w-min">
+				<div class="lg:w-1/3 w-full">
 					<Select
+						titleStyles="text-primary-500"
 						on:change={handleBuildToolSelection}
-						title=""
+						title="Build tool"
 						options={buildToolSelectionOptions}
-						placeholder="Docker"
+						placeholder="Select a build tool"
 					/>
 				</div>
 				<!-- <ListBox items={buildTools} /> -->
@@ -301,7 +308,7 @@
 					<span class="text-slate-700 text-base antialiased"> Change repository </span>
 				</div>
 
-				<ButtonSolid {isLoading} on:click={handleSaveAndBuild} disabled={invalidExecCommand}>
+				<ButtonSolid {isLoading} on:click={handleSaveAndBuild} disabled={isNextDisabled}>
 					Save and Build
 				</ButtonSolid>
 			</div>

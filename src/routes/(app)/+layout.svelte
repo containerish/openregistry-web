@@ -6,7 +6,6 @@
 	import type { LayoutData } from './$types';
 	import { browser } from '$app/environment';
 	export let data: LayoutData;
-	export let prerender = false;
 
 	let height = '';
 	if (browser) {

@@ -14,17 +14,17 @@
 	export let titleStyles = '';
 	export let title = '';
 
-	export const handleChange: ChangeFn<SelectOption> = ({ next }) => {
+	export const handleChange: ChangeFn<SelectOption | undefined> = ({ next }) => {
 		dispatch('change', next);
 		return next;
 	};
+
 	const {
-		elements: { trigger, menu, option, label },
+		elements: { trigger, menu, option, group, groupLabel, label },
 		states: { selectedLabel, open },
 		helpers: { isSelected },
 	} = createSelect({
 		forceVisible: true,
-		defaultSelected: options.filterBy[0],
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,
@@ -48,22 +48,18 @@
 	</button>
 	{#if $open}
 		<div
-			class="z-10 flex max-h-[300px] flex-col
-      overflow-y-auto rounded-lg bg-white p-1
-      shadow focus:!ring-0"
+			class="z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-lg bg-white p-1 shadow focus:!ring-0"
 			use:melt={$menu}
 			transition:fade={{ duration: 150 }}
 		>
 			{#each options.filterBy as item}
 				<div
-					class="relative cursor-pointer rounded-lg py-1 pl-8 pr-4 text-slate-800
-                hover:bg-primary-100 focus:z-10
-                focus:text-slate-700
-                data-[highlighted]:bg-primary-100 data-[highlighted]:text-slate-800
-                data-[disabled]:opacity-50"
+					class="relative cursor-pointer rounded-lg py-1 pl-8 pr-4 text-slate-800 hover:bg-primary-100
+					focus:z-10 focus:text-slate-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-slate-800
+					data-[disabled]:opacity-50"
 					use:melt={$option({ value: item.value, label: item.label, disabled: item.disabled })}
 				>
-					<div class="check {$isSelected(item) ? 'block' : 'hidden'}">
+					<div class="check {$isSelected(item.value) ? 'block' : 'hidden'}">
 						<Check
 							class="square-4 absolute z-20 left-2 -translate-x-1/2 ml-1 translate-y-1 text-primary-500"
 						/>

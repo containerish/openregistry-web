@@ -5,9 +5,7 @@ import type { PromiseClient } from '@connectrpc/connect';
 
 export const POST: RequestHandler = async ({ locals, request, cookies }) => {
     const body = await request.json();
-    console.log('api body: ', body);
     const userId = cookies.get('session_id')?.split(':')[1];
-    console.log('userid: ', userId);
     body.owner = userId;
     body.owner_id = userId;
 

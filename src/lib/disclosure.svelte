@@ -6,12 +6,14 @@
 
 	export let title: string;
 	export let disabled = false;
+	export let defaultOpen = false;
 
 	const {
 		elements: { root, content, trigger },
 		states: { open },
 	} = createCollapsible({
 		disabled,
+		defaultOpen,
 	});
 </script>
 

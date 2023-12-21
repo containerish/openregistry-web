@@ -22,10 +22,6 @@
 	let selectedRepo: string;
 	export let handleNext: (index: number) => void;
 
-	$: {
-		console.log('selectedRepo: ', selectedRepo, selectedRepository);
-	}
-
 	async function handleRepoSelect(repo: AuthorisedRepository) {
 		selectedRepo = repo.repository.name as string;
 		ghStore.setSelectedRepository(repo);
@@ -51,7 +47,6 @@
 
 	var selectedRepository: Repository;
 	const handleRepositorySelection = (e: CustomEvent<ContainerRepositorySelectOption>) => {
-		console.log('handleRepositorySelection: ', e.detail.value);
 		const repo = openRegistryRepos.find((r) => r.name === e.detail.value)!;
 		$store.repositoryId = new UUID({
 			value: repo.id,
@@ -140,32 +135,45 @@
 			{/if}
 		</div>
 
-		<div class="flex flex-col gap-2 pt-4 h-full w-full">
-			<div class="flex gap-3 items-center">
-				<span class="ml-2 text-base lg:text-lg font-semibold text-slate-600">Select a container repository</span
-				>
-			</div>
-			<div>
-				{#if repoOptions && repoOptions.filterBy.length > 0}
-					<div class="w-full lg:w-1/3">
-						<Select
-							titleStyles="text-primary-500"
-							on:change={handleRepositorySelection}
-							title=""
-							options={repoOptions}
-							placeholder="Select a repository"
-						/>
+		<div class="flex bg-primary-50/50 gap-4 justify-around items-center p-4 h-full w-full">
+			{#if repoOptions && repoOptions.filterBy.length > 0}
+				<div class="w-1/2">
+					<div class="flex items-center">
+						<span class="text-slate-600">Select a container repository</span>
 					</div>
-				{:else}
-					<div class="flex w-4/5 lg:w3/5 flex-col gap-3">
-						<span class="bg-brown-50 px-4 rounded py-2">
-							<span class="font-semibold">Note: </span>
-							Looks like you don't have any repositories. Please create a repository before proceeding
-						</span>
+					<div class="flex flex-col gap-3 w-full">
+						<div class="w-full">
+							<Select
+								titleStyles="text-primary-500"
+								on:change={handleRepositorySelection}
+								title=""
+								options={repoOptions}
+								placeholder="Select a repository"
+							/>
+						</div>
+					</div>
+				</div>
+				<div class="self-center px-4">
+					<span class="text-slate-600 font-bold text-lg">Or</span>
+				</div>
+				<div class="w-1/2">
+					<div class="flex items-center">
+						<span class="text-slate-600">Create a container repository</span>
+					</div>
+					<div class="flex flex-col gap-3 w-full">
 						<NewRepository handleSuccess={refreshRepositoryList} handleClose={() => {}} />
 					</div>
-				{/if}
-			</div>
+				</div>
+			{:else}
+				<div class="flex w-4/5 lg:w3/5 flex-col gap-3">
+					<span class="bg-primary-50 px-4 rounded py-2">
+						<span class="font-semibold">Note: </span>
+						Looks like you don't have any container repositories. Please create a container repository before
+						proceeding. <br />This will link your container repository with your GitHub repository
+					</span>
+					<NewRepository handleSuccess={refreshRepositoryList} handleClose={() => {}} />
+				</div>
+			{/if}
 		</div>
 		<span class="text-slate-700 text-sm lg:text-base my-3">
 			If your repository is not shown, it could be due to one of the following reasons:
@@ -197,16 +205,4 @@
 			Begin setup
 		</ButtonSolid>
 	</div>
-
-	<!-- {#if openDialog} -->
-	<!-- 	<Dialog> -->
-	<!-- 		<div class="px-5 py-10 flex flex-col justify-center items-center gap-6"> -->
-	<!-- 			<span class="text-slate-700 text-2xl font-bold antialiased"> please select a repository!! </span> -->
-	<!-- 			<span class="text-lg text-slate-700"> -->
-	<!-- 				in order to build the project, you must select a repository -->
-	<!-- 			</span> -->
-	<!-- 			<ButtonSolid type="submit" on:click={() => (openDialog = false)}>Got it!</ButtonSolid> -->
-	<!-- 		</div> -->
-	<!-- 	</Dialog> -->
-	<!-- {/if} -->
 </div>

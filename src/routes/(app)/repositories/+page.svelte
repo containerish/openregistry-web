@@ -70,10 +70,12 @@
 					<Textfield on:input={handleOnChange} placeholder="Search Repositories" />
 				</div>
 
-				<NewRepository
-					handleSuccess={handleCreateRepositorySuccess}
-					handleClose={() => (showCreateRepositoryModal = false)}
-				/>
+				<div class="w-full max-w-[202px]">
+					<NewRepository
+						handleSuccess={handleCreateRepositorySuccess}
+						handleClose={() => (showCreateRepositoryModal = false)}
+					/>
+				</div>
 			</div>
 			<div in:fly={{ y: 200, duration: 300 }}>
 				{#if catalog && catalog.length > 0}

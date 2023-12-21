@@ -65,9 +65,6 @@
 		$createProjectRequestStore.buildSettings = e.detail.buildSettings;
 	};
 
-	$: console.log('$createProjectRequestStore: ', $createProjectRequestStore);
-	$: console.log('setup page data: ', data);
-
 	$: ghAppLink = `https://github.com/settings/installations/${data.user?.identities?.github?.installation_id}`;
 </script>
 
@@ -119,7 +116,7 @@
 					store={createProjectRequestStore}
 				/>
 			{:else if selectedTab === 2}
-				<BuildProject {doesGithubActionAlreadyExist} {handleNext} />
+				<BuildProject store={createProjectRequestStore} {doesGithubActionAlreadyExist} {handleNext} />
 			{/if}
 		</div>
 	{/if}

@@ -1,4 +1,4 @@
-import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import {
 	ForgotPasswordSchema,
 	OpenRegistryUserSchema,
@@ -58,7 +58,7 @@ export class OpenRegistryClient {
 
 	constructor(fetcher: typeof fetch) {
 		this.fetcher = fetcher;
-		this.apiEndpoint = PUBLIC_OPEN_REGISTRY_BACKEND_URL;
+		this.apiEndpoint = env.PUBLIC_OPEN_REGISTRY_BACKEND_URL;
 	}
 
 	set withFetch(fetcher: typeof fetch) {

@@ -33,6 +33,10 @@
 	let isCreateRepositoryLoading = false;
 	let createRepositoryError = '';
 	const createRepository = async () => {
+		if (disableCreateButton) {
+			createRepositoryError = 'Please fill in all the required fields';
+			return;
+		}
 		isCreateRepositoryLoading = true;
 		const response = await client.createRepository(createRepositoryInput);
 		if (response.success) {
@@ -67,9 +71,15 @@
 
 	export let handleClose: DialogCloser;
 	export let handleSuccess: DialogSuccessHandler;
+
+	$: disableCreateButton =
+		isCreateRepositoryLoading ||
+		!createRepositoryInput.name ||
+		!createRepositoryInput.description ||
+		!createRepositoryInput.visibility;
 </script>
 
-<ButtonOutlined class="max-w-[202px] w-full p-0 m-0">
+<ButtonOutlined class="w-full p-0 m-0">
 	<button class="h-full w-full" use:melt={$trigger}> Create Respository </button>
 </ButtonOutlined>
 <div use:melt={$portalled} class="w-full h-full">
@@ -95,7 +105,7 @@
 				<div class="flex flex-col gap-3 w-full">
 					<div class="flex gap-4 text-slate-600 pb-2">
 						<RadioButton
-							on:change={(e) => readInputValue(e, 'visibility')}
+							on:input={(e) => readInputValue(e, 'visibility')}
 							value="Public"
 							label="Public"
 							name="visibility"
@@ -104,7 +114,7 @@
 						</RadioButton>
 						<RadioButton
 							name="visibility"
-							on:change={(e) => readInputValue(e, 'visibility')}
+							on:input={(e) => readInputValue(e, 'visibility')}
 							value="Private"
 							label="Private"
 						>
@@ -112,7 +122,7 @@
 						</RadioButton>
 					</div>
 					<div class="w-full">
-						<Textfield on:change={(e) => readInputValue(e, 'name')} label="Repository Name" name="name" />
+						<Textfield on:input={(e) => readInputValue(e, 'name')} label="Repository Name" name="name" />
 					</div>
 					<div class="w-full">
 						<label
@@ -123,7 +133,7 @@
 						</label>
 						<Textarea
 							name="description"
-							on:change={(e) => readInputValue(e, 'description')}
+							on:input={(e) => readInputValue(e, 'description')}
 							class="p-0 m-0"
 							placeholder="Eg: Awesome new container image"
 						/>
@@ -141,7 +151,12 @@
 					<ButtonOutlined type="button" class="w-full p-0 m-0" on:click={toggleModal}>
 						<button class="w-full h-full" use:melt={$close}> Close</button>
 					</ButtonOutlined>
-					<ButtonSolid isLoading={isCreateRepositoryLoading} type="submit" class="w-full">Create</ButtonSolid>
+					<ButtonSolid
+						isLoading={isCreateRepositoryLoading}
+						disabled={disableCreateButton}
+						type="submit"
+						class="w-full">Create</ButtonSolid
+					>
 				</div>
 			</form>
 		</div>

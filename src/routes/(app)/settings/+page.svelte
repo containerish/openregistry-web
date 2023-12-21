@@ -3,7 +3,7 @@
 	import { crossfade, fly } from 'svelte/transition';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { createTabs, melt } from '@melt-ui/svelte';
-	import { form, field } from 'svelte-forms';
+	import { field } from 'svelte-forms';
 	import { required, max, min, matchField } from 'svelte-forms/validators';
 	import type { PageData, SubmitFunction } from './$types';
 	import Textfield from '$lib/textfield.svelte';
@@ -22,19 +22,12 @@
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
 	let confirmPassword = field('confirm_password', '', [required(), matchField(newPassword)]);
 
-	const passwordForm = form(currentPassword, newPassword, confirmPassword);
-
-	let formResp = {
-		message: undefined,
-		type: undefined,
-	};
-
 	let dynamic_features = {
 		feature_delete_account: false,
 	};
 
 	if (browser) {
-		posthog.onFeatureFlags((flags) => {
+		posthog.onFeatureFlags(() => {
 			dynamic_features.feature_delete_account = posthog.isFeatureEnabled('delete_account') ?? false;
 		});
 	}
