@@ -5,8 +5,6 @@
 	import { CheckIcon, EmailIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import confetti from 'canvas-confetti';
-	var canvas = document.getElementById('confetti');
-	let conf = confetti.create(canvas, { resize: true });
 	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import Logo from './logo.svelte';
@@ -15,6 +13,9 @@
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { SubmitFunction } from '../../routes/(marketing)/auth/signup/$types';
+
+	var canvas = document.getElementById('confetti');
+	let conf = confetti.create(canvas as HTMLCanvasElement, { resize: true });
 
 	var count = 200;
 	var defaults = {
@@ -51,14 +52,15 @@
 	let emailErr = '';
 	let successMessage = '';
 
-	const handleSignUpSubmit: SubmitFunction = ({ form }) => {
+	const handleSignUpSubmit: SubmitFunction = ({ formData }) => {
 		isLoading = true;
 
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'success':
-					// await update();
-					form.reset();
+					for (const key of formData.keys()) {
+						formData.delete(key);
+					}
 					await update();
 					successMessage = result.data?.message;
 					showSuccessMsg = true;
@@ -98,7 +100,7 @@
 		isLoading = true;
 		try {
 			const body = WebAuthnSignUpSchema.parse(formData);
-			const client = new OpenRegistryClient(fetch);
+			const client = new OpenRegistryClient(fetch, $page.url.origin);
 			const { message, error } = await client.webAuthnRegister(body);
 			if (error) {
 				webAuthnForm.formErrors = [error.message];

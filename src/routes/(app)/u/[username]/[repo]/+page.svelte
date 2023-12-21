@@ -13,7 +13,7 @@
 	import CheckIcon from '$lib/icons/checkIcon.svelte';
 	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
-	const openregistryClient = new OpenRegistryClient(fetch);
+	const openregistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	let isOverview = true;
 	let isTags = false;
 	let isSetting = false;
@@ -45,7 +45,7 @@
 	const ns = data.username + '/' + data.repo;
 
 	onMount(async () => {
-		const url = new URL('/apis/registry/repository-detail', $page.url.origin);
+		const url = new URL('/api/registry/repository-detail', $page.url.origin);
 		url.searchParams.set('namespace', ns);
 
 		const response = await fetch(url);

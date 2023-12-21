@@ -12,9 +12,10 @@
 	import AddUsersToOrgModal from './addUsersToOrgModal.svelte';
 	import type { UpdateUserPermissionsRequest } from '$lib/types/permissions';
 	import Switch from './switch.svelte';
+	import { page } from '$app/stores';
 
 	export let user: OpenRegistryUserType;
-	const openRegistryClient = new OpenRegistryClient(fetch);
+	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 
 	let isConvertOrgLoading = false;
 	const convertUserToOrg = async () => {

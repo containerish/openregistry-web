@@ -11,7 +11,7 @@
 	let searchQuery = '';
 	let catalog: Catalog = {
 		repositories: [],
-		total: 0
+		total: 0,
 	};
 
 	const handleOnChange = async (e: any) => {
@@ -62,7 +62,7 @@
 		showItems = false;
 		searchQuery = '';
 		await goto(`/u/${item}`, {
-			replaceState: true
+			replaceState: true,
 		});
 	};
 </script>
@@ -90,11 +90,7 @@
 				class="absolute divide-y-2 text-left inset-x-0 mx-5 mt-4 overflow-y-auto bg-white border rounded-md
 				max-h-96"
 			>
-				<button
-					aria-label="no results found"
-					disabled
-					class="py-1 m-0 w-full border-none block no-underline"
-				>
+				<button aria-label="no results found" disabled class="py-1 m-0 w-full border-none block no-underline">
 					<div
 						class="2xl:px-4 2xl:py-5 px-4 hover:bg-slate-50 gap-1 py-3 flex flex-row items-center
 						justify-start"

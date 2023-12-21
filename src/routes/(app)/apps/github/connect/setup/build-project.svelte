@@ -37,7 +37,7 @@
 			runId: 0,
 			skipToPreviousRun: doesGithubActionAlreadyExist,
 		};
-		const response = await fetch('/apis/services/github/actions/logs', {
+		const response = await fetch('/api/services/github/actions/logs', {
 			method: 'POST',
 			body: JSON.stringify(body),
 		});

@@ -71,7 +71,7 @@
 	};
 
 	const createPullRequest = async (repositoryName: string): Promise<APIError | undefined> => {
-		const response = await fetch('/apis/services/github/pull-request', {
+		const response = await fetch('/api/services/github/pull-request', {
 			method: 'POST',
 			body: JSON.stringify({
 				dockerfile_path: $store.buildSettings?.worfklowFile,
@@ -113,7 +113,7 @@
 
 	const storeBuildProject = async () => {
 		console.log('storeBuildProject: ', $store.toJson());
-		const response = await fetch('/apis/services/github/actions/projects', {
+		const response = await fetch('/api/services/github/actions/projects', {
 			method: 'POST',
 			body: JSON.stringify($store.toJson()),
 		});

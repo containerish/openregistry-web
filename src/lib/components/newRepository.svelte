@@ -9,10 +9,10 @@
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import { CreateReposioryRequest, RepositoryVisibility } from '$lib/types/registry';
 	import type { DialogCloser, DialogSuccessHandler } from '$lib/types/components';
-
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import PlainCross from '$lib/icons/plain-cross.svelte';
+	import { page } from '$app/stores';
 
 	const {
 		elements: { trigger, overlay, content, title, close, portalled },
@@ -29,7 +29,7 @@
 		visibility: 'Private',
 	};
 
-	const client = new OpenRegistryClient(fetch);
+	const client = new OpenRegistryClient(fetch, $page.url.origin);
 	let isCreateRepositoryLoading = false;
 	let createRepositoryError = '';
 	const createRepository = async () => {

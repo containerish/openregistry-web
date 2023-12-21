@@ -54,22 +54,32 @@ type OpenRegistrySuccessResponse<T> = {
 
 export class OpenRegistryClient {
 	private fetcher: typeof fetch;
-	private readonly apiEndpoint: string;
+	private readonly apiHost: string;
 
-	constructor(fetcher: typeof fetch) {
+	constructor(fetcher: typeof fetch, apiHost: string) {
 		this.fetcher = fetcher;
-		this.apiEndpoint = PUBLIC_OPEN_REGISTRY_BACKEND_URL;
+		this.apiHost = apiHost;
 	}
 
-	set withFetch(fetcher: typeof fetch) {
+	withFetch(fetcher: typeof fetch) {
 		this.fetcher = fetcher;
+	}
+
+	private getEndpoint(path: string) {
+		if (!path.startsWith('/')) {
+			path = '/' + path;
+		}
+
+		const url = new URL(['/api/proxy', path].join(''), this.apiHost);
+		console.log('getEndpoint: url: ', url.toString());
+		return url;
 	}
 
 	async signIn(formData: FormData) {
 		const rawUser = Object.fromEntries(formData);
 		try {
 			const user = SignInSchema.parse(rawUser);
-			const response = await this.fetcher('/apis/auth/signin', {
+			const response = await this.fetcher('/api/auth/signin', {
 				method: 'POST',
 				body: JSON.stringify(user),
 				headers: {
@@ -274,8 +284,9 @@ export class OpenRegistryClient {
 		}
 	}
 
+	// THIS MUST ALWAYS BE A DIRECT CALL. WE ANYWAY SEEN THE SESSION ID WHICH CAN BE PASSED TO VIA THE ARGUMENTS
 	async getUserBySession(sessionId: string): Promise<OpenRegistryUserType | null> {
-		const uri = new URL('/auth/sessions/me', this.apiEndpoint);
+		const uri = new URL('/auth/sessions/me', PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		const response = await this.fetcher(uri, {
 			headers: {
 				cookie: `session_id=${sessionId}`,
@@ -292,7 +303,7 @@ export class OpenRegistryClient {
 	}
 
 	async getUserRepositoryCatalog(visibility?: 'Public' | 'Private'): Promise<RepositoryCatalogResponse> {
-		const url = new URL('/v2/ext/catalog/user', this.apiEndpoint);
+		const url = this.getEndpoint('/v2/ext/catalog/user');
 		if (visibility) {
 			url.searchParams.set('visibility', visibility);
 		}
@@ -317,7 +328,7 @@ export class OpenRegistryClient {
 
 	async webAuthnBeginRegister(body: WebAuthnSignUpType): Promise<WebAuthnBeginRegisterResponseType> {
 		try {
-			const url = new URL('/auth/webauthn/registration/begin', this.apiEndpoint);
+			const url = this.getEndpoint('/auth/webauthn/registration/begin');
 			const response = await this.fetcher(url, {
 				method: 'POST',
 				body: JSON.stringify(body),
@@ -345,7 +356,7 @@ export class OpenRegistryClient {
 		credentialCreationOpts: CredentialCreationOptionsJSON
 	): Promise<WebAuthnFinishRegisterResponseType> {
 		const options = parseCreationOptionsFromJSON(credentialCreationOpts);
-		const url = new URL('/auth/webauthn/registration/finish', this.apiEndpoint);
+		const url = this.getEndpoint('/auth/webauthn/registration/finish');
 		url.searchParams.set('username', username);
 		let body: RegistrationPublicKeyCredential;
 		try {
@@ -386,7 +397,7 @@ export class OpenRegistryClient {
 
 	async webAuthBeginLogin(username: string): Promise<WebAuthnBeginLoginResponseType> {
 		try {
-			const url = new URL('/auth/webauthn/login/begin', this.apiEndpoint);
+			const url = this.getEndpoint('/auth/webauthn/login/begin');
 			url.searchParams.set('username', username);
 			const response = await this.fetcher(url);
 			if (!response.ok) {
@@ -483,7 +494,7 @@ export class OpenRegistryClient {
 	}
 
 	async verifyEmail(token: string) {
-		const url = new URL('/auth/signup/verify', this.apiEndpoint);
+		const url = this.getEndpoint('/auth/signup/verify');
 		url.searchParams.set('token', token);
 
 		const response = await this.fetcher(url);
@@ -492,7 +503,7 @@ export class OpenRegistryClient {
 	}
 
 	async sendInvites(emails: string) {
-		const url = new URL('/auth/send-email/welcome', this.apiEndpoint);
+		const url = this.getEndpoint('/auth/send-email/welcome');
 		const body = {
 			emails: emails,
 		};
@@ -508,7 +519,7 @@ export class OpenRegistryClient {
 	}
 
 	async forgotPasswordCallback(newPassword: string, token: string) {
-		const url = new URL('/auth/reset-forgotten-password', this.apiEndpoint);
+		const url = this.getEndpoint('/auth/reset-forgotten-password');
 		const body = {
 			new_password: newPassword,
 		};
@@ -527,7 +538,7 @@ export class OpenRegistryClient {
 	}
 
 	async createRepository(input: CreateReposioryRequest): Promise<OpenRegistryResponse<string>> {
-		const uri = new URL('/v2/ext/repository/create', this.apiEndpoint);
+		const uri = this.getEndpoint('/v2/ext/repository/create');
 		console.log('request uri: ', uri.toString());
 		const response = await this.fetcher(uri, {
 			method: 'POST',
@@ -560,7 +571,7 @@ export class OpenRegistryClient {
 	}
 
 	async convertAccountToOrg(userId: string): Promise<OpenRegistryResponse<string>> {
-		const uri = new URL('/api/org/migrate', this.apiEndpoint);
+		const uri = this.getEndpoint('/api/org/migrate');
 
 		const response = await this.fetcher(uri, {
 			method: 'POST',
@@ -590,7 +601,7 @@ export class OpenRegistryClient {
 	}
 
 	async listOrgUsers(orgId: string): Promise<OpenRegistryResponse<OpenRegistryOrgMember[]>> {
-		const uri = new URL('/api/org/users', this.apiEndpoint);
+		const uri = this.getEndpoint('/api/org/users');
 		uri.searchParams.set('org_id', orgId);
 
 		const response = await this.fetcher(uri);
@@ -612,7 +623,7 @@ export class OpenRegistryClient {
 	}
 
 	async searchUsers(q: string): Promise<OpenRegistryResponse<OpenRegistryUserType[]>> {
-		const uri = new URL('/api/users/search', this.apiEndpoint);
+		const uri = this.getEndpoint('/api/users/search');
 		uri.searchParams.set('query', q);
 
 		const response = await this.fetcher(uri);
@@ -633,7 +644,7 @@ export class OpenRegistryClient {
 		};
 	}
 	async addUsersToOrg(body: AddUserToOrgRequest): Promise<OpenRegistryResponse<{ message: string }>> {
-		const uri = new URL('/api/org/users', this.apiEndpoint);
+		const uri = this.getEndpoint('/api/org/users');
 
 		const response = await this.fetcher(uri, {
 			method: 'POST',
@@ -663,7 +674,7 @@ export class OpenRegistryClient {
 		visibility_mode: 'Public' | 'Private',
 		repository_id: string
 	): Promise<OpenRegistryResponse<{ message: string }>> {
-		const uri = new URL('/v2/ext/repository/visibility', this.apiEndpoint);
+		const uri = this.getEndpoint('/v2/ext/repository/visibility');
 		const response = await this.fetcher(uri, {
 			method: 'POST',
 			body: JSON.stringify({
@@ -742,7 +753,7 @@ export class OpenRegistryClient {
 	async updateUserPermissions(
 		body: UpdateUserPermissionsRequest
 	): Promise<OpenRegistryResponse<{ message: string }>> {
-		const uri = new URL('/api/org/permissions/users', this.apiEndpoint);
+		const uri = this.getEndpoint('/api/org/permissions/users');
 
 		const response = await this.fetcher(uri, {
 			method: 'PATCH',

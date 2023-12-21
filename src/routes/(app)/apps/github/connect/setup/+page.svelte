@@ -20,10 +20,11 @@
 	import { onMount } from 'svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { Repository } from '$lib/types';
+	import { page } from '$app/stores';
 	export let data: PageData;
 	let selectedTab = 0;
 
-	const openRegistryClient = new OpenRegistryClient(fetch);
+	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	async function handleNext(index: number) {
 		ghStore.setTabIndex(index);
 		selectedTab = index;

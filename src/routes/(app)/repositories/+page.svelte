@@ -11,10 +11,11 @@
 	import { fly } from 'svelte/transition';
 	import { DefaultPageSize } from '$lib/constants';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import { browser } from '$app/environment';
 	export let data: PageData;
 	$: catalog = data.repositories;
 
-	const registryClient = new OpenRegistryClient(fetch);
+	const registryClient = new OpenRegistryClient(fetch, $page.url.origin);
 
 	const pageSize = 10;
 
@@ -22,6 +23,10 @@
 	const toggleModal = () => {
 		showCreateRepositoryModal = !showCreateRepositoryModal;
 	};
+
+	if (browser) {
+		console.log('cookies: ', document.cookie);
+	}
 
 	setContext('toggleModal', toggleModal);
 	const handleOnChange = async (e: Event) => {
@@ -32,7 +37,7 @@
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const autoComplete = async (q: string) => {
 		let query = data.user.username;
-		const url = new URL('/apis/registry/list/repositories', $page.url.origin);
+		const url = new URL('/api/registry/list/repositories', $page.url.origin);
 		url.searchParams.set('query', query);
 
 		const response = await fetch(url);

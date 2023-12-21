@@ -122,7 +122,7 @@
 		isLoading = true;
 		try {
 			const body = WebAuthnSignUpSchema.parse(formData);
-			const client = new OpenRegistryClient(fetch);
+			const client = new OpenRegistryClient(fetch, $page.url.origin);
 			const { message, error: err } = await client.webAuthnRegister(body);
 			if (err) {
 				console.log('webAuthnRegister error: ', err);
