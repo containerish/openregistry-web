@@ -1,3 +1,4 @@
+import { OpenRegistryUserSchema, OpenRegistryUserType } from '$lib/formSchemas';
 import { z } from 'zod';
 
 export const ImageManifest = z.object({
@@ -13,13 +14,14 @@ export const ImageManifest = z.object({
 	schemaVersion: z.number(),
 	size: z.number(),
 	ownerId: z.string(),
+	user: OpenRegistryUserType.nullish(),
 });
 
 export type ImageManifest = z.infer<typeof ImageManifest>;
 
 export const Repository = z.object({
 	created_at: z.coerce.date(),
-	updated_at: z.coerce.date(),
+	updated_at: z.coerce.date().nullish(),
 	meta_tags: z.record(z.string(), z.unknown()).nullish(),
 	id: z.string(),
 	name: z.string(),
@@ -27,12 +29,13 @@ export const Repository = z.object({
 	visibility: z.enum(['Private', 'Public']),
 	owner_id: z.string(),
 	image_manifests: z.array(ImageManifest).nullish(),
+	user: OpenRegistryUserSchema.nullish(),
 });
 
 export type Repository = z.infer<typeof Repository>;
 
 export const RepositoryCatalog = z.object({
-	repositories: z.array(Repository),
+	repositories: z.array(Repository).nullish().default([]),
 	total: z.number(),
 });
 
@@ -72,3 +75,9 @@ export const CreateReposioryRequest = z.object({
 export type RepositoryVisibility = z.infer<typeof RepositoryVisibility>;
 export type CreateReposioryRequest = z.infer<typeof CreateReposioryRequest>;
 
+export const SearchRepositoryResponse = z.object({
+	total: z.number(),
+	repositories: z.array(Repository),
+});
+
+export type SearchRepositoryResponse = z.infer<typeof SearchRepositoryResponse>;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Pagination from '$lib/pagination.svelte';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { navigating, page } from '$app/stores';
@@ -13,9 +13,11 @@
 	import { RepositoryCatalog } from '$lib/types/registry';
 	import AdvanceFilters from '$lib/components/advanceFilters.svelte';
 	import { createPopover, melt } from '@melt-ui/svelte';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
 	export let data: PageData;
 
+	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	let sortBy = 'namespace';
 	let openErrorModal = false;
 
@@ -24,59 +26,20 @@
 		strategy: 'fixed',
 	});
 
-	const extraOpts = {
-		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }],
-	};
-
 	const fetchPageData = async (offset: number) => {
-		const url = new URL('/api/registry/list/catalog', $page.url.origin);
-		url.searchParams.set('page_size', DefaultPageSize.toString());
-		url.searchParams.set('offset', (DefaultPageSize * offset).toString());
-		url.searchParams.set('sort_by', sortBy);
-		const response = await fetch(url);
-
-		if (response.status !== 200) {
-			return;
+		if (offset > 0) {
+			offset = offset * DefaultPageSize;
+		}
+		const response = await openRegistryClient.getDetailedCatalog(DefaultPageSize, offset, sortBy);
+		if (response.success) {
+			catalog = response.data;
 		}
 
-		const repoCatalog = await response.json();
-		const parsed = RepositoryCatalog.safeParse(repoCatalog);
-		if (parsed.success) {
-			catalog = parsed.data;
-		}
 		return offset;
 	};
 
 	setContext('fetchPageData', fetchPageData);
-	let catalog: RepositoryCatalog;
-
-	onMount(async () => {
-		const query = $page.url.searchParams.get('q');
-		if (query) {
-			const url = new URL('/api/registry/list/repositories', $page.url.origin);
-			url.searchParams.set('query', query);
-			const response = await fetch(url);
-			if (response.status !== 200) {
-				openErrorModal = true;
-				catalog.repositories = [];
-				return;
-			}
-			catalog = await response.json();
-			return;
-		}
-
-		const url = new URL('/api/registry/list/catalog', $page.url.origin);
-		url.searchParams.set('page_size', DefaultPageSize.toString());
-
-		const response = await fetch(url);
-
-		if (response.status !== 200) {
-			openErrorModal = true;
-			return;
-		}
-
-		catalog = await response.json();
-	});
+	$: catalog = data.catalog as RepositoryCatalog;
 
 	let showFilter = false;
 	const toggleFilter = () => {
@@ -88,15 +51,13 @@
 		showModal = !showModal;
 	};
 
-	let showTooltip = false;
-
 	setContext('toggleModal', toggleModal);
 	$: {
 		pulseStore.setPulseState(!$navigating && !!catalog);
 	}
 
 	const {
-		elements: { trigger, content, arrow, close },
+		elements: { trigger, content, arrow },
 		states: { open },
 	} = createPopover({
 		forceVisible: true,
@@ -174,7 +135,7 @@
 					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 						<div class="w-full">
 							{#each catalog.repositories as repo}
-								<Repository username={data.user.username} repository={repo} compact={false} />
+								<Repository repository={repo} compact={false} />
 							{/each}
 						</div>
 

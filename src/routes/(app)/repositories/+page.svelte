@@ -11,7 +11,6 @@
 	import { fly } from 'svelte/transition';
 	import { DefaultPageSize } from '$lib/constants';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
-	import { browser } from '$app/environment';
 	export let data: PageData;
 	$: catalog = data.repositories;
 
@@ -23,10 +22,6 @@
 	const toggleModal = () => {
 		showCreateRepositoryModal = !showCreateRepositoryModal;
 	};
-
-	if (browser) {
-		console.log('cookies: ', document.cookie);
-	}
 
 	setContext('toggleModal', toggleModal);
 	const handleOnChange = async (e: Event) => {
