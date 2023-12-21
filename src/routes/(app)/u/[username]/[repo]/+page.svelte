@@ -4,7 +4,6 @@
 	import type { PageData } from './$types';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import { page } from '$app/stores';
-	import { env } from '$env/dynamic/public';
 	import type { Repository } from '$lib/types/registry';
 	import Switch from '$lib/components/switch.svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
@@ -12,6 +11,7 @@
 	import ExternalLink from '$lib/icons/external-link.svelte';
 	import { DownloadIcon, LockClosedIcon, LockOpenIcon, SpinnerCircle } from '$lib/icons';
 	import CheckIcon from '$lib/icons/checkIcon.svelte';
+	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 	const openregistryClient = new OpenRegistryClient(fetch);
 	let isOverview = true;
@@ -61,7 +61,7 @@
 	let timeout: ReturnType<typeof setTimeout>;
 
 	const handleCopy = (cmd: string) => {
-		const u = new URL(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const u = new URL(PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		switch (cmd) {
 			case 'push':
 				isCopied = 'push';
@@ -80,7 +80,7 @@
 	onDestroy(() => clearTimeout(timeout));
 
 	const getImageCommand = (ns: string, subcommand: 'pull' | 'push' = 'pull') => {
-		const u = new URL(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+		const u = new URL(PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 		switch (subcommand) {
 			case 'pull':
 				return `docker pull ${u.host}/${ns}`;

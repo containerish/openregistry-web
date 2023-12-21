@@ -2,8 +2,8 @@ import { SignInSchema } from '$lib/formSchemas';
 import type { SigninRequestType } from '$lib/types/user';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { env } from '$env/dynamic/public';
 import { parse, splitCookiesString } from 'set-cookie-parser';
+import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
     let body: SigninRequestType;
@@ -12,10 +12,10 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
     } catch (err) {
         return json({ error: err }, { status: 400 });
     }
-    const url = new URL('/auth/signin', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+    const url = new URL('/auth/signin', PUBLIC_OPEN_REGISTRY_BACKEND_URL);
     const response = await fetch(url, {
         body: JSON.stringify(body),
-        method: 'POST'
+        method: 'POST',
     });
 
     if (response.status !== 200) {
@@ -25,7 +25,7 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const cookieList = parse(splitCookiesString(response.headers.get('set-cookie')!), {
         silent: true,
-        decodeValues: true
+        decodeValues: true,
     });
 
     cookieList.forEach((cookie) => {
@@ -35,7 +35,7 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
             sameSite: getSameSite(cookie.sameSite),
             secure: cookie.secure,
             path: '/',
-            expires: cookie.expires
+            expires: cookie.expires,
         });
     });
     return json(await response.json(), { status: 200 });

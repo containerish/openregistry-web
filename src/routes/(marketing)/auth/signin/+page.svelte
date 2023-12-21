@@ -11,10 +11,10 @@
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
-	import { env } from '$env/dynamic/public';
 	import IconButton from '$lib/icon-button.svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { SubmitFunction } from '@sveltejs/kit';
+	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 	let isLoading = false;
 	let emailErr: string;
@@ -190,8 +190,7 @@
 					</ButtonOutlined>
 					<ButtonOutlined
 						class="gap-0"
-						on:click={() =>
-							window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
+						on:click={() => window.open(PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
 					>
 						<GithubIcon class="text-slate-800 mr-2 h-7 w-7" />
 						Sign in with Github

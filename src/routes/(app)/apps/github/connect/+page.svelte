@@ -1,11 +1,11 @@
 <script lang="ts">
+	import { PUBLIC_GITHUB_APP_PUBLIC_LINK } from '$env/static/public';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import GihubIcon from '$lib/github.svelte';
-	import { env } from '$env/dynamic/public';
 	import { fly } from 'svelte/transition';
 
 	const installGithubApp = () => {
-		const installationUrl = env.PUBLIC_GITHUB_APP_PUBLIC_LINK + '/installations/new';
+		const installationUrl = PUBLIC_GITHUB_APP_PUBLIC_LINK + '/installations/new';
 		window.open(installationUrl, '_self');
 	};
 </script>

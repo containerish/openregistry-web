@@ -12,10 +12,10 @@
 		ProjectBuildSettingsMessage,
 	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 
-	import { env } from '$env/dynamic/public';
 	import type { SelectOptions } from '$lib/client/selectTypes';
 	import type { Writable } from 'svelte/store';
 	import type { SelectOption } from '@melt-ui/svelte';
+	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 	export let handleNext: (index: number) => void;
 	export let store: Writable<CreateProjectRequest>;
@@ -28,7 +28,7 @@
 			buildTag = `:${$store.productionBranch}`;
 		}
 
-		const openRegistryURI = `${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/${selectedRepository.repository.full_name}${buildTag}`;
+		const openRegistryURI = `${PUBLIC_OPEN_REGISTRY_BACKEND_URL}/${selectedRepository.repository.full_name}${buildTag}`;
 		switch (buildTool) {
 			case 'Docker':
 				return `docker build -t ${openRegistryURI} -f ${dockerFilePath} ${dockerContextPath}`;

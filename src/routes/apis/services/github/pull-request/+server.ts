@@ -1,8 +1,8 @@
-import { env } from '$env/dynamic/public';
 import { GitHubPullRequestSchema } from '$lib/schemas/github';
 import type { GitHubPullRequestType } from '$lib/schemas/github';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 export const POST: RequestHandler = async ({ fetch, request }) => {
 	let body: GitHubPullRequestType;
@@ -13,12 +13,11 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 		return json({ error: err }, { status: 400 });
 	}
 
-	const uri = new URL('/github/app/workflows/create', env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+	const uri = new URL('/github/app/workflows/create', PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 	const response = await fetch(uri, {
 		method: 'POST',
 		body: JSON.stringify(body),
-		credentials: 'include',
-		redirect: 'manual'
+		redirect: 'manual',
 	});
 	console.log('pull request: ', response.status);
 

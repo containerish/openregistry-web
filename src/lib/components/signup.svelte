@@ -14,7 +14,6 @@
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
-	import { env } from '$env/dynamic/public';
 	import type { SubmitFunction } from '../../routes/(marketing)/auth/signup/$types';
 
 	var count = 200;

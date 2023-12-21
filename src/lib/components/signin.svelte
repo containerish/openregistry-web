@@ -10,9 +10,9 @@
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
-	import { env } from '$env/dynamic/public';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { SubmitFunction } from '../../routes/(marketing)/auth/signin/$types';
+	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
@@ -125,9 +125,7 @@
 			<Logo type="dark" />
 		</div>
 
-		<ButtonOutlined
-			on:click={() => window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
-		>
+		<ButtonOutlined on:click={() => window.open(PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}>
 			<GithubIcon class="text-black mr-2 h-8 w-8" />
 			Sign in with Github
 		</ButtonOutlined>

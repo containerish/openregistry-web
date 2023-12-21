@@ -1,14 +1,14 @@
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { env } from '$env/dynamic/public';
 import type { AuthorisedRepository } from '$lib/types';
+import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ cookies, url, fetch }) => {
     const sessionId = cookies.get('session_id')!;
     const installationId = url.searchParams.get('installation_id');
 
     await handleGitHubAppInstallation(url, sessionId);
-    const resp = await fetch(`${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/repo/list`, {
+    const resp = await fetch(`${PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/repo/list`, {
         headers: {
             cookie: `session_id=${sessionId}`,
         },
@@ -46,7 +46,7 @@ async function handleGitHubAppInstallation(url: URL, sessionId: string) {
     const action = url.searchParams.get('setup_action');
 
     if (action && (action === 'install' || action === 'update')) {
-        const uri = `${env.PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`;
+        const uri = `${PUBLIC_OPEN_REGISTRY_BACKEND_URL}/github/app/setup/finish?installation_id=${installationId}`;
 
         const setupResp = await fetch(uri, {
             method: 'POST',

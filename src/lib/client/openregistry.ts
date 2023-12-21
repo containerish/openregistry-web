@@ -1,4 +1,3 @@
-import { env } from '$env/dynamic/public';
 import {
 	ForgotPasswordSchema,
 	OpenRegistryUserSchema,
@@ -38,6 +37,7 @@ import {
 	GetVulnerabilityReportResponse,
 } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
 import type { AddUserToOrgRequest, UpdateUserPermissionsRequest } from '$lib/types/permissions';
+import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 type OpenRegistryGenericError = {
 	message: string;
@@ -58,7 +58,7 @@ export class OpenRegistryClient {
 
 	constructor(fetcher: typeof fetch) {
 		this.fetcher = fetcher;
-		this.apiEndpoint = env.PUBLIC_OPEN_REGISTRY_BACKEND_URL;
+		this.apiEndpoint = PUBLIC_OPEN_REGISTRY_BACKEND_URL;
 	}
 
 	set withFetch(fetcher: typeof fetch) {
@@ -195,7 +195,6 @@ export class OpenRegistryClient {
 			const response = await this.fetcher('/apis/auth/reset-password', {
 				method: 'POST',
 				body: JSON.stringify(body),
-				credentials: 'include',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -298,7 +297,7 @@ export class OpenRegistryClient {
 			url.searchParams.set('visibility', visibility);
 		}
 
-		const response = await this.fetcher(url, { credentials: 'include' });
+		const response = await this.fetcher(url);
 		const data = await response.json();
 
 		if (response.status === 200) {
@@ -533,7 +532,6 @@ export class OpenRegistryClient {
 		const response = await this.fetcher(uri, {
 			method: 'POST',
 			body: JSON.stringify(input),
-			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -569,7 +567,6 @@ export class OpenRegistryClient {
 			body: JSON.stringify({
 				user_id: userId,
 			}),
-			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -596,7 +593,7 @@ export class OpenRegistryClient {
 		const uri = new URL('/api/org/users', this.apiEndpoint);
 		uri.searchParams.set('org_id', orgId);
 
-		const response = await this.fetcher(uri, { credentials: 'include' });
+		const response = await this.fetcher(uri);
 
 		const data = await response.json();
 		if (response.status !== 200) {
@@ -618,7 +615,7 @@ export class OpenRegistryClient {
 		const uri = new URL('/api/users/search', this.apiEndpoint);
 		uri.searchParams.set('query', q);
 
-		const response = await this.fetcher(uri, { credentials: 'include' });
+		const response = await this.fetcher(uri);
 
 		const data = await response.json();
 		if (response.status !== 200) {
@@ -641,7 +638,6 @@ export class OpenRegistryClient {
 		const response = await this.fetcher(uri, {
 			method: 'POST',
 			body: JSON.stringify(body),
-			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -670,7 +666,6 @@ export class OpenRegistryClient {
 		const uri = new URL('/v2/ext/repository/visibility', this.apiEndpoint);
 		const response = await this.fetcher(uri, {
 			method: 'POST',
-			credentials: 'include',
 			body: JSON.stringify({
 				visibility_mode,
 				repository_id,
@@ -699,7 +694,6 @@ export class OpenRegistryClient {
 	async submitManifestForVulnScan(manifestHash: string): Promise<OpenRegistryResponse<SubmitManifestToScanResponse>> {
 		const response = await this.fetcher('/apis/services/clair', {
 			method: 'POST',
-			credentials: 'include',
 			body: JSON.stringify({
 				hash: manifestHash,
 			}),
@@ -727,9 +721,7 @@ export class OpenRegistryClient {
 	async getVulnReport(manifestHash: string): Promise<OpenRegistryResponse<GetVulnerabilityReportResponse>> {
 		const uri = `/apis/services/clair?hash=${manifestHash}`;
 
-		const response = await this.fetcher(uri, {
-			credentials: 'include',
-		});
+		const response = await this.fetcher(uri);
 
 		const data = await response.json();
 		if (response.status !== 200) {
@@ -755,7 +747,6 @@ export class OpenRegistryClient {
 		const response = await this.fetcher(uri, {
 			method: 'PATCH',
 			body: JSON.stringify(body),
-			credentials: 'include',
 		});
 
 		const data = await response.json();
