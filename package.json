@@ -50,7 +50,7 @@
 		"canvas-confetti": "^1.9.1",
 		"cssnano": "^6.0.2",
 		"eslint": "^8.53.0",
-		"eslint-config-prettier": "^9.0.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.32",
 		"postcss-cli": "^11.0.0",
