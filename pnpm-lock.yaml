@@ -36,8 +36,8 @@ dependencies:
     specifier: 0.5.0
     version: 0.5.0
   gsap:
-    specifier: ^3.12.1
-    version: 3.12.1
+    specifier: ^3.12.4
+    version: 3.12.4
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5
@@ -2038,8 +2038,8 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /gsap@3.12.1:
-    resolution: {integrity: sha512-FXtb2YbBE9l8I9Pl5DFLpCMedaiMPztRlr0Ln0CMSnJn+pbTaeKlzgth8cLNPc7PzNwIZe+SEQiBBAWaBKJdVA==}
+  /gsap@3.12.4:
+    resolution: {integrity: sha512-1ByAq8dD0W4aBZ/JArgaQvc0gyUfkGkP8mgAQa0qZGdpOKlSOhOf+WNXjoLimKaKG3Z4Iu6DKZtnyszqQeyqWQ==}
     dev: false
 
   /has-flag@4.0.0:
