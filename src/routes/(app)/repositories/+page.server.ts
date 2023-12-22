@@ -13,10 +13,7 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 
 	const { repositories, total } = await locals.openRegistry.getUserRepositoryCatalog();
 	return {
-		user: locals.user,
-		isAuthenticated: locals.authenticated,
 		repositories,
 		total,
-		error: null,
 	};
 };

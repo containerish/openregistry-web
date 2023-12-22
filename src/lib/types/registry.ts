@@ -1,20 +1,26 @@
 import { OpenRegistryUserSchema, OpenRegistryUserType } from '$lib/formSchemas';
 import { z } from 'zod';
 
+export const RegistryDescriptor = z.object({
+	mediaType: z.string(),
+	digest: z.string(),
+	size: z.number(),
+});
+
 export const ImageManifest = z.object({
 	createdAt: z.coerce.date(),
-	updatedAt: z.coerce.date(),
+	updatedAt: z.coerce.date().nullish(),
 	digest: z.string(),
 	repositoryId: z.string(),
 	mediaType: z.string(),
 	id: z.string(),
 	reference: z.string(),
-	dfsLink: z.string(),
-	layers: z.array(z.string()).nullish(),
+	layers: z.array(RegistryDescriptor).nullish().default([]),
 	schemaVersion: z.number(),
 	size: z.number(),
 	ownerId: z.string(),
 	user: OpenRegistryUserType.nullish(),
+	config: RegistryDescriptor,
 });
 
 export type ImageManifest = z.infer<typeof ImageManifest>;
@@ -22,14 +28,16 @@ export type ImageManifest = z.infer<typeof ImageManifest>;
 export const Repository = z.object({
 	created_at: z.coerce.date(),
 	updated_at: z.coerce.date().nullish(),
-	meta_tags: z.record(z.string(), z.unknown()).nullish(),
-	id: z.string(),
-	name: z.string(),
-	description: z.string().default(''),
-	visibility: z.enum(['Private', 'Public']),
-	owner_id: z.string(),
-	image_manifests: z.array(ImageManifest).nullish(),
+	meta_tags: z.record(z.string(), z.string()).nullish(),
 	user: OpenRegistryUserSchema.nullish(),
+	name: z.string(),
+	visibility: z.enum(['Private', 'Public']),
+	description: z.string().default(''),
+	image_manifests: z.array(ImageManifest).nullish().default([]),
+	pull_count: z.number().default(0),
+	favorite_count: z.number().default(0),
+	id: z.string(),
+	owner_id: z.string(),
 });
 
 export type Repository = z.infer<typeof Repository>;

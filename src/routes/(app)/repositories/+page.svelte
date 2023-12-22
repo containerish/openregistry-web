@@ -11,14 +11,13 @@
 	import { fly } from 'svelte/transition';
 	import { DefaultPageSize } from '$lib/constants';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+
 	export let data: PageData;
 	$: catalog = data.repositories;
-
-	const registryClient = new OpenRegistryClient(fetch, $page.url.origin);
-
+	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	const pageSize = 10;
-
 	let showCreateRepositoryModal = false;
+
 	const toggleModal = () => {
 		showCreateRepositoryModal = !showCreateRepositoryModal;
 	};
@@ -29,19 +28,15 @@
 		autoCompleteThrottled(value);
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const autoComplete = async (q: string) => {
-		let query = data.user.username;
-		const url = new URL('/api/registry/list/repositories', $page.url.origin);
-		url.searchParams.set('query', query);
-
-		const response = await fetch(url);
-		if (response.status !== 200) {
-			catalog = [];
+		let query = data.user ? data.user.username : q;
+		const response = await openRegistryClient.searchRepositories(query);
+		if (response.success) {
+			catalog = response.data.repositories;
 			return;
 		}
 
-		catalog = await response.json();
+		catalog = [];
 	};
 
 	const autoCompleteThrottled = throttle(1000, autoComplete);
@@ -51,7 +46,7 @@
 	}
 
 	const handleCreateRepositorySuccess = async () => {
-		const response = await registryClient.getUserRepositoryCatalog();
+		const response = await openRegistryClient.getUserRepositoryCatalog();
 		if (!response.error) {
 			catalog = response.repositories;
 		}
@@ -81,7 +76,7 @@
 				{#if catalog && catalog.length > 0}
 					<div class="w-full">
 						{#each catalog as repo}
-							<Repository username={data.user.username} repository={repo} compact={false} />
+							<Repository repository={repo} compact={false} />
 						{/each}
 					</div>
 					<div class="flex justify-center">

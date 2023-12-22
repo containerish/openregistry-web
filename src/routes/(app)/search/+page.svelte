@@ -16,6 +16,9 @@
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 
 	export let data: PageData;
+	$: catalog = data.catalog as RepositoryCatalog;
+
+	$: console.log('catalog: ', data);
 
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	let sortBy = 'namespace';
@@ -39,7 +42,6 @@
 	};
 
 	setContext('fetchPageData', fetchPageData);
-	$: catalog = data.catalog as RepositoryCatalog;
 
 	let showFilter = false;
 	const toggleFilter = () => {

@@ -70,7 +70,7 @@
 	const triggers = [
 		{ id: 'tab-1', title: 'General' },
 		{ id: 'tab-2', title: 'Organisation(Org Mode)' },
-		{ id: 'tab-3', title: 'Automated Builds' },
+		// { id: 'tab-3', title: 'Automated Builds', disabled: true },
 	];
 
 	const [send, receive] = crossfade({
@@ -288,9 +288,9 @@
 				<div use:melt={$content('tab-2')} class="grow bg-white p-5">
 					<OrgMode user={data.user} />
 				</div>
-				<div use:melt={$content('tab-3')} class="grow bg-white p-5 text-slate-700">
-					<Settings />
-				</div>
+				<!-- <div use:melt={$content('tab-3')} class="grow bg-white p-5 text-slate-700"> -->
+				<!-- 	<Settings /> -->
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>

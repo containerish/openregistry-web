@@ -130,7 +130,7 @@
 				<div class="w-full px-8 py-8">
 					{#if catalog.repositories && catalog.repositories.length > 0}
 						{#each catalog.repositories as repo}
-							<Repository username={data.user.username} compact={false} repository={repo} />
+							<Repository compact={false} repository={repo} />
 						{/each}
 					{:else}
 						<div

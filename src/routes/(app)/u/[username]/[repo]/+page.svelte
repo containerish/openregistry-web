@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import Tag from '$lib/tag.svelte';
-	import type { PageData } from './$types';
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import { page } from '$app/stores';
-	import type { Repository } from '$lib/types/registry';
 	import Switch from '$lib/components/switch.svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import { GetVulnerabilityReportResponse } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
@@ -14,14 +12,19 @@
 	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 	const openregistryClient = new OpenRegistryClient(fetch, $page.url.origin);
+	export let data;
+
 	let isOverview = true;
 	let isTags = false;
 	let isSetting = false;
 
-	$: repository = {
-		visibility: 'Private',
-	} as Repository;
+	$: repository = data.repository;
 	$: isPrivate = !!repository && repository.visibility === 'Private';
+	$: ns = data.namespace;
+
+	$: {
+		console.log('repository: ', data);
+	}
 
 	const toggleOverview = () => {
 		isOverview = true;
@@ -40,22 +43,6 @@
 		isTags = false;
 		isOverview = false;
 	};
-
-	export let data: PageData;
-	const ns = data.username + '/' + data.repo;
-
-	onMount(async () => {
-		const url = new URL('/api/registry/repository-detail', $page.url.origin);
-		url.searchParams.set('namespace', ns);
-
-		const response = await fetch(url);
-		const data = await response.json();
-		if (response.status !== 200) {
-			console.log('error retrieaving tags: ', data);
-			return;
-		}
-		repository = data;
-	});
 
 	let isCopied = '';
 	let timeout: ReturnType<typeof setTimeout>;
@@ -91,53 +78,57 @@
 
 	const changeRepoVisibility = async (e: CustomEvent<boolean>) => {
 		console.log('change rpeo vis: ', e.detail);
-		const response = await openregistryClient.changeRepositoryVisibility(
-			e.detail ? 'Private' : 'Public',
-			repository.id
-		);
-		if (!response.success) {
-			console.log('error change repository visibility: ', response);
-			return;
+		if (repository) {
+			const response = await openregistryClient.changeRepositoryVisibility(
+				e.detail ? 'Private' : 'Public',
+				repository.id
+			);
+			if (!response.success) {
+				console.log('error change repository visibility: ', response);
+				return;
+			}
+			repository.visibility = e.detail ? 'Private' : 'Public';
 		}
-		repository.visibility = e.detail ? 'Private' : 'Public';
 	};
 
 	let imageVulnReport: GetVulnerabilityReportResponse;
 	let isVulnReportLoading = false;
 	let vulnReportFetchErr = '';
 	const generateVulnReport = async () => {
-		if (!repository.image_manifests || repository.image_manifests.length === 0) {
-			vulnReportFetchErr =
-				'No tags found for this repository. Try pushing a container image to this repository and then try again';
-			return;
-		}
-
-		// reset error message
-		vulnReportFetchErr = '';
-		isVulnReportLoading = true;
-		let digest = repository.image_manifests ? repository.image_manifests[0].digest : '';
-		const latestRef = repository.image_manifests?.find((mf) => mf.reference === 'latest');
-		if (latestRef) {
-			digest = latestRef.digest;
-		}
-
-		const submitResponse = await openregistryClient.submitManifestForVulnScan(digest);
-		console.log('submit response:', submitResponse);
-		if (submitResponse.success) {
-			const vulnResp = await openregistryClient.getVulnReport(digest);
-			console.log('vulnResp: ', vulnResp);
-			if (vulnResp.success) {
-				imageVulnReport = vulnResp.data;
-				isVulnReportLoading = false;
+		if (repository) {
+			if (!repository.image_manifests || repository.image_manifests.length === 0) {
+				vulnReportFetchErr =
+					'No tags found for this repository. Try pushing a container image to this repository and then try again';
 				return;
 			}
 
-			vulnReportFetchErr = vulnResp.error;
+			// reset error message
+			vulnReportFetchErr = '';
+			isVulnReportLoading = true;
+			let digest = repository.image_manifests ? repository.image_manifests[0].digest : '';
+			const latestRef = repository.image_manifests?.find((mf) => mf.reference === 'latest');
+			if (latestRef) {
+				digest = latestRef.digest;
+			}
 
-			return;
+			const submitResponse = await openregistryClient.submitManifestForVulnScan(digest);
+			console.log('submit response:', submitResponse);
+			if (submitResponse.success) {
+				const vulnResp = await openregistryClient.getVulnReport(digest);
+				console.log('vulnResp: ', vulnResp);
+				if (vulnResp.success) {
+					imageVulnReport = vulnResp.data;
+					isVulnReportLoading = false;
+					return;
+				}
+
+				vulnReportFetchErr = vulnResp.error;
+
+				return;
+			}
+			vulnReportFetchErr = submitResponse.error;
+			isVulnReportLoading = false;
 		}
-		vulnReportFetchErr = submitResponse.error;
-		isVulnReportLoading = false;
 	};
 </script>
 
@@ -148,15 +139,15 @@
 		</div>
 		<div class="w-full text-slate-700 flex flex-col gap-2 justify-center">
 			<div class="flex gap-3 items-center">
-				<span class="text-3xl">{data.username}/{data.repo} </span>
-				{#if repository.visibility === 'Public'}
+				<span class="text-3xl">{data.namespace} </span>
+				{#if repository && repository.visibility === 'Public'}
 					<LockOpenIcon />
 				{:else}
 					<LockClosedIcon class="text-rose-700" />
 				{/if}
 			</div>
 
-			<span class="text-base capitalize">by {data.username}</span>
+			<span class="text-base capitalize">by {data.namespace.split('/')[0]}</span>
 		</div>
 	</div>
 
@@ -184,18 +175,20 @@
 			Tags
 		</button>
 
-		<button
-			aria-label="tab for Tags"
-			on:click={toggleSettings}
-			class="ease-in duration-300 h-10 px-4 pb-6 text-center text-primary-500 bg-transparent border-b-2
+		{#if data.user && data.authenticated}
+			<button
+				aria-label="tab for Tags"
+				on:click={toggleSettings}
+				class="ease-in duration-300 h-10 px-4 pb-6 text-center text-primary-500 bg-transparent border-b-2
 				border-transparent text-lg whitespace-nowrap cursor-base m-0 hover:border-b-primary-400
           {isSetting ? 'border-b-primary-500' : 'border-transparent'}"
-		>
-			Settings
-		</button>
+			>
+				Settings
+			</button>
+		{/if}
 	</div>
 
-	{#if !!repository}
+	{#if repository}
 		<div class="w-full py-4 flex px-3 justify-center">
 			{#if isTags}
 				<div
@@ -204,7 +197,7 @@
 				>
 					{#if repository.image_manifests}
 						{#each repository.image_manifests as manifest}
-							<Tag namespace={`${data.username}/${data.repo}`} {manifest} />
+							<Tag namespace={data.namespace} {manifest} />
 						{/each}
 					{:else}
 						<div class="px-8 py-8 flex h-full w-full justify-center items-center flex-col gap-4">
@@ -256,7 +249,7 @@
 					</div>
 				</div>
 			{/if}
-			{#if isSetting}
+			{#if isSetting && data.authenticated && data.user}
 				<div class="flex w-full justify-between flex-col items-center gap-9">
 					<div class="h-full w-full flex gap-3 items-center justify-center">
 						<button
