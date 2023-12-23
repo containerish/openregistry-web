@@ -2,7 +2,6 @@
 	import type { PageData } from './$types';
 	import Pagination from '$lib/pagination.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import { throttle } from 'throttle-debounce';
 	import { setContext } from 'svelte';
 	import { NewRepository, Repository, Loader } from '$lib/components';
 	import { navigating } from '$app/stores';
@@ -24,22 +23,14 @@
 
 	setContext('toggleModal', toggleModal);
 	const handleOnChange = async (e: Event) => {
-		const value = (e.target as HTMLInputElement).value;
-		autoCompleteThrottled(value);
-	};
-
-	const autoComplete = async (q: string) => {
-		let query = data.user ? data.user.username : q;
-		const response = await openRegistryClient.searchRepositories(query);
-		if (response.success) {
-			catalog = response.data.repositories;
+		const target = e.target as HTMLInputElement;
+		if (!target.value) {
+			catalog = data.repositories;
 			return;
 		}
 
-		catalog = [];
+		catalog = data.repositories!.filter((r) => r.name.toLowerCase().includes(target.value));
 	};
-
-	const autoCompleteThrottled = throttle(1000, autoComplete);
 
 	$: {
 		pulseStore.setPulseState(!$navigating && !!catalog);

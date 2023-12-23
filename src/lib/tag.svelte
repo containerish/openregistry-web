@@ -17,8 +17,6 @@
 	};
 
 	onDestroy(() => clearTimeout(timeout));
-
-	$: console.log('manifest to render: ', manifest);
 </script>
 
 {#if manifest}

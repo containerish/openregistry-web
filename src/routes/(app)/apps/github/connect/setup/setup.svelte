@@ -51,7 +51,6 @@
 			await storeBuildProject();
 			const err = await createPullRequest(selectedRepository.repository.name ?? '');
 			if (!err) {
-				console.log('selectedRepository: ', selectedRepository);
 				isLoading = false;
 				handleNext(2);
 				return;
@@ -79,7 +78,6 @@
 			}),
 		});
 
-		console.log('response stastuus: ', response.status);
 		switch (response.status) {
 			// notModified, which means, PR not created, which means, GHA already exists
 			case 202:
