@@ -900,4 +900,40 @@ export class OpenRegistryClient {
 			message: parsed.error.message,
 		};
 	}
+
+	async addRepositoryToFavorites(user_id: string, repository_id: string): Promise<OpenRegistryResponse<string>> {
+		const uri = this.getEndpoint('/v2/ext/repository/favorites');
+		const response = await this.fetcher(uri, {
+			method: 'POST',
+			body: JSON.stringify({
+				user_id,
+				repository_id,
+			}),
+		});
+		if (response.status !== 200) {
+			const data = await response.json();
+			return data as OpenRegistryGenericError;
+		}
+
+		return {
+			success: true,
+			data: 'Repository added to favorites list',
+		};
+	}
+
+	async removeRepositoryFromFavorites(repository_id: string): Promise<OpenRegistryResponse<string>> {
+		const uri = this.getEndpoint(`/v2/ext/repository/favorites/${repository_id}`);
+		const response = await this.fetcher(uri, {
+			method: 'DELETE',
+		});
+		if (response.status !== 200) {
+			const data = await response.json();
+			return data as OpenRegistryGenericError;
+		}
+
+		return {
+			success: true,
+			data: 'Repository removedd from favorites list',
+		};
+	}
 }

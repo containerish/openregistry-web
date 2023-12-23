@@ -7,9 +7,10 @@
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import { GetVulnerabilityReportResponse } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
 	import ExternalLink from '$lib/icons/external-link.svelte';
-	import { DownloadIcon, LockClosedIcon, LockOpenIcon, SpinnerCircle } from '$lib/icons';
+	import { DownloadIcon, LockClosedIcon, LockOpenIcon, SpinnerCircle, StarIcon } from '$lib/icons';
 	import CheckIcon from '$lib/icons/checkIcon.svelte';
 	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
+	import { writable } from 'svelte/store';
 
 	const openregistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	export let data;
@@ -21,10 +22,6 @@
 	$: repository = data.repository;
 	$: isPrivate = !!repository && repository.visibility === 'Private';
 	$: ns = data.namespace;
-
-	$: {
-		console.log('repository: ', data);
-	}
 
 	const toggleOverview = () => {
 		isOverview = true;
@@ -43,6 +40,14 @@
 		isTags = false;
 		isOverview = false;
 	};
+
+	const repositoryIdMap = writable(
+		new Map(
+			data.user?.favorite_repositories.map((r) => {
+				return [r, r];
+			})
+		)
+	);
 
 	let isCopied = '';
 	let timeout: ReturnType<typeof setTimeout>;
@@ -77,7 +82,6 @@
 	};
 
 	const changeRepoVisibility = async (e: CustomEvent<boolean>) => {
-		console.log('change rpeo vis: ', e.detail);
 		if (repository) {
 			const response = await openregistryClient.changeRepositoryVisibility(
 				e.detail ? 'Private' : 'Public',
@@ -112,7 +116,6 @@
 			}
 
 			const submitResponse = await openregistryClient.submitManifestForVulnScan(digest);
-			console.log('submit response:', submitResponse);
 			if (submitResponse.success) {
 				const vulnResp = await openregistryClient.getVulnReport(digest);
 				console.log('vulnResp: ', vulnResp);
@@ -130,6 +133,22 @@
 			isVulnReportLoading = false;
 		}
 	};
+
+	let isStarLoading = false;
+	const toggleRepositoryFavorite = async () => {
+		isStarLoading = true;
+		if ($repositoryIdMap.has(repository!.id)) {
+			await openregistryClient.removeRepositoryFromFavorites(repository!.id);
+			$repositoryIdMap.delete(repository!.id);
+			$repositoryIdMap = $repositoryIdMap;
+			isStarLoading = false;
+			return;
+		}
+		await openregistryClient.addRepositoryToFavorites(data.user!.id, repository!.id);
+		isStarLoading = false;
+		$repositoryIdMap.set(repository!.id, repository!.id);
+		$repositoryIdMap = $repositoryIdMap;
+	};
 </script>
 
 <div class="w-full max-w-[2000px] flex flex-col mx-2 py-4">
@@ -141,10 +160,23 @@
 			<div class="flex gap-3 items-center">
 				<span class="text-3xl">{data.namespace} </span>
 				{#if repository && repository.visibility === 'Public'}
-					<LockOpenIcon />
+					<LockOpenIcon class="text-primary-400" />
 				{:else}
 					<LockClosedIcon class="text-rose-700" />
 				{/if}
+
+				<button
+					on:click={toggleRepositoryFavorite}
+					class="flex items-center justify-center rounded-full p-1 hover:bg-primary-100"
+				>
+					{#if isStarLoading}
+						<SpinnerCircle class="h-6 w-6 text-primary-400" />
+					{:else if $repositoryIdMap.has(repository?.id)}
+						<StarIcon class="fill-primary-400/50 w-6 h-6" />
+					{:else}
+						<StarIcon class="text-primary-400 w-6 h-6" />
+					{/if}
+				</button>
 			</div>
 
 			<span class="text-base capitalize">by {data.namespace.split('/')[0]}</span>
@@ -175,7 +207,7 @@
 			Tags
 		</button>
 
-		{#if data.user && data.authenticated}
+		{#if data.user && data.namespace.split('/')[0] === data.user?.username}
 			<button
 				aria-label="tab for Tags"
 				on:click={toggleSettings}
@@ -249,7 +281,7 @@
 					</div>
 				</div>
 			{/if}
-			{#if isSetting && data.authenticated && data.user}
+			{#if isSetting && data.namespace.split('/')[0] === data.user?.username}
 				<div class="flex w-full justify-between flex-col items-center gap-9">
 					<div class="h-full w-full flex gap-3 items-center justify-center">
 						<button
@@ -267,7 +299,7 @@
 									<DownloadIcon class="text-primary-400 w-6 h-6" />
 								{/if}
 							</div>
-							<p class="text-sm text-slate-500 antialiased max-w-md">
+							<p class="text-sm text-slate-500 text-left antialiased max-w-md">
 								Generate a one-time vulnerability report for your container image. This report will give
 								you vulnerable layers and affected packages.
 							</p>
@@ -292,7 +324,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="w-11/12 self-center flex-col h-full flex gap-4">
+					<div class="w-full mx-3 px-6 self-center flex-col h-full flex gap-4">
 						<div class="flex gap-3 text-slate-500 items-center">
 							<span class="text-lg font-semibold"> Vulnerability Report </span>
 						</div>
