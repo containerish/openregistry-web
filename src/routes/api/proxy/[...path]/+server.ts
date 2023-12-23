@@ -16,7 +16,8 @@ export const POST: RequestHandler = async ({ request, fetch, url, cookies }) => 
         method: 'POST',
         body: JSON.stringify(await request.json()),
         headers: {
-            Authorization: 'Bearer ' + cookies.get('access_token'),
+            'Authorization': 'Bearer ' + cookies.get('access_token'),
+            'Content-Type': 'application/json',
         },
     });
 
@@ -46,7 +47,8 @@ export const PATCH: RequestHandler = async ({ request, url, cookies }) => {
         method: 'PATCH',
         body: JSON.stringify(await request.json()),
         headers: {
-            Authorization: 'Bearer ' + cookies.get('access_token'),
+            'Authorization': 'Bearer ' + cookies.get('access_token'),
+            'Content-Type': 'application/json',
         },
     });
 
@@ -71,8 +73,6 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
             uri.searchParams.set(key, value);
         }
     }
-    console.log('GET PROXY - uri - ', uri.toString());
-    console.log('GET PROXY - og uri - ', url.toString());
 
     const resp = await fetch(uri, {
         headers: {
