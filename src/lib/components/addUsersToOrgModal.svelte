@@ -11,6 +11,7 @@
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import type { ListItem } from '$lib/types/components';
 	import type { AddUserToOrgRequest, OpenRegistryUserType } from '$lib/types';
+	import { createEventDispatcher } from 'svelte';
 
 	export let openRegistryClient: OpenRegistryClient;
 	export let orgOwner: OpenRegistryUserType;
@@ -108,12 +109,16 @@
 		addUsersToOrgRequest.users[userIndex] = userPerm;
 	};
 
+	const dispatch = createEventDispatcher();
+
 	let isAddUsersLoading = false;
 	const confirmAddUsersToOrg = async () => {
 		isAddUsersLoading = true;
 		const response = await openRegistryClient.addUsersToOrg(addUsersToOrgRequest);
 		console.log('response:', response);
 		isAddUsersLoading = false;
+		dispatch('user_add', true);
+		$open = false;
 	};
 </script>
 

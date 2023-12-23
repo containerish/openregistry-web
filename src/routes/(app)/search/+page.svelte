@@ -14,11 +14,11 @@
 	import AdvanceFilters from '$lib/components/advanceFilters.svelte';
 	import { createPopover, melt } from '@melt-ui/svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import Textfield from '$lib/textfield.svelte';
+	import { throttle } from 'throttle-debounce';
 
 	export let data: PageData;
 	$: catalog = data.catalog as RepositoryCatalog;
-
-	$: console.log('catalog: ', data);
 
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	let sortBy = 'namespace';
@@ -64,6 +64,39 @@
 	} = createPopover({
 		forceVisible: true,
 	});
+
+	const handleOnChange = async (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		autoCompleteThrottled(target.value);
+	};
+
+	const autoComplete = async (q: string) => {
+		if (!q) {
+			console.log('query: ', q);
+			const response = await openRegistryClient.getUserRepositoryCatalog();
+			console.log('response: ', response);
+			catalog = {
+				total: response.total,
+				repositories: response.repositories,
+			};
+			return;
+		}
+		const response = await openRegistryClient.searchRepositories(q);
+		if (response.success) {
+			catalog = {
+				total: response.data.total,
+				repositories: response.data.repositories,
+			};
+			return;
+		}
+
+		catalog = {
+			total: 0,
+			repositories: [],
+		};
+	};
+
+	const autoCompleteThrottled = throttle(350, autoComplete);
 </script>
 
 <svelte:head>
@@ -90,6 +123,9 @@
 						<span class="">Sort</span>
 					</button>
 
+					<div class="w-4/5 lg:w-3/5">
+						<Textfield on:input={handleOnChange} placeholder="Search Repositories" />
+					</div>
 					{#if $open}
 						<div use:melt={$content} transition:fade={{ duration: 100 }} class="content">
 							<div use:melt={$arrow} />
@@ -129,7 +165,7 @@
 					{/if}
 					<!-- advance filters -->
 					<ButtonOutlined class="gap-2" on:click={toggleFilter}>
-						Advance Filter
+						Filters
 						<FilterIcon />
 					</ButtonOutlined>
 				</div>

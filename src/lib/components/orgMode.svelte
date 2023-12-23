@@ -21,6 +21,11 @@
 	const convertUserToOrg = async () => {
 		isConvertOrgLoading = true;
 		const response = await openRegistryClient.convertAccountToOrg(user.id);
+		if (response.success) {
+			user.is_org_owner = true;
+			user.user_type = 'organization';
+		}
+
 		isConvertOrgLoading = false;
 	};
 
@@ -92,6 +97,26 @@
 			updateUserPermissionsRequest.is_admin = e.detail;
 		}
 	};
+
+	const refershOrgList = async (e: CustomEvent) => {
+		await listOrgUsers();
+	};
+
+	let isFiltered = false;
+	const filterOrgMembers = async (e: Event) => {
+		isFiltered = true;
+		const target = e.target as HTMLInputElement;
+
+		if (!target.value) {
+			isFiltered = false;
+			await listOrgUsers();
+			return;
+		}
+
+		orgUsers = orgUsers.filter((o) => {
+			return o.user.username.includes(target.value);
+		});
+	};
 </script>
 
 <div class="flex flex-col gap-3 h-full w-full">
@@ -120,22 +145,19 @@
 	{:else if user.user_type === 'organization'}
 		<!-- lsit of users with their roles in your organisation -->
 		<div class="flex w-full justify-center items-center h-full flex-col gap-2">
-			{#if orgUsers.length > 0}
-				<div class="flex justify-between py-2 w-11/12">
-					<div class="flex items-center gap-3 w-3/5 relative">
-						<Textfield class="px-9 -ml-6" />
-						<ButtonOutlined>Search</ButtonOutlined>
-						<SearchIcon class="square-5 text-slate-500 absolute left-4" />
-					</div>
-					<!-- <ButtonSolid class=""> -->
-					<!-- 	Add User -->
-					<!-- 	<UserPlusIcon /> -->
-					<!-- </ButtonSolid> -->
-					<AddUsersToOrgModal orgOwner={user} {openRegistryClient} />
+			<div class="flex justify-between py-2 w-11/12">
+				<div class="flex items-center gap-3 w-3/5 relative">
+					<Textfield placeholder="Search org members" on:input={filterOrgMembers} class="px-9 -ml-6" />
+					<SearchIcon class="square-5 text-slate-500 absolute left-4" />
 				</div>
-			{/if}
+				<!-- <ButtonSolid class=""> -->
+				<!-- 	Add User -->
+				<!-- 	<UserPlusIcon /> -->
+				<!-- </ButtonSolid> -->
+				<AddUsersToOrgModal on:user_add={refershOrgList} orgOwner={user} {openRegistryClient} />
+			</div>
 
-			{#if !orgUsers || orgUsers.length === 0}
+			{#if (!orgUsers || orgUsers.length === 0) && !isFiltered}
 				<div class="w-full h-full min-h-[800px] flex justify-center items-center">
 					<div
 						class="flex flex-col justify-center items-center gap-3 bg-primary-100/30 p-9 rounded border border-primary-200/50"
@@ -154,7 +176,16 @@
 							Please note that once you have converted into an Org, you cannot revert the change to become
 							a user again
 						</p>
-						<AddUsersToOrgModal orgOwner={user} {openRegistryClient} />
+						<AddUsersToOrgModal on:user_add={refershOrgList} orgOwner={user} {openRegistryClient} />
+					</div>
+				</div>
+			{:else if isFiltered && orgUsers.length === 0}
+				<div class="flex justify-center w-11/12 items-center">
+					<div
+						class="bg-primary-50/50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
+							flex justify-center items-center"
+					>
+						<span class="text-slate-500 text-2xl"> No users found </span>
 					</div>
 				</div>
 			{:else}
@@ -251,5 +282,5 @@
 				{/each}
 			{/if}
 		</div>
-	{:else}{/if}
+	{/if}
 </div>
