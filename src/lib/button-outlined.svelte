@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let isLoading = false;
 	export let disabled = false;
-	export let type: 'submit' | 'button' | 'reset' = 'submit';
+	export let type: 'submit' | 'button' | 'reset' | null | undefined = 'button';
 	import { twMerge } from 'tailwind-merge';
 </script>
 

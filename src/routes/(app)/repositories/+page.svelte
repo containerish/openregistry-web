@@ -50,7 +50,7 @@
 
 <Loader>
 	<div class="flex justify-start items-start w-full h-full min-w-max min-h-max py-8">
-		<div class="w-full flex flex-col my-8 max-w-[850px] px-9 lg:px-16">
+		<div class="w-full flex flex-col my-8 max-w-[950px] px-9 lg:px-16">
 			<div class="flex flex-col lg:flex-row gap-4 px-2 justify-between">
 				<div class="w-4/5 lg:w-3/5">
 					<Textfield on:input={handleOnChange} placeholder="Search Repositories" />

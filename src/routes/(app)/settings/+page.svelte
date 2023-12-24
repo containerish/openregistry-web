@@ -98,9 +98,11 @@
 						{data.user.username}
 					</span>
 					<div class="flex justify-center gap-6">
-						<div class="flex items-center">
+						<div class="flex items-center gap-1">
 							<ProfileIcon class="h-4 w-4 text-slate-500 fill-current" />
-							<span class="text-sm text-slate-500">Community User</span>
+							<span class="text-sm text-slate-500"
+								>{data.user.is_org_owner ? 'Organization' : 'User'}</span
+							>
 						</div>
 						<span class="text-sm text-slate-600">
 							Joined

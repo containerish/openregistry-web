@@ -111,7 +111,7 @@
 				? 'justify-start'
 				: 'justify-center'} flex items-start w-full h-full max-w-[3000px] my-8"
 		>
-			<div class="flex flex-col w-full my-8 items-start max-w-[850px] px-9 lg:px-16">
+			<div class="flex flex-col w-full my-8 items-start max-w-[950px] px-9 lg:px-16">
 				<div class="flex flex-row gap-10 justify-between items-center w-full pb-2 m-2">
 					<button
 						type="button"
