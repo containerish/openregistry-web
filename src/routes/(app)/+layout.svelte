@@ -5,8 +5,10 @@
 	import { Sidebar } from '$lib/components';
 	import type { LayoutData } from './$types';
 	import { browser } from '$app/environment';
+	import { initializeOpenRegistryClients } from '$lib/clients';
 	export let data: LayoutData;
 
+	initializeOpenRegistryClients(fetch);
 	let height = '';
 	if (browser) {
 		height = 'min-h-[' + window.screen.height + 'px]';

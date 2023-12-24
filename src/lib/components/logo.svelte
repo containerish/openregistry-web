@@ -6,7 +6,7 @@
 
 	onMount(() => {
 		gsap.set('.dark', { transformOrigin: '50% 50%' });
-		gsap.to('.dark', { duration: 1, rotation: 360, ease:backInOut });
+		gsap.to('.dark', { duration: 1, rotation: 360, ease: backInOut });
 	});
 </script>
 

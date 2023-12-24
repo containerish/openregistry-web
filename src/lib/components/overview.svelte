@@ -20,8 +20,8 @@
 				delay: 1,
 				ease: backInOut,
 				scrollTrigger: {
-					trigger: '.overview'
-				}
+					trigger: '.overview',
+				},
 			}
 		);
 
@@ -35,8 +35,8 @@
 				delay: 1,
 				ease: backInOut,
 				scrollTrigger: {
-					trigger: '.collab'
-				}
+					trigger: '.collab',
+				},
 			}
 		);
 
@@ -51,26 +51,24 @@
 				ease: backInOut,
 				scrollTrigger: {
 					trigger: '.webthree',
-				}
+				},
 			}
 		);
 
-		let mm = gsap.matchMedia()
+		let mm = gsap.matchMedia();
 		mm.add('(max-width: 500px)', () => {
 			gsap.fromTo(
 				'.overview, .collab, .webthree',
-				{duration: 0.5, opacity: 0, x: -3},
-				{duration: 0.5, opacity: 1, x: 0}
-			)
-		})
+				{ duration: 0.5, opacity: 0, x: -3 },
+				{ duration: 0.5, opacity: 1, x: 0 }
+			);
+		});
 	});
 </script>
 
 <Card id="overview" class="bg-primary-50/50 py-12">
 	<div class="w-full h-full flex flex-col gap-20 max-w-[1500px]">
-		<div
-			class="px-6 md:px-9 w-full flex justify-between gap-6 items-center flex-col md:flex-row my-3"
-		>
+		<div class="px-6 md:px-9 w-full flex justify-between gap-6 items-center flex-col md:flex-row my-3">
 			<div class="w-80 md:w-fit max-w-xl">
 				<picture>
 					<img src="overview.svg" alt="Operations" width="600px" />
@@ -81,10 +79,10 @@
 					Overview
 				</span>
 				<p class="lg:text-lg text-slate-700">
-					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution
-					Specification and has received an official certification from OCI. This means there is no
-					difference in operations of OpenRegistry than any other popular container registries like
-					GHCR or Dockerhub. The best part is, OpenRegistry is decentralised since it uses
+					OpenRegistry is fully compliant with OCI(Open Container Initiative) Distribution Specification and
+					has received an official certification from OCI. This means there is no difference in operations of
+					OpenRegistry than any other popular container registries like GHCR or Dockerhub. The best part is,
+					OpenRegistry is decentralised since it uses
 					<a
 						class="text-rose-700 font-semibold"
 						href="https://akash.network/"
@@ -94,12 +92,7 @@
 						Akash Network
 					</a>
 					as it's compute layer and
-					<a
-						class="text-cyan-600 font-semibold"
-						href="https://ipfs.tech/"
-						target="_blank"
-						rel="noreferrer"
-					>
+					<a class="text-cyan-600 font-semibold" href="https://ipfs.tech/" target="_blank" rel="noreferrer">
 						IPFS
 					</a> for storage
 				</p>
@@ -125,10 +118,9 @@
 					Collaborations
 				</span>
 				<p class="lg:text-lg text-slate-700">
-					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to
-					use. We are open to collaborations with projects that share similar vision and can be
-					integrated together to serve larger audience. Simply contribute to OpenRegistry by helping
-					with one of the
+					Want to Collaborate? It's super easy with OpenRegistry. Our code is OpenSource and free to use. We
+					are open to collaborations with projects that share similar vision and can be integrated together to
+					serve larger audience. Simply contribute to OpenRegistry by helping with one of the
 					<a
 						class="font-semibold capitalize"
 						href="https://github.com/containerish/OpenRegistry/issues"
@@ -176,10 +168,9 @@
 				</span>
 
 				<p class="lg:text-lg text-slate-700">
-					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and
-					richness of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We
-					at OpenRegistry believe in dWorld full of dApps. With our initiative, we want to make
-					OpenRegistry free for everyone
+					Web 3.0 is the internet's layer of trust. It offers the decentralisation from web 1.0 and richness
+					of web 2.0. It's Trustless, Self-Governing, Distributed and many more things. We at OpenRegistry
+					believe in dWorld full of dApps. With our initiative, we want to make OpenRegistry free for everyone
 				</p>
 				<div class="flex pt-2 cursor-pointer">
 					<a

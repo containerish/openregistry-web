@@ -22,7 +22,7 @@
 		</div>
 		<div class="absolute opacity-0 group-hover:opacity-100">
 			<div class="text-center">
-                <ButtonSolid type="button" on:click={() => window.open(link)}>Learn More</ButtonSolid>
+				<ButtonSolid type="button" on:click={() => window.open(link)}>Learn More</ButtonSolid>
 			</div>
 		</div>
 	</div>

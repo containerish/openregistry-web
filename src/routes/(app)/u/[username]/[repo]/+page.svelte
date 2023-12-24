@@ -11,7 +11,9 @@
 	import CheckIcon from '$lib/icons/checkIcon.svelte';
 	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 	import { writable } from 'svelte/store';
+	import { getVulnerabilityScanningClient } from '$lib/clients.js';
 
+	const vulnScanningClient = getVulnerabilityScanningClient();
 	const openregistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	export let data;
 
@@ -115,22 +117,29 @@
 				digest = latestRef.digest;
 			}
 
-			const submitResponse = await openregistryClient.submitManifestForVulnScan(digest);
-			if (submitResponse.success) {
-				const vulnResp = await openregistryClient.getVulnReport(digest);
-				console.log('vulnResp: ', vulnResp);
-				if (vulnResp.success) {
-					imageVulnReport = vulnResp.data;
-					isVulnReportLoading = false;
-					return;
+			try {
+				const submitResponse = await vulnScanningClient.submitManifestToScan({
+					hash: digest,
+				});
+				if (submitResponse.success) {
+					const vulnResp = await vulnScanningClient.getVulnerabilityReport({
+						manifestId: digest,
+					});
+					if (vulnResp.success) {
+						imageVulnReport = vulnResp;
+					} else {
+						vulnReportFetchErr = vulnResp.err;
+					}
+				}
+			} catch (err) {
+				vulnReportFetchErr = (err as Error).message;
+			} finally {
+				if (!vulnReportFetchErr && !imageVulnReport) {
+					vulnReportFetchErr = 'Report generation is taking longer than usual. Please try again later.';
 				}
 
-				vulnReportFetchErr = vulnResp.error;
-
-				return;
+				isVulnReportLoading = false;
 			}
-			vulnReportFetchErr = submitResponse.error;
-			isVulnReportLoading = false;
 		}
 	};
 

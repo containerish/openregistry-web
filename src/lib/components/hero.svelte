@@ -46,17 +46,15 @@
 			<img alt="hero svg" class="w-full" src="./hero-big.png" />
 		</picture>
 
-		<div
-			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-full px-6 md:px-16"
-		>
+		<div class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-full px-6 md:px-16">
 			<span class="text-3xl font-semibold md:text-4xl md:font-bold 2xl:text-6xl">
 				A Decentralised Container Registry
 			</span>
 
 			<p class="mt-5 break-words text-base text-slate-700 lg:text-lg">
-				OpenRegistry is an open source container registry developed for people by people. Backed by
-				amazing distributed communities, OpenRegistry offers all the features of a container
-				registry along with awesome additions like automated build system
+				OpenRegistry is an open source container registry developed for people by people. Backed by amazing
+				distributed communities, OpenRegistry offers all the features of a container registry along with awesome
+				additions like automated build system
 			</p>
 		</div>
 
@@ -85,12 +83,10 @@
 		</div>
 
 		<div class="flex flex-col justify-center items-center gap-9 py-10">
-			<div
-				class="browse flex flex-col items-center justify-center text-center text-base text-slate-600 px-9"
-			>
+			<div class="browse flex flex-col items-center justify-center text-center text-base text-slate-600 px-9">
 				<span>
-					Browse, Pull, Push and Share 100s of container images by open source projects, software
-					vendors and communities.
+					Browse, Pull, Push and Share 100s of container images by open source projects, software vendors and
+					communities.
 				</span>
 			</div>
 
