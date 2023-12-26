@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>About|Open Registry</title>
+	<title>About | OpenRegistry</title>
 </svelte:head>
 
 <div class="flex flex-col xl:flex-row bg-primary-50/30 justify-center items-center">

@@ -117,3 +117,6 @@ import EmailIcon from './email.svelte';
 import MenuIcon from './three-lines.svelte';
 import Check from './check.svelte';
 import ToolsIcon from './tools.svelte';
+
+export * as DeleteIcon from './DeleteIcon.svelte';
+

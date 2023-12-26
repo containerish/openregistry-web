@@ -121,7 +121,7 @@
 
 <div class="flex flex-col gap-3 h-full w-full">
 	{#if user.user_type === 'user'}
-		<div class="w-full h-full min-h-[1000px] flex justify-center items-center">
+		<div class="w-full h-full min-h-[850px] flex justify-center items-center">
 			<div
 				class="flex flex-col justify-center items-center gap-3 bg-primary-100/30 p-9 rounded border border-primary-200/50"
 			>
@@ -150,10 +150,6 @@
 					<Textfield placeholder="Search org members" on:input={filterOrgMembers} class="px-9 -ml-6" />
 					<SearchIcon class="square-5 text-slate-500 absolute left-4" />
 				</div>
-				<!-- <ButtonSolid class=""> -->
-				<!-- 	Add User -->
-				<!-- 	<UserPlusIcon /> -->
-				<!-- </ButtonSolid> -->
 				<AddUsersToOrgModal on:user_add={refershOrgList} orgOwner={user} {openRegistryClient} />
 			</div>
 

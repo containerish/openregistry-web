@@ -13,11 +13,13 @@
 	import posthog from 'posthog-js';
 	import { browser } from '$app/environment';
 	import { cubicInOut } from 'svelte/easing';
-	import Settings from '../projects/[project_id]/settings.svelte';
 	import OrgMode from '$lib/components/orgMode.svelte';
+	import PersonalAccessTokenList from '$lib/components/PersonalAccessTokenList.svelte';
+	import { OpenRegistryClient } from '$lib/client/openregistry';
 
 	export let data: PageData;
 
+	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	let currentPassword = field('current_password', '', [required(), min(8), max(48)]);
 	let newPassword = field('new_password', '', [required(), min(8), max(48)]);
 	let confirmPassword = field('confirm_password', '', [required(), matchField(newPassword)]);
@@ -64,13 +66,14 @@
 		elements: { root, list, content, trigger },
 		states: { value },
 	} = createTabs({
-		defaultValue: 'tab-1',
+		defaultValue: 'general',
 	});
 
 	const triggers = [
-		{ id: 'tab-1', title: 'General' },
-		{ id: 'tab-2', title: 'Organisation(Org Mode)' },
-		// { id: 'tab-3', title: 'Automated Builds', disabled: true },
+		{ id: 'general', title: 'General' },
+		{ id: 'org_mode', title: 'Organisation(Org Mode)' },
+		{ id: 'pat', title: 'Personal Access Tokens (PAT)' },
+		// { id: 'automated_builds', title: 'Automated Builds', disabled: true },
 	];
 
 	const [send, receive] = crossfade({
@@ -80,7 +83,7 @@
 </script>
 
 <svelte:head>
-	<title>User|Open Registry</title>
+	<title>Settings | OpenRegistry</title>
 </svelte:head>
 
 {#if data.user}
@@ -139,7 +142,7 @@
 						</button>
 					{/each}
 				</div>
-				<div use:melt={$content('tab-1')} class="grow bg-white p-5">
+				<div use:melt={$content('general')} class="grow bg-white p-5">
 					<div
 						class="flex w-full lg:w-4/5 max-w-[1200px] flex-col items-start justify-start gap-10 p-9"
 						in:fly={{ y: 200, duration: 300 }}
@@ -256,6 +259,7 @@
 							<ButtonSolid class="mt-6" disabled>Save</ButtonSolid>
 						</div>
 					</div>
+					<div class="h-px w-full bg-slate-200 rounded"></div>
 
 					{#if dynamic_features.feature_delete_account}
 						<div class="h-px w-full bg-slate-200 rounded"></div>
@@ -287,10 +291,13 @@
 					{/if}
 				</div>
 
-				<div use:melt={$content('tab-2')} class="grow bg-white p-5">
+				<div use:melt={$content('org_mode')} class="grow bg-white p-5">
 					<OrgMode user={data.user} />
 				</div>
-				<!-- <div use:melt={$content('tab-3')} class="grow bg-white p-5 text-slate-700"> -->
+				<div use:melt={$content('pat')} class="grow bg-white p-5">
+					<PersonalAccessTokenList {openRegistryClient} />
+				</div>
+				<!-- <div use:melt={$content('automated_builds')} class="grow bg-white p-5 text-slate-700"> -->
 				<!-- 	<Settings /> -->
 				<!-- </div> -->
 			</div>

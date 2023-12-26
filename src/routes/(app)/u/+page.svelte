@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-	<title>User | Open Registry</title>
+	<title>User | OpenRegistry</title>
 </svelte:head>
 
 {#if data.user}

@@ -1,4 +1,5 @@
 import {
+	AuthTokenList as AuthTokenListSchema,
 	ForgotPasswordSchema,
 	OpenRegistryUserSchema,
 	ResetPasswordSchema,
@@ -29,7 +30,7 @@ import type {
 import { fail, error } from '@sveltejs/kit';
 import type { Cookies } from '@sveltejs/kit';
 import { ZodError } from 'zod';
-import type { OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
+import type { AuthTokenList, OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
 import { Repository, RepositoryCatalog, type RepositoryCatalogResponse } from '$lib/types/registry';
 import { SearchRepositoryResponse, type CreateReposioryRequest, type RegistryAPIError } from '$lib/types/registry';
 import {
@@ -39,15 +40,15 @@ import {
 import type { AddUserToOrgRequest, UpdateUserPermissionsRequest } from '$lib/types/permissions';
 import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
-type OpenRegistryGenericError = {
+export type OpenRegistryGenericError = {
 	message: string;
 	error: string;
 	success: false;
 };
 
-type OpenRegistryResponse<Output> = OpenRegistrySuccessResponse<Output> | OpenRegistryGenericError;
+export type OpenRegistryResponse<Output> = OpenRegistrySuccessResponse<Output> | OpenRegistryGenericError;
 
-type OpenRegistrySuccessResponse<T> = {
+export type OpenRegistrySuccessResponse<T> = {
 	success: true;
 	data: T;
 };
@@ -934,6 +935,51 @@ export class OpenRegistryClient {
 		return {
 			success: true,
 			data: 'Repository removedd from favorites list',
+		};
+	}
+
+	async generateAuthToken(name: string, expires_at?: Date): Promise<OpenRegistryResponse<{ token: string }>> {
+		const uri = this.getEndpoint(`/api/users/token`);
+		const response = await this.fetcher(uri, {
+			method: 'POST',
+			body: JSON.stringify({
+				name,
+				expires_at: expires_at ? expires_at.toISOString() : null,
+			}),
+		});
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			return data as OpenRegistryGenericError;
+		}
+
+		return {
+			success: true,
+			data: data as { token: string },
+		};
+	}
+
+	async listAuthToken(): Promise<OpenRegistryResponse<AuthTokenList>> {
+		const uri = this.getEndpoint(`/api/users/token`);
+		const response = await this.fetcher(uri);
+
+		const data = await response.json();
+		if (response.status !== 200) {
+			return data as OpenRegistryGenericError;
+		}
+
+		const parsed = AuthTokenListSchema.safeParse(data);
+		if (parsed.success) {
+			return {
+				success: true,
+				data: parsed.data,
+			};
+		}
+
+		return {
+			success: false,
+			error: parsed.error.toString(),
+			message: parsed.error.message,
 		};
 	}
 }
