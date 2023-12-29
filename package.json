@@ -77,7 +77,7 @@
 	},
 	"dependencies": {
 		"@buf/containerish_openregistry.bufbuild_connect-es": "0.9.0-20231213043106-8f1c3791d49d.1",
-		"@buf/containerish_openregistry.bufbuild_connect-web": "0.8.6-20231015100817-c91fff96b58a.1",
+		"@buf/containerish_openregistry.bufbuild_connect-web": "0.8.6-20231217153936-3ce39122fce2.1",
 		"@bufbuild/connect": "^0.9.0",
 		"@bufbuild/connect-web": "^0.9.0",
 		"@bufbuild/protobuf": "^1.2.0",
