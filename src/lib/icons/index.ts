@@ -119,4 +119,5 @@ import Check from './check.svelte';
 import ToolsIcon from './tools.svelte';
 
 export * as DeleteIcon from './DeleteIcon.svelte';
+export * as KeyIcon from './KeyIcon.svelte';
 

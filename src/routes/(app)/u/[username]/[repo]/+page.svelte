@@ -45,9 +45,11 @@
 
 	const repositoryIdMap = writable(
 		new Map(
-			data.user?.favorite_repositories.map((r) => {
-				return [r, r];
-			})
+			data.user && data.user.favorite_repositories
+				? data.user.favorite_repositories.map((r) => {
+						return [r, r];
+					})
+				: []
 		)
 	);
 

@@ -42,6 +42,9 @@ export const Repository = z.object({
 
 export type Repository = z.infer<typeof Repository>;
 
+export const RepositoryList = z.array(Repository);
+export type RepositoryList = z.infer<typeof RepositoryList>;
+
 export const RepositoryCatalog = z.object({
 	repositories: z.array(Repository).nullish().default([]),
 	total: z.number(),

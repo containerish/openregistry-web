@@ -6,19 +6,21 @@ import cloudflareAdapter from '@sveltejs/adapter-cloudflare';
 
 /** @type {import('@sveltejs/kit').Config}*/
 const config = {
-    preprocess: sequence([vitePreprocess(), preprocessMeltUI()]),
-    kit: {
-        adapter: getAdapter(),
-        alias: {
-            $apis: 'src/apis',
-            $stores: 'src/stores',
-        },
-    },
+	preprocess: sequence([vitePreprocess(), preprocessMeltUI()]),
+	kit: {
+		adapter: getAdapter(),
+		alias: {
+			$apis: 'src/apis',
+			$stores: 'src/stores',
+		},
+	},
 };
+
 function getAdapter() {
-    if (process.env.PUBLIC_OPEN_REGISTRY_ENVIRONMENT === 'cloudflare') {
-        return cloudflareAdapter();
-    }
-    return autoAdapter();
+	if (process.env.PUBLIC_OPEN_REGISTRY_ENVIRONMENT === 'cloudflare' || process.env.CF_PAGES) {
+		return cloudflareAdapter();
+	}
+	return autoAdapter();
 }
+
 export default config;

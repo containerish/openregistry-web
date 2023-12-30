@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ProfileIcon } from '$lib/icons';
+	import { ProfileIcon, UserGroupIcon } from '$lib/icons';
 	import { crossfade, fly } from 'svelte/transition';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { createTabs, melt } from '@melt-ui/svelte';
@@ -132,6 +132,7 @@
 							class="trigger cursor-pointer flex justify-center items-center relative"
 						>
 							{triggerItem.title}
+
 							{#if $value === triggerItem.id}
 								<div
 									in:send={{ key: 'trigger' }}

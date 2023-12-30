@@ -15,107 +15,107 @@ import { OpenRegistryAutomationClient } from '$lib/server/automation/automation'
 import posthog from 'posthog-js';
 
 export const authenticationHandler: Handle = async ({ event, resolve }) => {
-    const { cookies, locals, url } = event;
+	const { cookies, locals, url } = event;
 
-    const sessionId = cookies.get('session_id');
-    if (sessionId && (!locals.user || !locals.authenticated)) {
-        const user = await locals.openRegistry.getUserBySession(sessionId);
-        if (user) {
-            session.setUser(user);
-            session.setIsAuthenticated(true);
-            locals.user = user;
-            locals.authenticated = true;
-            locals.sessionId = sessionId;
-        }
-    }
-    if (url.pathname === '/search' && !locals.user) {
-        return await resolve(event);
-    }
+	const sessionId = cookies.get('session_id');
+	if (sessionId && (!locals.user || !locals.authenticated)) {
+		const user = await locals.openRegistry.getUserBySession(sessionId);
+		if (user) {
+			session.setUser(user);
+			session.setIsAuthenticated(true);
+			locals.user = user;
+			locals.authenticated = true;
+			locals.sessionId = sessionId;
+		}
+	}
+	if (url.pathname === '/search' && !locals.user) {
+		return await resolve(event);
+	}
 
-    if (isProtectedRoute(url.pathname) && !locals.user) {
-        event.cookies.getAll().forEach((c) => {
-            event.cookies.delete(c.name, {
-                path: '/',
-            });
-        });
-        redirect(303, '/');
-    }
+	if (isProtectedRoute(url.pathname) && !locals.user) {
+		event.cookies.getAll().forEach((c) => {
+			event.cookies.delete(c.name, {
+				path: '/',
+			});
+		});
+		redirect(303, '/');
+	}
 
-    return await resolve(event);
+	return await resolve(event);
 };
 
 export const createProtobufClient: Handle = async ({ event, resolve }) => {
-    const transport = createConnectTransport({
-        baseUrl: OPEN_REGISTRY_BACKEND_PROTOBUF_URL,
-        interceptors: [setCookies(event.cookies)],
-    });
+	const transport = createConnectTransport({
+		baseUrl: OPEN_REGISTRY_BACKEND_PROTOBUF_URL,
+		interceptors: [setCookies(event.cookies)],
+	});
 
-    const clairTransport = createConnectTransport({
-        baseUrl: OPEN_REGISTRY_BACKEND_CLAIR_URL,
-        interceptors: [setCookies(event.cookies)],
-    });
+	const clairTransport = createConnectTransport({
+		baseUrl: OPEN_REGISTRY_BACKEND_CLAIR_URL,
+		interceptors: [setCookies(event.cookies)],
+	});
 
-    // set transports
-    event.locals.transport = transport;
-    event.locals.clairTransport = clairTransport;
+	// set transports
+	event.locals.transport = transport;
+	event.locals.clairTransport = clairTransport;
 
-    // set clients
-    event.locals.ghBuildClient = createPromiseClient(GithubActionsBuildService, transport);
-    event.locals.ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
-    event.locals.ghProjectsClient = createPromiseClient(GitHubActionsProjectService, transport);
-    event.locals.vulnScanningClient = createPromiseClient(ClairService, clairTransport);
-    event.locals.automationClient = new OpenRegistryAutomationClient(event.locals, event.fetch);
+	// set clients
+	event.locals.ghBuildClient = createPromiseClient(GithubActionsBuildService, transport);
+	event.locals.ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
+	event.locals.ghProjectsClient = createPromiseClient(GitHubActionsProjectService, transport);
+	event.locals.vulnScanningClient = createPromiseClient(ClairService, clairTransport);
+	event.locals.automationClient = new OpenRegistryAutomationClient(event.locals, event.fetch);
 
-    return await resolve(event);
+	return await resolve(event);
 };
 
 export const isProtectedRoute = (route: string): boolean => {
-    return (
-        route.startsWith('/settings') ||
-        route.startsWith('/repositories') ||
-        route.startsWith('/apps') ||
-        route.startsWith('/project')
-    );
+	return (
+		route.startsWith('/settings') ||
+		route.startsWith('/repositories') ||
+		route.startsWith('/apps') ||
+		route.startsWith('/project')
+	);
 };
 
 export const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) => {
-    const client = new OpenRegistryClient(event.fetch, event.url.origin);
-    event.locals.openRegistry = client;
-    return await resolve(event);
+	const client = new OpenRegistryClient(event.fetch, event.url.origin);
+	event.locals.openRegistry = client;
+	return await resolve(event);
 };
 
 const applyFeatureFlags: Handle = async ({ event, resolve }) => {
-    posthog.onFeatureFlags(function () {
-        // feature flags should be available at this point
-        const payload = posthog.getFeatureFlagPayload('automated_builds');
-        console.log('feature payload: ', payload);
-    });
+	posthog.onFeatureFlags(function () {
+		// feature flags should be available at this point
+		const payload = posthog.getFeatureFlagPayload('automated_builds');
+		console.log('feature payload: ', payload);
+	});
 
-    const { pathname } = event.url;
-    const pathMatched =
-        pathname === '/apps/github/connect' ||
-        pathname === '/apps/github/connect/setup' ||
-        pathname.startsWith('/projects');
+	const { pathname } = event.url;
+	const pathMatched =
+		pathname === '/apps/github/connect' ||
+		pathname === '/apps/github/connect/setup' ||
+		pathname.startsWith('/projects');
 
-    if (!posthog.isFeatureEnabled('automated-builds') && pathMatched) {
-        error(404, {
-            message: 'Route not found',
-        });
-    }
+	if (!posthog.isFeatureEnabled('automated-builds') && pathMatched) {
+		error(404, {
+			message: 'Route not found',
+		});
+	}
 
-    return await resolve(event);
+	return await resolve(event);
 };
 
 export const handle = sequence(
-    // applyFeatureFlags,
-    setOpenRegistryClientHandler,
-    authenticationHandler,
-    createProtobufClient
+	// applyFeatureFlags,
+	setOpenRegistryClientHandler,
+	authenticationHandler,
+	createProtobufClient
 );
 
 export const handleError: HandleServerError = async ({ error, event }) => {
-    console.log('unhandled server exception - route: %s - error: %s', event.route.id, error);
-    return {
-        message: typeof error === 'string' ? error : JSON.stringify(error),
-    };
+	console.log('unhandled server exception - route: %s - error: %s', event.route.id, error);
+	return {
+		message: typeof error === 'string' ? error : JSON.stringify(error),
+	};
 };

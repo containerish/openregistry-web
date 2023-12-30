@@ -9,6 +9,12 @@ export const load: PageServerLoad = async ({ parent, locals }) => {
 		});
 	}
 
-	return { user: locals.user };
-};
+	const repositories = await locals.openRegistry.listUserFavoriteRepositories();
+	if (repositories.success) {
+		return { favoriteRepositories: repositories.data };
+	}
 
+	return {
+		favoriteRepositories: [],
+	};
+};

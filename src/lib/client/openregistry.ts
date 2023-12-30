@@ -31,7 +31,7 @@ import { fail, error } from '@sveltejs/kit';
 import type { Cookies } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import type { AuthTokenList, OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
-import { Repository, RepositoryCatalog, type RepositoryCatalogResponse } from '$lib/types/registry';
+import { Repository, RepositoryCatalog, RepositoryList, type RepositoryCatalogResponse } from '$lib/types/registry';
 import { SearchRepositoryResponse, type CreateReposioryRequest, type RegistryAPIError } from '$lib/types/registry';
 import {
 	SubmitManifestToScanResponse,
@@ -969,6 +969,29 @@ export class OpenRegistryClient {
 		}
 
 		const parsed = AuthTokenListSchema.safeParse(data);
+		if (parsed.success) {
+			return {
+				success: true,
+				data: parsed.data,
+			};
+		}
+
+		return {
+			success: false,
+			error: parsed.error.toString(),
+			message: parsed.error.message,
+		};
+	}
+
+	async listUserFavoriteRepositories(): Promise<OpenRegistryResponse<RepositoryList>> {
+		const uri = this.getEndpoint(`/v2/ext/repository/favorites`);
+		const response = await this.fetcher(uri);
+		const data = await response.json();
+		if (response.status !== 200) {
+			return data as OpenRegistryGenericError;
+		}
+
+		const parsed = RepositoryList.safeParse(data);
 		if (parsed.success) {
 			return {
 				success: true,
