@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@buf/containerish_openregistry.bufbuild_connect-es':
-    specifier: 0.9.0-20231213043106-8f1c3791d49d.1
-    version: 0.9.0-20231213043106-8f1c3791d49d.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.2.0)
+    specifier: 0.9.0-20231217153936-3ce39122fce2.1
+    version: 0.9.0-20231217153936-3ce39122fce2.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.2.0)
   '@buf/containerish_openregistry.bufbuild_connect-web':
     specifier: 0.8.6-20231217153936-3ce39122fce2.1
     version: 0.8.6-20231217153936-3ce39122fce2.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.2.0)
@@ -213,12 +213,12 @@ packages:
       regenerator-runtime: 0.14.0
     dev: true
 
-  /@buf/containerish_openregistry.bufbuild_connect-es@0.9.0-20231213043106-8f1c3791d49d.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.2.0):
-    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-es/-/containerish_openregistry.bufbuild_connect-es-0.9.0-20231213043106-8f1c3791d49d.1.tgz}
+  /@buf/containerish_openregistry.bufbuild_connect-es@0.9.0-20231217153936-3ce39122fce2.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.2.0):
+    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-es/-/containerish_openregistry.bufbuild_connect-es-0.9.0-20231217153936-3ce39122fce2.1.tgz}
     peerDependencies:
       '@bufbuild/connect': ^0.9.0
     dependencies:
-      '@buf/containerish_openregistry.bufbuild_es': 1.2.0-20231213043106-8f1c3791d49d.1(@bufbuild/protobuf@1.2.0)
+      '@buf/containerish_openregistry.bufbuild_es': 1.2.0-20231217153936-3ce39122fce2.1(@bufbuild/protobuf@1.2.0)
       '@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-es': 0.9.0-20221025150516-6607b10f00ed.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.2.0)
       '@buf/googleapis_googleapis.bufbuild_connect-es': 0.9.0-20230329151039-5ae7f88519b0.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.2.0)
       '@bufbuild/connect': 0.9.0(@bufbuild/protobuf@1.2.0)
@@ -237,16 +237,6 @@ packages:
       '@bufbuild/connect-web': 0.9.0(@bufbuild/protobuf@1.2.0)
     transitivePeerDependencies:
       - '@bufbuild/protobuf'
-    dev: false
-
-  /@buf/containerish_openregistry.bufbuild_es@1.2.0-20231213043106-8f1c3791d49d.1(@bufbuild/protobuf@1.2.0):
-    resolution: {tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_es/-/containerish_openregistry.bufbuild_es-1.2.0-20231213043106-8f1c3791d49d.1.tgz}
-    peerDependencies:
-      '@bufbuild/protobuf': ^1.2.0
-    dependencies:
-      '@buf/envoyproxy_protoc-gen-validate.bufbuild_es': 1.2.0-20221025150516-6607b10f00ed.1(@bufbuild/protobuf@1.2.0)
-      '@buf/googleapis_googleapis.bufbuild_es': 1.2.0-20230329151039-5ae7f88519b0.1(@bufbuild/protobuf@1.2.0)
-      '@bufbuild/protobuf': 1.2.0
     dev: false
 
   /@buf/containerish_openregistry.bufbuild_es@1.2.0-20231217153936-3ce39122fce2.1(@bufbuild/protobuf@1.2.0):
