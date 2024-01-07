@@ -16,6 +16,8 @@
 	import OrgMode from '$lib/components/orgMode.svelte';
 	import PersonalAccessTokenList from '$lib/components/PersonalAccessTokenList.svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import { onMount } from 'svelte';
+	import type { AuthTokenList } from '$lib/types';
 
 	export let data: PageData;
 
@@ -81,6 +83,20 @@
 		duration: 450,
 		easing: cubicInOut,
 	});
+
+	onMount(async () => {
+		tokens = await listUserAuthTokens();
+	});
+
+	$: tokens = [] as AuthTokenList;
+	const listUserAuthTokens = async () => {
+		const response = await openRegistryClient.listAuthToken();
+		if (response.success && response.data) {
+			return response.data;
+		}
+
+		return [];
+	};
 </script>
 
 <svelte:head>
@@ -297,7 +313,7 @@
 					<OrgMode user={data.user} />
 				</div>
 				<div use:melt={$content('pat')} class="grow bg-white p-5">
-					<PersonalAccessTokenList {openRegistryClient} />
+					<PersonalAccessTokenList {openRegistryClient} {tokens} {listUserAuthTokens} />
 				</div>
 				<!-- <div use:melt={$content('automated_builds')} class="grow bg-white p-5 text-slate-700"> -->
 				<!-- 	<Settings /> -->

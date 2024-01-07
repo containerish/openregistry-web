@@ -7,24 +7,10 @@
 	import { isFuture } from 'date-fns';
 
 	export let openRegistryClient: OpenRegistryClient;
-	const listUserAuthTokens = async () => {
-		const response = await openRegistryClient.listAuthToken();
-		if (response.success && response.data) {
-			return response.data;
-		}
+	export let listUserAuthTokens: () => Promise<AuthTokenList>;
+	export let tokens: AuthTokenList = [];
 
-		return [];
-	};
-
-	$: tokens = [] as AuthTokenList;
-	let isTokensLoading = true;
-	listUserAuthTokens()
-		.then((t) => {
-			tokens = t;
-		})
-		.finally(() => {
-			isTokensLoading = false;
-		});
+	let isTokensLoading = false;
 
 	const handleTokenGenerate = async () => {
 		tokens = await listUserAuthTokens();

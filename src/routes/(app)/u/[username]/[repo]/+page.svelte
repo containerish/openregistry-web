@@ -120,23 +120,18 @@
 			}
 
 			try {
-				const submitResponse = await vulnScanningClient.submitManifestToScan({
+				await vulnScanningClient.submitManifestToScan({
 					hash: digest,
 				});
-				if (submitResponse.success) {
-					const vulnResp = await vulnScanningClient.getVulnerabilityReport({
-						manifestId: digest,
-					});
-					if (vulnResp.success) {
-						imageVulnReport = vulnResp;
-					} else {
-						vulnReportFetchErr = vulnResp.err;
-					}
-				}
+				const vulnResp = await vulnScanningClient.getVulnerabilityReport({
+					manifestId: digest,
+				});
+
+				imageVulnReport = vulnResp;
 			} catch (err) {
 				vulnReportFetchErr = (err as Error).message;
 			} finally {
-				if (!vulnReportFetchErr && !imageVulnReport) {
+				if (!imageVulnReport) {
 					vulnReportFetchErr = 'Report generation is taking longer than usual. Please try again later.';
 				}
 
@@ -368,8 +363,16 @@
 												</span>
 												<span class="font-normal text-slate-600">
 													Fixed in:
-													<span class="text-emerald-700 font-semibold">
-														{vuln.fixedInVersion}
+													<span
+														class="{vuln.fixedInVersion
+															? 'text-emerald-700'
+															: 'text-rose-600'} font-semibold"
+													>
+														{#if vuln.fixedInVersion}
+															{vuln.fixedInVersion}
+														{:else}
+															Fix not available
+														{/if}
 													</span>
 												</span>
 											</div>
