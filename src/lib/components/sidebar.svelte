@@ -63,9 +63,9 @@
 				</picture>
 			</a>
 
-			<a href="/repositories" class="rounded-full hover:bg-primary-100/50 p-3 mt-6"
-				><HomeIcon class="w-5 h-5 text-slate-700" /></a
-			>
+			<a href="/repositories" class="rounded-full hover:bg-primary-100/50 p-3 mt-6">
+				<HomeIcon class="w-5 h-5 text-slate-700" />
+			</a>
 
 			<a href="/search" class="rounded-full hover:bg-primary-100/50 p-3">
 				<SearchIcon class="w-5 h-5 text-slate-700" />

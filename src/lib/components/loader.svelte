@@ -1,116 +1,113 @@
 <script lang="ts">
-  import Card from "$lib/card.svelte";
-  import { SpinnerCircle } from "$lib/icons";
-  import { pulseStore } from "./pulse";
+	import Card from '$lib/card.svelte';
+	import { pulseStore } from './pulse';
 </script>
 
-{#if $pulseStore.status === "LOADING"}
-  <Card class="w-full py-8">
-    <div
-      class="flex w-screen h-full min-w-max min-h-max py-20 justify-center items-center"
-    >
-      <!-- <SpinnerCircle class="text-primary-100 h-20 w-20" /> -->
-      <svg class="pl" viewBox="0 0 200 200" width="230" height="230">
-        <defs>
-          <linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
-            <stop offset="0%" stop-color="hsl(233,93%,88%)" />
-            <stop offset="100%" stop-color="hsl(240,100%,72%)" />
-          </linearGradient>
-          <linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="hsl(233,93%,88%)" />
-            <stop offset="100%" stop-color="hsl(240,100%,72%)" />
-          </linearGradient>
-        </defs>
-        <circle
-          class="pl__ring"
-          cx="100"
-          cy="100"
-          r="82"
-          fill="none"
-          stroke="url(#pl-grad1)"
-          stroke-width="30"
-          stroke-dasharray="0 257 1 257"
-          stroke-dashoffset="0.01"
-          stroke-linecap="round"
-          transform="rotate(-90,100,100)"
-        />
-        <line
-          class="pl__ball"
-          stroke="url(#pl-grad2)"
-          x1="100"
-          y1="18"
-          x2="100.01"
-          y2="182"
-          stroke-width="30"
-          stroke-dasharray="1 165"
-          stroke-linecap="round"
-        />
-      </svg>
-    </div>
-  </Card>
+{#if $pulseStore.status === 'LOADING'}
+	<Card class="w-full py-8">
+		<div class="flex w-screen h-full min-w-max min-h-max py-20 justify-center items-center">
+			<!-- <SpinnerCircle class="text-primary-100 h-20 w-20" /> -->
+			<svg class="pl" viewBox="0 0 200 200" width="230" height="230">
+				<defs>
+					<linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
+						<stop offset="0%" stop-color="hsl(233,93%,88%)" />
+						<stop offset="100%" stop-color="hsl(240,100%,72%)" />
+					</linearGradient>
+					<linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="0%" stop-color="hsl(233,93%,88%)" />
+						<stop offset="100%" stop-color="hsl(240,100%,72%)" />
+					</linearGradient>
+				</defs>
+				<circle
+					class="pl__ring"
+					cx="100"
+					cy="100"
+					r="82"
+					fill="none"
+					stroke="url(#pl-grad1)"
+					stroke-width="30"
+					stroke-dasharray="0 257 1 257"
+					stroke-dashoffset="0.01"
+					stroke-linecap="round"
+					transform="rotate(-90,100,100)"
+				/>
+				<line
+					class="pl__ball"
+					stroke="url(#pl-grad2)"
+					x1="100"
+					y1="18"
+					x2="100.01"
+					y2="182"
+					stroke-width="30"
+					stroke-dasharray="1 165"
+					stroke-linecap="round"
+				/>
+			</svg>
+		</div>
+	</Card>
 {:else}
-  <slot />
+	<slot />
 {/if}
 
 <style>
-  * {
-    border: 0;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+	* {
+		border: 0;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
 
-  .pl {
-    display: block;
-    width: 6.25em;
-    height: 6.25em;
-  }
-  .pl__ring,
-  .pl__ball {
-    animation: ring 2s ease-out infinite;
-  }
-  .pl__ball {
-    animation-name: ball;
-  }
+	.pl {
+		display: block;
+		width: 6.25em;
+		height: 6.25em;
+	}
+	.pl__ring,
+	.pl__ball {
+		animation: ring 2s ease-out infinite;
+	}
+	.pl__ball {
+		animation-name: ball;
+	}
 
-  /* Animation */
-  @keyframes ring {
-    from {
-      stroke-dasharray: 0 257 0 0 1 0 0 258;
-    }
-    25% {
-      stroke-dasharray: 0 0 0 0 257 0 258 0;
-    }
-    50%,
-    to {
-      stroke-dasharray: 0 0 0 0 0 515 0 0;
-    }
-  }
-  @keyframes ball {
-    from,
-    50% {
-      animation-timing-function: ease-in;
-      stroke-dashoffset: 1;
-    }
-    64% {
-      animation-timing-function: ease-in;
-      stroke-dashoffset: -109;
-    }
-    78% {
-      animation-timing-function: ease-in;
-      stroke-dashoffset: -145;
-    }
-    92% {
-      animation-timing-function: ease-in;
-      stroke-dashoffset: -157;
-    }
-    57%,
-    71%,
-    85%,
-    99%,
-    to {
-      animation-timing-function: ease-out;
-      stroke-dashoffset: -163;
-    }
-  }
+	/* Animation */
+	@keyframes ring {
+		from {
+			stroke-dasharray: 0 257 0 0 1 0 0 258;
+		}
+		25% {
+			stroke-dasharray: 0 0 0 0 257 0 258 0;
+		}
+		50%,
+		to {
+			stroke-dasharray: 0 0 0 0 0 515 0 0;
+		}
+	}
+	@keyframes ball {
+		from,
+		50% {
+			animation-timing-function: ease-in;
+			stroke-dashoffset: 1;
+		}
+		64% {
+			animation-timing-function: ease-in;
+			stroke-dashoffset: -109;
+		}
+		78% {
+			animation-timing-function: ease-in;
+			stroke-dashoffset: -145;
+		}
+		92% {
+			animation-timing-function: ease-in;
+			stroke-dashoffset: -157;
+		}
+		57%,
+		71%,
+		85%,
+		99%,
+		to {
+			animation-timing-function: ease-out;
+			stroke-dashoffset: -163;
+		}
+	}
 </style>

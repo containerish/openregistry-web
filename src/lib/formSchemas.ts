@@ -110,7 +110,7 @@ export const OpenRegistryUserSchema = z.object({
 	created_at: z.coerce.date(),
 	identities: IdentitiesSchema.nullish(),
 	username: z.string(),
-	email: z.string().nullish(),
+	email: z.string(),
 	id: z.string(),
 	is_active: z.boolean().default(false),
 	webauthn_connected: z.boolean().default(false),

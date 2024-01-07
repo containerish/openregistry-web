@@ -1,11 +1,11 @@
 import type {
-    AuthToken,
-    AuthTokenList,
-    OpenRegistryOrgMember,
-    OpenRegistryUserSchema,
-    ResetPasswordSchema,
-    SignInSchema,
-    SignUpSchema,
+	AuthToken,
+	AuthTokenList,
+	OpenRegistryOrgMember,
+	OpenRegistryUserSchema,
+	ResetPasswordSchema,
+	SignInSchema,
+	SignUpSchema,
 } from '$lib/formSchemas';
 import type { z } from 'zod';
 

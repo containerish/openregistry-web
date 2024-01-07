@@ -4,7 +4,6 @@
 	import type { Repository } from '$lib/types/registry';
 
 	export let repository: Repository;
-	export let compact = true;
 
 	const handleRepoDetail = () => {
 		goto(`u/${repository.user?.username}/${repository.name}`);

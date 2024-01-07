@@ -44,13 +44,13 @@
 			isCreateRepositoryLoading = false;
 			await handleSuccess();
 			handleClose();
+			$open = false;
 			return;
 		}
 
 		console.error('error creating new repository: ', response);
 		createRepositoryError = response.message ?? response.error;
 		isCreateRepositoryLoading = false;
-		handleClose();
 	};
 
 	const readInputValue = (e: Event, key: keyof CreateReposioryRequest) => {

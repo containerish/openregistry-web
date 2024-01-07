@@ -41,8 +41,6 @@
 			orgUsers = response.data;
 			return;
 		}
-
-		console.log('list user error:', response);
 	};
 
 	let permsEdit = false;
@@ -98,7 +96,7 @@
 		}
 	};
 
-	const refershOrgList = async (e: CustomEvent) => {
+	const refershOrgList = async () => {
 		await listOrgUsers();
 	};
 

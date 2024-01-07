@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Card from "$lib/card.svelte";
-	import Globe from "$lib/icons/globe.svelte";
+	import Card from '$lib/card.svelte';
+	import Globe from '$lib/icons/globe.svelte';
 </script>
 
 <div>
@@ -20,9 +20,7 @@
 			<div>
 				<div class="flex flex-col flex-initial w-80">
 					<h1 class="text-2xl font-medium">Docker Commands</h1>
-					<span class="text-lg"
-						>to push a new image to this repository</span
-					>
+					<span class="text-lg">to push a new image to this repository</span>
 					<span class="bg-gray-400 text-gray-900 px-8 py-2">
 						docker push cntr.sh/janedoe/openregistry:tagname</span
 					>

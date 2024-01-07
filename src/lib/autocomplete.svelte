@@ -4,9 +4,7 @@
 	import { goto } from '$app/navigation';
 	import type { Catalog } from '$apis/registry';
 	import Search from './icons/search.svelte';
-	import Textfield from './textfield.svelte';
-	import Textarea from './textarea.svelte';
-	export let onAutoComplete: Function;
+	export let onAutoComplete: (q: string) => Promise<{ data: Catalog; error: string }>;
 	let showItems = false;
 	let searchQuery = '';
 	let catalog: Catalog = {
@@ -14,17 +12,18 @@
 		total: 0,
 	};
 
-	const handleOnChange = async (e: any) => {
-		if (e.target.value === '' || e.target.value.length < 2) {
+	const handleOnChange = async (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		if (target.value === '' || target.value.length < 2) {
 			showItems = false;
 			catalog.repositories = [];
 			return;
 		}
 
-		if (e.target.value.length < 5) {
-			autoCompleteThrottled(e.target.value);
+		if (target.value.length < 5) {
+			autoCompleteThrottled(target.value);
 		} else {
-			autoCompleteDebounced(e.target.value);
+			autoCompleteDebounced(target.value);
 		}
 	};
 
@@ -38,13 +37,13 @@
 
 		const { data, error } = await onAutoComplete(q);
 		if (error) {
-			catalog.repositories = null;
+			catalog.repositories = [];
 			showItems = false;
 			return;
 		}
 
 		if (!data.repositories) {
-			catalog.repositories = null;
+			catalog.repositories = [];
 			showItems = false;
 			return;
 		}

@@ -2,7 +2,7 @@
 	import { navigating } from '$app/stores';
 	import { Loader } from '$lib/components';
 	import { pulseStore } from '$lib/components/pulse';
-	import { Check, ExternalLinkIcon, RecycleIcon, ToolsIcon } from '$lib/icons';
+	import { Check, DeleteIcon, ExternalLinkIcon, GithubIcon, RecycleIcon, ToolsIcon } from '$lib/icons';
 	import { fly } from 'svelte/transition';
 	import type { PageData } from './$types';
 	import {
@@ -14,9 +14,13 @@
 	import Textfield from '$lib/textfield.svelte';
 	import { formatDistanceToNow } from 'date-fns';
 	import ButtonSolid from '$lib/button-solid.svelte';
+	import { getAutomationProjectsClient } from '$lib/clients';
+	import type { UUID } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
+	import SpinnerCircle from '$lib/icons/spinner-circle.svelte';
 
 	export let data: PageData;
 
+	const projectsClient = getAutomationProjectsClient();
 	$: projects = [] as GetProjectResponse[];
 
 	const getProjects = () => {
@@ -52,8 +56,32 @@
 		pulseStore.setPulseState(!$navigating && !!data.projects);
 	}
 
+	let isDeleteLoading = false;
+	const deleteProject = async (projId: UUID | undefined) => {
+		isDeleteLoading = true;
+		try {
+			const response = await projectsClient.deleteProject({
+				id: projId,
+			});
+
+			const projIndex = projects.findIndex((p) => p.id?.value === projId?.value);
+			projects.splice(projIndex, 1);
+			projects = [...projects];
+
+			console.log('delete project response: ', response.toJson());
+		} catch (err) {
+			console.log('error deleting project: ', err);
+		}
+		isDeleteLoading = false;
+	};
+
 	const handleCreateProject = async () => {
 		await goto('/apps/github/connect/setup');
+	};
+
+	const visitGitHubRepository = (repositoryName: string) => {
+		const uri = `https://github.com/${data.user?.identities?.github?.username}/${repositoryName}`;
+		window.open(uri, '_blank');
 	};
 </script>
 
@@ -71,16 +99,31 @@
 		<div class="justify-start flex flex-col gap-2 items-start w-full h-full max-w-[3000px]">
 			{#each projects as project}
 				<div
-					class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100/50
-	border-l-4 border-l-emerald-600 border-opacity-100 w-11/12 shadow-2xl gap-3 px-6 py-6"
+					class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100/50 w-11/12 gap-3 px-6 py-6"
 					in:fly={{ y: 200, duration: 300, delay: 200 }}
 				>
 					<div class="flex justify-between">
-						<span class="text-lg text-slate-700">{project.projectName}</span>
-						<button class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0">
-							<span class="underline underline-offset-4 text-slate-600">Visit GitHub repository</span>
-							<ExternalLinkIcon class="h-4 w-4 text-slate-700" />
-						</button>
+						<div>
+							<span class="text-lg text-slate-700">{project.projectName}</span>
+						</div>
+						<div class="flex justify-center items-center gap-3">
+							<button
+								on:click={() => visitGitHubRepository(project.repositoryName)}
+								class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0"
+							>
+								<GithubIcon class="text-primary-600 h-6 w-6" />
+							</button>
+							<button
+								on:click={() => deleteProject(project.id)}
+								class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0"
+							>
+								{#if isDeleteLoading}
+									<SpinnerCircle class="h-6 w-6" />
+								{:else}
+									<DeleteIcon class="text-rose-600" />
+								{/if}
+							</button>
+						</div>
 					</div>
 					<div class="flex gap-3 justify-start items-center">
 						<RecycleIcon class="h-4 w-4 text-slate-700" />

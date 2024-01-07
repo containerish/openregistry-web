@@ -44,6 +44,7 @@
 		"@tailwindcss/typography": "^0.5.10",
 		"@tsconfig/svelte": "^5.0.2",
 		"@types/cookie": "0.6.0",
+		"@types/eslint": "8.56.0",
 		"@types/set-cookie-parser": "^2.4.7",
 		"@types/throttle-debounce": "^5.0.2",
 		"@types/webappsec-credential-management": "^0.6.8",

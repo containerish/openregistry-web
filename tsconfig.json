@@ -1,17 +1,22 @@
 {
-    "extends": "./.svelte-kit/tsconfig.json",
-    "compilerOptions": {
-        "resolveJsonModule": true,
-        "sourceMap": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "allowJs": true,
-        "checkJs": true,
-        "types": [
-            "@types/webappsec-credential-management",
-            "node"
-        ]
-    }
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"checkJs": true,
+		"allowJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler",
+		"types": [
+			"@types/webappsec-credential-management",
+			"node"
+		]
+	}
+	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
+	//
+	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
+	// from the referenced tsconfig.json - TypeScript does not merge them in
 }

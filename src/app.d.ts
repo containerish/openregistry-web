@@ -5,8 +5,7 @@ import { GithubActionsBuildService } from '@buf/containerish_openregistry.connec
 import { GitHubActionsProjectService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_project_connect';
 import { ClairService } from '@buf/containerish_openregistry.connectrpc_es/services/yor/clair/v1/clair_connect';
 import { PromiseClient } from '@connectrpc/connect';
-import type { OpenRegistryAutomationClient } from '$lib/server/automation/automation';
-import { Transport, createPromiseClient } from '@connectrpc/connect';
+import { Transport } from '@connectrpc/connect';
 
 declare global {
 	declare namespace App {
@@ -24,7 +23,6 @@ declare global {
 			ghLogsClient: PromiseClient<typeof GitHubActionsLogsService>;
 			ghBuildClient: PromiseClient<typeof GithubActionsBuildService>;
 			vulnScanningClient: PromiseClient<typeof ClairService>;
-			automationClient: OpenRegistryAutomationClient;
 			transport: Transport;
 			clairTransport: Transport;
 		}

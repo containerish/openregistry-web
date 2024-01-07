@@ -67,7 +67,7 @@
 				{#if catalog && catalog.length > 0}
 					<div class="w-full">
 						{#each catalog as repo}
-							<Repository repository={repo} compact={false} />
+							<Repository repository={repo} />
 						{/each}
 					</div>
 					<div class="flex justify-center">

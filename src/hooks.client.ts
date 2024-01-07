@@ -3,13 +3,13 @@ import posthog from 'posthog-js';
 import { browser, dev } from '$app/environment';
 import { PUBLIC_POSTHOG_API_HOST, PUBLIC_POSTHOG_API_KEY } from '$env/static/public';
 
-if (browser && !dev && PUBLIC_POSTHOG_API_KEY) {
+if (browser && PUBLIC_POSTHOG_API_KEY) {
 	posthog.init(PUBLIC_POSTHOG_API_KEY, {
 		api_host: PUBLIC_POSTHOG_API_HOST,
 	});
 }
 
-export const handleError: HandleClientError = async ({ error, event, status, message }) => {
+export const handleError: HandleClientError = async ({ error, event }) => {
 	console.log('unhandled client exception - route: %s - error: %s', event.route.id, error);
 
 	return {

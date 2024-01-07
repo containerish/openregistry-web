@@ -22,9 +22,8 @@
 
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	let sortBy = 'namespace';
-	let openErrorModal = false;
 
-	const [popperRef, popperContent] = createPopperActions({
+	createPopperActions({
 		placement: 'top-start',
 		strategy: 'fixed',
 	});
@@ -173,7 +172,7 @@
 					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
 						<div class="w-full">
 							{#each catalog.repositories as repo}
-								<Repository repository={repo} compact={false} />
+								<Repository repository={repo} />
 							{/each}
 						</div>
 

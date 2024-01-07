@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { Steps } from 'svelte-steps';
-	let steps = [{ text: 'Select repository' }, { text: 'Set up build' }, { text: 'Build project' }];
+	let steps = [
+		{ text: 'Select repository' },
+		{ text: 'Set up build' },
+		// { text: 'Build project' },
+	];
 	let clickable = false;
 	import { ghStore } from '$lib/stores';
 	import SelectRepo from './select-repo.svelte';
 	import Setup from './setup.svelte';
-	import BuildProject from './build-project.svelte';
 	import type { PageData } from './$types';
 	import { fly } from 'svelte/transition';
 	import {
@@ -21,21 +24,21 @@
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { Repository } from '$lib/types';
 	import { page } from '$app/stores';
+	import { getAutomationProjectsClient } from '$lib/clients';
+	import { goto } from '$app/navigation';
 	export let data: PageData;
 	let selectedTab = 0;
 
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
+	const projectsClient = getAutomationProjectsClient();
 	async function handleNext(index: number) {
+		if (index === 2) {
+			await goto('/projects');
+			return;
+		}
 		ghStore.setTabIndex(index);
 		selectedTab = index;
 	}
-
-	let doesGithubActionAlreadyExist = false;
-
-	const handleOnPRCreate = async (event: CustomEvent<{ pullRequestExists: boolean }>) => {
-		doesGithubActionAlreadyExist = event.detail.pullRequestExists;
-		console.log('event ran: ', event.detail.pullRequestExists);
-	};
 
 	const createProjectRequestStore = writable<CreateProjectRequest>(
 		new CreateProjectRequest({
@@ -56,7 +59,7 @@
 	let containerRepos: Repository[] = [];
 	const fetchUserCatalog = async () => {
 		const { repositories, error } = await openRegistryClient.getUserRepositoryCatalog();
-		if (!error) {
+		if (!error && repositories) {
 			containerRepos = repositories;
 		}
 	};
@@ -70,7 +73,7 @@
 </script>
 
 <svelte:head>
-	<title>SetupBuild | OpenRegistry</title>
+	<title>Setup Automated Builds | OpenRegistry</title>
 </svelte:head>
 
 <div class="w-full flex flex-col justify-start items-center py-9 mx-10">
@@ -111,13 +114,14 @@
 				{/if}
 			{:else if selectedTab === 1}
 				<Setup
-					on:gha_pull_request={handleOnPRCreate}
+					{openRegistryClient}
 					{handleNext}
 					on:build_settings={updateBuildSettings}
 					store={createProjectRequestStore}
+					{projectsClient}
 				/>
-			{:else if selectedTab === 2}
-				<BuildProject store={createProjectRequestStore} {doesGithubActionAlreadyExist} {handleNext} />
+				<!-- {:else if selectedTab === 2} -->
+				<!-- 	<BuildProject store={createProjectRequestStore} {doesGithubActionAlreadyExist} {handleNext} /> -->
 			{/if}
 		</div>
 	{/if}

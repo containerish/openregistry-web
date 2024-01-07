@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ProfileIcon, UserGroupIcon } from '$lib/icons';
+	import { ProfileIcon } from '$lib/icons';
 	import { crossfade, fly } from 'svelte/transition';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { createTabs, melt } from '@melt-ui/svelte';
@@ -55,6 +55,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
+					break;
 				default:
 					await update();
 			}

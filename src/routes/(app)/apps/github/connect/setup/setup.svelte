@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 	import { ghStore } from '$lib/stores';
 	import Disclosure from '$lib/disclosure.svelte';
 	import Textfield from '$lib/textfield.svelte';
@@ -11,14 +12,17 @@
 		CreateProjectRequest,
 		ProjectBuildSettingsMessage,
 	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
-
 	import type { SelectOptions } from '$lib/client/selectTypes';
 	import type { Writable } from 'svelte/store';
 	import type { SelectOption } from '@melt-ui/svelte';
-	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
+	import type { OpenRegistryClient } from '$lib/client';
+	import type { PromiseClient } from '@connectrpc/connect';
+	import type { GitHubActionsProjectService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_project_connect';
 
 	export let handleNext: (index: number) => void;
 	export let store: Writable<CreateProjectRequest>;
+	export let openRegistryClient: OpenRegistryClient;
+	export let projectsClient: PromiseClient<typeof GitHubActionsProjectService>;
 
 	let dockerContextPath = '.';
 	const getBuildCommand = (buildTool: string, dockerFilePath: string) => {
@@ -70,29 +74,30 @@
 	};
 
 	const createPullRequest = async (repositoryName: string): Promise<APIError | undefined> => {
-		const response = await fetch('/api/services/github/pull-request', {
-			method: 'POST',
-			body: JSON.stringify({
-				dockerfile_path: $store.buildSettings?.worfklowFile,
-				repository_name: repositoryName,
-			}),
+		const response = await openRegistryClient.createPullRequest({
+			dockerfile_path: $store.buildSettings?.worfklowFile ?? '',
+			repository_name: repositoryName,
 		});
 
-		switch (response.status) {
-			// notModified, which means, PR not created, which means, GHA already exists
-			case 202:
+		// success scenarios are two:
+		// 1. 202 - setup is already done
+		// 2. 201 - PR is created
+		if (response.success) {
+			if (response.data.status === 202) {
 				dispatch('gha_pull_request', {
 					pullRequestExists: true,
 				});
-				break;
-			case 201:
-				dispatch('gha_pull_request', {
-					pullRequestExists: false,
-				});
-				break;
-			default:
-				return (await response.json()) as APIError;
+				return;
+			}
+			dispatch('gha_pull_request', {
+				pullRequestExists: false,
+			});
+			return;
 		}
+
+		dispatch('gha_pull_request_error', {
+			error: response.error,
+		});
 	};
 
 	onMount(() => {
@@ -110,13 +115,12 @@
 	};
 
 	const storeBuildProject = async () => {
-		console.log('storeBuildProject: ', $store.toJson());
-		const response = await fetch('/api/services/github/actions/projects', {
-			method: 'POST',
-			body: JSON.stringify($store.toJson()),
-		});
-		const data = await response.json();
-		console.log('response on client: ', response.status, data);
+		try {
+			const response = await projectsClient.createProject($store);
+			console.log('response on client: ', response);
+		} catch (err) {
+			console.log('error storing prject info: ', err);
+		}
 	};
 
 	const readDockerfilePath = (e: Event) => {

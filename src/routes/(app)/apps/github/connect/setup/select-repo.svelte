@@ -70,7 +70,7 @@
 		<div class="flex gap-2 items-center mt-6 text-primary-600">
 			<GithubIcon class="h-6 w-6" />
 			<span class="text-base lg:text-xl font-semibold">Github | </span>
-			<span class="font-light text-sm">more coming soon</span>
+			<span class="font-light text-sm">More coming soon</span>
 		</div>
 		<div class="flex flex-col relative">
 			<div class="w-24 bg-primary-200 h-1 rounded-md" />

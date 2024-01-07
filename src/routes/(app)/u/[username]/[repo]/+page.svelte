@@ -182,7 +182,7 @@
 				>
 					{#if isStarLoading}
 						<SpinnerCircle class="h-6 w-6 text-primary-400" />
-					{:else if $repositoryIdMap.has(repository?.id)}
+					{:else if $repositoryIdMap.has(repository?.id ?? '')}
 						<StarIcon class="fill-primary-400/50 w-6 h-6" />
 					{:else}
 						<StarIcon class="text-primary-400 w-6 h-6" />

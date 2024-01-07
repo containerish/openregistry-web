@@ -12,10 +12,10 @@
 	on:click
 	{type}
 	class={twMerge(
-		`flex justify-center space-x-2 items-center border-2 bg-primary-300 border-primary-600
-		text-primary-800 rounded font-medium lg:text-base tracking-wide bg-opacity-80 hover:shadow-primary-600 hover:shadow-3xl 
-		disabled:bg-slate-200 disabled:border-slate-300 disabled:shadow-none transition-all duration-200 
-		disabled:text-slate-400 gap-2 px-3 min-w-[120px] h-10 md:h-11 text-sm antialiased`,
+		`flex justify-center space-x-2 items-center border-2 bg-primary-300 border-primary-600 cursor-pointer
+		text-primary-800 rounded font-medium lg:text-base tracking-wide bg-opacity-80 hover:shadow-primary-600 
+		hover:shadow-3xl disabled:bg-slate-200 disabled:border-slate-300 disabled:shadow-none transition-all 
+		duration-200 disabled:text-slate-400 gap-2 px-3 min-w-[120px] h-10 md:h-11 text-sm antialiased`,
 		$$props.class
 	)}
 >

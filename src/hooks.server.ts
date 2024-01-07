@@ -1,7 +1,7 @@
 import { session } from './stores/session';
 import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { OpenRegistryClient } from '$lib/client/openregistry';
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { createConnectTransport } from '@connectrpc/connect-web';
 import { createPromiseClient } from '@connectrpc/connect';
 import { GitHubActionsLogsService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_logs_connect';
@@ -11,8 +11,6 @@ import { ClairService } from '@buf/containerish_openregistry.connectrpc_es/servi
 import { sequence } from '@sveltejs/kit/hooks';
 import { OPEN_REGISTRY_BACKEND_PROTOBUF_URL, OPEN_REGISTRY_BACKEND_CLAIR_URL } from '$env/static/private';
 import { setCookies } from '$lib/protobuf/interceptors';
-import { OpenRegistryAutomationClient } from '$lib/server/automation/automation';
-import posthog from 'posthog-js';
 
 export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
@@ -64,7 +62,6 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 	event.locals.ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
 	event.locals.ghProjectsClient = createPromiseClient(GitHubActionsProjectService, transport);
 	event.locals.vulnScanningClient = createPromiseClient(ClairService, clairTransport);
-	event.locals.automationClient = new OpenRegistryAutomationClient(event.locals, event.fetch);
 
 	return await resolve(event);
 };
@@ -84,34 +81,7 @@ export const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) =
 	return await resolve(event);
 };
 
-const applyFeatureFlags: Handle = async ({ event, resolve }) => {
-	posthog.onFeatureFlags(function () {
-		// feature flags should be available at this point
-		const payload = posthog.getFeatureFlagPayload('automated_builds');
-		console.log('feature payload: ', payload);
-	});
-
-	const { pathname } = event.url;
-	const pathMatched =
-		pathname === '/apps/github/connect' ||
-		pathname === '/apps/github/connect/setup' ||
-		pathname.startsWith('/projects');
-
-	if (!posthog.isFeatureEnabled('automated-builds') && pathMatched) {
-		error(404, {
-			message: 'Route not found',
-		});
-	}
-
-	return await resolve(event);
-};
-
-export const handle = sequence(
-	// applyFeatureFlags,
-	setOpenRegistryClientHandler,
-	authenticationHandler,
-	createProtobufClient
-);
+export const handle = sequence(setOpenRegistryClientHandler, authenticationHandler, createProtobufClient);
 
 export const handleError: HandleServerError = async ({ error, event }) => {
 	console.log('unhandled server exception - route: %s - error: %s', event.route.id, error);

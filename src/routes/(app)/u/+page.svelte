@@ -130,7 +130,7 @@
 				<div class="w-full px-8 py-8">
 					{#if catalog.repositories && catalog.repositories.length > 0}
 						{#each catalog.repositories as repo}
-							<Repository compact={false} repository={repo} />
+							<Repository repository={repo} />
 						{/each}
 					{:else}
 						<div
@@ -152,7 +152,7 @@
 				<div class="w-full px-8 py-8">
 					{#if data.favoriteRepositories && data.favoriteRepositories.length > 0}
 						{#each data.favoriteRepositories as repo}
-							<Repository compact={false} repository={repo} />
+							<Repository repository={repo} />
 						{/each}
 					{:else}
 						<div

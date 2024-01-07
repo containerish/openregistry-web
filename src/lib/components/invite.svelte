@@ -7,8 +7,6 @@
 	import { UserPlusIcon } from '$lib/icons';
 	import Textarea from '$lib/textarea.svelte';
 
-	export let handleModal = () => {};
-
 	const auth = new Auth();
 
 	let isLoading = false;
@@ -16,9 +14,9 @@
 	let respMsg = '';
 	let statusCode: number;
 
-	const readEmails = (e: any) => {
+	const readEmails = (e: Event) => {
 		respMsg = '';
-		emails = e.target.value;
+		emails = (e.target as HTMLInputElement).value;
 	};
 
 	const sendInvites = async () => {
@@ -37,7 +35,7 @@
 	};
 
 	const {
-		elements: { trigger, overlay, content, title, description, close, portalled },
+		elements: { trigger, overlay, content, title, close, portalled },
 		states: { open },
 	} = createDialog({
 		forceVisible: false,
@@ -48,8 +46,11 @@
 	use:melt={$trigger}
 	class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-	><UserPlusIcon /> Invite People</button
 >
+	<UserPlusIcon />
+	Invite People
+</button>
+
 <div use:melt={$portalled} class="w-full h-full">
 	{#if $open}
 		<div
@@ -59,9 +60,8 @@ hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underlin
 		/>
 		<div
 			use:melt={$content}
-			class="flex flex-col fixed left-[50%] bg-white top-[50%] z-50 max-h-[30vh] w-[50vw]
-	  max-w-[630px] translate-x-[-50%] translate-y-[-50%] md:flex-row justify-center items-start gap-3
-	  rounded shadow-2xl shadow-primary-800/30"
+			class="flex flex-col fixed left-[50%] bg-white top-[50%] z-50 max-w-[630px] translate-x-[-50%]
+			translate-y-[-50%] md:flex-row justify-center items-start gap-3 rounded shadow-2xl shadow-primary-800/30"
 		>
 			<div
 				class="bg-primary-100/50 w-full md:w-1/2 h-full p-14 flex flex-col text-center justify-center
@@ -86,6 +86,7 @@ hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underlin
 							bind:value={emails}
 							rows={4}
 							name="Emails"
+							class="max-h-[110px]"
 							placeholder="e.g jane@openregistry.dev, john@..."
 						/>
 					</div>

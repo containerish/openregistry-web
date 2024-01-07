@@ -33,12 +33,9 @@ import { ZodError } from 'zod';
 import type { AuthTokenList, OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
 import { Repository, RepositoryCatalog, RepositoryList, type RepositoryCatalogResponse } from '$lib/types/registry';
 import { SearchRepositoryResponse, type CreateReposioryRequest, type RegistryAPIError } from '$lib/types/registry';
-import {
-	SubmitManifestToScanResponse,
-	GetVulnerabilityReportResponse,
-} from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
 import type { AddUserToOrgRequest, UpdateUserPermissionsRequest } from '$lib/types/permissions';
 import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
+import type { GitHubPullRequestType } from '$lib/schemas/github';
 
 export type OpenRegistryGenericError = {
 	message: string;
@@ -768,54 +765,6 @@ export class OpenRegistryClient {
 		};
 	}
 
-	async submitManifestForVulnScan(manifestHash: string): Promise<OpenRegistryResponse<SubmitManifestToScanResponse>> {
-		const response = await this.fetcher('/api/services/clair', {
-			method: 'POST',
-			body: JSON.stringify({
-				hash: manifestHash,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-
-		const data = await response.json();
-		if (response.status !== 200) {
-			const err = data as RegistryAPIError;
-			return {
-				success: false,
-				message: err?.message ?? '',
-				error: err?.error ?? '',
-			};
-		}
-
-		return {
-			success: true,
-			data: new SubmitManifestToScanResponse().fromJson(data),
-		};
-	}
-
-	async getVulnReport(manifestHash: string): Promise<OpenRegistryResponse<GetVulnerabilityReportResponse>> {
-		const uri = `/api/services/clair?hash=${manifestHash}`;
-
-		const response = await this.fetcher(uri);
-
-		const data = await response.json();
-		if (response.status !== 200) {
-			const err = data as RegistryAPIError;
-			return {
-				success: false,
-				message: err?.message ?? '',
-				error: err?.error ?? '',
-			};
-		}
-
-		return {
-			success: true,
-			data: new GetVulnerabilityReportResponse().fromJson(data),
-		};
-	}
-
 	async updateUserPermissions(
 		body: UpdateUserPermissionsRequest
 	): Promise<OpenRegistryResponse<{ message: string }>> {
@@ -1004,5 +953,45 @@ export class OpenRegistryClient {
 			error: parsed.error.toString(),
 			message: parsed.error.message,
 		};
+	}
+
+	async createPullRequest(body: GitHubPullRequestType): Promise<
+		OpenRegistryResponse<{
+			status: number;
+			message: string;
+		}>
+	> {
+		const uri = this.getEndpoint('/github/app/workflows/create');
+		const response = await this.fetcher(uri, {
+			method: 'POST',
+			body: JSON.stringify(body),
+			redirect: 'manual',
+		});
+
+		switch (response.status) {
+			// not modified, indicating that GitHub action is already setup
+			case 202:
+				return {
+					success: true,
+					data: {
+						status: response.status,
+						message: 'Automation pull request already exists',
+					},
+				};
+			case 201:
+				return {
+					success: true,
+					data: {
+						status: 201,
+						message: 'Pull request created',
+					},
+				};
+			default:
+				return {
+					success: false,
+					error: 'error creating pull request',
+					message: 'error creating pull request',
+				};
+		}
 	}
 }

@@ -1,11 +1,6 @@
 <script lang="ts">
-	import {
-		Check,
-		ExternalLinkIcon,
-		GitBranchIcon,
-		RecycleIcon,
-	} from "$lib/icons";
-	import { fly } from "svelte/transition";
+	import { Check, ExternalLinkIcon, GitBranchIcon, RecycleIcon } from '$lib/icons';
+	import { fly } from 'svelte/transition';
 </script>
 
 <!-- the values are added just for design purposes, must cahnge them with dynamic values once APIs are in place -->
@@ -16,20 +11,14 @@
 >
 	<div class="flex justify-between">
 		<span class="text-lg text-slate-700">Production</span>
-		<button
-			class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0"
-		>
-			<span class="underline underline-offset-4 text-slate-600"
-				>visit site</span
-			>
+		<button class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0">
+			<span class="underline underline-offset-4 text-slate-600">visit site</span>
 			<ExternalLinkIcon class="h-4 w-4 text-slate-700" />
 		</button>
 	</div>
 	<div class="flex gap-3 justify-start items-center">
 		<RecycleIcon class="h-4 w-4 text-slate-700" />
-		<span class="text-slate-800 text-sm antialiased"
-			>Automatic deployments enabled</span
-		>
+		<span class="text-slate-800 text-sm antialiased">Automatic deployments enabled</span>
 	</div>
 	<div>
 		<span class="text-sm font-medium text-slate-700"> Domains: </span>
@@ -37,9 +26,7 @@
 	</div>
 	<hr class="-mx-6 border-b-1 border-slate-300" />
 	<div class="flex flex-col lg:flex-row gap-6 justify-between">
-		<div
-			class="flex flex-col md:flex-row items-start gap-6 md:items-center"
-		>
+		<div class="flex flex-col md:flex-row items-start gap-6 md:items-center">
 			<div
 				class="rounded-full bg-emerald-200 text-emerald-800 max-w-fit text-sm px-3 py-0.5 antialiased tracking-wide"
 			>
@@ -47,15 +34,11 @@
 			</div>
 			<div class="flex gap-1 items-center antialiased">
 				<GitBranchIcon class="h-4 w-4" />
-				<span class="text-sm font-semibold text-slate-800"
-					>release-main</span
-				>
+				<span class="text-sm font-semibold text-slate-800">release-main</span>
 			</div>
 			<a href="" class="underline">2345678</a>
 			<div class="flex gap-2 items-center">
-				<a href="#" class="text-slate-600 text-sm antialiased"
-					>123458.openregistry-is-awesome.dev</a
-				>
+				<a href="#" class="text-slate-600 text-sm antialiased">123458.openregistry-is-awesome.dev</a>
 				<ExternalLinkIcon class="h-4 w-4 text-primary-500" />
 			</div>
 		</div>
