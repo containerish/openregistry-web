@@ -40,8 +40,6 @@
 		return offset;
 	};
 
-	setContext('fetchPageData', fetchPageData);
-
 	let showFilter = false;
 	const toggleFilter = () => {
 		showFilter = !showFilter;
@@ -53,6 +51,7 @@
 	};
 
 	setContext('toggleModal', toggleModal);
+	setContext('fetchPageData', fetchPageData);
 	$: {
 		pulseStore.setPulseState(!$navigating && !!catalog);
 	}

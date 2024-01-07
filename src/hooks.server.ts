@@ -1,4 +1,3 @@
-import { session } from './stores/session';
 import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { OpenRegistryClient } from '$lib/client/openregistry';
 import { redirect } from '@sveltejs/kit';
@@ -19,8 +18,6 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	if (sessionId && (!locals.user || !locals.authenticated)) {
 		const user = await locals.openRegistry.getUserBySession(sessionId);
 		if (user) {
-			session.setUser(user);
-			session.setIsAuthenticated(true);
 			locals.user = user;
 			locals.authenticated = true;
 			locals.sessionId = sessionId;
