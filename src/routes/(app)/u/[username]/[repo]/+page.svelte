@@ -238,7 +238,7 @@
 					class="bg-white w-full mx-3 flex-col gap-4 rounded-sm px-3 py-6 flex justify-center
 				items-center border border-primary-100/50 shadow-2xl"
 				>
-					{#if repository.image_manifests}
+					{#if repository.image_manifests && repository.image_manifests.length > 0}
 						{#each repository.image_manifests as manifest}
 							<Tag namespace={data.namespace} {manifest} />
 						{/each}

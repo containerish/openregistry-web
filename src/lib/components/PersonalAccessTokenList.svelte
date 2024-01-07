@@ -4,6 +4,7 @@
 	import CreatePATModal from './CreatePATModal.svelte';
 	import { SpinnerCircle } from '$lib/icons';
 	import type { AuthTokenList } from '$lib/types';
+	import { isFuture } from 'date-fns';
 
 	export let openRegistryClient: OpenRegistryClient;
 	const listUserAuthTokens = async () => {
@@ -25,12 +26,12 @@
 			isTokensLoading = false;
 		});
 
-	const handleTokenGenerate = async (e: CustomEvent<{ token: string }>) => {
+	const handleTokenGenerate = async () => {
 		tokens = await listUserAuthTokens();
 	};
 
 	const hasTokenExpired = (expiresAt: Date) => {
-		return expiresAt.getUTCMilliseconds() < new Date().getUTCMilliseconds();
+		return !isFuture(expiresAt);
 	};
 </script>
 
