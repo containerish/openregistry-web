@@ -970,7 +970,7 @@ export class OpenRegistryClient {
 
 		switch (response.status) {
 			// not modified, indicating that GitHub action is already setup
-			case 202:
+			case 204:
 				return {
 					success: true,
 					data: {
