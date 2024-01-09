@@ -11,13 +11,14 @@ export const POST: RequestHandler = async ({ request, fetch, url, cookies }) => 
 			uri.searchParams.set(key, value);
 		}
 	}
-
+	const body = await request.json();
 	const resp = await fetch(uri, {
 		method: 'POST',
-		body: JSON.stringify(await request.json()),
+		body: JSON.stringify(body),
 		headers: {
 			'Authorization': 'Bearer ' + cookies.get('access_token'),
 			'Content-Type': 'application/json',
+			'cookie': `session_id=${cookies.get('session_id')}`,
 		},
 	});
 
@@ -29,7 +30,7 @@ export const POST: RequestHandler = async ({ request, fetch, url, cookies }) => 
 		const data = await resp.json();
 		return json(data, { status: resp.status });
 	} catch (err) {
-		return json({ error: (err as Error).message }, { status: 500 });
+		return json({ error: (err as Error).message }, { status: 400 });
 	}
 };
 
@@ -49,6 +50,7 @@ export const PATCH: RequestHandler = async ({ request, url, cookies }) => {
 		headers: {
 			'Authorization': 'Bearer ' + cookies.get('access_token'),
 			'Content-Type': 'application/json',
+			'cookie': `session_id=${cookies.get('session_id')}`,
 		},
 	});
 
@@ -77,6 +79,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	const resp = await fetch(uri, {
 		headers: {
 			Authorization: 'Bearer ' + cookies.get('access_token'),
+			cookie: `session_id=${cookies.get('session_id')}`,
 		},
 	});
 
@@ -106,6 +109,7 @@ export const DELETE: RequestHandler = async ({ url, cookies }) => {
 		method: 'DELETE',
 		headers: {
 			Authorization: 'Bearer ' + cookies.get('access_token'),
+			cookie: `session_id=${cookies.get('session_id')}`,
 		},
 	});
 
