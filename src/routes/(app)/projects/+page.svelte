@@ -4,11 +4,7 @@
 	import { pulseStore } from '$lib/components/pulse';
 	import { Check, DeleteIcon, ExternalLinkIcon, GithubIcon, RecycleIcon, ToolsIcon } from '$lib/icons';
 	import { fly } from 'svelte/transition';
-	import type { PageData } from './$types';
-	import {
-		GetProjectResponse,
-		ListProjectsResponse,
-	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+	import { GetProjectResponse } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
@@ -18,32 +14,40 @@
 	import type { UUID } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
 	import SpinnerCircle from '$lib/icons/spinner-circle.svelte';
 
-	export let data: PageData;
-
+	export let data;
 	const projectsClient = getAutomationProjectsClient();
 	$: projects = [] as GetProjectResponse[];
 
-	const getProjects = () => {
-		if (data.projects) {
-			const resp = new ListProjectsResponse().fromJson(data.projects);
-			return resp.projects;
-		}
+	const getProjects = async () => {
+		try {
+			const response = await projectsClient.listProjects({
+				ownerId: {
+					value: data.user?.id ?? '',
+				},
+			});
+			if (response.projects) {
+				return response.projects;
+			}
 
-		return [];
+			return [];
+		} catch (err) {
+			return [];
+		}
 	};
 
 	onMount(async () => {
-		projects = getProjects();
+		projects = await getProjects();
 		if (projects.length === 0) {
+			console.log('No projects setup, redirecting to setup');
 			await goto('/apps/github/connect');
 		}
 	});
 
-	function filterProjectList(e: Event) {
+	async function filterProjectList(e: Event) {
 		const target = e.target as HTMLInputElement;
 
 		if (target.value === '') {
-			projects = getProjects();
+			projects = await getProjects();
 			return;
 		}
 
@@ -53,12 +57,12 @@
 	}
 
 	$: {
-		pulseStore.setPulseState(!$navigating && !!data.projects);
+		pulseStore.setPulseState(!$navigating && !!projects);
 	}
 
-	let isDeleteLoading = false;
+	let isDeleteLoading: string | undefined = undefined;
 	const deleteProject = async (projId: UUID | undefined) => {
-		isDeleteLoading = true;
+		isDeleteLoading = projId?.value;
 		try {
 			const response = await projectsClient.deleteProject({
 				id: projId,
@@ -72,7 +76,7 @@
 		} catch (err) {
 			console.log('error deleting project: ', err);
 		}
-		isDeleteLoading = false;
+		isDeleteLoading = undefined;
 	};
 
 	const handleCreateProject = async () => {
@@ -97,7 +101,7 @@
 			</ButtonSolid>
 		</div>
 		<div class="justify-start flex flex-col gap-2 items-start w-full h-full max-w-[3000px]">
-			{#each projects as project}
+			{#each projects as project (project.id?.value)}
 				<div
 					class="flex flex-col bg-white rounded-sm min-h-max border-2 border-primary-100/50 w-11/12 gap-3 px-6 py-6"
 					in:fly={{ y: 200, duration: 300, delay: 200 }}
@@ -117,7 +121,7 @@
 								on:click={() => deleteProject(project.id)}
 								class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0"
 							>
-								{#if isDeleteLoading}
+								{#if isDeleteLoading && isDeleteLoading === project.id?.value}
 									<SpinnerCircle class="h-6 w-6" />
 								{:else}
 									<DeleteIcon class="text-rose-600" />

@@ -22,6 +22,7 @@
 	export let handleNext: (index: number) => void;
 	export let store: Writable<CreateProjectRequest>;
 	export let openRegistryClient: OpenRegistryClient;
+
 	export let projectsClient: PromiseClient<typeof GitHubActionsProjectService>;
 
 	let dockerContextPath = '.';
@@ -116,8 +117,7 @@
 
 	const storeBuildProject = async () => {
 		try {
-			const response = await projectsClient.createProject($store);
-			console.log('response on client: ', response);
+			await projectsClient.createProject($store);
 		} catch (err) {
 			console.log('error storing prject info: ', err);
 		}

@@ -6,7 +6,6 @@
 {#if $pulseStore.status === 'LOADING'}
 	<Card class="w-full py-8">
 		<div class="flex w-screen h-full min-w-max min-h-max py-20 justify-center items-center">
-			<!-- <SpinnerCircle class="text-primary-100 h-20 w-20" /> -->
 			<svg class="pl" viewBox="0 0 200 200" width="230" height="230">
 				<defs>
 					<linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
