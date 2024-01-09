@@ -23,7 +23,7 @@
 </script>
 
 <main
-	class="{height} min-h-[1700px] flex flex-row selection:bg-primary-500 selection:text-white w-screen
+	class="{height} flex flex-row selection:bg-primary-500 selection:text-white w-screen
 	bg-slate-50/50"
 >
 	<div class="flex w-full max-w-[2000px] mx-auto">
