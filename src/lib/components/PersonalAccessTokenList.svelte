@@ -22,11 +22,17 @@
 </script>
 
 <div class="w-full flex gap-4 flex-col">
-	<div class="w-11/12 flex justify-end">
-		<CreatePATModal on:generate={handleTokenGenerate} {openRegistryClient} />
-	</div>
-	<div>
-		<span class="font-semibold">Tokens</span>
+	<div class="w-full flex justify-between items-start">
+		<div class="gap-1 flex flex-col">
+			<span class="font-semibold">Tokens</span>
+			<p class="text-sm leading-4 text-slate-500"
+				>Personal access tokens are an easy and efficient way of logging into OpenRegistry, e.g CI/CD pipelines,
+				CLIs, and account with Webauthn login method can use this as registry login credentials</p
+			>
+		</div>
+		<div class="w-11/12 flex justify-end">
+			<CreatePATModal on:generate={handleTokenGenerate} {openRegistryClient} />
+		</div>
 	</div>
 
 	<div class="w-full">

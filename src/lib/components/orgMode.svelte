@@ -3,16 +3,16 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import Info from '$lib/icons/info.svelte';
 	import Textfield from '$lib/textfield.svelte';
-	import { CheckIcon, PencilIcon, PlainCrossIcon, SearchIcon } from '$lib/icons';
+	import { CheckIcon, PencilIcon, SearchIcon } from '$lib/icons';
 	import type { OpenRegistryOrgMember, OpenRegistryUserType } from '$lib/types/user';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import { onMount } from 'svelte';
-	import Checkbox from '$lib/checkbox.svelte';
 	import Chip from './Chip.svelte';
 	import AddUsersToOrgModal from './addUsersToOrgModal.svelte';
-	import type { UpdateUserPermissionsRequest } from '$lib/types/permissions';
 	import Switch from './switch.svelte';
 	import { page } from '$app/stores';
+	import { writable } from 'svelte/store';
+	import SpinnerCircle from '$lib/icons/spinner-circle.svelte';
 
 	export let user: OpenRegistryUserType;
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
@@ -29,72 +29,102 @@
 		isConvertOrgLoading = false;
 	};
 
-	$: orgUsers = [] as OpenRegistryOrgMember[];
+	const orgUsersStore = writable({
+		users: [] as OpenRegistryOrgMember[],
+		filteredUsers: [] as OpenRegistryOrgMember[],
+		activeUser: null as OpenRegistryOrgMember | null,
+	});
 
 	onMount(async () => {
 		await listOrgUsers();
 	});
 
+	let isOrgListLoading = false;
 	const listOrgUsers = async () => {
+		isOrgListLoading = true;
 		const response = await openRegistryClient.listOrgUsers(user.id);
 		if (response.success) {
-			orgUsers = response.data;
-			return;
+			$orgUsersStore.users = response.data;
+			$orgUsersStore.filteredUsers = response.data;
 		}
+		isOrgListLoading = false;
 	};
 
 	let permsEdit = false;
-	const togglePermsEdit = (userId: string, idx: number) => {
-		updateUserPermissionsRequest.user_id = userId;
+	const togglePermsEdit = () => {
 		permsEdit = !permsEdit;
-		activeEditIndex = idx;
 	};
 
-	$: activeEditIndex = 0;
+	// $: updateUserPermissionsRequest = {
+	// 	pull: $orgUsersStore.activeUser ? $orgUsersStore.activeUser.pull : false,
+	// 	push: $orgUsersStore.activeUser ? $orgUsersStore.activeUser.push : false,
+	// 	user_id: $orgUsersStore.activeUser ? $orgUsersStore.activeUser.user_id : '',
+	// 	is_admin: false,
+	// 	organization_id: user.id,
+	// } as UpdateUserPermissionsRequest;
 
-	$: updateUserPermissionsRequest = {
-		pull: orgUsers.length > 0 ? orgUsers[activeEditIndex].pull : false,
-		push: orgUsers.length > 0 ? orgUsers[activeEditIndex].push : false,
-		is_admin: false,
-		organization_id: user.id,
-		user_id: '',
-	} as UpdateUserPermissionsRequest;
+	let selectedMembers = new Map<string, OpenRegistryOrgMember>();
 
 	let isUpdatePermsLoading = false;
-	const updateUserPermissions = async (userId: string, index: number) => {
+	const updateUserPermissions = async () => {
 		isUpdatePermsLoading = true;
-		updateUserPermissionsRequest.user_id = userId;
-		updateUserPermissionsRequest.is_admin = updateUserPermissionsRequest.pull && updateUserPermissionsRequest.push;
 
-		const response = await openRegistryClient.updateUserPermissions(updateUserPermissionsRequest);
-		if (response.success) {
-			const orgUserIndex = orgUsers.findIndex((u) => u.user_id === userId);
-			orgUsers[orgUserIndex] = {
-				...orgUsers[orgUserIndex],
-				pull: updateUserPermissionsRequest.pull,
-				push: updateUserPermissionsRequest.push,
-				is_admin: updateUserPermissionsRequest.is_admin,
-			};
+		const response = await Promise.allSettled(
+			Array.from(selectedMembers.values()).map((u) => {
+				return openRegistryClient.updateUserPermissions(u);
+			})
+		);
+
+		let foundErr = '';
+
+		response.forEach((r) => {
+			switch (r.status) {
+				case 'fulfilled':
+					if (!r.value.success) {
+						foundErr = r.value.error;
+					}
+					break;
+				case 'rejected':
+					foundErr = r.reason;
+			}
+		});
+
+		if (!foundErr) {
+			togglePermsEdit();
+			await listOrgUsers();
 			isUpdatePermsLoading = false;
-			togglePermsEdit(userId, index);
 			return;
 		}
-		isUpdatePermsLoading = false;
 
-		console.log('error updating user permissions:', response);
+		isUpdatePermsLoading = false;
 	};
 
-	const updateUserPermState = (e: CustomEvent<boolean>, perm: 'push' | 'pull') => {
+	const updateUserPermState = (e: CustomEvent<boolean>, u: OpenRegistryOrgMember, perm: 'push' | 'pull') => {
 		if (perm === 'pull') {
-			updateUserPermissionsRequest.pull = e.detail;
+			u.pull = e.detail;
 		} else if (perm === 'push') {
-			updateUserPermissionsRequest.push = e.detail;
+			u.push = e.detail;
 		}
 
 		if (!e.detail) {
-			updateUserPermissionsRequest.is_admin = e.detail;
+			u.is_admin = e.detail;
 		}
+
+		if (selectedMembers.has(u.user_id)) {
+			const ok = compareUserPerms(u, selectedMembers.get(u.user_id)!);
+			if (ok) {
+				selectedMembers.delete(u.user_id);
+				selectedMembers = new Map(selectedMembers);
+				return;
+			}
+		}
+		selectedMembers.set(u.user_id, u);
+		selectedMembers = new Map(selectedMembers);
 	};
+
+	function compareUserPerms(first: OpenRegistryOrgMember, second: OpenRegistryOrgMember) {
+		return first.pull === second.pull && first.push === second.push && first.is_admin === second.is_admin;
+	}
 
 	const refershOrgList = async () => {
 		await listOrgUsers();
@@ -111,7 +141,7 @@
 			return;
 		}
 
-		orgUsers = orgUsers.filter((o) => {
+		$orgUsersStore.filteredUsers = $orgUsersStore.users.filter((o) => {
 			return o.user.username.includes(target.value);
 		});
 	};
@@ -144,14 +174,34 @@
 		<!-- lsit of users with their roles in your organisation -->
 		<div class="flex w-full justify-center items-center h-full flex-col gap-2">
 			<div class="flex justify-between py-2 w-11/12">
-				<div class="flex items-center gap-3 w-3/5 relative">
+				<div class="flex items-center gap-3 w-2/5 lg:w-3/5 relative">
 					<Textfield placeholder="Search org members" on:input={filterOrgMembers} class="px-9 -ml-6" />
 					<SearchIcon class="square-5 text-slate-500 absolute left-4" />
 				</div>
-				<AddUsersToOrgModal on:user_add={refershOrgList} orgOwner={user} {openRegistryClient} />
+				<div class="flex justify-center items-center gap-3">
+					<ButtonOutlined
+						on:click={togglePermsEdit}
+						class="text-primary-500 rounded px-4 flex justify-center items-center gap-2"
+					>
+						<span class="font-light">{!permsEdit ? 'Edit' : 'Cancel'}</span>
+						<PencilIcon />
+					</ButtonOutlined>
+					{#if permsEdit}
+						<ButtonSolid
+							on:click={updateUserPermissions}
+							isLoading={isUpdatePermsLoading}
+							class="max-w-[150px] p-0 m-0 w-full flex justify-center items-center"
+						>
+							Save
+							<CheckIcon class="h-6 w-6" />
+						</ButtonSolid>
+					{:else}
+						<AddUsersToOrgModal on:user_add={refershOrgList} orgOwner={user} {openRegistryClient} />
+					{/if}
+				</div>
 			</div>
 
-			{#if (!orgUsers || orgUsers.length === 0) && !isFiltered}
+			{#if (!$orgUsersStore.filteredUsers || $orgUsersStore.filteredUsers.length === 0) && !isFiltered}
 				<div class="w-full h-full min-h-[800px] flex justify-center items-center">
 					<div
 						class="flex flex-col justify-center items-center gap-3 bg-primary-100/30 p-9 rounded border border-primary-200/50"
@@ -173,7 +223,7 @@
 						<AddUsersToOrgModal on:user_add={refershOrgList} orgOwner={user} {openRegistryClient} />
 					</div>
 				</div>
-			{:else if isFiltered && orgUsers.length === 0}
+			{:else if isFiltered && $orgUsersStore.filteredUsers.length === 0}
 				<div class="flex justify-center w-11/12 items-center">
 					<div
 						class="bg-primary-50/50 border border-primary-100 w-full rounded-md px-20 py-20 my-5
@@ -182,8 +232,15 @@
 						<span class="text-slate-500 text-2xl"> No users found </span>
 					</div>
 				</div>
+			{:else if isOrgListLoading}
+				<div
+					class="min-h-[100px] rounded border border-primary-100 w-11/12 flex justify-center items-center py-3 px-6 gap-6"
+				>
+					<span class="text-primary-400 font-semibold"> Loading... </span>
+					<SpinnerCircle class="text-primary-400" />
+				</div>
 			{:else}
-				{#each orgUsers as u, index (index)}
+				{#each $orgUsersStore.filteredUsers as u, index (index)}
 					<div
 						id={index.toString()}
 						class="min-h-[100px] rounded border border-primary-100 w-11/12 flex flex-col justify-between py-3 px-6 gap-6"
@@ -193,7 +250,6 @@
 								<div class="flex flex-col w-full gap-3 justify-between">
 									<div class="flex gap-2 w-full justify-between items-start">
 										<div class="flex w-full gap-2 justify-start items-center">
-											<Checkbox />
 											<span
 												class="text-2xl font-semibold text-primary-500 underline underline-offset-2"
 											>
@@ -203,56 +259,23 @@
 												{`(${u.user.email})`}
 											</span>
 										</div>
-
-										<div>
-											{#if permsEdit && activeEditIndex === index}
-												<div class="flex gap-2 justify-center items-center">
-													<ButtonOutlined
-														id={index.toString()}
-														on:click={() => togglePermsEdit(u.user_id, index)}
-														class="text-primary-500 rounded px-4 flex justify-center items-center gap-2"
-													>
-														<span class="font-light">Cancel</span>
-														<PlainCrossIcon />
-													</ButtonOutlined>
-													<ButtonOutlined
-														id={index.toString()}
-														isLoading={isUpdatePermsLoading &&
-															updateUserPermissionsRequest.user_id === u.user_id}
-														on:click={() => updateUserPermissions(u.user_id, index)}
-														class="text-primary-500 rounded px-4 flex justify-center items-center gap-2"
-													>
-														<span class="font-light">Save</span>
-														<CheckIcon class="w-6 h-6 text-primary-300" />
-													</ButtonOutlined>
-												</div>
-											{:else}
-												<ButtonOutlined
-													on:click={() => togglePermsEdit(u.user_id, index)}
-													class="text-primary-500 rounded px-4 flex justify-center items-center gap-2"
-												>
-													<span class="font-light">Edit</span>
-													<PencilIcon />
-												</ButtonOutlined>
-											{/if}
-										</div>
 									</div>
 
 									<div class="flex flex-col justify-center items-start gap-3">
 										<span class="font-semibold antialiased text-slate-600"> Permissions </span>
 										<div class="flex justify-center items-center gap-2.5">
-											{#if permsEdit && activeEditIndex === index}
+											{#if permsEdit}
 												<div class="flex justify-center items-center">
 													<Switch
 														bind:checked={u.push}
-														on:change={(e) => updateUserPermState(e, 'push')}
+														on:change={(e) => updateUserPermState(e, u, 'push')}
 														label="Push"
 													/>
 												</div>
 												<div class="flex justify-center items-center">
 													<Switch
 														bind:checked={u.pull}
-														on:change={(e) => updateUserPermState(e, 'pull')}
+														on:change={(e) => updateUserPermState(e, u, 'pull')}
 														label="Pull"
 													/>
 												</div>

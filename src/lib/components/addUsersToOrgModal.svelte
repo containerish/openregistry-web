@@ -122,7 +122,7 @@
 	};
 </script>
 
-<ButtonSolid class="max-w-[150px] p-0 m-0 w-full flex justify-center items-center">
+<ButtonSolid class="max-w-[150px] px-2 m-0 w-full flex justify-center items-center">
 	<button class="flex gap-3 h-full w-full justify-center items-center" use:melt={$trigger}>
 		Add Users
 		<UserPlus />
