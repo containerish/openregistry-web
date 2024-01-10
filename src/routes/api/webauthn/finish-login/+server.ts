@@ -37,7 +37,9 @@ export const POST: RequestHandler = async ({ fetch, request, cookies }) => {
 		cookieList.forEach((cookie) => {
 			cookies.set(cookie.name, cookie.value, {
 				domain: cookie.domain,
-				httpOnly: cookie.httpOnly,
+				// TODO: find a better way to do this
+				httpOnly: false,
+				// httpOnly: cookie.httpOnly,
 				sameSite: getSameSite(cookie.sameSite),
 				secure: cookie.secure,
 				path: '/',

@@ -122,23 +122,23 @@ export class OpenRegistryClient {
 				},
 			});
 
+			cookies.delete('session_id', {
+				path: '/',
+			});
+			cookies.delete('access_token', {
+				path: '/',
+			});
+			cookies.delete('refresh_token', {
+				path: '/',
+			});
 			const data = await response.json();
 			if (response.status === 202) {
-				cookies.delete('session_id', {
-					path: '/',
-				});
-				cookies.delete('access_token', {
-					path: '/',
-				});
-				cookies.delete('refresh_token', {
-					path: '/',
-				});
 				locals.user = null;
 				locals.sessionId = '';
 				locals.authenticated = false;
 
 				return {
-					data: data,
+					data,
 				};
 			}
 

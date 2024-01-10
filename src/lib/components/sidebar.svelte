@@ -197,7 +197,7 @@
 										<StarIcon />
 										<span>Star us on Github</span>
 									</a>
-									<Invite handleModal={toggleModal} />
+									<Invite />
 								</div>
 								<hr />
 								<div class="flex flex-col">

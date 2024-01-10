@@ -28,7 +28,6 @@
 	const wrapTokenGenerator = async () => {
 		isTokenGenerating = true;
 		const response = await openRegistryClient.generateAuthToken($tokenInputStore.name, $tokenInputStore.expires_at);
-		console.log('generateAuthToken response: ', response);
 		if (response.success) {
 			dispatch('generate', { token });
 			token = response.data.token;
