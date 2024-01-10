@@ -115,7 +115,8 @@ export class OpenRegistryClient {
 
 	async signOut(cookies: Cookies, locals: App.Locals) {
 		try {
-			const response = await this.fetcher(`/api/auth/signout`, {
+			const uri = this.getEndpoint('/auth/signout');
+			const response = await this.fetcher(uri, {
 				method: 'DELETE',
 				headers: {
 					cookie: `session_id=${cookies.get('session_id')}`,

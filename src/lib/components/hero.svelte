@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import Card from '$lib/card.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { RepoBox } from '$lib/components';
@@ -7,30 +7,15 @@
 	import { MongoIcon } from '$lib/icons';
 
 	let showRegisterForm = false;
-	let isLoading = false;
 	function toggleRegisterForm() {
 		showRegisterForm = !showRegisterForm;
 	}
 
 	const onClickRegister = () => {
-		isLoading = true;
 		setTimeout(() => {
 			toggleRegisterForm();
-			isLoading = false;
 		}, 3000);
 	};
-
-	// 1280px * 1394px
-	// 3840 px *  1394 px
-	let resolution;
-	const getResolution = () => {
-		const isIphone = navigator.userAgent.includes('iPhone');
-		return isIphone ? 'iPhone' : 'noit';
-	};
-
-	onMount(() => {
-		resolution = getResolution();
-	});
 
 	let query = '';
 
@@ -40,10 +25,10 @@
 <Card id="hero" class="w-full flex flex-col px-0">
 	<div class="flex flex-col items-center justify-center gap-9 w-full">
 		<picture class="w-full">
-			<source media="(min-width: 2000px)" srcset="./hero-big.png" />
-			<source media="(min-width: 650px)" srcset="./hero-clear.png" />
-			<source media="(min-width: 360px)" srcset="./hero-small.png" />
-			<img alt="hero svg" class="w-full" src="./hero-big.png" />
+			<source media="(min-width: 2000px)" srcset="/hero-big.webp" />
+			<source media="(min-width: 650px)" srcset="/hero-clear.webp" />
+			<source media="(min-width: 360px)" srcset="/hero-small.webp" />
+			<img alt="hero svg" class="w-full" src="/hero-big.webp" />
 		</picture>
 
 		<div class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-full px-6 md:px-16">

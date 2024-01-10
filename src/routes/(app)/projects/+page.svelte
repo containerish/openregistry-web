@@ -112,7 +112,7 @@
 						</div>
 						<div class="flex justify-center items-center gap-3">
 							<button
-								on:click={() => visitGitHubRepository(project.repositoryName)}
+								on:click={() => visitGitHubRepository(project.projectName)}
 								class="flex justify-center items-center gap-1 bg-transparent border-0 p-0 m-0"
 							>
 								<GithubIcon class="text-primary-600 h-6 w-6" />

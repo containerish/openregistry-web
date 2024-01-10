@@ -5,7 +5,7 @@
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 	import { onMount } from 'svelte';
-	import { backIn, backInOut, backOut, elasticIn, elasticInOut } from 'svelte/easing';
+	import { backInOut } from 'svelte/easing';
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
@@ -59,7 +59,7 @@
 	</div>
 	<div class="diagram w-11/12 max-w-[1000px]">
 		<picture>
-			<img class="w-full" src="/high-level-arch.png" alt="OpenRegistry High Level Architecture Diagram" />
+			<img class="w-full" src="/high-level-arch.webp" alt="OpenRegistry High Level Architecture Diagram" />
 		</picture>
 	</div>
 </Card>
