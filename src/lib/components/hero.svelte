@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import Card from '$lib/card.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { RepoBox } from '$lib/components';
@@ -7,30 +7,15 @@
 	import { MongoIcon } from '$lib/icons';
 
 	let showRegisterForm = false;
-	let isLoading = false;
 	function toggleRegisterForm() {
 		showRegisterForm = !showRegisterForm;
 	}
 
 	const onClickRegister = () => {
-		isLoading = true;
 		setTimeout(() => {
 			toggleRegisterForm();
-			isLoading = false;
 		}, 3000);
 	};
-
-	// 1280px * 1394px
-	// 3840 px *  1394 px
-	let resolution;
-	const getResolution = () => {
-		const isIphone = navigator.userAgent.includes('iPhone');
-		return isIphone ? 'iPhone' : 'noit';
-	};
-
-	onMount(() => {
-		resolution = getResolution();
-	});
 
 	let query = '';
 
@@ -40,23 +25,21 @@
 <Card id="hero" class="w-full flex flex-col px-0">
 	<div class="flex flex-col items-center justify-center gap-9 w-full">
 		<picture class="w-full">
-			<source media="(min-width: 2000px)" srcset="./hero-big.png" />
-			<source media="(min-width: 650px)" srcset="./hero-clear.png" />
-			<source media="(min-width: 360px)" srcset="./hero-small.png" />
-			<img alt="hero svg" class="w-full" src="./hero-big.png" />
+			<source media="(min-width: 2000px)" srcset="/hero-big.webp" />
+			<source media="(min-width: 650px)" srcset="/hero-clear.webp" />
+			<source media="(min-width: 360px)" srcset="/hero-small.webp" />
+			<img alt="hero svg" class="w-full" src="/hero-big.webp" />
 		</picture>
 
-		<div
-			class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-full px-6 md:px-16"
-		>
+		<div class="flex max-w-[1391px] flex-col items-center text-center text-primary-600 w-full px-6 md:px-16">
 			<span class="text-3xl font-semibold md:text-4xl md:font-bold 2xl:text-6xl">
 				A Decentralised Container Registry
 			</span>
 
 			<p class="mt-5 break-words text-base text-slate-700 lg:text-lg">
-				OpenRegistry is an open source container registry developed for people by people. Backed by
-				amazing distributed communities, OpenRegistry offers all the features of a container
-				registry along with awesome additions like automated build system
+				OpenRegistry is an open source container registry developed for people by people. Backed by amazing
+				distributed communities, OpenRegistry offers all the features of a container registry along with awesome
+				additions like automated build system
 			</p>
 		</div>
 
@@ -85,12 +68,10 @@
 		</div>
 
 		<div class="flex flex-col justify-center items-center gap-9 py-10">
-			<div
-				class="browse flex flex-col items-center justify-center text-center text-base text-slate-600 px-9"
-			>
+			<div class="browse flex flex-col items-center justify-center text-center text-base text-slate-600 px-9">
 				<span>
-					Browse, Pull, Push and Share 100s of container images by open source projects, software
-					vendors and communities.
+					Browse, Pull, Push and Share 100s of container images by open source projects, software vendors and
+					communities.
 				</span>
 			</div>
 

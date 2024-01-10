@@ -5,26 +5,27 @@
 	import { CheckIcon, EmailIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
 	import confetti from 'canvas-confetti';
-	var canvas = document.getElementById('confetti');
-	let conf = confetti.create(canvas, { resize: true });
-	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import Logo from './logo.svelte';
 	import { WebAuthnSignUpSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
-	import { env } from '$env/dynamic/public';
+	import type { SubmitFunction } from '../../routes/(marketing)/auth/signup/$types';
+
+	var canvas = document.getElementById('confetti');
+	let conf = confetti.create(canvas as HTMLCanvasElement, { resize: true });
 
 	var count = 200;
 	var defaults = {
-		origin: { y: 0.7 }
+		origin: { y: 0.7 },
 	};
 
 	const fire = (particleRatio: number, opts: Object) => {
 		conf(
 			Object.assign({}, defaults, opts, {
-				particleCount: Math.floor(count * particleRatio)
+				particleCount: Math.floor(count * particleRatio),
 			})
 		);
 	};
@@ -51,14 +52,15 @@
 	let emailErr = '';
 	let successMessage = '';
 
-	const handleSignUpSubmit: SubmitFunction = ({ form }) => {
+	const handleSignUpSubmit: SubmitFunction = ({ formData }) => {
 		isLoading = true;
 
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'success':
-					// await update();
-					form.reset();
+					for (const key of formData.keys()) {
+						formData.delete(key);
+					}
 					await update();
 					successMessage = result.data?.message;
 					showSuccessMsg = true;
@@ -90,7 +92,7 @@
 
 	let webAuthnForm: WebAuthnState = {
 		fieldErrors: {},
-		formErrors: []
+		formErrors: [],
 	};
 
 	const webAuthNSignup = async (e: SubmitEvent) => {
@@ -98,7 +100,7 @@
 		isLoading = true;
 		try {
 			const body = WebAuthnSignUpSchema.parse(formData);
-			const client = new OpenRegistryClient(fetch);
+			const client = new OpenRegistryClient(fetch, $page.url.origin);
 			const { message, error } = await client.webAuthnRegister(body);
 			if (error) {
 				webAuthnForm.formErrors = [error.message];
@@ -256,9 +258,7 @@
 				<div class="mt-4 flex items-center justify-between">
 					<span class="w-1/5 border-b lg:w-1/4" />
 
-					<span
-						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
-					>
+					<span class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline">
 						or sign up with email
 					</span>
 

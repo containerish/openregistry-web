@@ -2,7 +2,7 @@ import type { WebAuthnSignInSchema, WebAuthnSignUpSchema } from '$lib/formSchema
 import type {
 	AuthenticationPublicKeyCredential,
 	CredentialCreationOptionsJSON,
-	CredentialRequestOptionsJSON
+	CredentialRequestOptionsJSON,
 } from '@github/webauthn-json/browser-ponyfill';
 import type { z } from 'zod';
 

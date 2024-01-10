@@ -1,5 +1,5 @@
+import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 import HttpClient from './httpClient';
-import { env } from '$env/dynamic/public';
 
 export type Repository = {
 	uuid: string;
@@ -49,8 +49,8 @@ export type Tag = {
 };
 
 export class RegistryBackend extends HttpClient {
-	public constructor() {
-		super(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL);
+	constructor() {
+		super(PUBLIC_OPEN_REGISTRY_BACKEND_URL);
 	}
 
 	public ListRepositories = async (namespace?: string) => {
