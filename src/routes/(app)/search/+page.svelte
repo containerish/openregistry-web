@@ -4,10 +4,9 @@
 	import { fade, fly } from 'svelte/transition';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { navigating, page } from '$app/stores';
-	import { ClockIcon, FilterIcon, PencilIcon, SortIcon } from '$lib/icons';
+	import { ClockIcon, PencilIcon, SortIcon } from '$lib/icons';
 	import { pulseStore } from '$lib/components/pulse';
 	import { Repository, Loader } from '$lib/components';
-	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import type { PageData } from './$types';
 	import { DefaultPageSize } from '$lib/constants';
 	import { RepositoryCatalog } from '$lib/types/registry';
@@ -113,7 +112,7 @@
 				<div class="flex flex-row gap-10 justify-between items-center w-full pb-2 m-2">
 					<button
 						type="button"
-						class="trigger flex gap-2 items-center text-primary-500 bg-primary-100/50 py-1 px-3 rounded"
+						class="trigger flex gap-2 items-center text-primary-500 bg-primary-100/50 py-3 px-4 rounded"
 						use:melt={$trigger}
 						aria-label="Update dimensions"
 					>
@@ -121,7 +120,7 @@
 						<span class="">Sort</span>
 					</button>
 
-					<div class="w-4/5 lg:w-3/5">
+					<div class="w-full">
 						<Textfield on:input={handleOnChange} placeholder="Search Repositories" />
 					</div>
 					{#if $open}
@@ -162,10 +161,10 @@
 						</div>
 					{/if}
 					<!-- advance filters -->
-					<ButtonOutlined class="gap-2" on:click={toggleFilter}>
-						Filters
-						<FilterIcon />
-					</ButtonOutlined>
+					<!-- <ButtonOutlined class="gap-2" on:click={toggleFilter}> -->
+					<!-- 	Filters -->
+					<!-- 	<FilterIcon /> -->
+					<!-- </ButtonOutlined> -->
 				</div>
 				<div class="w-full flex flex-col justify-center items-center" in:fly={{ y: 200, duration: 300 }}>
 					{#if catalog && catalog.repositories && catalog.repositories.length > 0}
