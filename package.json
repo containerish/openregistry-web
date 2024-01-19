@@ -56,7 +56,7 @@
 		"postcss-cli": "^11.0.0",
 		"posthog-js": "^1.96.1",
 		"prettier": "^2.8.8",
-		"prettier-plugin-svelte": "^2.10.0",
+		"prettier-plugin-svelte": "^2.10.1",
 		"prettier-plugin-tailwindcss": "^0.3.0",
 		"set-cookie-parser": "^2.6.0",
 		"svelte": "^3.59.1",
