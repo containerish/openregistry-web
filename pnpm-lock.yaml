@@ -48,8 +48,8 @@ dependencies:
     specifier: ^5.0.0
     version: 5.0.0
   typeit:
-    specifier: ^8.8.0
-    version: 8.8.0
+    specifier: ^8.8.3
+    version: 8.8.3
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -3636,8 +3636,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /typeit@8.8.0:
-    resolution: {integrity: sha512-GQp6OW7vxro1HN3F7UPL0C2KzkGs8bFtUgmJSeK+xNhdofI40mkWxrBT2AXQwtS5Txkg7ttwplxvWCQxnUXyrw==}
+  /typeit@8.8.3:
+    resolution: {integrity: sha512-K7nChkj6iyylUi713VBDULUXXLF0pfB6nFPVhNnXTKO2An7NzVz5fjoAHk2FAC3TFLiSnU+QsqhDmap17oBELw==}
     requiresBuild: true
     dependencies:
       '@types/web-animations-js': 2.2.16
