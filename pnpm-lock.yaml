@@ -10,13 +10,13 @@ dependencies:
     version: 0.9.0-20231217153936-3ce39122fce2.1(@bufbuild/connect@0.9.0)(@bufbuild/protobuf@1.7.0)
   '@buf/containerish_openregistry.bufbuild_connect-web':
     specifier: 0.8.6-20231217153936-3ce39122fce2.1
-    version: 0.8.6-20231217153936-3ce39122fce2.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.7.0)
+    version: 0.8.6-20231217153936-3ce39122fce2.1(@bufbuild/connect-web@0.13.0)(@bufbuild/protobuf@1.7.0)
   '@bufbuild/connect':
     specifier: ^0.9.0
     version: 0.9.0(@bufbuild/protobuf@1.7.0)
   '@bufbuild/connect-web':
-    specifier: ^0.9.0
-    version: 0.9.0(@bufbuild/protobuf@1.7.0)
+    specifier: ^0.13.0
+    version: 0.13.0(@bufbuild/protobuf@1.7.0)
   '@bufbuild/protobuf':
     specifier: ^1.7.0
     version: 1.7.0
@@ -226,15 +226,15 @@ packages:
       - '@bufbuild/protobuf'
     dev: false
 
-  /@buf/containerish_openregistry.bufbuild_connect-web@0.8.6-20231217153936-3ce39122fce2.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.7.0):
+  /@buf/containerish_openregistry.bufbuild_connect-web@0.8.6-20231217153936-3ce39122fce2.1(@bufbuild/connect-web@0.13.0)(@bufbuild/protobuf@1.7.0):
     resolution: {tarball: https://buf.build/gen/npm/v1/@buf/containerish_openregistry.bufbuild_connect-web/-/containerish_openregistry.bufbuild_connect-web-0.8.6-20231217153936-3ce39122fce2.1.tgz}
     peerDependencies:
       '@bufbuild/connect-web': ^0.8.6
     dependencies:
       '@buf/containerish_openregistry.bufbuild_es': 1.2.0-20231217153936-3ce39122fce2.1(@bufbuild/protobuf@1.7.0)
-      '@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web': 0.8.6-20221025150516-6607b10f00ed.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.7.0)
-      '@buf/googleapis_googleapis.bufbuild_connect-web': 0.8.6-20230329151039-5ae7f88519b0.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.7.0)
-      '@bufbuild/connect-web': 0.9.0(@bufbuild/protobuf@1.7.0)
+      '@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web': 0.8.6-20221025150516-6607b10f00ed.1(@bufbuild/connect-web@0.13.0)(@bufbuild/protobuf@1.7.0)
+      '@buf/googleapis_googleapis.bufbuild_connect-web': 0.8.6-20230329151039-5ae7f88519b0.1(@bufbuild/connect-web@0.13.0)(@bufbuild/protobuf@1.7.0)
+      '@bufbuild/connect-web': 0.13.0(@bufbuild/protobuf@1.7.0)
     transitivePeerDependencies:
       - '@bufbuild/protobuf'
     dev: false
@@ -283,13 +283,13 @@ packages:
       - '@bufbuild/protobuf'
     dev: false
 
-  /@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web@0.8.6-20221025150516-6607b10f00ed.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.7.0):
+  /@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web@0.8.6-20221025150516-6607b10f00ed.1(@bufbuild/connect-web@0.13.0)(@bufbuild/protobuf@1.7.0):
     resolution: {tarball: https://buf.build/gen/npm/v1/@buf/envoyproxy_protoc-gen-validate.bufbuild_connect-web/-/envoyproxy_protoc-gen-validate.bufbuild_connect-web-0.8.6-20221025150516-6607b10f00ed.1.tgz}
     peerDependencies:
       '@bufbuild/connect-web': ^0.8.6
     dependencies:
       '@buf/envoyproxy_protoc-gen-validate.bufbuild_es': 1.2.0-20221025150516-6607b10f00ed.1(@bufbuild/protobuf@1.7.0)
-      '@bufbuild/connect-web': 0.9.0(@bufbuild/protobuf@1.7.0)
+      '@bufbuild/connect-web': 0.13.0(@bufbuild/protobuf@1.7.0)
     transitivePeerDependencies:
       - '@bufbuild/protobuf'
     dev: false
@@ -332,13 +332,13 @@ packages:
       - '@bufbuild/protobuf'
     dev: false
 
-  /@buf/googleapis_googleapis.bufbuild_connect-web@0.8.6-20230329151039-5ae7f88519b0.1(@bufbuild/connect-web@0.9.0)(@bufbuild/protobuf@1.7.0):
+  /@buf/googleapis_googleapis.bufbuild_connect-web@0.8.6-20230329151039-5ae7f88519b0.1(@bufbuild/connect-web@0.13.0)(@bufbuild/protobuf@1.7.0):
     resolution: {tarball: https://buf.build/gen/npm/v1/@buf/googleapis_googleapis.bufbuild_connect-web/-/googleapis_googleapis.bufbuild_connect-web-0.8.6-20230329151039-5ae7f88519b0.1.tgz}
     peerDependencies:
       '@bufbuild/connect-web': ^0.8.6
     dependencies:
       '@buf/googleapis_googleapis.bufbuild_es': 1.2.0-20230329151039-5ae7f88519b0.1(@bufbuild/protobuf@1.7.0)
-      '@bufbuild/connect-web': 0.9.0(@bufbuild/protobuf@1.7.0)
+      '@bufbuild/connect-web': 0.13.0(@bufbuild/protobuf@1.7.0)
     transitivePeerDependencies:
       - '@bufbuild/protobuf'
     dev: false
@@ -370,12 +370,22 @@ packages:
       - '@bufbuild/protobuf'
     dev: true
 
-  /@bufbuild/connect-web@0.9.0(@bufbuild/protobuf@1.7.0):
-    resolution: {integrity: sha512-WyYWjPRWceUc/1d5n8oA1NcCni2ND6qj8iXd1Hqy6qkCyo2n/FUSSe3oQuoXYZ9KCUI+5qexHz46n2jtzmFDiQ==}
+  /@bufbuild/connect-web@0.13.0(@bufbuild/protobuf@1.7.0):
+    resolution: {integrity: sha512-Ys9VFDWYktD9yFQSLOlkpsD42LonDNMCysLCfjXFuxlupYuf4f7qg0zkT5bESyTfqk4xtRDSSGR3xygaj/ONIQ==}
+    deprecated: Connect has moved to its own org @connectrpc and has a stable v1. Run `npx @connectrpc/connect-migrate@latest` to update. See https://github.com/connectrpc/connect-es/releases/tag/v0.13.1 for details.
     peerDependencies:
-      '@bufbuild/protobuf': ^1.2.0
+      '@bufbuild/protobuf': ^1.2.1
     dependencies:
-      '@bufbuild/connect': 0.9.0(@bufbuild/protobuf@1.7.0)
+      '@bufbuild/connect': 0.13.0(@bufbuild/protobuf@1.7.0)
+      '@bufbuild/protobuf': 1.7.0
+    dev: false
+
+  /@bufbuild/connect@0.13.0(@bufbuild/protobuf@1.7.0):
+    resolution: {integrity: sha512-eZSMbVLyUFtXiZNORgCEvv580xKZeYQdMOWj2i/nxOcpXQcrEzTMTA7SZzWv4k4gveWCOSRoWmYDeOhfWXJv0g==}
+    deprecated: Connect has moved to its own org @connectrpc and has a stable v1. Run `npx @connectrpc/connect-migrate@latest` to update. See https://github.com/connectrpc/connect-es/releases/tag/v0.13.1 for details.
+    peerDependencies:
+      '@bufbuild/protobuf': ^1.2.1
+    dependencies:
       '@bufbuild/protobuf': 1.7.0
     dev: false
 
