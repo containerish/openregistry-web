@@ -86,7 +86,7 @@
 		"@types/canvas-confetti": "^1.6.4",
 		"axios": "^1.6.4",
 		"cookie": "0.6.0",
-		"gsap": "^3.12.4",
+		"gsap": "^3.12.5",
 		"js-cookie": "^3.0.5",
 		"svelte-steps": "^2.4.1",
 		"throttle-debounce": "^5.0.0",
