@@ -84,7 +84,7 @@
 		"@lukeed/uuid": "^2.0.1",
 		"@octokit/types": "^12.4.0",
 		"@types/canvas-confetti": "^1.6.4",
-		"axios": "^1.6.4",
+		"axios": "^1.6.7",
 		"cookie": "0.6.0",
 		"gsap": "^3.12.4",
 		"js-cookie": "^3.0.5",
