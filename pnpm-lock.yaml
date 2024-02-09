@@ -185,8 +185,8 @@ devDependencies:
     specifier: ^5.3.3
     version: 5.3.3
   typescript-svelte-plugin:
-    specifier: ^0.3.34
-    version: 0.3.34(svelte@3.59.2)(typescript@5.3.3)
+    specifier: ^0.3.37
+    version: 0.3.37(svelte@3.59.2)(typescript@5.3.3)
   vite:
     specifier: ^4.5.2
     version: 4.5.2
@@ -3911,10 +3911,10 @@ packages:
     resolution: {integrity: sha512-2Xq2lLcGJf3PaEY46f1w5s+/O+tLl4U2V+Z+sCeoUm/kEPFXeZP/aFr2JVKwdzSlXCT+raz75xqXtnZrPWJ0zA==}
     dev: false
 
-  /svelte2tsx@0.6.15(svelte@3.59.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-+j6RmA3g5pPs1DHa/rdzJjjhZuCfWx0IbNPaR99A2bvOSPPY6BlVkBGU0urI+DGcWHhYEG28Flo942KqlAkpEQ==}
+  /svelte2tsx@0.7.1(svelte@3.59.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-0lKa6LrqJxRan0bDmBd/uFsVzYSXnoFUDaczaH0znke/XI79oy1JjFaF51J9EsOvpn8lXPlrUc3n/MA/ORNxBg==}
     peerDependencies:
-      svelte: ^3.55 || ^4.0
+      svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
     dependencies:
       dedent-js: 1.0.1
@@ -4084,11 +4084,11 @@ packages:
       '@types/web-animations-js': 2.2.16
     dev: false
 
-  /typescript-svelte-plugin@0.3.34(svelte@3.59.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-LOex9QLlct+oHww0HVmABvfuOSUqlGrDU6COtNez61bycpSdu2ZnrYsP0N05WHqbrUPZG2u2R/fpbW77nd7x2Q==}
+  /typescript-svelte-plugin@0.3.37(svelte@3.59.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-eg+uod/Ao6PEQ606DpexbbKF9Rzm3w8W53DyVFaNnR1CTmQQ4LbKwjcVqFhwFnGeXqrvB+0UK3atTaE+HyK0uA==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
-      svelte2tsx: 0.6.15(svelte@3.59.2)(typescript@5.3.3)
+      svelte2tsx: 0.7.1(svelte@3.59.2)(typescript@5.3.3)
     transitivePeerDependencies:
       - svelte
       - typescript
