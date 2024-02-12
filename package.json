@@ -49,7 +49,7 @@
 		"autoprefixer": "^10.4.17",
 		"canvas-confetti": "^1.9.2",
 		"cssnano": "^6.0.3",
-		"eslint": "^8.53.0",
+		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.35",
