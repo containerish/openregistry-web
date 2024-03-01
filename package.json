@@ -48,7 +48,7 @@
 		"@typescript-eslint/parser": "^5.62.0",
 		"autoprefixer": "^10.4.17",
 		"canvas-confetti": "^1.9.2",
-		"cssnano": "^6.0.3",
+		"cssnano": "^6.0.5",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte3": "^4.0.0",
