@@ -46,7 +46,7 @@
 		"@types/webappsec-credential-management": "^0.6.8",
 		"@typescript-eslint/eslint-plugin": "^5.62.0",
 		"@typescript-eslint/parser": "^5.62.0",
-		"autoprefixer": "^10.4.17",
+		"autoprefixer": "^10.4.18",
 		"canvas-confetti": "^1.9.2",
 		"cssnano": "^6.1.0",
 		"eslint": "^8.56.0",
