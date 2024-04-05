@@ -89,8 +89,8 @@ devDependencies:
     specifier: ^0.5.12
     version: 0.5.12(tailwindcss@3.4.3)
   '@tsconfig/svelte':
-    specifier: ^5.0.2
-    version: 5.0.2
+    specifier: ^5.0.4
+    version: 5.0.4
   '@types/cookie':
     specifier: 0.6.0
     version: 0.6.0
@@ -1216,8 +1216,8 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: true
 
-  /@tsconfig/svelte@5.0.2:
-    resolution: {integrity: sha512-BRbo1fOtyVbhfLyuCWw6wAWp+U8UQle+ZXu84MYYWzYSEB28dyfnRBIE99eoG+qdAC0po6L2ScIEivcT07UaMA==}
+  /@tsconfig/svelte@5.0.4:
+    resolution: {integrity: sha512-BV9NplVgLmSi4mwKzD8BD/NQ8erOY/nUE/GpgWe2ckx+wIQF5RyRirn/QsSSCPeulVpc3RA/iJt6DpfTIZps0Q==}
     dev: true
 
   /@types/canvas-confetti@1.6.4:
