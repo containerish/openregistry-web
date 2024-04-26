@@ -91,6 +91,6 @@
 		"svelte-steps": "^2.4.1",
 		"throttle-debounce": "^5.0.0",
 		"typeit": "^8.8.3",
-		"zod": "^3.22.5"
+		"zod": "^3.23.4"
 	}
 }
