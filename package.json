@@ -73,7 +73,7 @@
 		"typescript": "^5.4.5",
 		"typescript-svelte-plugin": "^0.3.37",
 		"vite": "^4.5.3",
-		"vitest": "^1.5.0"
+		"vitest": "^1.6.0"
 	},
 	"dependencies": {
 		"@buf/containerish_openregistry.bufbuild_connect-es": "0.9.0-20231217153936-3ce39122fce2.1",
