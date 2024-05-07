@@ -185,8 +185,8 @@ devDependencies:
     specifier: ^5.4.5
     version: 5.4.5
   typescript-svelte-plugin:
-    specifier: ^0.3.37
-    version: 0.3.37(svelte@3.59.2)(typescript@5.4.5)
+    specifier: ^0.3.38
+    version: 0.3.38(svelte@3.59.2)(typescript@5.4.5)
   vite:
     specifier: ^4.5.3
     version: 4.5.3
@@ -4059,8 +4059,8 @@ packages:
       '@types/web-animations-js': 2.2.16
     dev: false
 
-  /typescript-svelte-plugin@0.3.37(svelte@3.59.2)(typescript@5.4.5):
-    resolution: {integrity: sha512-eg+uod/Ao6PEQ606DpexbbKF9Rzm3w8W53DyVFaNnR1CTmQQ4LbKwjcVqFhwFnGeXqrvB+0UK3atTaE+HyK0uA==}
+  /typescript-svelte-plugin@0.3.38(svelte@3.59.2)(typescript@5.4.5):
+    resolution: {integrity: sha512-JdfgJauNDNOvyY9/dP3WfWsy3+5usVLqL5WPvKvYDBqo+/bUfITWT0FSVyJvoOtNgkhYlxi9HDZycf4FIUxWSQ==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
       svelte2tsx: 0.7.1(svelte@3.59.2)(typescript@5.4.5)
