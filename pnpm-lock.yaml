@@ -97,8 +97,8 @@ importers:
         specifier: 0.6.0
         version: 0.6.0
       '@types/set-cookie-parser':
-        specifier: ^2.4.7
-        version: 2.4.7
+        specifier: ^2.4.10
+        version: 2.4.10
       '@types/throttle-debounce':
         specifier: ^5.0.2
         version: 5.0.2
@@ -148,8 +148,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(prettier-plugin-svelte@2.10.1(prettier@2.8.8)(svelte@3.59.2))(prettier@2.8.8)
       set-cookie-parser:
-        specifier: ^2.6.0
-        version: 2.6.0
+        specifier: ^2.7.0
+        version: 2.7.0
       svelte:
         specifier: ^3.59.2
         version: 3.59.2
@@ -837,8 +837,8 @@ packages:
   '@types/semver@7.3.13':
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
 
-  '@types/set-cookie-parser@2.4.7':
-    resolution: {integrity: sha512-+ge/loa0oTozxip6zmhRIk8Z/boU51wl9Q6QdLZcokIGMzY5lFXYy/x7Htj2HTC6/KZP1hUbZ1ekx8DYXICvWg==}
+  '@types/set-cookie-parser@2.4.10':
+    resolution: {integrity: sha512-GGmQVGpQWUe5qglJozEjZV/5dyxbOOZ0LHe/lqyWssB88Y4svNfst0uqBVscdDeIKl5Jy5+aPSvy7mI9tYRguw==}
 
   '@types/throttle-debounce@5.0.2':
     resolution: {integrity: sha512-pDzSNulqooSKvSNcksnV72nk8p7gRqN8As71Sp28nov1IgmPKWbOEIwAWvBME5pPTtaXJAvG3O4oc76HlQ4kqQ==}
@@ -2180,8 +2180,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  set-cookie-parser@2.6.0:
-    resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
+  set-cookie-parser@2.7.0:
+    resolution: {integrity: sha512-lXLOiqpkUumhRdFF3k1osNXCy9akgx/dyPZ5p8qAg9seJzXr5ZrlqZuWIMuY6ejOsVLE6flJ5/h3lsn57fQ/PQ==}
 
   shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -3051,7 +3051,7 @@ snapshots:
       magic-string: 0.30.5
       mrmime: 1.0.1
       sade: 1.8.1
-      set-cookie-parser: 2.6.0
+      set-cookie-parser: 2.7.0
       sirv: 2.0.3
       svelte: 3.59.2
       tiny-glob: 0.2.9
@@ -3111,7 +3111,7 @@ snapshots:
 
   '@types/semver@7.3.13': {}
 
-  '@types/set-cookie-parser@2.4.7':
+  '@types/set-cookie-parser@2.4.10':
     dependencies:
       '@types/node': 20.1.0
 
@@ -4452,7 +4452,7 @@ snapshots:
     dependencies:
       lru-cache: 6.0.0
 
-  set-cookie-parser@2.6.0: {}
+  set-cookie-parser@2.7.0: {}
 
   shebang-command@2.0.0:
     dependencies:
