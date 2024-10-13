@@ -8,22 +8,23 @@
 	import ButtonOutlined from '$lib/button-outlined.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Select from '$lib/components/select.svelte';
-	import {
-		CreateProjectRequest,
-		ProjectBuildSettingsMessage,
-	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 	import type { SelectOptions } from '$lib/client/selectTypes';
 	import type { Writable } from 'svelte/store';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import type { OpenRegistryClient } from '$lib/client';
-	import type { PromiseClient } from '@connectrpc/connect';
-	import type { GitHubActionsProjectService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_project_connect';
+	import type { Client } from '@connectrpc/connect';
+	import { GitHubActionsProjectService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+	import {
+		ProjectBuildSettingsMessageSchema,
+		type CreateProjectRequest,
+	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+	import { create } from '@bufbuild/protobuf';
 
 	export let handleNext: (index: number) => void;
 	export let store: Writable<CreateProjectRequest>;
 	export let openRegistryClient: OpenRegistryClient;
 
-	export let projectsClient: PromiseClient<typeof GitHubActionsProjectService>;
+	export let projectsClient: Client<typeof GitHubActionsProjectService>;
 
 	let dockerContextPath = '.';
 	const getBuildCommand = (buildTool: string, dockerFilePath: string) => {
@@ -102,7 +103,7 @@
 	};
 
 	onMount(() => {
-		$store.buildSettings = new ProjectBuildSettingsMessage({
+		$store.buildSettings = create(ProjectBuildSettingsMessageSchema, {
 			execCommand: getBuildCommand('Docker', './Dockerfile'),
 		});
 

@@ -4,7 +4,7 @@
 	import { pulseStore } from '$lib/components/pulse';
 	import { Check, DeleteIcon, ExternalLinkIcon, GithubIcon, RecycleIcon, ToolsIcon } from '$lib/icons';
 	import { fly } from 'svelte/transition';
-	import { GetProjectResponse } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+	import type { GetProjectResponse } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
@@ -31,6 +31,7 @@
 
 			return [];
 		} catch (err) {
+			console.log('error list projects: ', err);
 			return [];
 		}
 	};

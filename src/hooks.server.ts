@@ -2,12 +2,12 @@ import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { OpenRegistryClient } from '$lib/client/openregistry';
 import { redirect } from '@sveltejs/kit';
 import { createConnectTransport } from '@connectrpc/connect-web';
-import { createPromiseClient } from '@connectrpc/connect';
-import { GitHubActionsLogsService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_logs_connect';
-import { GitHubActionsProjectService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_project_connect';
-import { GithubActionsBuildService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_job_connect';
-import { ClairService } from '@buf/containerish_openregistry.connectrpc_es/services/yor/clair/v1/clair_connect';
+import { createClient } from '@connectrpc/connect';
 import { sequence } from '@sveltejs/kit/hooks';
+import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_logs_pb';
+import { GithubActionsBuildService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_job_pb';
+import { GitHubActionsProjectService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+import { ClairService } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
 import { OPEN_REGISTRY_BACKEND_PROTOBUF_URL, OPEN_REGISTRY_BACKEND_CLAIR_URL } from '$env/static/private';
 import { setCookies } from '$lib/protobuf/interceptors';
 
@@ -43,6 +43,7 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 	const transport = createConnectTransport({
 		baseUrl: OPEN_REGISTRY_BACKEND_PROTOBUF_URL,
 		interceptors: [setCookies(event.cookies)],
+		fetch: event.fetch,
 	});
 
 	const clairTransport = createConnectTransport({
@@ -55,10 +56,10 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 	event.locals.clairTransport = clairTransport;
 
 	// set clients
-	event.locals.ghBuildClient = createPromiseClient(GithubActionsBuildService, transport);
-	event.locals.ghLogsClient = createPromiseClient(GitHubActionsLogsService, transport);
-	event.locals.ghProjectsClient = createPromiseClient(GitHubActionsProjectService, transport);
-	event.locals.vulnScanningClient = createPromiseClient(ClairService, clairTransport);
+	event.locals.ghBuildClient = createClient(GithubActionsBuildService, transport);
+	event.locals.ghLogsClient = createClient(GitHubActionsLogsService, transport);
+	event.locals.ghProjectsClient = createClient(GitHubActionsProjectService, transport);
+	event.locals.vulnScanningClient = createClient(ClairService, clairTransport);
 
 	return await resolve(event);
 };

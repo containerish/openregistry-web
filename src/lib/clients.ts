@@ -1,9 +1,9 @@
 import { createConnectTransport } from '@connectrpc/connect-web';
-import { createPromiseClient, type PromiseClient } from '@connectrpc/connect';
-import { GitHubActionsLogsService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_logs_connect';
-import { GitHubActionsProjectService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_project_connect';
-import { GithubActionsBuildService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_job_connect';
-import { ClairService } from '@buf/containerish_openregistry.connectrpc_es/services/yor/clair/v1/clair_connect';
+import { createClient, type Client } from '@connectrpc/connect';
+import { ClairService } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
+import { GithubActionsBuildService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_job_pb';
+import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_logs_pb';
+import { GitHubActionsProjectService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 import { PUBLIC_OPEN_REGISTRY_BACKEND_CLAIR_URL, PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL } from '$env/static/public';
 import { setClientSideCookies } from './protobuf/interceptors';
 import { getContext, setContext } from 'svelte';
@@ -28,10 +28,10 @@ export const initializeOpenRegistryClients = (fetcher: typeof fetch) => {
 		fetch: fetcher,
 	});
 
-	const ghBuildClient = createPromiseClient(GithubActionsBuildService, buildAutomationTransport);
-	const ghLogsClient = createPromiseClient(GitHubActionsLogsService, buildAutomationTransport);
-	const ghProjectsClient = createPromiseClient(GitHubActionsProjectService, buildAutomationTransport);
-	const vulnScanningClient = createPromiseClient(ClairService, clairTransport);
+	const ghBuildClient = createClient(GithubActionsBuildService, buildAutomationTransport);
+	const ghLogsClient = createClient(GitHubActionsLogsService, buildAutomationTransport);
+	const ghProjectsClient = createClient(GitHubActionsProjectService, buildAutomationTransport);
+	const vulnScanningClient = createClient(ClairService, clairTransport);
 
 	setContext(ClientCtxKeys.VULNERABILITY_SCANNING_CLIENT, vulnScanningClient);
 	setContext(ClientCtxKeys.AUTOMATION_PROJECTS_CLIENT, ghProjectsClient);
@@ -40,17 +40,17 @@ export const initializeOpenRegistryClients = (fetcher: typeof fetch) => {
 };
 
 export function getAutomationBuildsClient() {
-	return getContext<PromiseClient<typeof GithubActionsBuildService>>(ClientCtxKeys.AUTOMATION_BUILDS_CLIENT);
+	return getContext<Client<typeof GithubActionsBuildService>>(ClientCtxKeys.AUTOMATION_BUILDS_CLIENT);
 }
 
 export function getAutomationLogsClient() {
-	return getContext<PromiseClient<typeof GitHubActionsLogsService>>(ClientCtxKeys.AUTOMATION_LOGS_CLIENT);
+	return getContext<Client<typeof GitHubActionsLogsService>>(ClientCtxKeys.AUTOMATION_LOGS_CLIENT);
 }
 
 export function getAutomationProjectsClient() {
-	return getContext<PromiseClient<typeof GitHubActionsProjectService>>(ClientCtxKeys.AUTOMATION_PROJECTS_CLIENT);
+	return getContext<Client<typeof GitHubActionsProjectService>>(ClientCtxKeys.AUTOMATION_PROJECTS_CLIENT);
 }
 
 export function getVulnerabilityScanningClient() {
-	return getContext<PromiseClient<typeof ClairService>>(ClientCtxKeys.VULNERABILITY_SCANNING_CLIENT);
+	return getContext<Client<typeof ClairService>>(ClientCtxKeys.VULNERABILITY_SCANNING_CLIENT);
 }

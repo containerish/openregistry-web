@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import Switch from '$lib/components/switch.svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
-	import { GetVulnerabilityReportResponse } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
+	import type { GetVulnerabilityReportResponse } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
 	import ExternalLink from '$lib/icons/external-link.svelte';
 	import { DownloadIcon, LockClosedIcon, LockOpenIcon, SpinnerCircle, StarIcon } from '$lib/icons';
 	import CheckIcon from '$lib/icons/checkIcon.svelte';

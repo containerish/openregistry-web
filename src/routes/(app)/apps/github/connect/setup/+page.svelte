@@ -1,33 +1,36 @@
 <script lang="ts">
 	import { Steps } from 'svelte-steps';
-	let steps = [
-		{ text: 'Select repository' },
-		{ text: 'Set up build' },
-		// { text: 'Build project' },
-	];
-	let clickable = false;
 	import { ghStore } from '$lib/stores';
 	import SelectRepo from './select-repo.svelte';
 	import Setup from './setup.svelte';
 	import type { PageData } from './$types';
 	import { fly } from 'svelte/transition';
-	import {
-		CreateProjectRequest,
-		ProjectBuildSettingsMessage,
-	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 	import { writable } from 'svelte/store';
 	import EmptyListMessage from '$lib/components/EmptyListMessage.svelte';
-	import { Timestamp } from '@bufbuild/protobuf';
 	import { v4 as UuidV4 } from '@lukeed/uuid';
-	import { UUID } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
 	import { onMount } from 'svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { Repository } from '$lib/types';
 	import { page } from '$app/stores';
 	import { getAutomationProjectsClient } from '$lib/clients';
 	import { goto } from '$app/navigation';
+	import {
+		CreateProjectRequestSchema,
+		ProjectBuildSettingsMessageSchema,
+		type CreateProjectRequest,
+	} from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
+	import { create } from '@bufbuild/protobuf';
+	import { TimestampSchema } from '@bufbuild/protobuf/wkt';
+	import { UUIDSchema } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
+
 	export let data: PageData;
 	let selectedTab = 0;
+	let steps = [
+		{ text: 'Select repository' },
+		{ text: 'Set up build' },
+		// { text: 'Build project' },
+	];
+	let clickable = false;
 
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	const projectsClient = getAutomationProjectsClient();
@@ -40,12 +43,12 @@
 		selectedTab = index;
 	}
 
-	const createProjectRequestStore = writable<CreateProjectRequest>(
-		new CreateProjectRequest({
-			createdAt: Timestamp.fromDate(new Date()),
-			id: new UUID({ value: UuidV4() }),
-			ownerId: new UUID({ value: data.user?.id }),
-			buildSettings: new ProjectBuildSettingsMessage({
+	const createProjectRequestStore = writable(
+		create(CreateProjectRequestSchema, {
+			createdAt: create(TimestampSchema, { seconds: BigInt(Date.now() / 1000) }),
+			id: create(UUIDSchema, { value: UuidV4() }),
+			ownerId: create(UUIDSchema, { value: data.user?.id }),
+			buildSettings: create(ProjectBuildSettingsMessageSchema, {
 				worfklowFile: './Dockerfile',
 				buildTool: 'Docker',
 			}),

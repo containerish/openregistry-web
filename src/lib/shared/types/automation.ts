@@ -1,4 +1,4 @@
-import { Timestamp } from '@bufbuild/protobuf';
+import { timestampFromDate, timestampNow } from '@bufbuild/protobuf/wkt';
 import { z } from 'zod';
 
 export const ProtoUUIDWrapper = z.object({
@@ -23,10 +23,10 @@ export const CreateProject = z.object({
 		.optional()
 		.transform((ts) => {
 			if (ts) {
-				return Timestamp.fromDate(ts);
+				return timestampFromDate(ts);
 			}
 
-			return Timestamp.now();
+			return timestampNow();
 		}),
 	projectName: z.string(),
 	buildSettings: BuildSettings,

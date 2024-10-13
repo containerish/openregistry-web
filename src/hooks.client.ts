@@ -1,6 +1,6 @@
 import type { HandleClientError } from '@sveltejs/kit';
 import posthog from 'posthog-js';
-import { browser, dev } from '$app/environment';
+import { browser } from '$app/environment';
 import { PUBLIC_POSTHOG_API_HOST, PUBLIC_POSTHOG_API_KEY } from '$env/static/public';
 
 if (browser && PUBLIC_POSTHOG_API_KEY) {

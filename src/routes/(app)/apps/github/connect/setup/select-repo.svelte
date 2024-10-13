@@ -10,7 +10,8 @@
 	import type { Writable } from 'svelte/store';
 	import Select from '$lib/components/select.svelte';
 	import { NewRepository } from '$lib/components';
-	import { UUID } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
+	import { UUIDSchema } from '@buf/containerish_openregistry.bufbuild_es/common/v1/id_pb';
+	import { create } from '@bufbuild/protobuf';
 
 	export let ghAppLink = '';
 	export let repoList: AuthorisedRepository[];
@@ -48,7 +49,7 @@
 	var selectedRepository: Repository;
 	const handleRepositorySelection = (e: CustomEvent<ContainerRepositorySelectOption>) => {
 		const repo = openRegistryRepos.find((r) => r.name === e.detail.value)!;
-		$store.repositoryId = new UUID({
+		$store.repositoryId = create(UUIDSchema, {
 			value: repo.id,
 		});
 		selectedRepository = repo;

@@ -9,13 +9,13 @@
 	import IconButton from '$lib/icon-button.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { CreateProjectRequest } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
-	import type { PromiseClient } from '@connectrpc/connect';
-	import type { GitHubActionsLogsService } from '@buf/containerish_openregistry.connectrpc_es/services/kon/github_actions/v1/build_logs_connect';
+	import type { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_logs_pb';
+	import type { Client } from '@connectrpc/connect';
 
 	export let handleNext: (index: number) => void;
 	export let doesGithubActionAlreadyExist = false;
 	export let store: Writable<CreateProjectRequest>;
-	export let logsClient: PromiseClient<typeof GitHubActionsLogsService>;
+	export let logsClient: Client<typeof GitHubActionsLogsService>;
 
 	let showModal = false;
 	const handleShowModal = () => {
@@ -52,7 +52,6 @@
 				ac.abort();
 			},
 		});
-		// eslint-disable-next-line no-undef
 		const reader = stream.pipeThrough(new TextDecoderStream()).getReader();
 		if (reader) {
 			let streamEnded = false;
