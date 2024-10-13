@@ -11,7 +11,7 @@ import { ClairService } from '@buf/containerish_openregistry.bufbuild_es/service
 import { OPEN_REGISTRY_BACKEND_PROTOBUF_URL, OPEN_REGISTRY_BACKEND_CLAIR_URL } from '$env/static/private';
 import { setCookies } from '$lib/protobuf/interceptors';
 
-export const authenticationHandler: Handle = async ({ event, resolve }) => {
+const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;
 
 	const sessionId = cookies.get('session_id');
@@ -39,7 +39,7 @@ export const authenticationHandler: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-export const createProtobufClient: Handle = async ({ event, resolve }) => {
+const createProtobufClient: Handle = async ({ event, resolve }) => {
 	const transport = createConnectTransport({
 		baseUrl: OPEN_REGISTRY_BACKEND_PROTOBUF_URL,
 		interceptors: [setCookies(event.cookies)],
@@ -64,7 +64,7 @@ export const createProtobufClient: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-export const isProtectedRoute = (route: string): boolean => {
+const isProtectedRoute = (route: string): boolean => {
 	return (
 		route.startsWith('/settings') ||
 		route.startsWith('/repositories') ||
@@ -73,7 +73,7 @@ export const isProtectedRoute = (route: string): boolean => {
 	);
 };
 
-export const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) => {
+const setOpenRegistryClientHandler: Handle = async ({ event, resolve }) => {
 	const client = new OpenRegistryClient(event.fetch, event.url.origin);
 	event.locals.openRegistry = client;
 	return await resolve(event);
