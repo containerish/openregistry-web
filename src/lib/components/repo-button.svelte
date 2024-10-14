@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <button
@@ -13,9 +13,3 @@
 >
 	<slot />
 </button>
-
-<!-- {repo.repository.name ===
-	selectedRepo
-		? 'shadow-2xl shadow-slate-200 bg-white'
-		: 'bg-slate-50'} -->
-

@@ -3,7 +3,6 @@
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import Card from '$lib/card.svelte';
 	import Xterm from '$lib/xterm.svelte';
-	import { goto } from '$app/navigation';
 	import Dialog from '$lib/dialog.svelte';
 	import Signup from './signup.svelte';
 	import Steps from './steps.svelte';
@@ -47,7 +46,7 @@
 				<ButtonOutlined
 					class="text-primary-500 border-primary-500/50 hover:shadow-primary-400/50"
 					on:click={() => {
-						goto('https://docs.openregistry.dev');
+						window.open('https://docs.openregistry.dev', '_blank');
 					}}>Learn more</ButtonOutlined
 				>
 			</div>
@@ -60,7 +59,7 @@
 	<Steps />
 </Card>
 {#if showSignUpForm}
-	<Dialog class="top-0">
+	<Dialog>
 		<Signup toggleSignInForm={() => {}} toggleSignUpForm={handleSignupForm} />
 	</Dialog>
 {/if}

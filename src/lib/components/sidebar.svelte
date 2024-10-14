@@ -11,18 +11,18 @@
 		SignOutIcon,
 		StarIcon,
 		ToolsIcon,
-	} from "$lib/icons";
-	import Logo from "./logo.svelte";
-	import type { OpenRegistryUserType } from "$lib/types/user";
-	import Advert from "../advert.svelte";
-	import Carousel from "./carousel.svelte";
-	import Invite from "./invite.svelte";
-	import { onMount } from "svelte";
-	import Dialog from "$lib/dialog.svelte";
-	import IconButton from "$lib/icon-button.svelte";
-	import { slide, fade } from "svelte/transition";
-	import { quintOut } from "svelte/easing";
-	import posthog from "posthog-js";
+	} from '$lib/icons';
+	import Logo from './logo.svelte';
+	import type { OpenRegistryUserType } from '$lib/types/user';
+	import Advert from '../advert.svelte';
+	import Carousel from './carousel.svelte';
+	import Invite from './invite.svelte';
+	import { onMount } from 'svelte';
+	import IconButton from '$lib/icon-button.svelte';
+	import { slide, fade } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
+	import posthog from 'posthog-js';
+	import { browser } from '$app/environment';
 
 	let extended = true;
 	export let user: OpenRegistryUserType;
@@ -30,8 +30,16 @@
 	let showModal = false;
 	const toggleModal = () => (showModal = !showModal);
 
+	let dynamicFeatures = {
+		automated_builds: false,
+	};
+
+	if (browser) {
+		dynamicFeatures.automated_builds = posthog.isFeatureEnabled('automated_builds') ?? false;
+	}
+
 	const handleScreenChange = () => {
-		if (window.matchMedia("(max-width: 1000px)").matches) {
+		if (window.matchMedia('(max-width: 1000px)').matches) {
 			extended = false;
 		} else {
 			extended = true;
@@ -40,33 +48,24 @@
 
 	onMount(() => {
 		handleScreenChange();
-		window.addEventListener("resize", handleScreenChange);
+		window.addEventListener('resize', handleScreenChange);
 
-		return () => window.removeEventListener("resize", handleScreenChange);
+		return () => window.removeEventListener('resize', handleScreenChange);
 	});
 </script>
 
-<div
-	class="flex flex-col"
-	in:slide={{ delay: 250, duration: 100, easing: quintOut, axis: "x" }}
->
+<div class="flex flex-col" in:slide={{ delay: 250, duration: 100, easing: quintOut, axis: 'x' }}>
 	{#if !extended}
-		<form
-			method="POST"
-			class="flex flex-col justify-start lg:px-3 items-center gap-3 py-6"
-			in:fade
-		>
+		<form method="POST" class="flex flex-col justify-start lg:px-3 items-center gap-3 py-6" in:fade>
 			<a href="/">
 				<picture>
 					<img src="/logo-new.png" alt="logo" width="40px" />
 				</picture>
 			</a>
 
-			<a
-				href="/repositories"
-				class="rounded-full hover:bg-primary-100/50 p-3 mt-6"
-				><HomeIcon class="w-5 h-5 text-slate-700" /></a
-			>
+			<a href="/repositories" class="rounded-full hover:bg-primary-100/50 p-3 mt-6">
+				<HomeIcon class="w-5 h-5 text-slate-700" />
+			</a>
 
 			<a href="/search" class="rounded-full hover:bg-primary-100/50 p-3">
 				<SearchIcon class="w-5 h-5 text-slate-700" />
@@ -89,8 +88,7 @@
 				href="https://blog.openregistry.dev/"
 				class="rounded-full hover:bg-primary-100/50 p-3"
 				target="_blank"
-				rel="noreferrer"
-				><PencilIcon class="w-5 h-5 text-slate-700" /></a
+				rel="noreferrer"><PencilIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
 			<a
@@ -102,10 +100,7 @@
 				<StarIcon class="w-5 h-5 text-slate-700" /></a
 			>
 
-			<IconButton
-				class="m-0 rounded-full hover:bg-primary-100/50 p-3"
-				on:click={toggleModal}
-			>
+			<IconButton class="m-0 rounded-full hover:bg-primary-100/50 p-3" on:click={toggleModal}>
 				<UserPlusIcon class="w-5 h-5 text-slate-700" />
 			</IconButton>
 
@@ -130,10 +125,7 @@
 			<label for="sidebar" class="h-full">
 				<div class="flex flex-col justify-between gap-24">
 					<div class="flex flex-col gap-9">
-						<a
-							href="/"
-							class="flex flex-row justify-between items-center gap-4 hover:no-underline px-2"
-						>
+						<a href="/" class="flex flex-row justify-between items-center gap-4 hover:no-underline px-2">
 							<Logo type="dark" />
 						</a>
 
@@ -159,15 +151,13 @@
 										<span>Explore</span>
 									</a>
 
-									{#if posthog.isFeatureEnabled("automated_builds")}
+									{#if dynamicFeatures.automated_builds}
 										<a
 											href="/projects"
 											class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 										 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 										>
-											<ToolsIcon
-												class="h-6 w-5 text-slate-600"
-											/>
+											<ToolsIcon class="h-6 w-5 text-slate-600" />
 											<span>Automated Builds</span>
 										</a>
 									{/if}
@@ -207,15 +197,7 @@
 										<StarIcon />
 										<span>Star us on Github</span>
 									</a>
-									<a
-										href="#"
-										on:click={toggleModal}
-										class="bg-transparent border-0 flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
-									 hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
-									>
-										<UserPlusIcon />
-										<span>Invite People</span>
-									</a>
+									<Invite />
 								</div>
 								<hr />
 								<div class="flex flex-col">
@@ -224,9 +206,7 @@
 										class="flex flex-row gap-3 justify-start items-center text-slate-700 antialiased tracking-wide
 										hover:bg-primary-100/50 rounded py-2 px-3 text-sm xl:text-base hover:no-underline"
 									>
-										<ProfileIcon
-											class="text-slate-700 antialiased h-5 w-5 "
-										/>
+										<ProfileIcon class="text-slate-700 antialiased h-5 w-5 " />
 										<span>View Profile</span>
 									</a>
 									<a
@@ -247,12 +227,8 @@
 								tracking-wide font-medium rounded-lg bg-primary-100/50 p-2"
 						>
 							<div class="flex justify-start items-center gap-3">
-								<div
-									class="w-fit border-2 border-slate-700 p-1 lg:p-2 rounded-full"
-								>
-									<UserIcon
-										class="h-4 w-4 text-slate-700 fill-current"
-									/>
+								<div class="w-fit border-2 border-slate-700 p-1 lg:p-2 rounded-full">
+									<UserIcon class="h-4 w-4 text-slate-700 fill-current" />
 								</div>
 								<div
 									class="rounded-full text-xs px-2 text-emerald-900 bg-gradient-to-b from-emerald-200 to-emerald-300"
@@ -276,9 +252,7 @@
 							<span>Sign out</span>
 						</button>
 
-						<div
-							class="bg-primary-200/20 rounded flex justify-center shadow-inner opacity-90 mt-10 px-3"
-						>
+						<div class="bg-primary-200/20 rounded flex justify-center shadow-inner opacity-90 mt-10 px-3">
 							<Carousel>
 								<Advert
 									link="https://akash.network"
@@ -301,10 +275,8 @@
 				<div />
 			</label>
 		</form>
-		{#if showModal}
-			<Dialog>
-				<Invite handleModal={toggleModal} />
-			</Dialog>
-		{/if}
+		<!-- {#if showModal}
+      <Invite handleModal={toggleModal} />
+    {/if} -->
 	{/if}
 </div>

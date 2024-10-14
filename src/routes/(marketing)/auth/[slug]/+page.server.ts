@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-/* eslint-disable no-case-declarations */
-export async function load({ params, locals, cookies, url }) {
+export const load: PageServerLoad = async ({ params, locals, cookies, url }) => {
 	let serverErr = url.searchParams.get('error');
 	const serverErrStatus = url.searchParams.get('status');
 
@@ -18,22 +18,20 @@ export async function load({ params, locals, cookies, url }) {
 			slug: params.slug,
 			status: Number(serverErrStatus),
 			error: {
-				message: serverErr
+				message: serverErr,
 			},
-			authenticated: false
+			authenticated: false,
 		};
 	}
 
 	switch (params.slug) {
 		case 'verify':
-			const response = await locals.openRegistry.verifyEmail(
-				url.searchParams.get('token') ?? ''
-			);
+			const response = await locals.openRegistry.verifyEmail(url.searchParams.get('token') ?? '');
 			if (response.status !== 200) {
 				console.log('verify email response');
 				return;
 			}
-			throw redirect(307, '/repositories');
+			redirect(307, '/repositories');
 		case 'forgot-password':
 			console.log('forgot-password-callback');
 			break;
@@ -53,13 +51,13 @@ export async function load({ params, locals, cookies, url }) {
 			slug: params.slug,
 			status: 401,
 			error: 'user not authenticated',
-			authenticated: false
+			authenticated: false,
 		};
 	}
 
 	return {
 		user: user,
 		authenticated: true,
-		slug: params.slug
+		slug: params.slug,
 	};
-}
+};

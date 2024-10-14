@@ -11,7 +11,6 @@
 <script lang="ts">
 	import CopyIcon from './icons/copy.svelte';
 
-	// @ts-ignore
 	export let tableData: TableData;
 	export let namespace: string;
 </script>

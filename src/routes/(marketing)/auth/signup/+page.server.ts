@@ -11,9 +11,9 @@ export const actions: Actions = {
 
 		try {
 			const body = SignUpSchema.parse(formData);
-			const response = await fetch('/apis/auth/signup', {
+			const response = await fetch('/api/auth/signup', {
 				method: 'POST',
-				body: JSON.stringify(body)
+				body: JSON.stringify(body),
 			});
 			const data = await response.json();
 			if (response.status !== 201) {
@@ -21,12 +21,12 @@ export const actions: Actions = {
 					data: body,
 					error: data,
 					formErrors: [data.message],
-					message: 'Error signing up'
+					message: 'Error signing up',
 				});
 			}
 			return {
 				success: true,
-				message: data.message
+				message: data.message,
 			};
 		} catch (err) {
 			if (err instanceof ZodError) {
@@ -34,9 +34,9 @@ export const actions: Actions = {
 				return fail(400, {
 					fieldErrors: fieldErrors,
 					formErrors: formErrors,
-					data: formData
+					data: formData,
 				});
 			}
 		}
-	}
+	},
 };
