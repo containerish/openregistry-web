@@ -4,7 +4,6 @@ import type { Actions } from './$types';
 export const actions: Actions = {
 	signin: async ({ locals, request }) => {
 		const err = await locals.openRegistry.signIn(await request.formData());
-
 		if (!err) {
 			redirect(303, '/repositories');
 		}

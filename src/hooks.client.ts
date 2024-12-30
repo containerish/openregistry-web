@@ -11,9 +11,7 @@ if (browser && PUBLIC_POSTHOG_API_KEY) {
 	});
 }
 
-export const handleError: HandleClientError = async ({ error, event }) => {
-	console.log('unhandled client exception - route: %s - error: %s', event.route.id, error);
-
+export const handleError: HandleClientError = async ({ error }) => {
 	return {
 		message: typeof error === 'string' ? error : JSON.stringify(error),
 	};

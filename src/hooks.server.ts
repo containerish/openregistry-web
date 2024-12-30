@@ -8,7 +8,8 @@ import { GitHubActionsLogsService } from '@buf/containerish_openregistry.bufbuil
 import { GithubActionsBuildService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_job_pb';
 import { GitHubActionsProjectService } from '@buf/containerish_openregistry.bufbuild_es/services/kon/github_actions/v1/build_project_pb';
 import { ClairService } from '@buf/containerish_openregistry.bufbuild_es/services/yor/clair/v1/clair_pb';
-import { OPEN_REGISTRY_BACKEND_PROTOBUF_URL, OPEN_REGISTRY_BACKEND_CLAIR_URL } from '$env/static/private';
+import { OPEN_REGISTRY_BACKEND_CLAIR_URL } from '$env/static/private';
+import { PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL } from '$env/static/public';
 import { setCookies } from '$lib/protobuf/interceptors';
 
 const authenticationHandler: Handle = async ({ event, resolve }) => {
@@ -41,7 +42,7 @@ const authenticationHandler: Handle = async ({ event, resolve }) => {
 
 const createProtobufClient: Handle = async ({ event, resolve }) => {
 	const transport = createConnectTransport({
-		baseUrl: OPEN_REGISTRY_BACKEND_PROTOBUF_URL,
+		baseUrl: PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL,
 		interceptors: [setCookies(event.cookies)],
 		fetch: event.fetch,
 	});
@@ -83,6 +84,7 @@ export const handle = sequence(setOpenRegistryClientHandler, authenticationHandl
 
 export const handleError: HandleServerError = async ({ error, event }) => {
 	console.log('unhandled server exception - route: %s - error: %s', event.route.id, error);
+
 	return {
 		message: typeof error === 'string' ? error : JSON.stringify(error),
 	};

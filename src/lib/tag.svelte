@@ -30,6 +30,8 @@
 				</span>
 			</div>
 			<div
+				role="button"
+				tabindex="0"
 				on:click={copyCommandToClipboard}
 				on:keypress={copyCommandToClipboard}
 				class="flex justify-center items-center text-md px-2 py-1 rounded-sm cursor-pointer"
@@ -54,7 +56,10 @@
 			<div class="flex flex-col gap-3">
 				<span>Updated At</span>
 				<span class="text-sm text-slate-500 font-normal">
-					{#if new Date(manifest.updatedAt).toDateString().toLowerCase().endsWith('0001')}
+					{#if !manifest.updatedAt || new Date(manifest.updatedAt)
+							.toDateString()
+							.toLowerCase()
+							.endsWith('0001')}
 						{new Date(manifest.createdAt).toDateString()}
 					{:else}
 						{new Date(manifest.updatedAt).toDateString()}

@@ -87,6 +87,7 @@ export class OpenRegistryClient {
 			if (response.status === 200) {
 				return null;
 			}
+
 			const data = (await response.json()) as OpenRegistryGenericError;
 			return fail(response.status, {
 				error: data.message,
@@ -553,7 +554,7 @@ export class OpenRegistryClient {
 			console.log('sdk webAuthnLogin err: ', err);
 			return { error: err };
 		}
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 		const finishResponse = await this.webAuthFinishLogin(username, options!);
 		return finishResponse;
 	}

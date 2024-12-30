@@ -4,7 +4,7 @@
 	import Textfield from '../textfield.svelte';
 	import { CheckIcon, EmailIcon, FingerprintIcon, GithubIcon } from '$lib/icons';
 	import { Auth } from '$apis/auth';
-	import confetti from 'canvas-confetti';
+	import confetti, { type Options as ConfettiOptions } from 'canvas-confetti';
 	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import Logo from './logo.svelte';
@@ -22,7 +22,7 @@
 		origin: { y: 0.7 },
 	};
 
-	const fire = (particleRatio: number, opts: Object) => {
+	const fire = (particleRatio: number, opts: ConfettiOptions) => {
 		conf(
 			Object.assign({}, defaults, opts, {
 				particleCount: Math.floor(count * particleRatio),
@@ -78,6 +78,7 @@
 					// handle server side error here
 					await update();
 					await applyAction(result);
+					break;
 				default:
 					await update();
 			}
@@ -123,8 +124,8 @@
 		throwSomeConfetti();
 	};
 
-	const validateUsername = (e: any) => {
-		const username: string = e.target.value;
+	const validateUsername = (e: Event) => {
+		const username: string = (e.target as HTMLInputElement).value;
 
 		if (!username) {
 			usernameErr = 'username is invalid';
@@ -139,10 +140,10 @@
 		usernameErr = '';
 	};
 
-	const validateEmail = (e: any) => {
-		const email: string = e.target.value;
+	const validateEmail = (e: Event) => {
+		const email: string = (e.target as HTMLInputElement).value;
 		const regexp = new RegExp(
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		);
 
 		const regexFailed = regexp.test(email);
@@ -181,10 +182,7 @@
 				<div class="mt-4 flex items-center justify-between">
 					<span class="w-1/5 border-b lg:w-1/4" />
 
-					<span
-						href="#"
-						class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline"
-					>
+					<span class="text-center text-xs font-semibold capitalize text-gray-600 hover:no-underline">
 						or sign up with email
 					</span>
 

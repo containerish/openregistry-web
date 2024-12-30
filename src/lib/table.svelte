@@ -1,3 +1,6 @@
+<script lang="ts">
+</script>
+
 <div class="w-full h-full flex items-center justify-center">
 	<table class="w-full border-separate border-gray-500 table-auto">
 		<thead>

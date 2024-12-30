@@ -115,7 +115,10 @@
 	const confirmAddUsersToOrg = async () => {
 		isAddUsersLoading = true;
 		const response = await openRegistryClient.addUsersToOrg(addUsersToOrgRequest);
-		console.log('response:', response);
+
+		if (!response.success) {
+			//TODO(guacamole) - Validate failure case
+		}
 		isAddUsersLoading = false;
 		dispatch('user_add', true);
 		$open = false;

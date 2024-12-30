@@ -10,7 +10,7 @@
 		new TypeIt('#typewriter', {
 			loop: false,
 			waitUntilVisible: true,
-			afterComplete: (t: any) => {
+			afterComplete: (t: TypeIt) => {
 				t.destroy();
 			},
 		})
@@ -31,7 +31,7 @@
 			.type(' --password-stdin')
 			.break()
 			.pause(1000)
-			.options({ speed: 0, instant: true })
+			.options({ speed: 0 })
 			.type('Login Succeeded')
 			.break()
 			.options({ speed: 0 })

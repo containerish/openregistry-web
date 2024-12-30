@@ -4,14 +4,14 @@
 	import Textfield from '$lib/textfield.svelte';
 	import { setContext } from 'svelte';
 	import { NewRepository, Repository, Loader } from '$lib/components';
-	import { navigating } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import { pulseStore } from '$lib/components/pulse';
-	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
 	import { DefaultPageSize } from '$lib/constants';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 
 	export let data: PageData;
+
 	$: catalog = data.repositories;
 	const openRegistryClient = new OpenRegistryClient(fetch, $page.url.origin);
 	const pageSize = 10;

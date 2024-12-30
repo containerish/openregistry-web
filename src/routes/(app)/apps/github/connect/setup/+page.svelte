@@ -7,7 +7,6 @@
 	import { fly } from 'svelte/transition';
 	import { writable } from 'svelte/store';
 	import EmptyListMessage from '$lib/components/EmptyListMessage.svelte';
-	import { v4 as UuidV4 } from '@lukeed/uuid';
 	import { onMount } from 'svelte';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
 	import type { Repository } from '$lib/types';
@@ -46,7 +45,7 @@
 	const createProjectRequestStore = writable(
 		create(CreateProjectRequestSchema, {
 			createdAt: create(TimestampSchema, { seconds: BigInt(Date.now() / 1000) }),
-			id: create(UUIDSchema, { value: UuidV4() }),
+			id: create(UUIDSchema, { value: crypto.randomUUID() }),
 			ownerId: create(UUIDSchema, { value: data.user?.id }),
 			buildSettings: create(ProjectBuildSettingsMessageSchema, {
 				worfklowFile: './Dockerfile',

@@ -40,7 +40,6 @@
 		isCreateRepositoryLoading = true;
 		const response = await client.createRepository(createRepositoryInput);
 		if (response.success) {
-			console.log('new repository created: ', response.data);
 			isCreateRepositoryLoading = false;
 			await handleSuccess();
 			handleClose();

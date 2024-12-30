@@ -20,7 +20,6 @@
 	let canvas: HTMLCanvasElement;
 	let conf: CreateTypes;
 	if (browser) {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		canvas = document.getElementById('confetti') as HTMLCanvasElement;
 		conf = createConfetti(canvas, { resize: true });
 	}
@@ -130,7 +129,6 @@
 				isLoading = false;
 				return;
 			}
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			successMessage = message!;
 		} catch (err) {
 			console.log('error webauthn signup:', err);
