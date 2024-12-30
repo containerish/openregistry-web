@@ -21,34 +21,34 @@
 	};
 </script>
 
-<div class="w-full flex gap-4 flex-col">
-	<div class="w-full flex justify-between items-start">
-		<div class="gap-1 flex flex-col">
+<div class="flex w-full flex-col gap-4">
+	<div class="flex w-full items-start justify-between">
+		<div class="flex flex-col gap-1">
 			<span class="font-semibold">Tokens</span>
 			<p class="text-sm leading-4 text-slate-500"
 				>Personal access tokens are an easy and efficient way of logging into OpenRegistry, e.g CI/CD pipelines,
 				CLIs, and account with Webauthn login method can use this as registry login credentials</p
 			>
 		</div>
-		<div class="w-11/12 flex justify-end">
+		<div class="flex w-11/12 justify-end">
 			<CreatePATModal on:generate={handleTokenGenerate} {openRegistryClient} />
 		</div>
 	</div>
 
 	<div class="w-full">
 		{#if isTokensLoading}
-			<div class="w-full flex gap-3 justify-center items-center py-4 px-2">
+			<div class="flex w-full items-center justify-center gap-3 px-2 py-4">
 				<SpinnerCircle />
 				Loading...
 			</div>
 		{:else if tokens && tokens.length > 0}
-			<div class="flex py-2 w-full justify-center items-center flex-col gap-3">
+			<div class="flex w-full flex-col items-center justify-center gap-3 py-2">
 				{#each tokens as token, id (id)}
 					<div
-						class="gap-2 bg-primary-50/50 border border-primary-100 py-1 px-4 rounded flex w-full justify-between"
+						class="flex w-full justify-between gap-2 rounded border border-primary-100 bg-primary-50/50 px-4 py-1"
 					>
 						<div class="flex w-full flex-col gap-2">
-							<span class="text-primary-600 font-semibold">{token.name}</span>
+							<span class="font-semibold text-primary-600">{token.name}</span>
 							<span
 								class="text-sm italic {hasTokenExpired(token.expires_at)
 									? 'text-rose-600'

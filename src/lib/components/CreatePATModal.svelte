@@ -64,58 +64,62 @@
 		clearTimeout(timer);
 		token = '';
 	});
+
+	const handleCloseEvent = () => {
+		token = '';
+	};
 </script>
 
-<ButtonSolid class="max-w-[200px] p-0 m-0 w-full flex justify-center items-center">
-	<button class="flex gap-3 h-full w-full justify-center items-center" use:melt={$trigger}>
+<ButtonSolid class="m-0 flex w-full max-w-[200px] items-center justify-center p-0">
+	<button class="flex h-full w-full items-center justify-center gap-3" use:melt={$trigger}>
 		Generate New Token
 	</button>
 </ButtonSolid>
 
-<div use:melt={$portalled} class="w-full h-full">
+<div use:melt={$portalled} class="h-full w-full">
 	{#if $open}
 		<div use:melt={$overlay} class="fixed inset-0 z-50 bg-primary-800/50" transition:fade={{ duration: 150 }} />
 
 		<div
-			class="flex justify-start items-center fixed left-[50%] bg-white top-[50%] z-50 w-[50vw]
-    max-w-[630px] translate-x-[-50%] translate-y-[-50%] md:flex-row shadow-3xl shadow-primary-800/40 rounded"
+			class="fixed left-[50%] top-[50%] z-50 flex w-[50vw] max-w-[630px] translate-x-[-50%] translate-y-[-50%]
+    items-center justify-start rounded bg-white shadow-3xl shadow-primary-800/40 md:flex-row"
 			use:melt={$content}
 		>
-			<div class="flex flex-col gap-3 p-9 relative w-full items-start">
-				<button use:melt={$close}>
-					<PlainCross class="absolute w-6 h-6 text-slate-500 top-0 right-0 m-2" />
+			<div class="relative flex w-full flex-col items-start gap-3 p-9">
+				<button use:melt={$close} on:m-click={handleCloseEvent}>
+					<PlainCross class="absolute right-0 top-0 m-2 h-6 w-6 text-slate-500" />
 				</button>
 
 				<div class="w-full">
 					<span class="text-2xl font-semibold text-primary-500" use:melt={$title}>
 						Generate a new token
 					</span>
-					<p class="text-sm text-slate-500 max-w-lg antialiased">
+					<p class="max-w-lg text-sm text-slate-500 antialiased">
 						Generate an authentication token for your OpenRegistry account. You can use this token to push
 						and pull container images
 					</p>
 				</div>
 				{#if token}
-					<span class="italic font-semibold text-sm text-slate-600">
+					<span class="text-sm font-semibold italic text-slate-600">
 						<b>Note: </b>
 						Please make sure to copy this access token and store is securely. You will not be able to see this
 						token again.
 					</span>
-					<div class="w-full rounded gap-2 flex items-center py-2 px-2">
+					<div class="flex w-full items-center gap-2 rounded px-2 py-2">
 						<div
-							class="flex items-center py-0 gap-2 bg-primary-50 border-primary-500/50 border-[1px] pl-2 rounded"
+							class="flex items-center gap-2 rounded border-[1px] border-primary-500/50 bg-primary-50 py-0 pl-2"
 						>
-							<span class="text-primary-600 text-base flex gap-2 font-semibold">
+							<span class="flex gap-2 text-base font-semibold text-primary-600">
 								{token}
 							</span>
-							<IconButton on:click={copyTokenToClipboard} class="bg-primary-100 h-full w-full py-0 m-0">
+							<IconButton on:click={copyTokenToClipboard} class="m-0 h-full w-full bg-primary-100 py-0">
 								{#if isCopyingText}
-									<span class="text-primary-600 text-base flex gap-2 font-semibold">
-										<CheckIcon class="text-primary-600 h-6 w-6" />
+									<span class="flex gap-2 text-base font-semibold text-primary-600">
+										<CheckIcon class="h-6 w-6 text-primary-600" />
 										Copied
 									</span>
 								{:else}
-									<CopyIcon class="text-primary-600 h-6 w-6" />
+									<CopyIcon class="h-6 w-6 text-primary-600" />
 								{/if}
 							</IconButton>
 						</div>
@@ -123,7 +127,7 @@
 				{:else}
 					<Textfield on:input={readTokenName} placeholder="Token name" label="Name" name="name" />
 
-					<div class="flex justify-center gap-6 items-center w-full pt-6 -mb-3">
+					<div class="-mb-3 flex w-full items-center justify-center gap-6 pt-6">
 						<ButtonOutlined class="m-0 p-0">
 							<button use:melt={$close}> Cancel </button></ButtonOutlined
 						>
