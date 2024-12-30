@@ -64,7 +64,7 @@
 				break;
 			case githubCallback:
 				if (data.error) {
-					formErr = data.error?.message;
+					formErr = typeof data.error === 'string' ? data.error : data.error.message;
 					showErrorModal = true;
 					return;
 				}
@@ -73,7 +73,7 @@
 				break;
 			case unhandled:
 				showErrorModal = true;
-				formErr = data?.error?.message ?? unhandledErr;
+				formErr = typeof data.error === 'string' ? data.error : data.error?.message ?? unhandledErr;
 		}
 	};
 
@@ -104,11 +104,6 @@
 		}
 
 		confirmPasswordErr = '';
-	};
-
-	const handleErrorModal = async () => {
-		showErrorModal = false;
-		await goto('/');
 	};
 </script>
 
@@ -216,4 +211,4 @@
 		{/if}
 	</div>
 </Loader>
-<ErrorModal open={showErrorModal} error={formErr} />
+<ErrorModal error={formErr} />

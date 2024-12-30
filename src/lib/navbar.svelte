@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import ButtonSolid from './button-solid.svelte';
-	import { Signin, Signup } from '$lib/components';
-	import Dialog from '$lib/dialog.svelte';
 	import Logo from './components/logo.svelte';
 	import Menu from './burger-menu.svelte';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import IconButton from './icon-button.svelte';
 
 	export let openSignInModal = false;
@@ -35,57 +32,8 @@
 				<Logo type="dark" />
 			</IconButton>
 			<div class="md:hidden">
-				<Menu>
-					<div class="flex flex-col items-start">
-						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
-							<IconButton
-								class="pr-16 pl-6 py-2 m-0 text-sm"
-								on:click={() => {
-									window.open('https://blog.openregistry.dev', '_blank');
-								}}
-							>
-								Blog
-							</IconButton>
-						</MenuItem>
-						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
-							<IconButton
-								class="pr-16 pl-6 py-2 m-0 text-sm"
-								on:click={() => {
-									window.open('/about', '_self');
-								}}
-							>
-								About
-							</IconButton>
-						</MenuItem>
-						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
-							<IconButton
-								class="pr-16 pl-6 py-2 m-0 text-sm"
-								on:click={() => {
-									window.open('https://github.com/containerish/OpenRegistry.git', '_blank');
-								}}
-							>
-								Github
-							</IconButton>
-						</MenuItem>
-						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
-							<IconButton
-								class="pr-16 pl-6 py-2 m-0 text-sm"
-								on:click={() => {
-									window.open('/faq', 'self');
-								}}
-							>
-								FAQ
-							</IconButton>
-						</MenuItem>
-						<MenuItem class="hover:bg-primary-100/20 hover:no-underline">
-							<IconButton class="pr-16 pl-6 py-2 m-0 text-sm" on:click={() => goto('/auth/signin')}
-								>Sign In</IconButton
-							>
-						</MenuItem>
-					</div>
-				</Menu>
+				<Menu />
 			</div>
-
 			<div class="hidden md:flex items-center">
 				<div class="flex flex-col md:mx-1 md:flex-row gap-1 md:gap-9">
 					<a
@@ -121,21 +69,28 @@
 				{#if pathname === '/' || pathname === '/auth/signup'}
 					<div class="hidden md:flex ml-5">
 						<ButtonSolid
-							on:click={() => { goto('/auth/signin'); }}>Sign In</ButtonSolid>
+							on:click={() => {
+								goto('/auth/signin');
+							}}>Sign In</ButtonSolid
+						>
 					</div>
 				{:else if pathname === '/auth/signin'}
 					<div class="hidden md:flex ml-5">
-						<ButtonSolid on:click={() => { goto('/auth/signup'); }}>Sign Up</ButtonSolid>
+						<ButtonSolid
+							on:click={() => {
+								goto('/auth/signup');
+							}}>Sign Up</ButtonSolid
+						>
 					</div>
 				{/if}
-				<div>
+				<!-- <div>
 					<Dialog isOpen={openSignInModal}>
 						<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
 					</Dialog>
 				</div>
 				<Dialog isOpen={openSignUpModal} class="top-0">
 					<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
-				</Dialog>
+				</Dialog> -->
 			</div>
 		</div>
 	</nav>

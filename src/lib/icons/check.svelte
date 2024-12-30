@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 </script>
 
-<svg
-	class={twMerge("h-6 w-6", $$props.class)}
-	viewBox="0 0 20 20"
-	fill="currentColor"
->
+<svg class={twMerge('h-6 w-6', $$props.class)} viewBox="0 0 20 20" fill="currentColor">
 	<path
 		fill-rule="evenodd"
 		d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 
@@ -14,4 +10,3 @@
 		clip-rule="evenodd"
 	/>
 </svg>
-

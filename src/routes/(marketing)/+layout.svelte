@@ -15,10 +15,11 @@
 		}
 	});
 	let animate = false;
-	onMount(() => {
+	onMount(async () => {
 		animate = true;
-		if (data.isAuthenticated && data.user && data.pathname === '/') {
-			goto('/repositories');
+		const publicRoute = $page.url.pathname === '/' || $page.url.pathname.startsWith('/auth/sign');
+		if (data.authenticated && publicRoute) {
+			await goto('/repositories');
 		}
 	});
 

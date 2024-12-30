@@ -2,7 +2,7 @@
 	import ButtonOutlined from '../button-outlined.svelte';
 	import ButtonSolid from '$lib/button-solid.svelte';
 	import { GithubIcon, FingerprintIcon, EmailIcon } from '$lib/icons';
-	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Textfield from '$lib/textfield.svelte';
@@ -10,8 +10,9 @@
 	import { WebAuthnSignInSchema } from '$lib/formSchemas';
 	import { ZodError } from 'zod';
 	import type { WebAuthnState } from '$lib/types/webauthn';
-	import { env } from '$env/dynamic/public';
 	import { OpenRegistryClient } from '$lib/client/openregistry';
+	import type { SubmitFunction } from '../../routes/(marketing)/auth/signin/$types';
+	import { PUBLIC_OPEN_REGISTRY_BACKEND_URL } from '$env/static/public';
 
 	export let toggleSignUpForm: () => void;
 	export let toggleSignInForm: () => void;
@@ -82,7 +83,7 @@
 
 	let webAuthnForm: WebAuthnState = {
 		fieldErrors: {},
-		formErrors: []
+		formErrors: [],
 	};
 
 	const webAuthnSignIn = async (e: SubmitEvent) => {
@@ -92,8 +93,8 @@
 		try {
 			const body = WebAuthnSignInSchema.parse(formData);
 			const username = body.username;
-			const openRegistry = new OpenRegistryClient(fetch);
-			const { message, error } = await openRegistry.webAuthnLogin(username);
+			const openRegistry = new OpenRegistryClient(fetch, $page.url.origin);
+			const { error } = await openRegistry.webAuthnLogin(username);
 			if (error) {
 				webAuthnForm.formErrors = [error.message];
 				isLoading = false;
@@ -124,10 +125,7 @@
 			<Logo type="dark" />
 		</div>
 
-		<ButtonOutlined
-			on:click={() =>
-				window.open(env.PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}
-		>
+		<ButtonOutlined on:click={() => window.open(PUBLIC_OPEN_REGISTRY_BACKEND_URL + '/auth/github/login', '_self')}>
 			<GithubIcon class="text-black mr-2 h-8 w-8" />
 			Sign in with Github
 		</ButtonOutlined>
@@ -142,17 +140,10 @@
 			<div class="mt-4 flex items-center justify-between">
 				<span class="w-1/5 border-b lg:w-1/4" />
 
-				<span class="text-center text-xs lg:text-sm capitalize text-slate-600">
-					or sign in with email
-				</span>
+				<span class="text-center text-xs lg:text-sm capitalize text-slate-600"> or sign in with email </span>
 				<span class="w-1/5 border-b lg:w-1/4" />
 			</div>
-			<form
-				class="mt-2 flex flex-col gap-4"
-				method="POST"
-				action="?/signin"
-				use:enhance={handleSignInSubmit}
-			>
+			<form class="mt-2 flex flex-col gap-4" method="POST" action="?/signin" use:enhance={handleSignInSubmit}>
 				<div class="">
 					<Textfield
 						errors={$page.form?.errors?.email}
@@ -228,9 +219,7 @@
 							<label for="reset_password" class="block text-base font-semibold text-slate-700">
 								Email
 							</label>
-							<span class="text-xs text-slate-500"
-								>we will send you an email to reset your password</span
-							>
+							<span class="text-xs text-slate-500">we will send you an email to reset your password</span>
 						</div>
 						<Textfield errors={$page.form?.errors?.email} name="email" bind:value={email} />
 					{/if}

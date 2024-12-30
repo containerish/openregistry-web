@@ -5,12 +5,12 @@
 	import IconButton from './icon-button.svelte';
 
 	let activePage = 0;
-	const fetchPageData = getContext<Function>('fetchPageData');
+	const fetchPageData = getContext<(offset: number) => Promise<void>>('fetchPageData');
 	export let pages = 0;
 
 	animateScroll.setGlobalOptions({
 		duration: 0,
-		easing: () => {}
+		easing: () => {},
 	});
 
 	const setActivePage = async (offset: number) => {
@@ -25,7 +25,7 @@
 
 <div class="flex">
 	<IconButton
-        disabled={activePage === 0}
+		disabled={activePage === 0}
 		on:click={() => setActivePage(activePage - 1)}
 		class="{activePage === 0
 			? 'disabled cursor-not-allowed bg-slate-200'
@@ -47,7 +47,7 @@
 	{/each}
 	<IconButton
 		on:click={() => setActivePage(activePage + 1)}
-        disabled={activePage === pages - 1}
+		disabled={activePage === pages - 1}
 		class="{activePage === pages - 1
 			? 'disabled cursor-not-allowed bg-slate-200'
 			: 'bg-slate-100 hover:bg-slate-300 hover:text-gray-700'}

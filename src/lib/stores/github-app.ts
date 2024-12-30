@@ -1,5 +1,5 @@
+import type { AuthorisedRepository } from '$lib/types';
 import { writable } from 'svelte/store';
-import type { AuthorisedRepository } from '../../routes/(marketing)/+layout.server';
 
 export type Branch = {
 	name: string;
@@ -15,7 +15,7 @@ const github = () => {
 		activeBranch?: string;
 	}>({
 		repositories: [],
-		githubUsername: ''
+		githubUsername: '',
 	});
 
 	function setAllAuthorisedRepositories(repos: AuthorisedRepository[]) {
@@ -46,7 +46,7 @@ const github = () => {
 		setGithubUsername,
 		setAllAuthorisedRepositories,
 		setTabIndex,
-		setActiveBranch
+		setActiveBranch,
 	};
 };
 

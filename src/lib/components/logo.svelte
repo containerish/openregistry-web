@@ -1,12 +1,13 @@
 <script lang="ts">
-	export let type = 'light';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 	import { backInOut } from 'svelte/easing';
 
+	export let type: 'light' | 'dark' = 'light';
+
 	onMount(() => {
 		gsap.set('.dark', { transformOrigin: '50% 50%' });
-		gsap.to('.dark', { duration: 1, rotation: 360, ease:backInOut });
+		gsap.to('.dark', { duration: 1, rotation: 360, ease: backInOut });
 	});
 </script>
 

@@ -1,22 +1,18 @@
-import { env } from "$env/dynamic/public";
-import type { HandleClientError } from "@sveltejs/kit";
-import posthog from "posthog-js";
-import { dev, browser } from "$app/environment";
+import type { HandleClientError } from '@sveltejs/kit';
+import posthog from 'posthog-js';
+import { browser } from '$app/environment';
+import { PUBLIC_POSTHOG_API_HOST, PUBLIC_POSTHOG_API_KEY, PUBLIC_POSTHOG_UI_HOST } from '$env/static/public';
 
-if (!dev && browser && env.PUBLIC_POSTHOG_API_KEY) {
-	posthog.init(env.PUBLIC_POSTHOG_API_KEY, {
-		api_host: env.PUBLIC_POSTHOG_API_HOST,
+if (browser && PUBLIC_POSTHOG_API_KEY) {
+	posthog.init(PUBLIC_POSTHOG_API_KEY, {
+		api_host: PUBLIC_POSTHOG_API_HOST,
+		ui_host: PUBLIC_POSTHOG_UI_HOST,
+		name: 'OpenRegistry Web',
 	});
 }
 
-export const handleError: HandleClientError = async ({ error, event }) => {
-	console.log(
-		"unhandled client exception - route: %s - error: %s",
-		event.route.id,
-		error
-	);
-
+export const handleError: HandleClientError = async ({ error }) => {
 	return {
-		message: typeof error === "string" ? error : JSON.stringify(error),
+		message: typeof error === 'string' ? error : JSON.stringify(error),
 	};
 };

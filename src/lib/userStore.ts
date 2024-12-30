@@ -7,14 +7,14 @@ const user = () => {
 		user: OpenRegistryUserType | null;
 	}>({
 		authenticated: false,
-		user: null
+		user: null,
 	});
 
 	function setUser(u: OpenRegistryUserType, auth: boolean) {
 		update(() => {
 			return {
 				user: u,
-				authenticated: auth
+				authenticated: auth,
 			};
 		});
 	}

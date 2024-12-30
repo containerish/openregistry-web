@@ -15,8 +15,8 @@
 		<div class="w-full flex flex-col justify-start gap-4 items-center">
 			<span class="text-slate-600 text-xl">
 				Status Code: {$page.status}
-				{JSON.stringify($page.error)}
 			</span>
+			<span class="text-slate-600 text-xl"> This page does not exist </span>
 			<div class="flex gap-4 justify-center items-center">
 				<ButtonSolid on:click={() => goto('/auth/signin')}>SignIn</ButtonSolid>
 				<span class="font-bold">or</span>

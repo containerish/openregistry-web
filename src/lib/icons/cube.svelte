@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <svg
 	aria-label="cube icon"
-	class={twMerge("w-5 h-5", $$props.class)}
+	class={twMerge('w-5 h-5', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke-width="2"

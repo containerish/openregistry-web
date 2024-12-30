@@ -1,24 +1,26 @@
+import { PUBLIC_OPEN_REGISTRY_SUPPORT_ENDPOINT } from '$env/static/public';
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import { env } from '$env/dynamic/public';
 
 declare module 'axios' {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	interface AxiosResponse<T = any> extends Promise<T> {}
 }
 
 abstract class HttpClient {
 	protected readonly http: AxiosInstance;
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected constructor(baseURL: string, headers?: any) {
 		this.http = axios.create({
 			baseURL,
 			headers: {
 				'Cache-Control': 'no-cache',
-				Pragma: 'no-cache',
-				Expires: '0',
-				...headers
+				'Pragma': 'no-cache',
+				'Expires': '0',
+				...headers,
 			},
-			withCredentials: true
+			withCredentials: true,
 		});
 
 		this._responseInterceptor();
@@ -27,7 +29,7 @@ abstract class HttpClient {
 
 	private _requestInterceptor = () => {
 		this.http.interceptors.request.use((req) => {
-			const supportBaseUrl = env.PUBLIC_OPEN_REGISTRY_SUPPORT_ENDPOINT;
+			const supportBaseUrl = PUBLIC_OPEN_REGISTRY_SUPPORT_ENDPOINT;
 			if (req.baseURL === supportBaseUrl) {
 				req.withCredentials = false;
 			} else {
@@ -48,20 +50,15 @@ abstract class HttpClient {
 		return {
 			data: data,
 			status: status,
-			headers: headers
+			headers: headers,
 		};
 	};
 
 	protected _handleError = (err: AxiosError) => {
 		return {
 			error: err?.response?.data ? err.response.data : err,
-			status: err?.response?.status
+			status: err?.response?.status,
 		};
-	};
-
-	private getUserAgent = () => {
-		const agentName = `${env.PUBLIC_OPEN_REGISTRY_APP_NAME}/${env.PUBLIC_OPEN_REGISTRY_ENVIRONMENT} ${env.PUBLIC_OPEN_REGISTRY_APP_VERSION}`;
-		return agentName;
 	};
 }
 

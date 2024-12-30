@@ -1,20 +1,9 @@
 <script lang="ts">
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 </script>
 
-<svg
-	class={twMerge("animate-spin h-8 w-8", $$props.class)}
-	fill="none"
-	viewBox="0 0 24 24"
->
-	<circle
-		class="opacity-25"
-		cx="12"
-		cy="12"
-		r="10"
-		stroke="currentColor"
-		stroke-width="2"
-	/>
+<svg class={twMerge('animate-spin h-8 w-8', $$props.class)} fill="none" viewBox="0 0 24 24">
+	<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
 	<path
 		class="opacity-75"
 		fill="currentColor"
