@@ -50,7 +50,7 @@
 		"@types/set-cookie-parser": "^2.4.10",
 		"@types/throttle-debounce": "^5.0.2",
 		"@types/webappsec-credential-management": "^0.6.9",
-		"@typescript-eslint/eslint-plugin": "^8.18.2",
+		"@typescript-eslint/eslint-plugin": "^8.19.0",
 		"@typescript-eslint/parser": "^8.18.2",
 		"autoprefixer": "^10.4.20",
 		"canvas-confetti": "^1.9.3",
