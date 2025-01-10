@@ -51,7 +51,7 @@
 		"@types/throttle-debounce": "^5.0.2",
 		"@types/webappsec-credential-management": "^0.6.9",
 		"@typescript-eslint/eslint-plugin": "^8.18.2",
-		"@typescript-eslint/parser": "^8.18.2",
+		"@typescript-eslint/parser": "^8.19.1",
 		"autoprefixer": "^10.4.20",
 		"canvas-confetti": "^1.9.3",
 		"cssnano": "^7.0.6",
