@@ -44,7 +44,7 @@
 		"@sveltejs/adapter-cloudflare": "^4.7.3",
 		"@sveltejs/kit": "^2.15.1",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
-		"@tailwindcss/typography": "^0.5.15",
+		"@tailwindcss/typography": "^0.5.16",
 		"@tsconfig/svelte": "^5.0.4",
 		"@types/eslint": "9.6.1",
 		"@types/set-cookie-parser": "^2.4.10",
