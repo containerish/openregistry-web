@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { Tag } from 'src/apis/registry';
+	import type { Tag } from '$apis/registry';
 
 	export type TableData = {
 		headers: string[];
@@ -11,7 +11,6 @@
 <script lang="ts">
 	import CopyIcon from './icons/copy.svelte';
 
-	// @ts-ignore
 	export let tableData: TableData;
 	export let namespace: string;
 </script>

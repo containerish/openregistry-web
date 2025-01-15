@@ -1,115 +1,70 @@
-<script>
-	import Discord from '$lib/icons/discord.svelte';
-	import Github from '$lib/icons/github.svelte';
-	import Twitter from '$lib/icons/twitter.svelte';
+<script lang="ts">
+	import Logo from './components/logo.svelte';
 </script>
 
-<footer class="bg-gray-50">
-	<div class="container px-10 pb-8 pt-12 mx-auto half:px-0">
-		<div class="flex justify-center">
-			<div class="w-full -mx-6">
-				<div class="px-6 flex justify-between pb-8">
-					<div>
-						<picture>
-							<img class="lg:max-w-4xl" src="/logo.svg" alt="OpenRegistry-Logo" />
-						</picture>
-						<p class="max-w-md mt-2 text-gray-500">
-							Join us and become a part of <br />the decentralised future of internet
-						</p>
-					</div>
-					<div />
-				</div>
+<footer class="bg-primary-700 p-10 z-5">
+	<div class=" mx-auto">
+		<div class="flex items-center justify-between gap-12 lg:gap-0">
+			<div class="mb-0 flex flex-col gap-2 lg:flex-row lg:-mb-16 lg:gap-4">
+				<a
+					href="/about"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					About,
+				</a>
+				<a
+					href="/faq"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					FAQs,
+				</a>
+				<a
+					href="https://github.com/containerish/openregistry"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					Github,
+				</a>
+				<a
+					href="https://twitter.com/containerish"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					Twitter,
+				</a>
+				<a
+					href="https://discord.gg/Mx8HAazrHc"
+					target="_blank"
+					rel="noreferrer"
+					class="text-3xl lg:text-4xl tracking-tight text-slate-100 hover:text-primary-100 hover:no-underline"
+				>
+					Discord
+				</a>
+			</div>
 
-				<div class="mt-6 lg:mt-0 lg:flex-1 px-6">
-					<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-						<div>
-							<h3 class="text-gray-700 pb-2 font-semibold uppercase">About</h3>
-							<a
-								href="https://blog.openregistry.dev"
-								target="_blank"
-								class="block mt-2 text-sm text-gray-600 hover:underline">Blog</a
-							>
-							<a
-								href="https://github.com/containerish"
-								target="_blank"
-								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer"
-								>Containerish</a
-							>
-						</div>
-
-						<div>
-							<h3 class="text-gray-700 pb-2 uppercase font-semibold">Developers</h3>
-							<a
-								href="https://blog.openregistry.dev"
-								target="_blank"
-								class="block mt-2 text-sm text-gray-600 hover:underline">Docs</a
-							>
-							<a
-								href="https://github.com/containerish/OpenRegistry/discussions"
-								target="_blank"
-								class="block mt-2 text-sm text-gray-600 hover:underline">Github Discussions</a
-							>
-						</div>
-
-						<div>
-							<h3 class="text-gray-700 pb-2 uppercase font-semibold">Community</h3>
-							<span
-								on:click={() => window.open('https://skynetlabs.com/developers', '_blank')}
-								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer">Skynet</span
-							>
-							<span
-								on:click={() => window.open('https://akash.network', '_blank')}
-								class="block mt-2 text-sm text-gray-600 hover:underline cursor-pointer"
-								>Akash Network</span
-							>
-						</div>
-
-						<div>
-							<h3 class="text-gray-700 pb-2 uppercase font-semibold">Contact Us</h3>
-							<span class="block mt-2 text-sm text-gray-600 hover:underline"
-								>team@openregistry.dev</span
-							>
-							<div class="flex mt-4 -mx-2">
-								<a
-									href="https://twitter.com/containerish"
-									target="_blank"
-									class="mx-2 text-gray-900 hover:text-gray-500"
-									aria-label="Twitter"
-								>
-									<Twitter />
-								</a>
-								<a
-									href="https://github.com/containerish/OpenRegistry.git"
-									target="_blank"
-									class="mx-2 text-gray-900 hover:text-gray-500"
-									aria-label="Github"
-								>
-									<Github />
-								</a>
-								<a
-									href="https://discord.gg/Mx8HAazrHc"
-									target="_blank"
-									class="mx-2 text-gray-900 hover:text-gray-500"
-									aria-label="Discord"
-								>
-									<Discord />
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="md:ml-5">
+				<Logo type="light" />
+				<p class="mt-2 max-w-md text-slate-200 antialiased lg:text-lg ml-5 md:ml-0">
+					Join us and become a part of <br />the decentralised future of internet
+				</p>
 			</div>
 		</div>
+	</div>
 
-		<hr class="h-px my-6 bg-gray-300 border-none" />
+	<hr class="my-9 bg-gray-100" />
 
-		<div>
-			<p class="text-center text-brown-800">
-				<a class="text-brown-900" href="https://github.com/containerish" target="_blank">
-					© Containerish {new Date().getFullYear()}
-				</a>
-				- All rights reserved
-			</p>
-		</div>
+	<div>
+		<p class="text-center text-slate-100">
+			<a class="text-slate-100" href="https://github.com/containerish" target="_blank" rel="noreferrer">
+				© Containerish {new Date().getFullYear()}
+			</a>
+			- All rights reserved
+		</p>
 	</div>
 </footer>

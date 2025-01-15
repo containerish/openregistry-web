@@ -1,28 +1,50 @@
 <script lang="ts">
+	import type { HTMLInputTypeAttribute } from 'svelte/elements';
+	import { twMerge } from 'tailwind-merge';
+
 	export let label = '';
-	export let type = 'text';
+	export let type: HTMLInputTypeAttribute = 'text';
 	export let placeholder = '';
 	export let subHeading = '';
 	export let name = '';
-	export let error = '';
-	export let onInput = (e: any) => {};
+	export let errors: string[] = [];
+	export let value: string | undefined = undefined;
+	export let disabled = false;
+	export let readonly = false;
+
+	const id = crypto.randomUUID();
 </script>
 
 <div class="flex items-center px-2">
-	<label for={label} class="block font-semibold text-sm text-gray-800">{label}</label>
+	<label for={name ?? id} class="-ml-1 block text-sm font-semibold text-slate-500 lg:text-base">
+		{label}
+	</label>
 	{#if subHeading !== ''}
-		<span class="px-2 text-xs text-brown-800">({subHeading})</span>
+		<span class="px-2 text-xs text-primary-700">({subHeading})</span>
 	{/if}
 </div>
 <input
-	on:input={onInput}
-	{name}
+	{readonly}
+	aria-label="text_input_{name}"
+	{id}
+	on:input
+	on:change
+	on:focus
 	{type}
+	on:keypress
+	{name}
+	value={value ?? ''}
 	{placeholder}
-	class="placeholder-gray-500 form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+	{disabled}
+	class={twMerge(
+		`form-control {errors && errors.length > 0 ? 'border-rose-600' : ''} m-0 block h-10 w-full rounded-md border border-solid border-primary-100 bg-white bg-clip-padding px-3 py-3 text-sm font-normal text-slate-700 placeholder-slate-500 transition ease-in-out focus:border-primary-200 focus:bg-white focus:text-gray-700 focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-40 disabled:text-slate-400 lg:h-12 lg:text-base`,
+		$$props.class
+	)}
 />
-<div class="w-full pt-1 capitalize text-center">
-	<span class="text-xs font-semibold text-center text-red-600 uppercase">
-		{error}
-	</span>
-</div>
+{#if errors && errors.length > 0}
+	<div class="w-full pl-2 text-left capitalize">
+		<span class="text-xs font-semibold uppercase text-rose-600">
+			{errors[0]}
+		</span>
+	</div>
+{/if}

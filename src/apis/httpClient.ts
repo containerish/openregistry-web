@@ -1,13 +1,16 @@
+import { PUBLIC_OPEN_REGISTRY_SUPPORT_ENDPOINT } from '$env/static/public';
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 declare module 'axios' {
-	interface AxiosResponse<T = any> extends Promise<T> { }
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	interface AxiosResponse<T = any> extends Promise<T> {}
 }
 
 abstract class HttpClient {
 	protected readonly http: AxiosInstance;
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected constructor(baseURL: string, headers?: any) {
 		this.http = axios.create({
 			baseURL,
@@ -15,7 +18,7 @@ abstract class HttpClient {
 				'Cache-Control': 'no-cache',
 				'Pragma': 'no-cache',
 				'Expires': '0',
-				...headers
+				...headers,
 			},
 			withCredentials: true,
 		});
@@ -25,8 +28,8 @@ abstract class HttpClient {
 	}
 
 	private _requestInterceptor = () => {
-		this.http.interceptors.request.use(req => {
-			const supportBaseUrl = import.meta.env.VITE_OPEN_REGISTRY_SUPPORT_ENDPOINT;
+		this.http.interceptors.request.use((req) => {
+			const supportBaseUrl = PUBLIC_OPEN_REGISTRY_SUPPORT_ENDPOINT;
 			if (req.baseURL === supportBaseUrl) {
 				req.withCredentials = false;
 			} else {
@@ -36,32 +39,27 @@ abstract class HttpClient {
 			}
 
 			return req;
-		})
-	}
+		});
+	};
 
 	private _responseInterceptor = () => {
 		this.http.interceptors.response.use(this._handleResponse, this._handleError);
-	}
+	};
 
 	private _handleResponse = ({ data, status, headers }: AxiosResponse) => {
 		return {
 			data: data,
 			status: status,
 			headers: headers,
-		}
+		};
 	};
 
 	protected _handleError = (err: AxiosError) => {
 		return {
 			error: err?.response?.data ? err.response.data : err,
 			status: err?.response?.status,
-		}
-	}
-
-	private getUserAgent = () => {
-		const agentName = `${import.meta.env.VITE_OPEN_REGISTRY_APP_NAME}/${import.meta.env.VITE_OPEN_REGISTRY_ENVIRONMENT} ${import.meta.env.VITE_OPEN_REGISTRY_APP_VERSION}`
-		return agentName;
-	}
+		};
+	};
 }
 
 export default HttpClient;

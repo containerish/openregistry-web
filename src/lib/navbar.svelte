@@ -1,47 +1,97 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { setContext } from 'svelte';
-	import NavbarDefault from './navbar-default.svelte';
-	import { userStore as session } from '$lib/userStore';
-	import NavbarAuth from './navbar-auth.svelte';
-	export let pathname: string;
-	export let openSignInModal: boolean;
+	import ButtonSolid from './button-solid.svelte';
+	import Logo from './components/logo.svelte';
+	import Menu from './burger-menu.svelte';
+	import IconButton from './icon-button.svelte';
 
-	let showSignInForm = false;
-	let showSignUpForm = false;
+	export let openSignInModal = false;
+	export let openSignUpModal = false;
 
-	const toggleSignInForm = () => {
-		showSignInForm = !showSignInForm;
+	const toggleSignIn = () => {
+		openSignUpModal = false;
+		openSignInModal = !openSignInModal;
 	};
 
-	const toggleSignUpForm = () => {
-		showSignInForm = !showSignInForm;
-		showSignUpForm = !showSignUpForm;
+	const toggleSignUp = () => {
+		openSignInModal = false;
+		openSignUpModal = !openSignUpModal;
 	};
 
-	// @ts-ignore
-
-	setContext('toggleSignInForm', toggleSignInForm);
-	setContext('toggleSignUpForm', toggleSignUpForm);
+	export let pathname = '/auth/signin';
 </script>
 
-{#if !$session.authenticated}
-	<header class="bg-gradient-to-r from-brown-50 to-brown-500 pt-4">
-		<nav class="uw:max-w-[70vw] apple:max-w-[100vw] px-16 mx-auto">
-			<div class="container px-6 mx-auto half:px-1 uw:px-12">
-				<div class="flex flex-col md:justify-between md:items-center">
-					<div class="flex items-center justify-between w-full">
-						<div on:click={() => goto('/')} class="cursor-pointer flex items-center half:ml-5">
-							<picture class="md:w-44">
-								<img class="h-full w-full" src="/logo.svg" alt="openeregistry" />
-							</picture>
-						</div>
-						<NavbarDefault {pathname} {openSignInModal} />
-					</div>
-				</div>
+<header class="sticky top-0 z-50 bg-primary-50">
+	<nav class="px-1 md:px-16 pt-3 pb-2 max-w-[2500px] mx-auto">
+		<div class="flex w-full items-center justify-between">
+			<IconButton
+				on:keyup={() => goto('/')}
+				on:click={() => goto('/')}
+				class="flex cursor-pointer items-center w-11 h-11 m-0 p-1"
+			>
+				<Logo type="dark" />
+			</IconButton>
+			<div class="md:hidden">
+				<Menu />
 			</div>
-		</nav>
-	</header>
-{:else}
-	<NavbarAuth />
-{/if}
+			<div class="hidden md:flex items-center">
+				<div class="flex flex-col md:mx-1 md:flex-row gap-1 md:gap-9">
+					<a
+						rel="noreferrer"
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="https://blog.openregistry.dev"
+						target="_blank"
+					>
+						Blog
+					</a>
+
+					<a
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="/about"
+					>
+						About
+					</a>
+					<a
+						rel="noreferrer"
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="https://github.com/containerish/OpenRegistry.git"
+						target="_blank"
+					>
+						Github
+					</a>
+					<a
+						class="transform text-base tracking-wide text-primary-600 duration-500 hover:scale-125"
+						href="/faq"
+					>
+						FAQ
+					</a>
+				</div>
+				{#if pathname === '/' || pathname === '/auth/signup'}
+					<div class="hidden md:flex ml-5">
+						<ButtonSolid
+							on:click={() => {
+								goto('/auth/signin');
+							}}>Sign In</ButtonSolid
+						>
+					</div>
+				{:else if pathname === '/auth/signin'}
+					<div class="hidden md:flex ml-5">
+						<ButtonSolid
+							on:click={() => {
+								goto('/auth/signup');
+							}}>Sign Up</ButtonSolid
+						>
+					</div>
+				{/if}
+				<!-- <div>
+					<Dialog isOpen={openSignInModal}>
+						<Signin toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
+					</Dialog>
+				</div>
+				<Dialog isOpen={openSignUpModal} class="top-0">
+					<Signup toggleSignUpForm={toggleSignUp} toggleSignInForm={toggleSignIn} />
+				</Dialog> -->
+			</div>
+		</div>
+	</nav>
+</header>

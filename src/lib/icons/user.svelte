@@ -1,10 +1,10 @@
-<script>
-	export let styles = '';
+<script lang="ts">
+	import { twMerge } from 'tailwind-merge';
 </script>
 
 <svg
-	xmlns="http://www.w3.org/2000/svg"
-	class={styles}
+	aria-label="user icon"
+	class={twMerge('h-6 w-6 text-slate-600', $$props.class)}
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"

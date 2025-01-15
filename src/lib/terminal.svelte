@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter';
 
-	let prompt = '<p class="text-green-300">jane@joe:~$ &nbsp;';
+	let prompt = '<p class="text-emerald-300">jane@joe:~$ &nbsp;';
 </script>
 
 <div class="terminal-window">

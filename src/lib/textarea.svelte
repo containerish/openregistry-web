@@ -1,16 +1,29 @@
 <script lang="ts">
+	import { twMerge } from 'tailwind-merge';
 	export let placeholder = '';
 	export let name = '';
-	export let onInput = (e: any, key: string) => {};
+	export let rows = 5;
+	export let cols = 10;
+	export let value = '';
 </script>
 
-<div class="my-2 xl:w-full">
+<div class={twMerge('my-2 xl:w-full', $$props.class)}>
 	<textarea
-		class="placeholder-gray-500 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-brown-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white border rounded-md focus:border-brown-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-brown-800"
+		aria-hidden="true"
+		aria-label="text area"
+		class="placeholder-slate-500 form-control block w-full px-3 py-1.5 text-base font-normal text-slate-700 bg-white
+		bg-clip-padding border-solid border-primary-100 transition ease-in-out m-0 focus:text-slate-700 focus:bg-white border
+		rounded-md focus:border-primary-100 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-primary-500 resize-none"
 		id="FormControlTextarea"
-		rows="3"
+		{rows}
+		wrap="hard"
+		{cols}
 		maxlength="300"
-		on:input={(e) => onInput(e, name)}
+		on:input
+		on:change
+		on:focus
+		on:keypress
+		value={value ?? ''}
 		{name}
 		{placeholder}
 	/>

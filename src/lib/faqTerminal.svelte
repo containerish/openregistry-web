@@ -3,7 +3,7 @@
 	import TypeIt from 'typeit';
 
 	const header = () => {
-		return `<span data-static class="text-green-500 font-semibold font-jetbrains-mono">jane@openregistry:~$ </span>`;
+		return `<span data-static class="text-primary-500 font-semibold font-jetbrains-mono">jane@openregistry:~$ </span>`;
 	};
 
 	onMount(() => {
@@ -12,7 +12,7 @@
 			waitUntilVisible: true,
 			afterComplete: (t: any) => {
 				t.destroy();
-			}
+			},
 		})
 			.options({ speed: 75 })
 			.type(header(), { instant: true })
@@ -39,15 +39,15 @@
 	});
 </script>
 
-<div class="w-full min-h-max h-full px-4">
+<div class="w-full h-full">
 	<div
-		class="coding h-full min-h-[250px] inverse-toggle px-5 shadow-lg text-gray-100 text-sm font-mono subpixel-antialiased bg-brown-900
-    pb-6 pt-4 rounded-lg leading-normal overflow-hidden"
+		class="coding min-h-[250px] min-w-[290px] md:min-w-[400px] px-5 shadow-2xl text-gray-100 text-sm font-mono
+		subpixel-antialiased bg-primary-50 pb-6 pt-4 rounded-sm leading-normal overflow-hidden border border-primary-100"
 	>
 		<div class="top mb-2 flex">
-			<div class="h-3 w-3 bg-red-500 rounded-full" />
+			<div class="h-3 w-3 bg-rose-500 rounded-full" />
 			<div class="ml-2 h-3 w-3 bg-orange-300 rounded-full" />
-			<div class="ml-2 h-3 w-3 bg-green-500 rounded-full" />
+			<div class="ml-2 h-3 w-3 bg-emerald-500 rounded-full" />
 		</div>
 		<div class="mt-4 flex" />
 		<span id="typewriter" class="font-jetbrains-mono" />

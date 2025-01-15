@@ -1,0 +1,22 @@
+version: 2
+enable-beta-ecosystems: true
+updates:
+  - package-ecosystem: 'npm'
+    target-branch: 'main'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'friday'
+    commit-message:
+      prefix: '.github:'
+    assignees:
+      - 'guacamole'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'friday'
+    commit-message:
+      prefix: '.github:'
+    assignees:
+      - 'guacamole'

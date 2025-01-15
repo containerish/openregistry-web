@@ -8,5 +8,8 @@ node_modules
 .env.*
 !.env.example
 .vercel
+.vscode
 .output
 package-lock.json
+*.pem
+/coverage-ts
