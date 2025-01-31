@@ -64,7 +64,7 @@
 		"postcss-cli": "^11.0.0",
 		"postcss-import": "^16.1.0",
 		"postcss-nesting": "^13.0.1",
-		"posthog-js": "^1.206.1",
+		"posthog-js": "^1.215.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.9",
