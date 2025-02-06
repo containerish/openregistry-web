@@ -2,40 +2,15 @@
 	import Card from '$lib/card.svelte';
 	import IconButton from '$lib/icon-button.svelte';
 	import Arrow from '$lib/icons/arrow-r.svelte';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-	import { onMount } from 'svelte';
-	import { backInOut } from 'svelte/easing';
-
-	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
-		gsap.from('.diagram', {
-			duration: 1.5,
-			opacity: 0,
-			ease: backInOut,
-			scale: 0.3,
-			scrollTrigger: {
-				trigger: '.trigger',
-			},
-		});
-
-		let mm = gsap.matchMedia();
-		mm.add('(max-width: 500px)', () => {
-			gsap.to('.diagram', {
-				opacity: 1,
-				scale: 1,
-			});
-		});
-	});
 </script>
 
-<Card id="high-level-architecture" class="bg-primary-100/40 py-12 lg:py-20 flex flex-col gap-6">
-	<div class="flex px-6 w-full flex-col justify-center max-w-2xl items-center">
-		<span class="text-primary-600 text-center whitespace-nowrap font-bold pb-6 text-3xl lg:text-5xl">
+<Card id="high-level-architecture" class="flex flex-col gap-6 bg-primary-100/40 py-12 lg:py-20">
+	<div class="flex w-full max-w-2xl flex-col items-center justify-center px-6">
+		<span class="whitespace-nowrap pb-6 text-center text-3xl font-bold text-primary-600 lg:text-5xl">
 			High Level Architecture
 		</span>
 
-		<p class="text-center lg:text-lg font-normal leading-normal text-slate-800">
+		<p class="text-center font-normal leading-normal text-slate-800 lg:text-lg">
 			The following diagram tries to depict the high level architecture of OpenRegistry. We are hosted on Akash
 			dCloud and the container images are stored on decentralised storage systems like IPFS. OpenRegistry is
 			designed as a pluggable platform to adapt to any modern infrastructure or frameworks. We are exploring ways
@@ -50,14 +25,14 @@
 				rel="noreferrer">More</a
 			>
 			<IconButton
-				class="trigger transition-all duration-500 ease-in-out bg-transparent hover:transform hover:translate-x-2
-            			hover:scale-110 border border-none w-5 p-1 mt-0.5"
+				class="trigger mt-0.5 w-5 border border-none bg-transparent p-1
+            			transition-all duration-500 ease-in-out hover:translate-x-2 hover:scale-110 hover:transform"
 			>
 				<Arrow class="text-primary-500" />
 			</IconButton>
 		</div>
 	</div>
-	<div class="diagram w-11/12 max-w-[1000px]">
+	<div class="w-11/12 max-w-[1000px]">
 		<picture>
 			<img class="w-full" src="/high-level-arch.webp" alt="OpenRegistry High Level Architecture Diagram" />
 		</picture>
