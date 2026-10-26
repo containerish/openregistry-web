@@ -11,6 +11,9 @@ import { ClairService } from '@buf/containerish_openregistry.bufbuild_es/service
 import { OPEN_REGISTRY_BACKEND_CLAIR_URL } from '$env/static/private';
 import { PUBLIC_OPEN_REGISTRY_BACKEND_PROTOBUF_URL } from '$env/static/public';
 import { setCookies } from '$lib/protobuf/interceptors';
+import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
+
+getNodeAutoInstrumentations();
 
 const authenticationHandler: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, url } = event;

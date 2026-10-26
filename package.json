@@ -39,6 +39,7 @@
 		"@melt-ui/svelte": "^0.86.2",
 		"@octokit/types": "^12.6.0",
 		"@playwright/test": "^1.49.1",
+		"@opentelemetry/auto-instrumentations-node": "0.80.0",
 		"@popperjs/core": "^2.11.8",
 		"@sveltejs/adapter-auto": "^3.3.1",
 		"@sveltejs/adapter-cloudflare": "^4.7.3",
