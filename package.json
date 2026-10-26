@@ -39,7 +39,7 @@
 		"@melt-ui/svelte": "^0.86.2",
 		"@octokit/types": "^12.6.0",
 		"@opentelemetry/api": "^1.9.0",
-		"@opentelemetry/auto-instrumentations-node": "^0.57.0",
+		"@opentelemetry/auto-instrumentations-node": "0.80.0",
 		"@opentelemetry/exporter-trace-otlp-http": "^0.57.0",
 		"@opentelemetry/resources": "^1.30.1",
 		"@opentelemetry/sdk-node": "^0.57.0",
